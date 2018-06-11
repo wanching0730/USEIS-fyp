@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import NavBar from './NavBar';
 
-const Society = () => {
+class Society extends Component {
 
-    return (
-        <div> 
-            <NavBar />
-            <div>Hello society</div>
-        </div>
-    );
+    render() {
+        return (
+            <div> 
+                <NavBar />
+                <div>Hello society</div>
+            </div>
+        );
+    };
+    
 };
 
 export default Society;
