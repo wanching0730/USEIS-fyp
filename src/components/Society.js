@@ -14,7 +14,8 @@ class Society extends Component {
     }
 
     listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => console.log("result: " + reply));
+        // fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => console.log("result: " + reply));
+        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => reply.map(row => console.log("row: " + row)));
     }
 
     render() {
