@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import {browserHistory} from 'react-router';
 
 class Login extends Component {
 
@@ -12,6 +13,10 @@ class Login extends Component {
     username:'',
     password:''
     }
+   }
+
+   handleClick(event) {
+     browserHistory.push("/student");
    }
 
   render() {
