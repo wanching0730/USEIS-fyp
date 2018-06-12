@@ -26,38 +26,37 @@ class Society extends Component {
     }
 
     render() {
-        var list = [];
-        for(var i = 0; i < this.state.society.length; i++) {
-            list.push(<p>{this.state.society[i]}</p>);
-        }
+        // var list = [];
+        // for(var i = 0; i < this.state.society.length; i++) {
+        //     list.push(<p>{this.state.society[i]}</p>);
+        // }
+        
         return (
             <div id="outerDiv"> 
                 <NavBar />
 
-                <div class="container" id="tableContainer">
-                <div class="row">
-                <div class="panel-body">
-                    <table class="table table-hover table-dark" border="1">
+                <div className="container" id="tableContainer">
+                <div className="row">
+                <div className="panel-body">
+                    <table className="table table-hover table-dark" border="1">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Poster</th>
-                                <th>Title</th>
-                                <th>Genre</th>
-                                <th>Year</th>
-                                <th>Action</th>                       
+                                <th>ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>                  
                             </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>Hello</td>
-                            <td>Hello</td>
-                            <td>Hello</td>
-                            <td>Hello</td>
-                            <td>Hello</td>
-                            <td>Hello</td>
-                        </tr>
+                        {this.state.society.map(row => {
+                            return (
+                                <tr>
+                                    <td>{row[0]}</td>
+                                    <td>{row[1]}</td>
+                                    <td>{row[3]}</td>
+                                </tr>
+                            );
+                        })}
                         </tbody>
                     </table>
                 </div>
