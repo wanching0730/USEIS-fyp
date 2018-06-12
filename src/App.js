@@ -4,6 +4,7 @@ import Register from '../src/components/Register';
 import Login from '../src/components/Login';
 import Home from '../src/components/Home';
 import Society from '../src/components/Society';
+import PerSociety from '../src/components/PerSociety';
 import './App.css';
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route path="/society" component={Society}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
+          <Route path="/perSociety" component={PerSociety}/>
         </Router>
         
 
