@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import $ from 'jquery';
 import axios from 'axios';
+import '../styles/society.css';
 
 class Society extends Component {
 
@@ -30,9 +31,38 @@ class Society extends Component {
             list.push(<p>{this.state.society[i]}</p>);
         }
         return (
-            <div> 
+            <div id="outerDiv"> 
                 <NavBar />
-                {list}
+
+                <div class="container" id="tableContainer">
+                <div class="row">
+                <div class="panel-body">
+                    <table class="table table-hover table-dark" border="1">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Poster</th>
+                                <th>Title</th>
+                                <th>Genre</th>
+                                <th>Year</th>
+                                <th>Action</th>                       
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td>Hello</td>
+                            <td>Hello</td>
+                            <td>Hello</td>
+                            <td>Hello</td>
+                            <td>Hello</td>
+                            <td>Hello</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
             </div>
         );
     };
