@@ -16,7 +16,7 @@ class App extends Component {
           <Route path="/society" component={Society}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
-          <Route path="/perSociety" component={PerSociety}/>
+          <Route path="/perSociety/:societyId" component={PerSociety}/>
         </Router>
         
 

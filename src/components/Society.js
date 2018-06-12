@@ -51,7 +51,7 @@ class Society extends Component {
                         {this.state.society.map(row => {
                             return (
                                 <tr>
-                                    <td><Link to="/perSociety">{row[0]}</Link></td>
+                                    <td><Link to={`/perSociety/1`}>{row[0]}</Link></td>
                                     <td>{row[1]}</td>
                                     <td>{row[3]}</td>
                                 </tr>
