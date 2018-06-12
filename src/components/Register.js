@@ -15,6 +15,8 @@ class Register extends Component {
     }
   }
   render() {
+    const { RaisedButtonStyle } = styles;
+    
     return (
       <div>
         <MuiThemeProvider>
@@ -46,14 +48,17 @@ class Register extends Component {
              onChange = {(event,newValue) => this.setState({password:newValue})}
              />
            <br/>
-           <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
+           <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
           </div>
          </MuiThemeProvider>
       </div>
     );
   }
 }
-const style = {
-  margin: 15,
+const styles = {
+  RaisedButtonStyle: {
+    margin: 15
+  }
+  
 };
 export default Register;
