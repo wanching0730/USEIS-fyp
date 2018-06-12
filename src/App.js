@@ -6,33 +6,6 @@ import Home from '../src/components/Home';
 import Society from '../src/components/Society';
 import './App.css';
 
-// props is 'title'
-// const Template = ( { title }) => (
-//   <div>
-//     <NavBar />
-//     <p className="page-info">
-//       This is the {title} page.
-//     </p>
-//   </div>
-// );
-
-// const Feed = (props) => (
-//   <Template title="Feed" />
-// );
-
-// const Profile = (props) => (
-//   <Template title = "Profile"/>
-// );
-
-// const NavBar = () => (
-//       <div className="navbar">
-//       <Link to="/">Home</Link>
-//       <Link to="/society">Societies</Link>
-//       <Link to="/login">Login</Link>
-//       <Link to="/register">Register</Link>
-//   </div>
-
-// );
 class App extends Component {
   render() {
     return (

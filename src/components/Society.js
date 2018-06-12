@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import $ from 'jquery';
 import axios from 'axios';
 import '../styles/society.css';
+import { Link } from 'react-router';
 
 class Society extends Component {
 
@@ -17,7 +18,6 @@ class Society extends Component {
     }
 
     listSocieties() {
-        // fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => reply.map(row => console.log("row: " + row)));
         fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
         // $.ajax({ type: "GET", url:`http://localhost:5000/puppies`, success: function(res) {
         //     this.setState({society:res});
@@ -51,7 +51,7 @@ class Society extends Component {
                         {this.state.society.map(row => {
                             return (
                                 <tr>
-                                    <td>{row[0]}</td>
+                                    <td><Link to="/">{row[0]}</Link></td>
                                     <td>{row[1]}</td>
                                     <td>{row[3]}</td>
                                 </tr>
