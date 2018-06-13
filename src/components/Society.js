@@ -34,34 +34,33 @@ class Society extends Component {
         return (
             <div id="outerDiv"> 
                 <NavBar />
-
                 <div className="container" id="tableContainer">
-                <div className="row">
-                <div className="panel-body">
-                    <table className="table table-hover table-dark" border="1">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>                  
-                            </tr>
-                        </thead>
+                    <div className="row">
+                        <div className="panel-body">
+                            <table className="table table-hover table-dark" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>                  
+                                    </tr>
+                                </thead>
 
-                        <tbody>
-                        {this.state.society.map(row => {
-                            return (
-                                <tr>
-                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                    <td>{row[1]}</td>
-                                    <td>{row[3]}</td>
-                                </tr>
-                            );
-                        })}
-                        </tbody>
-                    </table>
+                                <tbody>
+                                    {this.state.society.map(row => {
+                                        return (
+                                            <tr>
+                                                <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
+                                                <td>{row[1]}</td>
+                                                <td>{row[3]}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
             </div>
         );
     };
