@@ -20,6 +20,8 @@ class Home extends Component {
 
     render() {
 
+        const { imageStyle } = styles;
+
         return (
             <div id="outerDiv"> 
                 <NavBar />
@@ -39,7 +41,7 @@ class Home extends Component {
                                         return (
                                             <tr>
                                                 <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                <td>{row[1]}</td>
+                                                <img style={imageStyle} src={ require('../assets/images/image1.jpg') } />
                                             </tr>
                                         );
                                     })}
@@ -52,5 +54,12 @@ class Home extends Component {
         );
     };
 };
+
+const styles = {
+    imageStyle: {
+        height: "50px",
+        width: "50px"
+    }
+}
 
 export default Home;
