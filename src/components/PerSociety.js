@@ -10,9 +10,13 @@ class PerSociety extends Component {
         super(props);
     }
 
-    handleClick(event) {
+    handleJoinClick(event) {
         browserHistory.push("/register_society");
-      }
+    }
+
+    handleEditClick(event) {
+        browserHistory.push("/createProfile");
+    }
 
     render() {
 
@@ -30,7 +34,8 @@ class PerSociety extends Component {
                         <h3>Events</h3>
                         <p>1. Workshop</p>
                         <p>2. Talk</p>
-                        <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
+                        <RaisedButton label="Edit Profile" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEditClick(event)}/>
                     </MuiThemeProvider>
                 </div>
             </div>
