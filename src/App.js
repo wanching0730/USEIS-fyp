@@ -10,6 +10,7 @@ import Student from '../src/components/Student';
 import Feedback from '../src/components/Feedback';
 import RegisterEvent from '../src/components/RegisterEvent';
 import RegisterSociety from './components/RegisterSociety';
+import CreateProfile from './components/CreateProfile';
 import './App.css';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/feedback" component={Feedback}/>
           <Route path="/register_event" component={RegisterEvent}/>
           <Route path="/register_society" component={RegisterSociety}/>
+          <Route path="/createProfile" component={CreateProfile}/>
         </Router>
         
     );

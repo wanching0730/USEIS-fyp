@@ -7,24 +7,16 @@ import Society from './Society';
 import '../App.css';
 
 const NavBar = () => {
-
-    
-        return (
-
-           
-
-            <div className="navbar">
+    return (
+        <div className="navbar">
             <Link to="/">Home</Link>
             <Link to="/society">Societies</Link>
+            <Link to="/createProfile">Create Profile</Link>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
+            <Link>Logout</Link>
         </div>
-
-
-        );
-        
-   
-    
+    );
 };
 
 export default NavBar;
