@@ -11,6 +11,7 @@ import Feedback from '../src/components/Feedback';
 import RegisterEvent from '../src/components/RegisterEvent';
 import RegisterSociety from './components/RegisterSociety';
 import CreateProfile from './components/CreateProfile';
+import MyProfile from './components/MyProfile';
 import './App.css';
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
           <Route path="/register_event" component={RegisterEvent}/>
           <Route path="/register_society" component={RegisterSociety}/>
           <Route path="/createProfile" component={CreateProfile}/>
+          <Route path="/myProfile" component={MyProfile}/>
         </Router>
         
     );
