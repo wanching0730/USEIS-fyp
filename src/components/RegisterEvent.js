@@ -30,16 +30,17 @@ class RegisterEvent extends Component {
   }
 
   handleClick(event) {
-      this.displayText()
-  }
+      this.displayText();
+      this.setState({showModal: this.state.value});
+    }
+  
 
-  renderModal(event) {
+  renderModal() {
       if(this.state.showModal) {
           return <NotificationModal />;
       } else {
           return <p>hello</p>;
       }
-    
     
   }
   
@@ -87,8 +88,8 @@ class RegisterEvent extends Component {
                     })
                 }} />
             <br/>
-            <RaisedButton label="Allow Noti" primary={true} style={RaisedButtonStyle} onClick={() => this.setState({showModal: this.state.value})} />
-            <br/>
+            {/* <RaisedButton label="Allow Noti" primary={true} style={RaisedButtonStyle} onClick={() => this.setState({showModal: this.state.value})} /> */}
+            {/* <br/> */}
             <div>
             {this.renderModal()}
             </div>
@@ -98,8 +99,9 @@ class RegisterEvent extends Component {
           </MuiThemeProvider>
       </div>
     );
-  }
+    }
 }
+
 
 const styles = {
   RaisedButtonStyle: {
