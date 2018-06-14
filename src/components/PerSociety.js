@@ -11,7 +11,7 @@ class PerSociety extends Component {
     }
 
     handleClick(event) {
-        browserHistory.push("/register_event");
+        browserHistory.push("/register_society");
       }
 
     render() {

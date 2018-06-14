@@ -5,10 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
-import NotificationModal from './NotificationModal';
-import axios from 'axios';
 
-class RegisterEvent extends Component {
+class RegisterSociety extends Component {
 
   constructor(props){
     super(props);
@@ -16,40 +14,13 @@ class RegisterEvent extends Component {
       first_name:'',
       last_name:'',
       email:'',
-      password:'',
-      emailNoti: false,
-      webNoti: false
-      // showModal: false
+      password:''
     }
-  }
-
-  displayText() {
-
-      if(this.state.webNoti) {
-        if(this.n.supported()) 
-          this.n.show();
-      }
-  }
-
-  handleNotiClick(event) {
-    window.focus()
-    this.n.close(event.target.tag);
   }
 
   handleClick(event) {
-      this.displayText();
-      // this.setState({showModal: this.state.value});
+     
     }
-  
-
-  // renderModal() {
-  //     if(this.state.showModal) {
-  //         return <NotificationModal />;
-  //     } else {
-  //         return <p>hello</p>;
-  //     }
-    
-  // }
   
   render() {
 
@@ -86,32 +57,6 @@ class RegisterEvent extends Component {
               onChange = {(event,newValue) => this.setState({password:newValue})}
               />
             <br/>
-            <p>Allow Email Notification</p>
-            <ToggleButton
-                value={ this.state.emailNoti || false }
-                onToggle={(value) => {
-                    this.setState({
-                    emailNoti: !value,
-                    })
-                }} />
-            <p>Allow Web Notification</p>
-            <ToggleButton
-                value={ this.state.webNoti || false }
-                onToggle={(value) => {
-                    this.setState({
-                    webNoti: !value,
-                    })
-                }} />
-            <br/>
-            <ReactNotifications
-              onRef={ref => (this.n = ref)} // Required
-              title="Some Title" // Required
-              body="This is the body!"
-              icon="devices-logo.png"
-              tag="abcdef"
-              timeout="1000"
-              onClick={event => this.handleNotiClick(event)}
-            />
             <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
             </div>
           </MuiThemeProvider>
@@ -120,11 +65,10 @@ class RegisterEvent extends Component {
     }
 }
 
-
 const styles = {
   RaisedButtonStyle: {
     margin: 15
   }
 };
 
-export default RegisterEvent;
+export default RegisterSociety;
