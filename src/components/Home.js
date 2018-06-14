@@ -40,7 +40,7 @@ class Home extends Component {
                                     {this.state.society.map(row => {
                                         return (
                                             <tr>
-                                                <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
+                                                <td><Link to={`/perEvent/`+row[0]}>{row[0]}</Link></td>
                                                 <img style={imageStyle} src={ require('../assets/images/image1.jpg') } />
                                             </tr>
                                         );

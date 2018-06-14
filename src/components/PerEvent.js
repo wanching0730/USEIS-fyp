@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class PerSociety extends Component {
+class PerEvent extends Component {
 
     constructor(props) {
         super(props);
@@ -12,7 +12,7 @@ class PerSociety extends Component {
 
     handleClick(event) {
         browserHistory.push("/register_event");
-      }
+    }
 
     render() {
 
@@ -24,13 +24,10 @@ class PerSociety extends Component {
                 <div>
                     <MuiThemeProvider>
                         <h1>{this.props.params.societyId}</h1>
-                        <h2>IT Society</h2>
-                        <p>Description: It is a very active Society</p>
-                        <p>Category: Technology</p>
-                        <h3>Events</h3>
-                        <p>1. Workshop</p>
-                        <p>2. Talk</p>
-                        <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <h2>Cardio Night Run 2.0</h2>
+                        <p>Description: It is a very interesting night run</p>
+                        <p>Category: Sport</p>
+                        <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                     </MuiThemeProvider>
                 </div>
             </div>
@@ -44,4 +41,4 @@ const styles = {
     }
 }
 
-export default PerSociety;
+export default PerEvent;
