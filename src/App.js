@@ -7,6 +7,7 @@ import Society from '../src/components/Society';
 import PerSociety from '../src/components/PerSociety';
 import Student from '../src/components/Student';
 import Feedback from '../src/components/Feedback';
+import RegisterEvent from '../src/components/RegisterEvent';
 import './App.css';
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/perSociety/:societyId" component={PerSociety}/>
           <Route path="/student" component={Student}/>
           <Route path="/feedback" component={Feedback}/>
+          <Route path="/register_event" component={RegisterEvent}/>
         </Router>
         
     );
