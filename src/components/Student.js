@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import $ from 'jquery';
 import axios from 'axios';
-import '../styles/society.css';
+import '../style/society.css';
 import { Link } from 'react-router';
 
 class Society extends Component {

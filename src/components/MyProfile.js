@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
-import '../styles/society.css';
+import '../style/society.css';
 import { Link } from 'react-router';
 
 class MyProfile extends Component {
