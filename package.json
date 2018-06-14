@@ -16,7 +16,8 @@
     "react-star-rating-component": "^1.4.1",
     "react-table-view": "^1.0.0",
     "react-tap-event-plugin": "^3.0.3",
-    "react-toggle-button": "^2.2.0"
+    "react-toggle-button": "^2.2.0",
+    "reactjs-popup": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -3,7 +3,8 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import ToggleButton from 'react-toggle-button'
+import ToggleButton from 'react-toggle-button';
+import NotificationModal from './NotificationModal';
 import axios from 'axios';
 
 class RegisterEvent extends Component {
@@ -15,7 +16,8 @@ class RegisterEvent extends Component {
       last_name:'',
       email:'',
       password:'',
-      value: false
+      value: false,
+      showModal: false
     }
   }
 
@@ -29,6 +31,16 @@ class RegisterEvent extends Component {
 
   handleClick(event) {
       this.displayText()
+  }
+
+  renderModal(event) {
+      if(this.state.showModal) {
+          return <NotificationModal />;
+      } else {
+          return <p>hello</p>;
+      }
+    
+    
   }
   
   render() {
@@ -75,8 +87,12 @@ class RegisterEvent extends Component {
                     })
                 }} />
             <br/>
-            {this.displayText}
+            <RaisedButton label="Allow Noti" primary={true} style={RaisedButtonStyle} onClick={() => this.setState({showModal: this.state.value})} />
             <br/>
+            <div>
+            {this.renderModal()}
+            </div>
+
             <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
             </div>
           </MuiThemeProvider>
