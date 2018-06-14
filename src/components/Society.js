@@ -40,9 +40,9 @@ class Society extends Component {
                             <table className="table table-hover table-dark" border="1">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>                  
+                                        <th>Societies</th>
+                                        <th>Events</th>
+                                        <th>Status</th>                  
                                     </tr>
                                 </thead>
 

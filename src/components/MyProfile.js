@@ -32,19 +32,17 @@ class MyProfile extends Component {
                                     <tr>
                                         <th>Societies</th>
                                         <th>Events</th>
-                                        <th>Status</th>   
-                                        <th>Booth Reservation</th>                  
+                                        <th>Status</th>                   
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     {this.state.society.map(row => {
                                         return (
-                                            <tr>
-                                                <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
+                                            <tr>     
+                                                <td><Link to={`/perSociety/`+row[0]}>{row[1]}</Link></td>                                           
                                                 <td>{row[1]}</td>
-                                                <td>{row[2]}</td>
-                                                <td>{row[3]}</td>
+                                                <td>{row[2]}</td>   
                                             </tr>
                                         );
                                     })}
