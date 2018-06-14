@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import ToggleButton from 'react-toggle-button'
 import axios from 'axios';
 
 class RegisterEvent extends Component {
@@ -13,8 +14,21 @@ class RegisterEvent extends Component {
       first_name:'',
       last_name:'',
       email:'',
-      password:''
+      password:'',
+      value: false
     }
+  }
+
+  displayText() {
+      if(this.state.value) {
+          console.log("true")
+      } else {
+          console.log("false")
+      }
+  }
+
+  handleClick(event) {
+      this.displayText()
   }
   
   render() {
@@ -51,6 +65,17 @@ class RegisterEvent extends Component {
               floatingLabelText="Password"
               onChange = {(event,newValue) => this.setState({password:newValue})}
               />
+            <br/>
+            <p>Allow Notification</p>
+            <ToggleButton
+                value={ this.state.value || false }
+                onToggle={(value) => {
+                    this.setState({
+                    value: !value,
+                    })
+                }} />
+            <br/>
+            {this.displayText}
             <br/>
             <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
             </div>
