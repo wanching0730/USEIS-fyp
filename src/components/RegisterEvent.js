@@ -15,8 +15,6 @@ class RegisterEvent extends Component {
     this.state={
       first_name:'',
       last_name:'',
-      email:'',
-      password:'',
       emailNoti: false,
       webNoti: false
       // showModal: false
@@ -70,20 +68,6 @@ class RegisterEvent extends Component {
               hintText="Enter your Last Name"
               floatingLabelText="Last Name"
               onChange = {(event,newValue) => this.setState({last_name:newValue})}
-              />
-            <br/>
-            <TextField
-              hintText="Enter your Email"
-              type="email"
-              floatingLabelText="Email"
-              onChange = {(event,newValue) => this.setState({email:newValue})}
-              />
-            <br/>
-            <TextField
-              type = "password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
-              onChange = {(event,newValue) => this.setState({password:newValue})}
               />
             <br/>
             <p>Allow Email Notification</p>
