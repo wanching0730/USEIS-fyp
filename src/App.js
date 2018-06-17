@@ -30,7 +30,7 @@ class App extends Component {
           <Route path="/feedback" component={Feedback}/>
           <Route path="/register_event" component={RegisterEvent}/>
           <Route path="/register_society" component={RegisterSociety}/>
-          <Route path="/createProfile" component={CreateProfile}/>
+          <Route path="/createProfile(/:societyId)" component={CreateProfile}/>
           <Route path="/myProfile" component={MyProfile}/>
           <Route path="/register_booth" component={RegisterBooth}/>
         </Router>

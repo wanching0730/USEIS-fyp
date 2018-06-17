@@ -14,6 +14,8 @@ class CreateProfile extends Component {
       society_name:'',
       society_desc:'',
     }
+
+    console.log("societyid: " + this.props.params.societyId);
   }
 
   handleClick(event) {
@@ -33,12 +35,14 @@ class CreateProfile extends Component {
             <TextField
               hintText="Enter Society Name"
               floatingLabelText="Name"
+              value={this.state.society_name}
               onChange = {(event,newValue) => this.setState({society_name:newValue})}
               />
             <br/>
             <TextField
               hintText="Enter Society Description"
               floatingLabelText="Description"
+              value={this.state.society_desc}
               onChange = {(event,newValue) => this.setState({society_desc:newValue})}
               />
             <br/>

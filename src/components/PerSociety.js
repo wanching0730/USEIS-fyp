@@ -15,7 +15,7 @@ class PerSociety extends Component {
     }
 
     handleEditClick(event) {
-        browserHistory.push("/createProfile");
+        browserHistory.push("/createProfile/"+this.props.params.societyId);
     }
 
     handleBiddingClick(event) {
