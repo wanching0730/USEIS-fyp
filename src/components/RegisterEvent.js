@@ -28,11 +28,16 @@ class RegisterEvent extends Component {
           this.n.show();
       }
 
-      fetch(`http://localhost:5000/puppies/create?first_name=fido`, {
+      const data = Object.keys(this.state).map((key) => {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
+      }).join('&');
+
+      fetch(`http://localhost:5000/puppies/create`, {
         method: 'POST',
-        // body: JSON.stringify({
-        //   first_name: this.state.first_name
-        // })
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
       }).then(function(response) {
         return response;
       });
