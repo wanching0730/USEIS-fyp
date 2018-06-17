@@ -10,12 +10,20 @@ class CreateProfile extends Component {
 
   constructor(props){
     super(props);
-    this.state={
+
+    this.state = {
       society_name:'',
       society_desc:'',
     }
-
-    console.log("societyid: " + this.props.params.societyId);
+    
+    if(this.props.params.societyId != null) {
+      fetch(`http://localhost:5000/puppies/` + this.props.params.societyId).then(result => result.json()).then(reply => {
+        this.setState ({
+          society_name: reply[0][1],
+          society_desc: reply[0][2]
+        });
+      });
+    }
   }
 
   handleClick(event) {
