@@ -27,6 +27,16 @@ class RegisterEvent extends Component {
         if(this.n.supported()) 
           this.n.show();
       }
+
+      fetch(`http://localhost:5000/puppies/create?first_name=fido`, {
+        method: 'POST',
+        // body: JSON.stringify({
+        //   first_name: this.state.first_name
+        // })
+      }).then(function(response) {
+        return response;
+      });
+
   }
 
   handleNotiClick(event) {
