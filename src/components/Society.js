@@ -13,12 +13,14 @@ class Society extends Component {
         this.state = {society: []};
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.listSocieties();
     }
 
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
+    async listSocieties() {
+        const result = await fetch(`http://localhost:5000/puppies`);
+        const jsonresult = await result.json();
+        await this.setState({society: jsonresult});
         // $.ajax({ type: "GET", url:`http://localhost:5000/puppies`, success: function(res) {
         //     this.setState({society:res});
         //  }});
