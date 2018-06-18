@@ -13,6 +13,7 @@ import RegisterSociety from './components/RegisterSociety';
 import CreateProfile from './components/CreateProfile';
 import RegisterBooth from './components/RegisterBooth';
 import MyProfile from './components/MyProfile';
+import ManageMember from './components/ManageMember';
 import './App.css';
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
           <Route path="/createProfile(/:societyId)" component={CreateProfile}/>
           <Route path="/myProfile" component={MyProfile}/>
           <Route path="/register_booth" component={RegisterBooth}/>
+          <Route path="/manageMember" component={ManageMember}/>
         </Router>
         
     );

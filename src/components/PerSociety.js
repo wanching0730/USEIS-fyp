@@ -22,6 +22,10 @@ class PerSociety extends Component {
         browserHistory.push("/register_booth");
     }
 
+    handleMemberClick(event) {
+        browserHistory.push("/manageMember");
+    }
+
     render() {
 
         const { RaisedButtonStyle } = styles;
@@ -41,6 +45,7 @@ class PerSociety extends Component {
                         <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
                         <RaisedButton label="Edit Profile" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEditClick(event)}/>
                         <RaisedButton label="Register Booth" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleBiddingClick(event)}/>
+                        <RaisedButton label="Manage Member" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleMemberClick(event)}/>
                     </MuiThemeProvider>
                 </div>
             </div>
