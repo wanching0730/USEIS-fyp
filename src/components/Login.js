@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {browserHistory} from 'react-router';
+import '../style/loginForm.css';
 
 class Login extends Component {
 
@@ -28,20 +29,26 @@ class Login extends Component {
         <MuiThemeProvider>
           <div>
             <NavBar />
-            <TextField
-              hintText="Enter your Username"
-              floatingLabelText="Username"
-              onChange = {(event,newValue) => this.setState({username:newValue})}
-              />
-            <br/>
-              <TextField
-                type="password"
-                hintText="Enter your Password"
-                floatingLabelText="Password"
-                onChange = {(event,newValue) => this.setState({password:newValue})}
-                />
-              <br/>
-              <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6 col-md-offset-3">
+                <TextField
+                  hintText="Enter your Username"
+                  floatingLabelText="Username"
+                  onChange = {(event,newValue) => this.setState({username:newValue})}
+                  />
+                <br/>
+                <TextField
+                  type="password"
+                  hintText="Enter your Password"
+                  floatingLabelText="Password"
+                  onChange = {(event,newValue) => this.setState({password:newValue})}
+                  />
+                <br/>
+                <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                </div>
+              </div>
+            </div>
           </div>
           </MuiThemeProvider>
       </div>

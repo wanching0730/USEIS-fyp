@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
+import '../style/form.css';
 import NotificationModal from './NotificationModal';
 import axios from 'axios';
 
@@ -73,6 +74,8 @@ class RegisterEvent extends Component {
         <MuiThemeProvider>
           <div>
             <NavBar />
+            
+            <form>
             <TextField
               hintText="Enter your First Name"
               floatingLabelText="First Name"
@@ -112,7 +115,9 @@ class RegisterEvent extends Component {
               onClick={event => this.handleNotiClick(event)}
             />
             <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-            </div>
+          </form>
+         
+          </div>
           </MuiThemeProvider>
       </div>
     );
