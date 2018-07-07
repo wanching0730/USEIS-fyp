@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import '../style/form.css';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
 
@@ -24,13 +25,15 @@ class RegisterSociety extends Component {
   
   render() {
 
-    const { RaisedButtonStyle } = styles;
+    const { RaisedButtonStyle, ContainerStyle} = styles;
 
     return (
       <div>
         <MuiThemeProvider>
           <div>
             <NavBar />
+            <div className="container" style={ContainerStyle}>
+            <form>
             <TextField
               hintText="Enter your First Name"
               floatingLabelText="First Name"
@@ -58,6 +61,8 @@ class RegisterSociety extends Component {
               />
             <br/>
             <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+            </form>
+            </div>
             </div>
           </MuiThemeProvider>
       </div>
@@ -68,6 +73,9 @@ class RegisterSociety extends Component {
 const styles = {
   RaisedButtonStyle: {
     margin: 15
+  },
+  ContainerStyle: {
+    margin: 60
   }
 };
 

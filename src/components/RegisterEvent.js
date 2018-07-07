@@ -67,14 +67,14 @@ class RegisterEvent extends Component {
   
   render() {
 
-    const { RaisedButtonStyle } = styles;
+    const { RaisedButtonStyle, ContainerStyle } = styles;
 
     return (
       <div>
         <MuiThemeProvider>
           <div>
             <NavBar />
-            
+            <div className="container" style={ContainerStyle}>
             <form>
             <TextField
               hintText="Enter your First Name"
@@ -116,7 +116,7 @@ class RegisterEvent extends Component {
             />
             <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
           </form>
-         
+         </div>
           </div>
           </MuiThemeProvider>
       </div>
@@ -128,6 +128,9 @@ class RegisterEvent extends Component {
 const styles = {
   RaisedButtonStyle: {
     margin: 15
+  }, 
+  ContainerStyle: {
+    margin: 60
   }
 };
 

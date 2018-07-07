@@ -4,7 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {browserHistory} from 'react-router';
-import '../style/loginForm.css';
+import '../style/form.css';
 
 class Login extends Component {
 
