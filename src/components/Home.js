@@ -47,7 +47,7 @@ class Home extends Component {
             <div id="outerDiv"> 
                 <NavBar />
                 
-                <Calendar events={this.state.society}/>
+                <Calendar />
                 
                 {/* <div className="container" id="tableContainer">
                     <div className="row">

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-// import events from './events';
+import {browserHistory} from 'react-router';
 import moment from 'moment';
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
@@ -35,10 +35,8 @@ class Calendar extends Component {
                     end: element[4]
                 });
             });
-  });
-
-  
-}
+      });
+  }
 
   render() {
 
@@ -52,7 +50,7 @@ class Calendar extends Component {
         step={60}
         showMultiDayTimes
         defaultDate={new Date(2015, 3, 1)}
-        onSelectEvent={event=>alert(event.title)}
+        onSelectEvent={event=>browserHistory.push("/perEvent/"+event.id)}
       />
     );
   };
