@@ -43,15 +43,17 @@ class Calendar extends Component {
     console.log("calender: " + this.societies);
     
     return (
-      <BigCalendar
-        selectable
-        events={this.societies}
-        views={allViews}
-        step={60}
-        showMultiDayTimes
-        defaultDate={new Date(2015, 3, 1)}
-        onSelectEvent={event=>browserHistory.push("/perEvent/"+event.id)}
-      />
+      <div style={{ height: 700 }}>
+        <BigCalendar
+          selectable
+          events={this.societies}
+          views={allViews}
+          step={60}
+          showMultiDayTimes
+          defaultDate={new Date(2015, 3, 1)}
+          onSelectEvent={event=>browserHistory.push("/perEvent/"+event.id)}
+        />
+      </div>
     );
   };
 
