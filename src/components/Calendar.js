@@ -50,7 +50,7 @@ class Calendar extends Component {
           views={allViews}
           step={60}
           showMultiDayTimes
-          defaultDate={new Date(2015, 3, 1)}
+          defaultDate={new Date()}
           onSelectEvent={event=>browserHistory.push("/perEvent/"+event.id)}
         />
       </div>
