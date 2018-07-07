@@ -5,31 +5,51 @@ import { Link } from 'react-router';
 
 class Home extends Component {
 
+    // societies = [];
+
     constructor(props) {
         super(props);
 
-        this.state = {society: []};
+        // this.state = {society: []};
+
     }
 
-    componentDidMount() {
-        this.listSocieties();
-    }
+    // componentDidMount() {
+    //     this.listSocieties();
+    // }
 
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
-    }
+    // listSocieties() {
+    //     //fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
+    //     fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => {
+    //         console.log(reply);
+    //         reply.forEach(element => {
+    //             this.societies.push({
+    //                 id: element[0],
+    //                 title: element[1],
+    //                 allDay: element[2],
+    //                 start: element[3],
+    //                 end: element[4]
+    //             });
+    //         });
+
+    //         this.setState({society: this.societies});
+    
+    //         console.log("societies: " + JSON.stringify(this.societies));
+            
+    //     });
+    // }
 
     render() {
 
-        const { imageStyle } = styles;
+        // const { imageStyle } = styles;
 
         return (
             <div id="outerDiv"> 
                 <NavBar />
                 
-                <Calendar />
+                <Calendar events={this.state.society}/>
                 
-                <div className="container" id="tableContainer">
+                {/* <div className="container" id="tableContainer">
                     <div className="row">
                         <div className="panel-body">
                             <table className="table table-hover table-dark" border="1">
@@ -53,17 +73,17 @@ class Home extends Component {
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     };
 };
 
-const styles = {
-    imageStyle: {
-        height: "50px",
-        width: "50px"
-    }
-}
+// const styles = {
+//     imageStyle: {
+//         height: "50px",
+//         width: "50px"
+//     }
+// }
 
 export default Home;
