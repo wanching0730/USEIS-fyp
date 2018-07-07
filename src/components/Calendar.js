@@ -1,6 +1,6 @@
 import React from 'react';
 import BigCalendar from 'react-big-calendar';
-import events from 'events';
+import events from './events';
 import moment from 'moment';
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))

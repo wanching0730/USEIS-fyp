@@ -26,7 +26,9 @@ class Home extends Component {
         return (
             <div id="outerDiv"> 
                 <NavBar />
+                <div height="100">
                 <Calendar />
+                </div>
                 <div className="container" id="tableContainer">
                     <div className="row">
                         <div className="panel-body">
