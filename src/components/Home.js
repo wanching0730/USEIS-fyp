@@ -47,9 +47,31 @@ class Home extends Component {
             <div id="outerDiv"> 
                 <NavBar />
                 
-                <div style={{ marginTop: 20}}>
+               
+                <div className="pull-left col-md-9 col-lg-9 col-sm-9" style={{ marginTop: 20}}>
                     <Calendar />
                 </div>
+
+                <div className="pull-right col-md-3 col-lg-3 col-sm-3" style={{ marginTop: 20}}>
+                    <table className="table table-hover table-dark" border="1">
+                        <thead>
+                            <tr>
+                                <th>Societies</th>
+                                <th>Events</th>
+                                <th>Attendance</th>                  
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>IT Society</td>
+                                <td>Work Shop</td>
+                                <td>45</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+               
                 
                 
                 {/* <img style={imageStyle} src={ require('../assets/images/image1.jpg') } /> */}
