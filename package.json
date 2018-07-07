@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@opuscapita/react-searchbar": "^1.0.4",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "font-awesome": "^4.7.0",
@@ -19,6 +20,7 @@
     "react-modal": "^3.4.5",
     "react-router": "^3.0.5",
     "react-scripts": "1.1.4",
+    "react-search-bar": "^2.2.0",
     "react-seatmap": "^0.1.2",
     "react-star-rating-component": "^1.4.1",
     "react-table-view": "^1.0.0",

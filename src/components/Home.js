@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
 import Calendar from './Calendar';
+// import SearchBar from 'react-search-bar';
+import SearchBar from '@opuscapita/react-searchbar';
 import { Link } from 'react-router';
 
 class Home extends Component {
@@ -11,8 +13,15 @@ class Home extends Component {
         super(props);
 
         // this.state = {society: []};
+        this.state = {searchValue: ""}
 
     }
+
+    handleSearch(value) {
+        if (value) {
+          console.info(`Searching "${value}"`);
+        }
+      }
 
     // componentDidMount() {
     //     this.listSocieties();
@@ -46,13 +55,17 @@ class Home extends Component {
         return (
             <div id="outerDiv"> 
                 <NavBar />
-                
+
+                <SearchBar
+                    onSearch={this.handleSearch}
+                    value={this.state.searchValue}
+                />
                
-                <div className="pull-left col-md-9 col-lg-9 col-sm-9" style={{ marginTop: 20}}>
+                <div className="pull-left col-md-9 col-lg-9 col-sm-9" id="col-9" style={{ marginTop: 20}}>
                     <Calendar />
                 </div>
 
-                <div className="pull-right col-md-3 col-lg-3 col-sm-3" style={{ marginTop: 20}}>
+                <div className="pull-right col-md-3 col-lg-3 col-sm-3" id="col-3" style={{ marginTop: 20}}>
                     <table className="table table-hover table-dark" border="1">
                         <thead>
                             <tr>
