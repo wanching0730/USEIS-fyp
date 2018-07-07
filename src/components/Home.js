@@ -29,7 +29,7 @@ class Home extends Component {
                 
                 <Calendar />
                 
-                {/* <div className="container" id="tableContainer">
+                <div className="container" id="tableContainer">
                     <div className="row">
                         <div className="panel-body">
                             <table className="table table-hover table-dark" border="1">
@@ -53,7 +53,7 @@ class Home extends Component {
                             </table>
                         </div>
                     </div>
-                </div> */}
+                </div>
             </div>
         );
     };

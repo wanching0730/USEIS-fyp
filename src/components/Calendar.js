@@ -9,11 +9,13 @@ let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
 
 let Calendar = () => (
   <BigCalendar
+    selectable
     events={events}
     views={allViews}
     step={60}
     showMultiDayTimes
     defaultDate={new Date(2015, 3, 1)}
+    onSelectEvent={event=>alert(event.title)}
   />
 )
 
