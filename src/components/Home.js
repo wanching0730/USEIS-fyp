@@ -47,33 +47,13 @@ class Home extends Component {
             <div id="outerDiv"> 
                 <NavBar />
                 
-                <Calendar />
+                <div style={{ marginTop: 20}}>
+                    <Calendar />
+                </div>
                 
-                {/* <div className="container" id="tableContainer">
-                    <div className="row">
-                        <div className="panel-body">
-                            <table className="table table-hover table-dark" border="1">
-                                <thead>
-                                    <tr>
-                                        <th>Poster</th>
-                                        <th>Event Name</th>                 
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    {this.state.society.map(row => {
-                                        return (
-                                            <tr>
-                                                <td><Link to={`/perEvent/`+row[0]}>{row[0]}</Link></td>
-                                                <img style={imageStyle} src={ require('../assets/images/image1.jpg') } />
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div> */}
+                
+                {/* <img style={imageStyle} src={ require('../assets/images/image1.jpg') } /> */}
+                                           
             </div>
         );
     };

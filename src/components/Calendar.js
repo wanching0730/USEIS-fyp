@@ -31,8 +31,8 @@ class Calendar extends Component {
                     id: element[0],
                     title: element[1],
                     allDay: element[2],
-                    start: element[3],
-                    end: element[4]
+                    start: new Date(element[3]),
+                    end: new Date(element[4])
                 });
             });
       });
