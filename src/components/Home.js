@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
+import Calendar from './Calendar';
 import { Link } from 'react-router';
 
 class Home extends Component {
@@ -25,6 +26,7 @@ class Home extends Component {
         return (
             <div id="outerDiv"> 
                 <NavBar />
+                <Calendar />
                 <div className="container" id="tableContainer">
                     <div className="row">
                         <div className="panel-body">
