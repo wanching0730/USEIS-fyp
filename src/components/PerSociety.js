@@ -28,24 +28,37 @@ class PerSociety extends Component {
 
     render() {
 
-        const { RaisedButtonStyle } = styles;
+        const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
 
         return (
             <div>
                 <NavBar />
                 <div>
                     <MuiThemeProvider>
-                        <h1>{this.props.params.societyId}</h1>
-                        <h2>IT Society</h2>
-                        <p>Description: It is a very active Society</p>
-                        <p>Category: Technology</p>
-                        <h3>Events</h3>
-                        <p>1. Workshop</p>
-                        <p>2. Talk</p>
-                        <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
-                        <RaisedButton label="Edit Profile" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEditClick(event)}/>
-                        <RaisedButton label="Register Booth" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleBiddingClick(event)}/>
-                        <RaisedButton label="Manage Member" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleMemberClick(event)}/>
+                        {/* <h1>{this.props.params.societyId}</h1> */}
+                        <div style={div1Style}>
+                            <img style={imageStyle} src={ require('../assets/images/image1.jpg') } />
+                            <h1>IT Society</h1>
+                        </div>
+                        <div style={div2Style}>
+                            <h5>Category:</h5>
+                            <p>Technology</p>
+                            <h5>Description:</h5>
+                            <p>
+                                The biggest challenge to IT in the future is security. 
+                                Security could negatively impact connectivity to public networks. 
+                                If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
+                                The risks now are so great and getting worse every day that we even see foreign governments 
+                                toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security.
+                            </p>
+                            <br/>
+                        </div>
+                        <div style={div3Style}>
+                            <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
+                            <RaisedButton label="Edit Profile" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEditClick(event)}/>
+                            <RaisedButton label="Register Booth" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleBiddingClick(event)}/>
+                            <RaisedButton label="Manage Member" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleMemberClick(event)}/>
+                        </div>
                     </MuiThemeProvider>
                 </div>
             </div>
@@ -56,6 +69,27 @@ class PerSociety extends Component {
 const styles = {
     RaisedButtonStyle: {
         margin: 15
+    },
+    imageStyle: {
+        height: "200px",
+        width: "200px",
+        marginTop: "30px",
+        
+    }, 
+    div1Style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+    }, 
+    div2Style: {
+        marginLeft: "20px"
+    }, 
+    div3Style: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center"
     }
 }
 
