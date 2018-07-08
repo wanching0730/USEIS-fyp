@@ -32,20 +32,25 @@ class Login extends Component {
             <div className="container">
               <div className="row">
                 <div className="col-md-6 col-md-offset-3">
-                <TextField
-                  hintText="Enter your Username"
-                  floatingLabelText="Username"
-                  onChange = {(event,newValue) => this.setState({username:newValue})}
-                  />
-                <br/>
-                <TextField
-                  type="password"
-                  hintText="Enter your Password"
-                  floatingLabelText="Password"
-                  onChange = {(event,newValue) => this.setState({password:newValue})}
-                  />
-                <br/>
-                <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                  <div class="form-style-8">
+                    <h2>Login to your account</h2>
+                    <form>
+                      <TextField
+                        hintText="Enter your Username"
+                        floatingLabelText="Username"
+                        onChange = {(event,newValue) => this.setState({username:newValue})}
+                        />
+                      <br/>
+                      <TextField
+                        type="password"
+                        hintText="Enter your Password"
+                        floatingLabelText="Password"
+                        onChange = {(event,newValue) => this.setState({password:newValue})}
+                        />
+                      <br/>
+                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>

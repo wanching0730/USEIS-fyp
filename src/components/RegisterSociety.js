@@ -25,7 +25,7 @@ class RegisterSociety extends Component {
   
   render() {
 
-    const { RaisedButtonStyle, ContainerStyle} = styles;
+    const { RaisedButtonStyle, ContainerStyle, FormStyle } = styles;
 
     return (
       <div>
@@ -33,7 +33,7 @@ class RegisterSociety extends Component {
           <div>
             <NavBar />
             <div className="container" style={ContainerStyle}>
-            <form>
+            <form style={FormStyle}>
             <TextField
               hintText="Enter your First Name"
               floatingLabelText="First Name"
@@ -72,10 +72,20 @@ class RegisterSociety extends Component {
 
 const styles = {
   RaisedButtonStyle: {
-    margin: 15
+    margin: 15,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
   },
   ContainerStyle: {
     margin: 60
+  }, 
+  FormStyle: {
+    borderWidth: "3px",
+    borderStyle: "solid",
+    borderColor: "#666",
+    padding: "15px",
+    backgroundColor: "#ebeef4"
   }
 };
 
