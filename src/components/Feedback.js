@@ -25,7 +25,7 @@ class Feedback extends Component {
     
     render() {
   
-      const { RaisedButtonStyle, h3Style } = styles;
+      const { RaisedButtonStyle, ContainerStyle } = styles;
       const { rating } = this.state;
   
       return (
@@ -33,6 +33,8 @@ class Feedback extends Component {
           <MuiThemeProvider>
             <div>
               <NavBar />
+              <div className="container" style={ContainerStyle}>
+              <form>
               <TextField
                 hintText="Enter your First Name"
                 floatingLabelText="First Name"
@@ -59,20 +61,23 @@ class Feedback extends Component {
                 onChange = {(event,newValue) => this.setState({password:newValue})}
                 />
               <br/>
+              <br/>
 
                <div>
-                    <h2>Rate this event!</h2>
-                    <StarRatingComponent 
-                    name="rate1" 
-                    starCount={10}
-                    value={rating}
-                    onStarClick={this.onStarClick.bind(this)}
-                    />
-                </div>
+                  <h2>Rate this event!</h2>
+                  <StarRatingComponent 
+                  name="rate1" 
+                  starCount={10}
+                  value={rating}
+                  onStarClick={this.onStarClick.bind(this)}
+                  />
+              </div>
 
-            <p>{this.state.rating}</p>
+              <p>{this.state.rating}</p>
             
               <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+              </form>
+              </div>
               </div>
             </MuiThemeProvider>
 
@@ -85,6 +90,9 @@ class Feedback extends Component {
     RaisedButtonStyle: {
       margin: 15
     }, 
+    ContainerStyle: {
+      margin: 60
+    }
   };
   
   export default Feedback;
