@@ -4,6 +4,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import '../style/society.css';
 import { Link } from 'react-router';
+import { red100, red200, red50, red500 } from 'material-ui/styles/colors';
 
 class Society extends Component {
 
@@ -32,6 +33,8 @@ class Society extends Component {
         // for(var i = 0; i < this.state.society.length; i++) {
         //     list.push(<p>{this.state.society[i]}</p>);
         // }
+
+        const { imageStyle } = styles;
         
         return (
             <div id="outerDiv"> 
@@ -42,14 +45,56 @@ class Society extends Component {
                             <table className="table table-hover table-dark" border="1">
                                 <thead>
                                     <tr>
-                                        <th>Societies</th>
-                                        <th>Events</th>
-                                        <th>Status</th>                  
+                                        <th>No.</th>
+                                        <th>Logo</th>
+                                        <th>Society</th>  
+                                        <th>Events</th>               
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    {this.state.society.map(row => {
+                                    <tr>
+                                        <td>1</td>
+                                        <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                                        <td><Link to={`/perSociety/1`}>IT Society</Link></td>
+                                        <td> 
+                                            <li><Link to={`/perEvent/1`}>WorkShop</Link></li>
+                                            <li><Link to={`/perEvent/1`}>KLESF</Link></li>
+                                            <li><Link to={`/perEvent/1`}>Easy Parcel Talk</Link></li>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                                        <td><Link to={`/perSociety/1`}>First Aid Society</Link></td>
+                                        <td> 
+                                            <li><Link to={`/perEvent/1`}>Cardio Night Run</Link></li>
+                                            <li><Link to={`/perEvent/1`}>Blood Donation</Link></li>
+                                            <li><Link to={`/perEvent/1`}>Adventure Camp</Link></li>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                                        <td><Link to={`/perSociety/1`}>Engineering Society</Link></td>
+                                        <td> 
+                                            <li><Link to={`/perEvent/1`}>ES Camp</Link></li>
+                                            <li><Link to={`/perEvent/1`}>Engineering Fiesta</Link></li>
+                                            <li><Link to={`/perEvent/1`}>Annual General Meeting</Link></li>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                                        <td><Link to={`/perSociety/1`}>Sport Society</Link></td>
+                                        <td> 
+                                            <li><Link to={`/perEvent/1`}>Night Run</Link></li>
+                                            <li><Link to={`/perEvent/1`}>Colour Run</Link></li>
+                                            <li><Link to={`/perEvent/1`}>Sport Carnival</Link></li>
+                                        </td>
+                                    </tr>
+                                   
+                                    {/* {this.state.society.map(row => {
                                         return (
                                             <tr>
                                                 <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
@@ -57,7 +102,7 @@ class Society extends Component {
                                                 <td>{row[3]}</td>
                                             </tr>
                                         );
-                                    })}
+                                    })} */}
                                 </tbody>
                             </table>
                         </div>
@@ -68,5 +113,12 @@ class Society extends Component {
     };
     
 };
+
+const styles = {
+    imageStyle: {
+        height: "50px",
+        width: "50px"
+    }
+}
 
 export default Society;

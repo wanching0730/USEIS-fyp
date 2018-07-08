@@ -10,3 +10,7 @@ table {
     vertical-align: middle;
     height: 100%;
 }
+
+td {
+    text-align: left;
+}
