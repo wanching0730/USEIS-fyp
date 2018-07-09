@@ -56,8 +56,6 @@ class Home extends Component {
             <div id="outerDiv"> 
                 <NavBar />
 
-                
-               
                 <div className="pull-left col-md-9 col-lg-9 col-sm-9" id="col-9" style={{ marginTop: 20}}>
                     <div id="searchBarDiv">
                     <SearchBar
