@@ -67,7 +67,7 @@
 /* Register form */
 
 .form-style-10{
-    width:100%;
+    width:450px;
     padding:30px;
     /* margin:40px auto; */
     background: #FFF;
@@ -185,6 +185,13 @@
     color: #4D4D4D;
     margin-top: 10px;
     text-align: right;
+}
+
+@media screen and (max-width: 600px) {
+    .form-style-10{
+        width:80%;
+        margin: 0 0 1em 0;
+    }
 }
 
 
