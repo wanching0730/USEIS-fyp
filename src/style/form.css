@@ -67,7 +67,7 @@
 /* Register form */
 
 .form-style-10{
-    width:450px;
+    width:100%;
     padding:30px;
     /* margin:40px auto; */
     background: #FFF;
@@ -110,6 +110,7 @@
     color: #888;
     margin-bottom: 15px;
 }
+
 .form-style-10 input[type="text"],
 .form-style-10 input[type="date"],
 .form-style-10 input[type="datetime"],

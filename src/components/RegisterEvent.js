@@ -75,30 +75,34 @@ class RegisterEvent extends Component {
           <div>
             <NavBar />
             <div className="container" style={ContainerStyle}>
-              <div class="form-style-10">
+              <div className="form-style-10">
                 <h1>Sign Up Now!<span>Sign up and get yourself a seat for this event!</span></h1>
                 <form>
                     <div class="section"><span>1</span>First Name &amp; Address</div>
                     <div class="inner-wrap">
                         <label>Your Full Name</label>  
-                        <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} />
+                        {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
+                        <input type="text" onChange={(event) => {
+                          this.setState({first_name:event.target.value});
+                          console.log("state value: " + this.state.first_name);
+                          }}/>
                         <label>Address <textarea name="field2"></textarea></label>
                     </div>
 
                     <div class="section"><span>2</span>Email &amp; Phone</div>
                     <div class="inner-wrap">
-                    <label>Email Address</label>
-                        <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} />
-                        <label>Phone Number</label> 
-                        <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} />
+                      <label>Email Address</label>
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <label>Phone Number</label> 
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>3</span>Passwords</div>
                         <div class="inner-wrap">
                         <label>Password</label>
-                        <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} />
+                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                         <label>Confirm Password</label> 
-                        <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} />
+                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
                     <div class="button-section">
                     <input type="submit" name="Sign Up" />
@@ -161,7 +165,9 @@ const styles = {
     margin: 15
   }, 
   ContainerStyle: {
-    margin: 30
+    margin: "30px",
+    position: "absolute",
+    width: "100%"
   }
 };
 
