@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
 import Calendar from './Calendar';
-// import SearchBar from 'react-search-bar';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Link } from 'react-router';
+import '../style/home.css';
 
 class Home extends Component {
 
@@ -50,18 +50,22 @@ class Home extends Component {
 
     render() {
 
-        // const { imageStyle } = styles;
+        const { divStyle } = styles;
 
         return (
             <div id="outerDiv"> 
                 <NavBar />
 
-                <SearchBar
-                    onSearch={this.handleSearch}
-                    value={this.state.searchValue}
-                />
+                
                
                 <div className="pull-left col-md-9 col-lg-9 col-sm-9" id="col-9" style={{ marginTop: 20}}>
+                    <div id="searchBarDiv">
+                    <SearchBar
+                        onSearch={this.handleSearch}
+                        value={this.state.searchValue}
+                    />
+                    </div>
+
                     <Calendar />
                 </div>
 
@@ -94,6 +98,13 @@ class Home extends Component {
     };
 };
 
+const styles = {
+    divStyle: {
+        width: "50%",
+        // display: "flex",
+        justifyContent: "center"
+    }
+}
 // const styles = {
 //     imageStyle: {
 //         height: "50px",
