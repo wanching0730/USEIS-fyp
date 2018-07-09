@@ -47,7 +47,7 @@ class Calendar extends Component {
         <BigCalendar
           selectable
           events={this.societies}
-          views={allViews}
+          views={{ month: true, week: true }}
           step={60}
           showMultiDayTimes
           defaultDate={new Date()}

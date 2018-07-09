@@ -21,18 +21,16 @@ class NavBar extends Component {
     render() {
         return (
 
-            <div class="topnav" ref="myTopnav">
-                <div className="pull-left" style={{ marginLeft: "5px" }}>
-                    <Link to="/">Home</Link>
-                    <Link to="/society">Societies</Link>
-                    <Link to="/createProfile">Create Society Profile</Link>
-                    <Link to="/myProfile">My Profile</Link>
-                </div>
-                <div className="pull-right" style={{ marginRight: "5px" }}>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
-                    <Link>Logout</Link>
-                </div>
+            <div className="topnav" ref="myTopnav">
+               
+                <Link to="/">Home</Link>
+                <Link to="/society">Societies</Link>
+                <Link to="/createProfile">Create Society Profile</Link>
+                <Link to="/myProfile">My Profile</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/register">Register</Link>
+                <Link>Logout</Link>
+                
                 <a href="javascript:void(0);" class="icon" onClick={() => this.myFunction()}>
                     <i class="fa fa-bars"></i>
                 </a>
