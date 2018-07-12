@@ -4,7 +4,6 @@ import $ from 'jquery';
 import axios from 'axios';
 import '../style/society.css';
 import { Link } from 'react-router';
-import { red100, red200, red50, red500 } from 'material-ui/styles/colors';
 
 class Society extends Component {
 
