@@ -68,7 +68,7 @@ class Home extends Component {
                 </div>
 
                 <div className="pull-right col-md-3 col-lg-3 col-sm-3" id="col-3" style={{ marginTop: 20}}>
-                    <table className="table table-hover table-dark" border="1">
+                    <table className="table table-hover table-light" border="1">
                         <thead>
                             <tr>
                                 <th>Societies</th>

@@ -29,7 +29,7 @@ class ManageMember extends Component {
                 <div className="container" id="tableContainer">
                     <div className="row">
                         <div className="panel-body">
-                            <table className="table table-hover table-dark" border="1">
+                            <table className="table table-hover table-light" border="1">
                                 <thead>
                                     <tr>
                                         <th>Societies</th>
