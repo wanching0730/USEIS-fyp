@@ -7,6 +7,11 @@ table {
     border-color: #083477;
 }
 
+table thead {
+    background-color: #083477;
+    color: white;
+}
+
 #tableContainer {
     vertical-align: middle;
     height: 100%;
