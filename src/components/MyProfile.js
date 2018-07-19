@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import '../style/society.css';
 import { Link } from 'react-router';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { red400 } from 'material-ui/styles/colors';
 
 class MyProfile extends Component {
@@ -27,6 +28,14 @@ class MyProfile extends Component {
         return (
             <div id="outerDiv"> 
                 <NavBar />
+
+                <div style={{ margin: 20 }}>
+                    <Breadcrumb>
+                        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                        <BreadcrumbItem active>My Profile</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
+
                 <div className="container" id="tableContainer">
                     <div className="row">
                         <div className="panel-body">

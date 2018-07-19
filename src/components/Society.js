@@ -4,6 +4,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import '../style/society.css';
 import { Link } from 'react-router';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 class Society extends Component {
 
@@ -38,6 +39,14 @@ class Society extends Component {
         return (
             <div id="outerDiv"> 
                 <NavBar />
+
+                <div style={{ margin: 20 }}>
+                    <Breadcrumb>
+                        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                        <BreadcrumbItem active>Societies</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
+
                 <div className="container" id="tableContainer">
                     <div className="row">
                         <div className="panel-body">

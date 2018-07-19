@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 class PerSociety extends Component {
 
@@ -33,6 +34,15 @@ class PerSociety extends Component {
         return (
             <div>
                 <NavBar />
+
+                 <div style={{ margin: 20 }}>
+                    <Breadcrumb>
+                        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                        <BreadcrumbItem><a href="#">Societies</a></BreadcrumbItem>
+                        <BreadcrumbItem active>IT Society</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
+
                 <div>
                     <MuiThemeProvider>
                         {/* <h1>{this.props.params.societyId}</h1> */}

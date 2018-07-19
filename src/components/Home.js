@@ -4,6 +4,8 @@ import Calendar from './Calendar';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Link } from 'react-router';
 import '../style/home.css';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { white } from 'material-ui/styles/colors';
 
 class Home extends Component {
 
@@ -55,6 +57,12 @@ class Home extends Component {
         return (
             <div id="outerDiv"> 
                 <NavBar />
+
+                <div style={{ margin: 20 }}>
+                    <Breadcrumb>
+                        <BreadcrumbItem active>Home</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
 
                 <div className="pull-left col-md-9 col-lg-9 col-sm-9" id="col-9" style={{ marginTop: 20}}>
                     <div id="searchBarDiv">
