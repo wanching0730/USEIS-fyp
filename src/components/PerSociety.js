@@ -53,6 +53,10 @@ class PerSociety extends Component {
                         <div style={div2Style}>
                             <h5>Category:</h5>
                             <p>Technology</p>
+                            <h5>Mision</h5>
+                            <p>To promote IT information in UTAR</p>
+                            <h5>Vision</h5>
+                            <p>To increase reputation of IT Society in UTAR</p>
                             <h5>Description:</h5>
                             <p>
                                 The biggest challenge to IT in the future is security. 
