@@ -34,7 +34,7 @@ class RegisterSociety extends Component {
           <div>
             <NavBar />
 
-             <div style={{ margin: 20 }}>
+            <div style={{ margin: 20 }}>
                 <Breadcrumb>
                   <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
                     <BreadcrumbItem><a href="#">Societies</a></BreadcrumbItem>

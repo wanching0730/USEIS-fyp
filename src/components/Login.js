@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {browserHistory} from 'react-router';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/form.css';
 
 class Login extends Component {
@@ -29,6 +30,14 @@ class Login extends Component {
         <MuiThemeProvider>
           <div>
             <NavBar />
+
+            <div style={{ margin: 20 }}>
+              <Breadcrumb>
+                <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                <BreadcrumbItem active>Login</BreadcrumbItem>
+              </Breadcrumb>
+            </div>
+
             <div className="container">
               <div className="row">
                 <div className="col-md-6 col-md-offset-3">
