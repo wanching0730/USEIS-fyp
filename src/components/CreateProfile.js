@@ -42,25 +42,40 @@ class CreateProfile extends Component {
           <div>
             <NavBar />
             <div className="container" style={ContainerStyle}>
-            <form>
-            <TextField
-              hintText="Enter Society Name"
-              floatingLabelText="Name"
-              value={this.state.society_name}
-              onChange = {(event,newValue) => this.setState({society_name:newValue})}
-              />
-            <br/>
-            <TextField
-              hintText="Enter Society Description"
-              floatingLabelText="Description"
-              value={this.state.society_desc}
-              onChange = {(event,newValue) => this.setState({society_desc:newValue})}
-              />
-            <br/>
-            <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-            </form>
-            </div>
-            </div>
+              <div className="form-style-10">
+                <h1>Create Society Profile<span>Create your own society profile and start to promote it!</span></h1>
+                <form>
+                    <div class="section"><span>1</span>Name &amp; Category</div>
+                    <div class="inner-wrap">
+                        <label>Society Name</label>  
+                        {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
+                        <input type="text" onChange={(event) => {
+                          this.setState({first_name:event.target.value});
+                          console.log("state value: " + this.state.first_name);
+                          }}/>
+                        <label>Society Category <textarea name="field2"></textarea></label>
+                    </div>
+
+                    <div class="section"><span>2</span>Vision &amp; Mision</div>
+                    <div class="inner-wrap">
+                      <label>Society Vision</label>
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <label>Society Mision</label> 
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                    </div>
+
+                    <div class="section"><span>3</span>Description</div>
+                        <div class="inner-wrap">
+                        <label>Society Description</label>
+                        <textarea id="txtArea" rows="5" cols="10"></textarea>
+                    </div>
+                    <div class="button-section">
+                    <input type="submit" name="Sign Up" />
+                    </div>
+                </form>
+              </div>
+          </div>
+          </div>
           </MuiThemeProvider>
       </div>
     );

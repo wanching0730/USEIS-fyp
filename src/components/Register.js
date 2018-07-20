@@ -31,7 +31,7 @@ class Register extends Component {
               <div className="row">
                 <div className="col-md-6 col-md-offset-3">
                   <div class="form-style-8">
-                    <h2>Login to your account</h2>
+                    <h2>Register for new account</h2>
                     <form>
                       <TextField
                         hintText="Enter your First Name"
