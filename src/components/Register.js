@@ -27,36 +27,43 @@ class Register extends Component {
         <MuiThemeProvider>
           <div>
             <NavBar />
-            <div className="container" style={ContainerStyle}>
-            <form>
-            <TextField
-              hintText="Enter your First Name"
-              floatingLabelText="First Name"
-              onChange = {(event,newValue) => this.setState({first_name:newValue})}
-              />
-            <br/>
-            <TextField
-              hintText="Enter your Last Name"
-              floatingLabelText="Last Name"
-              onChange = {(event,newValue) => this.setState({last_name:newValue})}
-              />
-            <br/>
-            <TextField
-              hintText="Enter your Email"
-              type="email"
-              floatingLabelText="Email"
-              onChange = {(event,newValue) => this.setState({email:newValue})}
-              />
-            <br/>
-            <TextField
-              type = "password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
-              onChange = {(event,newValue) => this.setState({password:newValue})}
-              />
-            <br/>
-            <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-            </form>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6 col-md-offset-3">
+                  <div class="form-style-8">
+                    <h2>Login to your account</h2>
+                    <form>
+                      <TextField
+                        hintText="Enter your First Name"
+                        floatingLabelText="First Name"
+                        onChange = {(event,newValue) => this.setState({first_name:newValue})}
+                        />
+                      <br/>
+                      <TextField
+                        hintText="Enter your Last Name"
+                        floatingLabelText="Last Name"
+                        onChange = {(event,newValue) => this.setState({last_name:newValue})}
+                        />
+                      <br/>
+                      <TextField
+                        hintText="Enter your Email"
+                        type="email"
+                        floatingLabelText="Email"
+                        onChange = {(event,newValue) => this.setState({email:newValue})}
+                        />
+                      <br/>
+                      <TextField
+                        type = "password"
+                        hintText="Enter your Password"
+                        floatingLabelText="Password"
+                        onChange = {(event,newValue) => this.setState({password:newValue})}
+                        />
+                      <br/>
+                      <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
             </div>
           </MuiThemeProvider>
