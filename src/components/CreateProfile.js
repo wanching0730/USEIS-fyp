@@ -74,7 +74,7 @@ class CreateProfile extends Component {
                     </div>
                 </form>
               </div>
-          </div>
+            </div>
           </div>
           </MuiThemeProvider>
       </div>
