@@ -5,6 +5,7 @@ table {
     margin-top: 20px;
     vertical-align: middle;
     border-color: #083477;
+    width: 100%;
 }
 
 table thead {
@@ -19,4 +20,8 @@ table thead {
 
 td {
     text-align: left;
+}
+
+@media screen and (max-width: 320px) {
+    #table { display: none; }
 }
