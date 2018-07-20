@@ -96,7 +96,7 @@ const styles = {
     margin: 15
   },
   ContainerStyle: {
-    margin: 45
+    margin: 60
   }
 };
 

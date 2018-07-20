@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import ToggleButton from 'react-toggle-button';
@@ -74,6 +75,14 @@ class RegisterEvent extends Component {
         <MuiThemeProvider>
           <div>
             <NavBar />
+
+            <div style={{ margin: 20 }}>
+              <Breadcrumb>
+                <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                <BreadcrumbItem active>Society Profile</BreadcrumbItem>
+              </Breadcrumb>
+            </div>
+
             <div className="container" style={ContainerStyle}>
               <div className="form-style-10">
                 <h1>Sign Up Now!<span>Sign up and get yourself a seat for this event!</span></h1>

@@ -95,7 +95,7 @@ const styles = {
     justifyContent: "center"
   },
   ContainerStyle: {
-    margin: 45
+    margin: 60
   }, 
   FormStyle: {
     borderWidth: "3px",
