@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import {browserHistory} from 'react-router';
 import TextField from 'material-ui/TextField';
 import StarRatingComponent from 'react-star-rating-component';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -21,6 +22,10 @@ class Feedback extends Component {
 
     onStarClick(nextValue, prevValue, name) {
         this.setState({rating: nextValue});
+    }
+
+    handleClick() {
+      browserHistory.push("/student");
     }
      
     
