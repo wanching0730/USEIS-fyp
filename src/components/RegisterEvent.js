@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
+import {browserHistory} from 'react-router';
 import TextField from 'material-ui/TextField';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
@@ -52,7 +53,7 @@ class RegisterEvent extends Component {
   }
 
   handleClick(event) {
-      this.displayText();
+      browserHistory.push("/perEvent/1");
       // this.setState({showModal: this.state.value});
     }
   
@@ -79,7 +80,7 @@ class RegisterEvent extends Component {
             <div style={{ margin: 20 }}>
               <Breadcrumb>
                 <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
-                <BreadcrumbItem active>Society Profile</BreadcrumbItem>
+                <BreadcrumbItem active>Registration</BreadcrumbItem>
               </Breadcrumb>
             </div>
 
