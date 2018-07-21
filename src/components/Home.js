@@ -64,14 +64,14 @@ class Home extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div className="pull-left col-md-8 col-lg-8 col-sm-8" id="col-9" style={{ marginTop: 20}}>
-                    <div id="searchBarDiv">
-                        <SearchBar
-                            onSearch={this.handleSearch}
-                            value={this.state.searchValue}
-                        />
-                    </div>
+                <div id="searchBarDiv">
+                    <SearchBar
+                        onSearch={this.handleSearch}
+                        value={this.state.searchValue}
+                    />
+                </div>
 
+                <div className="pull-left col-md-8 col-lg-8 col-sm-8" id="col-9" style={{ marginTop: 20}}>
                     <Calendar />
                 </div>
 
@@ -115,8 +115,9 @@ class Home extends Component {
 const styles = {
     divStyle: {
         width: "50%",
-        // display: "flex",
-        justifyContent: "center"
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }
 // const styles = {
