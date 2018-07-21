@@ -70,7 +70,7 @@ class Society extends Component {
                                 <td>First Aid Society</td>
                                 <td>First Aid Training</td>
                                 <td>28/11/2017</td>
-                                <td><Link to={`/feedback`}>&#10004;</Link></td>
+                                <td>&#10004;</td>
                             </tr>
                             <tr>
                                 <td>3</td>
@@ -84,7 +84,7 @@ class Society extends Component {
                                 <td>Music Society</td>
                                 <td>USTAR8</td>
                                 <td>21/01/2018</td>
-                                <td><Link to={`/feedback`}>&#10004;</Link></td>
+                                <td>&#10004;</td>
                             </tr>
                         {/* {this.state.society.map(row => {
                             return (
