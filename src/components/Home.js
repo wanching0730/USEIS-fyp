@@ -52,8 +52,6 @@ class Home extends Component {
 
     render() {
 
-        const { divStyle } = styles;
-
         return (
             <div id="outerDiv"> 
                 <NavBar />
@@ -64,7 +62,7 @@ class Home extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div id="searchBarDiv">
+                <div id="searchBarDiv" style={{ margin: 20 }}>
                     <SearchBar
                         onSearch={this.handleSearch}
                         value={this.state.searchValue}
@@ -104,9 +102,7 @@ class Home extends Component {
                         </tbody>
                     </table>
                 </div>
-                
-                {/* <img style={imageStyle} src={ require('../assets/images/image1.jpg') } /> */}
-                                           
+
             </div>
         );
     };
@@ -120,11 +116,5 @@ const styles = {
         alignItems: "center"
     }
 }
-// const styles = {
-//     imageStyle: {
-//         height: "50px",
-//         width: "50px"
-//     }
-// }
 
 export default Home;

@@ -1,9 +1,9 @@
-.navbar a {
+/* .navbar a {
     display: inline-block;
     padding: 10px;
     color: #fff;
     text-decoration: none;
-}
+} */
 
 body {
     margin: 0;
@@ -25,6 +25,14 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+}
+
+.topnav img {
+  float: left;
+  display: block;
+  padding: 14px 16px;
+  height: 55px;
+  width: 100px;
 }
 
 .topnav a:hover {

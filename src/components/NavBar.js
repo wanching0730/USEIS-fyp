@@ -19,9 +19,14 @@ class NavBar extends Component {
     }
 
     render() {
+
+        const { imageStyle } = styles;
+
         return (
 
             <div className="topnav" ref="myTopnav">
+
+                <img src={ require('../assets/images/utar.jpg') } />
                
                 <Link to="/">Home</Link>
                 <Link to="/society">Societies</Link>
@@ -46,6 +51,13 @@ class NavBar extends Component {
                 // <Link>Logout</Link>
             // </div>
         );
+    }
+}
+
+const styles = {
+    imageStyle: {
+        height: "10px",
+        width: "20px"
     }
 }
 
