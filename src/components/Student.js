@@ -4,6 +4,7 @@ import $ from 'jquery';
 import axios from 'axios';
 import '../style/society.css';
 import { Link } from 'react-router';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 class Society extends Component {
 
@@ -35,21 +36,57 @@ class Society extends Component {
             <div id="outerDiv"> 
                 <NavBar />
 
+                <div style={{ margin: 20 }}>
+                    <Breadcrumb>
+                        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                        <BreadcrumbItem active>Student Profile</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
+
                 <div className="container" id="tableContainer">
                 <div className="row">
                 <div className="panel-body">
-                    <table className="table table-hover table-dark" border="1">
+                    <table className="table table-hover table-light" border="1">
                         <thead>
                             <tr>
-                                <th>Societies</th>
-                                <th>Events</th>
-                                <th>XXX</th>   
-                                <th>Status</th>               
+                                <th>No.</th>
+                                <th>Society Name</th>
+                                <th>Event Name</th>
+                                <th>Event Date</th>   
+                                <th>Rating Status</th>               
                             </tr>
                         </thead>
 
                         <tbody>
-                        {this.state.society.map(row => {
+                            <tr>
+                                <td>1</td>
+                                <td>IT Society</td>
+                                <td>Network Security Workshop</td>
+                                <td>28/09/2017</td>
+                                <td><Link to={`/feedback`}>X</Link></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>First Aid Society</td>
+                                <td>First Aid Training</td>
+                                <td>28/11/2017</td>
+                                <td><Link to={`/feedback`}>X</Link></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Sport Society</td>
+                                <td>Trekathon</td>
+                                <td>28/12/2017</td>
+                                <td><Link to={`/feedback`}>X</Link></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Music Society</td>
+                                <td>USTAR8</td>
+                                <td>21/01/2018</td>
+                                <td><Link to={`/feedback`}>X</Link></td>
+                            </tr>
+                        {/* {this.state.society.map(row => {
                             return (
                                 <tr>
                                     <td>{row[0]}</td>
@@ -58,7 +95,7 @@ class Society extends Component {
                                     <td><Link to={`/feedback`}>X</Link></td>
                                 </tr>
                             );
-                        })}
+                        })} */}
                         </tbody>
                     </table>
                 </div>
