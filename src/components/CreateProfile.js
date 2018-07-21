@@ -66,13 +66,16 @@ class CreateProfile extends Component {
                           this.setState({first_name:event.target.value});
                           console.log("state value: " + this.state.first_name);
                           }}/>
-                        <label>Society Category <textarea name="field2"></textarea></label>
+                        <br/>
+                        <label>Society Category</label>
+                        <textarea name="field2"></textarea>
                     </div>
 
                     <div class="section"><span>2</span>Vision &amp; Mision</div>
                     <div class="inner-wrap">
                       <label>Society Vision</label>
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <br/>
                       <label>Society Mision</label> 
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
