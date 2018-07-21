@@ -26,7 +26,7 @@ class PerEvent extends Component {
                  <div style={{ margin: 20 }}>
                     <Breadcrumb>
                         <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
-                        <BreadcrumbItem><a href="#">Events</a></BreadcrumbItem>
+                        <BreadcrumbItem><a href="#">Societies</a></BreadcrumbItem>
                         <BreadcrumbItem active>Cardio Night Run</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
