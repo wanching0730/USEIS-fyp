@@ -64,18 +64,18 @@ class Home extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div className="pull-left col-md-9 col-lg-9 col-sm-9" id="col-9" style={{ marginTop: 20}}>
+                <div className="pull-left col-md-8 col-lg-8 col-sm-8" id="col-9" style={{ marginTop: 20}}>
                     <div id="searchBarDiv">
-                    <SearchBar
-                        onSearch={this.handleSearch}
-                        value={this.state.searchValue}
-                    />
+                        <SearchBar
+                            onSearch={this.handleSearch}
+                            value={this.state.searchValue}
+                        />
                     </div>
 
                     <Calendar />
                 </div>
 
-                <div className="pull-right col-md-3 col-lg-3 col-sm-3" id="col-3" style={{ marginTop: 20}}>
+                <div className="pull-right col-md-4 col-lg-4 col-sm-4" id="col-3" style={{ marginTop: 20}}>
                     <table className="table table-hover table-light" border="1">
                         <thead>
                             <tr>
@@ -91,11 +91,19 @@ class Home extends Component {
                                 <td>Work Shop</td>
                                 <td>45</td>
                             </tr>
+                            <tr>
+                                <td>Music Society</td>
+                                <td>USTAR8</td>
+                                <td>40</td>
+                            </tr>
+                            <tr>
+                                <td>Wushu Society</td>
+                                <td>Performance</td>
+                                <td>38</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-               
-                
                 
                 {/* <img style={imageStyle} src={ require('../assets/images/image1.jpg') } /> */}
                                            
