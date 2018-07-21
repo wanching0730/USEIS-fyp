@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import '../style/form.css';
@@ -21,8 +22,8 @@ class RegisterSociety extends Component {
   }
 
   handleClick(event) {
-     
-    }
+    browserHistory.push("/perSociety/1");
+  }
   
   render() {
 
@@ -75,7 +76,8 @@ class RegisterSociety extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                       <br/>
                       <label>Email Address (Eg: abc@hotmail.com)</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                     </div>
                 </form>
               </div>

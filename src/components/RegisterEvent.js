@@ -114,7 +114,8 @@ class RegisterEvent extends Component {
                         <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
                     <div class="button-section">
-                    <input type="submit" name="Sign Up" />
+                    <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                    {/* <input type="submit" name="Sign Up" /> */}
                     </div>
                 </form>
                 </div>

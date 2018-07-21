@@ -3,10 +3,12 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
+import {browserHistory} from 'react-router';
 import TextField from 'material-ui/TextField';
 import '../style/form.css';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
+import { black } from '../../node_modules/material-ui/styles/colors';
 
 class CreateProfile extends Component {
 
@@ -29,8 +31,10 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
-     console.log(this.state.society_name);
-     console.log(this.state.society_desc);
+    console.log("clicked");
+    browserHistory.push("/society");
+    //  console.log(this.state.society_name);
+    //  console.log(this.state.society_desc);
     }
 
   render() {
@@ -79,7 +83,8 @@ class CreateProfile extends Component {
                         <textarea id="txtArea" rows="5" cols="10"></textarea>
                     </div>
                     <div class="button-section">
-                    <input type="submit" name="Sign Up" />
+                    <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                    {/* <input type="submit" name="Sign Up" onClick="handleClick()" /> */}
                     </div>
                 </form>
               </div>

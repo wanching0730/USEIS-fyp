@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import {browserHistory} from 'react-router';
 import '../style/form.css';
 import axios from 'axios';
 
@@ -17,6 +18,10 @@ class Register extends Component {
       email:'',
       password:''
     }
+  }
+
+  handleClick() {
+    browserHistory.push("/student");
   }
   
   render() {
