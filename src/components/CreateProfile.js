@@ -33,8 +33,13 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
-    console.log("clicked");
-    browserHistory.push("/society");
+    
+    if(this.props.params.societyId == null) {
+      browserHistory.push("/society");
+    } else {
+      browserHistory.push("/myProfile");
+    }
+    
     //  console.log(this.state.society_name);
     //  console.log(this.state.society_desc);
     }
