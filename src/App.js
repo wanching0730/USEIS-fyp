@@ -11,6 +11,7 @@ import Feedback from '../src/components/Feedback';
 import RegisterEvent from '../src/components/RegisterEvent';
 import RegisterSociety from './components/RegisterSociety';
 import CreateProfile from './components/CreateProfile';
+import CreateEvent from './components/CreateEvent';
 import RegisterBooth from './components/RegisterBooth';
 import MyProfile from './components/MyProfile';
 import ManageMember from './components/ManageMember';
@@ -38,6 +39,7 @@ class App extends Component {
           <Route path="/register_booth" component={RegisterBooth}/>
           <Route path="/manageMember" component={ManageMember}/>
           <Route path="/societyEvents" component={SocietyEvents}/>
+          <Route path="/createEvent" component={CreateEvent}/>
         </Router>
         
     );

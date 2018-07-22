@@ -51,7 +51,7 @@ class PerSociety extends Component {
                 </div>
 
                 <div id="mySidenav" class="sidenav">
-                    <a href="/" id="addEvent"><FontAwesome.FaPlus /> Create Event</a>
+                    <a href="/createEvent" id="addEvent"><FontAwesome.FaPlus /> Create Event</a>
                     <a href="/createProfile/{this.props.params.societyId}" id="editProfile"><FontAwesome.FaBook /> Edit Profile</a>
                     <a href="/manageMember" id="manageMember"><FontAwesome.FaUser /> Manage Member</a>
                 </div>
