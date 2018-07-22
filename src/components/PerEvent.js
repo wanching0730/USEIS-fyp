@@ -58,6 +58,18 @@ class PerEvent extends Component {
                                 The risks now are so great and getting worse every day that we even see foreign governments 
                                 toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security.
                             </p>
+                            <h5>Date:</h5>
+                            <p>28/09/2018</p>
+                            <h5>Time:</h5>
+                            <p>7pm - 10pm</p>
+                            <h5>Venue:</h5>
+                            <p>UTAR</p>
+                            <h5>Fee:</h5>
+                            <p>RM35</p>
+                            <h5>Chairperson:</h5>
+                            <p><a href="https://www.facebook.com/ho.m.hm">Leong Hao Meng</a></p>
+                            <h5>Contact Number:</h5>
+                            <p>018-9900890</p>
                             <br/>
                         </div>
                         <div style={div3Style}>
