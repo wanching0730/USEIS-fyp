@@ -52,11 +52,8 @@ class PerSociety extends Component {
 
                 <div id="mySidenav" class="sidenav">
                     <a href="/" id="addEvent"><FontAwesome.FaPlus /> Create Event</a>
-                    <a href="/" id="editEvent"><FontAwesome.FaEdit /> Edit Event</a>
-                    <a href="/" id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</a>
                     <a href="/createProfile/{this.props.params.societyId}" id="editProfile"><FontAwesome.FaBook /> Edit Profile</a>
-                    <a href="register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</a>
-                    <a href="manageMember" id="manageMember"><FontAwesome.FaUser /> Manage Member</a>
+                    <a href="/manageMember" id="manageMember"><FontAwesome.FaUser /> Manage Member</a>
                 </div>
 
                 <div>

@@ -5,6 +5,8 @@ import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
+import "../style/perEvent.css";
 
 class PerEvent extends Component {
 
@@ -30,6 +32,12 @@ class PerEvent extends Component {
                         <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Cardio Night Run</BreadcrumbItem>
                     </Breadcrumb>
+                </div>
+
+                <div id="mySidenav" class="sidenav">
+                    <a href="/" id="editEvent"><FontAwesome.FaEdit /> Edit Event</a>
+                    <a href="/" id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</a>
+                    <a href="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</a>
                 </div>
 
                 <div>
