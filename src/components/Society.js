@@ -54,8 +54,8 @@ class Society extends Component {
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Logo</th>
-                                        <th>Society</th>  
+                                        <th>Society Logos</th>
+                                        <th>Societies</th>  
                                         <th>Events</th>               
                                     </tr>
                                 </thead>
