@@ -35,11 +35,11 @@ class App extends Component {
           <Route path="/register_society" component={RegisterSociety}/>
           {/* optional society id for createProfile */}
           <Route path="/createProfile(/:societyId)" component={CreateProfile}/>
+          <Route path="/createEvent(/:eventId)" component={CreateEvent}/>
           <Route path="/myProfile" component={MyProfile}/>
           <Route path="/register_booth" component={RegisterBooth}/>
           <Route path="/manageMember" component={ManageMember}/>
           <Route path="/societyEvents" component={SocietyEvents}/>
-          <Route path="/createEvent" component={CreateEvent}/>
         </Router>
         
     );

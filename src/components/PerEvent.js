@@ -35,7 +35,7 @@ class PerEvent extends Component {
                 </div>
 
                 <div id="mySidenav" class="sidenav">
-                    <a href="/" id="editEvent"><FontAwesome.FaEdit /> Edit Event</a>
+                    <a href="/createEvent/1" id="editEvent"><FontAwesome.FaEdit /> Edit Event</a>
                     <a href="/" id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</a>
                     <a href="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</a>
                 </div>

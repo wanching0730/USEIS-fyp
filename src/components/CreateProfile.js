@@ -67,7 +67,7 @@ class CreateProfile extends Component {
 
             <div className="container" style={ContainerStyle}>
               <div className="form-style-10">
-                 { header }
+                { header }
                 <form>
                     <div class="section"><span>1</span>Name &amp; Category</div>
                     <div class="inner-wrap">
