@@ -22,12 +22,13 @@ class CreateProfile extends Component {
     }
     
     if(this.props.params.societyId != null) {
-      fetch(`http://localhost:5000/puppies/` + this.props.params.societyId).then(result => result.json()).then(reply => {
-        this.setState ({
-          society_name: reply[0][1],
-          society_desc: reply[0][2]
-        });
-      });
+      console.log(this.props.params.societyId);
+      // fetch(`http://localhost:5000/puppies/` + this.props.params.societyId).then(result => result.json()).then(reply => {
+      //   this.setState ({
+      //     society_name: reply[0][1],
+      //     society_desc: reply[0][2]
+      //   });
+      // });
     }
   }
 
@@ -41,6 +42,14 @@ class CreateProfile extends Component {
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
+
+    var header;
+
+    if(this.props.params.societyId == null) {
+      header = <h1>Create Society Profile<span>Create your own society profile and start to promote it!</span></h1>;
+    } else {
+      header = <h1>Edit Society Profile<span>Edit your own society profile and make it better!</span></h1>
+    }
 
     return (
       <div>
@@ -57,7 +66,7 @@ class CreateProfile extends Component {
 
             <div className="container" style={ContainerStyle}>
               <div className="form-style-10">
-                <h1>Create Society Profile<span>Create your own society profile and start to promote it!</span></h1>
+                 { header }
                 <form>
                     <div class="section"><span>1</span>Name &amp; Category</div>
                     <div class="inner-wrap">

@@ -68,7 +68,7 @@ class MyProfile extends Component {
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                         </td>
-                                        <td><Link to={`/createProfile`}><FontAwesome.FaEdit /></Link></td>
+                                        <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
