@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {browserHistory} from 'react-router';
+import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/form.css';
 
@@ -33,7 +34,7 @@ class Login extends Component {
 
             <div style={{ margin: 20 }}>
               <Breadcrumb>
-                <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+              <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                 <BreadcrumbItem active>Login</BreadcrumbItem>
               </Breadcrumb>
             </div>

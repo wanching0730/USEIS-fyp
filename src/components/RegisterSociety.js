@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import '../style/form.css';
 import ToggleButton from 'react-toggle-button';
@@ -37,7 +38,7 @@ class RegisterSociety extends Component {
 
             <div style={{ margin: 20 }}>
                 <Breadcrumb>
-                  <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                  <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                   <BreadcrumbItem><a href="#">Societies</a></BreadcrumbItem>
                   <BreadcrumbItem><a href="#">IT Society</a></BreadcrumbItem>
                   <BreadcrumbItem active>Registration</BreadcrumbItem>

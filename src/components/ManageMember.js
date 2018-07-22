@@ -30,7 +30,7 @@ class ManageMember extends Component {
 
                 <div style={{ margin: 20 }}>
                     <Breadcrumb>
-                        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><a href="#">Societies</a></BreadcrumbItem>
                         <BreadcrumbItem><a href="#">IT Society</a></BreadcrumbItem>
                         <BreadcrumbItem active>Manage Member</BreadcrumbItem>

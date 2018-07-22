@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
+import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import StarRatingComponent from 'react-star-rating-component';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -42,7 +43,7 @@ class Feedback extends Component {
 
               <div style={{ margin: 20 }}>
                   <Breadcrumb>
-                    <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                    <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                     <BreadcrumbItem><a href="#">Student Profile</a></BreadcrumbItem>
                     <BreadcrumbItem active>Rating Form</BreadcrumbItem>
                   </Breadcrumb>

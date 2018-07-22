@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavBar from './NavBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
+import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
@@ -37,7 +38,7 @@ class PerSociety extends Component {
 
                  <div style={{ margin: 20 }}>
                     <Breadcrumb>
-                        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><a href="#">Societies</a></BreadcrumbItem>
                         <BreadcrumbItem active>IT Society</BreadcrumbItem>
                     </Breadcrumb>

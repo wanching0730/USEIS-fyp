@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavBar from './NavBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
+import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -25,6 +26,7 @@ class PerEvent extends Component {
 
                  <div style={{ margin: 20 }}>
                     <Breadcrumb>
+                        <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
                         <BreadcrumbItem><a href="#">Societies</a></BreadcrumbItem>
                         <BreadcrumbItem active>Cardio Night Run</BreadcrumbItem>

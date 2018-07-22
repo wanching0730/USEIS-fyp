@@ -38,7 +38,7 @@ class Society extends Component {
 
                 <div style={{ margin: 20 }}>
                     <Breadcrumb>
-                        <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Student Profile</BreadcrumbItem>
                     </Breadcrumb>
                 </div>

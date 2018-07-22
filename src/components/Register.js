@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {browserHistory} from 'react-router';
+import { Link } from 'react-router';
 import '../style/form.css';
 import axios from 'axios';
 
@@ -36,7 +37,7 @@ class Register extends Component {
 
              <div style={{ margin: 20 }}>
               <Breadcrumb>
-                <BreadcrumbItem><a href="#">Home</a></BreadcrumbItem>
+                <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                 <BreadcrumbItem active>Register</BreadcrumbItem>
               </Breadcrumb>
             </div>
