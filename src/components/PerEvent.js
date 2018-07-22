@@ -6,6 +6,8 @@ import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
+import { confirmAlert } from 'react-confirm-alert'; 
+import "../../node_modules/react-confirm-alert/src/react-confirm-alert.css";
 import "../style/perEvent.css";
 
 class PerEvent extends Component {
@@ -16,6 +18,23 @@ class PerEvent extends Component {
 
     handleClick(event) {
         browserHistory.push("/register_event");
+    }
+
+    handleDelete() {
+        confirmAlert({
+            title: 'Delete Confirmation',
+            message: 'Are you sure to delete this event?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => console.log('Click Yes')
+              },
+              {
+                label: 'No',
+                onClick: () => console.log('Click No')
+              }
+            ]
+          })
     }
 
     render() {
@@ -36,7 +55,7 @@ class PerEvent extends Component {
 
                 <div id="mySidenav" class="sidenav">
                     <a href="/createEvent/1" id="editEvent"><FontAwesome.FaEdit /> Edit Event</a>
-                    <a href="/" id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</a>
+                    <a href="#" onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</a>
                     <a href="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</a>
                 </div>
 
