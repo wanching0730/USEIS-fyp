@@ -54,6 +54,7 @@ class RegisterEvent extends Component {
   }
 
   handleClick(event) {
+      this.displayText();
       browserHistory.push("/perEvent/1");
       // this.setState({showModal: this.state.value});
     }
@@ -89,17 +90,19 @@ class RegisterEvent extends Component {
 
             <div className="container" style={ContainerStyle}>
               <div className="form-style-10">
-                <h1>Sign Up Now!<span>Sign up and get yourself a seat for this event!</span></h1>
+                <h1>Register Cardio Night Run<span>Register the event now and get yourself a seat!</span></h1>
                 <form>
-                    <div class="section"><span>1</span>First Name &amp; Address</div>
+                    <div class="section"><span>1</span>Full Name &amp; ID</div>
                     <div class="inner-wrap">
-                        <label>Your Full Name</label>  
+                        <label>Full Name</label>  
                         {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
                         <input type="text" onChange={(event) => {
                           this.setState({first_name:event.target.value});
                           console.log("state value: " + this.state.first_name);
                           }}/>
-                        <label>Address <textarea name="field2"></textarea></label>
+                        <br/>
+                        <label>Student ID (Eg: 15UEB02834)</label>
+                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>2</span>Email &amp; Phone</div>
@@ -110,12 +113,35 @@ class RegisterEvent extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
-                    <div class="section"><span>3</span>Passwords</div>
-                        <div class="inner-wrap">
-                        <label>Password</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                        <label>Confirm Password</label> 
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                    <div class="section"><span>3</span>Allow Notification</div>
+                      <div class="inner-wrap">
+                        <label>Allow Email Notification</label>
+                        <ToggleButton
+                          value={ this.state.emailNoti || false }
+                          onToggle={(value) => {
+                              this.setState({
+                              emailNoti: !value,
+                              })
+                          }} />
+                        <br/>
+                        <label>Allow Web Notification</label>
+                        <ToggleButton
+                            value={ this.state.webNoti || false }
+                            onToggle={(value) => {
+                                this.setState({
+                                webNoti: !value,
+                                })
+                            }} />
+                        <br/>
+                        <ReactNotifications
+                          onRef={ref => (this.n = ref)} // Required
+                          title="Some Title" // Required
+                          body="This is the body!"
+                          icon="devices-logo.png"
+                          tag="abcdef"
+                          timeout="1000"
+                          onClick={event => this.handleNotiClick(event)}
+                        />
                     </div>
                     <div class="button-section">
                     <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
