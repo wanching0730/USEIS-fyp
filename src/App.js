@@ -14,6 +14,7 @@ import CreateProfile from './components/CreateProfile';
 import RegisterBooth from './components/RegisterBooth';
 import MyProfile from './components/MyProfile';
 import ManageMember from './components/ManageMember';
+import SocietyEvents from './components/SocietyEvents';
 import './App.css';
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
           <Route path="/myProfile" component={MyProfile}/>
           <Route path="/register_booth" component={RegisterBooth}/>
           <Route path="/manageMember" component={ManageMember}/>
+          <Route path="/societyEvents" component={SocietyEvents}/>
         </Router>
         
     );

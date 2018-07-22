@@ -18,17 +18,21 @@ class PerSociety extends Component {
         browserHistory.push("/register_society");
     }
 
-    handleEditClick(event) {
-        browserHistory.push("/createProfile/"+this.props.params.societyId);
+    handleListEventClick(event) {
+        browserHistory.push("/societyEvents");
     }
 
-    handleBiddingClick(event) {
-        browserHistory.push("/register_booth");
-    }
+    // handleEditClick(event) {
+    //     browserHistory.push("/createProfile/"+this.props.params.societyId);
+    // }
 
-    handleMemberClick(event) {
-        browserHistory.push("/manageMember");
-    }
+    // handleBiddingClick(event) {
+    //     browserHistory.push("/register_booth");
+    // }
+
+    // handleMemberClick(event) {
+    //     browserHistory.push("/manageMember");
+    // }
 
     render() {
 
@@ -81,9 +85,7 @@ class PerSociety extends Component {
                         </div>
                         <div style={div3Style}>
                             <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
-                            <RaisedButton label="Edit Profile" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEditClick(event)}/>
-                            <RaisedButton label="Register Booth" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleBiddingClick(event)}/>
-                            <RaisedButton label="Manage Member" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleMemberClick(event)}/>
+                            <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
                         </div>
                     </MuiThemeProvider>
                 </div>
