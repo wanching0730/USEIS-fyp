@@ -5,10 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
-import TextField from 'material-ui/TextField';
 import '../style/form.css';
-import ToggleButton from 'react-toggle-button';
-import ReactNotifications from 'react-browser-notifications';
 
 class RegisterSociety extends Component {
 

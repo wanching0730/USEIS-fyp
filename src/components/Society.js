@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
-import $ from 'jquery';
-import axios from 'axios';
 import '../style/society.css';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import $ from 'jquery';
+import axios from 'axios';
 
 class Society extends Component {
 

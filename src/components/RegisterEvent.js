@@ -5,7 +5,6 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
-import TextField from 'material-ui/TextField';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
 import '../style/form.css';

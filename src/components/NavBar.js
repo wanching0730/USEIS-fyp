@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { Router, browserHistory, Route, Link } from 'react-router';
-import Register from './Register';
-import Login from './Login';
-import Home from './Home';
-import Society from './Society';
+import { Link } from 'react-router';
 import '../App.css';
 import '../style/navbar.css';
 

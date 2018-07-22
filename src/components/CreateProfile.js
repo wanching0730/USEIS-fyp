@@ -5,11 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
-import TextField from 'material-ui/TextField';
 import '../style/form.css';
-import ToggleButton from 'react-toggle-button';
-import ReactNotifications from 'react-browser-notifications';
-import { black } from '../../node_modules/material-ui/styles/colors';
 
 class CreateProfile extends Component {
 

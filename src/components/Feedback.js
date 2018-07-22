@@ -4,7 +4,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
-import TextField from 'material-ui/TextField';
 import StarRatingComponent from 'react-star-rating-component';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 

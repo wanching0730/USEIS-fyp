@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import NavBar from './NavBar';
 import Calendar from './Calendar';
 import SearchBar from '@opuscapita/react-searchbar';
-import { Link } from 'react-router';
-import '../style/home.css';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { white } from 'material-ui/styles/colors';
+import '../style/home.css';
 
 class Home extends Component {
 

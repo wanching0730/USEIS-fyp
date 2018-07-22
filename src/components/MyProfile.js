@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
-import '../style/society.css';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
-import { red400 } from 'material-ui/styles/colors';
+import '../style/society.css';
 
 class MyProfile extends Component {
 
