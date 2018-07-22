@@ -47,7 +47,7 @@ class MyProfile extends Component {
                                         <th>Logo</th>
                                         <th>Society</th>  
                                         <th>Events</th>  
-                                        <th>Feedback Status</th>  
+                                        <th>Rating Status</th>  
                                         <th>Action</th>           
                                     </tr>
                                 </thead>

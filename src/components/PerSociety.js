@@ -5,6 +5,8 @@ import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
+import "../style/perSociety.css";
 
 class PerSociety extends Component {
 
@@ -42,6 +44,15 @@ class PerSociety extends Component {
                         <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
                         <BreadcrumbItem active>IT Society</BreadcrumbItem>
                     </Breadcrumb>
+                </div>
+
+                <div id="mySidenav" class="sidenav">
+                    <a href="/" id="addEvent"><FontAwesome.FaPlus /> Create Event</a>
+                    <a href="/" id="editEvent"><FontAwesome.FaEdit /> Edit Event</a>
+                    <a href="/" id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</a>
+                    <a href="/createProfile/{this.props.params.societyId}" id="editProfile"><FontAwesome.FaBook /> Edit Profile</a>
+                    <a href="register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</a>
+                    <a href="manageMember" id="manageMember"><FontAwesome.FaUser /> Manage Member</a>
                 </div>
 
                 <div>
