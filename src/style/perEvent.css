@@ -1,0 +1,38 @@
+#mySidenav a {
+    position: absolute;
+    right: -145px;
+    transition: 0.3s;
+    padding: 15px;
+    width: 180px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px 0px 0px 5px;
+}
+/* 
+@media (min-width: 768px) {
+    #mySidenav a {
+        right: -130px;
+    }
+} */
+
+
+#mySidenav a:hover {
+    right: 0;
+}
+
+#editEvent {
+    top: 220px;
+    background-color: #2196F3;
+}
+
+#deleteEvent {
+    top: 280px;
+    background-color: #f44336;
+}
+
+#bidBooth {
+    top: 340px;
+    background-color: #555
+}
+
