@@ -44,7 +44,7 @@ class Feedback extends Component {
               <div style={{ margin: 20 }}>
                   <Breadcrumb>
                     <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
-                    <BreadcrumbItem><a href="#">Student Profile</a></BreadcrumbItem>
+                    <BreadcrumbItem><Link to={`/student`}>Student Profile</Link></BreadcrumbItem>
                     <BreadcrumbItem active>Rating Form</BreadcrumbItem>
                   </Breadcrumb>
               </div>

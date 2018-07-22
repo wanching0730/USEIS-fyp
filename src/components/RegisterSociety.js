@@ -39,8 +39,8 @@ class RegisterSociety extends Component {
             <div style={{ margin: 20 }}>
                 <Breadcrumb>
                   <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
-                  <BreadcrumbItem><a href="#">Societies</a></BreadcrumbItem>
-                  <BreadcrumbItem><a href="#">IT Society</a></BreadcrumbItem>
+                  <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
+                  <BreadcrumbItem><Link to={`/perSociety/1`}>IT Society</Link></BreadcrumbItem>
                   <BreadcrumbItem active>Registration</BreadcrumbItem>
                 </Breadcrumb>
             </div>
