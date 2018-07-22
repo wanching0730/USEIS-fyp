@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import '../style/society.css';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { red400 } from 'material-ui/styles/colors';
 
 class MyProfile extends Component {
@@ -26,6 +27,7 @@ class MyProfile extends Component {
         const { imageStyle } = styles;
         
         return (
+            
             <div id="outerDiv"> 
                 <NavBar />
 
@@ -46,7 +48,8 @@ class MyProfile extends Component {
                                         <th>Logo</th>
                                         <th>Society</th>  
                                         <th>Events</th>  
-                                        <th>Feedback Status</th>             
+                                        <th>Feedback Status</th>  
+                                        <th>Action</th>           
                                     </tr>
                                 </thead>
 
@@ -65,6 +68,7 @@ class MyProfile extends Component {
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                         </td>
+                                        <td><Link to={`/createProfile`}><FontAwesome.FaEdit /></Link></td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -80,6 +84,7 @@ class MyProfile extends Component {
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                             <li>Done</li>
                                         </td>
+                                        <td><Link to={`/createProfile`}><FontAwesome.FaEdit /></Link></td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -95,6 +100,7 @@ class MyProfile extends Component {
                                             <li>Done</li>
                                             <li>Done</li>
                                         </td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -110,6 +116,7 @@ class MyProfile extends Component {
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                         </td>
+                                        <td><Link to={`/createProfile`}><FontAwesome.FaEdit /></Link></td>
                                     </tr>
                                    
                                     {/* {this.state.society.map(row => {
