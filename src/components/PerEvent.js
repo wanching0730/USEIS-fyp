@@ -96,6 +96,10 @@ class PerEvent extends Component {
                             <p>UTAR</p>
                             <h5>Fee:</h5>
                             <p>RM35</p>
+                            <h5>Soft Skill Points:</h5>
+                            <p>5</p>
+                            <h5>Soft Skill Category:</h5>
+                            <p>Leadership Skills</p>
                             <h5>Chairperson:</h5>
                             <p><a href="https://www.facebook.com/ho.m.hm">Leong Hao Meng</a></p>
                             <h5>Contact Number:</h5>

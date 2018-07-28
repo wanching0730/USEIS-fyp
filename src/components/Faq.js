@@ -93,7 +93,7 @@ class Faq extends Component {
             }
         
             function updateCategoryPosition() {
-                if($('.cd-faq') != null) {
+                if($('.cd-faq').length > 0) {
                     var top = $('.cd-faq').offset().top,
                     height = $('.cd-faq').height() - $('.cd-faq-categories').height(),
                     margin = 20;

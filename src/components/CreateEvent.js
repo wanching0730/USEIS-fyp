@@ -100,7 +100,7 @@ class CreateProfile extends Component {
                         <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
-                    <div class="section"><span>2</span>Chairperson &amp; Contact Number</div>
+                    <div class="section"><span>4</span>Chairperson &amp; Contact Number</div>
                     <div class="inner-wrap">
                       <label>Organizing Chairperson</label>
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
@@ -110,8 +110,19 @@ class CreateProfile extends Component {
                       <br/>
                     </div>
 
+                    <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
+                    <div class="inner-wrap">
+                      <label>Soft Skill Points</label>
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <br/>
+                      <label>Soft Skill Category</label> 
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <br/>
+                    </div>
+
                     <div class="button-section">
-                    <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                     {/* <input type="submit" name="Sign Up" onClick="handleClick()" /> */}
                     </div>
                 </form>
