@@ -31,7 +31,10 @@ class PerEvent extends Component {
             buttons: [
               {
                 label: 'Yes',
-                onClick: () => console.log('Click Yes')
+                onClick: () => {
+                    console.log('Click Yes');
+                    browserHistory.push("/event");
+                }
               },
               {
                 label: 'No',
@@ -59,7 +62,7 @@ class PerEvent extends Component {
 
                 <div id="mySidenav" class="sidenav">
                     <Link to="/createEvent/1" id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
-                    <Link to="#" onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
+                    <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
                     <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
                     <Link to="/manageCrew" id="manageCrew"><FontAwesome.FaUser /> Manage Crew</Link>
                     <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
