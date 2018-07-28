@@ -83,7 +83,7 @@ class RegisterEvent extends Component {
                 <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                 <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
                 <BreadcrumbItem><Link to={`/perEvent/1`}>Cardio Night Run</Link></BreadcrumbItem>
-                <BreadcrumbItem active>Registration</BreadcrumbItem>
+                <BreadcrumbItem active>Event Registration</BreadcrumbItem>
               </Breadcrumb>
             </div>
 
