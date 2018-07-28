@@ -29,6 +29,7 @@ class NavBar extends Component {
                 <Link to="/event">Events</Link>
                 <Link to="/createProfile">Create Society Profile</Link>
                 <Link to="/myProfile">My Profile</Link>
+                <Link to="/faq">FAQ</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
                 <Link to="/login">Logout</Link>

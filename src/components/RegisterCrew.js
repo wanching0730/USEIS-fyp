@@ -105,7 +105,8 @@ class RegisterCrew extends Component {
                         <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> 
                     </div>
                     <div class="button-section">
-                    <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                     </div>
                 </form>
                 </div>

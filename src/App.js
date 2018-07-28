@@ -21,6 +21,7 @@ import ManageMember from './components/ManageMember';
 import ManageCrew from './components/ManageCrew';
 import CommitteeBoard from './components/CommitteeBoard';
 import SocietyEvents from './components/SocietyEvents';
+import Faq from './components/Faq';
 import './App.css';
 
 class App extends Component {
@@ -50,6 +51,7 @@ class App extends Component {
           <Route path="/manageCrew" component={ManageCrew}/>
           <Route path="/commBoard" component={CommitteeBoard}/>
           <Route path="/societyEvents" component={SocietyEvents}/>
+          <Route path="/faq" component={Faq}/>
         </Router>
         
     );
