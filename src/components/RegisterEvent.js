@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import RaisedButton from 'material-ui/RaisedButton';
+import {RaisedButton, Checkbox } from 'material-ui';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import ToggleButton from 'react-toggle-button';
@@ -19,7 +19,8 @@ class RegisterEvent extends Component {
       first_name:'',
       last_name:'',
       emailNoti: false,
-      webNoti: false
+      webNoti: false,
+      vegetarian: true
       // showModal: false
     }
   }
@@ -56,8 +57,24 @@ class RegisterEvent extends Component {
       this.displayText();
       browserHistory.push("/perEvent/1");
       // this.setState({showModal: this.state.value});
-    }
+  }
+
+  handleCheckBox(event, checked) {
+    this.setState({ vegetarian: checked });
+    console.log("checked: " + this.state.vegetarian);
+  }
   
+
+  // handle multiple input
+  // handleInputChange(event) {
+  //   const target = event.target;
+  //   const value = target.type === 'checkbox' ? target.checked : target.value;
+  //   const name = target.name;
+
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // }
 
   // renderModal() {
   //     if(this.state.showModal) {
@@ -123,7 +140,17 @@ class RegisterEvent extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
-                    <div class="section"><span>4</span>Allow Notification</div>
+                    <div class="section"><span>4</span>Vegetarian</div>
+                    <div class="inner-wrap">
+                    Vegetarian
+                    <Checkbox onCheck={(e, checked) => {
+                        this.setState({vegetarian: !checked});
+                        console.log("checked: " + this.state.vegetarian);
+                      }}
+                    /> 
+                    </div>
+
+                    <div class="section"><span>5</span>Allow Notification</div>
                     <div class="inner-wrap">
                       <label>Allow Email Notification</label>
                       <ToggleButton

@@ -120,11 +120,13 @@
 .form-style-10 input[type="time"],
 .form-style-10 input[type="url"],
 .form-style-10 input[type="password"],
+.form-style-10 input[type="checkbox"]
 .form-style-10 textarea,
 .form-style-10 select {
     display: block;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    -webkit-appearance: "checkbox";
     -moz-box-sizing: border-box;
     width: 100%;
     padding: 8px;
