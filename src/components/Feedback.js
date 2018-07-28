@@ -6,6 +6,7 @@ import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import StarRatingComponent from 'react-star-rating-component';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import '../style/form.css';
 
 class Feedback extends Component {
 
