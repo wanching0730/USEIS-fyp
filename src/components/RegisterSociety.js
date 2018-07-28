@@ -4,6 +4,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
+import ToggleButton from 'react-toggle-button';
+import ReactNotifications from 'react-browser-notifications';
 import { Link } from 'react-router';
 import '../style/form.css';
 
@@ -74,6 +76,38 @@ class RegisterSociety extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                       <br/>
                       <label>Email Address (Eg: abc@hotmail.com)</label> 
+
+                      <div class="section"><span>4</span>Allow Notification</div>
+                      <div class="inner-wrap">
+                        <label>Allow Email Notification</label>
+                        <ToggleButton
+                          value={ this.state.emailNoti || false }
+                          onToggle={(value) => {
+                              this.setState({
+                              emailNoti: !value,
+                              })
+                          }} />
+                        <br/>
+                        <label>Allow Web Notification</label>
+                        <ToggleButton
+                            value={ this.state.webNoti || false }
+                            onToggle={(value) => {
+                                this.setState({
+                                webNoti: !value,
+                                })
+                            }} />
+                        <br/>
+                        <ReactNotifications
+                          onRef={ref => (this.n = ref)} // Required
+                          title="Some Title" // Required
+                          body="This is the body!"
+                          icon="devices-logo.png"
+                          tag="abcdef"
+                          timeout="1000"
+                          onClick={event => this.handleNotiClick(event)}
+                        />
+                      </div>
+
                       <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                       {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                     </div>

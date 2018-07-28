@@ -91,7 +91,7 @@ class RegisterEvent extends Component {
               <div className="form-style-10">
                 <h1>Register Cardio Night Run<span>Register the event now and get yourself a seat!</span></h1>
                 <form>
-                    <div class="section"><span>1</span>Full Name &amp; ID</div>
+                    <div class="section"><span>1</span>Full Name &amp; ID &amp; IC</div>
                     <div class="inner-wrap">
                         <label>Full Name</label>  
                         {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
@@ -102,9 +102,20 @@ class RegisterEvent extends Component {
                         <br/>
                         <label>Student ID (Eg: 15UEB02834)</label>
                         <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                        <label>Student IC (Eg: 998877-66-5555)</label>
+                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
-                    <div class="section"><span>2</span>Email &amp; Phone</div>
+                     <div class="section"><span>2</span>Course &amp; Year</div>
+                    <div class="inner-wrap">
+                      <label>Course (Eg: Software Engineering)</label>
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <br/>
+                      <label>Year and Semester (Eg: Y1S1)</label> 
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                    </div>
+
+                    <div class="section"><span>3</span>Email &amp; Phone</div>
                     <div class="inner-wrap">
                       <label>Email Address</label>
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
@@ -112,35 +123,35 @@ class RegisterEvent extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
-                    <div class="section"><span>3</span>Allow Notification</div>
-                      <div class="inner-wrap">
-                        <label>Allow Email Notification</label>
-                        <ToggleButton
-                          value={ this.state.emailNoti || false }
+                    <div class="section"><span>4</span>Allow Notification</div>
+                    <div class="inner-wrap">
+                      <label>Allow Email Notification</label>
+                      <ToggleButton
+                        value={ this.state.emailNoti || false }
+                        onToggle={(value) => {
+                            this.setState({
+                            emailNoti: !value,
+                            })
+                        }} />
+                      <br/>
+                      <label>Allow Web Notification</label>
+                      <ToggleButton
+                          value={ this.state.webNoti || false }
                           onToggle={(value) => {
                               this.setState({
-                              emailNoti: !value,
+                              webNoti: !value,
                               })
                           }} />
-                        <br/>
-                        <label>Allow Web Notification</label>
-                        <ToggleButton
-                            value={ this.state.webNoti || false }
-                            onToggle={(value) => {
-                                this.setState({
-                                webNoti: !value,
-                                })
-                            }} />
-                        <br/>
-                        <ReactNotifications
-                          onRef={ref => (this.n = ref)} // Required
-                          title="Some Title" // Required
-                          body="This is the body!"
-                          icon="devices-logo.png"
-                          tag="abcdef"
-                          timeout="1000"
-                          onClick={event => this.handleNotiClick(event)}
-                        />
+                      <br/>
+                      <ReactNotifications
+                        onRef={ref => (this.n = ref)} // Required
+                        title="Some Title" // Required
+                        body="This is the body!"
+                        icon="devices-logo.png"
+                        tag="abcdef"
+                        timeout="1000"
+                        onClick={event => this.handleNotiClick(event)}
+                      />
                     </div>
                     <div class="button-section">
                     <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
