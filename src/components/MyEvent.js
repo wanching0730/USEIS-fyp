@@ -34,10 +34,29 @@ class MyProfile extends Component {
         browserHistory.push("/myEvents");
     }
 
-    handleDelete() {
+    handleCancelCrew() {
         confirmAlert({
-            title: 'Cancel Registration Confirmation',
-            message: 'Are you sure to cancel participating this crew?',
+            title: 'Cancel Crew Registration Confirmation',
+            message: 'Are you sure to cancel joining as crew for this event?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    console.log('Click Yes');
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => console.log('Click No')
+              }
+            ]
+          })
+    }
+
+    handleCancelEvent() {
+        confirmAlert({
+            title: 'Cancel Participation Confirmation',
+            message: 'Are you sure to cancel participating this event?',
             buttons: [
               {
                 label: 'Yes',
@@ -87,7 +106,7 @@ class MyProfile extends Component {
                                             <th>Organisers</th> 
                                             <th>Date</th>
                                             <th>Rating Status</th>    
-                                            <th>Action</th>           
+                                            <th colSpan="2">Actions</th>           
                                         </tr>
                                     </thead>
 
@@ -99,7 +118,8 @@ class MyProfile extends Component {
                                             <td><Link to={`/perSociety/1`}>IT Society</Link></td>
                                             <td>01/12/2018</td>
                                             <td>-</td>
-                                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
+                                            <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td>
+                                            <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
@@ -108,7 +128,8 @@ class MyProfile extends Component {
                                             <td><Link to={`/perSociety/1`}>First Aid Society</Link></td>
                                             <td>21/10/2018</td>
                                             <td>-</td>
-                                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
+                                            <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td>
+                                            <td>-</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
@@ -117,7 +138,8 @@ class MyProfile extends Component {
                                             <td><Link to={`/perSociety/1`}>Engineering Society</Link></td>
                                             <td>01/05/2018</td>
                                             <td>Done</td>
-                                            <td></td>
+                                            <td>-</td>
+                                            <td>-</td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
@@ -126,7 +148,8 @@ class MyProfile extends Component {
                                             <td><Link to={`/perSociety/1`}>Sport Club</Link></td>
                                             <td>17/01/2018</td>
                                             <td><Link to={`/feedback`}>Undone</Link></td>
-                                            <td></td>
+                                            <td>-</td>
+                                            <td>-</td>
                                         </tr>
                                     
                                         {/* {this.state.society.map(row => {

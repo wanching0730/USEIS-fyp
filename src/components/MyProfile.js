@@ -90,7 +90,7 @@ class MyProfile extends Component {
                                                 <li><Link to={`/perEvent/1`}>Blood Donation</Link></li>
                                                 <li><Link to={`/perEvent/1`}>Adventure Camp</Link></li>
                                             </td>
-                                            <td><Link to={`/createProfile`}><FontAwesome.FaEdit /></Link></td>
+                                            <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
@@ -112,7 +112,7 @@ class MyProfile extends Component {
                                                 <li><Link to={`/perEvent/1`}>Colour Run</Link></li>
                                                 <li><Link to={`/perEvent/1`}>Sport Carnival</Link></li>
                                             </td>
-                                            <td><Link to={`/createProfile`}><FontAwesome.FaEdit /></Link></td>
+                                            <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
                                         </tr>
                                     
                                         {/* {this.state.society.map(row => {
