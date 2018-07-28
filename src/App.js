@@ -18,6 +18,7 @@ import RegisterBooth from './components/RegisterBooth';
 import MyProfile from './components/MyProfile';
 import MyEvent from './components/MyEvent';
 import ManageMember from './components/ManageMember';
+import ManageParticipant from './components/ManageParticipant';
 import ManageCrew from './components/ManageCrew';
 import CommitteeBoard from './components/CommitteeBoard';
 import SocietyEvents from './components/SocietyEvents';
@@ -48,6 +49,7 @@ class App extends Component {
           <Route path="/myEvents" component={MyEvent}/>
           <Route path="/register_booth" component={RegisterBooth}/>
           <Route path="/manageMember" component={ManageMember}/>
+          <Route path="/manageParticipant" component={ManageParticipant}/>
           <Route path="/manageCrew" component={ManageCrew}/>
           <Route path="/commBoard" component={CommitteeBoard}/>
           <Route path="/societyEvents" component={SocietyEvents}/>
