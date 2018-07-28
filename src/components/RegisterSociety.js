@@ -32,7 +32,7 @@ class RegisterSociety extends Component {
     return (
       <div>
         <MuiThemeProvider>
-          <div>
+        <div>
             <NavBar />
 
             <div style={{ margin: 20 }}>
@@ -76,6 +76,7 @@ class RegisterSociety extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                       <br/>
                       <label>Email Address (Eg: abc@hotmail.com)</label> 
+                    </div>
 
                       <div class="section"><span>4</span>Allow Notification</div>
                       <div class="inner-wrap">
@@ -108,9 +109,11 @@ class RegisterSociety extends Component {
                         />
                       </div>
 
-                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      <div class="button-section">
+                        <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                       {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
-                    </div>
+                      </div>
                 </form>
               </div>
             </div>
@@ -123,10 +126,7 @@ class RegisterSociety extends Component {
 
 const styles = {
   RaisedButtonStyle: {
-    margin: 15,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center"
+    margin: 15
   },
   ContainerStyle: {
     margin: 45

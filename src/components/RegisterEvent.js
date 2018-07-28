@@ -106,7 +106,7 @@ class RegisterEvent extends Component {
                         <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
-                     <div class="section"><span>2</span>Course &amp; Year</div>
+                    <div class="section"><span>2</span>Course &amp; Year</div>
                     <div class="inner-wrap">
                       <label>Course (Eg: Software Engineering)</label>
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
@@ -153,11 +153,14 @@ class RegisterEvent extends Component {
                         onClick={event => this.handleNotiClick(event)}
                       />
                     </div>
+
                     <div class="button-section">
-                    <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+
                     {/* <input type="submit" name="Sign Up" /> */}
                     </div>
-                </form>
+                  </form>
                 </div>
 
             {/* <form>
@@ -202,8 +205,8 @@ class RegisterEvent extends Component {
             <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
           </form> */}
           </div>
-          </div>
-          </MuiThemeProvider>
+        </div>
+        </MuiThemeProvider>
       </div>
     );
     }

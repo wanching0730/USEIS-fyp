@@ -100,6 +100,7 @@ class PerEvent extends Component {
                         <div style={div3Style}>
                         <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
                         <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                         </div>
                     </MuiThemeProvider>
                 </div>

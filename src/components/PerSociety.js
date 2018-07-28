@@ -83,6 +83,7 @@ class PerSociety extends Component {
                         <div style={div3Style}>
                             <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
                             <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
+                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                         </div>
                     </MuiThemeProvider>
                 </div>

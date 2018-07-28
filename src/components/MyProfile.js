@@ -129,6 +129,11 @@ class MyProfile extends Component {
                             </div>
                         </div>
                     </div>
+
+                    <div style= {{ textAlign: "center" }}>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    </div>
+
                 </div>
                 </MuiThemeProvider>
             </div>
