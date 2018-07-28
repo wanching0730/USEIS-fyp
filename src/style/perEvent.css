@@ -33,6 +33,10 @@
 
 #bidBooth {
     top: 340px;
-    background-color: #555
+    background-color: #555;
 }
 
+#manageCrew {
+    top: 400px;
+    background-color: blueviolet;
+}
