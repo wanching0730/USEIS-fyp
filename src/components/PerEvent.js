@@ -73,6 +73,8 @@ class PerEvent extends Component {
                         <div style={div2Style}>
                             <h5>Category:</h5>
                             <p>Sport</p>
+                            <h5>Organiser:</h5>
+                            <p>First Aid Society</p>
                             <h5>Description:</h5>
                             <p>
                                 The biggest challenge to IT in the future is security. 
