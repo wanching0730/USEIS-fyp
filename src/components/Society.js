@@ -58,8 +58,8 @@ class Society extends Component {
                     <MuiThemeProvider>
                         <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
 
-                        <RaisedButton label="Order by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                        <RaisedButton label="Order by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Sort by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
 
                         <div class="wrapper">
                             <ul>

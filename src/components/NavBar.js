@@ -26,6 +26,7 @@ class NavBar extends Component {
                
                 <Link to="/">Home</Link>
                 <Link to="/society">Societies</Link>
+                <Link to="/event">Events</Link>
                 <Link to="/createProfile">Create Society Profile</Link>
                 <Link to="/myProfile">My Profile</Link>
                 <Link to="/login">Login</Link>

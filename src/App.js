@@ -4,6 +4,7 @@ import Register from '../src/components/Register';
 import Login from '../src/components/Login';
 import Home from '../src/components/Home';
 import Society from '../src/components/Society';
+import Event from '../src/components/Event';
 import perEvent from '../src/components/PerEvent';
 import PerSociety from '../src/components/PerSociety';
 import Student from '../src/components/Student';
@@ -26,6 +27,7 @@ class App extends Component {
         <Router history={browserHistory}>
           <Route path="/" component={Home}/>
           <Route path="/society" component={Society}/>
+          <Route path="/event" component={Event}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route path="/perSociety/:societyId" component={PerSociety}/>
