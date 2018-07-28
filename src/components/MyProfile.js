@@ -47,8 +47,8 @@ class MyProfile extends Component {
                                         <th>Logo</th>
                                         <th>Society</th>  
                                         <th>Events</th>  
-                                        <th>Rating Status</th>  
-                                        <th>Action</th>           
+                                        <th>Rating Status</th>    
+                                        <th colSpan="2">Actions</th>           
                                     </tr>
                                 </thead>
 
@@ -67,6 +67,7 @@ class MyProfile extends Component {
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                         </td>
+                                        <td><Link to={`/createProfile`}><FontAwesome.FaTrash /></Link></td>
                                         <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
                                     </tr>
                                     <tr>
@@ -83,6 +84,7 @@ class MyProfile extends Component {
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                             <li>Done</li>
                                         </td>
+                                        <td><Link to={`/createProfile`}><FontAwesome.FaTrash /></Link></td>
                                         <td><Link to={`/createProfile`}><FontAwesome.FaEdit /></Link></td>
                                     </tr>
                                     <tr>
@@ -100,6 +102,7 @@ class MyProfile extends Component {
                                             <li>Done</li>
                                         </td>
                                         <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
@@ -115,6 +118,7 @@ class MyProfile extends Component {
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                             <li><Link to={`/feedback`}>Undone</Link></li>
                                         </td>
+                                        <td><Link to={`/createProfile`}><FontAwesome.FaTrash /></Link></td>
                                         <td><Link to={`/createProfile`}><FontAwesome.FaEdit /></Link></td>
                                     </tr>
                                    
