@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {browserHistory, Router} from 'react-router';
+import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
@@ -31,6 +32,25 @@ class MyProfile extends Component {
 
     handleEvents(event) {
         browserHistory.push("/myEvents");
+    }
+
+    handleDelete() {
+        confirmAlert({
+            title: 'Cancel Registration Confirmation',
+            message: 'Are you sure to cancel participating this crew?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    console.log('Click Yes');
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => console.log('Click No')
+              }
+            ]
+          })
     }
     
     render() {
@@ -79,7 +99,7 @@ class MyProfile extends Component {
                                             <td><Link to={`/perSociety/1`}>IT Society</Link></td>
                                             <td>01/12/2018</td>
                                             <td>-</td>
-                                            <td><Link to={`/createProfile/1`}><FontAwesome.FaTrash /></Link></td>
+                                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
@@ -88,7 +108,7 @@ class MyProfile extends Component {
                                             <td><Link to={`/perSociety/1`}>First Aid Society</Link></td>
                                             <td>21/10/2018</td>
                                             <td>-</td>
-                                            <td><Link to={`/createProfile`}><FontAwesome.FaTrash /></Link></td>
+                                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
