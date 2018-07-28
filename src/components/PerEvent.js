@@ -16,8 +16,12 @@ class PerEvent extends Component {
         super(props);
     }
 
-    handleClick(event) {
+    handleEvent(event) {
         browserHistory.push("/register_event");
+    }
+
+    handleCrew(event) {
+        browserHistory.push("/register_crew");
     }
 
     handleDelete() {
@@ -92,7 +96,8 @@ class PerEvent extends Component {
                             <br/>
                         </div>
                         <div style={div3Style}>
-                        <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                        <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
                         </div>
                     </MuiThemeProvider>
                 </div>
