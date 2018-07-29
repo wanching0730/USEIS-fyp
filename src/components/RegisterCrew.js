@@ -5,8 +5,6 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
-import ToggleButton from 'react-toggle-button';
-import ReactNotifications from 'react-browser-notifications';
 import '../style/form.css';
 
 class RegisterCrew extends Component {
@@ -17,9 +15,13 @@ class RegisterCrew extends Component {
       first_name:'',
       last_name:'',
       emailNoti: false,
-      webNoti: false
+      webNoti: false,
+      position: 'secretary'
       // showModal: false
     }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   displayText() {
@@ -52,12 +54,18 @@ class RegisterCrew extends Component {
 
   handleClick(event) {
       this.displayText();
+      console.log("position: " + this.state.position);
       browserHistory.push("/myProfile");
-    }
+  }
+
+  handleChange(event) {
+    this.setState({position: event.target.value});
+  }
   
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
+    const BUTTONS = ['Default', 'Primary', 'Success', 'Info', 'Warning', 'Danger'];
 
     return (
       <div>
@@ -102,7 +110,18 @@ class RegisterCrew extends Component {
                     <div class="section"><span>3</span>Position</div>
                       <div class="inner-wrap">
                         <label>Position (Eg: Logistics HOD)</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> 
+                        <select value={this.state.position} onChange={this.handleChange}>
+                          <option value="secretary">Secretary</option>
+                          <option value="treasurer">Treasurer</option>
+                          <option value="programme">Programme HOD</option>
+                          <option value="logistics">Logistics HOD</option>
+                          <option value="editorial">Editorial HOD</option>
+                          <option value="publicity">Publicity HOD</option>
+                          <option value="decoration">Decoration HOD</option>
+                          <option value="technical">Technical HOD</option>
+                        </select>
+                        
+                        {/* <ButtonToolbar>{this.renderDropdownButton}</ButtonToolbar> */}
                     </div>
                     <div class="button-section">
                       <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
