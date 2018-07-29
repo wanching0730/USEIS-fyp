@@ -16,6 +16,10 @@ class PerEvent extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     handleEvent(event) {
         browserHistory.push("/register_event");
     }

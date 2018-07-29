@@ -22,6 +22,10 @@ class PerSociety extends Component {
         browserHistory.push("/societyEvents");
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     // handleEditClick(event) {
     //     browserHistory.push("/createProfile/"+this.props.params.societyId);
     // }

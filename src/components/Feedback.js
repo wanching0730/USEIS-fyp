@@ -28,7 +28,10 @@ class Feedback extends Component {
     handleClick() {
       browserHistory.push("/student");
     }
-     
+
+    componentDidMount() {
+      window.scrollTo(0, 0);
+    }
     
     render() {
   

@@ -40,6 +40,10 @@ class CreateProfile extends Component {
     this.handleSoftskilltCategory = this.handleSoftskilltCategory.bind(this);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleClick(event) {
     console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
     console.log("end date: " + moment(this.state.endDate).format("DD MMM YYYY hh:mm a"));

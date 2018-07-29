@@ -25,6 +25,10 @@ class RegisterSociety extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleClick(event) {
     console.log("course: " + this.state.course);
     browserHistory.push("/perSociety/1");

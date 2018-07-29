@@ -6,7 +6,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import $ from 'jquery';
 import axios from 'axios';
 
-class Society extends Component {
+class Student extends Component {
 
     constructor(props) {
         super(props);
@@ -15,7 +15,8 @@ class Society extends Component {
     }
 
     componentDidMount() {
-        this.listSocieties();
+        //this.listSocieties();
+        window.scrollTo(0,0);
     }
 
     listSocieties() {
@@ -107,4 +108,4 @@ class Society extends Component {
     
 };
 
-export default Society;
+export default Student;

@@ -18,9 +18,13 @@ class Login extends Component {
     }
    }
 
-   handleClick(event) {
-     browserHistory.push("/student");
-   }
+  handleClick(event) {
+    browserHistory.push("/student");
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   render() {
     

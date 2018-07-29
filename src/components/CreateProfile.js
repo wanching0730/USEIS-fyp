@@ -28,6 +28,10 @@ class CreateProfile extends Component {
     }
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleClick(event) {
     
     if(this.props.params.societyId == null) {

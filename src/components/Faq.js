@@ -8,6 +8,9 @@ import $ from 'jquery';
 class Faq extends Component {
 
     componentDidMount() {
+
+        window.scrollTo(0, 0);
+
         $(document).ready(function($){
             //update these values if you change these breakpoints in the style.css file (or _layout.scss if you use SASS)
             var MqM= 768,

@@ -17,7 +17,8 @@ class SocietyEvents extends Component {
     }
 
     componentDidMount() {
-        this.listSocieties();
+        //this.listSocieties();
+        window.scrollTo(0,0);
     }
 
     listSocieties() {

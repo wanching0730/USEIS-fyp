@@ -29,6 +29,10 @@ class RegisterEvent extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   displayText() {
 
       if(this.state.webNoti) {

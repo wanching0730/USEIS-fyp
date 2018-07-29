@@ -20,6 +20,7 @@ class ManageMember extends Component {
 
     componentDidMount() {
         this.listSocieties();
+        window.scrollTo(0, 0)
     }
 
     listSocieties() {

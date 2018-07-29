@@ -18,7 +18,8 @@ class Event extends Component {
     }
 
     async componentDidMount() {
-        this.listSocieties();
+        //this.listSocieties();
+        window.scrollTo(0, 0);
     }
 
     async listSocieties() {
