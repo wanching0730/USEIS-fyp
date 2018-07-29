@@ -61,12 +61,16 @@ class RegisterCrew extends Component {
   handleChange(event) {
     this.setState({position: event.target.value});
   }
+
+  mapItem(item) {
+    return <option>{item}</option>;
+  }
   
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
-    const BUTTONS = ['Default', 'Primary', 'Success', 'Info', 'Warning', 'Danger'];
-
+    const positions = ['Secretary', 'Treasurer', 'Programme HOD', 'Logistics HOD', 'Decoration HOD', 'Publicity HOD', 'Editorial HOD', 'Technical HOD'];
+    
     return (
       <div>
         <MuiThemeProvider>
@@ -111,14 +115,7 @@ class RegisterCrew extends Component {
                       <div class="inner-wrap">
                         <label>Position (Eg: Logistics HOD)</label>
                         <select value={this.state.position} onChange={this.handleChange}>
-                          <option value="secretary">Secretary</option>
-                          <option value="treasurer">Treasurer</option>
-                          <option value="programme">Programme HOD</option>
-                          <option value="logistics">Logistics HOD</option>
-                          <option value="editorial">Editorial HOD</option>
-                          <option value="publicity">Publicity HOD</option>
-                          <option value="decoration">Decoration HOD</option>
-                          <option value="technical">Technical HOD</option>
+                          {positions.map(this.mapItem)}
                         </select>
                         
                         {/* <ButtonToolbar>{this.renderDropdownButton}</ButtonToolbar> */}
