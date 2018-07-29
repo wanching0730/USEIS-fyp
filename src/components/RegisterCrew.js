@@ -63,13 +63,15 @@ class RegisterCrew extends Component {
   }
 
   mapItem(item) {
-    return <option>{item}</option>;
+    return <option value={item.value}>{item.name}</option>;
   }
   
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
-    const positions = ['Secretary', 'Treasurer', 'Programme HOD', 'Logistics HOD', 'Decoration HOD', 'Publicity HOD', 'Editorial HOD', 'Technical HOD'];
+    const positions = [{value:'secretary', name:'Secretary'}, {value:'treasurer', name:'Treasurer'}, {value:'programme', name:'Programme HOD'},
+    {value:'publicity', name:'Publicity HOD'}, {value:'logistics', name:'Logistics HOD'}, {value:'decoration', name:'Decoration HOD'},
+    {value:'editorial', name:'Editorial HOD'}, {value:'technical', name:'Technical HOD'}];
     
     return (
       <div>
