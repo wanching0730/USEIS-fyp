@@ -20,9 +20,13 @@ class RegisterEvent extends Component {
       last_name:'',
       emailNoti: false,
       webNoti: false,
-      vegetarian: true
+      vegetarian: true,
+      course: 'software'
       // showModal: false
     }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   displayText() {
@@ -55,8 +59,17 @@ class RegisterEvent extends Component {
 
   handleClick(event) {
       this.displayText();
+      console.log("course: " + this.state.course);
       browserHistory.push("/perEvent/1");
       // this.setState({showModal: this.state.value});
+  }
+
+  handleChange(event) {
+    this.setState({course: event.target.value});
+  }
+
+  mapItem(item) {
+    return <option value={item.value}>{item.name}</option>;
   }
 
   // handle multiple input
@@ -82,6 +95,9 @@ class RegisterEvent extends Component {
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
+    const courses = [{value:'software', name:'Software Engineering'}, {value:'chemical', name:'Chemical Engineering'}, {value:'civil', name:'Civil Engineering'},
+    {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, {value:'electronic', name:'Electronic Engineering'},
+    {value:'accounting', name:'Accounting'}, {value:'mbbs', name:'MBBS'}];
 
     return (
       <div>
@@ -120,7 +136,9 @@ class RegisterEvent extends Component {
                     <div class="section"><span>2</span>Course &amp; Year</div>
                     <div class="inner-wrap">
                       <label>Course (Eg: Software Engineering)</label>
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <select value={this.state.course} onChange={this.handleChange}>
+                        {courses.map(this.mapItem)}
+                      </select>
                       <br/>
                       <label>Year and Semester (Eg: Y1S1)</label> 
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
