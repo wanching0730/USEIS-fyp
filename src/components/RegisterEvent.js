@@ -21,7 +21,7 @@ class RegisterEvent extends Component {
       emailNoti: false,
       webNoti: false,
       vegetarian: true,
-      course: 'software'
+      course: 'accounting'
       // showModal: false
     }
 
@@ -95,9 +95,9 @@ class RegisterEvent extends Component {
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
-    const courses = [{value:'software', name:'Software Engineering'}, {value:'chemical', name:'Chemical Engineering'}, {value:'civil', name:'Civil Engineering'},
-    {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, {value:'electronic', name:'Electronic Engineering'},
-    {value:'accounting', name:'Accounting'}, {value:'mbbs', name:'MBBS'}];
+    const courses = [{value:'accounting', name:'Accounting'}, {value:'chemical', name:'Chemical Engineering'}, {value:'civil', name:'Civil Engineering'}, 
+    {value:'electronic', name:'Electronic Engineering'}, {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, 
+    {value:'software', name:'Software Engineering'}, {value:'mbbs', name:'MBBS'}];
 
     return (
       <div>
