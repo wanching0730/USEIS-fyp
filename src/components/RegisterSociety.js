@@ -17,17 +17,33 @@ class RegisterSociety extends Component {
       first_name:'',
       last_name:'',
       email:'',
-      password:''
+      password:'',
+      course: 'software'
     }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
+    console.log("course: " + this.state.course);
     browserHistory.push("/perSociety/1");
+  }
+
+  handleChange(event) {
+    this.setState({course: event.target.value});
+  }
+
+  mapItem(item) {
+    return <option value={item.value}>{item.name}</option>;
   }
   
   render() {
 
     const { RaisedButtonStyle, ContainerStyle, FormStyle } = styles;
+    const courses = [{value:'software', name:'Software Engineering'}, {value:'chemical', name:'Chemical Engineering'}, {value:'civil', name:'Civil Engineering'},
+    {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, {value:'electronic', name:'Electronic Engineering'},
+    {value:'accounting', name:'Accounting'}, {value:'mbbs', name:'MBBS'}];
 
     return (
       <div>
@@ -64,7 +80,9 @@ class RegisterSociety extends Component {
                     <div class="section"><span>2</span>Course &amp; Year</div>
                     <div class="inner-wrap">
                       <label>Course (Eg: Software Engineering)</label>
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <select value={this.state.course} onChange={this.handleChange}>
+                        {courses.map(this.mapItem)}
+                      </select>
                       <br/>
                       <label>Year and Semester (Eg: Y1S1)</label> 
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
