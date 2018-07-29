@@ -20,7 +20,8 @@ class CreateProfile extends Component {
       society_desc:'',
       startDate: moment(),
       endDate: moment(),
-      eventCategory: 'sport'
+      eventCategory: 'sport',
+      softskillCategory: 'communication'
     }
     
     if(this.props.params.eventId != null) {
@@ -36,12 +37,14 @@ class CreateProfile extends Component {
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleEventCategory = this.handleEventCategory.bind(this);
+    this.handleSoftskilltCategory = this.handleSoftskilltCategory.bind(this);
   }
 
   handleClick(event) {
     console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
     console.log("end date: " + moment(this.state.endDate).format("DD MMM YYYY hh:mm a"));
     console.log("event category: " + this.state.eventCategory);
+    console.log("softskill category: " + this.state.softskillCategory);
     browserHistory.push("/societyEvents");
   }
 
@@ -61,6 +64,10 @@ class CreateProfile extends Component {
     this.setState({eventCategory: event.target.value});
   }
 
+  handleSoftskilltCategory(event) {
+    this.setState({softskillCategory: event.target.value});
+  }
+
   mapItem(item) {
     return <option value={item.value}>{item.name}</option>;
   }
@@ -68,9 +75,14 @@ class CreateProfile extends Component {
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
+
     const eventCategories = [{value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}, {value:'music', name:'Music'},
     {value:'dance', name:'Dance'}, {value:'entertainment', name:'Entertainment'}, {value:'education', name:'Education'},
     {value:'design', name:'Design'}, {value:'softskill', name:'Soft Skill'}];
+
+    const softSkillCategories = [{value:'communication', name:'Communication & Language Skills'}, {value:'criticalThinking', name:'Critical Thinking & Problem Solving'}, {value:'digitalLiteracy', name:'Digital Literacy'},
+    {value:'eq', name:'Emotional Intelligence & Teamwork Skills'}, {value:'entrepreneur', name:'Entrepreneurship Skills'}, {value:'leadership', name:'Leadership Skills'},
+    {value:'lifelong', name:'Lifelong Learning & Information Management'}, {value:'moral', name:'Moral & Professional Ethics'}];
 
     var header;
     var activeBreadCrumb;
@@ -174,7 +186,9 @@ class CreateProfile extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                       <br/>
                       <label>Soft Skill Category</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <select value={this.state.softskillCategory} onChange={this.handleSoftskilltCategory}>
+                        {softSkillCategories.map(this.mapItem)}
+                      </select>
                       <br/>
                     </div>
 
