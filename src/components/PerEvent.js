@@ -77,7 +77,7 @@ class PerEvent extends Component {
                     <MuiThemeProvider>
                         {/* <h1>{this.props.params.societyId}</h1> */}
                         <div style={div1Style}>
-                            <img style={imageStyle} src={ require('../assets/images/image1.jpg') } />
+                            <img style={imageStyle} src={ require('../assets/images/cardio.jpg') } />
                             <h1>Cardio Night Run</h1>
                         </div>
                         <div style={div2Style}>

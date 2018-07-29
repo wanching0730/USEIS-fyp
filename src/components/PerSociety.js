@@ -64,7 +64,7 @@ class PerSociety extends Component {
                     <MuiThemeProvider>
                         {/* <h1>{this.props.params.societyId}</h1> */}
                         <div style={div1Style}>
-                            <img style={imageStyle} src={ require('../assets/images/image1.jpg') } />
+                            <img style={imageStyle} src={ require('../assets/images/its.jpg') } />
                             <h1>IT Society</h1>
                         </div>
                         <div style={div2Style}>

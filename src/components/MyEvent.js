@@ -114,7 +114,7 @@ class MyProfile extends Component {
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                                            <td><img style={imageStyle} src={ require('../assets/images/workshop.jpg') } /></td>
                                             <td> <Link to={`/perEvent/1`}>WorkShop</Link></td>
                                             <td><Link to={`/perSociety/1`}>IT Society</Link></td>
                                             <td>01/12/2018</td>
@@ -124,7 +124,7 @@ class MyProfile extends Component {
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                                            <td><img style={imageStyle} src={ require('../assets/images/cardio.jpg') } /></td>
                                             <td><Link to={`/perEvent/1`}>Cardio Night Run</Link></td>
                                             <td><Link to={`/perSociety/1`}>First Aid Society</Link></td>
                                             <td>21/10/2018</td>
@@ -134,7 +134,7 @@ class MyProfile extends Component {
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                                            <td><img style={imageStyle} src={ require('../assets/images/camp.jpg') } /></td>
                                             <td><Link to={`/perEvent/1`}>ES Camp</Link></td>
                                             <td><Link to={`/perSociety/1`}>Engineering Society</Link></td>
                                             <td>01/05/2018</td>
@@ -144,7 +144,7 @@ class MyProfile extends Component {
                                         </tr>
                                         <tr>
                                             <td>4</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                                            <td><img style={imageStyle} src={ require('../assets/images/carnival.jpg') } /></td>
                                             <td><Link to={`/perEvent/1`}>Sport Carnival</Link></td>
                                             <td><Link to={`/perSociety/1`}>Sport Club</Link></td>
                                             <td>17/01/2018</td>
