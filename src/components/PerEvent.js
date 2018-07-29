@@ -64,7 +64,7 @@ class PerEvent extends Component {
                     <Link to="/createEvent/1" id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
                     <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
                     <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                    <Link to="/manageCrew" id="manageCrew"><FontAwesome.FaUser /> Manage Crew</Link>
+                    <Link to="/manageCrew" id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
                     <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
                     <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                 </div>
