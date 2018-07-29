@@ -5,7 +5,7 @@ import Login from '../src/components/Login';
 import Home from '../src/components/Home';
 import Society from '../src/components/Society';
 import Event from '../src/components/Event';
-import perEvent from '../src/components/PerEvent';
+import PerEvent from '../src/components/PerEvent';
 import PerSociety from '../src/components/PerSociety';
 import Student from '../src/components/Student';
 import Feedback from '../src/components/Feedback';
@@ -36,7 +36,7 @@ class App extends Component {
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route path="/perSociety/:societyId" component={PerSociety}/>
-          <Route path="/perEvent/:eventId" component={perEvent}/>
+          <Route path="/perEvent/:eventId" component={PerEvent}/>
           <Route path="/student" component={Student}/>
           <Route path="/feedback" component={Feedback}/>
           <Route path="/register_event" component={RegisterEvent}/>

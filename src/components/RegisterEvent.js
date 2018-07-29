@@ -59,12 +59,6 @@ class RegisterEvent extends Component {
       // this.setState({showModal: this.state.value});
   }
 
-  handleCheckBox(event, checked) {
-    this.setState({ vegetarian: checked });
-    console.log("checked: " + this.state.vegetarian);
-  }
-  
-
   // handle multiple input
   // handleInputChange(event) {
   //   const target = event.target;
