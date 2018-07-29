@@ -79,7 +79,7 @@ class CreateProfile extends Component {
                           }}/>
                         <br/>
                         <label>Society Category</label>
-                        <textarea name="field2"></textarea>
+                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>2</span>Vision &amp; Mision</div>

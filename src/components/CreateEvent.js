@@ -20,7 +20,7 @@ class CreateProfile extends Component {
       society_desc:'',
       startDate: moment(),
       endDate: moment(),
-      eventCategory: 'sport',
+      eventCategory: 'dance',
       softskillCategory: 'communication'
     }
     
@@ -76,9 +76,9 @@ class CreateProfile extends Component {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
 
-    const eventCategories = [{value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}, {value:'music', name:'Music'},
-    {value:'dance', name:'Dance'}, {value:'entertainment', name:'Entertainment'}, {value:'education', name:'Education'},
-    {value:'design', name:'Design'}, {value:'softskill', name:'Soft Skill'}];
+    const eventCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
+    {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
+    {value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}];
 
     const softSkillCategories = [{value:'communication', name:'Communication & Language Skills'}, {value:'criticalThinking', name:'Critical Thinking & Problem Solving'}, {value:'digitalLiteracy', name:'Digital Literacy'},
     {value:'eq', name:'Emotional Intelligence & Teamwork Skills'}, {value:'entrepreneur', name:'Entrepreneurship Skills'}, {value:'leadership', name:'Leadership Skills'},
