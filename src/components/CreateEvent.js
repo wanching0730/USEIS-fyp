@@ -170,12 +170,12 @@ class CreateProfile extends Component {
                         <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
-                    <div class="section"><span>4</span>Chairperson &amp; Contact Number</div>
+                    <div class="section"><span>4</span>Organizing Chairperson Name &amp; Contact Number</div>
                     <div class="inner-wrap">
-                      <label>Organizing Chairperson</label>
+                      <label>Chairperson Name</label>
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                       <br/>
-                      <label>Contact Number</label> 
+                      <label>Chairperson Contact Number</label> 
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                       <br/>
                     </div>
