@@ -5,6 +5,9 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
+import moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import '../style/form.css';
 
 class CreateProfile extends Component {
@@ -15,6 +18,8 @@ class CreateProfile extends Component {
     this.state = {
       society_name:'',
       society_desc:'',
+      startDate: moment(),
+      endDate: moment()
     }
     
     if(this.props.params.eventId != null) {
@@ -26,10 +31,27 @@ class CreateProfile extends Component {
       //   });
       // });
     }
+
+    this.handleStart = this.handleStart.bind(this);
+    this.handleEnd = this.handleEnd.bind(this);
   }
 
   handleClick(event) {
+    console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
+    console.log("end date: " + moment(this.state.endDate).format("DD MMM YYYY hh:mm a"));
     browserHistory.push("/societyEvents");
+  }
+
+  handleStart(date) {
+    this.setState({
+      startDate: date
+    });
+  }
+
+  handleEnd(date) {
+    this.setState({
+      endDate: date
+    });
   }
 
   render() {
@@ -84,11 +106,30 @@ class CreateProfile extends Component {
 
                     <div class="section"><span>2</span>Date &amp; Time &amp; Venue</div>
                     <div class="inner-wrap">
-                      <label>Event Date</label>
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <label>Event Start Date &amp; Time </label>
+                      <DatePicker
+                        selected={this.state.startDate}
+                        onChange={this.handleStart.bind(this)}
+                        showTimeSelect
+                        timeFormat="HH:mm"
+                        timeIntervals={15}
+                        dateFormat="LLL"
+                        timeCaption="time"
+                      />
+                      {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                       <br/>
-                      <label>Event Time</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <label>Event End Date &amp; Time </label>
+                      <DatePicker
+                        selected={this.state.endDate}
+                        onChange={this.handleEnd.bind(this)}
+                        showTimeSelect
+                        timeFormat="HH:mm"
+                        timeIntervals={15}
+                        dateFormat="LLL"
+                        timeCaption="time"
+                      />
+                      {/* <label>Event Time</label> 
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                       <br/>
                       <label>Event Venue</label> 
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
