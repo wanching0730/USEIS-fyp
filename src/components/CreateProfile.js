@@ -94,8 +94,9 @@ class CreateProfile extends Component {
                     <div class="section"><span>3</span>Description</div>
                         <div class="inner-wrap">
                         <label>Society Description</label>
-                        <textarea id="txtArea" rows="5" cols="10"></textarea>
+                        <textarea id="txtArea"></textarea>
                     </div>
+
                     <div class="button-section">
                       <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                       <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
