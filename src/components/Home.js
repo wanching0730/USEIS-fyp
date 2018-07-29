@@ -73,33 +73,59 @@ class Home extends Component {
                 </div>
 
                 <div className="pull-right col-md-4 col-lg-4 col-sm-4" id="col-3" style={{ marginTop: 20}}>
+                    <h4>Event Recommendations</h4>
                     <table className="table table-hover table-light" border="1">
                         <thead>
                             <tr>
-                                <th>Societies</th>
                                 <th>Events</th>
+                                <th>Organiser</th>
                                 <th>Attendance</th>                  
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <td>IT Society</td>
                                 <td>Work Shop</td>
+                                <td>IT Society</td>
                                 <td>45</td>
                             </tr>
                             <tr>
+                                <td>USTAR 8</td>
                                 <td>Music Society</td>
-                                <td>USTAR8</td>
                                 <td>40</td>
                             </tr>
                             <tr>
-                                <td>Wushu Society</td>
                                 <td>Performance</td>
+                                <td>Wushu Society</td>
                                 <td>38</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    <br/>
+                    <br/>
+
+                    <h4>Society Recommendations</h4>
+                    <table className="table table-hover table-light" border="1">
+                        <thead>
+                            <tr>
+                                <th>Societies</th>             
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>IT Society</td>
+                            </tr>
+                            <tr>
+                                <td>Music Society</td>
+                            </tr>
+                            <tr>
+                                <td>Wushu Society</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
 
             </div>
