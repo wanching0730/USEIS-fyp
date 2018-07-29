@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
-import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/faq.css';
 import $ from 'jquery';
-import axios from 'axios';
 
 class Faq extends Component {
 
@@ -156,6 +152,13 @@ class Faq extends Component {
             <div>
 
                 <NavBar />
+
+                <div style={{ margin: 20 }}>
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>FAQ</BreadcrumbItem>
+                    </Breadcrumb>
+                </div>
 
                 <div class="cd-faq">
                 <ul class="cd-faq-categories">
