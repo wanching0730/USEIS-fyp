@@ -22,7 +22,12 @@ class RegisterBooth extends Component {
   return (
     <div>
       <NavBar />
-      <Seatmap rows={rows} maxReservableSeats={3} alpha />
+
+      <h2>Booth Registration</h2>
+
+      <div className="container">
+        <Seatmap rows={rows} maxReservableSeats={3} alpha />
+      </div>
     </div>
   );
   

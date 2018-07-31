@@ -34,6 +34,8 @@ class Calendar extends Component {
                     start: new Date(element[3]),
                     end: new Date(element[4])
                 });
+
+                console.log("start: " + element[3]);
             });
       });
   }
