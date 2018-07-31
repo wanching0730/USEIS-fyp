@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Seatmap from './Seatmap.jsx';
 import NavBar from './NavBar';
+import { Link } from 'react-router';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/main.scss';
 import '../style/main.css';
 
@@ -22,6 +24,15 @@ class RegisterBooth extends Component {
   return (
     <div>
       <NavBar />
+
+      <div style={{ margin: 20 }}>
+          <Breadcrumb>
+              <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
+              <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
+              <BreadcrumbItem><Link to={`/perSociety/1`}>Cardio Night Run</Link></BreadcrumbItem>
+              <BreadcrumbItem active>Register Booth</BreadcrumbItem>
+          </Breadcrumb>
+      </div>
 
       <h2>Booth Registration</h2>
 
