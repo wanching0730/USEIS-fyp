@@ -77,8 +77,10 @@ export default class Seatmap extends React.Component {
                 selectedSeats: selectedSeats.update(row, seats => seats.delete(number)),
                 size: size - 1
             }, () => removeSeatCallback(row, number))
-        } else {
+        } else if (size == maxReservableSeats) {
             this.handleMax();
+        } else {
+            console.log("not available");
         }
     }
 
