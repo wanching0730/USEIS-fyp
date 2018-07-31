@@ -4,6 +4,7 @@ import Immutable, { Map, Set } from 'immutable/dist/immutable.min.js';
 import Seat from './Seat';
 import Blank from './Blank';
 import PropTypes from 'prop-types'; 
+import { confirmAlert } from 'react-confirm-alert'; 
 
 export default class Seatmap extends React.Component {
 
@@ -42,6 +43,21 @@ export default class Seatmap extends React.Component {
         };
     }
 
+    handleMax() {
+        confirmAlert({
+            title: 'Maximum Reservation',
+            message: 'You have reserved the maximum amount of seats. No seat is allowed to be researved again',
+            buttons: [
+              {
+                label: 'OK',
+                onClick: () => {
+                    console.log('Click Yes');
+                }
+              }
+            ]
+          })
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         return nextState.selectedSeats !== this.state.selectedSeats;
     }
@@ -61,6 +77,8 @@ export default class Seatmap extends React.Component {
                 selectedSeats: selectedSeats.update(row, seats => seats.delete(number)),
                 size: size - 1
             }, () => removeSeatCallback(row, number))
+        } else {
+            this.handleMax();
         }
     }
 
