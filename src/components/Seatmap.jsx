@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 
 export default class Seatmap extends React.Component {
 
+    // constant variables
     static propTypes = {
         addSeatCallback: PropTypes.func,
         alpha: PropTypes.bool,
@@ -26,7 +27,7 @@ export default class Seatmap extends React.Component {
     static defaultProps = {
         addSeatCallback: (row, number) => {
             console.log(`Added seat ${number}, row ${row}`);
-            this.setState({selectedRow: row, selectedNumber: number});
+            // return (row, number);
         },
         removeSeatCallback: (row, number) => {
             console.log(`Removed seat ${number}, row ${row}`);
@@ -41,13 +42,16 @@ export default class Seatmap extends React.Component {
             selectedSeats: Map(),
             size: 0,
             width: seatWidth * (1 + Math.max.apply(null, rows.map(row => row.length))),
-            selectedRow: '',
-            selectedNumber: ''
+            // selectedRow: '',
+            // selectedNumber: ''
         };
 
-        this.setState({selectedRow: this.props.selected});
-        console.log("state: " + this.state.selectedRow);
-        console.log("state: " + this.props.selected);
+        //this.props.selected(this.state.selected);
+
+        // this.setState({selectedRow: this.props.selected});
+        // console.log("state: " + this.state.selectedRow);
+        // console.log("state: " + this.props.selected);
+        // console.log("returned: " + Seatmap.defaultProps.addSeatCallback());
     }
 
     handleMax() {
@@ -77,7 +81,9 @@ export default class Seatmap extends React.Component {
         if (size < maxReservableSeats && !seatAlreadySelected) {
             this.setState({
                 selectedSeats: selectedSeats.mergeDeep({[row]: Set([number])}),
-                size: size + 1
+                size: size + 1,
+                // selectedNumber: number,
+                // selectedRow: row
             }, () => addSeatCallback(row, number));
         } else if (selectedSeats.has(row) && seatAlreadySelected) {
             this.setState({
