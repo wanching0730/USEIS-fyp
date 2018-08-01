@@ -196,6 +196,11 @@
     }
 }
 
+.button-section {
+    display: flex;
+    justify-content: center;
+}
+
 /* RaisedButton {
     background-color: #083477;
     color: #083477;
