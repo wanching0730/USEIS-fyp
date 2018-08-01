@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Seatmap from './Seatmap.jsx';
 import NavBar from './NavBar';
 import { Link } from 'react-router';
+import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -21,7 +22,7 @@ class RegisterBooth extends Component {
   }
 
   handleClick() {
-
+    browserHistory.push("/perSociety/1");
   }
 
   selectedSeat = (dataFromChild) => {
