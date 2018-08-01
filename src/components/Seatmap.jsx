@@ -26,6 +26,7 @@ export default class Seatmap extends React.Component {
     static defaultProps = {
         addSeatCallback: (row, number) => {
             console.log(`Added seat ${number}, row ${row}`);
+            this.setState({selectedRow: row, selectedNumber: number});
         },
         removeSeatCallback: (row, number) => {
             console.log(`Removed seat ${number}, row ${row}`);
@@ -39,8 +40,14 @@ export default class Seatmap extends React.Component {
         this.state = {
             selectedSeats: Map(),
             size: 0,
-            width: seatWidth * (1 + Math.max.apply(null, rows.map(row => row.length)))
+            width: seatWidth * (1 + Math.max.apply(null, rows.map(row => row.length))),
+            selectedRow: '',
+            selectedNumber: ''
         };
+
+        this.setState({selectedRow: this.props.selected});
+        console.log("state: " + this.state.selectedRow);
+        console.log("state: " + this.props.selected);
     }
 
     handleMax() {

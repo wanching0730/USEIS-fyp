@@ -21,7 +21,11 @@ class RegisterBooth extends Component {
   }
 
   handleClick() {
-    
+
+  }
+
+  selectedSeat = (dataFromChild) => {
+    console.log("data from child: " + dataFromChild);
   }
 
   render() {
@@ -56,7 +60,7 @@ class RegisterBooth extends Component {
         <h2>Booth Registration</h2>
 
         <div className="container">
-          <Seatmap rows={rows} maxReservableSeats={3} alpha />
+          <Seatmap rows={rows} maxReservableSeats={3} alpha selected={this.selectedSeat} />
         </div>
 
         <div class="button-section">
