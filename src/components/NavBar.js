@@ -1,62 +1,87 @@
 import React, { Component } from 'react';
+import {browserHistory} from 'react-router';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav,  NavItem, UncontrolledDropdown, 
+    DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router';
-import '../App.css';
 import '../style/navbar.css';
 
 class NavBar extends Component {
+    constructor(props) {
+        super(props);
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+        isOpen: false
+        };
 
-    myFunction() {
-        var x = this.refs.myTopnav;
-        if(x.className === "topnav") {
-            x.className += " responsive";
+        this.toggle = this.toggle.bind(this);
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(event) {
+        if(event.target.name == "createProfile") {
+            browserHistory.push("/createProfile");
         } else {
-            x.className = "topnav";
+            browserHistory.push("/faq");
         }
     }
 
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+
     render() {
-
-        const { imageStyle } = styles;
-
-        return (
-
-            <div className="topnav" ref="myTopnav">
-
-                <img src={ require('../assets/images/utar.jpg') } />
-               
-                <Link to="/">Home</Link>
+    return (
+        <div>
+        <Navbar className="topnav" dark expand="md">
+            <NavbarBrand href="/"><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
+            <NavbarToggler onClick={this.toggle} />
+            <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="mr-auto" navbar>
+                <NavItem>
+                <Link to="/">Home1</Link>
+                </NavItem>
+                <NavItem>
                 <Link to="/society">Societies</Link>
+                </NavItem>
+                <NavItem>
                 <Link to="/event">Events</Link>
+                </NavItem>
+                <NavItem>
                 <Link to="/recruitmentBooth">Booths</Link>
-                <Link to="/createProfile">Create Society Profile</Link>
+                </NavItem>
+                <NavItem>
                 <Link to="/myProfile">My Profile</Link>
-                <Link to="/faq">FAQ</Link>
+                </NavItem>
+                <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                    Manage
+                </DropdownToggle>
+                <DropdownMenu right>
+                    <DropdownItem name="createProfile" onClick={this.onClick}>
+                    My Profile
+                    </DropdownItem>
+                    <DropdownItem name="faq" onClick={this.onClick}>
+                    FAQ
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem name="faq" onClick={this.onClick}>
+                    FAQ
+                    </DropdownItem>
+                </DropdownMenu>
+                </UncontrolledDropdown>
+            </Nav>
+            <Nav className="ml-auto" navbar>
+            <NavItem>
                 <Link to="/login">Login</Link>
-                {/* <Link to="/register">Register</Link> */}
-                
-                <a href="javascript:void(0);" class="icon" onClick={() => this.myFunction()}>
-                    <i class="fa fa-bars"></i>
-                </a>
-            </div>
-
-            // <div className="navbar">
-                // <Link to="/">Home</Link>
-                // <Link to="/society">Societies</Link>
-                // <Link to="/createProfile">Create Society Profile</Link>
-                // <Link to="/myProfile">My Profile</Link>
-                // <Link to="/login">Login</Link>
-                // <Link to="/register">Register</Link>
-                // <Link>Logout</Link>
-            // </div>
-        );
+                </NavItem>
+            </Nav>
+            </Collapse>
+        </Navbar>
+        </div>
+    );
     }
 }
 
-const styles = {
-    imageStyle: {
-        height: "10px",
-        width: "20px"
-    }
-}
-
-export default NavBar;
+export default  NavBar;
