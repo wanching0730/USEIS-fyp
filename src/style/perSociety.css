@@ -37,7 +37,12 @@
     background-color: rgb(255, 0, 64)
 }
 
-#manageMember {
+#submitProposal {
     top: 400px;
+    background-color: darksalmon;
+}
+
+#manageMember {
+    top: 460px;
     background-color: rgba(143, 0, 238, 0.815)
 }

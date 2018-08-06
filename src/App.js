@@ -25,6 +25,7 @@ import ManageCrew from './components/ManageCrew';
 import CommitteeBoard from './components/CommitteeBoard';
 import SocietyEvents from './components/SocietyEvents';
 import RecruitmentBooth from './components/RecruitmentBooth';
+import SubmitProposal from './components/SubmitProposal';
 import Faq from './components/Faq';
 import './App.css';
 
@@ -59,6 +60,7 @@ class App extends Component {
           <Route path="/commBoard" component={CommitteeBoard}/>
           <Route path="/societyEvents" component={SocietyEvents}/>
           <Route path="/recruitmentBooth" component={RecruitmentBooth}/>
+          <Route path="/submitProposal" component={SubmitProposal}/>
           <Route path="/faq" component={Faq}/>
         </Router>
         

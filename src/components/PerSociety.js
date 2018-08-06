@@ -58,6 +58,7 @@ class PerSociety extends Component {
                     <Link to="/createEvent" id="addEvent"><FontAwesome.FaPlus /> Create Event</Link>
                     <Link to="/createProfile/{this.props.params.societyId}" id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
                     <Link to="/register_booth" id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+                    <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
                     <Link to="/manageMember" id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
                 </div>
 
