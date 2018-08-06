@@ -13,7 +13,6 @@ class NavBar extends Component {
             isOpen: false
         };
 
-        
         this.onClick = this.onClick.bind(this);
     }
 

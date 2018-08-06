@@ -21,6 +21,7 @@ import ManageBooth from './components/ManageBooth';
 import ManageEventBooth from './components/ManageEventBooth';
 import ManageMember from './components/ManageMember';
 import ManageParticipant from './components/ManageParticipant';
+import ManageProposal from './components/ManageProposal';
 import ManageCrew from './components/ManageCrew';
 import CommitteeBoard from './components/CommitteeBoard';
 import SocietyEvents from './components/SocietyEvents';
@@ -56,6 +57,7 @@ class App extends Component {
           <Route path="/manageBooth" component={ManageBooth}/>
           <Route path="/manageMember" component={ManageMember}/>
           <Route path="/manageParticipant" component={ManageParticipant}/>
+          <Route path="/manageProposal" component={ManageProposal}/>
           <Route path="/manageCrew" component={ManageCrew}/>
           <Route path="/commBoard" component={CommitteeBoard}/>
           <Route path="/societyEvents" component={SocietyEvents}/>
