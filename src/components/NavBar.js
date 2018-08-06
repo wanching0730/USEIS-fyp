@@ -24,6 +24,8 @@ class NavBar extends Component {
             browserHistory.push("/faq");
         } else if(event.target.name == "manageBooth") {
             browserHistory.push("/manageBooth");
+        } else if(event.target.name == "submitProposal") {
+            browserHistory.push("/submitProposal");
         } else {
             browserHistory.push("/manageProposal");
         }
@@ -64,7 +66,10 @@ class NavBar extends Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                     <DropdownItem name="createProfile" onClick={this.onClick}>
-                        My Profile
+                        Create Society Profile
+                    </DropdownItem>
+                    <DropdownItem name="submitProposal" onClick={this.onClick}>
+                        Submit Proposal
                     </DropdownItem>
                     <DropdownItem name="manageBooth" onClick={this.onClick}>
                         Manage Booth
