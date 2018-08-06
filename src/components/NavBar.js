@@ -33,7 +33,6 @@ class NavBar extends Component {
                 <Link to="/faq">FAQ</Link>
                 <Link to="/login">Login</Link>
                 {/* <Link to="/register">Register</Link> */}
-                <Link to="/login">Logout</Link>
                 
                 <a href="javascript:void(0);" class="icon" onClick={() => this.myFunction()}>
                     <i class="fa fa-bars"></i>

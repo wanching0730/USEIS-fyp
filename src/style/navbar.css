@@ -5,19 +5,38 @@
     text-decoration: none;
 } */
 
+Navbar {
+  background-color: #083477;
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .topnav {
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #083477;
-  width: 100%;
-  margin: 0 0 1em 0;
+  color: #FFFFFF;
+  /* width: 100%;
+  margin: 0 0 1em 0; */
 }
 
-.topnav a {
+Nav {
+  color: white;
+  height: 70px;
+}
+
+
+.topnav img {
+  float: left;
+  display: block;
+  padding: 14px 16px;
+  height: 65px;
+  width: 100px;
+}
+
+/* .topnav a {
   float: left;
   display: block;
   color: #f2f2f2;
@@ -81,4 +100,4 @@ body {
   }
 
   
-}
+} */

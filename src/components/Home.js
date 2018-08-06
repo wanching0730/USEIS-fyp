@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import NavBar from './NavBar';
+// import NavBar from './NavBar';
+import NavBar1 from './NavBar1';
 import Calendar from './Calendar';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -26,6 +27,7 @@ class Home extends Component {
     componentDidMount() {
         //this.listSocieties();
         window.scrollTo(0, 0);
+        console.log(React.version);
     }
 
     // listSocieties() {
@@ -53,7 +55,7 @@ class Home extends Component {
 
         return (
             <div id="outerDiv"> 
-                <NavBar />
+                <NavBar1 />
 
                 <div style={{ margin: 20 }}>
                     <Breadcrumb>
