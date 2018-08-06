@@ -27,13 +27,18 @@ Nav {
   height: 70px;
 }
 
-
 .topnav img {
   float: left;
   display: block;
   padding: 14px 16px;
   height: 65px;
   width: 100px;
+}
+
+@media screen and (max-width: 600px) {
+  Nav {
+    height: 100%;
+  }
 }
 
 /* .topnav a {
