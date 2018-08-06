@@ -20,8 +20,12 @@ class NavBar extends Component {
     onClick(event) {
         if(event.target.name == "createProfile") {
             browserHistory.push("/createProfile");
-        } else {
+        } else if(event.target.name == "faq") {
             browserHistory.push("/faq");
+        } else if(event.target.name == "manageBooth") {
+            browserHistory.push("/manageBooth");
+        } else {
+            browserHistory.push("/manageProposal");
         }
     }
 
