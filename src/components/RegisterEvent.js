@@ -9,7 +9,6 @@ import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
 import '../style/form.css';
 import NotificationModal from './NotificationModal';
-import axios from 'axios';
 
 class RegisterEvent extends Component {
 

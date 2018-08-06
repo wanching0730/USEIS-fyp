@@ -5,8 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import $ from 'jquery';
 import axios from 'axios';
-import '../style/society.css';
 import { Link } from 'react-router';
+import '../style/society.css';
 
 class ManageParticipant extends Component {
 

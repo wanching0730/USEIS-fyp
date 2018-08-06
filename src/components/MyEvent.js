@@ -8,7 +8,6 @@ import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
-import { colors } from 'material-ui/styles';
 
 class MyProfile extends Component {
 

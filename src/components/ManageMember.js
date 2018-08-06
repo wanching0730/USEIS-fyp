@@ -5,10 +5,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import $ from 'jquery';
 import axios from 'axios';
-import '../style/society.css';
 import { confirmAlert } from 'react-confirm-alert'; 
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
+import '../style/society.css';
 
 class ManageMember extends Component {
 

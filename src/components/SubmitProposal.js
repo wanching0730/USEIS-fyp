@@ -18,7 +18,6 @@ class SubmitProposal extends Component {
       webNoti: false,
       vegetarian: true,
       course: 'accounting'
-      // showModal: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -61,7 +60,6 @@ class SubmitProposal extends Component {
       this.displayText();
       console.log("course: " + this.state.course);
       browserHistory.push("/perEvent/1");
-      // this.setState({showModal: this.state.value});
   }
 
   handleChange(event) {
@@ -72,18 +70,6 @@ class SubmitProposal extends Component {
     return <option value={item.value}>{item.name}</option>;
   }
 
-  // handle multiple input
-  // handleInputChange(event) {
-  //   const target = event.target;
-  //   const value = target.type === 'checkbox' ? target.checked : target.value;
-  //   const name = target.name;
-
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // }
-
-  
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
@@ -112,7 +98,6 @@ class SubmitProposal extends Component {
                     <div class="section"><span>1</span>Society Name</div>
                     <div class="inner-wrap">
                         <label>Society Name</label>  
-                        {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
                         <input type="text" onChange={(event) => {
                           this.setState({first_name:event.target.value});
                           console.log("state value: " + this.state.first_name);
@@ -148,7 +133,6 @@ class SubmitProposal extends Component {
     );
     }
 }
-
 
 const styles = {
   RaisedButtonStyle: {
