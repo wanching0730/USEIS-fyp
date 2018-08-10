@@ -1,6 +1,4 @@
 import React from 'react';
-import color from 'rcolor';
-import Graph from './Graph';
 import '../style/analysis.css';
 import { Line, Doughnut } from '../../node_modules/react-chartjs-2';
 
@@ -33,7 +31,6 @@ class Analysis extends React.Component {
 
     }
 
-
     getRandomInt (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -43,9 +40,6 @@ class Analysis extends React.Component {
     }
     
     render() {
-
-
-        
 
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
