@@ -76,12 +76,15 @@ class Analysis extends React.Component {
           
         return (
             <div>
-            <h2>Line Example</h2>
-            <Line data={data} width={100} height={50} />
+                <div style={{width:500, height: 450}}>
+                    <h2>Line Example</h2>
+                    <Line data={data} width={100} height={50} />
+                </div>
 
-            <h2>Dynamicly refreshed Doughnut Example</h2>
-            <Doughnut data={this.state.getState} width={100} height={50} />
-
+                <div style={{width:500, height: 450}}>
+                    <h2>Dynamicly refreshed Doughnut Example</h2>
+                    <Doughnut data={this.state.getState} width={100} height={50} />
+                </div>
           </div>
         );
     }
