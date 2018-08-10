@@ -1,13 +1,50 @@
 import React from 'react';
 import color from 'rcolor';
 import Graph from './Graph';
-import { Line } from '../../node_modules/react-chartjs-2';
+import { Line, Doughnut } from '../../node_modules/react-chartjs-2';
 
 class Analysis extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {getState: 
+            {
+                labels: [
+                  'Red',
+                  'Green',
+                  'Yellow'
+                ],
+                datasets: [{
+                  data: [this.getRandomInt(50, 200), this.getRandomInt(100, 150), this.getRandomInt(150, 250)],
+                  backgroundColor: [
+                  '#CCC',
+                  '#36A2EB',
+                  '#FFCE56'
+                  ],
+                  hoverBackgroundColor: [
+                  '#FF6384',
+                  '#36A2EB',
+                  '#FFCE56'
+                  ]
+                }]
+              }}
+
+    }
+
+
+    getRandomInt (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
     
+	componentDidMount() {
+		setInterval(() => 5000);
+    }
     
     render() {
+
+
+        
 
         const data = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -40,7 +77,11 @@ class Analysis extends React.Component {
         return (
             <div>
             <h2>Line Example</h2>
-            <Line data={data} />
+            <Line data={data} width={100} height={50} />
+
+            <h2>Dynamicly refreshed Doughnut Example</h2>
+            <Doughnut data={this.state.getState} width={100} height={50} />
+
           </div>
         );
     }
