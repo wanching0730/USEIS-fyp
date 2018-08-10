@@ -32,7 +32,7 @@ class Calendar extends Component {
                     title: element[1],
                     allDay: element[2],
                     start: new Date(element[3]),
-                    end: new Date(element[4])
+                    end: new Date(element[4]),
                 });
 
                 console.log("start: " + element[3]);
@@ -43,9 +43,15 @@ class Calendar extends Component {
   render() {
 
     console.log("calender: " + this.societies);
+
+    const venues = [
+      { id: 1, venue: 'Board room' },
+      { id: 2, venue: 'Training room' },
+      { id: 3, venue: 'Meeting room 1' }
+    ]
     
     return (
-      <div style={{ height: 700 }}>
+      <div style={{ height: 800 }}>
         <BigCalendar
           selectable
           events={this.societies}
@@ -53,6 +59,9 @@ class Calendar extends Component {
           step={60}
           showMultiDayTimes
           defaultDate={new Date()}
+          resources={venues}
+          resourceIdAccessor="id"
+          resourceTitleAccessor="venue"
           onSelectEvent={event=>browserHistory.push("/perEvent/"+event.id)}
         />
       </div>
