@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
 import Calendar from './Calendar';
+import Analysis from './Analysis';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/home.css';
@@ -126,6 +127,10 @@ class Home extends Component {
                             </tr>
                         </tbody>
                     </table>
+
+                    <br/>
+
+                    <Analysis />
 
                 </div>
 
