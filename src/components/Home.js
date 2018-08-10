@@ -128,6 +128,8 @@ class Home extends Component {
                         </tbody>
                     </table>
 
+                    <br/>
+
                     <Analysis />
 
                 </div>

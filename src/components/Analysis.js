@@ -10,14 +10,14 @@ class Analysis extends React.Component {
         this.state = {getState: 
             {
                 labels: [
-                  'Red',
-                  'Green',
-                  'Yellow'
+                  'First Aid Society',
+                  'IT Society',
+                  'Sport Club'
                 ],
                 datasets: [{
                   data: [this.getRandomInt(50, 200), this.getRandomInt(100, 150), this.getRandomInt(150, 250)],
                   backgroundColor: [
-                  '#CCC',
+                  '#FF6384',
                   '#36A2EB',
                   '#FFCE56'
                   ],
@@ -71,13 +71,13 @@ class Analysis extends React.Component {
           
         return (
             <div className="outerDiv">
-                <div style={{width:400, height: 350}}>
+                {/* <div style={{width:400, height: 350}}>
                     <h2>Line Example</h2>
                     <Line data={data} />
-                </div>
+                </div> */}
 
                 <div style={{width:400, height: 350}}>
-                    <h2>Dynamicly refreshed Doughnut Example</h2>
+                    <h2>Top 3 Famous Events</h2>
                     <Doughnut data={this.state.getState} />
                 </div>
           </div>
