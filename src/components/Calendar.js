@@ -53,6 +53,7 @@ class Calendar extends Component {
     return (
       <div style={{ height: 800 }}>
         <BigCalendar
+          popup
           selectable
           events={this.societies}
           views={{ month: true, week: true }}
