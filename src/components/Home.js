@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
+import Analysis from './Analysis';
 import Calendar from './Calendar';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -55,6 +56,8 @@ class Home extends Component {
         return (
             <div id="outerDiv"> 
                 <NavBar />
+
+                <Analysis />
 
                 <div style={{ margin: 20 }}>
                     <Breadcrumb>
