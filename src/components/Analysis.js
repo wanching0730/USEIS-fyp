@@ -1,6 +1,7 @@
 import React from 'react';
 import color from 'rcolor';
 import Graph from './Graph';
+import '../style/analysis.css';
 import { Line, Doughnut } from '../../node_modules/react-chartjs-2';
 
 class Analysis extends React.Component {
@@ -75,15 +76,15 @@ class Analysis extends React.Component {
 
           
         return (
-            <div>
-                <div style={{width:500, height: 450}}>
+            <div className="outerDiv">
+                <div style={{width:400, height: 350}}>
                     <h2>Line Example</h2>
-                    <Line data={data} width={100} height={50} />
+                    <Line data={data} />
                 </div>
 
-                <div style={{width:500, height: 450}}>
+                <div style={{width:400, height: 350}}>
                     <h2>Dynamicly refreshed Doughnut Example</h2>
-                    <Doughnut data={this.state.getState} width={100} height={50} />
+                    <Doughnut data={this.state.getState} />
                 </div>
           </div>
         );

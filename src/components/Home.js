@@ -57,8 +57,6 @@ class Home extends Component {
             <div id="outerDiv"> 
                 <NavBar />
 
-                <Analysis />
-
                 <div style={{ margin: 20 }}>
                     <Breadcrumb>
                         <BreadcrumbItem active>Home</BreadcrumbItem>
@@ -129,6 +127,8 @@ class Home extends Component {
                             </tr>
                         </tbody>
                     </table>
+
+                    <Analysis />
 
                 </div>
 

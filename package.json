@@ -8,7 +8,7 @@
     "@opuscapita/react-searchbar": "^1.0.4",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
-    "chart.js": "^2.7.2",
+    "chart.js": "^1.0.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "jqwidgets-framework": "^6.0.5",
