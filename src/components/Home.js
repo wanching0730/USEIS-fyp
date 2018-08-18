@@ -75,8 +75,8 @@ class Home extends Component {
                 </div>
 
                 <div className="pull-right col-md-4 col-lg-4 col-sm-4" id="col-3" style={{ marginTop: 20}}>
-                    <h4>Event Recommendations</h4>
-                    <table className="table table-hover table-light" border="1">
+                    {/* <h4>Event Recommendations</h4> */}
+                    {/* <table className="table table-hover table-light" border="1">
                         <thead>
                             <tr>
                                 <th>Events</th>
@@ -126,7 +126,7 @@ class Home extends Component {
                                 <td>Wushu Society</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> */}
 
                     <br/>
 
