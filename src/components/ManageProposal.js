@@ -82,6 +82,7 @@ class ManageProposal extends Component {
                                             <th>No.</th>
                                             <th>Societies</th>
                                             <th>Events</th>
+                                            <th>File</th>
                                             <th>Action</th>                 
                                         </tr>
                                     </thead>
@@ -91,24 +92,36 @@ class ManageProposal extends Component {
                                             <td>1</td>
                                             <td>Sport Club</td>
                                             <td>Sport Festival</td>
+                                            <td>
+                                                <RaisedButton label="Download" primary={false} style={RaisedButtonStyle} />
+                                            </td>
                                             <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
                                         </tr>
                                         <tr> 
                                             <td>2</td>
                                             <td>First Aid Club</td>
                                             <td>Blood Donation</td>
+                                            <td>
+                                                <RaisedButton label="Download" primary={false} style={RaisedButtonStyle} />
+                                            </td>
                                             <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
                                         </tr>
                                         <tr> 
                                             <td>3</td>
                                             <td>Music Club</td>
                                             <td>USTAR 8</td>
+                                            <td>
+                                                <RaisedButton label="Download" primary={false} style={RaisedButtonStyle} />
+                                            </td>
                                             <td><FontAwesome.FaCheck /></td>
                                         </tr>
                                         <tr> 
                                             <td>4</td>
                                             <td>EasyParcel Talk</td>
                                             <td>IT Society</td>
+                                            <td>
+                                                <RaisedButton label="Download" primary={false} style={RaisedButtonStyle} />
+                                            </td>
                                             <td><FontAwesome.FaCheck /></td>
                                         </tr>
                                         {/* {this.state.society.map(row => {
