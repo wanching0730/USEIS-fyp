@@ -1,23 +1,23 @@
 export default [
     {
       id: 0,
-      title: 'All Day Event very long title',
+      title: 'Cardio Night Run',
       allDay: true,
-      start: new Date(2015, 3, 0),
-      end: new Date(2015, 3, 1),
+      start: new Date(2018, 7, 22),
+      end: new Date(2018, 7, 22),
     },
     {
       id: 1,
-      title: 'Long Event',
-      start: new Date(2015, 3, 7),
-      end: new Date(2015, 3, 10),
+      title: 'USTAR8',
+      start: new Date(2018, 6, 31),
+      end: new Date(2018, 6, 31),
     },
   
     {
       id: 2,
-      title: 'DTS STARTS',
-      start: new Date(2016, 2, 13, 0, 0, 0),
-      end: new Date(2016, 2, 20, 0, 0, 0),
+      title: 'Blood Donation',
+      start: new Date(2018, 7, 13, 0, 0, 0),
+      end: new Date(2018, 7, 15, 0, 0, 0),
     },
   
     {

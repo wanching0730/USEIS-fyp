@@ -3,6 +3,7 @@ import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import {browserHistory} from 'react-router';
 import moment from 'moment';
+import events from './events';
 
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
@@ -55,7 +56,8 @@ class Calendar extends Component {
         <BigCalendar
           popup
           selectable
-          events={this.societies}
+         // events={this.societies}
+          events={events}
           views={{ month: true, week: true }}
           step={60}
           showMultiDayTimes
