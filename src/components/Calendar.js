@@ -51,7 +51,7 @@ class Calendar extends Component {
     ]
     
     return (
-      <div style={{ height: 800 }}>
+      <div style={{ height: 700 }}>
         <BigCalendar
           popup
           selectable

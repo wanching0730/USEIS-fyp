@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {browserHistory} from 'react-router';
 import { Doughnut, HorizontalBar } from '../../node_modules/react-chartjs-2';
 
 class Analysis extends Component {
@@ -6,13 +7,21 @@ class Analysis extends Component {
         super(props);
     }
 
+    clickEvent(event) {
+        browserHistory.push("/perEvent/1");
+    }
+
+    clickSociety(event) {
+        browserHistory.push("/perSociety/1");
+    }
+
     render() {
 
         const doughnutData = {
             labels: [
-                'First Aid Society',
-                'IT Society',
-                'Sport Club'
+                'Cardio Night Run',
+                'Blood Donation',
+                'Engineering Fiesta'
             ],
             datasets: [{
                 data: [200, 30, 50],
@@ -49,14 +58,14 @@ class Analysis extends Component {
             <div>
                 <div>
                     <h2>Top 3 Famous Events</h2>
-                    <Doughnut data={doughnutData} />
+                    <Doughnut data={doughnutData} onElementsClick={this.clickEvent} />
                 </div>
 
                 <br/>
 
                 <div>
                     <h2>Active Societies</h2>
-                    <HorizontalBar data={barData} />
+                    <HorizontalBar data={barData} onElementsClick={this.clickSociety} />
                 </div>
             </div>
         );
