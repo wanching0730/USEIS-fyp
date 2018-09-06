@@ -92,7 +92,9 @@ class NewsFeed extends Component {
                         >
 
                         <h2 ref={subtitle => this.subtitle = subtitle}>What's new?</h2>
-                        <form>
+                        <br/>
+                        <br/>
+                        <form style={{textAlign:"center"}}>
                             <label>Status</label>
                             <input onChange={this.updateInputValue} />
                             <br/>
