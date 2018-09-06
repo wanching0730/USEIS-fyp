@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
+import '../style/newsfeed.css';
 import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -83,7 +84,7 @@ class NewsFeed extends Component {
                         </Breadcrumb>
                     </div>
 
-                    <div style={{height: 80, width: 500}}>
+                    <div className="card">
                         <Card>
                             <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
                             <CardBody>
