@@ -6,12 +6,27 @@ import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import '../style/newsfeed.css';
 import {browserHistory} from 'react-router';
+import Modal from 'react-pop';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class NewsFeed extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = { isOpen: false };
+        this.closeModal = this.closeModal.bind(this);
+    }
+
+    toggleModal = event => {
+        console.log(event);
+        const { isOpen } = this.state;
+        this.setState({ isOpen: !isOpen });
+    }
+
+    closeModal(event) {
+        const { isOpen } = this.state;
+        this.setState({ isOpen: !isOpen });
     }
 
     handleSocieties(event) {
@@ -27,6 +42,8 @@ class NewsFeed extends Component {
     }
 
     render() {
+
+        const { isOpen } = this.state;
 
         const { RaisedButtonStyle } = styles;
         
@@ -49,6 +66,8 @@ class NewsFeed extends Component {
                         <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
                     </div>
 
+                  
+        
                     <div className="card">
 
                         <Card>
