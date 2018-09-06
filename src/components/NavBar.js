@@ -48,6 +48,9 @@ class NavBar extends Component {
                             <Link to="/">Home</Link>
                         </NavItem>
                         <NavItem>
+                            <Link to="/newsFeed">NewsFeed</Link>
+                        </NavItem>
+                        <NavItem>
                             <Link to="/society">Societies</Link>
                         </NavItem>
                         <NavItem>

@@ -3,6 +3,7 @@ import { Router, browserHistory, Route, Link } from 'react-router';
 import Register from '../src/components/Register';
 import Login from '../src/components/Login';
 import Home from '../src/components/Home';
+import NewsFeed from './components/NewsFeed';
 import Society from '../src/components/Society';
 import Event from '../src/components/Event';
 import PerEvent from '../src/components/PerEvent';
@@ -33,9 +34,10 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-
+      
         <Router history={browserHistory}>
           <Route path="/" component={Home}/>
+          <Route path="/newsFeed" component={NewsFeed}/>
           <Route path="/society" component={Society}/>
           <Route path="/event" component={Event}/>
           <Route path="/login" component={Login}/>
