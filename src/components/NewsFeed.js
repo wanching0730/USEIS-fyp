@@ -14,11 +14,11 @@ class NewsFeed extends Component {
         super(props);
     }
 
-    handleSocieties() {
+    handleSocieties(event) {
         console.log("click society");
     }
 
-    handleEvents() {
+    handleEvents(event) {
         console.log("click event");
     }
 
@@ -50,15 +50,27 @@ class NewsFeed extends Component {
                     </div>
 
                     <div className="card">
+
                         <Card>
-                            <CardImg top width="40px" height="300px" src={ require('../assets/images/its.jpg') } alt="Card image cap" />
+                            <img className="image" src={ require('../assets/images/its.jpg') } />
                             <CardBody>
                             <CardTitle>Card title</CardTitle>
                             <CardSubtitle>Card subtitle</CardSubtitle>
                             <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                            <Button>Button</Button>
+                            <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push("/myEvents")}/>
                             </CardBody>
                         </Card>
+    
+                         <Card>
+                            <img className="image" src={ require('../assets/images/its.jpg') } />
+                            <CardBody>
+                            <CardTitle>Card title</CardTitle>
+                            <CardSubtitle>Card subtitle</CardSubtitle>
+                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                            <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push("/myEvents")}/>
+                            </CardBody>
+                        </Card>
+
                     </div>
                     
                 </div>
