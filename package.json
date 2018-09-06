@@ -40,7 +40,7 @@
     "react-table-view": "^1.0.0",
     "react-tap-event-plugin": "^3.0.3",
     "react-toggle-button": "^2.2.0",
-    "reactjs-popup": "^1.1.1",
+    "reactjs-popup": "^1.2.0",
     "reactstrap": "^5.0.0-alpha.4"
   },
   "scripts": {

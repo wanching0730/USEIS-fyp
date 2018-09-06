@@ -6,7 +6,7 @@ import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import '../style/newsfeed.css';
 import {browserHistory} from 'react-router';
-import Modal from 'react-pop';
+import Modal from 'react-modal';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class NewsFeed extends Component {
@@ -14,20 +14,27 @@ class NewsFeed extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { isOpen: false };
-        this.closeModal = this.closeModal.bind(this);
+        this.state = {
+            modalIsOpen: false
+          };
+      
+          this.openModal = this.openModal.bind(this);
+          this.afterOpenModal = this.afterOpenModal.bind(this);
+          this.closeModal = this.closeModal.bind(this);
     }
 
-    toggleModal = event => {
-        console.log(event);
-        const { isOpen } = this.state;
-        this.setState({ isOpen: !isOpen });
-    }
-
-    closeModal(event) {
-        const { isOpen } = this.state;
-        this.setState({ isOpen: !isOpen });
-    }
+    openModal() {
+        this.setState({modalIsOpen: true});
+      }
+    
+      afterOpenModal() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#f00';
+      }
+    
+      closeModal() {
+        this.setState({modalIsOpen: false});
+      }
 
     handleSocieties(event) {
         console.log("click society");
@@ -43,9 +50,7 @@ class NewsFeed extends Component {
 
     render() {
 
-        const { isOpen } = this.state;
-
-        const { RaisedButtonStyle } = styles;
+        const { RaisedButtonStyle, content } = styles;
         
         return (
             
@@ -66,7 +71,26 @@ class NewsFeed extends Component {
                         <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
                     </div>
 
-                  
+                    <button onClick={this.openModal}>Open Modal</button>
+                    <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onAfterOpen={this.afterOpenModal}
+                    onRequestClose={this.closeModal}
+                    style={content}
+                    contentLabel="Example Modal"
+                    >
+
+                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+                    <button onClick={this.closeModal}>close</button>
+                    <div>I am a modal</div>
+                    <form>
+                        <input />
+                        <button>tab navigation</button>
+                        <button>stays</button>
+                        <button>inside</button>
+                        <button>the modal</button>
+                    </form>
+                    </Modal>
         
                     <div className="card">
 
@@ -104,6 +128,14 @@ const styles = {
     RaisedButtonStyle: {
         margin: 15
     },
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+      }
 }
 
 export default NewsFeed;
