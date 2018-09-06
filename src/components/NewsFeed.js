@@ -15,26 +15,34 @@ class NewsFeed extends Component {
         super(props);
 
         this.state = {
-            modalIsOpen: false
-          };
-      
-          this.openModal = this.openModal.bind(this);
-          this.afterOpenModal = this.afterOpenModal.bind(this);
-          this.closeModal = this.closeModal.bind(this);
+            modalIsOpen: false,
+            inputValue: ""
+        };
+    
+        this.openModal = this.openModal.bind(this);
+        //this.afterOpenModal = this.afterOpenModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.updateInputValue = this.updateInputValue.bind(this);
     }
 
     openModal() {
         this.setState({modalIsOpen: true});
-      }
-    
-      afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        this.subtitle.style.color = '#f00';
-      }
-    
-      closeModal() {
+    }
+
+    // afterOpenModal() {
+    //     this.subtitle.style.color = '#f00';
+    // }
+
+    closeModal() {
         this.setState({modalIsOpen: false});
-      }
+        console.log("value:" + this.state.inputValue);
+    }
+
+    updateInputValue(event) {
+        this.setState({
+          inputValue: event.target.value
+        });
+    }
 
     handleSocieties(event) {
         console.log("click society");
@@ -70,26 +78,27 @@ class NewsFeed extends Component {
                         <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSocieties(event)}/>
                         <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
                     </div>
-
-                    <button onClick={this.openModal}>Open Modal</button>
+                    
+                    <div style= {{ textAlign: "left" }}>
+                        <RaisedButton label="Create New" primary={false} style={RaisedButtonStyle} onClick={(event) => this.openModal()}/>
+                    </div>
                     <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={content}
-                    contentLabel="Example Modal"
-                    >
+                        isOpen={this.state.modalIsOpen}
+                        ariaHideApp={false}
+                        //onAfterOpen={this.afterOpenModal}
+                        onRequestClose={this.closeModal}
+                        style={content}
+                        contentLabel="Example Modal"
+                        >
 
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
-                    <button onClick={this.closeModal}>close</button>
-                    <div>I am a modal</div>
-                    <form>
-                        <input />
-                        <button>tab navigation</button>
-                        <button>stays</button>
-                        <button>inside</button>
-                        <button>the modal</button>
-                    </form>
+                        <h2 ref={subtitle => this.subtitle = subtitle}>What's new?</h2>
+                        <form>
+                            <label>Status</label>
+                            <input onChange={this.updateInputValue} />
+                            <br/>
+                            <RaisedButton label="Save" primary={true} style={RaisedButtonStyle} onClick={(event) => this.closeModal()}/>
+                        </form>
+                    
                     </Modal>
         
                     <div className="card">
@@ -129,12 +138,12 @@ const styles = {
         margin: 15
     },
     content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)'
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
       }
 }
 
