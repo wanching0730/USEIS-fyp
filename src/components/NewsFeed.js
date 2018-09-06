@@ -14,11 +14,21 @@ class NewsFeed extends Component {
         super(props);
     }
 
+    handleSocieties() {
+        console.log("click society");
+    }
+
+    handleEvents() {
+        console.log("click event");
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0);
     }
 
     render() {
+
+        const { RaisedButtonStyle } = styles;
         
         return (
             
@@ -32,6 +42,11 @@ class NewsFeed extends Component {
                             <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
                             <BreadcrumbItem active>NewsFeed</BreadcrumbItem>
                         </Breadcrumb>
+                    </div>
+
+                     <div style= {{ textAlign: "center" }}>
+                        <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSocieties(event)}/>
+                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
                     </div>
 
                     <div className="card">
@@ -53,5 +68,11 @@ class NewsFeed extends Component {
     };
     
 };
+
+const styles = {
+    RaisedButtonStyle: {
+        margin: 15
+    },
+}
 
 export default NewsFeed;
