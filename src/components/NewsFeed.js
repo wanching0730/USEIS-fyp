@@ -3,9 +3,8 @@ import NavBar from './NavBar';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import Card from './Card';
-import Title from './Title';
-import '../style/newsfeed.scss';
+import { Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button } from 'reactstrap';
 import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -84,15 +83,18 @@ class NewsFeed extends Component {
                         </Breadcrumb>
                     </div>
 
-                    <Title />
-                    <div className="app-card-list">
-                        {
-                        Object
-                        .keys(this.state.posts)
-                        .map(key => <Card key={key} index={key} details={this.state.posts[key]}/>)
-                        }
+                    <div style={{height: 80, width: 500}}>
+                        <Card>
+                            <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                            <CardBody>
+                            <CardTitle>Card title</CardTitle>
+                            <CardSubtitle>Card subtitle</CardSubtitle>
+                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                            <Button>Button</Button>
+                            </CardBody>
+                        </Card>
                     </div>
-
+                    
                 </div>
                 </MuiThemeProvider>
             </div>
