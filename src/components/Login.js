@@ -13,12 +13,27 @@ class Login extends Component {
   constructor(props){
     super(props);
     this.state={
-    username:'',
+    name:'',
     password:''
     }
    }
 
+  verify_user() {
+    const data = Object.keys(this.state).map((key) => {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
+    }).join('&');
+
+    fetch(`http://localhost:5000/api/get_token`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: data
+    }).then(result => result.json()).then(reply => console.log("token: " + reply));
+  }
+
   handleClick(event) {
+    this.verify_user();
     browserHistory.push("/student");
   }
 
@@ -52,14 +67,14 @@ class Login extends Component {
                       <TextField
                         hintText="Enter your Username"
                         floatingLabelText="Username"
-                        onChange = {(event,newValue) => this.setState({username:newValue})}
+                        onChange = {(event) => this.setState({name:event.target.value})}
                         />
                       <br/>
                       <TextField
                         type="password"
                         hintText="Enter your Password"
                         floatingLabelText="Password"
-                        onChange = {(event,newValue) => this.setState({password:newValue})}
+                        onChange = {(event) => this.setState({password:event.target.value})}
                         />
                       <br/>
                       <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
