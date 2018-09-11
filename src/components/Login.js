@@ -9,7 +9,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateUser, loginUser } from '../actions/auth-action';
+import { loginUser } from '../actions/auth-action';
 
 import '../style/form.css';
 
@@ -22,13 +22,7 @@ class Login extends Component {
       password:''
     }
 
-    this.onUpdateUser = this.onUpdateUser.bind(this);
     this.onLoginUser = this.onLoginUser.bind(this);
-  }
-
-  onUpdateUser(event) {
-    this.props.onUpdateUser(event.target.value);
-    console.log("props: " + JSON.stringify(this.props));
   }
 
   onLoginUser(event) {
@@ -37,36 +31,12 @@ class Login extends Component {
     this.props.onLoginUser(data);
   }
 
-  // verify_user() {
-  //   const data = Object.keys(this.state).map((key) => {
-  //     return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
-  //   }).join('&');
-
-  //   fetch(`http://localhost:5000/api/login_user`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/x-www-form-urlencoded'
-  //     },
-  //     body: data
-  //   }).then(result => result.json()).then(reply => {
-  //     localStorage.setItem('token', reply["token"]);
-  //     console.log("token: " + reply["token"]);
-  //     console.log("user position: " + reply["user"][3]);
-  //     console.log("token in local storage: " + localStorage.getItem('token'));
-  //   });
-  // }
-
-  // handleClick(event) {
-  //   this.verify_user();
-  //   browserHistory.push("/student");
-  // }
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
-    console.log("props: " + JSON.stringify(this.props.username));
+    console.log("props: " + this.props.userPosition);
     
     const { RaisedButtonStyle } = styles;
 
@@ -83,13 +53,10 @@ class Login extends Component {
               </Breadcrumb>
             </div>
 
-            <input onChange={this.onUpdateUser} />
-            <div>{this.props.username}</div>
-
             <div className="container">
               <div className="row">
                 <div className="col-md-6 col-md-offset-3">
-                  <div class="form-style-8">
+                  <div className="form-style-8">
                     <h2>Login to your account</h2>
                     <form>
                       <TextField
@@ -126,8 +93,6 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  
-  //console.log("state username: " + JSON.stringify(state));
 
   return {
     username: state["auth"]["userName"],
@@ -138,7 +103,6 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    onUpdateUser: updateUser,
     onLoginUser: loginUser
   }, dispatch);
 };

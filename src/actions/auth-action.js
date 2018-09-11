@@ -8,15 +8,6 @@ import {
     LOGOUT_USER,
 } from '../constant';
 
-export function updateUser(newUser) {
-    return {
-        type: LOGIN_USER_REQUEST,
-        payload: {
-            user: newUser
-        }
-    }
-}
-
 export function loginUserSuccessful(user, token) {
     localStorage.setItem('token', token);
     return {
@@ -31,8 +22,8 @@ export function loginUserSuccessful(user, token) {
 
 export function loginUser(postData) {
     return function (dispatch) {
-        const data = Object.keys(this.postData).map((key) => {
-            return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
+        const data = Object.keys(postData).map((key) => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
         }).join('&');
     
         return verifyUser(data).then(result => result.json()).then(reply => {
