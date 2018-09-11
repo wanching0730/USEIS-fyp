@@ -29,7 +29,11 @@ class Login extends Component {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: data
-    }).then(result => result.json()).then(reply => console.log("token: " + reply));
+    }).then(result => result.json()).then(reply => {
+      localStorage.setItem('token', token);
+      console.log("token: " + reply);
+      console.log("token in local storage: " + localStorage.getItem('token'));
+    });
   }
 
   handleClick(event) {
