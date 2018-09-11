@@ -118,9 +118,11 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log("state username: " + state.userName);
+  
+  //console.log("state username: " + JSON.stringify(state));
+
   return {
-    username: state.userName
+    username: state["auth"]["userName"]
   };
 };
 
