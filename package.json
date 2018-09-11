@@ -43,6 +43,7 @@
     "react-toggle-button": "^2.2.0",
     "reactjs-popup": "^1.2.0",
     "reactstrap": "^5.0.0-alpha.4",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
