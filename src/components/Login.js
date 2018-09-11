@@ -30,7 +30,7 @@ class Login extends Component {
       },
       body: data
     }).then(result => result.json()).then(reply => {
-      localStorage.setItem('token', token);
+      //localStorage.setItem('token', token);
       console.log("token: " + reply);
       console.log("token in local storage: " + localStorage.getItem('token'));
     });

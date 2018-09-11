@@ -8,5 +8,15 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import 'font-awesome/css/font-awesome.min.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import allReducers from './reducers';
+
+const store = createStore(
+    allReducers, 
+    window.devToolsExtension && window.devToolsExtension()
+);
+
+ReactDOM.render(<Provider store={store}><App /></Provider>,
+     document.getElementById('root'));
 registerServiceWorker();
