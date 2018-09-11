@@ -17,6 +17,8 @@ const store = createStore(
     window.devToolsExtension && window.devToolsExtension()
 );
 
+console.log("State in store: " + JSON.stringify(store.getState()));
+
 ReactDOM.render(<Provider store={store}><App /></Provider>,
      document.getElementById('root'));
 registerServiceWorker();

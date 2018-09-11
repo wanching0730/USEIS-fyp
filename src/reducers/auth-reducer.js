@@ -16,7 +16,9 @@ const initialState = {
 export default function authReducer(state = initialState, { type, payload }) {
     switch(type) {
         case LOGIN_USER_SUCCESS:
-            return payload.user;
+            return Object.assign({}, state, {
+                userName: payload.user
+            });
         default: 
         // return initial state
             return state;

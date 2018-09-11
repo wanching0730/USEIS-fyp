@@ -6,6 +6,11 @@ import TextField from 'material-ui/TextField';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { updateUser } from '../actions/auth-action';
+
 import '../style/form.css';
 
 class Login extends Component {
@@ -16,7 +21,14 @@ class Login extends Component {
     name:'',
     password:''
     }
-   }
+
+    this.onUpdateUser = this.onUpdateUser.bind(this);
+  }
+
+  onUpdateUser(event) {
+    this.props.onUpdateUser(event.target.value);
+    console.log("props: " + JSON.stringify(this.props));
+  }
 
   verify_user() {
     const data = Object.keys(this.state).map((key) => {
@@ -46,6 +58,7 @@ class Login extends Component {
   }
 
   render() {
+    console.log("props: " + JSON.stringify(this.props.username));
     
     const { RaisedButtonStyle } = styles;
 
@@ -61,6 +74,9 @@ class Login extends Component {
                 <BreadcrumbItem active>Login</BreadcrumbItem>
               </Breadcrumb>
             </div>
+
+            <input onChange={this.onUpdateUser} />
+            <div>{this.props.username}</div>
 
             <div className="container">
               <div className="row">
@@ -101,4 +117,17 @@ const styles = {
     }
 };
 
-export default Login;
+const mapStateToProps = (state, props) => {
+  console.log("state username: " + state.userName);
+  return {
+    username: state.userName
+  };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    onUpdateUser: updateUser
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Login);
