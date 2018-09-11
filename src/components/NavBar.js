@@ -3,11 +3,13 @@ import {browserHistory} from 'react-router';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav,  NavItem, UncontrolledDropdown, 
     DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import '../style/navbar.css';
 
 class NavBar extends Component {
     constructor(props) {
         super(props);
+
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false
@@ -17,13 +19,15 @@ class NavBar extends Component {
     }
 
     onClick(event) {
-        if(event.target.name == "createProfile") {
+        let clickedTab = event.target.name;
+
+        if(clickedTab == "createProfile") {
             browserHistory.push("/createProfile");
-        } else if(event.target.name == "faq") {
+        } else if(clickedTab == "faq") {
             browserHistory.push("/faq");
-        } else if(event.target.name == "manageBooth") {
+        } else if(clickedTab == "manageBooth") {
             browserHistory.push("/manageBooth");
-        } else if(event.target.name == "submitProposal") {
+        } else if(clickedTab == "submitProposal") {
             browserHistory.push("/submitProposal");
         } else {
             browserHistory.push("/manageProposal");
@@ -37,6 +41,47 @@ class NavBar extends Component {
     }
 
     render() {
+
+        let position = this.props.userPosition;
+        var dropDownItem;
+
+        if(position == "committee") {
+            dropDownItem = 
+            <DropdownMenu left>
+                <DropdownItem name="createProfile" onClick={this.onClick}>
+                    Create Society Profile
+                </DropdownItem>
+                <DropdownItem name="submitProposal" onClick={this.onClick}>
+                    Submit Proposal
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem name="faq" onClick={this.onClick}>
+                    FAQ
+                </DropdownItem>
+            </DropdownMenu>
+        } else if(position == "staff") {
+            dropDownItem = 
+            <DropdownMenu left>
+                <DropdownItem name="manageBooth" onClick={this.onClick}>
+                    Manage Booth
+                </DropdownItem>
+                <DropdownItem name="manageProposal" onClick={this.onClick}>
+                    Manage Proposal
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem name="faq" onClick={this.onClick}>
+                    FAQ
+                </DropdownItem>
+            </DropdownMenu>
+        } else {
+            dropDownItem = 
+            <DropdownMenu left>
+                <DropdownItem name="faq" onClick={this.onClick}>
+                    FAQ
+                </DropdownItem>
+            </DropdownMenu>
+        }
+
         return (
             <div>
                 <Navbar className="topnav" dark expand="md">
@@ -66,24 +111,7 @@ class NavBar extends Component {
                             <DropdownToggle nav caret>
                                 Manage
                             </DropdownToggle>
-                                <DropdownMenu left>
-                                    <DropdownItem name="createProfile" onClick={this.onClick}>
-                                        Create Society Profile
-                                    </DropdownItem>
-                                    <DropdownItem name="submitProposal" onClick={this.onClick}>
-                                        Submit Proposal
-                                    </DropdownItem>
-                                    <DropdownItem name="manageBooth" onClick={this.onClick}>
-                                        Manage Booth
-                                    </DropdownItem>
-                                    <DropdownItem name="manageProposal" onClick={this.onClick}>
-                                        Manage Proposal
-                                    </DropdownItem>
-                                    <DropdownItem divider />
-                                    <DropdownItem name="faq" onClick={this.onClick}>
-                                        FAQ
-                                    </DropdownItem>
-                                </DropdownMenu>
+                            {dropDownItem}
                         </UncontrolledDropdown>
                     </Nav>
                     <Nav className="ml-auto" navbar>
@@ -98,4 +126,11 @@ class NavBar extends Component {
     }
 }
 
-export default  NavBar;
+const mapStateToProps = (state, props) => {
+    return {
+      username: state["auth"]["userName"],
+      userPosition: state["auth"]["userPosition"]
+    };
+  };
+
+export default connect(mapStateToProps)(NavBar);

@@ -93,7 +93,6 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-
   return {
     username: state["auth"]["userName"],
     userPosition: state["auth"]["userPosition"],
