@@ -163,114 +163,114 @@ class Faq extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div class="cd-faq">
-                <ul class="cd-faq-categories">
-                    <li><a class="selected" href="#basics">Basics</a></li>
+                <div className="cd-faq">
+                <ul className="cd-faq-categories">
+                    <li><a className="selected" href="#basics">Basics</a></li>
                     <li><a href="#mobile">Society</a></li>
                     <li><a href="#account">Event</a></li>
                     <li><a href="#payments">Profile</a></li>
                     <li><a href="#privacy">Authorization</a></li>
                 </ul> 
             
-                <div class="cd-faq-items">
-                    <ul id="basics" class="cd-faq-group">
-                        <li class="cd-faq-title"><h2>Basics</h2></li>
+                <div className="cd-faq-items">
+                    <ul id="basics" className="cd-faq-group">
+                        <li className="cd-faq-title"><h2>Basics</h2></li>
                         <li>
-                            <a class="cd-faq-trigger" href="#0">What is my username and password</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">What is my username and password</a>
+                            <div className="cd-faq-content">
                                 <p>The username and password are following the UTAR Portal authentication.</p>
                             </div> 
                         </li>
             
                         <li>
-                            <a class="cd-faq-trigger" href="#0">How do I register?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">How do I register?</a>
+                            <div className="cd-faq-content">
                                 <p>There is no registration. The account should be created at the beginning by the department. </p>
                             </div> 
                         </li>
             
                         <li>
-                            <a class="cd-faq-trigger" href="#0">How do I make payment for society and event registration?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">How do I make payment for society and event registration?</a>
+                            <div className="cd-faq-content">
                                 <p>Payment is excluded from this system. Please contact the respective person in charged to make payment.</p>
                             </div> 
                         </li>
         
                     </ul> 
             
-                    <ul id="mobile" class="cd-faq-group">
-                        <li class="cd-faq-title"><h2>Society</h2></li>
+                    <ul id="mobile" className="cd-faq-group">
+                        <li className="cd-faq-title"><h2>Society</h2></li>
                         <li>
-                            <a class="cd-faq-trigger" href="#0">Can I receive notification from registered society?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">Can I receive notification from registered society?</a>
+                            <div className="cd-faq-content">
                                 <p>Yes, you can allow the notification during the society registration.</p>
                             </div> 
                         </li>
             
                         <li>
-                            <a class="cd-faq-trigger" href="#0">Can I register as a society member of any interested society?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">Can I register as a society member of any interested society?</a>
+                            <div className="cd-faq-content">
                                 <p>Yes, you can register as society member in this system and wait for the people in-charged to approve your registration. But payment is excluded in this sytem.</p>
                             </div> 
                         </li>
             
                     </ul> 
             
-                    <ul id="account" class="cd-faq-group">
-                        <li class="cd-faq-title"><h2>Event</h2></li>
+                    <ul id="account" className="cd-faq-group">
+                        <li className="cd-faq-title"><h2>Event</h2></li>
                         <li>
-                            <a class="cd-faq-trigger" href="#0">Can I receive notification from registered event?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">Can I receive notification from registered event?</a>
+                            <div className="cd-faq-content">
                                 <p>Yes, you can allow the notification during event registration. The notification will be sent to you as a reminder before the actual day of the event.</p>
                             </div> 
                         </li>
             
                         <li>
-                            <a class="cd-faq-trigger" href="#0">Can I register as an event crew of any interested event?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">Can I register as an event crew of any interested event?</a>
+                            <div className="cd-faq-content">
                                 <p>Yes, you can register as an event crew in this system and wait for the people in-charged to approve your registration. But payment is excluded in this sytem.</p>
                             </div> 
                         </li>
 
                         <li>
-                            <a class="cd-faq-trigger" href="#0">Can I provide rating for the events that I had participated?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">Can I provide rating for the events that I had participated?</a>
+                            <div className="cd-faq-content">
                                 <p>Yes, you can rate for any event that you had participated before from your profile.</p>
                             </div> 
                         </li>
             
                     </ul> 
             
-                    <ul id="payments" class="cd-faq-group">
-                        <li class="cd-faq-title"><h2>My Profile</h2></li>
+                    <ul id="payments" className="cd-faq-group">
+                        <li className="cd-faq-title"><h2>My Profile</h2></li>
                         <li>
-                            <a class="cd-faq-trigger" href="#0">Can I cancel the registration that I had made before?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">Can I cancel the registration that I had made before?</a>
+                            <div className="cd-faq-content">
                                 <p>Yes, you can cancel the registration that you have made before such as event and crew registration from your profile.</p>
                             </div> 
                         </li>
             
                         <li>
-                            <a class="cd-faq-trigger" href="#0">As a executive committee of a society, can I manage my own society in this system?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">As a executive committee of a society, can I manage my own society in this system?</a>
+                            <div className="cd-faq-content">
                                 <p>Yes, you can manage your own profile if the authorization is given to you based on your position. You can manage your the profile, members, events and event crews of your society.</p>
                             </div> 
                         </li>
         
                     </ul> 
             
-                    <ul id="privacy" class="cd-faq-group">
-                        <li class="cd-faq-title"><h2>Authorization</h2></li>
+                    <ul id="privacy" className="cd-faq-group">
+                        <li className="cd-faq-title"><h2>Authorization</h2></li>
                         <li>
-                            <a class="cd-faq-trigger" href="#0">What kind of authorization is allowed in managing the society?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">What kind of authorization is allowed in managing the society?</a>
+                            <div className="cd-faq-content">
                                 <p>Only specific position of society committees is allowed to manage the society. For example, Chairperson, Secretary and Publicity Manager are allowed to manage the respective societies in this system to ensure the security. </p>
                             </div> 
                         </li>
             
                         <li>
-                            <a class="cd-faq-trigger" href="#0">Can I change the username of my account in this system?</a>
-                            <div class="cd-faq-content">
+                            <a className="cd-faq-trigger" href="#0">Can I change the username of my account in this system?</a>
+                            <div className="cd-faq-content">
                                 <p>No, you are not allowed to do this. Because the account is linked with UTAR authentiction. Hence, only student ID is allowed to be used as the login username in this system.</p>
                             </div> 
                         </li>
@@ -278,12 +278,11 @@ class Faq extends Component {
                     </ul> 
             
                 </div> 
-                <a href="#0" class="cd-close-panel">Close</a>
+                <a href="#0" className="cd-close-panel">Close</a>
             </div> 
         </div>
                 
-        );
-           
+        );    
     }
 }
 
