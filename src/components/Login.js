@@ -35,7 +35,7 @@ class Login extends Component {
       return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
     }).join('&');
 
-    fetch(`http://localhost:5000/api/get_token`, {
+    fetch(`http://localhost:5000/api/login_user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -43,7 +43,8 @@ class Login extends Component {
       body: data
     }).then(result => result.json()).then(reply => {
       //localStorage.setItem('token', token);
-      console.log("token: " + reply);
+      console.log("token: " + reply["token"]);
+      console.log("user: " + reply["user"][3]);
       console.log("token in local storage: " + localStorage.getItem('token'));
     });
   }
