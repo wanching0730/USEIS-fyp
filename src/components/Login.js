@@ -3,13 +3,13 @@ import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import {browserHistory} from 'react-router';
+// import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateUser } from '../actions/auth-action';
+import { updateUser, loginUser } from '../actions/auth-action';
 
 import '../style/form.css';
 
@@ -18,11 +18,12 @@ class Login extends Component {
   constructor(props){
     super(props);
     this.state={
-    name:'',
-    password:''
+      name:'',
+      password:''
     }
 
     this.onUpdateUser = this.onUpdateUser.bind(this);
+    this.onLoginUser = this.onLoginUser.bind(this);
   }
 
   onUpdateUser(event) {
@@ -30,29 +31,35 @@ class Login extends Component {
     console.log("props: " + JSON.stringify(this.props));
   }
 
-  verify_user() {
-    const data = Object.keys(this.state).map((key) => {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
-    }).join('&');
-
-    fetch(`http://localhost:5000/api/login_user`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: data
-    }).then(result => result.json()).then(reply => {
-      //localStorage.setItem('token', token);
-      console.log("token: " + reply["token"]);
-      console.log("user: " + reply["user"][3]);
-      console.log("token in local storage: " + localStorage.getItem('token'));
-    });
+  onLoginUser(event) {
+    let data = this.state;
+    console.log("data content: " + JSON.stringify(data));
+    this.props.onLoginUser(data);
   }
 
-  handleClick(event) {
-    this.verify_user();
-    browserHistory.push("/student");
-  }
+  // verify_user() {
+  //   const data = Object.keys(this.state).map((key) => {
+  //     return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
+  //   }).join('&');
+
+  //   fetch(`http://localhost:5000/api/login_user`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded'
+  //     },
+  //     body: data
+  //   }).then(result => result.json()).then(reply => {
+  //     localStorage.setItem('token', reply["token"]);
+  //     console.log("token: " + reply["token"]);
+  //     console.log("user position: " + reply["user"][3]);
+  //     console.log("token in local storage: " + localStorage.getItem('token'));
+  //   });
+  // }
+
+  // handleClick(event) {
+  //   this.verify_user();
+  //   browserHistory.push("/student");
+  // }
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -98,7 +105,7 @@ class Login extends Component {
                         onChange = {(event) => this.setState({password:event.target.value})}
                         />
                       <br/>
-                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.onLoginUser(event)}/>
                     </form>
                   </div>
                 </div>
@@ -123,13 +130,16 @@ const mapStateToProps = (state, props) => {
   //console.log("state username: " + JSON.stringify(state));
 
   return {
-    username: state["auth"]["userName"]
+    username: state["auth"]["userName"],
+    userPosition: state["auth"]["userPosition"],
+    token: state["auth"]["token"]
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    onUpdateUser: updateUser
+    onUpdateUser: updateUser,
+    onLoginUser: loginUser
   }, dispatch);
 };
 
