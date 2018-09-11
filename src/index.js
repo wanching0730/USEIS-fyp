@@ -11,14 +11,21 @@ import 'font-awesome/css/font-awesome.min.css';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import allReducers from './reducers';
+import configureStore from './store/configureStore';
 
-const store = createStore(
-    allReducers, 
-    window.devToolsExtension && window.devToolsExtension()
-);
+// const store = createStore(
+//     allReducers, 
+//     window.devToolsExtension && window.devToolsExtension()
+// );
+
+const store = configureStore();
 
 console.log("State in store: " + JSON.stringify(store.getState()));
 
-ReactDOM.render(<Provider store={store}><App /></Provider>,
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
      document.getElementById('root'));
+     
 registerServiceWorker();
