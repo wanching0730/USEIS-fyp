@@ -48,6 +48,9 @@ export function loginUser(postData) {
             console.log("token: " + reply["token"]);
             console.log("user position: " + reply["user"][3]);
             console.log("token in local storage: " + localStorage.getItem('token'));
+        })
+        .catch(error => {
+            alert("Invalid user name and password!");
         });
     }
 }
