@@ -85,7 +85,7 @@ class RegisterCrew extends Component {
 
             <div style={{ margin: 20 }}>
               <Breadcrumb>
-                <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
+                <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                 <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
                 <BreadcrumbItem><Link to={`/perEvent/1`}>Cardio Night Run</Link></BreadcrumbItem>
                 <BreadcrumbItem active>Crew Registration</BreadcrumbItem>

@@ -92,16 +92,16 @@ class NavBar extends Component {
 
         return (
             <div>
-                    {
-                        this.props.isAuthenticated ?
-                    
-                        <Navbar className="topnav" dark expand="md">
-                    <NavbarBrand href="/"><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
+                {
+                    this.props.isAuthenticated ?
+                
+                    <Navbar className="topnav" dark expand="md">
+                    <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <NavItem>
-                                <Link to="/">Home</Link>
+                                <Link to="/home">Home</Link>
                             </NavItem>
                             <NavItem>
                                 <Link to="/newsFeed">NewsFeed</Link>
@@ -137,24 +137,22 @@ class NavBar extends Component {
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>
-                        </Collapse>
-                </Navbar>
-                        
-                        :
-                        <Navbar className="topnav" dark expand="md">
-                    <NavbarBrand href="/"><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
+                    </Collapse>
+                    </Navbar>
+                    
+                    :
+                    <Navbar className="topnav" dark expand="md">
+                    <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <Link to="/login">Login</Link>
-                                </NavItem>
-                            </Nav>
-                            </Collapse>
-                </Navbar>
-                        
-                    }
-                   
+                    {/* <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <Link to="/login">Login</Link>
+                            </NavItem>
+                        </Nav>
+                    </Collapse> */}
+                    </Navbar>  
+                }     
             </div>
         );
     }

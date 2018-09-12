@@ -36,12 +36,12 @@ class App extends Component {
     return (
       
         <Router history={browserHistory}>
-          <Route path="/" component={Home}/>
+          <Route path="/" component={Login}/>
+          <Route path="/home" component={Home}/>
           <Route path="/newsFeed" component={NewsFeed}/>
           <Route path="/society" component={Society}/>
           <Route path="/event" component={Event}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/register" component={Register}/>
+          {/* <Route path="/register" component={Register}/> */}
           <Route path="/perSociety/:societyId" component={PerSociety}/>
           <Route path="/perEvent/:eventId" component={PerEvent}/>
           <Route path="/student" component={Student}/>

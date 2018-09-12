@@ -65,7 +65,7 @@ class ManageBooth extends Component {
 
                 <div style={{ margin: 20 }}>
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Manage Booth</BreadcrumbItem>
                     </Breadcrumb>
                 </div>

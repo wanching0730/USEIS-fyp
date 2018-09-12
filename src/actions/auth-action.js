@@ -30,7 +30,7 @@ export function logout() {
 export function logoutAndRedirect() {
     return (dispatch) => {
         dispatch(logout());
-        browserHistory.push('/login');
+        browserHistory.push('/');
     };
 }
 

@@ -45,13 +45,6 @@ class Login extends Component {
           <div>
             <NavBar />
 
-            <div style={{ margin: 20 }}>
-              <Breadcrumb>
-              <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
-                <BreadcrumbItem active>Login</BreadcrumbItem>
-              </Breadcrumb>
-            </div>
-
             <div className="container">
               <div className="row">
                 <div className="col-md-6 col-md-offset-3">

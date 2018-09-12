@@ -35,7 +35,7 @@ class ManageParticipant extends Component {
 
                 <div style={{ margin: 20 }}>
                     <Breadcrumb>
-                        <BreadcrumbItem><Link to={`/`}>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/society`}>Events</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/perSociety/1`}>Cardio Night Run</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Manage Participants</BreadcrumbItem>
