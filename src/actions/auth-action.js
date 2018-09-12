@@ -15,7 +15,8 @@ export function loginUserSuccessful(user, token) {
         payload: {
             userName: user[1],
             userPosition: user[3],
-            token: token
+            token: token,
+            isAuthenticated: true
         }
     }
 }

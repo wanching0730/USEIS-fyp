@@ -20,7 +20,8 @@ export default function authReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 userName: payload.userName,
                 userPosition: payload.userPosition,
-                token: payload.token
+                token: payload.token,
+                isAuthenticated: payload.isAuthenticated
             });
         default: 
         // return initial state

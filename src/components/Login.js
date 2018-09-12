@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-// import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
@@ -37,6 +36,7 @@ class Login extends Component {
 
   render() {
     console.log("props: " + this.props.userPosition);
+    console.log("authenticated: " + this.props.isAuthenticated);
     
     const { RaisedButtonStyle } = styles;
 
@@ -93,10 +93,12 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
+  console.log(JSON.stringify(state));
   return {
-    username: state["auth"]["userName"],
-    userPosition: state["auth"]["userPosition"],
-    token: state["auth"]["token"]
+    username: state.auth.username,
+    userPosition: state.auth.userPosition,
+    token: state.auth.token,
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 
