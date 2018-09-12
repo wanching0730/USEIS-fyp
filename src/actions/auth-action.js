@@ -1,5 +1,6 @@
 import {browserHistory} from 'react-router';
 import { verifyUser } from '../utils/http_function';
+import { confirmAlert } from 'react-confirm-alert';
 
 import {
     LOGIN_USER_SUCCESS,
@@ -50,7 +51,18 @@ export function loginUser(postData) {
             console.log("token in local storage: " + localStorage.getItem('token'));
         })
         .catch(error => {
-            alert("Invalid user name and password!");
+            confirmAlert({
+                title: 'Invalid Login',
+                message: 'Your user name and password are not valid',
+                buttons: [
+                    {
+                        label: 'Close',
+                        onClick: () => {
+                            console.log('Click close');
+                        }
+                    }
+                ]
+              })
         });
     }
 }
