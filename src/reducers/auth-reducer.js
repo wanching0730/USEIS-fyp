@@ -21,7 +21,14 @@ export default function authReducer(state = initialState, { type, payload }) {
                 userName: payload.userName,
                 userPosition: payload.userPosition,
                 token: payload.token,
-                isAuthenticated: payload.isAuthenticated
+                isAuthenticated: true
+            });
+        case LOGOUT_USER:
+            return Object.assign({}, state, {
+                userName: null,
+                userPosition: null,
+                token: null,
+                isAuthenticated: false
             });
         default: 
         // return initial state

@@ -15,10 +15,23 @@ export function loginUserSuccessful(user, token) {
         payload: {
             userName: user[1],
             userPosition: user[3],
-            token: token,
-            isAuthenticated: true
+            token: token
         }
     }
+}
+
+export function logout() {
+    localStorage.removeItem('token');
+    return {
+        type: LOGOUT_USER
+    };
+}
+
+export function logoutAndRedirect() {
+    return (dispatch) => {
+        dispatch(logout());
+        browserHistory.push('/login');
+    };
 }
 
 export function loginUser(postData) {

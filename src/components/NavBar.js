@@ -3,8 +3,11 @@ import {browserHistory} from 'react-router';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav,  NavItem, UncontrolledDropdown, 
     DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import '../style/navbar.css';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { logoutAndRedirect } from '../actions/auth-action';
 
 class NavBar extends Component {
     constructor(props) {
@@ -16,6 +19,7 @@ class NavBar extends Component {
         };
 
         this.onClick = this.onClick.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     onClick(event) {
@@ -32,6 +36,10 @@ class NavBar extends Component {
         } else {
             browserHistory.push("/manageProposal");
         }
+    }
+
+    logout() {
+        this.props.onLogoutUser();
     }
 
     toggle() {
@@ -84,43 +92,69 @@ class NavBar extends Component {
 
         return (
             <div>
-                <Navbar className="topnav" dark expand="md">
+                    {
+                        this.props.isAuthenticated ?
+                    
+                        <Navbar className="topnav" dark expand="md">
                     <NavbarBrand href="/"><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <Link to="/">Home</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/newsFeed">NewsFeed</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/society">Societies</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/event">Events</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/recruitmentBooth">Booths</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link to="/myProfile">My Profile</Link>
-                        </NavItem>
-                        <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                Manage
-                            </DropdownToggle>
-                            {dropDownItem}
-                        </UncontrolledDropdown>
-                    </Nav>
-                    <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <Link to="/login">Login</Link>
-                        </NavItem>
-                    </Nav>
-                    </Collapse>
+                        <Nav className="mr-auto" navbar>
+                            <NavItem>
+                                <Link to="/">Home</Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link to="/newsFeed">NewsFeed</Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link to="/society">Societies</Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link to="/event">Events</Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link to="/recruitmentBooth">Booths</Link>
+                            </NavItem>
+                            <NavItem>
+                                <Link to="/myProfile">My Profile</Link>
+                            </NavItem>
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                    Manage
+                                </DropdownToggle>
+                                {dropDownItem}
+                            </UncontrolledDropdown>
+                        </Nav>
+                        <Nav className="ml-auto" navbar>
+                            <UncontrolledDropdown nav inNavbar>
+                                <DropdownToggle nav caret>
+                                    {this.props.userName}
+                                </DropdownToggle>
+                                <DropdownMenu left>
+                                    <DropdownItem name="logout" onClick={this.logout}>
+                                        Logout
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
+                        </Nav>
+                        </Collapse>
                 </Navbar>
+                        
+                        :
+                        <Navbar className="topnav" dark expand="md">
+                    <NavbarBrand href="/"><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <Link to="/login">Login</Link>
+                                </NavItem>
+                            </Nav>
+                            </Collapse>
+                </Navbar>
+                        
+                    }
+                   
             </div>
         );
     }
@@ -128,9 +162,16 @@ class NavBar extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-      username: state["auth"]["userName"],
-      userPosition: state["auth"]["userPosition"]
+      userName: state.auth.userName,
+      userPosition: state.auth.userPosition,
+      isAuthenticated: state.auth.isAuthenticated
     };
-  };
+};
 
-export default connect(mapStateToProps)(NavBar);
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onLogoutUser: logoutAndRedirect
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(NavBar);

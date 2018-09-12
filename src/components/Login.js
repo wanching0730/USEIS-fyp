@@ -21,10 +21,10 @@ class Login extends Component {
       password:''
     }
 
-    this.onLoginUser = this.onLoginUser.bind(this);
+    this.login = this.login.bind(this);
   }
 
-  onLoginUser(event) {
+  login(event) {
     let data = this.state;
     console.log("data content: " + JSON.stringify(data));
     this.props.onLoginUser(data);
@@ -36,7 +36,6 @@ class Login extends Component {
 
   render() {
     console.log("props: " + this.props.userPosition);
-    console.log("authenticated: " + this.props.isAuthenticated);
     
     const { RaisedButtonStyle } = styles;
 
@@ -72,7 +71,7 @@ class Login extends Component {
                         onChange = {(event) => this.setState({password:event.target.value})}
                         />
                       <br/>
-                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.onLoginUser(event)}/>
+                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.login(event)}/>
                     </form>
                   </div>
                 </div>
@@ -95,10 +94,9 @@ const styles = {
 const mapStateToProps = (state, props) => {
   console.log(JSON.stringify(state));
   return {
-    username: state.auth.username,
+    userName: state.auth.userName,
     userPosition: state.auth.userPosition,
     token: state.auth.token,
-    isAuthenticated: state.auth.isAuthenticated
   };
 };
 
