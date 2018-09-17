@@ -9,13 +9,13 @@ import {
     LOGOUT_USER,
 } from '../constant';
 
-export function loginUserSuccessful(student, societies, token) {
+export function loginUserSuccessful(user, societies, token) {
     localStorage.setItem('token', token);
 
     return {
         type: LOGIN_USER_SUCCESS,
         payload: {
-            userName: student[1],
+            userName: user[1],
             societies: societies,
             token: token
         }
@@ -44,22 +44,37 @@ export function loginUser(postData) {
     
         return verifyUser(data).then(result => result.json()).then(reply => {
 
+            let user = reply["user"];
+            let userSociety = reply["userSociety"];
+            let token = reply["token"];
             var societies = [];
-            let studentSociety = reply["studentSociety"];
-            for(var i = 0; i < studentSociety.length; i++) {
-                societies.push({
-                    societyName: studentSociety[i][8],
-                    position: studentSociety[i][10]
-                })
+
+            if(user[1].substring(0,2) == "00") {
+                console.log("username substring: " + user[1].substring(0,2));
+                for(var i = 0; i < userSociety.length; i++) {
+                    societies.push({
+                        societyId: userSociety[i][5],
+                        position: userSociety[i][7]
+                    })
+                }
+                console.log("user societies: " + societies);
+            } else {
+                console.log("username substring: " + user[1].substring(0,2));
+                for(var i = 0; i < userSociety.length; i++) {
+                    societies.push({
+                        societyId: userSociety[i][8],
+                        position: userSociety[i][10]
+                    })
+                }
+                console.log("user societies: " + societies);
             }
-            console.log("student societies: " + societies);
-            
-            dispatch(loginUserSuccessful(reply["student"], societies, reply["token"]));
+        
+            dispatch(loginUserSuccessful(user, societies, token));
             browserHistory.push("/home");
 
-            console.log("reply: " + JSON.stringify(reply));
+            //console.log("reply: " + JSON.stringify(reply));
             console.log("token: " + reply["token"]);
-            console.log("user position: " + reply["studentSociety"][0][10]);
+            //console.log("user position: " + reply["userSociety"][0][10]);
             console.log("token in local storage: " + localStorage.getItem('token'));
         })
         .catch(error => {

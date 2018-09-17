@@ -56,8 +56,8 @@ class NavBar extends Component {
                 let p = societies[i]["position"];
                 if(p == "chairperson" || p == "secretary")
                     position = "committee";
-                else if(p == "staff")
-                    position = "staff";
+                else if(p == "officer")
+                    position = "officer";
                 else 
                     position = "student";
             }
@@ -76,7 +76,7 @@ class NavBar extends Component {
                     FAQ
                 </DropdownItem>
             </DropdownMenu>
-        } else if(position == "staff") {
+        } else if(position == "officer") {
             dropDownItem = 
             <DropdownMenu left>
                 <DropdownItem name="manageBooth" onClick={this.onClick}>
