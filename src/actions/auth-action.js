@@ -9,13 +9,13 @@ import {
     LOGOUT_USER,
 } from '../constant';
 
-export function loginUserSuccessful(user, token) {
+export function loginUserSuccessful(student, studentSociety, token) {
     localStorage.setItem('token', token);
     return {
         type: LOGIN_USER_SUCCESS,
         payload: {
-            userName: user[1],
-            userPosition: user[3],
+            userName: student[1],
+            userPosition: studentSociety[0][10],
             token: token
         }
     }
@@ -43,11 +43,12 @@ export function loginUser(postData) {
     
         return verifyUser(data).then(result => result.json()).then(reply => {
             
-            dispatch(loginUserSuccessful(reply["user"], reply["token"]));
-            browserHistory.push("/student");
+            dispatch(loginUserSuccessful(reply["student"], reply["studentSociety"], reply["token"]));
+            browserHistory.push("/home");
 
+            console.log("reply: " + JSON.stringify(reply));
             console.log("token: " + reply["token"]);
-            console.log("user position: " + reply["user"][3]);
+            console.log("user position: " + reply["studentSociety"][0][10]);
             console.log("token in local storage: " + localStorage.getItem('token'));
         })
         .catch(error => {

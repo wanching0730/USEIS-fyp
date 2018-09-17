@@ -51,9 +51,10 @@ class NavBar extends Component {
     render() {
 
         let position = this.props.userPosition;
+        console.log("position in navbar: " + position);
         var dropDownItem;
 
-        if(position == "committee") {
+        if(position == "chairperson" || position == "secretary") {
             dropDownItem = 
             <DropdownMenu left>
                 <DropdownItem name="createProfile" onClick={this.onClick}>
