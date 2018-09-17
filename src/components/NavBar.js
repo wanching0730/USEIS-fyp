@@ -48,11 +48,24 @@ class NavBar extends Component {
 
     render() {
 
-        let position = this.props.userPosition;
-        console.log("position in navbar: " + position);
         var dropDownItem;
-
-        if(position == "chairperson" || position == "secretary") {
+        var position;
+        let societies = this.props.societies;
+        if(societies != null) {
+            for(var i = 0; i < societies.length; i++) {
+                let p = societies[i]["position"];
+                if(p == "chairperson" || p == "secretary")
+                    position = "committee";
+                else if(p == "staff")
+                    position = "staff";
+                else 
+                    position = "student";
+            }
+            console.log("position in navbar: " + position);
+            console.log("societies in navbar: " + JSON.stringify(societies));
+        }
+        
+        if(position == "committee") {
             dropDownItem = 
             <DropdownMenu left>
                 <DropdownItem name="createProfile" onClick={this.onClick}>
@@ -157,7 +170,7 @@ class NavBar extends Component {
 const mapStateToProps = (state, props) => {
     return {
       userName: state.auth.userName,
-      userPosition: state.auth.userPosition,
+      societies: state.auth.societies,
       isAuthenticated: state.auth.isAuthenticated
     };
 };

@@ -9,13 +9,14 @@ import {
     LOGOUT_USER,
 } from '../constant';
 
-export function loginUserSuccessful(student, studentSociety, token) {
+export function loginUserSuccessful(student, societies, token) {
     localStorage.setItem('token', token);
+
     return {
         type: LOGIN_USER_SUCCESS,
         payload: {
             userName: student[1],
-            userPosition: studentSociety[0][10],
+            societies: societies,
             token: token
         }
     }
@@ -42,8 +43,18 @@ export function loginUser(postData) {
         }).join('&');
     
         return verifyUser(data).then(result => result.json()).then(reply => {
+
+            var societies = [];
+            let studentSociety = reply["studentSociety"];
+            for(var i = 0; i < studentSociety.length; i++) {
+                societies.push({
+                    societyName: studentSociety[i][8],
+                    position: studentSociety[i][10]
+                })
+            }
+            console.log("student societies: " + societies);
             
-            dispatch(loginUserSuccessful(reply["student"], reply["studentSociety"], reply["token"]));
+            dispatch(loginUserSuccessful(reply["student"], societies, reply["token"]));
             browserHistory.push("/home");
 
             console.log("reply: " + JSON.stringify(reply));
@@ -54,7 +65,7 @@ export function loginUser(postData) {
         .catch(error => {
             confirmAlert({
                 title: 'Invalid Login',
-                message: 'Your user name and password are not valid',
+                message: 'Your user name and password are not valid' + error,
                 buttons: [
                     {
                         label: 'Close',
