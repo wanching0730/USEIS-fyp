@@ -82,6 +82,7 @@ class MyEvent extends Component {
 
         var rows = [];
         var position, crewStatus, isVege;
+        
         for(var i = 0; i < events.length; i++) {
             if(events[i]["position"] == "participant"){
                 position = <td>Participant</td>;
@@ -108,10 +109,10 @@ class MyEvent extends Component {
                     <td><Link to={`/perEvent/`+events[i]["eventId"]}>{events[i]["name"]}</Link></td>
                     <td><Link to={`/perSociety/1`}>{events[i]["organiser"]}</Link></td>
                     <td>{events[i]["joinDate"]}</td>
-                    <td>-</td>
                     {position}
                     {crewStatus}
                     {isVege}
+                    <td><Link to={`/feedback`}>Undone</Link></td>
                     <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td>
                     <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
                 </tr>
