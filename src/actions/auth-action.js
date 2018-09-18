@@ -16,6 +16,7 @@ export function loginUserSuccessful(user, societies, token) {
         type: LOGIN_USER_SUCCESS,
         payload: {
             userName: user[1],
+            id: user[3],
             societies: societies,
             token: token
         }

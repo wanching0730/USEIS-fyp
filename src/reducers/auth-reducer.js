@@ -19,6 +19,7 @@ export default function authReducer(state = initialState, { type, payload }) {
         case LOGIN_USER_SUCCESS: 
             return Object.assign({}, state, {
                 userName: payload.userName,
+                id: payload.id,
                 societies: payload.societies,
                 token: payload.token,
                 isAuthenticated: true

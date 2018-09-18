@@ -51,6 +51,7 @@ class NavBar extends Component {
         var dropDownItem;
         var position;
         let societies = this.props.societies;
+
         if(societies != null) {
             for(var i = 0; i < societies.length; i++) {
                 let p = societies[i]["position"];
@@ -61,7 +62,9 @@ class NavBar extends Component {
                 else 
                     position = "student";
             }
+
             console.log("position in navbar: " + position);
+            console.log("user id in navbar: " + this.props.id);
             console.log("societies in navbar: " + JSON.stringify(societies));
         }
         
@@ -170,6 +173,7 @@ class NavBar extends Component {
 const mapStateToProps = (state, props) => {
     return {
       userName: state.auth.userName,
+      id: state.auth.id,
       societies: state.auth.societies,
       isAuthenticated: state.auth.isAuthenticated
     };
