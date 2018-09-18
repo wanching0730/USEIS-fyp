@@ -8,6 +8,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
 
+import { connect } from 'react-redux';
+
 class MyProfile extends Component {
 
     constructor(props) {
@@ -36,6 +38,21 @@ class MyProfile extends Component {
     render() {
 
         const { imageStyle, RaisedButtonStyle } = styles;
+        let societies = this.props.societies;
+        console.log("societies in profile: " + JSON.stringify(societies));
+
+        var rows = [];
+        for(var i = 0; i < societies.length; i++) {
+            rows.push(
+                <tr>
+                    <td>{i}</td>
+                    <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
+                    <td><Link to={`/perSociety/`+societies[i]["societyId"]}>{societies[i]["name"]}</Link></td>
+                    <td>halo</td>
+                    <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
+                </tr>
+            )
+        }
         
         return (
             
@@ -60,7 +77,7 @@ class MyProfile extends Component {
                         <div className="row">
                             <div className="panel-body">
                                 <table className="table table-hover table-light" border="1">
-                                <thead>
+                                    <thead>
                                         <tr>
                                             <th>No.</th>
                                             <th>Logo</th>
@@ -71,60 +88,7 @@ class MyProfile extends Component {
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/its.jpg') } /></td>
-                                            <td><Link to={`/perSociety/1`}>IT Society</Link></td>
-                                            <td> 
-                                                <li><Link to={`/perEvent/1`}>WorkShop</Link></li>
-                                                <li><Link to={`/perEvent/1`}>KLESF</Link></li>
-                                                <li><Link to={`/perEvent/1`}>Easy Parcel Talk</Link></li>
-                                            </td>
-                                            <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/firstaid.jpg') } /></td>
-                                            <td><Link to={`/perSociety/1`}>First Aid Society</Link></td>
-                                            <td> 
-                                                <li><Link to={`/perEvent/1`}>Cardio Night Run</Link></li>
-                                                <li><Link to={`/perEvent/1`}>Blood Donation</Link></li>
-                                                <li><Link to={`/perEvent/1`}>Adventure Camp</Link></li>
-                                            </td>
-                                            <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/engineering.png') } /></td>
-                                            <td><Link to={`/perSociety/1`}>Engineering Society</Link></td>
-                                            <td> 
-                                                <li><Link to={`/perEvent/1`}>ES Camp</Link></li>
-                                                <li><Link to={`/perEvent/1`}>Engineering Fiesta</Link></li>
-                                                <li><Link to={`/perEvent/1`}>Annual General Meeting</Link></li>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
-                                            <td><Link to={`/perSociety/1`}>Sport Society</Link></td>
-                                            <td> 
-                                                <li><Link to={`/perEvent/1`}>Night Run</Link></li>
-                                                <li><Link to={`/perEvent/1`}>Colour Run</Link></li>
-                                                <li><Link to={`/perEvent/1`}>Sport Carnival</Link></li>
-                                            </td>
-                                            <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
-                                        </tr>
-                                    
-                                        {/* {this.state.society.map(row => {
-                                            return (
-                                                <tr>
-                                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                    <td>{row[1]}</td>
-                                                    <td>{row[3]}</td>
-                                                </tr>
-                                            );
-                                        })} */}
+                                        {rows}
                                     </tbody>
                                 </table>
                             </div>
@@ -153,4 +117,10 @@ const styles = {
     },
 }
 
-export default MyProfile;
+const mapStateToProps = (state, props) => {
+    return {
+      societies: state.auth.societies,
+    };
+};
+
+export default connect(mapStateToProps)(MyProfile);

@@ -70,7 +70,8 @@ export function loginUser(postData) {
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
                         societies.push({
-                            societyId: userSociety[i][8],
+                            societyId: userSociety[i]["societyId"],
+                            name: userSociety[i]["name"],
                             position: userSociety[i][10],
                             joinDate: userSociety[i][11]
                         })
@@ -82,6 +83,8 @@ export function loginUser(postData) {
                         events.push({
                             eventId: userEvent[i]["eventId"],
                             name: userEvent[i]["name"],
+                            date: userEvent[i]["eventDateTime"],
+                            organiser: userEvent[i]["organiser"],
                             joinDate: userEvent[i]["joinDate"],
                             position: userEvent[i]["position"],
                             crewStatus: userEvent[i]["crewStatus"],
@@ -90,7 +93,7 @@ export function loginUser(postData) {
                     }
                 }
                 
-                console.log("user societies: " + societies);
+                console.log("user societies: " + JSON.stringify(societies));
                 console.log("user events: " + JSON.stringify(events));
                 console.log("user events: " + JSON.stringify(userEvent));
             }
