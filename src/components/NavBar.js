@@ -64,7 +64,7 @@ class NavBar extends Component {
             }
 
             console.log("position in navbar: " + position);
-            console.log("user id in navbar: " + this.props.id);
+            console.log("user id in navbar: " + this.props.userId);
             console.log("societies in navbar: " + JSON.stringify(societies));
         }
         
@@ -173,7 +173,7 @@ class NavBar extends Component {
 const mapStateToProps = (state, props) => {
     return {
       userName: state.auth.userName,
-      id: state.auth.id,
+      userId: state.auth.userId,
       societies: state.auth.societies,
       isAuthenticated: state.auth.isAuthenticated
     };

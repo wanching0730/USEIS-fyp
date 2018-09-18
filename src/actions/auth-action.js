@@ -9,14 +9,14 @@ import {
     LOGOUT_USER
 } from '../constant';
 
-export function loginUserSuccessful(user, societies, events, token) {
+export function loginUserSuccessful(userName, userId, societies, events, token) {
     localStorage.setItem('token', token);
 
     return {
         type: LOGIN_USER_SUCCESS,
         payload: {
-            userName: user[1],
-            id: user[3],
+            userName: userName,
+            userId: userId,
             societies: societies,
             events: events,
             token: token
@@ -53,8 +53,11 @@ export function loginUser(postData) {
             var societies = [];
             var events = [];
 
-            if(user[1].substring(0,2) == "00") {
-                console.log("username substring: " + user[1].substring(0,2));
+            let userName = user[0]["name"];
+            let userId = user[0]["userId"];
+
+            if(userName.substring(0,2) == "00") {
+                console.log("username substring: " + userName.substring(0,2));
                 for(var i = 0; i < userSociety.length; i++) {
                     societies.push({
                         societyId: userSociety[i][5],
@@ -63,7 +66,7 @@ export function loginUser(postData) {
                 }
                 console.log("user societies: " + societies);
             } else {
-                console.log("username substring: " + user[1].substring(0,2));
+                console.log("username substring: " + userName.substring(0,2));
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
                         societies.push({
@@ -92,7 +95,7 @@ export function loginUser(postData) {
                 console.log("user events: " + JSON.stringify(userEvent));
             }
         
-            dispatch(loginUserSuccessful(user, societies, events, token));
+            dispatch(loginUserSuccessful(userName, userId, societies, events, token));
             browserHistory.push("/home");
 
             //console.log("reply: " + JSON.stringify(reply));
