@@ -78,6 +78,7 @@ export function loginUser(postData) {
                     for(var i = 0; i < userEvent.length; i++) {
                         events.push({
                             eventId: userEvent[i]["eventId"],
+                            name: userEvent[i]["name"],
                             joinDate: userEvent[i]["joinDate"],
                             position: userEvent[i]["position"],
                             crewStatus: userEvent[i]["crewStatus"],
