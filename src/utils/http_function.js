@@ -7,3 +7,9 @@ export function verifyUser(data) {
         body: data
     });
 }
+
+export function retrieveData(type) {
+    if(type == "society") {
+        return fetch(`http://localhost:5000/societies`);
+    }
+}
