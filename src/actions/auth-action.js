@@ -77,17 +77,18 @@ export function loginUser(postData) {
                 if(userEvent.length > 0) {
                     for(var i = 0; i < userEvent.length; i++) {
                         events.push({
-                            eventId: userEvent[i][9],
-                            joinDate: userEvent[i][10],
-                            position: userEvent[i][11],
-                            crewStatus: userEvent[i][12],
-                            vegetarian: userEvent[i][13]
+                            eventId: userEvent[i]["eventId"],
+                            joinDate: userEvent[i]["joinDate"],
+                            position: userEvent[i]["position"],
+                            crewStatus: userEvent[i]["crewStatus"],
+                            vegetarian: userEvent[i]["vegetarian"]
                         })
                     }
                 }
                 
                 console.log("user societies: " + societies);
-                console.log("user events: " + events);
+                console.log("user events: " + JSON.stringify(events));
+                console.log("user events: " + JSON.stringify(userEvent));
             }
         
             dispatch(loginUserSuccessful(user, societies, events, token));

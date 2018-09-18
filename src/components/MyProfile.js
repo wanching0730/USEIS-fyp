@@ -22,7 +22,7 @@ class MyProfile extends Component {
     }
 
     listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
+        //fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
     }
 
     handleSocieties(event) {
