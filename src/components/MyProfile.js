@@ -23,9 +23,9 @@ class MyProfile extends Component {
         window.scrollTo(0, 0);
     }
 
-    listSocieties() {
-        //fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
-    }
+    // listSocieties() {
+    //     //fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
+    // }
 
     handleSocieties(event) {
         browserHistory.push("/myProfile");
@@ -48,6 +48,8 @@ class MyProfile extends Component {
                     <td>{i}</td>
                     <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
                     <td><Link to={`/perSociety/`+societies[i]["societyId"]}>{societies[i]["name"]}</Link></td>
+                    <td>{societies[i]["joinDate"]}</td>
+                    <td>{societies[i]["position"]}</td>
                     <td>halo</td>
                     <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
                 </tr>
@@ -77,18 +79,34 @@ class MyProfile extends Component {
                         <div className="row">
                             <div className="panel-body">
                                 <table className="table table-hover table-light" border="1">
-                                    <thead>
+                                <thead>
                                         <tr>
                                             <th>No.</th>
                                             <th>Logo</th>
                                             <th>Society</th>  
+                                            <th>Joined Date</th>
+                                            <th>Position</th>
                                             <th>Events</th>   
                                             <th>Action</th>           
                                         </tr>
                                     </thead>
 
                                     <tbody>
+                                        
+                                        {/* <tr>
+                                            <td>2</td>
+                                            <td><img style={imageStyle} src={ require('../assets/images/firstaid.jpg') } /></td>
+                                            <td><Link to={`/perSociety/1`}>First Aid Society</Link></td>
+                                            <td> 
+                                                <li><Link to={`/perEvent/1`}>Cardio Night Run</Link></li>
+                                                <li><Link to={`/perEvent/1`}>Blood Donation</Link></li>
+                                                <li><Link to={`/perEvent/1`}>Adventure Camp</Link></li>
+                                            </td>
+                                            <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
+                                        </tr> */}
+
                                         {rows}
+
                                     </tbody>
                                 </table>
                             </div>

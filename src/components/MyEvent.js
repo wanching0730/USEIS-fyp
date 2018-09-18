@@ -9,7 +9,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
 
-class MyProfile extends Component {
+import { connect } from 'react-redux';
+
+class MyEvent extends Component {
 
     constructor(props) {
         super(props);
@@ -22,9 +24,9 @@ class MyProfile extends Component {
         window.scrollTo(0, 0);
     }
 
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
-    }
+    // listSocieties() {
+    //     fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
+    // }
 
     handleSocieties(event) {
         browserHistory.push("/myProfile");
@@ -75,6 +77,46 @@ class MyProfile extends Component {
     render() {
 
         const { imageStyle, RaisedButtonStyle } = styles;
+        let events = this.props.events;
+        console.log("events in profile: " + JSON.stringify(events));
+
+        var rows = [];
+        var position, crewStatus, isVege;
+        for(var i = 0; i < events.length; i++) {
+            if(events[i]["position"] == "participant"){
+                position = <td>Participant</td>;
+                crewStatus = <td>-</td>;
+            } else {
+                if(events[i]["crewStatus"] == 0) {
+                    position = <td>-</td>;
+                    crewStatus = <td>Pending</td>;
+                } else {
+                    position = <td>{events[i]["position"]}</td>;
+                    crewStatus = <td>Approved</td>;
+                }
+            }
+
+            if(events[i]["vegetarian"] == 0)
+                isVege = <td>No</td>;
+            else 
+                isVege = <td>Yes</td>;
+
+            rows.push(
+                <tr>
+                    <td>{i}</td>
+                    <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
+                    <td><Link to={`/perEvent/`+events[i]["eventId"]}>{events[i]["name"]}</Link></td>
+                    <td><Link to={`/perSociety/1`}>{events[i]["organiser"]}</Link></td>
+                    <td>{events[i]["joinDate"]}</td>
+                    <td>-</td>
+                    {position}
+                    {crewStatus}
+                    {isVege}
+                    <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td>
+                    <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
+                </tr>
+            )
+        }
         
         return (
             <div>
@@ -104,44 +146,17 @@ class MyProfile extends Component {
                                             <th>Logo</th>
                                             <th>Events</th> 
                                             <th>Organisers</th> 
-                                            <th>Date</th>
+                                            <th>Joined Date</th>
+                                            <th>Position</th>
+                                            <th>Crew Status</th>
+                                            <th>Vegetarian</th>
                                             <th>Rating Status</th>    
                                             <th colSpan="2">Actions</th>           
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/workshop.jpg') } /></td>
-                                            <td> <Link to={`/perEvent/1`}>WorkShop</Link></td>
-                                            <td><Link to={`/perSociety/1`}>IT Society</Link></td>
-                                            <td>01/12/2018</td>
-                                            <td>-</td>
-                                            <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td>
-                                            <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/cardio.jpg') } /></td>
-                                            <td><Link to={`/perEvent/1`}>Cardio Night Run</Link></td>
-                                            <td><Link to={`/perSociety/1`}>First Aid Society</Link></td>
-                                            <td>21/10/2018</td>
-                                            <td>-</td>
-                                            <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td>
-                                            <td>-</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/camp.jpg') } /></td>
-                                            <td><Link to={`/perEvent/1`}>ES Camp</Link></td>
-                                            <td><Link to={`/perSociety/1`}>Engineering Society</Link></td>
-                                            <td>01/05/2018</td>
-                                            <td>Done</td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                        </tr>
-                                        <tr>
+                                        {/* <tr>
                                             <td>4</td>
                                             <td><img style={imageStyle} src={ require('../assets/images/carnival.jpg') } /></td>
                                             <td><Link to={`/perEvent/1`}>Sport Carnival</Link></td>
@@ -150,17 +165,10 @@ class MyProfile extends Component {
                                             <td><Link to={`/feedback`}>Undone</Link></td>
                                             <td>-</td>
                                             <td>-</td>
-                                        </tr>
-                                    
-                                        {/* {this.state.society.map(row => {
-                                            return (
-                                                <tr>
-                                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                    <td>{row[1]}</td>
-                                                    <td>{row[3]}</td>
-                                                </tr>
-                                            );
-                                        })} */}
+                                        </tr> */}
+
+                                        {rows}
+
                                     </tbody>
                                 </table>
                             </div>
@@ -189,4 +197,10 @@ const styles = {
     }
 }
 
-export default MyProfile;
+const mapStateToProps = (state, props) => {
+    return {
+      events: state.auth.events,
+    };
+};
+
+export default connect(mapStateToProps)(MyEvent);
