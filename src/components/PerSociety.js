@@ -33,18 +33,6 @@ class PerSociety extends Component {
         window.scrollTo(0, 0);
     }
 
-    // handleEditClick(event) {
-    //     browserHistory.push("/createProfile/"+this.props.params.societyId);
-    // }
-
-    // handleBiddingClick(event) {
-    //     browserHistory.push("/register_booth");
-    // }
-
-    // handleMemberClick(event) {
-    //     browserHistory.push("/manageMember");
-    // }
-
     render() {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
