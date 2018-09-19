@@ -10,10 +10,17 @@ import { confirmAlert } from 'react-confirm-alert';
 import "../../node_modules/react-confirm-alert/src/react-confirm-alert.css";
 import "../style/perEvent.css";
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveData } from '../actions/data-action';
+
 class PerEvent extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onRetrieveData("event", this.props.params.eventId);
+        console.log("event id: " + this.props.params.eventId);
     }
 
     componentDidMount() {
@@ -51,7 +58,7 @@ class PerEvent extends Component {
     render() {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
-
+        const { name, dateTime, organiser, desc, venue, category, fee, points, chairperson, contact } = this.props;
         return (
             <div>
                 <NavBar />
@@ -78,37 +85,38 @@ class PerEvent extends Component {
                         {/* <h1>{this.props.params.societyId}</h1> */}
                         <div style={div1Style}>
                             <img style={imageStyle} src={ require('../assets/images/cardio.jpg') } />
-                            <h1>Cardio Night Run</h1>
+                            <h1>{name}</h1>
                         </div>
                         <div style={div2Style}>
                             <h5>Category:</h5>
-                            <p>Sport</p>
+                            <p>{category}</p>
                             <h5>Organiser:</h5>
-                            <p>First Aid Society</p>
+                            <p>{organiser} Society</p>
                             <h5>Description:</h5>
                             <p>
-                                The biggest challenge to IT in the future is security. 
+                                {desc}
+                                {/* The biggest challenge to IT in the future is security. 
                                 Security could negatively impact connectivity to public networks. 
                                 If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
                                 The risks now are so great and getting worse every day that we even see foreign governments 
-                                toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security.
+                                toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security. */}
                             </p>
                             <h5>Date:</h5>
-                            <p>28/09/2018</p>
+                            <p>{dateTime}</p>
                             <h5>Time:</h5>
-                            <p>7pm - 10pm</p>
+                            <p>{dateTime}</p>
                             <h5>Venue:</h5>
-                            <p>UTAR</p>
+                            <p>{venue}</p>
                             <h5>Fee:</h5>
-                            <p>RM35</p>
+                            <p>RM{fee}</p>
                             <h5>Soft Skill Points:</h5>
-                            <p>5</p>
+                            <p>{points}</p>
                             <h5>Soft Skill Category:</h5>
-                            <p>Leadership Skills</p>
+                            <p>???</p>
                             <h5>Chairperson:</h5>
-                            <p><a href="https://www.facebook.com/ho.m.hm">Leong Hao Meng</a></p>
+                            <p><a href="https://www.facebook.com/ho.m.hm">{chairperson}</a></p>
                             <h5>Contact Number:</h5>
-                            <p>018-9900890</p>
+                            <p>{contact}</p>
                             <br/>
                         </div>
                         <div style={div3Style}>
@@ -150,4 +158,25 @@ const styles = {
     }
 }
 
-export default PerEvent;
+const mapStateToProps = (state, props) => {
+    return {
+      name: state.data.eventName,
+      dateTime: state.data.eventDateTime,
+      organiser: state.data.organiser,
+      desc: state.data.eventDesc,
+      venue: state.data.eventVenue,
+      category: state.data.eventCategory,
+      fee: state.data.eventFee,
+      points: state.data.eventPoints,
+      chairperson: state.data.eventChairperson,
+      contact: state.data.eventContact,
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveData: retrieveData
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(PerSociety);
