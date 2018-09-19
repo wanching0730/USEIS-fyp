@@ -179,4 +179,4 @@ const mapActionsToProps = (dispatch, props) => {
     }, dispatch);
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(PerSociety);
+export default connect(mapStateToProps, mapActionsToProps)(PerEvent);

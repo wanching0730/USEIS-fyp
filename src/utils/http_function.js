@@ -11,5 +11,7 @@ export function verifyUser(data) {
 export function getData(type, id) {
     if(type == "society") {
         return fetch(`http://localhost:5000/society/` + id);
+    } else {
+        return fetch(`http://localhost:5000/event/` + id);
     }
 }

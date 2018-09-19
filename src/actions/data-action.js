@@ -55,6 +55,8 @@ export function retrieveData(type, id) {
 
                 dispatch(retrieveSocietySuccessful(societyName, societyCategory, societyVision, societyMission, societyDesc, societyBoothId));
             } else {
+                console.log("result of get event: " + JSON.stringify(reply));
+
                 let eventName = reply[0]["name"];
                 let eventDateTime = reply[0]["eventDateTime"];
                 let organiser = reply[0]["organiser"];
