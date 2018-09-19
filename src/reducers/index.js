@@ -5,8 +5,8 @@ import dataReducer from './data-reducer';
 
 const allReducers = combineReducers({
     auth: authReducer,
-    registerReducer: registerReducer,
-    dataReducer: dataReducer
+    register: registerReducer,
+    data: dataReducer
 });
 
 export default allReducers;
