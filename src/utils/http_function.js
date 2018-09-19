@@ -8,8 +8,8 @@ export function verifyUser(data) {
     });
 }
 
-export function retrieveData(type) {
+export function getData(type, id) {
     if(type == "society") {
-        return fetch(`http://localhost:5000/societies`);
+        return fetch(`http://localhost:5000/society/` + id);
     }
 }

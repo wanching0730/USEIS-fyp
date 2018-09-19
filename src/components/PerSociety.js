@@ -8,10 +8,17 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import "../style/perSociety.css";
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveData } from '../actions/data-action';
+
 class PerSociety extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onRetrieveData("society", this.props.params.societyId);
+        console.log("society id: " + this.props.params.societyId);
     }
 
     handleJoinClick(event) {
@@ -125,4 +132,16 @@ const styles = {
     }
 }
 
-export default PerSociety;
+// const mapStateToProps = (state, props) => {
+//     return {
+//       societies: state.auth.societies,
+//     };
+// };
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveData: retrieveData
+    }, dispatch);
+};
+
+export default connect(null, mapActionsToProps)(PerSociety);

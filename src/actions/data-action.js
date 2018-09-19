@@ -1,5 +1,5 @@
 import {browserHistory} from 'react-router';
-import retrieveData from '../utils/http_function';
+import { getData } from '../utils/http_function';
 
 import {
     RETRIEVE_USER_SOCIETY, 
@@ -10,10 +10,10 @@ export function retrieveDataSuccessful() {
 
 }
 
-export function retrieveData(type) {
+export function retrieveData(type, id) {
     return function (dispatch) {
-        return retrieveData(type).then(result => result.json()).then(reply => {
-
+        return getData(type, id).then(result => result.json()).then(reply => {
+            console.log("result of get society: " + JSON.stringify(reply));
         });
     };
 }

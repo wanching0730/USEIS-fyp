@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { Link } from 'react-router';
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
