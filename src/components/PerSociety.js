@@ -48,6 +48,7 @@ class PerSociety extends Component {
     render() {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
+        const { name, category, vision, mission, desc } = this.props;
 
         console.log("society vision: " + this.props.vision);
         console.log("society mission: " + this.props.mission);
@@ -64,7 +65,7 @@ class PerSociety extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div id="mySidenav" class="sidenav">
+                <div id="mySidenav" className="sidenav">
                     <Link to="/createEvent" id="addEvent"><FontAwesome.FaPlus /> Create Event</Link>
                     <Link to="/createProfile/{this.props.params.societyId}" id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
                     <Link to="/register_booth" id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
@@ -77,22 +78,23 @@ class PerSociety extends Component {
                         {/* <h1>{this.props.params.societyId}</h1> */}
                         <div style={div1Style}>
                             <img style={imageStyle} src={ require('../assets/images/its.jpg') } />
-                            <h1>IT Society</h1>
+                            <h1>{name}</h1>
                         </div>
                         <div style={div2Style}>
                             <h5>Category:</h5>
-                            <p>Technology</p>
+                            <p>{category}</p>
                             <h5>Vision</h5>
-                            <p>To promote IT information in UTAR</p>
+                            <p>{vision}</p>
                             <h5>Mision</h5>
-                            <p>To increase reputation of IT Society in UTAR</p>
+                            <p>{mission}</p>
                             <h5>Description:</h5>
                             <p>
-                                The biggest challenge to IT in the future is security. 
+                                {desc}
+                                {/* The biggest challenge to IT in the future is security. 
                                 Security could negatively impact connectivity to public networks. 
                                 If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
                                 The risks now are so great and getting worse every day that we even see foreign governments 
-                                toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security.
+                                toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security. */}
                             </p>
                             <br/>
                         </div>
