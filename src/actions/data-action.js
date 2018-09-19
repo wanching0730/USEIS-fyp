@@ -46,26 +46,26 @@ export function retrieveData(type, id) {
             console.log("result of get society: " + JSON.stringify(reply));
 
             if(type == "society") {
-                let societyName = reply["name"];
-                let societyCategory = reply["category"];
-                let societyVision = reply["vision"];
-                let societyMission = reply["mission"];
-                let societyDesc = reply["description"];
-                let societyBoothId = reply["boothId"];
+                let societyName = reply[0]["name"];
+                let societyCategory = reply[0]["category"];
+                let societyVision = reply[0]["vision"];
+                let societyMission = reply[0]["mission"];
+                let societyDesc = reply[0]["description"];
+                let societyBoothId = reply[0]["boothId"];
 
                 dispatch(retrieveSocietySuccessful(societyName, societyCategory, societyVision, societyMission, societyDesc, societyBoothId));
             } else {
-                let eventName = reply["name"];
-                let eventDateTime = reply["eventDateTime"];
-                let organiser = reply["organiser"];
-                let eventDesc = reply["description"];
-                let eventVenue = reply["venue"];
-                let eventCategory = reply["category"];
-                let eventFee = reply["fee"];
-                let eventPoints = reply["ssPoint"];
-                let eventChairperson = reply["chairperson"];
-                let eventContact = reply["contact"];
-                let eventBoothId = reply["boothId"];
+                let eventName = reply[0]["name"];
+                let eventDateTime = reply[0]["eventDateTime"];
+                let organiser = reply[0]["organiser"];
+                let eventDesc = reply[0]["description"];
+                let eventVenue = reply[0]["venue"];
+                let eventCategory = reply[0]["category"];
+                let eventFee = reply[0]["fee"];
+                let eventPoints = reply[0]["ssPoint"];
+                let eventChairperson = reply[0]["chairperson"];
+                let eventContact = reply[0]["contact"];
+                let eventBoothId = reply[0]["boothId"];
 
                 dispatch(retrieveEventSuccessful(eventName, eventDateTime, organiser, eventDesc, eventVenue,
                     eventCategory, eventFee, eventPoints, eventChairperson, eventContact, eventBoothId));
