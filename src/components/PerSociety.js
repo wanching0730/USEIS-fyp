@@ -49,6 +49,9 @@ class PerSociety extends Component {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
 
+        console.log("society vision: " + this.props.vision);
+        console.log("society mission: " + this.props.mission);
+
         return (
             <div>
                 <NavBar />
@@ -132,11 +135,15 @@ const styles = {
     }
 }
 
-// const mapStateToProps = (state, props) => {
-//     return {
-//       societies: state.auth.societies,
-//     };
-// };
+const mapStateToProps = (state, props) => {
+    return {
+      name: state.data.societyName,
+      category: state.data.societyCategory,
+      vision: state.data.societyVision,
+      mission: state.data.societyMission,
+      desc: state.data.societyDesc
+    };
+};
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
@@ -144,4 +151,4 @@ const mapActionsToProps = (dispatch, props) => {
     }, dispatch);
 };
 
-export default connect(null, mapActionsToProps)(PerSociety);
+export default connect(mapStateToProps, mapActionsToProps)(PerSociety);
