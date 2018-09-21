@@ -108,8 +108,9 @@ export function retrieveAll(type) {
             if(type == "society") {
                 for(var i = 0; i < reply.length; i++) {
                     societies.push ({
-                        name: reply[i]["name"],
-                        category: reply[i]["category"]
+                        category: reply[i]["category"],
+                        id: reply[i]["societyId"],
+                        name: reply[i]["name"]
                     });
                 }
                 console.log("societies in action: " + societies);

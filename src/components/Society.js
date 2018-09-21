@@ -36,6 +36,20 @@ class Society extends Component {
         //axios.get("http://localhost:5000/puppies").then(response => this.setState({society: response.data}));
     }
 
+    groupBy(list, keyGetter) {
+        const map = new Map();
+        list.forEach((item) => {
+            const key = keyGetter(item);
+            const collection = map.get(key);
+            if (!collection) {
+                map.set(key, [item]);
+            } else {
+                collection.push(item);
+            }
+        });
+        return map;
+    }
+
     handleClick(event) {
         console.log("clicked");
     }
@@ -50,13 +64,53 @@ class Society extends Component {
         console.log("stringify societies: " + JSON.stringify(societies));
         console.log("societies in Society: " + societies);
 
+
+
         if(societies != null) {
             var rows = [];
-            for(var i = 0; i < societies.length; i++) {
+            const categories = this.groupBy(societies, society => society["category"]);
+            for (const [key, values] of categories.entries()) {
+                var subRows = [];
+                values.forEach(value => {
+                    subRows.push(
+                        <li><Link to={`/perEvent/` + value["id"]}>{value["name"]}</Link></li>
+                    );
+                });
+
                 rows.push(
-                    <div>{societies[i]["name"]}</div>
+                    <li>
+                        <input type="checkbox" id="list-item-1" />
+                        <label for="list-item-1" className="first">{key}   <FontAwesome.FaHandORight /></label>
+                        <ul>
+                            {subRows}
+                        </ul>
+                    </li>
                 );
-            }
+              }
+            
+            
+            // var rows = [];
+            // for(var i = 0; i < societies.length; i++) {
+            //     let category = societies[i]["category"];
+            //     for(var j = 0; j < societies.length; j++) {
+            //         var subRows = [];
+            //         if(societies[j]["category"] == category) {
+            //             subRows.push(
+            //                 <li><Link to={`/perEvent/` + societies[j]["id"]}>{societies[j]["name"]}</Link></li>
+            //             );
+            //         }
+            //     }  
+
+            //     rows.push(
+            //         <li>
+            //             <input type="checkbox" id="list-item-1" />
+            //             <label for="list-item-1" className="first">{category}   <FontAwesome.FaHandORight /></label>
+            //             <ul>
+            //                {subRows}
+            //             </ul>
+            //         </li>
+            //     );
+            // }
         }
 
         const { imageStyle, RaisedButtonStyle } = styles;
