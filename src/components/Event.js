@@ -6,30 +6,35 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
-import $ from 'jquery';
-import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveAll } from '../actions/data-action';
 
 class Event extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {society: []};
+        this.props.onRetrieveAll("event");
     }
 
     async componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0, 0);
     }
 
-    async listSocieties() {
-        const result = await fetch(`http://localhost:5000/puppies`);
-        const jsonresult = await result.json();
-        await this.setState({society: jsonresult});
-        // $.ajax({ type: "GET", url:`http://localhost:5000/puppies`, success: function(res) {
-        //     this.setState({society:res});
-        //  }});
-        //axios.get("http://localhost:5000/puppies").then(response => this.setState({society: response.data}));
+    groupBy(list, keyGetter) {
+        const map = new Map();
+        list.forEach((item) => {
+            const key = keyGetter(item);
+            const collection = map.get(key);
+            if (!collection) {
+                map.set(key, [item]);
+            } else {
+                collection.push(item);
+            }
+        });
+        return map;
     }
 
     handleClick(event) {
@@ -37,13 +42,37 @@ class Event extends Component {
     }
 
     render() {
-        // var list = [];
-        // for(var i = 0; i < this.state.society.length; i++) {
-        //     list.push(<p>{this.state.society[i]}</p>);
-        // }
+        const { RaisedButtonStyle } = styles;
+        let events = this.props.events;
 
-        const { imageStyle, RaisedButtonStyle } = styles;
-        
+        if(events != null) {
+            var rows = [];
+            var counter = 1;
+            const categories = this.groupBy(events, event => event["category"]);
+            for (const [key, values] of categories.entries()) {
+                var subRows = [];
+                values.forEach(value => {
+                    subRows.push(
+                        <li><Link to={`/perEvent/` + value["id"]}>{value["name"]}</Link></li>
+                    );
+                });
+
+                let stringId = "list-item-" + counter;
+                rows.push(
+                    <li>
+                        <input type="checkbox" id={stringId} />
+                        <label for={stringId} className="first">{key}   <FontAwesome.FaHandORight /></label>
+                        <ul>
+                            {subRows}
+                        </ul>
+                    </li>
+                );
+
+                <hr/>
+                counter++;
+              }
+        }
+
         return (
             <div id="outerDiv"> 
                 <NavBar />
@@ -65,103 +94,7 @@ class Event extends Component {
 
                         <div class="wrapper">
                             <ul>
-                                <li>
-                                    <input type="checkbox" id="list-item-1" />
-                                    <label for="list-item-1" class="first">August 2018   <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li><Link to={`/perEvent/1`}>WorkShop</Link></li>
-                                        <li><Link to={`/perEvent/1`}>KLESF</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Easy Parcel Talk</Link></li>
-                                    </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <input type="checkbox" id="list-item-2"/>
-                                    <label for="list-item-2">September 2018  <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li><Link to={`/perEvent/1`}>Cardio Night Run</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Blood Donation</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Adventure Camp</Link></li>
-                                    </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <input type="checkbox" id="list-item-3"/>
-                                    <label for="list-item-3">October 2018   <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li><Link to={`/perEvent/1`}>ES Camp</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Engineering Fiesta</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Annual General Meeting</Link></li>
-                                    </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <input type="checkbox" id="list-item-4" />
-                                    <label for="list-item-4">November 2018   <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li><Link to={`/perEvent/1`}>ES Camp</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Engineering Fiesta</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Annual General Meeting</Link></li>
-                                    </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <input type="checkbox" id="list-item-5"/>
-                                    <label for="list-item-5">December 2018   <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li><Link to={`/perEvent/1`}>Night Run</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Colour Run</Link></li>
-                                        <li><Link to={`/perEvent/1`}>Sport Carnival</Link></li>
-                                    </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <input type="checkbox" id="list-item-6"/>
-                                    <label for="list-item-6">January 2019   <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li>Inconsolata</li>
-                                        <li>Source Code Pro</li>
-                                        <li>Droid Sans Mono</li>
-                                        <li>Ubuntu Mono</li>
-                                        <li>Cousine</li>
-                                    </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <input type="checkbox" id="list-item-7" />
-                                    <label for="list-item-7">February 2019   <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li>Slabo</li>
-                                        <li>Droid Serif</li>
-                                        <li>Roboto Serif</li>
-                                        <li>Lora</li>
-                                        <li>Meriweather</li>
-                                    </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <input type="checkbox" id="list-item-8"/>
-                                    <label for="list-item-8">Spiritual   <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li>Open Sans</li>
-                                        <li>Roboto</li>
-                                        <li>Lato</li>
-                                        <li>Stabo</li>
-                                        <li>Oswald</li>
-                                    </ul>
-                                </li>
-                                <hr/>
-                                <li>
-                                    <input type="checkbox" id="list-item-9"/>
-                                    <label for="list-item-9" class="last">Sport   <FontAwesome.FaHandORight /></label>
-                                    <ul>
-                                        <li>Inconsolata</li>
-                                        <li>Source Code Pro</li>
-                                        <li>Droid Sans Mono</li>
-                                        <li>Ubuntu Mono</li>
-                                        <li>Cousine</li>
-                                    </ul>
-                                </li>
+                                {rows}
                             </ul>
                         </div>
                         </MuiThemeProvider>
@@ -173,13 +106,22 @@ class Event extends Component {
 };
 
 const styles = {
-    imageStyle: {
-        height: "50px",
-        width: "50px"
-    },
     RaisedButtonStyle: {
         marginLeft: 20
     }
 }
 
-export default Event;
+const mapStateToProps = (state, props) => {
+    console.log("state in event: " + state.data.events);
+    return {
+      events: state.data.events
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveAll: retrieveAll
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Event);

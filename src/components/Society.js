@@ -23,12 +23,6 @@ class Society extends Component {
         window.scrollTo(0,0);
     }
 
-    async listSocieties() {
-        const result = await fetch(`http://localhost:5000/puppies`);
-        const jsonresult = await result.json();
-        await this.setState({society: jsonresult});
-    }
-
     groupBy(list, keyGetter) {
         const map = new Map();
         list.forEach((item) => {
@@ -48,6 +42,7 @@ class Society extends Component {
     }
 
     render() {
+        const { RaisedButtonStyle } = styles;
         let societies = this.props.societies;
 
         if(societies != null) {
@@ -77,8 +72,6 @@ class Society extends Component {
                 counter++;
               }
         }
-
-        const { RaisedButtonStyle } = styles;
         
         return (
             <div id="outerDiv"> 
