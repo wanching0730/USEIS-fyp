@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
+import { groupBy } from '../common/common_function';
 import '../style/society.css';
 
 import { connect } from 'react-redux';
@@ -23,20 +24,6 @@ class Society extends Component {
         window.scrollTo(0,0);
     }
 
-    groupBy(list, keyGetter) {
-        const map = new Map();
-        list.forEach((item) => {
-            const key = keyGetter(item);
-            const collection = map.get(key);
-            if (!collection) {
-                map.set(key, [item]);
-            } else {
-                collection.push(item);
-            }
-        });
-        return map;
-    }
-
     handleClick(event) {
         console.log("clicked");
     }
@@ -48,7 +35,7 @@ class Society extends Component {
         if(societies != null) {
             var rows = [];
             var counter = 1;
-            const categories = this.groupBy(societies, society => society["category"]);
+            const categories = groupBy(societies, society => society["category"]);
             for (const [key, values] of categories.entries()) {
                 var subRows = [];
                 values.forEach(value => {
