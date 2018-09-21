@@ -15,3 +15,11 @@ export function getData(type, id) {
         return fetch(`http://localhost:5000/event/` + id);
     }
 }
+
+export function getAllData(type) {
+    if(type == "society") {
+        return fetch(`http://localhost:5000/societies`);
+    } else {
+        return fetch(`http://localhost:5000/events`);
+    }
+}

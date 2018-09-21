@@ -2,6 +2,8 @@ import {browserHistory} from 'react-router';
 import { getData } from '../utils/http_function';
 
 import {
+    RETRIEVE_SOCIETIES,
+    RETRIEVE_EVENTS,
     RETRIEVE_USER_SOCIETY, 
     RETRIEVE_USER_EVENT
 } from '../constant';
@@ -73,5 +75,11 @@ export function retrieveData(type, id) {
                     eventCategory, eventFee, eventPoints, eventChairperson, eventContact, eventBoothId));
             }
         });
+    };
+}
+
+export function retrieveAll() {
+    return function (dispatch) {
+
     };
 }
