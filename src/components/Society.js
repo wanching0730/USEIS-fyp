@@ -46,7 +46,18 @@ class Society extends Component {
         //     list.push(<p>{this.state.society[i]}</p>);
         // }
 
-        console.log("societies in Society: " + this.props.societies[0]["name"]);
+        let societies = this.props.societies;
+        console.log("stringify societies: " + JSON.stringify(societies));
+        console.log("societies in Society: " + societies);
+
+        if(societies != null) {
+            var rows = [];
+            for(var i = 0; i < societies.length; i++) {
+                rows.push(
+                    <div>{societies[i]["name"]}</div>
+                );
+            }
+        }
 
         const { imageStyle, RaisedButtonStyle } = styles;
         
@@ -61,6 +72,8 @@ class Society extends Component {
                     </Breadcrumb>
                 </div>
 
+                {rows}
+
                 <div>
                     <MuiThemeProvider>
                         <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
@@ -68,11 +81,11 @@ class Society extends Component {
                         <RaisedButton label="Sort by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                         <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
 
-                        <div class="wrapper">
+                        <div className="wrapper">
                             <ul>
                                 <li>
                                     <input type="checkbox" id="list-item-1" />
-                                    <label for="list-item-1" class="first">Dance   <FontAwesome.FaHandORight /></label>
+                                    <label for="list-item-1" className="first">Dance   <FontAwesome.FaHandORight /></label>
                                     <ul>
                                         <li><Link to={`/perEvent/1`}>WorkShop</Link></li>
                                         <li><Link to={`/perEvent/1`}>KLESF</Link></li>
@@ -158,7 +171,7 @@ class Society extends Component {
                                 <hr/>
                                 <li>
                                     <input type="checkbox" id="list-item-9"/>
-                                    <label for="list-item-9" class="last">Sport   <FontAwesome.FaHandORight /></label>
+                                    <label for="list-item-9" className="last">Sport   <FontAwesome.FaHandORight /></label>
                                     <ul>
                                         <li>Inconsolata</li>
                                         <li>Source Code Pro</li>
@@ -258,6 +271,7 @@ const styles = {
 }
 
 const mapStateToProps = (state, props) => {
+    console.log("state in society: " + state.data.societies);
     return {
       societies: state.data.societies
     };

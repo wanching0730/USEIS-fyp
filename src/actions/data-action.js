@@ -112,6 +112,7 @@ export function retrieveAll(type) {
                         category: reply[i]["category"]
                     });
                 }
+                console.log("societies in action: " + societies);
                 dispatch(retrieveSocietiesSuccessful(societies));
             } else {
                 for(var i = 0; i < reply.length; i++) {

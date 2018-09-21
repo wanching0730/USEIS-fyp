@@ -78,7 +78,7 @@ class MyEvent extends Component {
 
         const { imageStyle, RaisedButtonStyle } = styles;
         let events = this.props.events;
-        console.log("events in profile: " + JSON.stringify(events));
+        console.log("events in profile: " + events.length);
 
         var rows = [];
         var position, crewStatus, isVege;
