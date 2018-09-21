@@ -118,8 +118,9 @@ export function retrieveAll(type) {
             } else {
                 for(var i = 0; i < reply.length; i++) {
                     events.push ({
-                        name: reply[i]["name"],
-                        category: reply[i]["category"]
+                        category: reply[i]["category"],
+                        id: reply[i]["eventId"],
+                        name: reply[i]["name"]
                     });
                 }
                 dispatch(retrieveEventsSuccessful(events));
