@@ -25,20 +25,20 @@ class Calendar extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => {
-            console.log(reply);
-            reply.forEach(element => {
-                this.societies.push({
-                    id: element[0],
-                    title: element[1],
-                    allDay: element[2],
-                    start: new Date(element[3]),
-                    end: new Date(element[4]),
-                });
+    // fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => {
+    //         console.log(reply);
+    //         reply.forEach(element => {
+    //             this.societies.push({
+    //                 id: element[0],
+    //                 title: element[1],
+    //                 allDay: element[2],
+    //                 start: new Date(element[3]),
+    //                 end: new Date(element[4]),
+    //             });
 
-                console.log("start: " + element[3]);
-            });
-      });
+    //             console.log("start: " + element[3]);
+    //         });
+    //   });
   }
 
   render() {

@@ -42,12 +42,23 @@ export function retrieveEventSuccessful(eventName, eventDateTime, organiser, eve
         };
 }
 
-export function retrieveSocietiesSuccessful() {
+export function retrieveSocietiesSuccessful(societies) {
+    return {
+        type: RETRIEVE_SOCIETIES,
+        payload: {
+            societies: societies
+        }
+    }
 
 }
 
-export function retrieveEventsSuccessful() {
-    
+export function retrieveEventsSuccessful(events) {
+    return {
+        type: RETRIEVE_EVENTS,
+        payload: {
+            events: events
+        }
+    }
 }
 
 export function retrieveData(type, id) {
@@ -90,7 +101,12 @@ export function retrieveAll(type) {
     return function (dispatch) {
         return getAllData(type).then(result => result.json()).then(reply => {
             console.log("societies: " + JSON.stringify(reply));
-            //dispatch();
+            
+            if(type == "society") {
+                dispatch(retrieveSocietiesSuccessful(reply));
+            } else {
+                dispatch(retrieveEventsSuccessful(reply));
+            }
         });
     };
 }

@@ -6,15 +6,19 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
-import $ from 'jquery';
-import axios from 'axios';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveAll } from '../actions/data-action';
 
 class Society extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {society: []};
+        //this.state = {society: []};
+
+        this.props.onRetrieveAll("society");
     }
 
     async componentDidMount() {
@@ -251,4 +255,16 @@ const styles = {
     }
 }
 
-export default Society;
+const mapStateToProps = (state, props) => {
+    return {
+      //societies: societies;
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveAll: retrieveAll
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(Society);
