@@ -46,6 +46,8 @@ class Society extends Component {
         //     list.push(<p>{this.state.society[i]}</p>);
         // }
 
+        console.log("societies in Society: " + this.props.societies[0]["name"]);
+
         const { imageStyle, RaisedButtonStyle } = styles;
         
         return (
@@ -257,7 +259,7 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-      //societies: societies;
+      societies: state.data.societies
     };
 };
 

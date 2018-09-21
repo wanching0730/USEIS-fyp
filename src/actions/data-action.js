@@ -101,11 +101,26 @@ export function retrieveAll(type) {
     return function (dispatch) {
         return getAllData(type).then(result => result.json()).then(reply => {
             console.log("societies: " + JSON.stringify(reply));
+
+            let societies = [];
+            let events = [];
             
             if(type == "society") {
-                dispatch(retrieveSocietiesSuccessful(reply));
+                for(var i = 0; i < reply.length; i++) {
+                    societies.push ({
+                        name: reply[i]["name"],
+                        category: reply[i]["category"]
+                    });
+                }
+                dispatch(retrieveSocietiesSuccessful(societies));
             } else {
-                dispatch(retrieveEventsSuccessful(reply));
+                for(var i = 0; i < reply.length; i++) {
+                    events.push ({
+                        name: reply[i]["name"],
+                        category: reply[i]["category"]
+                    });
+                }
+                dispatch(retrieveEventsSuccessful(events));
             }
         });
     };
