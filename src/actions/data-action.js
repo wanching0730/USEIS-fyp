@@ -1,5 +1,5 @@
 import {browserHistory} from 'react-router';
-import { getData } from '../utils/http_function';
+import { getData, getAllData } from '../utils/http_function';
 
 import {
     RETRIEVE_SOCIETIES,
@@ -42,6 +42,14 @@ export function retrieveEventSuccessful(eventName, eventDateTime, organiser, eve
         };
 }
 
+export function retrieveSocietiesSuccessful() {
+
+}
+
+export function retrieveEventsSuccessful() {
+    
+}
+
 export function retrieveData(type, id) {
     return function (dispatch) {
         return getData(type, id).then(result => result.json()).then(reply => {
@@ -78,8 +86,11 @@ export function retrieveData(type, id) {
     };
 }
 
-export function retrieveAll() {
+export function retrieveAll(type) {
     return function (dispatch) {
-
+        return getAllData(type).then(result => result.json()).then(reply => {
+            console.log("societies: " + JSON.stringify(reply));
+            //dispatch();
+        });
     };
 }
