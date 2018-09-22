@@ -16,23 +16,29 @@ class CreateProfile extends Component {
     super(props);
 
     this.state = {
-      society_name:'',
-      society_desc:'',
-      startDate: moment(),
+      name:'',
+      startDate:'',
       endDate: moment(),
-      eventCategory: 'dance',
-      softskillCategory: 'communication'
+      desc: '',
+      venue: '',
+      organiser: '',
+      category: 'dance',
+      ssCategory: 'communication',
+      ssPoints: 0,
+      fee: 0,
+      chairperson: '',
+      contact: ''
     }
     
-    if(this.props.params.eventId != null) {
-      console.log(this.props.params.eventId);
-      // fetch(`http://localhost:5000/puppies/` + this.props.params.societyId).then(result => result.json()).then(reply => {
-      //   this.setState ({
-      //     society_name: reply[0][1],
-      //     society_desc: reply[0][2]
-      //   });
-      // });
-    }
+    // if(this.props.params.eventId != null) {
+    //   console.log(this.props.params.eventId);
+    //   // fetch(`http://localhost:5000/puppies/` + this.props.params.societyId).then(result => result.json()).then(reply => {
+    //   //   this.setState ({
+    //   //     society_name: reply[0][1],
+    //   //     society_desc: reply[0][2]
+    //   //   });
+    //   // });
+    // }
 
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
@@ -45,8 +51,9 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
+    console.log(moment(this.state.startDate));
     console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
-    console.log("end date: " + moment(this.state.endDate).format("DD MMM YYYY hh:mm a"));
+    console.log("end date: " + moment(this.state.endDate).format("YYYY-MM-DD hh:mm:ss"));
     console.log("event category: " + this.state.eventCategory);
     console.log("softskill category: " + this.state.softskillCategory);
     browserHistory.push("/societyEvents");
@@ -54,22 +61,22 @@ class CreateProfile extends Component {
 
   handleStart(date) {
     this.setState({
-      startDate: date
+      startDate: moment(date).format("YYYY-MM-DD hh:mm:ss")
     });
   }
 
   handleEnd(date) {
     this.setState({
-      endDate: date
+      endDate: moment(date).format("YYYY-MM-DD hh:mm:ss")
     });
   }
 
   handleEventCategory(event) {
-    this.setState({eventCategory: event.target.value});
+    this.setState({category: event.target.value});
   }
 
   handleSoftskilltCategory(event) {
-    this.setState({softskillCategory: event.target.value});
+    this.setState({ssCategory: event.target.value});
   }
 
   mapItem(item) {
@@ -123,18 +130,20 @@ class CreateProfile extends Component {
                         <label>Event Name</label>  
                         {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
                         <input type="text" onChange={(event) => {
-                          this.setState({first_name:event.target.value});
-                          console.log("state value: " + this.state.first_name);
+                          this.setState({name:event.target.value});
+                          console.log("state value: " + this.state.name);
                           }}/>
                         <br/>
                         <label>Event Category (Eg: Technology)</label>
-                        <select value={this.state.eventCategory} onChange={this.handleEventCategory}>
+                        <select value={this.state.category} onChange={this.handleEventCategory}>
                           {eventCategories.map(this.mapItem)}
                         </select>
                         {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                         <br/>
                         <label>Event Description</label>
-                        <textarea name="field2"></textarea>
+                        <textarea name="field2" onChange={(event) => {
+                          this.setState({desc: event.target.value});
+                        }}></textarea>
                     </div>
 
                     <div class="section"><span>2</span>Date &amp; Time &amp; Venue</div>
@@ -165,32 +174,32 @@ class CreateProfile extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                       <br/>
                       <label>Event Venue</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <input type="text" onChange={(event) => {this.setState({venue:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>3</span>Fee</div>
                         <div class="inner-wrap">
                         <label>Event Fee</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                        <input type="text" onChange={(event) => {this.setState({fee:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>4</span>Organizing Chairperson Name &amp; Contact Number</div>
                     <div class="inner-wrap">
                       <label>Chairperson Name</label>
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <input type="text" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
                       <br/>
                       <label>Chairperson Contact Number</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <input type="text" onChange={(event) => {this.setState({contact:event.target.value})}}/>
                       <br/>
                     </div>
 
                     <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
                     <div class="inner-wrap">
                       <label>Soft Skill Points</label>
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <input type="text" onChange={(event) => {this.setState({ssPoints:event.target.value})}}/>
                       <br/>
                       <label>Soft Skill Category</label> 
-                      <select value={this.state.softskillCategory} onChange={this.handleSoftskilltCategory}>
+                      <select value={this.state.ssCategory} onChange={this.handleSoftskilltCategory}>
                         {softSkillCategories.map(this.mapItem)}
                       </select>
                       <br/>
@@ -199,7 +208,6 @@ class CreateProfile extends Component {
                     <div class="button-section">
                       <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                       <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                    {/* <input type="submit" name="Sign Up" onClick="handleClick()" /> */}
                     </div>
                 </form>
               </div>
