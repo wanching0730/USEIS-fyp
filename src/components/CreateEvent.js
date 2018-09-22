@@ -3,7 +3,6 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
-import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import moment from "moment";
 import DatePicker from "react-datepicker";
@@ -14,35 +13,27 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create } from '../actions/post-action';
 
-class CreateProfile extends Component {
+class CreateEvent extends Component {
 
   constructor(props){
     super(props);
 
     this.state = {
       name:'',
-      startDate:'',
-      endDate: moment(),
+      startDate: '',
+      endDate: '',
       desc: '',
       venue: '',
       organiser: '',
       category: 'dance',
       ssCategory: 'communication',
-      ssPoints: 0,
+      ssPoint: 0,
       fee: 0,
       chairperson: '',
-      contact: ''
+      contact: '',
+      selectedStartDate: moment(),
+      selectedEndDate: moment()
     }
-    
-    // if(this.props.params.eventId != null) {
-    //   console.log(this.props.params.eventId);
-    //   // fetch(`http://localhost:5000/puppies/` + this.props.params.societyId).then(result => result.json()).then(reply => {
-    //   //   this.setState ({
-    //   //     society_name: reply[0][1],
-    //   //     society_desc: reply[0][2]
-    //   //   });
-    //   // });
-    // }
 
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
@@ -57,10 +48,9 @@ class CreateProfile extends Component {
   handleClick(event) {
     console.log(moment(this.state.startDate));
     console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
-    console.log("end date: " + moment(this.state.endDate).format("YYYY-MM-DD hh:mm:ss"));
+    console.log("end date: " + moment(this.state.selectedStartDate).format("YYYY-MM-DD hh:mm:ss"));
     console.log("event category: " + this.state.eventCategory);
     console.log("softskill category: " + this.state.softskillCategory);
-    //browserHistory.push("/societyEvents");
     let data = this.state
     console.log("event content: " + JSON.stringify(data));
     this.props.onCreate("event", data);
@@ -68,13 +58,15 @@ class CreateProfile extends Component {
 
   handleStart(date) {
     this.setState({
-      startDate: moment(date).format("YYYY-MM-DD hh:mm:ss")
+      selectedStartDate: date,
+      startDate: "" + moment(date).format("YYYY-MM-DD hh:mm:ss")
     });
   }
 
   handleEnd(date) {
     this.setState({
-      endDate: moment(date).format("YYYY-MM-DD hh:mm:ss")
+      selectedEndDate: date,
+      endDate: "" + moment(date).format("YYYY-MM-DD hh:mm:ss")
     });
   }
 
@@ -157,7 +149,7 @@ class CreateProfile extends Component {
                     <div class="inner-wrap">
                       <label>Event Start Date &amp; Time </label>
                       <DatePicker
-                        selected={this.state.startDate}
+                        selected={this.state.selectedStartDate}
                         onChange={this.handleStart.bind(this)}
                         showTimeSelect
                         timeFormat="HH:mm"
@@ -169,7 +161,7 @@ class CreateProfile extends Component {
                       <br/>
                       <label>Event End Date &amp; Time </label>
                       <DatePicker
-                        selected={this.state.endDate}
+                        selected={this.state.selectedEndDate}
                         onChange={this.handleEnd.bind(this)}
                         showTimeSelect
                         timeFormat="HH:mm"
@@ -203,7 +195,7 @@ class CreateProfile extends Component {
                     <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
                     <div class="inner-wrap">
                       <label>Soft Skill Points</label>
-                      <input type="text" onChange={(event) => {this.setState({ssPoints:event.target.value})}}/>
+                      <input type="text" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
                       <br/>
                       <label>Soft Skill Category</label> 
                       <select value={this.state.ssCategory} onChange={this.handleSoftskilltCategory}>

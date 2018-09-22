@@ -30,7 +30,7 @@ export function create(type, postData) {
             return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
         }).join('&');
 
-        return createData(data).then(result => result.json()).then(reply => {
+        return createData(type, data).then(result => result.json()).then(reply => {
             console.log("post data reply: " + reply);
 
             // if(type == "society") {
