@@ -10,6 +10,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import '../style/form.css';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { create } from '../actions/post-action';
+
 class CreateProfile extends Component {
 
   constructor(props){
@@ -56,7 +60,10 @@ class CreateProfile extends Component {
     console.log("end date: " + moment(this.state.endDate).format("YYYY-MM-DD hh:mm:ss"));
     console.log("event category: " + this.state.eventCategory);
     console.log("softskill category: " + this.state.softskillCategory);
-    browserHistory.push("/societyEvents");
+    //browserHistory.push("/societyEvents");
+    let data = this.state
+    console.log("event content: " + JSON.stringify(data));
+    this.props.onCreate("event", data);
   }
 
   handleStart(date) {
@@ -228,4 +235,17 @@ const styles = {
   }
 };
 
-export default CreateProfile;
+const mapStateToProps = (state, props) => {
+  console.log(JSON.stringify(state));
+  return {
+    createdEventId: state.create.createdEventId
+  };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    onCreate: create
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(CreateEvent);
