@@ -23,3 +23,23 @@ export function getAllData(type) {
         return fetch(`http://localhost:5000/events`);
     }
 }
+
+export function createData(type, data) {
+    if(type == "society") {
+        return fetch(`http://localhost:5000/society/create`, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+    });
+    } else {
+        return fetch(`http://localhost:5000/event/create`, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+    });
+    }
+}
