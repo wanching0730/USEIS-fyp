@@ -3,7 +3,6 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
-import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import { confirmAlert } from 'react-confirm-alert';
 import '../style/form.css';
@@ -11,6 +10,7 @@ import '../style/form.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create } from '../actions/post-action';
+import { retrieveData } from '../actions/data-action';
 
 class CreateProfile extends Component {
 
@@ -25,16 +25,46 @@ class CreateProfile extends Component {
       mission: ''
     }
 
+    console.log("societyid: " + this.props.params.societyId);
+
+    if(this.props.params.societyId != null)  
+      this.props.onRetrieveData("society", this.props.params.societyId);
+
+    if(this.props.params.societyId != null && this.props.societyName != null) {
+      const { societyName, societyCategory, societyVision, societyMission, societyDesc } = this.props;
+      this.setState({
+        name: societyName,
+        category: societyCategory,
+        vision: societyVision,
+        mission: societyMission, 
+        desc: societyDesc
+      })
+
+      
+    }
+
+    console.log("nammeeee: " + this.props.name);
+
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    setTimeout(function() { 
+      this.setState({
+        name: this.props.name,
+        desc: this.props.desc,
+        vision: this.props.vision,
+        mission: this.props.mission,
+        category: this.props.category
+      }) 
+    }.bind(this), 2000)
   }
 
   handleClick(event) {
     const { name, desc, vision, mission } = this.state;
-    
+
     if(name == '' || desc == '' || vision == '' ||  mission == '') {
       confirmAlert({
         title: 'Warning',
@@ -104,7 +134,7 @@ class CreateProfile extends Component {
                     <div class="inner-wrap">
                         <label>Society Name</label>  
                         {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
-                        <input type="text" onChange={(event) => {
+                        <input type="text" value={this.state.name} onChange={(event) => {
                           this.setState({name:event.target.value});
                           console.log("state value: " + this.state.name);
                           }}/>
@@ -118,16 +148,16 @@ class CreateProfile extends Component {
                     <div class="section"><span>2</span>Vision &amp; Mision</div>
                     <div class="inner-wrap">
                       <label>Society Vision</label>
-                      <input type="text" onChange={(event) => {this.setState({vision:event.target.value})}}/>
+                      <input type="text" value={this.state.vision} onChange={(event) => {this.setState({vision:event.target.value})}}/>
                       <br/>
                       <label>Society Mision</label> 
-                      <input type="text" onChange={(event) => {this.setState({mission:event.target.value})}}/>
+                      <input type="text" value={this.state.mission} onChange={(event) => {this.setState({mission:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>3</span>Description</div>
                         <div class="inner-wrap">
                         <label>Society Description</label>
-                        <textarea id="txtArea" onChange={(event) => {this.setState({desc:event.target.value})}}></textarea>
+                        <textarea id="txtArea" value={this.state.desc} onChange={(event) => {this.setState({desc:event.target.value})}}></textarea>
                     </div>
 
                     <div class="button-section">
@@ -156,13 +186,19 @@ const styles = {
 const mapStateToProps = (state, props) => {
   console.log(JSON.stringify(state));
   return {
-    createdSocietyId: state.create.createdSocietyId
+    createdSocietyId: state.create.createdSocietyId,
+    name: state.data.societyName,
+    category: state.data.societyCategory,
+    vision: state.data.societyVision,
+    mission: state.data.societyMission,
+    desc: state.data.societyDesc
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    onCreate: create
+    onCreate: create,
+    onRetrieveData: retrieveData
   }, dispatch);
 };
 
