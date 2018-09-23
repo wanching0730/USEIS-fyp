@@ -7,24 +7,42 @@ import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import '../style/form.css';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { create } from '../actions/post-action';
+
 class CreateProfile extends Component {
 
   constructor(props){
     super(props);
 
     this.state = {
-      society_name:'',
-      society_desc:'',
+      name:'',
+      desc:'',
+      category: '',
+      vision: '',
+      mission: ''
     }
+  }
+
+  handleClick(event) {
+    const { name, desc, venue, chairperson, contact } = this.state;
     
-    if(this.props.params.societyId != null) {
-      console.log(this.props.params.societyId);
-      // fetch(`http://localhost:5000/puppies/` + this.props.params.societyId).then(result => result.json()).then(reply => {
-      //   this.setState ({
-      //     society_name: reply[0][1],
-      //     society_desc: reply[0][2]
-      //   });
-      // });
+    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' ) {
+      confirmAlert({
+        title: 'Warning',
+        message: 'Please fill in all empty fields before proceed',
+        buttons: [
+            {
+                label: 'Close'
+            }
+        ]
+      })
+      return false;
+    } else {
+      let data = this.state
+      console.log("event content: " + JSON.stringify(data));
+      this.props.onCreate("event", data);
     }
   }
 
@@ -33,20 +51,20 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
-    
     if(this.props.params.societyId == null) {
       browserHistory.push("/society");
     } else {
       browserHistory.push("/myProfile");
     }
-    
-    //  console.log(this.state.society_name);
-    //  console.log(this.state.society_desc);
-    }
+  }
 
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
+
+    const societyCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
+    {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
+    {value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}];
 
     var header;
 
@@ -78,33 +96,34 @@ class CreateProfile extends Component {
                         <label>Society Name</label>  
                         {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
                         <input type="text" onChange={(event) => {
-                          this.setState({first_name:event.target.value});
-                          console.log("state value: " + this.state.first_name);
+                          this.setState({name:event.target.value});
+                          console.log("state value: " + this.state.name);
                           }}/>
                         <br/>
                         <label>Society Category</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                        <select value={this.state.category} onChange={this.handleEventCategory}>
+                          {societyCategories.map(this.mapItem)}
+                        </select>
                     </div>
 
                     <div class="section"><span>2</span>Vision &amp; Mision</div>
                     <div class="inner-wrap">
                       <label>Society Vision</label>
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <input type="text" onChange={(event) => {this.setState({vision:event.target.value})}}/>
                       <br/>
                       <label>Society Mision</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                      <input type="text" onChange={(event) => {this.setState({mission:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>3</span>Description</div>
                         <div class="inner-wrap">
                         <label>Society Description</label>
-                        <textarea id="txtArea"></textarea>
+                        <textarea id="txtArea" onChange={(event) => {this.setState({desc:event.target.value})}}></textarea>
                     </div>
 
                     <div class="button-section">
                       <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                       <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                    {/* <input type="submit" name="Sign Up" onClick="handleClick()" /> */}
                     </div>
                 </form>
               </div>
@@ -125,4 +144,17 @@ const styles = {
   }
 };
 
-export default CreateProfile;
+const mapStateToProps = (state, props) => {
+  console.log(JSON.stringify(state));
+  return {
+    createdSocietyId: state.create.createdSocietyId
+  };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    onCreate: create
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(CreateProfile);
