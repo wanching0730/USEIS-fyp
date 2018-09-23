@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 import moment from "moment";
 import DatePicker from "react-datepicker";
+import { confirmAlert } from 'react-confirm-alert';
 import "react-datepicker/dist/react-datepicker.css";
 import '../style/form.css';
 
@@ -45,15 +46,38 @@ class CreateEvent extends Component {
     window.scrollTo(0, 0);
   }
 
+  checkForm(form) {
+    console.log("name value: " + form.elements["name"].value);
+    if(form.elements["name"].value == null) {
+      
+    } else 
+      return true;
+  }
+
   handleClick(event) {
-    console.log(moment(this.state.startDate));
-    console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
-    console.log("end date: " + moment(this.state.selectedStartDate).format("YYYY-MM-DD hh:mm:ss"));
-    console.log("event category: " + this.state.eventCategory);
-    console.log("softskill category: " + this.state.softskillCategory);
-    let data = this.state
-    console.log("event content: " + JSON.stringify(data));
-    this.props.onCreate("event", data);
+    // console.log(moment(this.state.startDate));
+    // console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
+    // console.log("end date: " + moment(this.state.selectedStartDate).format("YYYY-MM-DD hh:mm:ss"));
+    // console.log("event category: " + this.state.eventCategory);
+    // console.log("softskill category: " + this.state.softskillCategory);
+    const { name, desc, venue, chairperson, contact } = this.state;
+    
+    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' ) {
+      confirmAlert({
+        title: 'Warning',
+        message: 'Please fill in all empty fields before proceed',
+        buttons: [
+            {
+                label: 'Close'
+            }
+        ]
+      })
+      return false;
+    } else {
+      let data = this.state
+      console.log("event content: " + JSON.stringify(data));
+      this.props.onCreate("event", data);
+    }
   }
 
   handleStart(date) {
@@ -128,7 +152,7 @@ class CreateEvent extends Component {
                     <div class="inner-wrap">
                         <label>Event Name</label>  
                         {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
-                        <input type="text" onChange={(event) => {
+                        <input type="text" ref="name" onChange={(event) => {
                           this.setState({name:event.target.value});
                           console.log("state value: " + this.state.name);
                           }}/>
@@ -140,7 +164,7 @@ class CreateEvent extends Component {
                         {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                         <br/>
                         <label>Event Description</label>
-                        <textarea name="field2" onChange={(event) => {
+                        <textarea name="desc" onChange={(event) => {
                           this.setState({desc: event.target.value});
                         }}></textarea>
                     </div>
@@ -173,29 +197,29 @@ class CreateEvent extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                       <br/>
                       <label>Event Venue</label> 
-                      <input type="text" onChange={(event) => {this.setState({venue:event.target.value})}}/>
+                      <input type="text"  name="venue" onChange={(event) => {this.setState({venue:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>3</span>Fee</div>
                         <div class="inner-wrap">
                         <label>Event Fee</label>
-                        <input type="text" onChange={(event) => {this.setState({fee:event.target.value})}}/>
+                        <input type="text" name="fee" onChange={(event) => {this.setState({fee:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>4</span>Organizing Chairperson Name &amp; Contact Number</div>
                     <div class="inner-wrap">
                       <label>Chairperson Name</label>
-                      <input type="text" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
+                      <input type="text" name="chairperson" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
                       <br/>
                       <label>Chairperson Contact Number</label> 
-                      <input type="text" onChange={(event) => {this.setState({contact:event.target.value})}}/>
+                      <input type="text" name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
                       <br/>
                     </div>
 
                     <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
                     <div class="inner-wrap">
                       <label>Soft Skill Points</label>
-                      <input type="text" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
+                      <input type="text" name="ssPoint" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
                       <br/>
                       <label>Soft Skill Category</label> 
                       <select value={this.state.ssCategory} onChange={this.handleSoftskilltCategory}>
