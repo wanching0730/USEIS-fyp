@@ -1,5 +1,6 @@
 import {browserHistory} from 'react-router';
 import { createData } from '../utils/http_function';
+import { confirmAlert } from 'react-confirm-alert';
 
 import {
     CREATE_SOCIETY,
@@ -32,6 +33,21 @@ export function create(type, postData) {
 
         return createData(type, data).then(result => result.json()).then(reply => {
             console.log("post data reply: " + reply);
+
+            if(reply != null) {
+                confirmAlert({
+                    title: 'Message',
+                    message: 'Event has been created successfully',
+                    buttons: [
+                        {
+                            label: 'Close',
+                            onClick: () => {
+                                browserHistory.push('/perEvent/' + reply);
+                            }
+                        }
+                    ]
+                  })
+            }
 
             // if(type == "society") {
             //     dispatch(createSocietySuccessful(id));
