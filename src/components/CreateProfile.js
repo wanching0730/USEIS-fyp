@@ -5,6 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
+import { confirmAlert } from 'react-confirm-alert';
 import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
@@ -19,16 +20,22 @@ class CreateProfile extends Component {
     this.state = {
       name:'',
       desc:'',
-      category: '',
+      category: 'dance',
       vision: '',
       mission: ''
     }
+
+    this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   handleClick(event) {
-    const { name, desc, venue, chairperson, contact } = this.state;
+    const { name, desc, vision, mission } = this.state;
     
-    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' ) {
+    if(name == '' || desc == '' || vision == '' ||  mission == '') {
       confirmAlert({
         title: 'Warning',
         message: 'Please fill in all empty fields before proceed',
@@ -41,21 +48,23 @@ class CreateProfile extends Component {
       return false;
     } else {
       let data = this.state
-      console.log("event content: " + JSON.stringify(data));
-      this.props.onCreate("event", data);
+      console.log("society content: " + JSON.stringify(data));
+      this.props.onCreate("society", data);
     }
+
+    // if(this.props.params.societyId == null) {
+    //   browserHistory.push("/society");
+    // } else {
+    //   browserHistory.push("/myProfile");
+    // }
   }
 
-  componentDidMount() {
-    window.scrollTo(0, 0);
+  handleSocietyCategory(event) {
+    this.setState({category: event.target.value});
   }
 
-  handleClick(event) {
-    if(this.props.params.societyId == null) {
-      browserHistory.push("/society");
-    } else {
-      browserHistory.push("/myProfile");
-    }
+  mapItem(item) {
+    return <option value={item.value}>{item.name}</option>;
   }
 
   render() {
@@ -100,8 +109,8 @@ class CreateProfile extends Component {
                           console.log("state value: " + this.state.name);
                           }}/>
                         <br/>
-                        <label>Society Category</label>
-                        <select value={this.state.category} onChange={this.handleEventCategory}>
+                        <label>Society Category (Eg: Technology)</label>
+                        <select value={this.state.category} onChange={this.handleSocietyCategory}>
                           {societyCategories.map(this.mapItem)}
                         </select>
                     </div>

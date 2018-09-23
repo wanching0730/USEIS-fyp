@@ -46,14 +46,6 @@ class CreateEvent extends Component {
     window.scrollTo(0, 0);
   }
 
-  checkForm(form) {
-    console.log("name value: " + form.elements["name"].value);
-    if(form.elements["name"].value == null) {
-      
-    } else 
-      return true;
-  }
-
   handleClick(event) {
     // console.log(moment(this.state.startDate));
     // console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));

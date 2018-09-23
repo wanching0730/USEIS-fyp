@@ -37,25 +37,24 @@ export function create(type, postData) {
             if(reply != null) {
                 confirmAlert({
                     title: 'Message',
-                    message: 'Event has been created successfully',
+                    message: 'Data has been created successfully',
                     buttons: [
                         {
                             label: 'Close',
                             onClick: () => {
-                                browserHistory.push('/perEvent/' + reply);
+                                if(type == "society") {
+                                    dispatch(createSocietySuccessful(reply));
+                                    browserHistory.push('/perSociety/' + reply);
+                                } else {
+                                    dispatch(createEventSuccessful(reply));
+                                    browserHistory.push('/perEvent/' + reply);
+                                }
+                                
                             }
                         }
                     ]
                   })
             }
-
-            // if(type == "society") {
-            //     dispatch(createSocietySuccessful(id));
-            //     browserHistory.push("/perSociety/" + id);
-            // } else {
-            //     dispatch(createEventSuccessful(id));
-            //     browserHistory.push("/societyEvents");
-            // }
         });
     };
 }
