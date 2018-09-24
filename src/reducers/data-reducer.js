@@ -3,8 +3,7 @@ import {
     RETRIEVE_USER_EVENT,
     RETRIEVE_SOCIETIES,
     RETRIEVE_EVENTS,
-    RETRIEVE_S_NEWSFEED,
-    RETRIEVE_E_NEWSFEED
+    RETRIEVE_NEWSFEED
 } from '../constant';
 
 const initialState = {
@@ -66,6 +65,10 @@ export default function dataReducer(state = initialState, { type, payload }) {
         case RETRIEVE_EVENTS:
             return Object.assign({}, state, {
                 events: payload.events
+            });
+        case RETRIEVE_NEWSFEED:
+            return Object.assign({}, state, {
+                newsfeeds: payload.newsfeeds
             });
         default: 
             return state;

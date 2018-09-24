@@ -22,7 +22,7 @@ export function getAllData(type) {
     } else if(type == "event") {
         return fetch(`http://localhost:5000/events`);
     } else if(type == "newsfeed") {
-        return fetch(`http://localhost:5000/newsfeed`);
+        return fetch(`http://localhost:5000/newsfeeds`);
     } 
 }
 

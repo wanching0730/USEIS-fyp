@@ -62,11 +62,11 @@ export function retrieveEventsSuccessful(events) {
     }
 }
 
-export function retrieveNewsfeedSuccessful(newsfeed) {
+export function retrieveNewsfeedSuccessful(newsfeeds) {
     return {
         type: RETRIEVE_NEWSFEED,
         payload: {
-            newsfeed: newsfeed
+            newsfeeds: newsfeeds
         }
     }
 }
@@ -134,8 +134,8 @@ export function retrieveAll(type) {
                     });
                 }
                 dispatch(retrieveEventsSuccessful(events));
-            } else if(type == "newsfeed") {
-                console.log("all newsfeed: " + reply);
+            } else if(type == "newsfeeds") {
+                console.log("all newsfeeds: " + reply);
                 //dispatch(retrieveNewsfeedSuccessful(reply));
             } 
         });
