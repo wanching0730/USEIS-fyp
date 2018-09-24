@@ -5,7 +5,9 @@ import {
     RETRIEVE_SOCIETIES,
     RETRIEVE_EVENTS,
     RETRIEVE_USER_SOCIETY, 
-    RETRIEVE_USER_EVENT
+    RETRIEVE_USER_EVENT,
+    RETRIEVE_S_NEWSFEED,
+    RETRIEVE_E_NEWSFEED
 } from '../constant';
 
 export function retrieveSocietySuccessful(societyName, societyCategory, societyVision, societyMission, societyDesc, societyBoothId) {
@@ -57,6 +59,24 @@ export function retrieveEventsSuccessful(events) {
         type: RETRIEVE_EVENTS,
         payload: {
             events: events
+        }
+    }
+}
+
+export function retrieveSNewsfeedSuccessful(newsfeed) {
+    return {
+        type: RETRIEVE_S_NEWSFEED,
+        payload: {
+            sNewsfeed: newsfeed
+        }
+    }
+}
+
+export function retrieveENewsfeedSuccessful(newsfeed) {
+    return {
+        type: RETRIEVE_E_NEWSFEED,
+        payload: {
+            eNewsfeed: newsfeed
         }
     }
 }
@@ -115,7 +135,7 @@ export function retrieveAll(type) {
                 }
                 console.log("societies in action: " + societies);
                 dispatch(retrieveSocietiesSuccessful(societies));
-            } else {
+            } else if(type == "event") {
                 for(var i = 0; i < reply.length; i++) {
                     events.push ({
                         category: reply[i]["category"],
@@ -124,6 +144,12 @@ export function retrieveAll(type) {
                     });
                 }
                 dispatch(retrieveEventsSuccessful(events));
+            } else if(type == "sNewsfeed") {
+                console.log("society newsfeed: " + reply);
+                //dispatch(retrieveSNewsfeedSuccessful(reply));
+            } else if(type == "eNewsfeed") {
+                console.log("event newsfeed: " + reply);
+                //dispatch(retrieveENewsfeedSuccessful(reply));
             }
         });
     };

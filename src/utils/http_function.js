@@ -19,8 +19,12 @@ export function getData(type, id) {
 export function getAllData(type) {
     if(type == "society") {
         return fetch(`http://localhost:5000/societies`);
-    } else {
+    } else if(type == "event") {
         return fetch(`http://localhost:5000/events`);
+    } else if(type == "sNewsfeed") {
+        return fetch(`http://localhost:5000/societyNewsfeed`);
+    } else if(type == "eNewsfeed") {
+        return fetch(`http://localhost:5000/eventNewsfeed`);
     }
 }
 
