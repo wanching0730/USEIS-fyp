@@ -140,7 +140,7 @@ export function retrieveAll(type) {
 
                 for(var i = 0; i < reply.length; i++) {
                     newsfeeds.push({
-                        ownderId: reply[i]["societyId"],
+                        ownerId: reply[i]["societyId"],
                         name: reply[i]["name"],
                         category: reply[i]["category"],
                         desc: reply[i]["description"],

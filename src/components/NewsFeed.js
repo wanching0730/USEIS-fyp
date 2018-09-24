@@ -67,21 +67,28 @@ class NewsFeed extends Component {
         
         if(newsfeeds != null) {
             var url = "";
+            var type  = "";
             var rows = [];
             for(var i = 0; i < newsfeeds.length; i++) {
                 let newsfeed = newsfeeds[i];
-                if(newsfeed["type"] == "s")
+                if(newsfeed["type"] == "s") {
                     url = "/perSociety/" + newsfeed["ownerId"];
-                else 
+                    type = " Society";
+                }
+                else {
                     url = "/perEvent/" + newsfeed["ownerId"];
+                    type = " Event";
+                }
                 rows.push(
                     <Card>
                         <img className="image" src={ require('../assets/images/its.jpg') } />
                         <CardBody>
-                        <CardTitle>{newsfeed["name"]}</CardTitle>
-                        <CardSubtitle>{newsfeed["category"]}</CardSubtitle>
+                        <CardTitle>{newsfeed["name"]}{type}</CardTitle>
+                        <CardSubtitle>| Category: {newsfeed["category"]} |</CardSubtitle>
+                        <br/>
                         <CardText>{newsfeed["desc"]}</CardText>
-                        <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push(url)}/>
+                        <Link to={url}>View</Link>
+                        {/* <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push(url)}/> */}
                         <CardText>
                             <small className="text-muted">{moment(newsfeed["dateCreate"]).format("MMM DD YYYY hh:mm A")}</small>
                         </CardText>
