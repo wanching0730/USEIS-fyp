@@ -9,6 +9,10 @@ import {browserHistory} from 'react-router';
 import Modal from 'react-modal';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveAll } from '../actions/data-action';
+
 class NewsFeed extends Component {
 
     constructor(props) {
@@ -23,15 +27,13 @@ class NewsFeed extends Component {
         //this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.updateInputValue = this.updateInputValue.bind(this);
+
+        this.props.onRetrieveAll("newsfeeds");
     }
 
     openModal() {
         this.setState({modalIsOpen: true});
     }
-
-    // afterOpenModal() {
-    //     this.subtitle.style.color = '#f00';
-    // }
 
     closeModal() {
         this.setState({modalIsOpen: false});
@@ -149,4 +151,17 @@ const styles = {
       }
 }
 
-export default NewsFeed;
+const mapStateToProps = (state, props) => {
+    console.log("state in newsfeed: " + state.data.newsfeeds);
+    return {
+      newsfeeds: state.data.newsfeeds
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveAll: retrieveAll
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(NewsFeed);
