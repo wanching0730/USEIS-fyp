@@ -2,7 +2,9 @@ import {
     RETRIEVE_USER_SOCIETY,
     RETRIEVE_USER_EVENT,
     RETRIEVE_SOCIETIES,
-    RETRIEVE_EVENTS
+    RETRIEVE_EVENTS,
+    RETRIEVE_S_NEWSFEED,
+    RETRIEVE_E_NEWSFEED
 } from '../constant';
 
 const initialState = {
@@ -26,7 +28,9 @@ const initialState = {
     eventBoothId: null,
 
     societies: null,
-    events: null
+    events: null,
+
+    newsFeeds: null
 };
 
 export default function dataReducer(state = initialState, { type, payload }) {

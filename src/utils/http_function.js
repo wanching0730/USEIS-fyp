@@ -21,11 +21,9 @@ export function getAllData(type) {
         return fetch(`http://localhost:5000/societies`);
     } else if(type == "event") {
         return fetch(`http://localhost:5000/events`);
-    } else if(type == "sNewsfeed") {
-        return fetch(`http://localhost:5000/societyNewsfeed`);
-    } else if(type == "eNewsfeed") {
-        return fetch(`http://localhost:5000/eventNewsfeed`);
-    }
+    } else if(type == "newsfeed") {
+        return fetch(`http://localhost:5000/newsfeed`);
+    } 
 }
 
 export function createData(type, data) {
