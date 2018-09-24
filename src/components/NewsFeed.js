@@ -8,6 +8,7 @@ import '../style/newsfeed.css';
 import {browserHistory} from 'react-router';
 import Modal from 'react-modal';
 import RaisedButton from 'material-ui/RaisedButton';
+import moment from "moment";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -61,7 +62,35 @@ class NewsFeed extends Component {
     render() {
 
         const { RaisedButtonStyle, content } = styles;
+        let newsfeeds = this.props.newsfeeds;
+        console.log("newsfeedsss: " + newsfeeds);
         
+        if(newsfeeds != null) {
+            var url = "";
+            var rows = [];
+            for(var i = 0; i < newsfeeds.length; i++) {
+                let newsfeed = newsfeeds[i];
+                if(newsfeed["type"] == "s")
+                    url = "/perSociety/" + newsfeed["ownerId"];
+                else 
+                    url = "/perEvent/" + newsfeed["ownerId"];
+                rows.push(
+                    <Card>
+                        <img className="image" src={ require('../assets/images/its.jpg') } />
+                        <CardBody>
+                        <CardTitle>{newsfeed["name"]}</CardTitle>
+                        <CardSubtitle>{newsfeed["category"]}</CardSubtitle>
+                        <CardText>{newsfeed["desc"]}</CardText>
+                        <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push(url)}/>
+                        <CardText>
+                            <small className="text-muted">{moment(newsfeed["dateCreate"]).format("MMM DD YYYY hh:mm A")}</small>
+                        </CardText>
+                        </CardBody>
+                    </Card>
+                );
+            }
+        }
+
         return (
             
             <div>
@@ -84,6 +113,7 @@ class NewsFeed extends Component {
                     <div style= {{ textAlign: "left" }}>
                         <RaisedButton label="Create New" primary={false} style={RaisedButtonStyle} onClick={(event) => this.openModal()}/>
                     </div>
+
                     <Modal
                         isOpen={this.state.modalIsOpen}
                         ariaHideApp={false}
@@ -106,8 +136,9 @@ class NewsFeed extends Component {
                     </Modal>
         
                     <div className="card">
+                        {rows}
 
-                        <Card>
+                        {/* <Card>
                             <img className="image" src={ require('../assets/images/its.jpg') } />
                             <CardBody>
                             <CardTitle>Card title</CardTitle>
@@ -125,7 +156,7 @@ class NewsFeed extends Component {
                             <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
                             <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push("/myEvents")}/>
                             </CardBody>
-                        </Card>
+                        </Card> */}
 
                     </div>
                     

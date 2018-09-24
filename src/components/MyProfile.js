@@ -53,7 +53,7 @@ class MyProfile extends Component {
                     <td>halo</td>
                     <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
                 </tr>
-            )
+            );
         }
         
         return (

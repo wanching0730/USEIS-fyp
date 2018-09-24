@@ -114,6 +114,7 @@ export function retrieveAll(type) {
 
             let societies = [];
             let events = [];
+            let newsfeeds = [];
             
             if(type == "society") {
                 for(var i = 0; i < reply.length; i++) {
@@ -136,7 +137,19 @@ export function retrieveAll(type) {
                 dispatch(retrieveEventsSuccessful(events));
             } else if(type == "newsfeeds") {
                 console.log("all newsfeeds: " + reply);
-                //dispatch(retrieveNewsfeedSuccessful(reply));
+
+                for(var i = 0; i < reply.length; i++) {
+                    newsfeeds.push({
+                        ownderId: reply[i]["societyId"],
+                        name: reply[i]["name"],
+                        category: reply[i]["category"],
+                        desc: reply[i]["description"],
+                        dateCreate: reply[i]["dateCreate"],
+                        type: reply[i]["type"]
+                    })
+                }
+                console.log("all newsfeeds 2: " + newsfeeds);
+                dispatch(retrieveNewsfeedSuccessful(newsfeeds));
             } 
         });
     };

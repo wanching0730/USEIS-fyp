@@ -29,7 +29,7 @@ const initialState = {
     societies: null,
     events: null,
 
-    newsFeeds: null
+    newsfeeds: null
 };
 
 export default function dataReducer(state = initialState, { type, payload }) {
