@@ -304,16 +304,6 @@ class NewsFeed extends Component {
         
                     <div className="card">
                         {rows}
-
-                         {/* <Card>
-                            <img className="image" src={ require('../assets/images/its.jpg') } />
-                            <CardBody>
-                            <CardTitle>Card title</CardTitle>
-                            <CardSubtitle>Card subtitle</CardSubtitle>
-                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                            <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push("/myEvents")}/>
-                            </CardBody>
-                        </Card>  */}
                     </div>
                     
                 </div>

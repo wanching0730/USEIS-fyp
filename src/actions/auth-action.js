@@ -94,18 +94,12 @@ export function loginUser(postData) {
                         })
                     }
                 }
-                
-                console.log("user societies: " + JSON.stringify(societies));
-                console.log("user events: " + JSON.stringify(events));
-                console.log("user events: " + JSON.stringify(userEvent));
             }
         
             dispatch(loginUserSuccessful(userName, userId, societies, events, token));
             browserHistory.push("/home");
 
-            //console.log("reply: " + JSON.stringify(reply));
             console.log("token: " + reply["token"]);
-            //console.log("user position: " + reply["userSociety"][0][10]);
             console.log("token in local storage: " + localStorage.getItem('token'));
         })
         .catch(error => {
