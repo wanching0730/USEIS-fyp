@@ -45,6 +45,23 @@ class CreateEvent extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.setOrganiserId();
+
+    setTimeout(function() { 
+      let event = this.props.event;
+      this.setState({
+        name: event["name"],
+        dateTime: event["dateTime"],
+        organiser: event["organiser"],
+        desc: event["desc"], 
+        venue: event["venue"],
+        category: event["category"],
+        fee: event["category"],
+        ssPoint: event["fee"],
+        chairperson: event["chairperson"], 
+        contact: event["contact"],
+        boothId: event["boothId"]
+      })   
+    }.bind(this), 2000)
   }
 
   setOrganiserId() {
@@ -154,7 +171,7 @@ class CreateEvent extends Component {
                     <div class="section"><span>1</span>Name &amp; Category &amp; Description</div>
                     <div class="inner-wrap">
                         <label>Event Name</label>  
-                        <input type="text" ref="name" onChange={(event) => {
+                        <input type="text" value={this.state.name} ref="name" onChange={(event) => {
                           this.setState({name:event.target.value});
                           console.log("state value: " + this.state.name);
                           }}/>
@@ -165,7 +182,7 @@ class CreateEvent extends Component {
                         </select>
                         <br/>
                         <label>Event Description</label>
-                        <textarea name="desc" onChange={(event) => {
+                        <textarea name="desc" value={this.state.desc} onChange={(event) => {
                           this.setState({desc: event.target.value});
                         }}></textarea>
                     </div>
@@ -195,29 +212,29 @@ class CreateEvent extends Component {
                       />
                       <br/>
                       <label>Event Venue</label> 
-                      <input type="text"  name="venue" onChange={(event) => {this.setState({venue:event.target.value})}}/>
+                      <input type="text" value={this.state.venue} name="venue" onChange={(event) => {this.setState({venue:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>3</span>Fee</div>
                         <div class="inner-wrap">
                         <label>Event Fee</label>
-                        <input type="text" name="fee" onChange={(event) => {this.setState({fee:event.target.value})}}/>
+                        <input type="text" value={this.state.fee} name="fee" onChange={(event) => {this.setState({fee:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>4</span>Organizing Chairperson Name &amp; Contact Number</div>
                     <div class="inner-wrap">
                       <label>Chairperson Name</label>
-                      <input type="text" name="chairperson" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
+                      <input type="text" value={this.state.chairperson} name="chairperson" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
                       <br/>
                       <label>Chairperson Contact Number</label> 
-                      <input type="text" name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
+                      <input type="text" value={this.state.contact} name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
                       <br/>
                     </div>
 
                     <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
                     <div class="inner-wrap">
                       <label>Soft Skill Points</label>
-                      <input type="text" name="ssPoint" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
+                      <input type="text" value={this.state.ssPoint} name="ssPoint" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
                       <br/>
                       <label>Soft Skill Category</label> 
                       <select value={this.state.ssCategory} onChange={this.handleSoftskilltCategory}>
@@ -252,7 +269,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
   console.log(JSON.stringify(state));
   return {
-    createdEventId: state.create.createdEventId
+    createdEventId: state.create.createdEventId,
+    event: state.data.event
   };
 };
 
