@@ -32,11 +32,12 @@ class RegisterSociety extends Component {
   }
 
   handleClick(event) {
+    let current = moment();
     let data = {
       societyId: this.props.params.societyId,
       studentId: this.props.id,
       position: "member",
-      joinDate: moment(),
+      joinDate: moment(current).format("YYYY-MM-DD"),
       emailNoti: this.state.emailNoti,
       webNoti: this.state.webNoti
     };

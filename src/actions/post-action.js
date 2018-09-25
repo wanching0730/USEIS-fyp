@@ -36,6 +36,24 @@ export function createNewsfeedSuccessful(newsfeedId) {
     }
 }
 
+export function registerSocietySuccessfully(registeredSocietyId) {
+    return {
+        type: REGISTER_SOCIETY,
+        payload: {
+            registeredSocietyId: registeredSocietyId
+        }
+    }
+}
+
+export function registerEventSuccessfully(registeredEventId) {
+    return {
+        type: REGISTER_EVENT,
+        payload: {
+            registeredEventId: registeredEventId
+        }
+    }
+}
+
 export function create(type, postData) {
     return function (dispatch) {
         const data = Object.keys(postData).map((key) => {
@@ -63,11 +81,11 @@ export function create(type, postData) {
                                     dispatch(createNewsfeedSuccessful(reply));
                                     browserHistory.push('/newsfeeds');
                                 } else if(type == "registerSociety") {
-                                    dispatch();
+                                    dispatch(registerSocietySuccessfully);
                                     browserHistory.push('/perSociety/' + reply);
-                                } else if(type == "registerSociety") {
-                                    dispatch();
-                                    browserHistory.push('/perSociety/' + reply);
+                                } else if(type == "registerEvent") {
+                                    dispatch(registerEventSuccessfully);
+                                    browserHistory.push('/perEvent/' + reply);
                                 }
                                 
                             }
