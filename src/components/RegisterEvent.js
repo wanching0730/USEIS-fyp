@@ -10,17 +10,19 @@ import ReactNotifications from 'react-browser-notifications';
 import '../style/form.css';
 import NotificationModal from './NotificationModal';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { create } from '../actions/post-action';
+
 class RegisterEvent extends Component {
 
   constructor(props){
     super(props);
     this.state={
-      first_name:'',
-      last_name:'',
+      position: 'secretary',
       emailNoti: false,
       webNoti: false,
       vegetarian: true,
-      course: 'accounting'
       // showModal: false
     }
 
@@ -61,14 +63,24 @@ class RegisterEvent extends Component {
   }
 
   handleClick(event) {
-      this.displayText();
-      console.log("course: " + this.state.course);
-      browserHistory.push("/perEvent/1");
+    let current = moment();
+    let data = {
+      eventId: this.props.params.eventId,
+      id: this.props.id,
+      position: this.state.position,
+      joinDate: moment(current).format("YYYY-MM-DD"),
+      emailNoti: this.state.emailNoti,
+      webNoti: this.state.webNoti
+    };
+    this.props.onCreate("registerEvent", data);
+
+      //this.displayText();
+      //browserHistory.push("/perEvent/1");
       // this.setState({showModal: this.state.value});
   }
 
   handleChange(event) {
-    this.setState({course: event.target.value});
+    this.setState({position: event.target.value});
   }
 
   mapItem(item) {
@@ -98,9 +110,9 @@ class RegisterEvent extends Component {
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
-    const courses = [{value:'accounting', name:'Accounting'}, {value:'chemical', name:'Chemical Engineering'}, {value:'civil', name:'Civil Engineering'}, 
+    const positions = [{value:'secretary', name:'Secretary'}, {value:'treasurer', name:'treasurer'}, {value:'logistics', name:'Logistics'}, 
     {value:'electronic', name:'Electronic Engineering'}, {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, 
-    {value:'software', name:'Software Engineering'}, {value:'mbbs', name:'MBBS'}];
+    {value:'publicity', name:'Publicity'}, {value:'programme', name:'Programme'}, {value:'technical', name:'Technical'}];
 
     return (
       <div>
@@ -119,43 +131,17 @@ class RegisterEvent extends Component {
 
             <div className="container" style={ContainerStyle}>
               <div className="form-style-10">
-                <h1>Register Cardio Night Run<span>Register the event now and get yourself a seat!</span></h1>
+                <h1>Register ???<span>Register the event now and get yourself a seat!</span></h1>
                 <form>
-                    <div class="section"><span>1</span>Full Name &amp; ID &amp; IC</div>
+                    <div class="section"><span>1</span>Position</div>
                     <div class="inner-wrap">
-                        <label>Full Name</label>  
-                        {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
-                        <input type="text" onChange={(event) => {
-                          this.setState({first_name:event.target.value});
-                          console.log("state value: " + this.state.first_name);
-                          }}/>
-                        <br/>
-                        <label>Student ID (Eg: 15UEB02834)</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                        <label>Student IC (Eg: 998877-66-5555)</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                    </div>
-
-                    <div class="section"><span>2</span>Course &amp; Year</div>
-                    <div class="inner-wrap">
-                      <label>Course (Eg: Software Engineering)</label>
-                      <select value={this.state.course} onChange={this.handleChange}>
-                        {courses.map(this.mapItem)}
+                      <label>Position (Eg: Logistics Department)</label>
+                      <select value={this.state.position} onChange={this.handleChange}>
+                        {positions.map(this.mapItem)}
                       </select>
-                      <br/>
-                      <label>Year and Semester (Eg: Y1S1)</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
-                    <div class="section"><span>3</span>Email &amp; Phone</div>
-                    <div class="inner-wrap">
-                      <label>Email Address</label>
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                      <label>Phone Number</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                    </div>
-
-                    <div class="section"><span>4</span>Vegetarian</div>
+                    <div class="section"><span>1</span>Vegetarian</div>
                     <div class="inner-wrap">
                     Vegetarian
                     <Checkbox onCheck={(e, checked) => {
@@ -165,7 +151,7 @@ class RegisterEvent extends Component {
                     /> 
                     </div>
 
-                    <div class="section"><span>5</span>Allow Notification</div>
+                    <div class="section"><span>2</span>Allow Notification</div>
                     <div class="inner-wrap">
                       <label>Allow Email Notification</label>
                       <ToggleButton
@@ -200,52 +186,9 @@ class RegisterEvent extends Component {
                       <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                       <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
 
-                    {/* <input type="submit" name="Sign Up" /> */}
                     </div>
                   </form>
                 </div>
-
-            {/* <form>
-            <TextField
-              hintText="Enter your First Name"
-              floatingLabelText="First Name"
-              onChange = {(event,newValue) => this.setState({first_name:newValue})}
-              />
-            <br/>
-            <TextField
-              hintText="Enter your Last Name"
-              floatingLabelText="Last Name"
-              onChange = {(event,newValue) => this.setState({last_name:newValue})}
-              />
-            <br/>
-            <p>Allow Email Notification</p>
-            <ToggleButton
-                value={ this.state.emailNoti || false }
-                onToggle={(value) => {
-                    this.setState({
-                    emailNoti: !value,
-                    })
-                }} />
-            <p>Allow Web Notification</p>
-            <ToggleButton
-                value={ this.state.webNoti || false }
-                onToggle={(value) => {
-                    this.setState({
-                    webNoti: !value,
-                    })
-                }} />
-            <br/>
-            <ReactNotifications
-              onRef={ref => (this.n = ref)} // Required
-              title="Some Title" // Required
-              body="This is the body!"
-              icon="devices-logo.png"
-              tag="abcdef"
-              timeout="1000"
-              onClick={event => this.handleNotiClick(event)}
-            />
-            <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-          </form> */}
           </div>
         </div>
         </MuiThemeProvider>
@@ -266,4 +209,17 @@ const styles = {
   }
 };
 
-export default RegisterEvent;
+const mapStateToProps = (state, props) => {
+  console.log(JSON.stringify(state));
+  return {
+    id: state.auth.id
+  };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    onCreate: create
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(RegisterEvent);
