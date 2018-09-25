@@ -22,13 +22,16 @@ class NewsFeed extends Component {
         this.state = {
             modalIsOpen: false,
             inputValue: "",
-            status: "all"
+
+            status: "all",
+            owner: "society"
         };
     
         this.openModal = this.openModal.bind(this);
         //this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.updateInputValue = this.updateInputValue.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
 
         this.props.onRetrieveAll("newsfeeds");
     }
@@ -52,7 +55,15 @@ class NewsFeed extends Component {
         });
     }
 
+    handleOptionChange(event) {
+        this.setState({
+            owner: event.target.value
+        });
+        
+    }
+
     render() {
+        console.log("owner: " + this.state.owner);
 
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.props.newsfeeds;
@@ -142,7 +153,14 @@ class NewsFeed extends Component {
                         <br/>
                         <br/>
                         <form style={{textAlign:"center"}}>
-                            <label>Status</label>
+                            <label>Post from: </label>
+                            <input type="radio" value="society" 
+                                checked={this.state.owner === 'society'} 
+                                onChange={this.handleOptionChange} />Society
+                            <input type="radio" value="event" 
+                                checked={this.state.owner === 'event'} 
+                                onChange={this.handleOptionChange} />Event
+                            <label>Status: </label>
                             <input onChange={this.updateInputValue} />
                             <br/>
                             <RaisedButton label="Save" primary={true} style={RaisedButtonStyle} onClick={(event) => this.closeModal()}/>
