@@ -33,7 +33,7 @@ class Login extends Component {
   }
 
   render() {
-    console.log("props: " + this.props.userPosition);
+    console.log("user position: " + this.props.userPosition);
     
     const { RaisedButtonStyle } = styles;
 

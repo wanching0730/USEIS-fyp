@@ -9,7 +9,7 @@ import {
     LOGOUT_USER
 } from '../constant';
 
-export function loginUserSuccessful(userName, userId, societies, events, token) {
+export function loginUserSuccessful(userName, userId, id, societies, events, token) {
     localStorage.setItem('token', token);
 
     return {
@@ -17,6 +17,7 @@ export function loginUserSuccessful(userName, userId, societies, events, token) 
         payload: {
             userName: userName,
             userId: userId,
+            id: id,
             societies: societies,
             events: events,
             token: token
@@ -52,12 +53,13 @@ export function loginUser(postData) {
             let token = reply["token"];
             var societies = [];
             var events = [];
-
+            
             let userName = user[0]["name"];
             let userId = user[0]["userId"];
 
             if(userName.substring(0,2) == "00") {
                 console.log("username substring: " + userName.substring(0,2));
+                let id = user[0]["staffId"];
                 for(var i = 0; i < userSociety.length; i++) {
                     societies.push({
                         societyId: userSociety[i][5],
@@ -65,8 +67,10 @@ export function loginUser(postData) {
                     })
                 }
                 console.log("user societies: " + societies);
+                dispatch(loginUserSuccessful(userName, userId, id, societies, events, token));
             } else {
                 console.log("username substring: " + userName.substring(0,2));
+                let id = user[0]["studentId"];
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
                         societies.push({
@@ -94,9 +98,10 @@ export function loginUser(postData) {
                         })
                     }
                 }
+
+                dispatch(loginUserSuccessful(userName, userId, id, societies, events, token));
             }
-        
-            dispatch(loginUserSuccessful(userName, userId, societies, events, token));
+
             browserHistory.push("/home");
 
             console.log("token: " + reply["token"]);

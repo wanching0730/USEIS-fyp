@@ -66,6 +66,8 @@ class NavBar extends Component {
             console.log("position in navbar: " + position);
             console.log("user id in navbar: " + this.props.userId);
             console.log("societies in navbar: " + JSON.stringify(societies));
+            console.log("user id in navbar: " + this.props.userId);
+            console.log("student/staff id in navbar: " + this.props.id);
         }
         
         if(position == "committee") {
@@ -174,6 +176,7 @@ const mapStateToProps = (state, props) => {
     return {
       userName: state.auth.userName,
       userId: state.auth.userId,
+      id: state.auth.id,
       societies: state.auth.societies,
       isAuthenticated: state.auth.isAuthenticated
     };

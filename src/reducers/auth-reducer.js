@@ -8,6 +8,8 @@ import {
 const initialState = {
     token: null,
     userName: null,
+    userId: null,
+    id: null,
     societies: null,
     events: null,
     isAuthenticated: false,
@@ -21,6 +23,7 @@ export default function authReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 userName: payload.userName,
                 userId: payload.userId,
+                id: payload.id,
                 societies: payload.societies,
                 events: payload.events,
                 token: payload.token,

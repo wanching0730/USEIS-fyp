@@ -9,16 +9,17 @@ import ReactNotifications from 'react-browser-notifications';
 import { Link } from 'react-router';
 import '../style/form.css';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { create } from '../actions/post-action';
+
 class RegisterSociety extends Component {
 
   constructor(props){
     super(props);
     this.state={
-      first_name:'',
-      last_name:'',
-      email:'',
-      password:'',
-      course: 'software'
+      emailNoti: false,
+      webNoti: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,16 +39,16 @@ class RegisterSociety extends Component {
     this.setState({course: event.target.value});
   }
 
-  mapItem(item) {
-    return <option value={item.value}>{item.name}</option>;
-  }
+  // mapItem(item) {
+  //   return <option value={item.value}>{item.name}</option>;
+  // }
   
   render() {
 
-    const { RaisedButtonStyle, ContainerStyle, FormStyle } = styles;
-    const courses = [{value:'software', name:'Software Engineering'}, {value:'chemical', name:'Chemical Engineering'}, {value:'civil', name:'Civil Engineering'},
-    {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, {value:'electronic', name:'Electronic Engineering'},
-    {value:'accounting', name:'Accounting'}, {value:'mbbs', name:'MBBS'}];
+    const { RaisedButtonStyle, ContainerStyle } = styles;
+    // const courses = [{value:'software', name:'Software Engineering'}, {value:'chemical', name:'Chemical Engineering'}, {value:'civil', name:'Civil Engineering'},
+    // {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, {value:'electronic', name:'Electronic Engineering'},
+    // {value:'accounting', name:'Accounting'}, {value:'mbbs', name:'MBBS'}];
 
     return (
       <div>
@@ -68,17 +69,13 @@ class RegisterSociety extends Component {
               <div className="form-style-10">
                 <h1>Register IT Society<span>Register society and looking forward for the upcoming events!</span></h1>
                 <form>
-                    <div class="section"><span>1</span>Name &amp; IC</div>
+                    {/* <div class="section"><span>1</span>Name</div>
                     <div class="inner-wrap">
                         <label>Full Name</label>  
-                        {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
                         <input type="text" onChange={(event) => {
                           this.setState({first_name:event.target.value});
                           console.log("state value: " + this.state.first_name);
                           }}/>
-                        <br/>
-                        <label>IC Number (Eg: 998877-66-5555)</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                     </div>
 
                     <div class="section"><span>2</span>Course &amp; Year</div>
@@ -98,9 +95,10 @@ class RegisterSociety extends Component {
                       <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
                       <br/>
                       <label>Email Address (Eg: abc@hotmail.com)</label> 
-                    </div>
+                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
+                    </div> */}
 
-                      <div class="section"><span>4</span>Allow Notification</div>
+                      <div class="section"><span>1</span>Allow Notification</div>
                       <div class="inner-wrap">
                         <label>Allow Email Notification</label>
                         <ToggleButton
@@ -134,7 +132,6 @@ class RegisterSociety extends Component {
                       <div class="button-section">
                         <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                         <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                      {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                       </div>
                 </form>
               </div>
@@ -153,13 +150,26 @@ const styles = {
   ContainerStyle: {
     margin: 45
   }, 
-  FormStyle: {
-    borderWidth: "3px",
-    borderStyle: "solid",
-    borderColor: "#666",
-    padding: "15px",
-    backgroundColor: "#ebeef4"
-  }
+  // FormStyle: {
+  //   borderWidth: "3px",
+  //   borderStyle: "solid",
+  //   borderColor: "#666",
+  //   padding: "15px",
+  //   backgroundColor: "#ebeef4"
+  // }
 };
 
-export default RegisterSociety;
+const mapStateToProps = (state, props) => {
+  console.log(JSON.stringify(state));
+  return {
+    
+  };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    onCreate: create
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(RegisterSociety);
