@@ -121,6 +121,7 @@ class RegisterEvent extends Component {
     // {value:'publicity', name:'Publicity'}, {value:'programme', name:'Programme'}, {value:'technical', name:'Technical'}];
 
     return (
+
       <div>
         <MuiThemeProvider>
           <div>

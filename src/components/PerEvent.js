@@ -57,8 +57,25 @@ class PerEvent extends Component {
 
     render() {
 
+        var buttons;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         const { name, dateTime, organiser, desc, venue, category, fee, points, chairperson, contact } = this.props;
+
+        if(this.props.userName.substring(0,2) == "00") {
+            buttons =
+                <div style={div3Style}>
+                    <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                </div>
+        } else {
+            buttons =
+                <div style={div3Style}>
+                    <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                    <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
+                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                </div>
+        }
+
         return (
             <div>
                 <NavBar />
@@ -119,11 +136,7 @@ class PerEvent extends Component {
                             <p>{contact}</p>
                             <br/>
                         </div>
-                        <div style={div3Style}>
-                        <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
-                        <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
-                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                        </div>
+                       {buttons}
                     </MuiThemeProvider>
                 </div>
             </div>
@@ -170,6 +183,7 @@ const mapStateToProps = (state, props) => {
       points: state.data.eventPoints,
       chairperson: state.data.eventChairperson,
       contact: state.data.eventContact,
+      userName: state.auth.userName
     };
 };
 
