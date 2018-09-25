@@ -57,9 +57,29 @@ class PerEvent extends Component {
 
     render() {
 
+        console.log("event: " + this.props.event);
+
         var buttons;
+        var event;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
-        const { name, dateTime, organiser, desc, venue, category, fee, points, chairperson, contact } = this.props;
+
+        if(this.props.event != null) {
+            event = this.props.event;
+        } else {
+            event = {
+                name: null,
+                dateTime: null,
+                organiser: null,
+                desc: null,
+                venue: null,
+                category: null,
+                fee: null,
+                ssPoint: null,
+                chairperson: null, 
+                contact: null, 
+                boothId: null,
+            };
+        }
 
         if(this.props.userName.substring(0,2) == "00") {
             buttons =
@@ -99,19 +119,18 @@ class PerEvent extends Component {
 
                 <div>
                     <MuiThemeProvider>
-                        {/* <h1>{this.props.params.societyId}</h1> */}
                         <div style={div1Style}>
                             <img style={imageStyle} src={ require('../assets/images/cardio.jpg') } />
-                            <h1>{name}</h1>
+                            <h1>{event["name"]}</h1>
                         </div>
                         <div style={div2Style}>
                             <h5>Category:</h5>
-                            <p>{category}</p>
+                            <p>{event["category"]}</p>
                             <h5>Organiser:</h5>
-                            <p>{organiser} Society</p>
+                            <p>{event["organiser"]} Society</p>
                             <h5>Description:</h5>
                             <p>
-                                {desc}
+                                {event["desc"]}
                                 {/* The biggest challenge to IT in the future is security. 
                                 Security could negatively impact connectivity to public networks. 
                                 If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
@@ -119,21 +138,21 @@ class PerEvent extends Component {
                                 toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security. */}
                             </p>
                             <h5>Date:</h5>
-                            <p>{dateTime}</p>
+                            <p>{event["dateTime"]}</p>
                             <h5>Time:</h5>
-                            <p>{dateTime}</p>
+                            <p>{event["dateTime"]}</p>
                             <h5>Venue:</h5>
-                            <p>{venue}</p>
+                            <p>{event["venue"]}</p>
                             <h5>Fee:</h5>
-                            <p>RM{fee}</p>
+                            <p>RM{event["fee"]}</p>
                             <h5>Soft Skill Points:</h5>
-                            <p>{points}</p>
+                            <p>{event["ssPoint"]}</p>
                             <h5>Soft Skill Category:</h5>
                             <p>???</p>
                             <h5>Chairperson:</h5>
-                            <p><a href="https://www.facebook.com/ho.m.hm">{chairperson}</a></p>
+                            <p><a href="https://www.facebook.com/ho.m.hm">{event["chairperson"]}</a></p>
                             <h5>Contact Number:</h5>
-                            <p>{contact}</p>
+                            <p>{event["contact"]}</p>
                             <br/>
                         </div>
                        {buttons}
@@ -173,17 +192,8 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-      name: state.data.eventName,
-      dateTime: state.data.eventDateTime,
-      organiser: state.data.organiser,
-      desc: state.data.eventDesc,
-      venue: state.data.eventVenue,
-      category: state.data.eventCategory,
-      fee: state.data.eventFee,
-      points: state.data.eventPoints,
-      chairperson: state.data.eventChairperson,
-      contact: state.data.eventContact,
-      userName: state.auth.userName
+        event: state.data.event,
+        userName: state.auth.userName
     };
 };
 

@@ -6,40 +6,23 @@ import {
     RETRIEVE_EVENTS,
     RETRIEVE_USER_SOCIETY, 
     RETRIEVE_USER_EVENT,
-    RETRIEVE_NEWSFEED,
-    DONE_UPDATE_NEWSFEED
+    RETRIEVE_NEWSFEED
 } from '../constant';
 
-export function retrieveSocietySuccessful(societyName, societyCategory, societyVision, societyMission, societyDesc, societyBoothId) {
+export function retrieveSocietySuccessful(society) {
     return {
         type: RETRIEVE_USER_SOCIETY,
         payload: {
-            societyName: societyName,
-            societyCategory: societyCategory,
-            societyVision: societyVision,
-            societyMission: societyMission,
-            societyDesc: societyDesc,
-            societyBoothId: societyBoothId
+            society: society
         }
     };
 }
 
-export function retrieveEventSuccessful(eventName, eventDateTime, organiser, eventDesc, eventVenue,
-    eventCategory, eventFee, eventPoints, eventChairperson, eventContact, eventBoothId) {
+export function retrieveEventSuccessful(event) {
         return {
             type: RETRIEVE_USER_EVENT,
             payload: {
-                eventName: eventName,
-                eventDateTime: eventDateTime,
-                organiser: organiser,
-                eventDesc: eventDesc,
-                eventVenue: eventVenue,
-                eventCategory: eventCategory,
-                eventFee: eventFee,
-                eventPoints: eventPoints,
-                eventChairperson: eventChairperson, 
-                eventContact: eventContact, 
-                eventBoothId: eventBoothId
+                event: event
             }
         };
 }
@@ -51,7 +34,6 @@ export function retrieveSocietiesSuccessful(societies) {
             societies: societies
         }
     }
-
 }
 
 export function retrieveEventsSuccessful(events) {
@@ -78,31 +60,35 @@ export function retrieveData(type, id) {
             console.log("result of get society: " + JSON.stringify(reply));
 
             if(type == "society") {
-                let societyName = reply[0]["name"];
-                let societyCategory = reply[0]["category"];
-                let societyVision = reply[0]["vision"];
-                let societyMission = reply[0]["mission"];
-                let societyDesc = reply[0]["description"];
-                let societyBoothId = reply[0]["boothId"];
+                let society = {
+                    name: reply[0]["name"],
+                    category: reply[0]["category"],
+                    vision: reply[0]["vision"],
+                    mission: reply[0]["mission"],
+                    desc: reply[0]["description"],
+                    boothId: reply[0]["boothId"],
+                }
 
-                dispatch(retrieveSocietySuccessful(societyName, societyCategory, societyVision, societyMission, societyDesc, societyBoothId));
+                dispatch(retrieveSocietySuccessful(society));
             } else {
                 console.log("result of get event: " + JSON.stringify(reply));
 
-                let eventName = reply[0]["name"];
-                let eventDateTime = reply[0]["eventDateTime"];
-                let organiser = reply[0]["organiser"];
-                let eventDesc = reply[0]["description"];
-                let eventVenue = reply[0]["venue"];
-                let eventCategory = reply[0]["category"];
-                let eventFee = reply[0]["fee"];
-                let eventPoints = reply[0]["ssPoint"];
-                let eventChairperson = reply[0]["chairperson"];
-                let eventContact = reply[0]["contact"];
-                let eventBoothId = reply[0]["boothId"];
+                let event = {
+                    name: reply[0]["name"],
+                    dateTime: reply[0]["eventDateTime"],
+                    organiser: reply[0]["organiser"],
+                    desc: reply[0]["description"],
+                    venue: reply[0]["venue"],
+                    category: reply[0]["category"],
+                    fee: reply[0]["fee"],
+                    ssPoint: reply[0]["ssPoint"],
+                    chairperson: reply[0]["chairperson"],
+                    contact: reply[0]["contact"],
+                    boothId: reply[0]["boothId"],
+                }
 
-                dispatch(retrieveEventSuccessful(eventName, eventDateTime, organiser, eventDesc, eventVenue,
-                    eventCategory, eventFee, eventPoints, eventChairperson, eventContact, eventBoothId));
+                console.log("event in action: " + JSON.stringify(event));
+                dispatch(retrieveEventSuccessful(event));
             }
         });
     };

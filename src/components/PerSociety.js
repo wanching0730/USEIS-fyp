@@ -36,10 +36,20 @@ class PerSociety extends Component {
     render() {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
-        const { name, category, vision, mission, desc } = this.props;
-
-        console.log("society vision: " + this.props.vision);
-        console.log("society mission: " + this.props.mission);
+        var society;
+        
+        if(this.props.society != null) {
+            society = this.props.society;
+        } else {
+            society = {
+                name: null,
+                category: null,
+                vision: null,
+                mission: null,
+                desc: null,
+                boothId: null,
+            };
+        }
 
         return (
             <div>
@@ -65,18 +75,18 @@ class PerSociety extends Component {
                     <MuiThemeProvider>
                         <div style={div1Style}>
                             <img style={imageStyle} src={ require('../assets/images/its.jpg') } />
-                            <h1>{name}</h1>
+                            <h1>{society["name"]}</h1>
                         </div>
                         <div style={div2Style}>
                             <h5>Category:</h5>
-                            <p>{category}</p>
+                            <p>{society["category"]}</p>
                             <h5>Vision</h5>
-                            <p>{vision}</p>
+                            <p>{society["vision"]}</p>
                             <h5>Mision</h5>
-                            <p>{mission}</p>
+                            <p>{society["mission"]}</p>
                             <h5>Description:</h5>
                             <p>
-                                {desc}
+                                {society["desc"]}
                                 {/* The biggest challenge to IT in the future is security. 
                                 Security could negatively impact connectivity to public networks. 
                                 If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
@@ -126,11 +136,7 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-      name: state.data.societyName,
-      category: state.data.societyCategory,
-      vision: state.data.societyVision,
-      mission: state.data.societyMission,
-      desc: state.data.societyDesc
+        society: state.data.society
     };
 };
 
