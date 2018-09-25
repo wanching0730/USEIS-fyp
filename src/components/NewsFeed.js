@@ -7,6 +7,7 @@ import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardText, CardBody,
 import '../style/newsfeed.css';
 import Modal from 'react-modal';
 import RaisedButton from 'material-ui/RaisedButton';
+import { confirmAlert } from 'react-confirm-alert';
 import moment from "moment";
 
 import { connect } from 'react-redux';
@@ -88,36 +89,49 @@ class NewsFeed extends Component {
         this.setState({modalIsOpen: false});
         console.log("closemodal ownerId:" + this.state.ownerId);
 
-        if(this.state.owner == "s") {
-            let societies = this.props.societies;
-            for(var i = 0; i < societies.length; i++) {
-                let society = societies[i];
-                if(society["societyId"] == this.state.ownerId) {
-                    // call submit() method after the state is set completely
-                    this.setState({
-                        ownerName: society["name"],
-                        ownerCategory: society["category"]
-                    }, () => {
-                        this.submit();
-                    })
-                    return;
+        if(this.state.inputValue == "") {
+            confirmAlert({
+              title: 'Warning',
+              message: 'Please fill in all empty fields before proceed',
+              buttons: [
+                  {
+                      label: 'Close'
+                  }
+              ]
+            })
+            return false;
+          } else {
+            if(this.state.owner == "s") {
+                let societies = this.props.societies;
+                for(var i = 0; i < societies.length; i++) {
+                    let society = societies[i];
+                    if(society["societyId"] == this.state.ownerId) {
+                        // call submit() method after the state is set completely
+                        this.setState({
+                            ownerName: society["name"],
+                            ownerCategory: society["category"]
+                        }, () => {
+                            this.submit();
+                        })
+                        return;
+                    }
+                }
+            } else {
+                let events = this.props.events;
+                for(var i = 0; i < events.length; i++) {
+                    let event = events[i];
+                    if(event["eventId"] == this.state.ownerId) {
+                        this.setState({
+                            ownerName: event["name"],
+                            ownerCategory: event["category"]
+                        }, () => {
+                            this.submit();
+                        })
+                        return;
+                    }
                 }
             }
-        } else {
-            let events = this.props.events;
-            for(var i = 0; i < events.length; i++) {
-                let event = events[i];
-                if(event["eventId"] == this.state.ownerId) {
-                    this.setState({
-                        ownerName: event["name"],
-                        ownerCategory: event["category"]
-                    }, () => {
-                        this.submit();
-                    })
-                    return;
-                }
-            }
-        }
+          }
     }
 
     submit() {
@@ -135,7 +149,13 @@ class NewsFeed extends Component {
 
         this.props.onCreate("newsfeeds", data);
 
-        this.forceUpdate();
+        this.setState({
+            status: "all",
+            owner: "s",
+            ownerId: null,
+            ownerName: null,
+            ownerCategory: null
+        })
     }
 
     updateInputValue(event) {
