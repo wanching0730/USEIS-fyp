@@ -35,8 +35,16 @@ export function createData(type, data) {
         },
         body: data
     });
-    } else {
+    } else if(type == "event") {
         return fetch(`http://localhost:5000/event/create`, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+    });
+    } else if(type == "newsfeeds") {
+        return fetch(`http://localhost:5000/newsfeeds/create`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/x-www-form-urlencoded'

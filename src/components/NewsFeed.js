@@ -44,7 +44,6 @@ class NewsFeed extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.setDefault();
 
         if(this.props.societies != null) {
             let societies = this.props.societies;
@@ -60,7 +59,7 @@ class NewsFeed extends Component {
             }
             this.setState({
                 societyOptions: options
-            });
+            }, () => this.setDefault());
         } 
         
         if(this.props.events != null) {
@@ -77,7 +76,7 @@ class NewsFeed extends Component {
             }
             this.setState({
                 eventOptions: options
-            });
+            }, () => this.setDefault());
         }
     }
 
@@ -122,18 +121,19 @@ class NewsFeed extends Component {
     }
 
     submit() {
-        var data = [];
         let current = moment();
-        data.push({
+        let data = {
             id: this.state.ownerId,
             name: this.state.ownerName,
             category: this.state.ownerCategory,
             desc: this.state.inputValue,
             dateCreate: moment(current).format("YYYY-MM-DD hh:mm:ss"),
             type: this.state.owner
-        });
+        };
 
         console.log("owner data: " + JSON.stringify(data));
+
+        this.props.onCreate("newsfeeds", data);
     }
 
     updateInputValue(event) {
