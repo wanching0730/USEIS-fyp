@@ -99,6 +99,7 @@ class CreateEvent extends Component {
   }
 
   render() {
+    console.log("society id in create event: " + JSON.stringify(this.props));
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
 
@@ -113,7 +114,7 @@ class CreateEvent extends Component {
     var header;
     var activeBreadCrumb;
 
-    if(this.props.params.eventId == null) {
+    if(this.props.params.type == "society") {
         header = <h1>Create Society Event<span>Create a new event for your society and start to promote it!</span></h1>
         activeBreadCrumb = <BreadcrumbItem active>Create Event</BreadcrumbItem>
     } else {

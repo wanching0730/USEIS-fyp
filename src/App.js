@@ -51,7 +51,7 @@ class App extends Component {
           <Route path="/register_crew" component={RegisterCrew}/>
           {/* optional society id for createProfile */}
           <Route path="/createProfile(/:societyId)" component={CreateProfile}/>
-          <Route path="/createEvent(/:eventId)" component={CreateEvent}/>
+          <Route path="/createEvent/:type(society|event)/:id" component={CreateEvent}/>
           <Route path="/myProfile" component={MyProfile}/>
           <Route path="/myEvents" component={MyEvent}/>
           <Route path="/register_booth" component={RegisterBooth}/>

@@ -89,7 +89,7 @@ class PerEvent extends Component {
                 </div>
 
                 <div id="mySidenav" class="sidenav">
-                    <Link to="/createEvent/1" id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
+                    <Link to={`/createEvent/event/` + this.props.params.eventId} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
                     <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
                     <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
                     <Link to="/manageCrew" id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
