@@ -6,7 +6,8 @@ import {
     RETRIEVE_EVENTS,
     RETRIEVE_USER_SOCIETY, 
     RETRIEVE_USER_EVENT,
-    RETRIEVE_NEWSFEED
+    RETRIEVE_NEWSFEED,
+    DONE_UPDATE_NEWSFEED
 } from '../constant';
 
 export function retrieveSocietySuccessful(societyName, societyCategory, societyVision, societyMission, societyDesc, societyBoothId) {

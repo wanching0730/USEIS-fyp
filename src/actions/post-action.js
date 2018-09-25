@@ -1,7 +1,6 @@
 import {browserHistory} from 'react-router';
 import { createData } from '../utils/http_function';
 import { confirmAlert } from 'react-confirm-alert';
-
 import {
     CREATE_SOCIETY,
     CREATE_EVENT,

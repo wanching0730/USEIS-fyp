@@ -7,7 +7,8 @@ import {
 const initialState = {
     createdSocietyId: null,
     createdEventId: null,
-    createdNewsfeedId: null
+    createdNewsfeedId: null,
+    refresh: false
 };
 
 export default function createReducer(state = initialState, { type, payload }) {

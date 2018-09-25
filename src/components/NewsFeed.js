@@ -134,6 +134,8 @@ class NewsFeed extends Component {
         console.log("owner data: " + JSON.stringify(data));
 
         this.props.onCreate("newsfeeds", data);
+
+        this.forceUpdate();
     }
 
     updateInputValue(event) {
@@ -177,11 +179,13 @@ class NewsFeed extends Component {
     }
 
     render() {
+        this.props.onRetrieveAll("newsfeeds");
+
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.props.newsfeeds;
         let filteredNewsfeeds = [];
         var dropdown;
-
+            
         if(this.state.owner == "s") {
             if(this.state.societyOptions != null) {
                 dropdown = <select value={this.state.ownerId} onChange={this.handleOwner}>
