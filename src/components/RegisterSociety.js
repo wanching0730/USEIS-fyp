@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
 import { Link } from 'react-router';
+import moment from "moment";
 import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
@@ -17,7 +18,7 @@ class RegisterSociety extends Component {
 
   constructor(props){
     super(props);
-    this.state={
+    this.state = {
       emailNoti: false,
       webNoti: false
     }
@@ -31,8 +32,16 @@ class RegisterSociety extends Component {
   }
 
   handleClick(event) {
-    console.log("course: " + this.state.course);
-    browserHistory.push("/perSociety/1");
+    let data = {
+      societyId: this.props.params.societyId,
+      studentId: this.props.id,
+      position: "member",
+      joinDate: moment(),
+      emailNoti: this.state.emailNoti,
+      webNoti: this.state.webNoti
+    };
+    this.props.onCreate("registerSociety", data);
+    //browserHistory.push("/perSociety/1");
   }
 
   handleChange(event) {
@@ -162,7 +171,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
   console.log(JSON.stringify(state));
   return {
-    
+    id: state.auth.id
   };
 };
 
