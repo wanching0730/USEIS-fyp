@@ -30,19 +30,6 @@ class CreateProfile extends Component {
     if(this.props.params.societyId != null)  
       this.props.onRetrieveData("society", this.props.params.societyId);
 
-    if(this.props.params.societyId != null && this.props.societyName != null) {
-      const { societyName, societyCategory, societyVision, societyMission, societyDesc } = this.props;
-      this.setState({
-        name: societyName,
-        category: societyCategory,
-        vision: societyVision,
-        mission: societyMission, 
-        desc: societyDesc
-      })
-
-      
-    }
-
     console.log("nammeeee: " + this.props.name);
 
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
@@ -52,13 +39,14 @@ class CreateProfile extends Component {
     window.scrollTo(0, 0);
 
     setTimeout(function() { 
+      let society = this.props.society;
       this.setState({
-        name: this.props.name,
-        desc: this.props.desc,
-        vision: this.props.vision,
-        mission: this.props.mission,
-        category: this.props.category
-      }) 
+        name: society["name"],
+        category: society["category"],
+        vision: society["vision"],
+        mission: society["mission"], 
+        desc: society["desc"]
+      })   
     }.bind(this), 2000)
   }
 
@@ -180,11 +168,7 @@ const mapStateToProps = (state, props) => {
   console.log(JSON.stringify(state));
   return {
     createdSocietyId: state.create.createdSocietyId,
-    name: state.data.societyName,
-    category: state.data.societyCategory,
-    vision: state.data.societyVision,
-    mission: state.data.societyMission,
-    desc: state.data.societyDesc
+    society: state.data.society
   };
 };
 
