@@ -52,13 +52,19 @@ class NavBar extends Component {
         var position;
         let societies = this.props.societies;
 
+        console.log("staff society: " + JSON.stringify(societies));
+
         if(societies != null) {
             for(var i = 0; i < societies.length; i++) {
                 let p = societies[i]["position"];
-                if(p == "chairperson" || p == "secretary")
+                if(p == "chairperson" || p == "secretary") {
                     position = "committee";
-                else if(p == "officer")
-                    position = "officer";
+                    break;
+                }
+                else if(p == "officer" || p == "advisor") {
+                    position = "staff";
+                    break;
+                }
                 else 
                     position = "student";
             }
@@ -81,7 +87,7 @@ class NavBar extends Component {
                     FAQ
                 </DropdownItem>
             </DropdownMenu>
-        } else if(position == "officer") {
+        } else if(position == "staff") {
             dropDownItem = 
             <DropdownMenu left>
                 <DropdownItem name="manageBooth" onClick={this.onClick}>

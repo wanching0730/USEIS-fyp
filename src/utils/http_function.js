@@ -28,7 +28,7 @@ export function getAllData(type) {
 
 export function createData(type, data) {
     if(type == "society") {
-        return fetch(`http://localhost:5000/society/create`, {
+        return fetch(`http://localhost:5000/create/society`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -36,7 +36,7 @@ export function createData(type, data) {
             body: data
         });
     } else if(type == "event") {
-            return fetch(`http://localhost:5000/event/create`, {
+            return fetch(`http://localhost:5000/create/event`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -44,7 +44,7 @@ export function createData(type, data) {
             body: data
         });
     } else if(type == "newsfeeds") {
-            return fetch(`http://localhost:5000/newsfeeds/create`, {
+            return fetch(`http://localhost:5000/create/newsfeeds`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

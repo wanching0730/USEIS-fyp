@@ -60,13 +60,34 @@ export function loginUser(postData) {
             if(userName.substring(0,2) == "00") {
                 console.log("username substring: " + userName.substring(0,2));
                 let id = user[0]["staffId"];
-                for(var i = 0; i < userSociety.length; i++) {
-                    societies.push({
-                        societyId: userSociety[i][5],
-                        position: userSociety[i][7]
-                    })
+                if(userSociety.length > 0) {
+                    for(var i = 0; i < userSociety.length; i++) {
+                        societies.push({
+                            societyId: userSociety[i]["societyId"],
+                            name: userSociety[i]["name"],         
+                            position: userSociety[i]["position"],
+                            joinDate: "-"
+                        })
+                    }
+                    console.log("user societies: " + societies);
                 }
-                console.log("user societies: " + societies);
+
+                if(userEvent.length > 0) {
+                    for(var i = 0; i < userEvent.length; i++) {
+                        events.push({
+                            eventId: userEvent[i]["eventId"],
+                            name: userEvent[i]["name"],
+                            category: userEvent[i]["category"],
+                            date: userEvent[i]["eventDateTime"],
+                            organiser: userEvent[i]["organiser"],
+                            joinDate: userEvent[i]["joinDate"],
+                            position: userEvent[i]["position"],
+                            crewStatus: userEvent[i]["crewStatus"],
+                            vegetarian: userEvent[i]["vegetarian"]
+                        })
+                    }
+                }
+                
                 dispatch(loginUserSuccessful(userName, userId, id, societies, events, token));
             } else {
                 console.log("username substring: " + userName.substring(0,2));
