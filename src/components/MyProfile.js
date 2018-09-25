@@ -15,7 +15,7 @@ class MyProfile extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {society: []};
+       // this.state = {society: []};
     }
 
     componentDidMount() {

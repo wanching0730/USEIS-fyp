@@ -24,7 +24,8 @@ class NewsFeed extends Component {
             inputValue: "",
 
             status: "all",
-            owner: "society"
+            owner: "society",
+            ownerId: null
         };
     
         this.openModal = this.openModal.bind(this);
@@ -59,16 +60,56 @@ class NewsFeed extends Component {
         this.setState({
             owner: event.target.value
         });
-        
+    }
+
+    handleOwner(event) {
+        this.setState({
+            ownerId: event.target.value
+        })
+    }
+
+    mapItem(item) {
+        return <option value={item.value}>{item.name}</option>;
     }
 
     render() {
-        console.log("owner: " + this.state.owner);
-
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.props.newsfeeds;
         let filteredNewsfeeds = [];
+        var dropdown;
         console.log("newsfeedsss: " + newsfeeds);
+
+        if(this.state.owner == "society") {
+            let societies = this.props.societies;
+            let societyOptions = [];
+            for(var i = 0; i < societies.length; i++) {
+                let society = societies[i];
+                if(society["position"] == "chairperson" || society["position"] == "secretary") {
+                    societyOptions.push({
+                        value: society["societyId"],
+                        name: society["name"]
+                    });
+                }
+            }
+            dropdown = <select onChange={this.handleOwner}>
+                                {societyOptions.map(this.mapItem)}
+                            </select>
+        } else {
+            let events = this.props.events;
+            let eventOptions = [];
+            for(var i = 0; i < events.length; i++) {
+                let event = events[i];
+                if(event["position"] == "chairperson" || event["position"] == "secretary") {
+                    eventOptions.push({
+                        value: event["eventId"],
+                        name: event["name"]
+                    });
+                }
+            }
+            dropdown = <select onChange={this.handleOwner}>
+                                {eventOptions.map(this.mapItem)}
+                            </select>
+        }
         
         if(newsfeeds != null) {
             var url = "";
@@ -153,13 +194,15 @@ class NewsFeed extends Component {
                         <br/>
                         <br/>
                         <form style={{textAlign:"center"}}>
-                            <label>Post from: </label>
+                            <label>Choose: </label>
                             <input type="radio" value="society" 
                                 checked={this.state.owner === 'society'} 
                                 onChange={this.handleOptionChange} />Society
                             <input type="radio" value="event" 
                                 checked={this.state.owner === 'event'} 
                                 onChange={this.handleOptionChange} />Event
+                            <label>Post From: </label>
+                            {dropdown}
                             <label>Status: </label>
                             <input onChange={this.updateInputValue} />
                             <br/>
@@ -207,7 +250,9 @@ const styles = {
 const mapStateToProps = (state, props) => {
     console.log("state in newsfeed: " + state.data.newsfeeds);
     return {
-      newsfeeds: state.data.newsfeeds
+      newsfeeds: state.data.newsfeeds,
+      societies: state.auth.societies,
+      events: state.auth.events
     };
 };
 
