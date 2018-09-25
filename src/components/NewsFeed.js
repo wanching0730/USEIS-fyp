@@ -5,7 +5,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import '../style/newsfeed.css';
-import {browserHistory} from 'react-router';
 import Modal from 'react-modal';
 import RaisedButton from 'material-ui/RaisedButton';
 import moment from "moment";
@@ -35,7 +34,6 @@ class NewsFeed extends Component {
         };
     
         this.openModal = this.openModal.bind(this);
-        //this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.updateInputValue = this.updateInputValue.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -111,7 +109,6 @@ class NewsFeed extends Component {
             for(var i = 0; i < events.length; i++) {
                 let event = events[i];
                 if(event["eventId"] == this.state.ownerId) {
-                    // call submit() method after the state is set completely
                     this.setState({
                         ownerName: event["name"],
                         ownerCategory: event["category"]
@@ -173,8 +170,6 @@ class NewsFeed extends Component {
         this.setState({
             ownerId: event.target.value
         });
-        console.log("ownerId: " + this.state.ownerId);
-        console.log("event value: " + event.target.value);
     }
 
     mapItem(item) {
@@ -186,9 +181,6 @@ class NewsFeed extends Component {
         let newsfeeds = this.props.newsfeeds;
         let filteredNewsfeeds = [];
         var dropdown;
-        console.log("newsfeedsss: " + newsfeeds);
-        console.log("user event option: " + JSON.stringify(this.state.societyOptions));
-        console.log("user society option: " + JSON.stringify(this.state.eventOptions));
 
         if(this.state.owner == "s") {
             if(this.state.societyOptions != null) {
@@ -244,7 +236,6 @@ class NewsFeed extends Component {
                         <br/>
                         <CardText>{newsfeed["desc"]}</CardText>
                         <Link to={url}>View</Link>
-                        {/* <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push(url)}/> */}
                         <CardText>
                             <small className="text-muted">{moment(newsfeed["dateCreate"]).format("MMM DD YYYY hh:mm A")}</small>
                         </CardText>
@@ -294,12 +285,15 @@ class NewsFeed extends Component {
                             <label>Choose: </label>
                             <input type="radio" value="s" 
                                 checked={this.state.owner === 's'} 
-                                onChange={this.handleOptionChange} />Society
+                                onChange={this.handleOptionChange} /> Society 
+                            &nbsp;
                             <input type="radio" value="e" 
                                 checked={this.state.owner === 'e'} 
-                                onChange={this.handleOptionChange} />Event
+                                onChange={this.handleOptionChange} /> Event
+                            <br/>
                             <label>Post From: </label>
                             {dropdown}
+                            <br/>
                             <label>Status: </label>
                             <input onChange={this.updateInputValue} />
                             <br/>
