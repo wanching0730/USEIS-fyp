@@ -44,6 +44,16 @@ class CreateEvent extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    this.setOrganiserId();
+  }
+
+  setOrganiserId() {
+    let p = this.props.params;
+    if(p.type == "society") {
+      this.setState({
+        organiser: p.id
+      });
+    }
   }
 
   handleClick(event) {
@@ -99,7 +109,7 @@ class CreateEvent extends Component {
   }
 
   render() {
-    console.log("society id in create event: " + JSON.stringify(this.props));
+    console.log("society id in create event: " + JSON.stringify(this.props.params.id));
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
 
