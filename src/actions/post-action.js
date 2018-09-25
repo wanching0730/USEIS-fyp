@@ -4,7 +4,9 @@ import { confirmAlert } from 'react-confirm-alert';
 import {
     CREATE_SOCIETY,
     CREATE_EVENT,
-    CREATE_NEWSFEED
+    CREATE_NEWSFEED,
+    REGISTER_SOCIETY,
+    REGISTER_EVENT
 } from '../constant';
 
 export function createSocietySuccessful(societyId) {
@@ -60,6 +62,12 @@ export function create(type, postData) {
                                 } else if(type == "newsfeeds") {
                                     dispatch(createNewsfeedSuccessful(reply));
                                     browserHistory.push('/newsfeeds');
+                                } else if(type == "registerSociety") {
+                                    dispatch();
+                                    browserHistory.push('/perSociety/' + reply);
+                                } else if(type == "registerSociety") {
+                                    dispatch();
+                                    browserHistory.push('/perSociety/' + reply);
                                 }
                                 
                             }

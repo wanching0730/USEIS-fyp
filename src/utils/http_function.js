@@ -29,27 +29,35 @@ export function getAllData(type) {
 export function createData(type, data) {
     if(type == "society") {
         return fetch(`http://localhost:5000/society/create`, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-    });
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
     } else if(type == "event") {
-        return fetch(`http://localhost:5000/event/create`, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-    });
+            return fetch(`http://localhost:5000/event/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
     } else if(type == "newsfeeds") {
-        return fetch(`http://localhost:5000/newsfeeds/create`, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-    });
+            return fetch(`http://localhost:5000/newsfeeds/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
+    } else if(type == "registerSociety") {
+            return fetch(`http://localhost:5000/register/society`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
     }
 }
