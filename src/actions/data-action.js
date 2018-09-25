@@ -61,6 +61,7 @@ export function retrieveData(type, id) {
 
             if(type == "society") {
                 let society = {
+                    id: reply[0]["societyId"],
                     name: reply[0]["name"],
                     category: reply[0]["category"],
                     vision: reply[0]["vision"],
@@ -74,6 +75,7 @@ export function retrieveData(type, id) {
                 console.log("result of get event: " + JSON.stringify(reply));
 
                 let event = {
+                    id: reply[0]["eventId"],
                     name: reply[0]["name"],
                     dateTime: reply[0]["eventDateTime"],
                     organiser: reply[0]["organiser"],

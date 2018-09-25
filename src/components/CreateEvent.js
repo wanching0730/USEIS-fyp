@@ -46,21 +46,26 @@ class CreateEvent extends Component {
     window.scrollTo(0, 0);
     this.setOrganiserId();
 
+    // wait after 2 seconds just set state
     setTimeout(function() { 
-      let event = this.props.event;
-      this.setState({
-        name: event["name"],
-        dateTime: event["dateTime"],
-        organiser: event["organiser"],
-        desc: event["desc"], 
-        venue: event["venue"],
-        category: event["category"],
-        fee: event["category"],
-        ssPoint: event["fee"],
-        chairperson: event["chairperson"], 
-        contact: event["contact"],
-        boothId: event["boothId"]
-      })   
+      if(this.props.event != null && this.props.params.type == "event") {
+        let event = this.props.event;
+        this.setState({
+          name: event["name"],
+          dateTime: event["dateTime"],
+          organiser: event["organiser"],
+          desc: event["desc"], 
+          venue: event["venue"],
+          category: event["category"],
+          fee: event["category"],
+          ssPoint: event["fee"],
+          chairperson: event["chairperson"], 
+          contact: event["contact"],
+          boothId: event["boothId"],
+          selectedStartDate: moment(event["dateTime"])
+        });
+        console.log("converted date: " + this.state.selectedStartDate);
+      }
     }.bind(this), 2000)
   }
 
