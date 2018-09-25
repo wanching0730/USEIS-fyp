@@ -67,14 +67,18 @@ class RegisterEvent extends Component {
     let data = {
       eventId: this.props.params.eventId,
       id: this.props.id,
-      position: "member",
+      position: "participant",
       joinDate: moment(current).format("YYYY-MM-DD"),
       crewStatus: this.state.crewStatus,
       vegetarian: this.state.vegetarian,
       emailNoti: this.state.emailNoti,
       webNoti: this.state.webNoti
     };
-    this.props.onCreate("registerEvent", data);
+
+    if(this.props.userName.substring(0,2) == "00")
+      this.props.onCreate("staffRegisterEvent", data);
+    else
+      this.props.onCreate("studentRegisterEvent", data);
 
       //this.displayText();
       //browserHistory.push("/perEvent/1");
@@ -217,7 +221,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
   console.log(JSON.stringify(state));
   return {
-    id: state.auth.id
+    id: state.auth.id,
+    userName: state.auth.userName
   };
 };
 

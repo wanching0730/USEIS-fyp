@@ -83,7 +83,7 @@ export function create(type, postData) {
                                 } else if(type == "registerSociety") {
                                     dispatch(registerSocietySuccessfully);
                                     browserHistory.push('/perSociety/' + reply);
-                                } else if(type == "registerEvent") {
+                                } else if(type == "staffRegisterEvent" || type == "studentRegisterEvent") {
                                     dispatch(registerEventSuccessfully);
                                     browserHistory.push('/perEvent/' + reply);
                                 }
