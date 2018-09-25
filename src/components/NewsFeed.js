@@ -21,7 +21,8 @@ class NewsFeed extends Component {
 
         this.state = {
             modalIsOpen: false,
-            inputValue: ""
+            inputValue: "",
+            status: "all"
         };
     
         this.openModal = this.openModal.bind(this);
@@ -48,11 +49,15 @@ class NewsFeed extends Component {
     }
 
     handleSocieties(event) {
-        console.log("click society");
+        this.setState({
+            status: "society"
+        });
     }
 
     handleEvents(event) {
-        console.log("click event");
+        this.setState({
+            status: "event"
+        });
     }
 
     componentDidMount() {
@@ -63,14 +68,28 @@ class NewsFeed extends Component {
 
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.props.newsfeeds;
+        let filteredNewsfeeds = [];
         console.log("newsfeedsss: " + newsfeeds);
         
         if(newsfeeds != null) {
             var url = "";
             var type  = "";
             var rows = [];
-            for(var i = 0; i < newsfeeds.length; i++) {
-                let newsfeed = newsfeeds[i];
+
+            if(this.state.status == "society") {
+                for(var i = 0; i < newsfeeds.length; i++) 
+                    if(newsfeeds[i]["type"] == "s")
+                        filteredNewsfeeds.push(newsfeeds[i]);
+            } else if(this.state.status == "event") {
+                for(var i = 0; i < newsfeeds.length; i++) 
+                    if(newsfeeds[i]["type"] == "e")
+                        filteredNewsfeeds.push(newsfeeds[i]);
+            } else {
+                filteredNewsfeeds = newsfeeds;
+            }
+            
+            for(var i = 0; i < filteredNewsfeeds.length; i++) {
+                let newsfeed = filteredNewsfeeds[i];
                 if(newsfeed["type"] == "s") {
                     url = "/perSociety/" + newsfeed["ownerId"];
                     type = " Society";
