@@ -59,5 +59,13 @@ export function createData(type, data) {
             },
             body: data
         });
+    } else if(type == "registerEvent") {
+            return fetch(`http://localhost:5000/register/event`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
     }
 }

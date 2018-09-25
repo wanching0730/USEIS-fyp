@@ -3,10 +3,10 @@ import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {RaisedButton, Checkbox } from 'material-ui';
-import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
+import moment from "moment";
 import '../style/form.css';
 import NotificationModal from './NotificationModal';
 
@@ -19,10 +19,10 @@ class RegisterEvent extends Component {
   constructor(props){
     super(props);
     this.state={
-      position: 'secretary',
       emailNoti: false,
       webNoti: false,
-      vegetarian: true,
+      crewStatus: 0,
+      vegetarian: 1,
       // showModal: false
     }
 
@@ -34,28 +34,28 @@ class RegisterEvent extends Component {
     window.scrollTo(0, 0);
   }
 
-  displayText() {
+  // displayText() {
 
-      if(this.state.webNoti) {
-        if(this.n.supported()) 
-          this.n.show();
-      }
+  //     if(this.state.webNoti) {
+  //       if(this.n.supported()) 
+  //         this.n.show();
+  //     }
 
-      const data = Object.keys(this.state).map((key) => {
-        return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
-      }).join('&');
+  //     const data = Object.keys(this.state).map((key) => {
+  //       return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
+  //     }).join('&');
 
-      fetch(`http://localhost:5000/puppies/create`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-      }).then(function(response) {
-        return response;
-      });
+  //     fetch(`http://localhost:5000/puppies/create`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded'
+  //       },
+  //       body: data
+  //     }).then(function(response) {
+  //       return response;
+  //     });
 
-  }
+  // }
 
   handleNotiClick(event) {
     window.focus()
@@ -67,8 +67,10 @@ class RegisterEvent extends Component {
     let data = {
       eventId: this.props.params.eventId,
       id: this.props.id,
-      position: this.state.position,
+      position: "member",
       joinDate: moment(current).format("YYYY-MM-DD"),
+      crewStatus: this.state.crewStatus,
+      vegetarian: this.state.vegetarian,
       emailNoti: this.state.emailNoti,
       webNoti: this.state.webNoti
     };
@@ -110,9 +112,9 @@ class RegisterEvent extends Component {
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
-    const positions = [{value:'secretary', name:'Secretary'}, {value:'treasurer', name:'treasurer'}, {value:'logistics', name:'Logistics'}, 
-    {value:'electronic', name:'Electronic Engineering'}, {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, 
-    {value:'publicity', name:'Publicity'}, {value:'programme', name:'Programme'}, {value:'technical', name:'Technical'}];
+    // const positions = [{value:'secretary', name:'Secretary'}, {value:'treasurer', name:'treasurer'}, {value:'logistics', name:'Logistics'}, 
+    // {value:'electronic', name:'Electronic Engineering'}, {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, 
+    // {value:'publicity', name:'Publicity'}, {value:'programme', name:'Programme'}, {value:'technical', name:'Technical'}];
 
     return (
       <div>
@@ -133,19 +135,22 @@ class RegisterEvent extends Component {
               <div className="form-style-10">
                 <h1>Register ???<span>Register the event now and get yourself a seat!</span></h1>
                 <form>
-                    <div class="section"><span>1</span>Position</div>
+                    {/* <div class="section"><span>1</span>Position</div>
                     <div class="inner-wrap">
                       <label>Position (Eg: Logistics Department)</label>
                       <select value={this.state.position} onChange={this.handleChange}>
                         {positions.map(this.mapItem)}
                       </select>
-                    </div>
+                    </div> */}
 
                     <div class="section"><span>1</span>Vegetarian</div>
                     <div class="inner-wrap">
                     Vegetarian
                     <Checkbox onCheck={(e, checked) => {
-                        this.setState({vegetarian: !checked});
+                        if(checked)
+                          this.setState({vegetarian: 1});
+                        else 
+                          this.setState({vegetarian: 0});
                         console.log("checked: " + this.state.vegetarian);
                       }}
                     /> 
