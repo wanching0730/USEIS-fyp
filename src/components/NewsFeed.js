@@ -28,7 +28,10 @@ class NewsFeed extends Component {
             owner: "s",
             ownerId: null,
             ownerName: null,
-            ownerCategory: null
+            ownerCategory: null,
+
+            societyOptions: null,
+            eventOptions: null
         };
     
         this.openModal = this.openModal.bind(this);
@@ -44,6 +47,40 @@ class NewsFeed extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
         this.setDefault();
+
+        if(this.props.societies != null) {
+            let societies = this.props.societies;
+            let options = [];
+            for(var i = 0; i < societies.length; i++) {
+                let society = societies[i];
+                if(society["position"] == "chairperson" || society["position"] == "secretary") {
+                    options.push({
+                        value: society["societyId"],
+                        name: society["name"]
+                    });
+                }
+            }
+            this.setState({
+                societyOptions: options
+            });
+        } 
+        
+        if(this.props.events != null) {
+            let events = this.props.events;
+            let options = [];
+            for(var i = 0; i < events.length; i++) {
+                let event = events[i];
+                if(event["position"] == "chairperson" || event["position"] == "secretary") {
+                    options.push({
+                        value: event["eventId"],
+                        name: event["name"]
+                    });
+                }
+            }
+            this.setState({
+                eventOptions: options
+            });
+        }
     }
 
     openModal() {
@@ -52,7 +89,7 @@ class NewsFeed extends Component {
 
     closeModal() {
         this.setState({modalIsOpen: false});
-        console.log("value:" + this.state.inputValue);
+        console.log("closemodal ownerId:" + this.state.ownerId);
 
         if(this.state.owner == "s") {
             let societies = this.props.societies;
@@ -63,6 +100,21 @@ class NewsFeed extends Component {
                     this.setState({
                         ownerName: society["name"],
                         ownerCategory: society["category"]
+                    }, () => {
+                        this.submit();
+                    })
+                    return;
+                }
+            }
+        } else {
+            let events = this.props.events;
+            for(var i = 0; i < events.length; i++) {
+                let event = events[i];
+                if(event["eventId"] == this.state.ownerId) {
+                    // call submit() method after the state is set completely
+                    this.setState({
+                        ownerName: event["name"],
+                        ownerCategory: event["category"]
                     }, () => {
                         this.submit();
                     })
@@ -96,22 +148,22 @@ class NewsFeed extends Component {
     handleOptionChange(event) {
         this.setState({
             owner: event.target.value
-        });
+        }, () => this.setDefault());
     }
 
     setDefault() {
         if(this.state.owner == "s") {
-            let societies = this.props.societies;
-            if(societies != null) {
+            let first = this.state.societyOptions;
+            if(first != null) {
                 this.setState({
-                    ownerId: societies[0]["societyId"]
+                    ownerId: first[0]["value"]
                 });
             }
         } else {
-            let events = this.props.events;
-            if(events != null) {
+            let first = this.state.eventOptions;
+            if(first != null) {
                 this.setState({
-                    ownerId: events[0]["eventId"]
+                    ownerId: first[0]["value"]
                 });
             }
         }
@@ -120,7 +172,9 @@ class NewsFeed extends Component {
     handleOwner(event) {
         this.setState({
             ownerId: event.target.value
-        })
+        });
+        console.log("ownerId: " + this.state.ownerId);
+        console.log("event value: " + event.target.value);
     }
 
     mapItem(item) {
@@ -133,41 +187,21 @@ class NewsFeed extends Component {
         let filteredNewsfeeds = [];
         var dropdown;
         console.log("newsfeedsss: " + newsfeeds);
+        console.log("user event option: " + JSON.stringify(this.state.societyOptions));
+        console.log("user society option: " + JSON.stringify(this.state.eventOptions));
 
         if(this.state.owner == "s") {
-            if(this.props.societies != null) {
-                let societies = this.props.societies;
-                let societyOptions = [];
-                for(var i = 0; i < societies.length; i++) {
-                    let society = societies[i];
-                    if(society["position"] == "chairperson" || society["position"] == "secretary") {
-                        societyOptions.push({
-                            value: society["societyId"],
-                            name: society["name"]
-                        });
-                    }
-                }
-                dropdown = <select onChange={this.handleOwner}>
-                                    {societyOptions.map(this.mapItem)}
-                                </select>
+            if(this.state.societyOptions != null) {
+                dropdown = <select value={this.state.ownerId} onChange={this.handleOwner}>
+                                {this.state.societyOptions.map(this.mapItem)}
+                            </select>;
             } else {
                 dropdown = "No societies available";
             }
         } else {
-            if(this.props.events != null) {
-                let events = this.props.events;
-                let eventOptions = [];
-                for(var i = 0; i < events.length; i++) {
-                    let event = events[i];
-                    if(event["position"] == "chairperson" || event["position"] == "secretary") {
-                        eventOptions.push({
-                            value: event["eventId"],
-                            name: event["name"]
-                        });
-                    }
-                }
-                dropdown = <select onChange={this.handleOwner}>
-                                    {eventOptions.map(this.mapItem)}
+            if(this.state.eventOptions != null) {
+                dropdown = <select value={this.state.ownerId} onChange={this.handleOwner}>
+                                    {this.state.eventOptions.map(this.mapItem)}
                                 </select>
             } else {
                 dropdown = "No events available";
