@@ -143,7 +143,6 @@ class CreateEvent extends Component {
                     <div class="section"><span>1</span>Name &amp; Category &amp; Description</div>
                     <div class="inner-wrap">
                         <label>Event Name</label>  
-                        {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
                         <input type="text" ref="name" onChange={(event) => {
                           this.setState({name:event.target.value});
                           console.log("state value: " + this.state.name);
@@ -153,7 +152,6 @@ class CreateEvent extends Component {
                         <select value={this.state.category} onChange={this.handleEventCategory}>
                           {eventCategories.map(this.mapItem)}
                         </select>
-                        {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                         <br/>
                         <label>Event Description</label>
                         <textarea name="desc" onChange={(event) => {
@@ -173,7 +171,6 @@ class CreateEvent extends Component {
                         dateFormat="LLL"
                         timeCaption="time"
                       />
-                      {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                       <br/>
                       <label>Event End Date &amp; Time </label>
                       <DatePicker
@@ -185,8 +182,6 @@ class CreateEvent extends Component {
                         dateFormat="LLL"
                         timeCaption="time"
                       />
-                      {/* <label>Event Time</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
                       <br/>
                       <label>Event Venue</label> 
                       <input type="text"  name="venue" onChange={(event) => {this.setState({venue:event.target.value})}}/>

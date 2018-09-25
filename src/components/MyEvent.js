@@ -3,7 +3,7 @@ import NavBar from './NavBar';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import {browserHistory, Router} from 'react-router';
+import {browserHistory} from 'react-router';
 import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
@@ -20,14 +20,9 @@ class MyEvent extends Component {
     }
 
     componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0, 0);
     }
-
-    // listSocieties() {
-    //     fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
-    // }
-
+    
     handleSocieties(event) {
         browserHistory.push("/myProfile");
     }

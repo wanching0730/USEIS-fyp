@@ -15,12 +15,7 @@ class SocietyEvents extends Component {
     }
 
     componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0,0);
-    }
-
-    listSocieties() {
-        // fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
     }
 
     render() {

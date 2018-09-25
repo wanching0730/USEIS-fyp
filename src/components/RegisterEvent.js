@@ -116,9 +116,6 @@ class RegisterEvent extends Component {
   render() {
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
-    // const positions = [{value:'secretary', name:'Secretary'}, {value:'treasurer', name:'treasurer'}, {value:'logistics', name:'Logistics'}, 
-    // {value:'electronic', name:'Electronic Engineering'}, {value:'mechanical', name:'Mechanical Engineering'}, {value:'mechatronic', name:'Mechatronic Engineering'}, 
-    // {value:'publicity', name:'Publicity'}, {value:'programme', name:'Programme'}, {value:'technical', name:'Technical'}];
 
     return (
 
@@ -140,14 +137,6 @@ class RegisterEvent extends Component {
               <div className="form-style-10">
                 <h1>Register ???<span>Register the event now and get yourself a seat!</span></h1>
                 <form>
-                    {/* <div class="section"><span>1</span>Position</div>
-                    <div class="inner-wrap">
-                      <label>Position (Eg: Logistics Department)</label>
-                      <select value={this.state.position} onChange={this.handleChange}>
-                        {positions.map(this.mapItem)}
-                      </select>
-                    </div> */}
-
                     <div class="section"><span>1</span>Vegetarian</div>
                     <div class="inner-wrap">
                     Vegetarian

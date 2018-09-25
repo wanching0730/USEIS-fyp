@@ -15,23 +15,10 @@ class Student extends Component {
     }
 
     componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0,0);
     }
 
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
-        // $.ajax({ type: "GET", url:`http://localhost:5000/puppies`, success: function(res) {
-        //     this.setState({society:res});
-        //  }});
-        //axios.get("http://localhost:5000/puppies").then(response => this.setState({society: response.data}));
-    }
-
     render() {
-        // var list = [];
-        // for(var i = 0; i < this.state.society.length; i++) {
-        //     list.push(<p>{this.state.society[i]}</p>);
-        // }
         
         return (
             <div id="outerDiv"> 

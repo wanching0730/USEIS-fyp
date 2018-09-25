@@ -14,18 +14,11 @@ class MyProfile extends Component {
 
     constructor(props) {
         super(props);
-
-       // this.state = {society: []};
     }
 
     componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0, 0);
     }
-
-    // listSocieties() {
-    //     //fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
-    // }
 
     handleSocieties(event) {
         browserHistory.push("/myProfile");

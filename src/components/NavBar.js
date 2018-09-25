@@ -69,11 +69,11 @@ class NavBar extends Component {
                     position = "student";
             }
 
-            console.log("position in navbar: " + position);
-            console.log("user id in navbar: " + this.props.userId);
-            console.log("societies in navbar: " + JSON.stringify(societies));
-            console.log("user id in navbar: " + this.props.userId);
-            console.log("student/staff id in navbar: " + this.props.id);
+            // console.log("position in navbar: " + position);
+            // console.log("user id in navbar: " + this.props.userId);
+            // console.log("societies in navbar: " + JSON.stringify(societies));
+            // console.log("user id in navbar: " + this.props.userId);
+            // console.log("student/staff id in navbar: " + this.props.id);
         }
         
         if(position == "committee") {

@@ -81,12 +81,6 @@ class CreateProfile extends Component {
       console.log("society content: " + JSON.stringify(data));
       this.props.onCreate("society", data);
     }
-
-    // if(this.props.params.societyId == null) {
-    //   browserHistory.push("/society");
-    // } else {
-    //   browserHistory.push("/myProfile");
-    // }
   }
 
   handleSocietyCategory(event) {
@@ -133,7 +127,6 @@ class CreateProfile extends Component {
                     <div class="section"><span>1</span>Name &amp; Category</div>
                     <div class="inner-wrap">
                         <label>Society Name</label>  
-                        {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
                         <input type="text" value={this.state.name} onChange={(event) => {
                           this.setState({name:event.target.value});
                           console.log("state value: " + this.state.name);
