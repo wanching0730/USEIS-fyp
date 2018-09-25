@@ -33,6 +33,10 @@ class NewsFeed extends Component {
         this.props.onRetrieveAll("newsfeeds");
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     openModal() {
         this.setState({modalIsOpen: true});
     }
@@ -46,22 +50,6 @@ class NewsFeed extends Component {
         this.setState({
           inputValue: event.target.value
         });
-    }
-
-    handleSocieties(event) {
-        this.setState({
-            status: "society"
-        });
-    }
-
-    handleEvents(event) {
-        this.setState({
-            status: "event"
-        });
-    }
-
-    componentDidMount() {
-        window.scrollTo(0, 0);
     }
 
     render() {
@@ -132,8 +120,9 @@ class NewsFeed extends Component {
                     </div>
 
                      <div style= {{ textAlign: "center" }}>
-                        <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSocieties(event)}/>
-                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
+                        <RaisedButton label="All" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "all"})}/>
+                        <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "society"})}/>
+                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "event"})}/>
                     </div>
                     
                     <div style= {{ textAlign: "left" }}>
@@ -164,7 +153,7 @@ class NewsFeed extends Component {
                     <div className="card">
                         {rows}
 
-                        {/* <Card>
+                         {/* <Card>
                             <img className="image" src={ require('../assets/images/its.jpg') } />
                             <CardBody>
                             <CardTitle>Card title</CardTitle>
@@ -172,18 +161,7 @@ class NewsFeed extends Component {
                             <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
                             <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push("/myEvents")}/>
                             </CardBody>
-                        </Card>
-    
-                         <Card>
-                            <img className="image" src={ require('../assets/images/its.jpg') } />
-                            <CardBody>
-                            <CardTitle>Card title</CardTitle>
-                            <CardSubtitle>Card subtitle</CardSubtitle>
-                            <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                            <RaisedButton label="View" primary={true} style={RaisedButtonStyle} onClick={(event) => browserHistory.push("/myEvents")}/>
-                            </CardBody>
-                        </Card> */}
-
+                        </Card>  */}
                     </div>
                     
                 </div>
