@@ -84,6 +84,7 @@ export function loginUser(postData) {
                         events.push({
                             eventId: userEvent[i]["eventId"],
                             name: userEvent[i]["name"],
+                            category: userEvent[i]["category"],
                             date: userEvent[i]["eventDateTime"],
                             organiser: userEvent[i]["organiser"],
                             joinDate: userEvent[i]["joinDate"],
