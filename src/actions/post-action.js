@@ -4,7 +4,8 @@ import { confirmAlert } from 'react-confirm-alert';
 
 import {
     CREATE_SOCIETY,
-    CREATE_EVENT
+    CREATE_EVENT,
+    CREATE_NEWSFEED
 } from '../constant';
 
 export function createSocietySuccessful(societyId) {
@@ -21,6 +22,15 @@ export function createEventSuccessful(eventId) {
         type: CREATE_EVENT,
         payload: {
             createdEventId: eventId
+        }
+    }
+}
+
+export function createNewsfeedSuccessful(newsfeedId) {
+    return {
+        type: CREATE_NEWSFEED,
+        payload: {
+            createdNewsfeedId: newsfeedId
         }
     }
 }
@@ -45,9 +55,12 @@ export function create(type, postData) {
                                 if(type == "society") {
                                     dispatch(createSocietySuccessful(reply));
                                     browserHistory.push('/perSociety/' + reply);
-                                } else {
+                                } else if(type == "event") {
                                     dispatch(createEventSuccessful(reply));
                                     browserHistory.push('/perEvent/' + reply);
+                                } else if(type == "newsfeeds") {
+                                    dispatch(createNewsfeedSuccessful(reply));
+                                    browserHistory.push('/newsfeeds');
                                 }
                                 
                             }

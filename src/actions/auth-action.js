@@ -72,6 +72,7 @@ export function loginUser(postData) {
                         societies.push({
                             societyId: userSociety[i]["societyId"],
                             name: userSociety[i]["name"],
+                            category: userSociety[i]["category"],
                             position: userSociety[i]["position"],
                             joinDate: userSociety[i]["joinDate"]
                         })

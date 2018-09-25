@@ -13,6 +13,7 @@ import moment from "moment";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveAll } from '../actions/data-action';
+import { create } from '../actions/post-action';
 
 class NewsFeed extends Component {
 
@@ -24,8 +25,10 @@ class NewsFeed extends Component {
             inputValue: "",
 
             status: "all",
-            owner: "society",
-            ownerId: null
+            owner: "s",
+            ownerId: null,
+            ownerName: null,
+            ownerCategory: null
         };
     
         this.openModal = this.openModal.bind(this);
@@ -33,12 +36,14 @@ class NewsFeed extends Component {
         this.closeModal = this.closeModal.bind(this);
         this.updateInputValue = this.updateInputValue.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
+        this.handleOwner = this.handleOwner.bind(this);
 
         this.props.onRetrieveAll("newsfeeds");
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);
+        this.setDefault();
     }
 
     openModal() {
@@ -48,6 +53,38 @@ class NewsFeed extends Component {
     closeModal() {
         this.setState({modalIsOpen: false});
         console.log("value:" + this.state.inputValue);
+
+        if(this.state.owner == "s") {
+            let societies = this.props.societies;
+            for(var i = 0; i < societies.length; i++) {
+                let society = societies[i];
+                if(society["societyId"] == this.state.ownerId) {
+                    // call submit() method after the state is set completely
+                    this.setState({
+                        ownerName: society["name"],
+                        ownerCategory: society["category"]
+                    }, () => {
+                        this.submit();
+                    })
+                    return;
+                }
+            }
+        }
+    }
+
+    submit() {
+        var data = [];
+        let current = moment();
+        data.push({
+            id: this.state.ownerId,
+            name: this.state.ownerName,
+            category: this.state.ownerCategory,
+            desc: this.state.inputValue,
+            dateCreate: moment(current).format("YYYY-MM-DD hh:mm:ss"),
+            type: this.state.owner
+        });
+
+        console.log("owner data: " + JSON.stringify(data));
     }
 
     updateInputValue(event) {
@@ -60,6 +97,24 @@ class NewsFeed extends Component {
         this.setState({
             owner: event.target.value
         });
+    }
+
+    setDefault() {
+        if(this.state.owner == "s") {
+            let societies = this.props.societies;
+            if(societies != null) {
+                this.setState({
+                    ownerId: societies[0]["societyId"]
+                });
+            }
+        } else {
+            let events = this.props.events;
+            if(events != null) {
+                this.setState({
+                    ownerId: events[0]["eventId"]
+                });
+            }
+        }
     }
 
     handleOwner(event) {
@@ -79,36 +134,44 @@ class NewsFeed extends Component {
         var dropdown;
         console.log("newsfeedsss: " + newsfeeds);
 
-        if(this.state.owner == "society") {
-            let societies = this.props.societies;
-            let societyOptions = [];
-            for(var i = 0; i < societies.length; i++) {
-                let society = societies[i];
-                if(society["position"] == "chairperson" || society["position"] == "secretary") {
-                    societyOptions.push({
-                        value: society["societyId"],
-                        name: society["name"]
-                    });
+        if(this.state.owner == "s") {
+            if(this.props.societies != null) {
+                let societies = this.props.societies;
+                let societyOptions = [];
+                for(var i = 0; i < societies.length; i++) {
+                    let society = societies[i];
+                    if(society["position"] == "chairperson" || society["position"] == "secretary") {
+                        societyOptions.push({
+                            value: society["societyId"],
+                            name: society["name"]
+                        });
+                    }
                 }
+                dropdown = <select onChange={this.handleOwner}>
+                                    {societyOptions.map(this.mapItem)}
+                                </select>
+            } else {
+                dropdown = "No societies available";
             }
-            dropdown = <select onChange={this.handleOwner}>
-                                {societyOptions.map(this.mapItem)}
-                            </select>
         } else {
-            let events = this.props.events;
-            let eventOptions = [];
-            for(var i = 0; i < events.length; i++) {
-                let event = events[i];
-                if(event["position"] == "chairperson" || event["position"] == "secretary") {
-                    eventOptions.push({
-                        value: event["eventId"],
-                        name: event["name"]
-                    });
+            if(this.props.events != null) {
+                let events = this.props.events;
+                let eventOptions = [];
+                for(var i = 0; i < events.length; i++) {
+                    let event = events[i];
+                    if(event["position"] == "chairperson" || event["position"] == "secretary") {
+                        eventOptions.push({
+                            value: event["eventId"],
+                            name: event["name"]
+                        });
+                    }
                 }
+                dropdown = <select onChange={this.handleOwner}>
+                                    {eventOptions.map(this.mapItem)}
+                                </select>
+            } else {
+                dropdown = "No events available";
             }
-            dropdown = <select onChange={this.handleOwner}>
-                                {eventOptions.map(this.mapItem)}
-                            </select>
         }
         
         if(newsfeeds != null) {
@@ -116,11 +179,11 @@ class NewsFeed extends Component {
             var type  = "";
             var rows = [];
 
-            if(this.state.status == "society") {
+            if(this.state.status == "s") {
                 for(var i = 0; i < newsfeeds.length; i++) 
                     if(newsfeeds[i]["type"] == "s")
                         filteredNewsfeeds.push(newsfeeds[i]);
-            } else if(this.state.status == "event") {
+            } else if(this.state.status == "e") {
                 for(var i = 0; i < newsfeeds.length; i++) 
                     if(newsfeeds[i]["type"] == "e")
                         filteredNewsfeeds.push(newsfeeds[i]);
@@ -172,9 +235,9 @@ class NewsFeed extends Component {
                     </div>
 
                      <div style= {{ textAlign: "center" }}>
-                        <RaisedButton label="All" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "all"})}/>
-                        <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "society"})}/>
-                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "event"})}/>
+                        <RaisedButton label="All" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "a"})}/>
+                        <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "s"})}/>
+                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "e"})}/>
                     </div>
                     
                     <div style= {{ textAlign: "left" }}>
@@ -195,11 +258,11 @@ class NewsFeed extends Component {
                         <br/>
                         <form style={{textAlign:"center"}}>
                             <label>Choose: </label>
-                            <input type="radio" value="society" 
-                                checked={this.state.owner === 'society'} 
+                            <input type="radio" value="s" 
+                                checked={this.state.owner === 's'} 
                                 onChange={this.handleOptionChange} />Society
-                            <input type="radio" value="event" 
-                                checked={this.state.owner === 'event'} 
+                            <input type="radio" value="e" 
+                                checked={this.state.owner === 'e'} 
                                 onChange={this.handleOptionChange} />Event
                             <label>Post From: </label>
                             {dropdown}
@@ -258,7 +321,8 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveAll: retrieveAll
+      onRetrieveAll: retrieveAll,
+      onCreate: create
     }, dispatch);
 };
 
