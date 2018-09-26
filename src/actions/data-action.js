@@ -10,23 +10,32 @@ import {
     RETRIEVE_SOCIETY_EVENTS
 } from '../constant';
 
-export function retrieveSocietySuccessful(society) {
-    return {
-        type: RETRIEVE_USER_SOCIETY,
-        payload: {
-            society: society
-        }
-    };
-}
-
-export function retrieveEventSuccessful(event) {
+export function retrieveSingleDataSuccessful(type, data) {
+    if(type == "society") {
+        return {
+            type: RETRIEVE_USER_SOCIETY,
+            payload: {
+                society: data
+            }
+        };
+    } else if(type == "event") {
         return {
             type: RETRIEVE_USER_EVENT,
             payload: {
-                event: event
+                event: data
             }
         };
+    }
 }
+
+// export function retrieveEventSuccessful(event) {
+//         return {
+//             type: RETRIEVE_USER_EVENT,
+//             payload: {
+//                 event: event
+//             }
+//         };
+// }
 
 export function retrieveAllDataSuccessful(type, data) {
     if(type == "societies") {
@@ -103,7 +112,7 @@ export function retrieveData(type, id) {
                     boothId: reply[0]["boothId"],
                 }
 
-                dispatch(retrieveSocietySuccessful(society));
+                dispatch(retrieveSingleDataSuccessful("society", society));
             } else {
                 console.log("result of get event: " + JSON.stringify(reply));
 
@@ -123,7 +132,7 @@ export function retrieveData(type, id) {
                 }
 
                 console.log("event in action: " + JSON.stringify(event));
-                dispatch(retrieveEventSuccessful(event));
+                dispatch(retrieveSingleDataSuccessful("event", event));
             }
         });
     };
