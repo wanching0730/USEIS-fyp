@@ -192,7 +192,7 @@ export function retrieveAll(type) {
                         }
                     })
                 }
-                console.log("all society events 2: " + societyEvents);
+                console.log("all society events: " + societyEvents);
                 dispatch(retrieveAllDataSuccessful("societyEvents", societyEvents));
             }
         });
