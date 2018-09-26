@@ -6,6 +6,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
+import { groupBy } from '../common/common_function';
 import '../style/society.css';
 
 import { connect } from 'react-redux';
@@ -45,15 +46,15 @@ class MyProfile extends Component {
             for(var i = 0; i < societies.length; i++) {
                 var events = [];
                 let society = societies[i];
-                for(var j = 0; j < societyEvents.length; j++) {
-                    let societyEvent = societyEvents[j];
-                    console.log("societyId : " + society["societyId"]);
-                    console.log("society event's societyid : " + societyEvent["societyId"]);
-                    if(society["societyId"] == societyEvent["societyId"]) {
-                        events.push(
-                            <li><Link to={`/perEvent/` + societyEvent["eventId"]}>{societyEvent["eventName"]}</Link></li>
-                        );
-                    }
+                const ids = groupBy(societyEvents, societyEvent => societyEvent["societyId"]);
+                for (const [key, values] of ids.entries()) {
+                    if(society["societyId"] == key) {
+                        values.forEach(value => {
+                            events.push(
+                                <li><Link to={`/perEvent/` + value["eventId"]}>{value["eventName"]}</Link></li>
+                            );
+                        });
+                    }    
                 }
                 rows.push(
                     <tr>
@@ -67,6 +68,31 @@ class MyProfile extends Component {
                     </tr>
                 );
             }
+            // for(var i = 0; i < societies.length; i++) {
+            //     var events = [];
+            //     let society = societies[i];
+            //     for(var j = 0; j < societyEvents.length; j++) {
+            //         let societyEvent = societyEvents[j];
+            //         console.log("societyId : " + society["societyId"]);
+            //         console.log("society event's societyid : " + societyEvent["societyId"]);
+            //         if(society["societyId"] == societyEvent["societyId"]) {
+            //             events.push(
+            //                 <li><Link to={`/perEvent/` + societyEvent["eventId"]}>{societyEvent["eventName"]}</Link></li>
+            //             );
+            //         }
+            //     }
+            //     rows.push(
+            //         <tr>
+            //             <td>{i+1}</td>
+            //             <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
+            //             <td><Link to={`/perSociety/`+society["societyId"]}>{society["name"]}</Link></td>
+            //             <td>{society["joinDate"]}</td>
+            //             <td>{society["position"]}</td>
+            //             <td>{events}</td>
+            //             <td><Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link></td>
+            //         </tr>
+            //     );
+            // }
         }
         
         return (
