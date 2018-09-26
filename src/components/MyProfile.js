@@ -9,11 +9,15 @@ import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveAll } from '../actions/data-action';
 
 class MyProfile extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onRetrieveAll("societyEvent");
     }
 
     componentDidMount() {
@@ -32,25 +36,40 @@ class MyProfile extends Component {
 
         const { imageStyle, RaisedButtonStyle } = styles;
         let societies = this.props.societies;
+        let societyEvents = this.props.societyEvents;
         console.log("societies in profile: " + JSON.stringify(societies));
+        console.log("society events: " + JSON.stringify(this.props.societyEvents));
 
-        var rows = [];
-        for(var i = 0; i < societies.length; i++) {
-            rows.push(
-                <tr>
-                    <td>{i}</td>
-                    <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
-                    <td><Link to={`/perSociety/`+societies[i]["societyId"]}>{societies[i]["name"]}</Link></td>
-                    <td>{societies[i]["joinDate"]}</td>
-                    <td>{societies[i]["position"]}</td>
-                    <td>halo</td>
-                    <td><Link to={`/createProfile/1`}><FontAwesome.FaEdit /></Link></td>
-                </tr>
-            );
+        if(societies != null && societyEvents != null) {
+            var rows = [];
+            for(var i = 0; i < societies.length; i++) {
+                var events = [];
+                let society = societies[i];
+                for(var j = 0; j < societyEvents.length; j++) {
+                    let societyEvent = societyEvents[j];
+                    console.log("societyId : " + society["societyId"]);
+                    console.log("society event's societyid : " + societyEvent["societyId"]);
+                    if(society["societyId"] == societyEvent["societyId"]) {
+                        events.push(
+                            <li><Link to={`/perEvent/` + societyEvent["eventId"]}>{societyEvent["eventName"]}</Link></li>
+                        );
+                    }
+                }
+                rows.push(
+                    <tr>
+                        <td>{i+1}</td>
+                        <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
+                        <td><Link to={`/perSociety/`+society["societyId"]}>{society["name"]}</Link></td>
+                        <td>{society["joinDate"]}</td>
+                        <td>{society["position"]}</td>
+                        <td>{events}</td>
+                        <td><Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link></td>
+                    </tr>
+                );
+            }
         }
         
         return (
-            
             <div>
                 <MuiThemeProvider>
                 <div id="outerDiv"> 
@@ -129,9 +148,17 @@ const styles = {
 }
 
 const mapStateToProps = (state, props) => {
+    console.log("state in society: " + state.data.societies);
     return {
-      societies: state.auth.societies,
+        societies: state.auth.societies,
+        societyEvents: state.data.societyEvents
     };
 };
 
-export default connect(mapStateToProps)(MyProfile);
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveAll: retrieveAll
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(MyProfile);

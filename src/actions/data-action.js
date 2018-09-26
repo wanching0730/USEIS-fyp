@@ -38,14 +38,14 @@ export function retrieveSingleDataSuccessful(type, data) {
 // }
 
 export function retrieveAllDataSuccessful(type, data) {
-    if(type == "societies") {
+    if(type == "society") {
         return {
             type: RETRIEVE_SOCIETIES,
             payload: {
                 societies: data
             }
         }
-    } else if(type == "events") {
+    } else if(type == "event") {
         return {
             type: RETRIEVE_EVENTS,
             payload: {
@@ -59,7 +59,7 @@ export function retrieveAllDataSuccessful(type, data) {
                 newsfeeds: data
             }
         }
-    } else if(type == "societyEvents") {
+    } else if(type == "societyEvent") {
         return {
             type: RETRIEVE_SOCIETY_EVENTS,
             payload: {
@@ -157,7 +157,7 @@ export function retrieveAll(type) {
                     });
                 }
                 console.log("societies in action: " + societies);
-                dispatch(retrieveAllDataSuccessful("societies", societies));
+                dispatch(retrieveAllDataSuccessful("society", societies));
             } else if(type == "event") {
                 for(var i = 0; i < reply.length; i++) {
                     events.push ({
@@ -166,7 +166,7 @@ export function retrieveAll(type) {
                         name: reply[i]["name"]
                     });
                 }
-                dispatch(retrieveAllDataSuccessful("events", events));
+                dispatch(retrieveAllDataSuccessful("event", events));
             } else if(type == "newsfeeds") {
                 console.log("all newsfeeds: " + reply);
 
@@ -186,14 +186,12 @@ export function retrieveAll(type) {
                 for(var i = 0; i < reply.length; i++) {
                     societyEvents.push({
                         societyId: reply[i]["societyId"],
-                        events: {
-                            eventId: reply[i]["eventId"],
-                            eventName: reply[i]["name"]
-                        }
+                        eventId: reply[i]["eventId"],
+                        eventName: reply[i]["name"]
                     })
                 }
                 console.log("all society events: " + societyEvents);
-                dispatch(retrieveAllDataSuccessful("societyEvents", societyEvents));
+                dispatch(retrieveAllDataSuccessful("societyEvent", societyEvents));
             }
         });
     };
