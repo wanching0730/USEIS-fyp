@@ -18,11 +18,11 @@ export function getData(type, id) {
 
 export function getAllData(type) {
     if(type == "society") {
-        return fetch(`http://localhost:5000/societies`);
+        return fetch(`http://localhost:5000/get/societies`);
     } else if(type == "event") {
-        return fetch(`http://localhost:5000/events`);
+        return fetch(`http://localhost:5000/get/events`);
     } else if(type == "newsfeeds") {
-        return fetch(`http://localhost:5000/newsfeeds`);
+        return fetch(`http://localhost:5000/get/newsfeeds`);
     } 
 }
 

@@ -148,7 +148,7 @@ export function retrieveAll(type) {
                     });
                 }
                 console.log("societies in action: " + societies);
-                dispatch(retrieveSocietiesSuccessful("societies", societies));
+                dispatch(retrieveAllDataSuccessful("societies", societies));
             } else if(type == "event") {
                 for(var i = 0; i < reply.length; i++) {
                     events.push ({
@@ -157,7 +157,7 @@ export function retrieveAll(type) {
                         name: reply[i]["name"]
                     });
                 }
-                dispatch(retrieveEventsSuccessful("events", events));
+                dispatch(retrieveAllDataSuccessful("events", events));
             } else if(type == "newsfeeds") {
                 console.log("all newsfeeds: " + reply);
 
@@ -172,7 +172,7 @@ export function retrieveAll(type) {
                     })
                 }
                 console.log("all newsfeeds 2: " + newsfeeds);
-                dispatch(retrieveNewsfeedSuccessful("newsfeeds", newsfeeds));
+                dispatch(retrieveAllDataSuccessful("newsfeeds", newsfeeds));
             } else if(type == "societyEvent") {
                 for(var i = 0; i < reply.length; i++) {
                     societyEvents.push({
@@ -184,7 +184,7 @@ export function retrieveAll(type) {
                     })
                 }
                 console.log("all society events 2: " + societyEvents);
-                dispatch(retrieveNewsfeedSuccessful("societyEvents", societyEvents));
+                dispatch(retrieveAllDataSuccessful("societyEvents", societyEvents));
             }
         });
     };
