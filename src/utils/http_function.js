@@ -27,6 +27,8 @@ export function getAllData(type) {
         return fetch(`http://localhost:5000/get/societyEvent`);
     } else if(type === "societyBooth") {
         return fetch(`http://localhost:5000/get/societyBooth`);
+    } else if(type === "eventBooth") {
+        return fetch(`http://localhost:5000/get/eventBooth`);
     } 
 }
 
@@ -79,5 +81,5 @@ export function createData(type, data) {
             },
             body: data
         });
-    }
+    } 
 }

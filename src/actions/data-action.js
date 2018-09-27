@@ -8,7 +8,8 @@ import {
     RETRIEVE_USER_EVENT,
     RETRIEVE_NEWSFEED,
     RETRIEVE_SOCIETY_EVENTS,
-    RETRIEVE_SOCIETY_BOOTHS
+    RETRIEVE_SOCIETY_BOOTHS,
+    RETRIEVE_EVENT_BOOTHS
 } from '../constant';
 
 export function retrieveSingleDataSuccessful(type, data) {
@@ -72,6 +73,13 @@ export function retrieveAllDataSuccessful(type, data) {
             type: RETRIEVE_SOCIETY_BOOTHS,
             payload: {
                 societyBooths: data
+            }
+        }
+    } else if(type === "eventBooth") {
+        return {
+            type: RETRIEVE_EVENT_BOOTHS,
+            payload: {
+                eventBooths: data
             }
         }
     }
@@ -156,6 +164,7 @@ export function retrieveAll(type) {
             let newsfeeds = [];
             let societyEvents = [];
             let societyBooths = [];
+            let eventBooths = [];
             
             if(type === "society") {
                 for(var i = 0; i < reply.length; i++) {
@@ -212,6 +221,17 @@ export function retrieveAll(type) {
                 }
                 console.log("all society booths: " + societyBooths);
                 dispatch(retrieveAllDataSuccessful(type, societyBooths));
+            } else if(type === "eventBooth") {
+                for(var i = 0; i < reply.length; i++) {
+                    eventBooths.push({
+                        societyId: reply[i]["eventId"],
+                        name: reply[i]["name"],
+                        boothId: reply[i]["boothId"],
+                        location: reply[i]["location"]
+                    })
+                }
+                console.log("all event booths: " + eventBooths);
+                dispatch(retrieveAllDataSuccessful(type, eventBooths));
             }
         });
     };

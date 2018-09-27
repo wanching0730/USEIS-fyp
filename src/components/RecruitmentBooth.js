@@ -21,6 +21,7 @@ class RecruitmentBooth extends Component {
 
         this.handleClick = this.handleClick.bind(this);
         this.props.onRetrieveAll("societyBooth");
+        this.props.onRetrieveAll("eventBooth");
     }
 
     componentDidMount() {
