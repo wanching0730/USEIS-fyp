@@ -105,3 +105,11 @@ export function updateData(type, id, data) {
         });
     } 
 }
+
+export function deleteData(type, id) {
+    if(type === "society") {
+        return fetch(`http://localhost:5000/delete/society/` + id);
+    } else if(type === "event") {
+        return fetch(`http://localhost:5000/delete/event/` + id);
+    }
+}
