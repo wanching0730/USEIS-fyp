@@ -12,7 +12,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create } from '../actions/post-action';
+import { create, update } from '../actions/post-action';
 
 class CreateEvent extends Component {
 
@@ -57,8 +57,8 @@ class CreateEvent extends Component {
           desc: event["desc"], 
           venue: event["venue"],
           category: event["category"],
-          fee: event["category"],
-          ssPoint: event["fee"],
+          fee: event["fee"],
+          ssPoint: event["ssPoint"],
           chairperson: event["chairperson"], 
           contact: event["contact"],
           boothId: event["boothId"],
@@ -99,8 +99,15 @@ class CreateEvent extends Component {
       return false;
     } else {
       let data = this.state
+      // let eventId = this.props.params.id;
       console.log("event content: " + JSON.stringify(data));
-      this.props.onCreate("event", data);
+      if(this.props.params.type == "society")
+        this.props.onCreate("event", data);
+      else {
+        if(data.startDate == '')
+          data.startDate = "" + moment(this.props.event["dateTime"]).format("YYYY-MM-DD hh:mm:ss")
+        this.props.onUpdate("event", this.props.params.id, data);
+      }
     }
   }
 
@@ -281,7 +288,8 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    onCreate: create
+    onCreate: create,
+    onUpdate: update
   }, dispatch);
 };
 
