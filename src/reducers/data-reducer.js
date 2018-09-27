@@ -4,7 +4,7 @@ import {
     RETRIEVE_SOCIETIES,
     RETRIEVE_EVENTS,
     RETRIEVE_NEWSFEED,
-    RETRIEVE_SOCIETY_EVENTS,
+    RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
     RETRIEVE_EVENT_BOOTHS
 } from '../constant';
@@ -16,7 +16,7 @@ const initialState = {
     societies: null,
     events: null,
     newsfeeds: null,
-    societyEvents: null,
+    allSocietyEvents: null,
     societyBooths: null,
     eventBooths: null
 };
@@ -43,9 +43,9 @@ export default function dataReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 newsfeeds: payload.newsfeeds
             });
-        case RETRIEVE_SOCIETY_EVENTS:
+        case RETRIEVE_ALL_SOCIETY_EVENTS:
             return Object.assign({}, state, {
-                societyEvents: payload.societyEvents
+                allSocietyEvents: payload.allSocietyEvents
             });
         case RETRIEVE_SOCIETY_BOOTHS:
             return Object.assign({}, state, {

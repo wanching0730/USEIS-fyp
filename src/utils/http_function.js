@@ -23,7 +23,7 @@ export function getAllData(type) {
         return fetch(`http://localhost:5000/get/events`);
     } else if(type === "newsfeeds") {
         return fetch(`http://localhost:5000/get/newsfeeds`);
-    } else if(type === "societyEvent") {
+    } else if(type === "allSocietyEvent") {
         return fetch(`http://localhost:5000/get/societyEvent`);
     } else if(type === "societyBooth") {
         return fetch(`http://localhost:5000/get/societyBooth`);

@@ -18,7 +18,7 @@ class MyProfile extends Component {
     constructor(props) {
         super(props);
 
-        this.props.onRetrieveAll("societyEvent");
+        this.props.onRetrieveAll("allSocietyEvent");
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ class MyProfile extends Component {
 
         const { imageStyle, RaisedButtonStyle } = styles;
         let societies = this.props.societies;
-        let societyEvents = this.props.societyEvents;
+        let societyEvents = this.props.allSocietyEvents;
         console.log("societies in profile: " + JSON.stringify(societies));
         console.log("society events: " + JSON.stringify(this.props.societyEvents));
 
@@ -177,7 +177,7 @@ const mapStateToProps = (state, props) => {
     console.log("state in society: " + state.data.societies);
     return {
         societies: state.auth.societies,
-        societyEvents: state.data.societyEvents
+        allSocietyEvents: state.data.allSocietyEvents
     };
 };
 

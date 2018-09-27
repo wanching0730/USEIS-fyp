@@ -7,9 +7,10 @@ import {
     RETRIEVE_USER_SOCIETY, 
     RETRIEVE_USER_EVENT,
     RETRIEVE_NEWSFEED,
-    RETRIEVE_SOCIETY_EVENTS,
+    RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
-    RETRIEVE_EVENT_BOOTHS
+    RETRIEVE_EVENT_BOOTHS,
+
 } from '../constant';
 
 export function retrieveSingleDataSuccessful(type, data) {
@@ -61,11 +62,11 @@ export function retrieveAllDataSuccessful(type, data) {
                 newsfeeds: data
             }
         }
-    } else if(type === "societyEvent") {
+    } else if(type === "allSocietyEvent") {
         return {
-            type: RETRIEVE_SOCIETY_EVENTS,
+            type: RETRIEVE_ALL_SOCIETY_EVENTS,
             payload: {
-                societyEvents: data
+                allSocietyEvents: data
             }
         }
     } else if(type === "societyBooth") {
@@ -162,7 +163,7 @@ export function retrieveAll(type) {
             let societies = [];
             let events = [];
             let newsfeeds = [];
-            let societyEvents = [];
+            let allSocietyEvents = [];
             let societyBooths = [];
             let eventBooths = [];
             
@@ -200,16 +201,16 @@ export function retrieveAll(type) {
                 }
                 console.log("all newsfeeds 2: " + newsfeeds);
                 dispatch(retrieveAllDataSuccessful(type, newsfeeds));
-            } else if(type === "societyEvent") {
+            } else if(type === "allSocietyEvent") {
                 for(var i = 0; i < reply.length; i++) {
-                    societyEvents.push({
+                    allSocietyEvents.push({
                         societyId: reply[i]["societyId"],
                         eventId: reply[i]["eventId"],
                         eventName: reply[i]["name"]
                     })
                 }
-                console.log("all society events: " + societyEvents);
-                dispatch(retrieveAllDataSuccessful(type, societyEvents));
+                console.log("all society events: " + allSocietyEvents);
+                dispatch(retrieveAllDataSuccessful(type, allSocietyEvents));
             } else if(type === "societyBooth") {
                 for(var i = 0; i < reply.length; i++) {
                     societyBooths.push({
