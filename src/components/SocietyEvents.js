@@ -28,25 +28,32 @@ class SocietyEvents extends Component {
         console.log("society's events: " + JSON.stringify(this.props.societyEvents));
 
         if(this.props.societyEvents != null) {
-            let societyEvents = this.props.societyEvents;
-            var rows = [];
-            for(var i = 0; i < societyEvents.length; i++) {
-                let societyEvent = societyEvents[i];
-                rows.push(
-                    <tr> 
-                        <td>{i+1}</td>
-                        <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
-                        <td><Link to={`/perEvent/` + societyEvent["id"]}>{societyEvent["name"]}</Link></td>
-                        <td>{societyEvent["dateTime"]}</td>
-                        <td>???</td>
-                        <td>{societyEvent["venue"]}</td>
-                        <td>{societyEvent["fee"]}</td>
-                        <td>{societyEvent["chairperson"]}</td>
-                        <td>{societyEvent["contact"]}</td>
-                    </tr>
-                );
-            }
-        }
+            var message = <div></div>;
+
+            if(this.props.societyEvents.length == 0) {
+                var rows = [];
+                message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No events for this society</div>;
+            } else {
+                let societyEvents = this.props.societyEvents;
+                var rows = [];
+                for(var i = 0; i < societyEvents.length; i++) {
+                    let societyEvent = societyEvents[i];
+                    rows.push(
+                        <tr> 
+                            <td>{i+1}</td>
+                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                            <td><Link to={`/perEvent/` + societyEvent["id"]}>{societyEvent["name"]}</Link></td>
+                            <td>{societyEvent["dateTime"]}</td>
+                            <td>???</td>
+                            <td>{societyEvent["venue"]}</td>
+                            <td>{societyEvent["fee"]}</td>
+                            <td>{societyEvent["chairperson"]}</td>
+                            <td>{societyEvent["contact"]}</td>
+                        </tr>
+                    );
+                }
+            }   
+        } 
         
         return (
             
@@ -86,6 +93,8 @@ class SocietyEvents extends Component {
                                         {rows}
                                     </tbody>
                                 </table>
+
+                                {message}
 
                                 <div style= {{ textAlign: "center" }}>
                                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
