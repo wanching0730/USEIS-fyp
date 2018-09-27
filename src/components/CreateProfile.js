@@ -9,7 +9,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create } from '../actions/post-action';
+import { create, update } from '../actions/post-action';
 import { retrieveData } from '../actions/data-action';
 
 class CreateProfile extends Component {
@@ -27,10 +27,10 @@ class CreateProfile extends Component {
 
     console.log("societyid: " + this.props.params.societyId);
 
-    if(this.props.params.societyId != null)  
+    if(this.props.params.societyId != null) 
       this.props.onRetrieveData("society", this.props.params.societyId);
 
-    console.log("nammeeee: " + this.props.name);
+    //console.log("nammeeee: " + this.props.society["name"]);
 
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
   }
@@ -38,16 +38,18 @@ class CreateProfile extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    setTimeout(function() { 
-      let society = this.props.society;
-      this.setState({
-        name: society["name"],
-        category: society["category"],
-        vision: society["vision"],
-        mission: society["mission"], 
-        desc: society["desc"]
-      })   
-    }.bind(this), 2000)
+    if(this.props.params.societyId != null) {
+      setTimeout(function() { 
+        let society = this.props.society;
+        this.setState({
+          name: society["name"],
+          category: society["category"],
+          vision: society["vision"],
+          mission: society["mission"], 
+          desc: society["desc"]
+        })   
+      }.bind(this), 2000)
+    }
   }
 
   handleClick(event) {
@@ -65,9 +67,14 @@ class CreateProfile extends Component {
       })
       return false;
     } else {
+      let societyId = this.props.params.societyId;
       let data = this.state
       console.log("society content: " + JSON.stringify(data));
-      this.props.onCreate("society", data);
+      if(societyId == null) {
+        this.props.onCreate("society", data);
+      } else {
+        this.props.onUpdate("society", societyId, data);
+      }
     }
   }
 
@@ -175,6 +182,7 @@ const mapStateToProps = (state, props) => {
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
+    onUpdate: update,
     onRetrieveData: retrieveData
   }, dispatch);
 };

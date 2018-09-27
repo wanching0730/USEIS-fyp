@@ -1,12 +1,14 @@
 import {browserHistory} from 'react-router';
-import { createData } from '../utils/http_function';
+import { createData, updateData } from '../utils/http_function';
 import { confirmAlert } from 'react-confirm-alert';
 import {
     CREATE_SOCIETY,
     CREATE_EVENT,
     CREATE_NEWSFEED,
     REGISTER_SOCIETY,
-    REGISTER_EVENT
+    REGISTER_EVENT,
+    UPDATE_SOCIETY,
+    UPDATE_EVENT
 } from '../constant';
 
 export function createSocietySuccessful(societyId) {
@@ -89,6 +91,49 @@ export function create(type, postData) {
                                 }
                                 
                             }
+                        }
+                    ]
+                  })
+            }
+        });
+    };
+}
+
+export function update(type, id, postData) {
+    return function (dispatch) {
+        const data = Object.keys(postData).map((key) => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
+        }).join('&');
+
+        return updateData(type, id, data).then(result => result.json()).then(reply => {
+            console.log("updated data reply: " + reply);
+
+            if(reply != null) {
+                confirmAlert({
+                    title: 'Message',
+                    message: 'Data has been updated successfully',
+                    buttons: [
+                        {
+                            label: 'Close',
+                            // onClick: () => {
+                            //     if(type === "society") {
+                            //         dispatch(createSocietySuccessful(reply));
+                            //         browserHistory.push('/perSociety/' + reply);
+                            //     } else if(type === "event") {
+                            //         dispatch(createEventSuccessful(reply));
+                            //         browserHistory.push('/perEvent/' + reply);
+                            //     } else if(type === "newsfeeds") {
+                            //         dispatch(createNewsfeedSuccessful(reply));
+                            //         browserHistory.push('/newsfeeds');
+                            //     } else if(type === "registerSociety") {
+                            //         dispatch(registerSocietySuccessfully);
+                            //         browserHistory.push('/perSociety/' + reply);
+                            //     } else if(type === "staffRegisterEvent" || type == "studentRegisterEvent") {
+                            //         dispatch(registerEventSuccessfully);
+                            //         browserHistory.push('/perEvent/' + reply);
+                            //     }
+                                
+                            // }
                         }
                     ]
                   })

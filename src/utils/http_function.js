@@ -85,3 +85,23 @@ export function createData(type, data) {
         });
     } 
 }
+
+export function updateData(type, id, data) {
+    if(type === "society") {
+        return fetch(`http://localhost:5000/update/society/`+ id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
+    } else if(type === "event") {
+            return fetch(`http://localhost:5000/update/event/` + id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
+    } 
+}
