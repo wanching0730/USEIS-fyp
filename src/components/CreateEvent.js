@@ -79,7 +79,6 @@ class CreateEvent extends Component {
   }
 
   handleClick(event) {
-    // console.log(moment(this.state.startDate));
     // console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
     // console.log("end date: " + moment(this.state.selectedStartDate).format("YYYY-MM-DD hh:mm:ss"));
     // console.log("event category: " + this.state.eventCategory);
@@ -139,6 +138,7 @@ class CreateEvent extends Component {
 
   render() {
     console.log("society id in create event: " + JSON.stringify(this.props.params.id));
+    console.log("category: " + this.state.category);
 
     const { RaisedButtonStyle, ContainerStyle } = styles;
 
