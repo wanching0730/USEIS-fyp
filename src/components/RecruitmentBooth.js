@@ -3,28 +3,23 @@ import NavBar from './NavBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import $ from 'jquery';
-import axios from 'axios';
 import '../style/society.css';
 import { Link } from 'react-router';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveAll } from '../actions/data-action';
 
 class RecruitmentBooth extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {society: []};
     }
 
     componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0, 0)
     }
-
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
-    }
-
+    
     render() {
 
         const { RaisedButtonStyle } = styles;
@@ -69,7 +64,7 @@ class RecruitmentBooth extends Component {
                                                 <td>IT Society</td>
                                                 <td>21</td>
                                             </tr>
-                                            <tr> 
+                                            {/* <tr> 
                                                 <td>2</td>
                                                 <td>Music Club</td>
                                                 <td>12</td>
@@ -78,7 +73,7 @@ class RecruitmentBooth extends Component {
                                                 <td>3</td>
                                                 <td>Zumba Club</td>
                                                 <td>08</td>
-                                            </tr>
+                                            </tr> */}
                                             {/* {this.state.society.map(row => {
                                                 return (
                                                     <tr>
@@ -116,4 +111,17 @@ const styles = {
     }
 }
 
-export default RecruitmentBooth;
+const mapStateToProps = (state, props) => {
+    console.log("state in society: " + state.data.societies);
+    return {
+        societyBooths: state.data.societyBooths
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveAll: retrieveAll
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(RecruitmentBooth);
