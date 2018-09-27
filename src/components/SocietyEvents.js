@@ -6,12 +6,16 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
 import '../style/society.css';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveAll } from '../actions/data-action';
+
 class SocietyEvents extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {society: []};
+        this.props.onRetrieveAll("societyEvent", this.props.params.societyId);
     }
 
     componentDidMount() {
@@ -138,4 +142,17 @@ const styles = {
     }
 }
 
-export default SocietyEvents;
+const mapStateToProps = (state, props) => {
+    console.log("state in society: " + state.data.societies);
+    return {
+        societyEvents: state.data.societyEvents
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveAll: retrieveAll
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(SocietyEvents);

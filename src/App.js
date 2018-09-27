@@ -62,7 +62,7 @@ class App extends Component {
           <Route path="/manageProposal" component={ManageProposal}/>
           <Route path="/manageCrew" component={ManageCrew}/>
           <Route path="/commBoard" component={CommitteeBoard}/>
-          <Route path="/societyEvents" component={SocietyEvents}/>
+          <Route path="/societyEvents/:societyId" component={SocietyEvents}/>
           <Route path="/recruitmentBooth" component={RecruitmentBooth}/>
           <Route path="/submitProposal" component={SubmitProposal}/>
           <Route path="/faq" component={Faq}/>

@@ -26,7 +26,7 @@ class PerSociety extends Component {
     }
 
     handleListEventClick(event) {
-        browserHistory.push("/societyEvents");
+        browserHistory.push("/societyEvents/" + this.props.params.societyId);
     }
 
     componentDidMount() {
