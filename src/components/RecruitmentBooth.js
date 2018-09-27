@@ -19,7 +19,6 @@ class RecruitmentBooth extends Component {
             type: "society"
         }
 
-        this.handleClick = this.handleClick.bind(this);
         this.props.onRetrieveAll("societyBooth");
         this.props.onRetrieveAll("eventBooth");
     }
@@ -54,10 +53,12 @@ class RecruitmentBooth extends Component {
                         </tr>
                     );
                 }
-            } else {
-                let eventBooths = this.props.eventBooths;
-                console.log("event booths: " + this.props.eventBooths);
+            } 
+        } else {
+            let eventBooths = this.props.eventBooths;
+            console.log("event booths: " + this.props.eventBooths);
 
+            if(eventBooths != null) {
                 var header = 
                     <tr>
                         <th>No.</th>
@@ -78,6 +79,7 @@ class RecruitmentBooth extends Component {
             }
         }
         
+        
         return (
 
             <div>
@@ -94,7 +96,7 @@ class RecruitmentBooth extends Component {
 
                     <div style= {{ textAlign: "center" }}>
                         <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => {this.setState({type: "society"})}}/>
-                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => {this.setState({type: "society"})}}/>
+                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => {this.setState({type: "event"})}}/>
                     </div>
 
                     <div>
@@ -105,15 +107,11 @@ class RecruitmentBooth extends Component {
                                 <div className="panel-body">
                                     <table className="table table-hover table-light" border="1">
                                         <thead>
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Society</th>
-                                                <th>Booth Number</th>                 
-                                            </tr>
+                                            {header}
                                         </thead>
 
                                         <tbody>
-                                            {rows}
+                                            {body}
                                         </tbody>
                                     </table>
 

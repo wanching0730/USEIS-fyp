@@ -224,7 +224,7 @@ export function retrieveAll(type) {
             } else if(type === "eventBooth") {
                 for(var i = 0; i < reply.length; i++) {
                     eventBooths.push({
-                        societyId: reply[i]["eventId"],
+                        eventId: reply[i]["eventId"],
                         name: reply[i]["name"],
                         boothId: reply[i]["boothId"],
                         location: reply[i]["location"]
