@@ -161,14 +161,17 @@ export function retrieveData(type, id) {
             } else if(type === "societyEvent") {
                 console.log("result of get society's event: " + JSON.stringify(reply));
 
-                let societyEvents = {
-                    id: reply[0]["eventId"],
-                    name: reply[0]["name"],
-                    dateTime: reply[0]["eventDateTime"],
-                    venue: reply[0]["venue"],
-                    fee: reply[0]["fee"],
-                    chairperson: reply[0]["chairperson"],
-                    contact: reply[0]["contact"],
+                var societyEvents = [];
+                for(var i = 0; i < reply.length; i++) {
+                    societyEvents.push({
+                        id: reply[i]["eventId"],
+                        name: reply[i]["name"],
+                        dateTime: reply[i]["eventDateTime"],
+                        venue: reply[i]["venue"],
+                        fee: reply[i]["fee"],
+                        chairperson: reply[i]["chairperson"],
+                        contact: reply[i]["contact"],
+                    });
                 }
 
                 console.log("society's event in action: " + JSON.stringify(societyEvents));

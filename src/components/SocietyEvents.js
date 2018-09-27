@@ -8,14 +8,14 @@ import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll } from '../actions/data-action';
+import { retrieveData } from '../actions/data-action';
 
 class SocietyEvents extends Component {
 
     constructor(props) {
         super(props);
 
-        this.props.onRetrieveAll("societyEvent", this.props.params.societyId);
+        this.props.onRetrieveData("societyEvent", this.props.params.societyId);
     }
 
     componentDidMount() {
@@ -25,6 +25,28 @@ class SocietyEvents extends Component {
     render() {
 
         const { imageStyle, RaisedButtonStyle } = styles;
+        console.log("society's events: " + JSON.stringify(this.props.societyEvents));
+
+        if(this.props.societyEvents != null) {
+            let societyEvents = this.props.societyEvents;
+            var rows = [];
+            for(var i = 0; i < societyEvents.length; i++) {
+                let societyEvent = societyEvents[i];
+                rows.push(
+                    <tr> 
+                        <td>{i+1}</td>
+                        <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                        <td><Link to={`/perEvent/` + societyEvent["id"]}>{societyEvent["name"]}</Link></td>
+                        <td>{societyEvent["dateTime"]}</td>
+                        <td>???</td>
+                        <td>{societyEvent["venue"]}</td>
+                        <td>{societyEvent["fee"]}</td>
+                        <td>{societyEvent["chairperson"]}</td>
+                        <td>{societyEvent["contact"]}</td>
+                    </tr>
+                );
+            }
+        }
         
         return (
             
@@ -61,59 +83,7 @@ class SocietyEvents extends Component {
                                     </thead>
 
                                     <tbody>
-                                        <tr> 
-                                            <td>1</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
-                                            <td><Link to={`/perEvent/1`}>Sport Carnival</Link></td>
-                                            <td>28/09/2018</td>
-                                            <td>2pm - 4pm</td>
-                                            <td>MPH</td>
-                                            <td>RM50</td>
-                                            <td>Leong Hao Meng</td>
-                                            <td>018-9900990</td>
-                                        </tr>
-                                        <tr> 
-                                            <td>2</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
-                                            <td><Link to={`/perEvent/1`}>First Aid Training</Link></td>
-                                            <td>28/10/2018</td>
-                                            <td>1pm - 5pm</td>
-                                            <td>KB101</td>
-                                            <td>RM100</td>
-                                            <td>Tang Jie Ying</td>
-                                            <td>018-99007877</td>
-                                        </tr>
-                                        <tr> 
-                                            <td>3</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
-                                            <td><Link to={`/perEvent/1`}>KLESF</Link></td>
-                                            <td>01/02/2019</td>
-                                            <td>10am - 3pm</td>
-                                            <td>KB301</td>
-                                            <td>RM10</td>
-                                            <td>Leong Hao Meng</td>
-                                            <td>018-1234567</td>
-                                        </tr>
-                                        <tr> 
-                                            <td>4</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
-                                            <td><Link to={`/perEvent/1`}>Cut For Hope 3.0</Link></td>
-                                            <td>30/10/2018</td>
-                                            <td>9am - 4pm</td>
-                                            <td>MPH</td>
-                                            <td>RM3</td>
-                                            <td>Lee Lian Tiang</td>
-                                            <td>018-4433223</td>
-                                        </tr>
-                                        {/* {this.state.society.map(row => {
-                                            return (
-                                                <tr>
-                                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                    <td>{row[1]}</td>
-                                                    <td>{row[3]}</td>
-                                                </tr>
-                                            );
-                                        })} */}
+                                        {rows}
                                     </tbody>
                                 </table>
 
@@ -151,7 +121,7 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveAll: retrieveAll
+      onRetrieveData: retrieveData
     }, dispatch);
 };
 
