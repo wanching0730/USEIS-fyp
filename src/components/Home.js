@@ -139,13 +139,4 @@ class Home extends Component {
     };
 };
 
-const styles = {
-    divStyle: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-    }
-}
-
 export default Home;

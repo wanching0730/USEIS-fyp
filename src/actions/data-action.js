@@ -1,4 +1,4 @@
-import {browserHistory} from 'react-router';
+//import {browserHistory} from 'react-router';
 import { getData, getAllData } from '../utils/http_function';
 
 import {
@@ -11,14 +11,14 @@ import {
 } from '../constant';
 
 export function retrieveSingleDataSuccessful(type, data) {
-    if(type == "society") {
+    if(type === "society") {
         return {
             type: RETRIEVE_USER_SOCIETY,
             payload: {
                 society: data
             }
         };
-    } else if(type == "event") {
+    } else if(type === "event") {
         return {
             type: RETRIEVE_USER_EVENT,
             payload: {
@@ -38,28 +38,28 @@ export function retrieveSingleDataSuccessful(type, data) {
 // }
 
 export function retrieveAllDataSuccessful(type, data) {
-    if(type == "society") {
+    if(type === "society") {
         return {
             type: RETRIEVE_SOCIETIES,
             payload: {
                 societies: data
             }
         }
-    } else if(type == "event") {
+    } else if(type === "event") {
         return {
             type: RETRIEVE_EVENTS,
             payload: {
                 events: data
             }
         }
-    } else if(type == "newsfeeds") {
+    } else if(type === "newsfeeds") {
         return {
             type: RETRIEVE_NEWSFEED,
             payload: {
                 newsfeeds: data
             }
         }
-    } else if(type == "societyEvent") {
+    } else if(type === "societyEvent") {
         return {
             type: RETRIEVE_SOCIETY_EVENTS,
             payload: {
@@ -101,7 +101,7 @@ export function retrieveData(type, id) {
         return getData(type, id).then(result => result.json()).then(reply => {
             console.log("result of get society: " + JSON.stringify(reply));
 
-            if(type == "society") {
+            if(type === "society") {
                 let society = {
                     id: reply[0]["societyId"],
                     name: reply[0]["name"],
@@ -148,7 +148,7 @@ export function retrieveAll(type) {
             let newsfeeds = [];
             let societyEvents = [];
             
-            if(type == "society") {
+            if(type === "society") {
                 for(var i = 0; i < reply.length; i++) {
                     societies.push ({
                         category: reply[i]["category"],
@@ -158,7 +158,7 @@ export function retrieveAll(type) {
                 }
                 console.log("societies in action: " + societies);
                 dispatch(retrieveAllDataSuccessful("society", societies));
-            } else if(type == "event") {
+            } else if(type === "event") {
                 for(var i = 0; i < reply.length; i++) {
                     events.push ({
                         category: reply[i]["category"],
@@ -167,7 +167,7 @@ export function retrieveAll(type) {
                     });
                 }
                 dispatch(retrieveAllDataSuccessful("event", events));
-            } else if(type == "newsfeeds") {
+            } else if(type === "newsfeeds") {
                 console.log("all newsfeeds: " + reply);
 
                 for(var i = 0; i < reply.length; i++) {
@@ -182,7 +182,7 @@ export function retrieveAll(type) {
                 }
                 console.log("all newsfeeds 2: " + newsfeeds);
                 dispatch(retrieveAllDataSuccessful("newsfeeds", newsfeeds));
-            } else if(type == "societyEvent") {
+            } else if(type === "societyEvent") {
                 for(var i = 0; i < reply.length; i++) {
                     societyEvents.push({
                         societyId: reply[i]["societyId"],

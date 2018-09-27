@@ -8,9 +8,9 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import 'font-awesome/css/font-awesome.min.css';
 
-import { createStore } from 'redux';
+//import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import allReducers from './reducers';
+//import allReducers from './reducers';
 import configureStore from './store/configureStore';
 
 // const store = createStore(

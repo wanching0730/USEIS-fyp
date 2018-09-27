@@ -8,7 +8,7 @@ import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
 import moment from "moment";
 import '../style/form.css';
-import NotificationModal from './NotificationModal';
+// import NotificationModal from './NotificationModal';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -75,7 +75,7 @@ class RegisterEvent extends Component {
       webNoti: this.state.webNoti
     };
 
-    if(this.props.userName.substring(0,2) == "00")
+    if(this.props.userName.substring(0,2) === "00")
       this.props.onCreate("staffRegisterEvent", data);
     else
       this.props.onCreate("studentRegisterEvent", data);

@@ -79,7 +79,7 @@ class Event extends Component {
                         <RaisedButton label="Sort by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                         <RaisedButton label="Sort by Date" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
 
-                        <div class="wrapper">
+                        <div className="wrapper">
                             <ul>
                                 {rows}
                             </ul>

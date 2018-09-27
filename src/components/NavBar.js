@@ -78,7 +78,7 @@ class NavBar extends Component {
         
         if(position == "committee") {
             dropDownItem = 
-            <DropdownMenu left>
+            <DropdownMenu left="true">
                 <DropdownItem name="createProfile" onClick={this.onClick}>
                     Create Society Profile
                 </DropdownItem>
@@ -89,7 +89,7 @@ class NavBar extends Component {
             </DropdownMenu>
         } else if(position == "staff") {
             dropDownItem = 
-            <DropdownMenu left>
+            <DropdownMenu left="true">
                 <DropdownItem name="manageBooth" onClick={this.onClick}>
                     Manage Booth
                 </DropdownItem>
@@ -103,7 +103,7 @@ class NavBar extends Component {
             </DropdownMenu>
         } else {
             dropDownItem = 
-            <DropdownMenu left>
+            <DropdownMenu left="true">
                 <DropdownItem name="faq" onClick={this.onClick}>
                     FAQ
                 </DropdownItem>

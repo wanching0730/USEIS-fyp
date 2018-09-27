@@ -4,8 +4,8 @@ import { confirmAlert } from 'react-confirm-alert';
 
 import {
     LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAILURE,
-    LOGIN_USER_REQUEST,
+    // LOGIN_USER_FAILURE,
+    // LOGIN_USER_REQUEST,
     LOGOUT_USER
 } from '../constant';
 
@@ -57,7 +57,7 @@ export function loginUser(postData) {
             let userName = user[0]["name"];
             let userId = user[0]["userId"];
 
-            if(userName.substring(0,2) == "00") {
+            if(userName.substring(0,2) === "00") {
                 console.log("username substring: " + userName.substring(0,2));
                 let id = user[0]["staffId"];
                 if(userSociety.length > 0) {
