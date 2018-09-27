@@ -18,7 +18,7 @@ class MyEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {society: []};
+        this.state = {eventId: -1};
 
         this.handleCancelEvent = this.handleCancelEvent.bind(this);
     }
@@ -54,26 +54,31 @@ class MyEvent extends Component {
           })
     }
 
-    handleCancelEvent(id) {
-        const JSON = require('circular-json');
+    handleCancelEvent(event) {
+        let eventId = event.target.value;
+        this.setState({eventId: eventId})
+        console.log("event to delete: " + this.state.eventId);
 
-        console.log("event to delete: " + JSON.stringify(obj));
-        confirmAlert({
-            title: 'Cancel Participation Confirmation',
-            message: 'Are you sure to cancel participating this event?',
-            buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-                    //this.props.onDeleteParticipation("studentEvent", )
+        // console.log("event to delete: " + JSON.stringify(name));
+        // console.log("event to delete: " + name);
+        setTimeout(() => {
+            confirmAlert({
+                title: 'Cancel Participation Confirmation',
+                message: 'Are you sure to cancel participating this event?',
+                buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        this.props.onDeleteParticipation("studentEvent", this.props.id, this.state.eventId);
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => console.log('Click No')
                 }
-              },
-              {
-                label: 'No',
-                onClick: () => console.log('Click No')
-              }
-            ]
-          })
+                ]
+            })
+        }, 2000);
     }
     
     render() {
@@ -115,7 +120,7 @@ class MyEvent extends Component {
                     {crewStatus}
                     {isVege}
                     <td><Link to={`/feedback`}>Undone</Link></td>
-                    <td><i id={events[i]["eventId"]} onClick={(id) => this.handleCancelEvent(id)} className="fa fa-trash"></i></td>
+                    <td><li value={events[i]["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
                     {/* <td><FontAwesome.FaTrash value={events[i]["eventId"]} onClick={this.handleCancelEvent}/></td> */}
                     {/* <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td> */}
                     <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
@@ -205,6 +210,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
       events: state.auth.events,
+      id: state.auth.id
     };
 };
 
