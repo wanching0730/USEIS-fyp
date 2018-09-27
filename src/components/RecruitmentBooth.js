@@ -15,30 +15,65 @@ class RecruitmentBooth extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            type: "society"
+        }
+
+        this.handleClick = this.handleClick.bind(this);
         this.props.onRetrieveAll("societyBooth");
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
     }
-    
+
     render() {
 
         const { RaisedButtonStyle } = styles;
-        let societyBooths = this.props.societyBooths;
-        console.log("society booths: " + this.props.societyBooths);
 
-        if(societyBooths != null) {
-            var rows = [];
-            for(var i = 0; i < societyBooths.length; i++) {
-                let societyBooth = societyBooths[i];
-                rows.push(
+        if(this.state.type === "society") {
+            let societyBooths = this.props.societyBooths;
+            console.log("society booths: " + this.props.societyBooths);
+
+            if(societyBooths != null) {
+                var header = 
                     <tr>
-                        <td>{i+1}</td>
-                        <td><Link to={`/perSociety/`+societyBooth["societyId"]}>{societyBooth["name"]}</Link></td>
-                        <td>{societyBooth["location"]}</td>
+                        <th>No.</th>
+                        <th>Society</th>
+                        <th>Booth Number</th>                 
                     </tr>
-                );
+                var body = [];
+                for(var i = 0; i < societyBooths.length; i++) {
+                    let societyBooth = societyBooths[i];
+                    body.push(
+                        <tr>
+                            <td>{i+1}</td>
+                            <td><Link to={`/perSociety/`+societyBooth["societyId"]}>{societyBooth["name"]}</Link></td>
+                            <td>{societyBooth["location"]}</td>
+                        </tr>
+                    );
+                }
+            } else {
+                let eventBooths = this.props.eventBooths;
+                console.log("event booths: " + this.props.eventBooths);
+
+                var header = 
+                    <tr>
+                        <th>No.</th>
+                        <th>Event</th>
+                        <th>Booth Number</th>                 
+                    </tr>
+                var body = [];
+                for(var i = 0; i < eventBooths.length; i++) {
+                    let eventBooth = eventBooths[i];
+                    body.push(
+                        <tr>
+                            <td>{i+1}</td>
+                            <td><Link to={`/perEvent/`+eventBooth["eventId"]}>{eventBooth["name"]}</Link></td>
+                            <td>{eventBooth["location"]}</td>
+                        </tr>
+                    );
+                }
             }
         }
         
@@ -57,8 +92,8 @@ class RecruitmentBooth extends Component {
                     </div>
 
                     <div style= {{ textAlign: "center" }}>
-                        <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => console.log("clicked")}/>
-                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => console.log("clicked")}/>
+                        <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => {this.setState({type: "society"})}}/>
+                        <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => {this.setState({type: "society"})}}/>
                     </div>
 
                     <div>
@@ -109,7 +144,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
     console.log("state in society: " + state.data.societies);
     return {
-        societyBooths: state.data.societyBooths
+        societyBooths: state.data.societyBooths,
+        eventBooths: state.data.eventBooths
     };
 };
 
