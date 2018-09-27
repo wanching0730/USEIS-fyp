@@ -11,6 +11,7 @@ import "../style/perSociety.css";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData } from '../actions/data-action';
+//import { deletes } from '../actions/delete-action';
 
 class PerSociety extends Component {
 
@@ -98,6 +99,7 @@ class PerSociety extends Component {
                         <div style={div3Style}>
                             <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
                             <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
+                            {/* <RaisedButton label="Delete" primary={true} style={RaisedButtonStyle} onClick={(event) => this.props.onDeleteData("society", this.props.params.societyId)}/> */}
                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                         </div>
                     </MuiThemeProvider>
@@ -142,7 +144,8 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveData
+      onRetrieveData: retrieveData,
+      //onDeleteData: deletes
     }, dispatch);
 };
 
