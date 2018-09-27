@@ -6,6 +6,7 @@ import {
     RETRIEVE_EVENTS,
     RETRIEVE_USER_SOCIETY, 
     RETRIEVE_USER_EVENT,
+    RETRIEVE_ONE_SOCIETY_EVENTS,
     RETRIEVE_NEWSFEED,
     RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
@@ -26,6 +27,13 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_USER_EVENT,
             payload: {
                 event: data
+            }
+        };
+    } else if(type === "societyEvent") {
+        return {
+            type: RETRIEVE_ONE_SOCIETY_EVENTS,
+            payload: {
+                societyEvents: data
             }
         };
     }
@@ -130,7 +138,7 @@ export function retrieveData(type, id) {
                 }
 
                 dispatch(retrieveSingleDataSuccessful("society", society));
-            } else {
+            } else if(type === "event") {
                 console.log("result of get event: " + JSON.stringify(reply));
 
                 let event = {
@@ -150,6 +158,21 @@ export function retrieveData(type, id) {
 
                 console.log("event in action: " + JSON.stringify(event));
                 dispatch(retrieveSingleDataSuccessful("event", event));
+            } else if(type === "societyEvent") {
+                console.log("result of get society's event: " + JSON.stringify(reply));
+
+                let societyEvents = {
+                    id: reply[0]["eventId"],
+                    name: reply[0]["name"],
+                    dateTime: reply[0]["eventDateTime"],
+                    venue: reply[0]["venue"],
+                    fee: reply[0]["fee"],
+                    chairperson: reply[0]["chairperson"],
+                    contact: reply[0]["contact"],
+                }
+
+                console.log("society's event in action: " + JSON.stringify(societyEvents));
+                dispatch(retrieveSingleDataSuccessful("societyEvent", societyEvents));
             }
         });
     };

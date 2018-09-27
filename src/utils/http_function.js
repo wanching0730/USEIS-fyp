@@ -11,8 +11,10 @@ export function verifyUser(data) {
 export function getData(type, id) {
     if(type === "society") {
         return fetch(`http://localhost:5000/get/society/` + id);
-    } else {
+    } else if(type === "event") {
         return fetch(`http://localhost:5000/get/event/` + id);
+    } else if(type === "societyEvent") {
+        return fetch(`http://localhost:5000/get/societyEvent/` + id);
     }
 }
 
