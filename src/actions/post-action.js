@@ -108,32 +108,20 @@ export function update(type, id, postData) {
         return updateData(type, id, data).then(result => result.json()).then(reply => {
             console.log("updated data reply: " + reply);
 
-            if(reply != null) {
+            if(reply != "true") {
                 confirmAlert({
                     title: 'Message',
                     message: 'Data has been updated successfully',
                     buttons: [
                         {
                             label: 'Close',
-                            // onClick: () => {
-                            //     if(type === "society") {
-                            //         dispatch(createSocietySuccessful(reply));
-                            //         browserHistory.push('/perSociety/' + reply);
-                            //     } else if(type === "event") {
-                            //         dispatch(createEventSuccessful(reply));
-                            //         browserHistory.push('/perEvent/' + reply);
-                            //     } else if(type === "newsfeeds") {
-                            //         dispatch(createNewsfeedSuccessful(reply));
-                            //         browserHistory.push('/newsfeeds');
-                            //     } else if(type === "registerSociety") {
-                            //         dispatch(registerSocietySuccessfully);
-                            //         browserHistory.push('/perSociety/' + reply);
-                            //     } else if(type === "staffRegisterEvent" || type == "studentRegisterEvent") {
-                            //         dispatch(registerEventSuccessfully);
-                            //         browserHistory.push('/perEvent/' + reply);
-                            //     }
-                                
-                            // }
+                            onClick: () => {
+                                if(type === "society") {
+                                    browserHistory.push('/perSociety/' + id);
+                                } else if(type === "event") {
+                                    browserHistory.push('/perEvent/' + id);
+                                }
+                            }
                         }
                     ]
                   })
