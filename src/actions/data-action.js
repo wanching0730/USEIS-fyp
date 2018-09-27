@@ -7,7 +7,8 @@ import {
     RETRIEVE_USER_SOCIETY, 
     RETRIEVE_USER_EVENT,
     RETRIEVE_NEWSFEED,
-    RETRIEVE_SOCIETY_EVENTS
+    RETRIEVE_SOCIETY_EVENTS,
+    RETRIEVE_SOCIETY_BOOTHS
 } from '../constant';
 
 export function retrieveSingleDataSuccessful(type, data) {
@@ -147,6 +148,7 @@ export function retrieveAll(type) {
             let events = [];
             let newsfeeds = [];
             let societyEvents = [];
+            let societyBooths = [];
             
             if(type === "society") {
                 for(var i = 0; i < reply.length; i++) {
@@ -157,7 +159,7 @@ export function retrieveAll(type) {
                     });
                 }
                 console.log("societies in action: " + societies);
-                dispatch(retrieveAllDataSuccessful("society", societies));
+                dispatch(retrieveAllDataSuccessful(type, societies));
             } else if(type === "event") {
                 for(var i = 0; i < reply.length; i++) {
                     events.push ({
@@ -166,7 +168,7 @@ export function retrieveAll(type) {
                         name: reply[i]["name"]
                     });
                 }
-                dispatch(retrieveAllDataSuccessful("event", events));
+                dispatch(retrieveAllDataSuccessful(type, events));
             } else if(type === "newsfeeds") {
                 console.log("all newsfeeds: " + reply);
 
@@ -181,7 +183,7 @@ export function retrieveAll(type) {
                     })
                 }
                 console.log("all newsfeeds 2: " + newsfeeds);
-                dispatch(retrieveAllDataSuccessful("newsfeeds", newsfeeds));
+                dispatch(retrieveAllDataSuccessful(type, newsfeeds));
             } else if(type === "societyEvent") {
                 for(var i = 0; i < reply.length; i++) {
                     societyEvents.push({
@@ -191,7 +193,18 @@ export function retrieveAll(type) {
                     })
                 }
                 console.log("all society events: " + societyEvents);
-                dispatch(retrieveAllDataSuccessful("societyEvent", societyEvents));
+                dispatch(retrieveAllDataSuccessful(type, societyEvents));
+            } else if(type === "societyBooth") {
+                for(var i = 0; i < reply.length; i++) {
+                    societyBooths.push({
+                        societyId: reply[i]["societyId"],
+                        name: reply[i]["name"],
+                        boothId: reply[i]["boothId"],
+                        location: reply[i]["location"]
+                    })
+                }
+                console.log("all society booths: " + societyBooths);
+                dispatch(retrieveAllDataSuccessful(type, societyBooths));
             }
         });
     };

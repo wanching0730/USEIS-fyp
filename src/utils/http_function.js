@@ -25,6 +25,8 @@ export function getAllData(type) {
         return fetch(`http://localhost:5000/get/newsfeeds`);
     } else if(type == "societyEvent") {
         return fetch(`http://localhost:5000/get/societyEvent`);
+    } else if(type == "societyBooth") {
+        return fetch(`http://localhost:5000/get/societyBooth`);
     } 
 }
 
