@@ -1,6 +1,6 @@
-// import {browserHistory} from 'react-router';
-// import { deleteData } from '../utils/http_function';
-// import { confirmAlert } from 'react-confirm-alert';
+import {browserHistory} from 'react-router';
+import { deleteData } from '../utils/http_function';
+import { confirmAlert } from 'react-confirm-alert';
 
 // export function deletes(type, id) {
 //     return function (dispatch) {
@@ -29,3 +29,26 @@
 //         });
 //     };
 // }
+
+export function deleteParticipation(type, id, eventId) {
+    return function (dispatch) {
+        return deleteData(type, id, eventId).then(result => result.json()).then(reply => {
+            console.log("deleted data reply: " + reply);
+
+            if(reply != "true") {
+                confirmAlert({
+                    title: 'Message',
+                    message: 'Event participation has been deleted successfully',
+                    buttons: [
+                        {
+                            label: 'Close',
+                            onClick: () => {
+                                browserHistory.push("/myEvents");
+                            }
+                        }
+                    ]
+                  })
+            }
+        })
+    }
+}

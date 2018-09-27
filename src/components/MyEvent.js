@@ -3,13 +3,15 @@ import NavBar from './NavBar';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import {browserHistory} from 'react-router';
 import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
+import {browserHistory} from 'react-router';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
 
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { deleteParticipation } from '../actions/delete-action';
 
 class MyEvent extends Component {
 
@@ -17,6 +19,8 @@ class MyEvent extends Component {
         super(props);
 
         this.state = {society: []};
+
+        this.handleCancelEvent = this.handleCancelEvent.bind(this);
     }
 
     componentDidMount() {
@@ -50,7 +54,10 @@ class MyEvent extends Component {
           })
     }
 
-    handleCancelEvent() {
+    handleCancelEvent(id) {
+        const JSON = require('circular-json');
+
+        console.log("event to delete: " + JSON.stringify(obj));
         confirmAlert({
             title: 'Cancel Participation Confirmation',
             message: 'Are you sure to cancel participating this event?',
@@ -58,7 +65,7 @@ class MyEvent extends Component {
               {
                 label: 'Yes',
                 onClick: () => {
-                    console.log('Click Yes');
+                    //this.props.onDeleteParticipation("studentEvent", )
                 }
               },
               {
@@ -108,7 +115,9 @@ class MyEvent extends Component {
                     {crewStatus}
                     {isVege}
                     <td><Link to={`/feedback`}>Undone</Link></td>
-                    <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td>
+                    <td><i id={events[i]["eventId"]} onClick={(id) => this.handleCancelEvent(id)} className="fa fa-trash"></i></td>
+                    {/* <td><FontAwesome.FaTrash value={events[i]["eventId"]} onClick={this.handleCancelEvent}/></td> */}
+                    {/* <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td> */}
                     <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
                 </tr>
             )
@@ -199,4 +208,10 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-export default connect(mapStateToProps)(MyEvent);
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onDeleteParticipation: deleteParticipation
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(MyEvent);

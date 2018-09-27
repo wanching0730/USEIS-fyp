@@ -106,12 +106,12 @@ export function updateData(type, id, data) {
     } 
 }
 
-// export function deleteData(type, id) {
-//     if(type === "society") {
-//         return fetch(`http://localhost:5000/delete/` + id, {
-//             method: 'DELETE'
-//         });
-//     } else if(type === "event") {
-//         return fetch(`http://localhost:5000/delete/event/` + id);
-//     }
-// }
+export function deleteData(type, id, eventId) {
+    if(type === "studentEvent") {
+        return fetch(`http://localhost:5000/delete/studentEvent/` + id + '/' + eventId, {
+            method: 'DELETE'
+        });
+    } else if(type === "staffEvent") {
+        return fetch(`http://localhost:5000/delete/staffEvent/` + id + '/' + eventId);
+    }
+}
