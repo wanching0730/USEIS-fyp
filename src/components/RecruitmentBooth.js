@@ -25,7 +25,22 @@ class RecruitmentBooth extends Component {
     render() {
 
         const { RaisedButtonStyle } = styles;
+        let societyBooths = this.props.societyBooths;
         console.log("society booths: " + this.props.societyBooths);
+
+        if(societyBooths != null) {
+            var rows = [];
+            for(var i = 0; i < societyBooths.length; i++) {
+                let societyBooth = societyBooths[i];
+                rows.push(
+                    <tr>
+                        <td>{i+1}</td>
+                        <td><Link to={`/perSociety/`+societyBooth["societyId"]}>{societyBooth["name"]}</Link></td>
+                        <td>{societyBooth["location"]}</td>
+                    </tr>
+                );
+            }
+        }
         
         return (
 
@@ -62,30 +77,7 @@ class RecruitmentBooth extends Component {
                                         </thead>
 
                                         <tbody>
-                                            <tr> 
-                                                <td>1</td>
-                                                <td>IT Society</td>
-                                                <td>21</td>
-                                            </tr>
-                                            {/* <tr> 
-                                                <td>2</td>
-                                                <td>Music Club</td>
-                                                <td>12</td>
-                                            </tr>
-                                            <tr> 
-                                                <td>3</td>
-                                                <td>Zumba Club</td>
-                                                <td>08</td>
-                                            </tr> */}
-                                            {/* {this.state.society.map(row => {
-                                                return (
-                                                    <tr>
-                                                        <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                        <td>{row[1]}</td>
-                                                        <td>{row[3]}</td>
-                                                    </tr>
-                                                );
-                                            })} */}
+                                            {rows}
                                         </tbody>
                                     </table>
 
