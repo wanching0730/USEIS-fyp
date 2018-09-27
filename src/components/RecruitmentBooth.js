@@ -14,6 +14,8 @@ class RecruitmentBooth extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onRetrieveAll("societyBooth");
     }
 
     componentDidMount() {
@@ -23,6 +25,7 @@ class RecruitmentBooth extends Component {
     render() {
 
         const { RaisedButtonStyle } = styles;
+        console.log("society booths: " + this.props.societyBooths);
         
         return (
 

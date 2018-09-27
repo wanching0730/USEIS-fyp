@@ -19,13 +19,13 @@ export function getData(type, id) {
 export function getAllData(type) {
     if(type === "society") {
         return fetch(`http://localhost:5000/get/societies`);
-    } else if(type == "event") {
+    } else if(type === "event") {
         return fetch(`http://localhost:5000/get/events`);
-    } else if(type == "newsfeeds") {
+    } else if(type === "newsfeeds") {
         return fetch(`http://localhost:5000/get/newsfeeds`);
-    } else if(type == "societyEvent") {
+    } else if(type === "societyEvent") {
         return fetch(`http://localhost:5000/get/societyEvent`);
-    } else if(type == "societyBooth") {
+    } else if(type === "societyBooth") {
         return fetch(`http://localhost:5000/get/societyBooth`);
     } 
 }

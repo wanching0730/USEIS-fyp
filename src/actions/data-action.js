@@ -67,6 +67,13 @@ export function retrieveAllDataSuccessful(type, data) {
                 societyEvents: data
             }
         }
+    } else if(type === "societyBooth") {
+        return {
+            type: RETRIEVE_SOCIETY_BOOTHS,
+            payload: {
+                societyBooths: data
+            }
+        }
     }
 }
 
