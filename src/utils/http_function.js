@@ -116,6 +116,8 @@ export function deleteData(type, id, eventId) {
             method: 'DELETE'
         });
     } else if(type === "staffEvent") {
-        return fetch(`http://localhost:5000/delete/staffEvent/` + id + '/' + eventId);
+        return fetch(`http://localhost:5000/delete/staffEvent/` + id + '/' + eventId, {
+            method: 'DELETE'
+        });
     }
 }
