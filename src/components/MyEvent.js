@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createFactory } from 'react';
 import NavBar from './NavBar';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -99,40 +99,48 @@ class MyEvent extends Component {
                 let events = this.props.userEvents;
                 console.log("events in profile: " + events.length);
 
-                var position, crewStatus, isVege;
+                var position, crewStatus, isVege, crewAction;
                 
                 for(var i = 0; i < events.length; i++) {
-                    if(events[i]["position"] == "participant"){
+                    let event = events[i];
+
+                    if(event["position"] === "participant"){
                         position = <td>Participant</td>;
                         crewStatus = <td>-</td>;
                     } else {
-                        if(events[i]["crewStatus"] == 0) {
+                        if(event["crewStatus"] === 0) {
                             position = <td>-</td>;
                             crewStatus = <td>Pending</td>;
                         } else {
-                            position = <td>{events[i]["position"]}</td>;
+                            position = <td>{event["position"]}</td>;
                             crewStatus = <td>Approved</td>;
                         }
                     }
 
-                    if(events[i]["vegetarian"] == 0)
+                    if(event["vegetarian"] == 0)
                         isVege = <td>No</td>;
                     else 
                         isVege = <td>Yes</td>;
+
+                    if(event["crewStatus"] === 0 && event["position"] != "participant") {
+                        crewAction = <td><li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-times-circle"></li></td>;
+                    } else {
+                        crewAction = <td>-</td>
+                    }
 
                     rows.push(
                         <tr>
                             <td>{i+1}</td>
                             <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
-                            <td><Link to={`/perEvent/`+events[i]["eventId"]}>{events[i]["name"]}</Link></td>
-                            <td><Link to={`/perSociety/1`}>{events[i]["organiser"]}</Link></td>
-                            <td>{events[i]["joinDate"]}</td>
+                            <td><Link to={`/perEvent/`+event["eventId"]}>{event["name"]}</Link></td>
+                            <td><Link to={`/perSociety/1`}>{event["organiser"]}</Link></td>
+                            <td>{event["joinDate"]}</td>
                             {position}
                             {crewStatus}
                             {isVege}
                             <td><Link to={`/feedback`}>Undone</Link></td>
-                            <td><li value={events[i]["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
-                            <td><li value={events[i]["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-times-circle"></li></td>
+                            <td><li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
+                            {crewAction}
                         </tr>
                     )
                 }
