@@ -120,7 +120,36 @@ export function update(type, id, postData) {
                                     browserHistory.push('/perSociety/' + id);
                                 } else if(type === "event") {
                                     browserHistory.push('/perEvent/' + id);
-                                }
+                                } 
+                            }
+                        }
+                    ]
+                  })
+            }
+        });
+    };
+}
+
+export function updateDouble(type, postData) {
+    return function (dispatch) {
+        const data = Object.keys(postData).map((key) => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
+        }).join('&');
+
+        return updateDataDouble(type, data).then(result => result.json()).then(reply => {
+            console.log("updated double data reply: " + reply);
+
+            if(reply != "true") {
+                confirmAlert({
+                    title: 'Message',
+                    message: 'Data has been updated successfully',
+                    buttons: [
+                        {
+                            label: 'Close',
+                            onClick: () => {
+                                if(type === "crew") {
+                                    browserHistory.push('/manageCrew/' + reply);
+                                } 
                             }
                         }
                     ]

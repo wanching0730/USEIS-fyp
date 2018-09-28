@@ -112,6 +112,18 @@ export function updateData(type, id, data) {
     } 
 }
 
+export function updateDataDouble(type, data) {
+    if(type === "crew") {
+        return fetch(`http://localhost:5000/update/crew`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
+    } 
+}
+
 export function deleteData(type, id, eventId) {
     if(type === "studentEvent") {
         return fetch(`http://localhost:5000/delete/studentEvent/` + id + '/' + eventId, {
