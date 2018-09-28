@@ -209,7 +209,7 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-      events: state.auth.events,
+    //   events: state.auth.events,
       id: state.auth.id
     };
 };

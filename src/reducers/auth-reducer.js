@@ -11,7 +11,7 @@ const initialState = {
     userId: null,
     id: null,
     societies: null,
-    events: null,
+    // events: null,
     isAuthenticated: false,
     isAuthenticating: false,
     statusText: null,
@@ -25,7 +25,7 @@ export default function authReducer(state = initialState, { type, payload }) {
                 userId: payload.userId,
                 id: payload.id,
                 societies: payload.societies,
-                events: payload.events,
+                // events: payload.events,
                 token: payload.token,
                 isAuthenticated: true
             });
@@ -33,7 +33,7 @@ export default function authReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 userName: null,
                 societies: null,
-                events: null,
+                // events: null,
                 token: null,
                 isAuthenticated: false
             });

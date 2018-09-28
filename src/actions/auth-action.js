@@ -9,7 +9,7 @@ import {
     LOGOUT_USER
 } from '../constant';
 
-export function loginUserSuccessful(userName, userId, id, societies, events, token) {
+export function loginUserSuccessful(userName, userId, id, societies, token) {
     localStorage.setItem('token', token);
 
     return {
@@ -19,7 +19,7 @@ export function loginUserSuccessful(userName, userId, id, societies, events, tok
             userId: userId,
             id: id,
             societies: societies,
-            events: events,
+            // events: events,
             token: token
         }
     }
@@ -49,7 +49,7 @@ export function loginUser(postData) {
 
             let user = reply["user"];
             let userSociety = reply["userSociety"];
-            let userEvent = reply["userEvent"];
+            // let userEvent = reply["userEvent"];
             let token = reply["token"];
             var societies = [];
             var events = [];
@@ -72,23 +72,23 @@ export function loginUser(postData) {
                     console.log("user societies: " + societies);
                 }
 
-                if(userEvent.length > 0) {
-                    for(var i = 0; i < userEvent.length; i++) {
-                        events.push({
-                            eventId: userEvent[i]["eventId"],
-                            name: userEvent[i]["name"],
-                            category: userEvent[i]["category"],
-                            date: userEvent[i]["eventDateTime"],
-                            organiser: userEvent[i]["organiser"],
-                            joinDate: userEvent[i]["joinDate"],
-                            position: userEvent[i]["position"],
-                            crewStatus: userEvent[i]["crewStatus"],
-                            vegetarian: userEvent[i]["vegetarian"]
-                        })
-                    }
-                }
+                // if(userEvent.length > 0) {
+                //     for(var i = 0; i < userEvent.length; i++) {
+                //         events.push({
+                //             eventId: userEvent[i]["eventId"],
+                //             name: userEvent[i]["name"],
+                //             category: userEvent[i]["category"],
+                //             date: userEvent[i]["eventDateTime"],
+                //             organiser: userEvent[i]["organiser"],
+                //             joinDate: userEvent[i]["joinDate"],
+                //             position: userEvent[i]["position"],
+                //             crewStatus: userEvent[i]["crewStatus"],
+                //             vegetarian: userEvent[i]["vegetarian"]
+                //         })
+                //     }
+                // }
                 
-                dispatch(loginUserSuccessful(userName, userId, id, societies, events, token));
+                dispatch(loginUserSuccessful(userName, userId, id, societies, token));
             } else {
                 console.log("username substring: " + userName.substring(0,2));
                 let id = user[0]["studentId"];
@@ -104,23 +104,23 @@ export function loginUser(postData) {
                     }
                 }
 
-                if(userEvent.length > 0) {
-                    for(var i = 0; i < userEvent.length; i++) {
-                        events.push({
-                            eventId: userEvent[i]["eventId"],
-                            name: userEvent[i]["name"],
-                            category: userEvent[i]["category"],
-                            date: userEvent[i]["eventDateTime"],
-                            organiser: userEvent[i]["organiser"],
-                            joinDate: userEvent[i]["joinDate"],
-                            position: userEvent[i]["position"],
-                            crewStatus: userEvent[i]["crewStatus"],
-                            vegetarian: userEvent[i]["vegetarian"]
-                        })
-                    }
-                }
+                // if(userEvent.length > 0) {
+                //     for(var i = 0; i < userEvent.length; i++) {
+                //         events.push({
+                //             eventId: userEvent[i]["eventId"],
+                //             name: userEvent[i]["name"],
+                //             category: userEvent[i]["category"],
+                //             date: userEvent[i]["eventDateTime"],
+                //             organiser: userEvent[i]["organiser"],
+                //             joinDate: userEvent[i]["joinDate"],
+                //             position: userEvent[i]["position"],
+                //             crewStatus: userEvent[i]["crewStatus"],
+                //             vegetarian: userEvent[i]["vegetarian"]
+                //         })
+                //     }
+                // }
 
-                dispatch(loginUserSuccessful(userName, userId, id, societies, events, token));
+                dispatch(loginUserSuccessful(userName, userId, id, societies, token));
             }
 
             browserHistory.push("/home");
