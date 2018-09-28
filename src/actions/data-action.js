@@ -37,6 +37,13 @@ export function retrieveSingleDataSuccessful(type, data) {
                 societyEvents: data
             }
         };
+    } else if(type === "userEvent") {
+        return {
+            type: RETRIEVE_USER_EVENTS,
+            payload: {
+                userEvents: data
+            }
+        }
     }
 }
 
@@ -90,13 +97,6 @@ export function retrieveAllDataSuccessful(type, data) {
             type: RETRIEVE_EVENT_BOOTHS,
             payload: {
                 eventBooths: data
-            }
-        }
-    } else if(type === "userEvent") {
-        return {
-            type: RETRIEVE_USER_EVENTS,
-            payload: {
-                userEvents: data
             }
         }
     }

@@ -12,6 +12,7 @@ import '../style/society.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteParticipation } from '../actions/delete-action';
+import { retrieveData } from '../actions/data-action';
 
 class MyEvent extends Component {
 
@@ -19,6 +20,11 @@ class MyEvent extends Component {
         super(props);
 
         this.state = {eventId: -1};
+
+        if(this.props.userName.substring(0,2) === "00") 
+            this.props.onRetrieveData("staffEvent", this.props.userId);
+        else 
+            this.props.onRetrieveData("studentEvent", this.props.userId);
 
         this.handleCancelEvent = this.handleCancelEvent.bind(this);
     }
@@ -213,13 +219,15 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         userEvents: state.data.userEvents,
-        id: state.auth.id
+        userId: state.auth.id,
+        userName: state.auth.userName,
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onDeleteParticipation: deleteParticipation
+        onRetrieveData: retrieveData,
+        onDeleteParticipation: deleteParticipation
     }, dispatch);
 };
 
