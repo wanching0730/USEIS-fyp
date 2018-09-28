@@ -12,17 +12,10 @@ class ManageCrew extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {society: []};
     }
 
     componentDidMount() {
-        this.listSocieties();
         window.scrollTo(0, 0)
-    }
-
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
     }
 
     handleApprove() {
@@ -114,51 +107,6 @@ class ManageCrew extends Component {
                                             <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
                                             <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
                                         </tr>
-                                        <tr> 
-                                            <td>2</td>
-                                            <td>Toh Chi Meng</td>
-                                            <td>777777-77-7777</td>
-                                            <td>Mechanical Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-9900990</td>
-                                            <td>chimeng@hotmail.com</td>
-                                            <td>Logistics HOD</td>
-                                            <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
-                                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
-                                        </tr>
-                                        <tr> 
-                                            <td>3</td>
-                                            <td>Lim Keng Huat</td>
-                                            <td>888888-88-8888</td>
-                                            <td>Civil Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-8989898</td>
-                                            <td>kenghuat@hotmail.com</td>
-                                            <td>Vice Chairperson</td>
-                                            <td><FontAwesome.FaCheck /></td>
-                                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
-                                        </tr>
-                                        <tr> 
-                                            <td>4</td>
-                                            <td>Kenneth Teng</td>
-                                            <td>333333-33-3333</td>
-                                            <td>Electrical Engineering</td>
-                                            <td>Y3S3</td>
-                                            <td>012-2930560</td>
-                                            <td>kenneth@hotmail.com</td>
-                                            <td>Editorial Assistant</td>
-                                            <td><FontAwesome.FaCheck /></td>
-                                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
-                                        </tr>
-                                        {/* {this.state.society.map(row => {
-                                            return (
-                                                <tr>
-                                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                    <td>{row[1]}</td>
-                                                    <td>{row[3]}</td>
-                                                </tr>
-                                            );
-                                        })} */}
                                     </tbody>
                                 </table>
 
