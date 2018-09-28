@@ -20,6 +20,9 @@ class PerEvent extends Component {
         super(props);
 
         this.props.onRetrieveData("event", this.props.params.eventId);
+        if(this.props.userName.substring(0,2) != "00")
+            this.props.onRetrieveData("studentEvent", this.props.id);
+
         console.log("event id: " + this.props.params.eventId);
     }
 
@@ -96,6 +99,31 @@ class PerEvent extends Component {
                 </div>
         }
 
+        if(this.props.userEvents != null) {
+            let userEvents = this.props.userEvents;
+            var sideNavBar;
+            for(var i = 0; i < userEvents.length; i++) {
+                let userEvent = userEvents[i];
+                if((userEvent["position"] == "chairperson" || userEvent["position"] == "vice_chairperson") && 
+                userEvent["eventId"] == this.props.params.eventId) {
+                        sideNavBar = 
+                            <div id="mySidenav" class="sidenav">
+                                <Link to={`/createEvent/event/` + this.props.params.eventId} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
+                                <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
+                                <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+                                <Link to="/manageCrew" id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
+                                <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
+                                <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                            </div>
+                } else {
+                    sideNavBar = 
+                        <div id="mySidenav" class="sidenav">
+                            <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                        </div>
+                }
+            }
+        }
+
         return (
             <div>
                 <NavBar />
@@ -108,14 +136,7 @@ class PerEvent extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div id="mySidenav" class="sidenav">
-                    <Link to={`/createEvent/event/` + this.props.params.eventId} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
-                    <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
-                    <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                    <Link to="/manageCrew" id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
-                    <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
-                    <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                </div>
+                {sideNavBar}
 
                 <div>
                     <MuiThemeProvider>
@@ -193,7 +214,9 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         event: state.data.event,
-        userName: state.auth.userName
+        userEvents: state.data.userEvents,
+        userName: state.auth.userName,
+        id: state.auth.id
     };
 };
 
