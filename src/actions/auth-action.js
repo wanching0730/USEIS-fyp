@@ -52,7 +52,7 @@ export function loginUser(postData) {
             // let userEvent = reply["userEvent"];
             let token = reply["token"];
             var societies = [];
-            var events = [];
+            //var events = [];
             
             let userName = user[0]["name"];
             let userId = user[0]["userId"];

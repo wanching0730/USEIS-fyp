@@ -4,27 +4,28 @@ import { getData, getAllData } from '../utils/http_function';
 import {
     RETRIEVE_SOCIETIES,
     RETRIEVE_EVENTS,
-    RETRIEVE_USER_SOCIETY, 
-    RETRIEVE_USER_EVENT,
+    RETRIEVE_ONE_SOCIETY, 
+    RETRIEVE_ONE_EVENT,
     RETRIEVE_ONE_SOCIETY_EVENTS,
     RETRIEVE_NEWSFEED,
     RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
     RETRIEVE_EVENT_BOOTHS,
+    RETRIEVE_USER_EVENTS
 
 } from '../constant';
 
 export function retrieveSingleDataSuccessful(type, data) {
     if(type === "society") {
         return {
-            type: RETRIEVE_USER_SOCIETY,
+            type: RETRIEVE_ONE_SOCIETY,
             payload: {
                 society: data
             }
         };
     } else if(type === "event") {
         return {
-            type: RETRIEVE_USER_EVENT,
+            type: RETRIEVE_ONE_EVENT,
             payload: {
                 event: data
             }
@@ -89,6 +90,13 @@ export function retrieveAllDataSuccessful(type, data) {
             type: RETRIEVE_EVENT_BOOTHS,
             payload: {
                 eventBooths: data
+            }
+        }
+    } else if(type === "userEvent") {
+        return {
+            type: RETRIEVE_USER_EVENTS,
+            payload: {
+                userEvents: data
             }
         }
     }
@@ -176,7 +184,24 @@ export function retrieveData(type, id) {
 
                 console.log("society's event in action: " + JSON.stringify(societyEvents));
                 dispatch(retrieveSingleDataSuccessful("societyEvent", societyEvents));
+            } else if(type === "studentEvent" || type === "staffEvent") {
+                let userEvents = [];
+                for(var i = 0; i < reply.length; i++) {
+                    userEvents.push({
+                        eventId: reply[i]["eventId"],
+                        name: reply[i]["name"],
+                        category: reply[i]["category"], 
+                        organiser: reply[i]["organiser"],
+                        joinDate: reply[i]["joinDate"],
+                        position: reply[i]["position"],
+                        crewStatus: reply[i]["crewStatus"],
+                        vegetarian: reply[i]["vegetarian"]
+                    })
+                }
+                console.log("user's event in action: " + JSON.stringify(userEvents));
+                dispatch(retrieveSingleDataSuccessful("userEvent", userEvents));
             }
+            
         });
     };
 }

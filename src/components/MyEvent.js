@@ -84,48 +84,51 @@ class MyEvent extends Component {
     render() {
 
         const { imageStyle, RaisedButtonStyle } = styles;
-        let events = this.props.events;
-        console.log("events in profile: " + events.length);
 
-        var rows = [];
-        var position, crewStatus, isVege;
-        
-        for(var i = 0; i < events.length; i++) {
-            if(events[i]["position"] == "participant"){
-                position = <td>Participant</td>;
-                crewStatus = <td>-</td>;
-            } else {
-                if(events[i]["crewStatus"] == 0) {
-                    position = <td>-</td>;
-                    crewStatus = <td>Pending</td>;
+        if(this.props.userEvents != null) {
+            let events = this.props.userEvents;
+            console.log("events in profile: " + events.length);
+
+            var rows = [];
+            var position, crewStatus, isVege;
+            
+            for(var i = 0; i < events.length; i++) {
+                if(events[i]["position"] == "participant"){
+                    position = <td>Participant</td>;
+                    crewStatus = <td>-</td>;
                 } else {
-                    position = <td>{events[i]["position"]}</td>;
-                    crewStatus = <td>Approved</td>;
+                    if(events[i]["crewStatus"] == 0) {
+                        position = <td>-</td>;
+                        crewStatus = <td>Pending</td>;
+                    } else {
+                        position = <td>{events[i]["position"]}</td>;
+                        crewStatus = <td>Approved</td>;
+                    }
                 }
+
+                if(events[i]["vegetarian"] == 0)
+                    isVege = <td>No</td>;
+                else 
+                    isVege = <td>Yes</td>;
+
+                rows.push(
+                    <tr>
+                        <td>{i}</td>
+                        <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
+                        <td><Link to={`/perEvent/`+events[i]["eventId"]}>{events[i]["name"]}</Link></td>
+                        <td><Link to={`/perSociety/1`}>{events[i]["organiser"]}</Link></td>
+                        <td>{events[i]["joinDate"]}</td>
+                        {position}
+                        {crewStatus}
+                        {isVege}
+                        <td><Link to={`/feedback`}>Undone</Link></td>
+                        <td><li value={events[i]["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
+                        {/* <td><FontAwesome.FaTrash value={events[i]["eventId"]} onClick={this.handleCancelEvent}/></td> */}
+                        {/* <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td> */}
+                        <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
+                    </tr>
+                )
             }
-
-            if(events[i]["vegetarian"] == 0)
-                isVege = <td>No</td>;
-            else 
-                isVege = <td>Yes</td>;
-
-            rows.push(
-                <tr>
-                    <td>{i}</td>
-                    <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
-                    <td><Link to={`/perEvent/`+events[i]["eventId"]}>{events[i]["name"]}</Link></td>
-                    <td><Link to={`/perSociety/1`}>{events[i]["organiser"]}</Link></td>
-                    <td>{events[i]["joinDate"]}</td>
-                    {position}
-                    {crewStatus}
-                    {isVege}
-                    <td><Link to={`/feedback`}>Undone</Link></td>
-                    <td><li value={events[i]["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
-                    {/* <td><FontAwesome.FaTrash value={events[i]["eventId"]} onClick={this.handleCancelEvent}/></td> */}
-                    {/* <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td> */}
-                    <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
-                </tr>
-            )
         }
         
         return (
@@ -209,8 +212,8 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-    //   events: state.auth.events,
-      id: state.auth.id
+        userEvents: state.data.userEvents,
+        id: state.auth.id
     };
 };
 
