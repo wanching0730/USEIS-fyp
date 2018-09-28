@@ -19,6 +19,8 @@ export function getData(type, id) {
         return fetch(`http://localhost:5000/get/studentEvent/` + id);
     } else if(type === "staffEvent") {
         return fetch(`http://localhost:5000/get/staffEvent/` + id);
+    } else if(type === "eventCrew") {
+        return fetch(`http://localhost:5000/get/eventCrew/` + id);
     }
 }
 

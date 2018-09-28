@@ -8,6 +8,11 @@ import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
 import '../style/society.css';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { deleteParticipation } from '../actions/delete-action';
+import { retrieveData } from '../actions/data-action';
+
 class ManageCrew extends Component {
 
     constructor(props) {

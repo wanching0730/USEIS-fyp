@@ -6,6 +6,7 @@ import {
     RETRIEVE_ONE_SOCIETY, 
     RETRIEVE_ONE_EVENT,
     RETRIEVE_ONE_SOCIETY_EVENTS,
+    RETRIEVE_ONE_EVENT_CREW,
     RETRIEVE_NEWSFEED,
     RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
@@ -41,6 +42,13 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_USER_EVENTS,
             payload: {
                 userEvents: data
+            }
+        }
+    } else if(type === "eventCrew") {
+        return {
+            type: RETRIEVE_ONE_EVENT_CREW,
+            payload: {
+                eventCrew: data
             }
         }
     }
@@ -163,6 +171,22 @@ export function retrieveData(type, id) {
                 }
                 console.log("user's event in action: " + JSON.stringify(userEvents));
                 dispatch(retrieveSingleDataSuccessful("userEvent", userEvents));
+            } else if(type === "eventCrew") {
+                let eventCrew = [];
+                for(var i = 0; i < reply.length; i++) {
+                    userEvents.push({
+                        ic: reply[i]["eventId"],
+                        course: reply[i]["course"],
+                        year: reply[i]["year"], 
+                        semester: reply[i]["semester"],
+                        contact: reply[i]["contact"],
+                        email: reply[i]["email"],
+                        crewStatus: reply[i]["crewStatus"],
+                        position: reply[i]["position"]
+                    })
+                }
+                console.log("event's crew in action: " + JSON.stringify(eventCrew));
+                dispatch(retrieveSingleDataSuccessful("eventCrew", eventCrew));
             }
             
         });
