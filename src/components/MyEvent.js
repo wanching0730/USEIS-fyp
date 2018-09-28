@@ -75,7 +75,7 @@ class MyEvent extends Component {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        this.props.onDeleteParticipation("studentEvent", this.props.id, this.state.eventId);
+                        this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
                     }
                 },
                 {
@@ -119,7 +119,7 @@ class MyEvent extends Component {
 
                 rows.push(
                     <tr>
-                        <td>{i}</td>
+                        <td>{i+1}</td>
                         <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
                         <td><Link to={`/perEvent/`+events[i]["eventId"]}>{events[i]["name"]}</Link></td>
                         <td><Link to={`/perSociety/1`}>{events[i]["organiser"]}</Link></td>
