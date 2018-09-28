@@ -109,7 +109,7 @@ class SocietyEvents extends Component {
         );
     };
     
-};
+}
 
 const styles = {
     imageStyle: {
