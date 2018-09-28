@@ -10,13 +10,14 @@ import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteParticipation } from '../actions/delete-action';
 import { retrieveData } from '../actions/data-action';
 
 class ManageCrew extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onRetrieveData("eventCrew", this.props.params.eventId);
     }
 
     componentDidMount() {
@@ -64,6 +65,39 @@ class ManageCrew extends Component {
     render() {
 
         const { RaisedButtonStyle } = styles;
+        let eventCrew = this.props.eventCrew;
+        var message = <div></div>;
+        var rows = [];
+        console.log("event's crew: " + JSON.stringify(this.props.eventCrew));
+
+        if(eventCrew != null) {
+            if(eventCrew.length != 0) {
+                for(var i = 0; i < eventCrew.length; i++) {
+                    let crew = eventCrew[i];
+                    var approvedIcon = <li value={crew["eventId"]} className="fa fa-plus"></li>
+
+                    if(crew["crewStatus"] == 1) 
+                        approvedIcon = <li className="fa fa-check"></li>
+
+                    rows.push(
+                        <tr> 
+                            <td>{i+1}</td>
+                            <td>Lim Heng Hao</td>
+                            <td>{crew["ic"]}</td>
+                            <td>{crew["course"]}</td>
+                            <td>Y{crew["year"]}S{crew["semester"]}</td>
+                            <td>{crew["contact"]}</td>
+                            <td>{crew["email"]}</td>
+                            <td>{crew["position"]}</td>
+                            <td>{approvedIcon}</td>
+                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
+                        </tr>
+                    )
+                }
+            } else {
+                message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No crew for this event</div>;
+            }
+        }
         
         return (
             <div id="outerDiv"> 
@@ -100,20 +134,11 @@ class ManageCrew extends Component {
                                     </thead>
 
                                     <tbody>
-                                        <tr> 
-                                            <td>1</td>
-                                            <td>Lim Heng Hao</td>
-                                            <td>999999-99-9999</td>
-                                            <td>Software Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-9900990</td>
-                                            <td>henghao@hotmail.com</td>
-                                            <td>Secretary</td>
-                                            <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
-                                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
-                                        </tr>
+                                        {rows}
                                     </tbody>
                                 </table>
+
+                                {message}
 
                                 <div style= {{ textAlign: "center" }}>
                                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
@@ -136,4 +161,16 @@ const styles = {
     }
 }
 
-export default ManageCrew;
+const mapStateToProps = (state, props) => {
+    return {
+        eventCrew: state.data.eventCrew
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveData: retrieveData
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(ManageCrew);

@@ -174,8 +174,8 @@ export function retrieveData(type, id) {
             } else if(type === "eventCrew") {
                 let eventCrew = [];
                 for(var i = 0; i < reply.length; i++) {
-                    userEvents.push({
-                        ic: reply[i]["eventId"],
+                    eventCrew.push({
+                        ic: reply[i]["ic"],
                         course: reply[i]["course"],
                         year: reply[i]["year"], 
                         semester: reply[i]["semester"],

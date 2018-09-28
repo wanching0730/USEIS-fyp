@@ -65,6 +65,7 @@ class PerEvent extends Component {
         var buttons;
         var event;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
+        let eventId = this.props.params.eventId;
 
         if(this.props.event != null) {
             event = this.props.event;
@@ -105,13 +106,13 @@ class PerEvent extends Component {
             for(var i = 0; i < userEvents.length; i++) {
                 let userEvent = userEvents[i];
                 if((userEvent["position"] == "chairperson" || userEvent["position"] == "vice_chairperson") && 
-                userEvent["eventId"] == this.props.params.eventId) {
+                userEvent["eventId"] == eventId) {
                         sideNavBar = 
                             <div id="mySidenav" class="sidenav">
-                                <Link to={`/createEvent/event/` + this.props.params.eventId} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
+                                <Link to={`/createEvent/event/` + eventId} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
                                 <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
                                 <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                                <Link to="/manageCrew" id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
+                                <Link to={`/manageCrew/` + eventId} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
                                 <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
                                 <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                             </div>
