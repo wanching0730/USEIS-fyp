@@ -6,7 +6,6 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
-import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import '../style/society.css';
 
 import { connect } from 'react-redux';
@@ -65,26 +64,24 @@ class MyEvent extends Component {
         this.setState({eventId: eventId})
         console.log("event to delete: " + this.state.eventId);
 
-        // console.log("event to delete: " + JSON.stringify(name));
-        // console.log("event to delete: " + name);
         setTimeout(() => {
             confirmAlert({
                 title: 'Cancel Participation Confirmation',
                 message: 'Are you sure to cancel participating this event?',
                 buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => {
-                        if(this.props.userName.substring(0,2) === "00") 
-                            this.props.onDeleteParticipation("staffEvent", this.props.userId, this.state.eventId);
-                        else 
-                        this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
+                    {
+                        label: 'Yes',
+                        onClick: () => {
+                            if(this.props.userName.substring(0,2) === "00") 
+                                this.props.onDeleteParticipation("staffEvent", this.props.userId, this.state.eventId);
+                            else 
+                            this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
+                        }
+                    },
+                    {
+                        label: 'No',
+                        onClick: () => console.log('Click No')
                     }
-                },
-                {
-                    label: 'No',
-                    onClick: () => console.log('Click No')
-                }
                 ]
             })
         }, 2000);
@@ -135,9 +132,7 @@ class MyEvent extends Component {
                             {isVege}
                             <td><Link to={`/feedback`}>Undone</Link></td>
                             <td><li value={events[i]["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
-                            {/* <td><FontAwesome.FaTrash value={events[i]["eventId"]} onClick={this.handleCancelEvent}/></td> */}
-                            {/* <td><Link onClick={this.handleCancelEvent}><FontAwesome.FaTrash /></Link></td> */}
-                            <td><Link onClick={this.handleCancelCrew}><FontAwesome.FaTimesCircle /></Link></td>
+                            <td><li value={events[i]["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-times-circle"></li></td>
                         </tr>
                     )
                 }
@@ -184,19 +179,7 @@ class MyEvent extends Component {
                                     </thead>
 
                                     <tbody>
-                                        {/* <tr>
-                                            <td>4</td>
-                                            <td><img style={imageStyle} src={ require('../assets/images/carnival.jpg') } /></td>
-                                            <td><Link to={`/perEvent/1`}>Sport Carnival</Link></td>
-                                            <td><Link to={`/perSociety/1`}>Sport Club</Link></td>
-                                            <td>17/01/2018</td>
-                                            <td><Link to={`/feedback`}>Undone</Link></td>
-                                            <td>-</td>
-                                            <td>-</td>
-                                        </tr> */}
-
                                         {rows}
-
                                     </tbody>
                                 </table>
                                 {message}

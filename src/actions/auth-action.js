@@ -19,7 +19,6 @@ export function loginUserSuccessful(userName, userId, id, societies, token) {
             userId: userId,
             id: id,
             societies: societies,
-            // events: events,
             token: token
         }
     }
@@ -49,10 +48,8 @@ export function loginUser(postData) {
 
             let user = reply["user"];
             let userSociety = reply["userSociety"];
-            // let userEvent = reply["userEvent"];
             let token = reply["token"];
             var societies = [];
-            //var events = [];
             
             let userName = user[0]["name"];
             let userId = user[0]["userId"];
@@ -71,22 +68,6 @@ export function loginUser(postData) {
                     }
                     console.log("user societies: " + societies);
                 }
-
-                // if(userEvent.length > 0) {
-                //     for(var i = 0; i < userEvent.length; i++) {
-                //         events.push({
-                //             eventId: userEvent[i]["eventId"],
-                //             name: userEvent[i]["name"],
-                //             category: userEvent[i]["category"],
-                //             date: userEvent[i]["eventDateTime"],
-                //             organiser: userEvent[i]["organiser"],
-                //             joinDate: userEvent[i]["joinDate"],
-                //             position: userEvent[i]["position"],
-                //             crewStatus: userEvent[i]["crewStatus"],
-                //             vegetarian: userEvent[i]["vegetarian"]
-                //         })
-                //     }
-                // }
                 
                 dispatch(loginUserSuccessful(userName, userId, id, societies, token));
             } else {
@@ -103,22 +84,6 @@ export function loginUser(postData) {
                         })
                     }
                 }
-
-                // if(userEvent.length > 0) {
-                //     for(var i = 0; i < userEvent.length; i++) {
-                //         events.push({
-                //             eventId: userEvent[i]["eventId"],
-                //             name: userEvent[i]["name"],
-                //             category: userEvent[i]["category"],
-                //             date: userEvent[i]["eventDateTime"],
-                //             organiser: userEvent[i]["organiser"],
-                //             joinDate: userEvent[i]["joinDate"],
-                //             position: userEvent[i]["position"],
-                //             crewStatus: userEvent[i]["crewStatus"],
-                //             vegetarian: userEvent[i]["vegetarian"]
-                //         })
-                //     }
-                // }
 
                 dispatch(loginUserSuccessful(userName, userId, id, societies, token));
             }

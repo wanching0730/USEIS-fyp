@@ -1,4 +1,3 @@
-//import {browserHistory} from 'react-router';
 import { getData, getAllData } from '../utils/http_function';
 
 import {
@@ -47,15 +46,6 @@ export function retrieveSingleDataSuccessful(type, data) {
     }
 }
 
-// export function retrieveEventSuccessful(event) {
-//         return {
-//             type: RETRIEVE_USER_EVENT,
-//             payload: {
-//                 event: event
-//             }
-//         };
-// }
-
 export function retrieveAllDataSuccessful(type, data) {
     if(type === "society") {
         return {
@@ -101,33 +91,6 @@ export function retrieveAllDataSuccessful(type, data) {
         }
     }
 }
-
-// export function retrieveSocietiesSuccessful(societies) {
-//     return {
-//         type: RETRIEVE_SOCIETIES,
-//         payload: {
-//             societies: societies
-//         }
-//     }
-// }
-
-// export function retrieveEventsSuccessful(events) {
-//     return {
-//         type: RETRIEVE_EVENTS,
-//         payload: {
-//             events: events
-//         }
-//     }
-// }
-
-// export function retrieveNewsfeedSuccessful(newsfeeds) {
-//     return {
-//         type: RETRIEVE_NEWSFEED,
-//         payload: {
-//             newsfeeds: newsfeeds
-//         }
-//     }
-// }
 
 export function retrieveData(type, id) {
     return function (dispatch) {
