@@ -75,7 +75,7 @@ class MyEvent extends Component {
                             if(this.props.userName.substring(0,2) === "00") 
                                 this.props.onDeleteParticipation("staffEvent", this.props.userId, this.state.eventId);
                             else 
-                            this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
+                                this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
                         }
                     },
                     {

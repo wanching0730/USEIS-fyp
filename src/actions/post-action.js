@@ -1,5 +1,5 @@
 import {browserHistory} from 'react-router';
-import { createData, updateData } from '../utils/http_function';
+import { createData, updateData, updateDataDouble } from '../utils/http_function';
 import { confirmAlert } from 'react-confirm-alert';
 import {
     CREATE_SOCIETY,

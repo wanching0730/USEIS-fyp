@@ -11,11 +11,14 @@ import '../style/society.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData } from '../actions/data-action';
+import { updateDouble } from '../actions/post-action';
 
 class ManageCrew extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {studentId: -1};
 
         this.props.onRetrieveData("eventCrew", this.props.params.eventId);
     }
@@ -24,23 +27,33 @@ class ManageCrew extends Component {
         window.scrollTo(0, 0)
     }
 
-    handleApprove() {
-        confirmAlert({
-            title: 'Approval Confirmation',
-            message: 'Are you sure to approve this crew?',
-            buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-                    console.log('Click Yes');
-                }
-              },
-              {
-                label: 'No',
-                onClick: () => console.log('Click No')
-              }
-            ]
-          })
+    handleApprove(event) {
+        let studentId = event.target.value;
+        this.setState({studentId: studentId})
+
+        setTimeout(() => {
+            confirmAlert({
+                title: 'Approval Confirmation',
+                message: 'Are you sure to approve this crew?',
+                buttons: [
+                  {
+                    label: 'Yes',
+                    onClick: () => {
+                        
+                        let data = {
+                            studentId: this.state.studentId,
+                            eventId: this.props.params.eventId
+                        }
+                        this.props.onUpdateData("crew", data);
+                    }
+                  },
+                  {
+                    label: 'No',
+                    onClick: () => console.log('Click No')
+                  }
+                ]
+              })
+        }, 2000);
     }
 
     handleDelete() {
@@ -74,10 +87,13 @@ class ManageCrew extends Component {
             if(eventCrew.length != 0) {
                 for(var i = 0; i < eventCrew.length; i++) {
                     let crew = eventCrew[i];
-                    var approvedIcon = <li value={crew["studentId"]} className="fa fa-plus"></li>
+                    console.log("student id: " + crew["studentId"]);
+                    var approvedIcon;
 
                     if(crew["crewStatus"] == 1) 
-                        approvedIcon = <li className="fa fa-check"></li>
+                        approvedIcon = <td><li className="fa fa-check"></li></td>
+                    else 
+                        approvedIcon = <td><li value={crew["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li></td>
 
                     rows.push(
                         <tr> 
@@ -89,7 +105,7 @@ class ManageCrew extends Component {
                             <td>{crew["contact"]}</td>
                             <td>{crew["email"]}</td>
                             <td>{crew["position"]}</td>
-                            <td>{approvedIcon}</td>
+                            {approvedIcon}
                             <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
                         </tr>
                     )
@@ -169,7 +185,8 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveData
+      onRetrieveData: retrieveData,
+      onUpdateData: updateDouble
     }, dispatch);
 };
 
