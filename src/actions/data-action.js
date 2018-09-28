@@ -175,6 +175,7 @@ export function retrieveData(type, id) {
                 let eventCrew = [];
                 for(var i = 0; i < reply.length; i++) {
                     eventCrew.push({
+                        studentId: reply[i]["studentId"],
                         ic: reply[i]["ic"],
                         course: reply[i]["course"],
                         year: reply[i]["year"], 

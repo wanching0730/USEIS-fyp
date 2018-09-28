@@ -74,7 +74,7 @@ class ManageCrew extends Component {
             if(eventCrew.length != 0) {
                 for(var i = 0; i < eventCrew.length; i++) {
                     let crew = eventCrew[i];
-                    var approvedIcon = <li value={crew["eventId"]} className="fa fa-plus"></li>
+                    var approvedIcon = <li value={crew["studentId"]} className="fa fa-plus"></li>
 
                     if(crew["crewStatus"] == 1) 
                         approvedIcon = <li className="fa fa-check"></li>
