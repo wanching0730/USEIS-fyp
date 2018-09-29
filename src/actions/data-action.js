@@ -7,6 +7,7 @@ import {
     RETRIEVE_ONE_EVENT,
     RETRIEVE_ONE_SOCIETY_EVENTS,
     RETRIEVE_ONE_EVENT_CREW,
+    RETRIEVE_ONE_SOCIETY_COMM,
     RETRIEVE_NEWSFEED,
     RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
@@ -49,6 +50,13 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_ONE_EVENT_CREW,
             payload: {
                 eventCrew: data
+            }
+        }
+    } else if(type === "societyComm") {
+        return {
+            type: RETRIEVE_ONE_SOCIETY_COMM,
+            payload: {
+                societyComm: data
             }
         }
     }
@@ -188,8 +196,24 @@ export function retrieveData(type, id) {
                 }
                 console.log("event's crew in action: " + JSON.stringify(eventCrew));
                 dispatch(retrieveSingleDataSuccessful("eventCrew", eventCrew));
+            } else if(type === "societyComm") {
+                let societyComm = [];
+                for(var i = 0; i < reply.length; i++) {
+                    societyComm.push({
+                        studentId: reply[i]["studentId"],
+                        name: reply[i]["name"],
+                        ic: reply[i]["ic"],
+                        course: reply[i]["course"],
+                        year: reply[i]["year"], 
+                        semester: reply[i]["semester"],
+                        contact: reply[i]["contact"],
+                        email: reply[i]["email"],
+                        position: reply[i]["position"]
+                    })
+                }
+                console.log("society's comm in action: " + JSON.stringify(societyComm));
+                dispatch(retrieveSingleDataSuccessful("societyComm", societyComm));
             }
-            
         });
     };
 }
