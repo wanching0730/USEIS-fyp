@@ -62,13 +62,17 @@ class PerEvent extends Component {
 
         console.log("event: " + this.props.event);
 
-        var buttons;
-        var event;
+        var buttons, event, toEditEvent;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
 
         if(this.props.event != null) {
             event = this.props.event;
+
+            toEditEvent = {
+                pathname: "/createEvent/event/" + this.props.params.eventId,
+                state: {eventName: this.props.event.name}
+            }
         } else {
             event = {
                 name: null,
@@ -107,15 +111,15 @@ class PerEvent extends Component {
                 let userEvent = userEvents[i];
                 if((userEvent["position"] == "chairperson" || userEvent["position"] == "vice_chairperson") && 
                 userEvent["eventId"] == eventId) {
-                        sideNavBar = 
-                            <div id="mySidenav" class="sidenav">
-                                <Link to={`/createEvent/event/` + eventId} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
-                                <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
-                                <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                                <Link to={`/manageCrew/` + eventId} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
-                                <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
-                                <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                            </div>
+                    sideNavBar = 
+                        <div id="mySidenav" class="sidenav">
+                            <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
+                            <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
+                            <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+                            <Link to={`/manageCrew/` + eventId} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
+                            <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
+                            <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                        </div>
                 } else {
                     sideNavBar = 
                         <div id="mySidenav" class="sidenav">

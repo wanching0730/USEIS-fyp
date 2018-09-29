@@ -151,13 +151,17 @@ class CreateEvent extends Component {
     {value:'lifelong', name:'Lifelong Learning & Information Management'}, {value:'moral', name:'Moral & Professional Ethics'}];
 
     var header;
-    var activeBreadCrumb;
+    var activeBreadCrumb, breadCrumb1, breadCrumb2;
 
     if(this.props.params.type == "society") {
         header = <h1>Create Society Event<span>Create a new event for your society and start to promote it!</span></h1>
+        breadCrumb1 = <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.id}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
+        breadCrumb2 = <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
         activeBreadCrumb = <BreadcrumbItem active>Create Event</BreadcrumbItem>
     } else {
       header = <h1>Edit Society Event<span>Edit your event details and make it better!</span></h1>
+      breadCrumb1 = <BreadcrumbItem><Link to={`/perEvent/` + this.props.params.id}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
+      breadCrumb2 = <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
       activeBreadCrumb = <BreadcrumbItem active>Edit Event</BreadcrumbItem>
     }
 
@@ -170,15 +174,15 @@ class CreateEvent extends Component {
             <div style={{ margin: 20 }}>
                 <Breadcrumb>
                   <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                  <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-                  <BreadcrumbItem><Link to={`/perSociety/1`}>IT Society</Link></BreadcrumbItem>
-                  { activeBreadCrumb }
+                  {breadCrumb1}
+                  {breadCrumb2}
+                  {activeBreadCrumb}
                 </Breadcrumb>
             </div>
 
             <div className="container" style={ContainerStyle}>
               <div className="form-style-10">
-                { header }
+                {header}
                 <form>
                     <div class="section"><span>1</span>Name &amp; Category &amp; Description</div>
                     <div class="inner-wrap">
