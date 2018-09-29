@@ -46,21 +46,32 @@ class MyProfile extends Component {
             for(var i = 0; i < societies.length; i++) {
                 var events = [];
                 let society = societies[i];
+
+                let toSociety = {
+                    pathname: "/perSociety/" + society["societyId"],
+                    state: {societyName: society["name"]}
+                }
+                
                 const ids = groupBy(societyEvents, societyEvent => societyEvent["societyId"]);
                 for (const [key, values] of ids.entries()) {
                     if(society["societyId"] == key) {
                         values.forEach(value => {
+                            let toEvent = {
+                                pathname: "/perEvent/" + value["eventId"],
+                                state: {eventName: value["eventName"]}
+                            }
                             events.push(
-                                <li><Link to={`/perEvent/` + value["eventId"]}>{value["eventName"]}</Link></li>
+                                <li><Link to={toEvent}>{value["eventName"]}</Link></li>
                             );
                         });
                     }    
                 }
+                
                 rows.push(
                     <tr>
                         <td>{i+1}</td>
                         <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
-                        <td><Link to={`/perSociety/`+society["societyId"]}>{society["name"]}</Link></td>
+                        <td><Link to={toSociety}>{society["name"]}</Link></td>
                         <td>{society["joinDate"]}</td>
                         <td>{society["position"]}</td>
                         <td>{events}</td>

@@ -104,6 +104,11 @@ class MyEvent extends Component {
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
 
+                    let toEvent = {
+                        pathname: "/perEvent/" + event["eventId"],
+                        state: {eventName: event["name"]}
+                    }
+
                     if(event["position"] === "participant"){
                         position = <td>Participant</td>;
                         crewStatus = <td>-</td>;
@@ -132,7 +137,7 @@ class MyEvent extends Component {
                         <tr>
                             <td>{i+1}</td>
                             <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
-                            <td><Link to={`/perEvent/`+event["eventId"]}>{event["name"]}</Link></td>
+                            <td><Link to={toEvent}>{event["name"]}</Link></td>
                             <td><Link to={`/perSociety/1`}>{event["organiser"]}</Link></td>
                             <td>{event["joinDate"]}</td>
                             {position}
