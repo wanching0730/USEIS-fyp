@@ -3,32 +3,54 @@ import NavBar from './NavBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import $ from 'jquery';
-import axios from 'axios';
 import '../style/society.css';
 import { Link } from 'react-router';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveData } from '../actions/data-action';
 
 class CommitteeBoard extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {society: []};
+        this.props.onRetrieveData("societyComm", this.props.params.id);
+
+        console.log("params type: " + this.props.params.type);
+        console.log("params id: " + this.props.params.id);
     }
 
     componentDidMount() {
-        // this.listSocieties();
         window.scrollTo(0, 0)
-    }
-
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
     }
 
     render() {
         
         const { RaisedButtonStyle } = styles;
-        
+        let societyComm = this.props.societyComm;
+        console.log("society comm: " + societyComm);
+        var rows = [];
+
+        if(societyComm != null) {
+            for(var i = 0; i < societyComm.length; i++) {
+                let comm = societyComm[i];
+
+                rows.push(
+                    <tr> 
+                        <td>{i+1}</td>
+                        <td>{comm["name"]}</td>
+                        <td>{comm["ic"]}</td>
+                        <td>{comm["course"]}</td>
+                        <td>Y{comm["year"]}S{comm["semester"]}</td>
+                        <td>{comm["contact"]}</td>
+                        <td>{comm["email"]}</td>
+                        <td>{comm["position"]}</td>
+                    </tr>
+                )
+            }
+        }
+
         return (
             <div id="outerDiv"> 
                 <NavBar />
@@ -63,55 +85,7 @@ class CommitteeBoard extends Component {
                                     </thead>
 
                                     <tbody>
-                                        <tr> 
-                                            <td>1</td>
-                                            <td>Lim Heng Hao</td>
-                                            <td>999999-99-9999</td>
-                                            <td>Software Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-9900990</td>
-                                            <td>henghao@hotmail.com</td>
-                                            <td>Chairperson</td>
-                                        </tr>
-                                        <tr> 
-                                            <td>2</td>
-                                            <td>Toh Chi Meng</td>
-                                            <td>777777-77-7777</td>
-                                            <td>Mechanical Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-9900990</td>
-                                            <td>chimeng@hotmail.com</td>
-                                            <td>Vice Chaiperson</td>
-                                        </tr>
-                                        <tr> 
-                                            <td>3</td>
-                                            <td>Lim Keng Huat</td>
-                                            <td>888888-88-8888</td>
-                                            <td>Civil Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-8989898</td>
-                                            <td>kenghuat@hotmail.com</td>
-                                            <td>Secretary</td>
-                                        </tr>
-                                        <tr> 
-                                            <td>4</td>
-                                            <td>Kenneth Teng</td>
-                                            <td>333333-33-3333</td>
-                                            <td>Electrical Engineering</td>
-                                            <td>Y3S3</td>
-                                            <td>012-2930560</td>
-                                            <td>kenneth@hotmail.com</td>
-                                            <td>treasurer</td>
-                                        </tr>
-                                        {/* {this.state.society.map(row => {
-                                            return (
-                                                <tr>
-                                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                    <td>{row[1]}</td>
-                                                    <td>{row[3]}</td>
-                                                </tr>
-                                            );
-                                        })} */}
+                                        {rows}
                                     </tbody>
                                 </table>
 
@@ -138,4 +112,17 @@ const styles = {
     }
 }
 
-export default CommitteeBoard;
+const mapStateToProps = (state, props) => {
+    return {
+        societyComm: state.data.societyComm,
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+        onRetrieveData: retrieveData
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(CommitteeBoard);
+

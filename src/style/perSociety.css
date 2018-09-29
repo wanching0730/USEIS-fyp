@@ -46,3 +46,9 @@
     top: 460px;
     background-color: rgba(143, 0, 238, 0.815)
 }
+
+
+#commBoard {
+    top: 520px;
+    background-color: limegreen;
+}
