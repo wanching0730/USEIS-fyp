@@ -15,10 +15,14 @@ class CommitteeBoard extends Component {
     constructor(props) {
         super(props);
 
-        this.props.onRetrieveData("societyComm", this.props.params.id);
+        let parameter = this.props.params;
+        if(parameter.type === "society")
+            this.props.onRetrieveData("societyComm", parameter.id);
+        else 
+            this.props.onRetrieveData("eventComm", parameter.id);
 
         console.log("params location: " + JSON.stringify(this.props.location));
-        console.log("params id: " + this.props.params.id);
+        console.log("params type: " + this.props.params.type);
     }
 
     componentDidMount() {
@@ -28,13 +32,13 @@ class CommitteeBoard extends Component {
     render() {
         
         const { RaisedButtonStyle } = styles;
-        let societyComm = this.props.societyComm;
-        console.log("society comm: " + societyComm);
-        var rows = [];
+        let committee = this.props.comm;
+        console.log("comm: " + committee);
+        var rows = [], breadCrumb;
 
-        if(societyComm != null) {
-            for(var i = 0; i < societyComm.length; i++) {
-                let comm = societyComm[i];
+        if(committee != null) {
+            for(var i = 0; i < committee.length; i++) {
+                let comm = committee[i];
 
                 rows.push(
                     <tr> 
@@ -51,19 +55,32 @@ class CommitteeBoard extends Component {
             }
         }
 
+        if(this.props.params.type === "society") {
+            breadCrumb =
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.id}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>Committee Board</BreadcrumbItem>
+                </Breadcrumb>
+        } else {
+            breadCrumb = 
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
+                    <BreadcrumbItem><Link to={`/perEvent/` + this.props.params.id}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>Committee Board</BreadcrumbItem>
+                </Breadcrumb>
+        }
+
         return (
             <div id="outerDiv"> 
                 <NavBar />
 
                 <div style={{ margin: 20 }}>
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.id}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>Committee Board</BreadcrumbItem>
-                    </Breadcrumb>
+                    
                 </div>
-
+                    {breadCrumb}
                 <div>
                     <MuiThemeProvider>
 
@@ -114,7 +131,7 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-        societyComm: state.data.societyComm,
+        comm: state.data.comm,
     };
 };
 

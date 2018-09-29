@@ -68,7 +68,7 @@ class PerEvent extends Component {
 
         console.log("event: " + this.props.event);
 
-        var buttons, event, toEditEvent, toManageCrew;
+        var buttons, event, toEditEvent, toManageCrew, toCommBoard;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
 
@@ -84,6 +84,11 @@ class PerEvent extends Component {
                 pathname: "/manageCrew/" + eventId,
                 state: {eventName: this.props.event.name}
             }
+
+            toCommBoard = { 
+                pathname: "/commBoard/event/" + eventId, 
+                state: { eventName: this.props.event.name } 
+            };
         } else {
             event = {
                 name: null,
@@ -129,12 +134,12 @@ class PerEvent extends Component {
                             <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
                             <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
                             <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
-                            <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                            <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                         </div>
                 } else {
                     sideNavBar = 
                         <div id="mySidenav" class="sidenav">
-                            <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                            <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                         </div>
                 }
             }
