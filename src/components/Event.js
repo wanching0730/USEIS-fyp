@@ -39,8 +39,12 @@ class Event extends Component {
             for (const [key, values] of categories.entries()) {
                 var subRows = [];
                 values.forEach(value => {
+                    let toEvent = {
+                        pathname: "/perEvent/" + value["id"],
+                        state: {eventName: value["name"]}
+                    }
                     subRows.push(
-                        <li><Link to={`/perEvent/` + value["id"]}>{value["name"]}</Link></li>
+                        <li><Link to={toEvent}>{value["name"]}</Link></li>
                     );
                 });
 

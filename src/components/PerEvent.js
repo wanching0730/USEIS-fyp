@@ -137,7 +137,7 @@ class PerEvent extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>Cardio Night Run</BreadcrumbItem>
+                        <BreadcrumbItem active>{this.props.location.state["eventName"]}</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
 
