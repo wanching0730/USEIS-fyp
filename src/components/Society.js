@@ -39,8 +39,12 @@ class Society extends Component {
             for (const [key, values] of categories.entries()) {
                 var subRows = [];
                 values.forEach(value => {
+                    let toSociety = {
+                        pathname: "/perSociety/" + value["id"],
+                        state: {societyName: value["name"]}
+                    }
                     subRows.push(
-                        <li><Link to={`/perSociety/` + value["id"]}>{value["name"]}</Link></li>
+                        <li><Link to={toSociety}>{value["name"]}</Link></li>
                     );
                 });
 

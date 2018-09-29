@@ -69,7 +69,7 @@ class PerSociety extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>IT Society</BreadcrumbItem>
+                        <BreadcrumbItem active>{this.props.location.state["societyName"]}</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
 
