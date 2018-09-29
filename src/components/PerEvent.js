@@ -31,7 +31,13 @@ class PerEvent extends Component {
     }
 
     handleEvent(event) {
-        browserHistory.push("/register_event/" + this.props.params.eventId);
+        if(this.props.event != null) {
+            let toRegisterEvent = {
+                pathname: "/register_event/" + this.props.params.eventId,
+                state: {eventName: this.props.event.name}
+            }
+            browserHistory.push(toRegisterEvent);
+        }
     }
 
     handleCrew(event) {

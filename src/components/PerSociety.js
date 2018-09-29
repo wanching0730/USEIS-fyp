@@ -22,7 +22,13 @@ class PerSociety extends Component {
     }
 
     handleJoinClick(event) {
-        browserHistory.push("/register_society/" + this.props.params.societyId);
+        if(this.props.society != null) {
+            let toRegisterSociety = {
+                pathname: "/register_society/" + this.props.params.societyId,
+                state: {societyName: this.props.society.name}
+            }
+            browserHistory.push(toRegisterSociety);
+        }
     }
 
     handleListEventClick(event) {
