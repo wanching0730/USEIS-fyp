@@ -7,7 +7,7 @@ import {
     RETRIEVE_ONE_EVENT,
     RETRIEVE_ONE_SOCIETY_EVENTS,
     RETRIEVE_ONE_EVENT_CREW,
-    RETRIEVE_ONE_SOCIETY_COMM,
+    RETRIEVE_COMM,
     RETRIEVE_NEWSFEED,
     RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
@@ -52,14 +52,14 @@ export function retrieveSingleDataSuccessful(type, data) {
                 eventCrew: data
             }
         }
-    } else if(type === "societyComm") {
+    } else if(type === "comm") {
         return {
-            type: RETRIEVE_ONE_SOCIETY_COMM,
+            type: RETRIEVE_COMM,
             payload: {
-                societyComm: data
+                comm: data
             }
         }
-    }
+    } 
 }
 
 export function retrieveAllDataSuccessful(type, data) {
@@ -196,10 +196,10 @@ export function retrieveData(type, id) {
                 }
                 console.log("event's crew in action: " + JSON.stringify(eventCrew));
                 dispatch(retrieveSingleDataSuccessful("eventCrew", eventCrew));
-            } else if(type === "societyComm") {
-                let societyComm = [];
+            } else if(type === "societyComm" || type === "eventComm") {
+                let comm = [];
                 for(var i = 0; i < reply.length; i++) {
-                    societyComm.push({
+                    comm.push({
                         studentId: reply[i]["studentId"],
                         name: reply[i]["name"],
                         ic: reply[i]["ic"],
@@ -211,9 +211,9 @@ export function retrieveData(type, id) {
                         position: reply[i]["position"]
                     })
                 }
-                console.log("society's comm in action: " + JSON.stringify(societyComm));
-                dispatch(retrieveSingleDataSuccessful("societyComm", societyComm));
-            }
+                console.log("committeee in action: " + JSON.stringify(comm));
+                dispatch(retrieveSingleDataSuccessful("comm", comm));
+            } 
         });
     };
 }

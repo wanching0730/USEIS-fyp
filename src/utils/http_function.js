@@ -23,6 +23,8 @@ export function getData(type, id) {
         return fetch(`http://localhost:5000/get/eventCrew/` + id);
     } else if(type === "societyComm") {
         return fetch(`http://localhost:5000/get/societyComm/` + id);
+    } else if(type === "eventComm") {
+        return fetch(`http://localhost:5000/get/eventComm/` + id);
     }
 }
 
