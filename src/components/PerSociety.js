@@ -42,20 +42,26 @@ class PerSociety extends Component {
     render() {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
-        var society, toCommBoard, toCreateEvent;
+        var society, toCommBoard, toCreateEvent, toManageMember;
         
         if(this.props.society != null) {
             society = this.props.society;
+            let societyId = this.props.params.societyId;
 
             toCommBoard = { 
-                pathname: "/commBoard/society/" + this.props.params.societyId, 
+                pathname: "/commBoard/society/" + societyId, 
                 state: { societyName: this.props.society.name } 
             };
 
             toCreateEvent = {
-                pathname: "/createEvent/society/" + this.props.params.societyId,
+                pathname: "/createEvent/society/" + societyId,
                 state: {societyName: this.props.society.name}
-            }
+            };
+
+            toManageMember = {
+                pathname: "/manageMember/" + societyId,
+                state: {societyName: this.props.society.name}
+            };
         } else {
             society = {
                 name: null,
@@ -84,7 +90,7 @@ class PerSociety extends Component {
                     <Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
                     <Link to="/register_booth" id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
                     <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
-                    <Link to="/manageMember" id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
+                    <Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
                     <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                 </div>
 

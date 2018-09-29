@@ -68,7 +68,7 @@ class PerEvent extends Component {
 
         console.log("event: " + this.props.event);
 
-        var buttons, event, toEditEvent;
+        var buttons, event, toEditEvent, toManageCrew;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
 
@@ -76,7 +76,12 @@ class PerEvent extends Component {
             event = this.props.event;
 
             toEditEvent = {
-                pathname: "/createEvent/event/" + this.props.params.eventId,
+                pathname: "/createEvent/event/" + eventId,
+                state: {eventName: this.props.event.name}
+            }
+
+            toManageCrew = {
+                pathname: "/manageCrew/" + eventId,
                 state: {eventName: this.props.event.name}
             }
         } else {
@@ -122,7 +127,7 @@ class PerEvent extends Component {
                             <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
                             <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
                             <Link to="/register_booth" id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                            <Link to={`/manageCrew/` + eventId} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
+                            <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
                             <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
                             <Link to="/commBoard" id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                         </div>

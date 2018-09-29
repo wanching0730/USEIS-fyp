@@ -14,17 +14,10 @@ class ManageMember extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {society: []};
     }
 
     componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0, 0)
-    }
-
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
     }
 
     handleApprove() {
@@ -58,7 +51,7 @@ class ManageMember extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/perSociety/1`}>IT Society</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.societyId}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Manage Member</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
@@ -93,27 +86,7 @@ class ManageMember extends Component {
                                             <td>018-9900990</td>
                                             <td>henghao@hotmail.com</td>
                                             <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
-                                        </tr>
-                                        <tr> 
-                                            <td>2</td>
-                                            <td>Toh Chi Meng</td>
-                                            <td>777777-77-7777</td>
-                                            <td>Mechanical Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-9900990</td>
-                                            <td>chimeng@hotmail.com</td>
-                                            <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
-                                        </tr>
-                                        <tr> 
-                                            <td>3</td>
-                                            <td>Lim Keng Huat</td>
-                                            <td>888888-88-8888</td>
-                                            <td>Civil Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-8989898</td>
-                                            <td>kenghuat@hotmail.com</td>
-                                            <td><FontAwesome.FaCheck /></td>
-                                        </tr>
+                                        </tr> 
                                         <tr> 
                                             <td>4</td>
                                             <td>Kenneth Teng</td>
@@ -124,15 +97,6 @@ class ManageMember extends Component {
                                             <td>kenneth@hotmail.com</td>
                                             <td><FontAwesome.FaCheck /></td>
                                         </tr>
-                                        {/* {this.state.society.map(row => {
-                                            return (
-                                                <tr>
-                                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                    <td>{row[1]}</td>
-                                                    <td>{row[3]}</td>
-                                                </tr>
-                                            );
-                                        })} */}
                                     </tbody>
                                 </table>
 
