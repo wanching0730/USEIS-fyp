@@ -17,7 +17,7 @@ class CommitteeBoard extends Component {
 
         this.props.onRetrieveData("societyComm", this.props.params.id);
 
-        console.log("params type: " + this.props.params.type);
+        console.log("params location: " + JSON.stringify(this.props.location));
         console.log("params id: " + this.props.params.id);
     }
 
@@ -59,7 +59,7 @@ class CommitteeBoard extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/perEvent/1`}>Cardio Night Run</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.id}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Committee Board</BreadcrumbItem>
                     </Breadcrumb>
                 </div>

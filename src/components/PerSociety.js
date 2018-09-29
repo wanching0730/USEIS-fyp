@@ -36,10 +36,15 @@ class PerSociety extends Component {
     render() {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
-        var society;
+        var society, newTo;
         
         if(this.props.society != null) {
             society = this.props.society;
+
+            newTo = { 
+                pathname: "/commBoard/society/" + this.props.params.societyId, 
+                state: { societyName: this.props.society.name } 
+            };
         } else {
             society = {
                 name: null,
@@ -69,7 +74,7 @@ class PerSociety extends Component {
                     <Link to="/register_booth" id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
                     <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
                     <Link to="/manageMember" id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
-                    <Link to={`/commBoard/society/` + this.props.params.societyId} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                    <Link to={newTo} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                 </div>
 
                 <div>
