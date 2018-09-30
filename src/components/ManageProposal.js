@@ -15,17 +15,10 @@ class ManageProposal extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {society: []};
     }
 
     componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0, 0)
-    }
-
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
     }
 
     handleSocieties(event) {
@@ -96,16 +89,7 @@ class ManageProposal extends Component {
                                                 <RaisedButton label="Download" primary={false} style={RaisedButtonStyle} />
                                             </td>
                                             <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
-                                        </tr>
-                                        <tr> 
-                                            <td>2</td>
-                                            <td>First Aid Club</td>
-                                            <td>Blood Donation</td>
-                                            <td>
-                                                <RaisedButton label="Download" primary={false} style={RaisedButtonStyle} />
-                                            </td>
-                                            <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
-                                        </tr>
+                                        </tr> 
                                         <tr> 
                                             <td>3</td>
                                             <td>Music Club</td>
@@ -115,24 +99,6 @@ class ManageProposal extends Component {
                                             </td>
                                             <td><FontAwesome.FaCheck /></td>
                                         </tr>
-                                        <tr> 
-                                            <td>4</td>
-                                            <td>EasyParcel Talk</td>
-                                            <td>IT Society</td>
-                                            <td>
-                                                <RaisedButton label="Download" primary={false} style={RaisedButtonStyle} />
-                                            </td>
-                                            <td><FontAwesome.FaCheck /></td>
-                                        </tr>
-                                        {/* {this.state.society.map(row => {
-                                            return (
-                                                <tr>
-                                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                    <td>{row[1]}</td>
-                                                    <td>{row[3]}</td>
-                                                </tr>
-                                            );
-                                        })} */}
                                     </tbody>
                                 </table>
 
