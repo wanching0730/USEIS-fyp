@@ -3,8 +3,6 @@ import NavBar from './NavBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import $ from 'jquery';
-import axios from 'axios';
 import { Link } from 'react-router';
 import '../style/society.css';
 
@@ -12,17 +10,10 @@ class ManageParticipant extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {society: []};
     }
 
     componentDidMount() {
-        // this.listSocieties();
         window.scrollTo(0, 0)
-    }
-
-    listSocieties() {
-        fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
     }
 
     render() {
@@ -36,8 +27,8 @@ class ManageParticipant extends Component {
                 <div style={{ margin: 20 }}>
                     <Breadcrumb>
                         <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/society`}>Events</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/perSociety/1`}>Cardio Night Run</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/perEvent/` + this.params.props.eventId}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Manage Participants</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
@@ -73,45 +64,6 @@ class ManageParticipant extends Component {
                                             <td>henghao@hotmail.com</td>
                                             <td>Yes</td>
                                         </tr>
-                                        <tr> 
-                                            <td>2</td>
-                                            <td>Toh Chi Meng</td>
-                                            <td>777777-77-7777</td>
-                                            <td>Mechanical Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-9900990</td>
-                                            <td>chimeng@hotmail.com</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr> 
-                                            <td>3</td>
-                                            <td>Lim Keng Huat</td>
-                                            <td>888888-88-8888</td>
-                                            <td>Civil Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-8989898</td>
-                                            <td>kenghuat@hotmail.com</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr> 
-                                            <td>4</td>
-                                            <td>Kenneth Teng</td>
-                                            <td>333333-33-3333</td>
-                                            <td>Electrical Engineering</td>
-                                            <td>Y3S3</td>
-                                            <td>012-2930560</td>
-                                            <td>kenneth@hotmail.com</td>
-                                            <td>No</td>
-                                        </tr>
-                                        {/* {this.state.society.map(row => {
-                                            return (
-                                                <tr>
-                                                    <td><Link to={`/perSociety/`+row[0]}>{row[0]}</Link></td>
-                                                    <td>{row[1]}</td>
-                                                    <td>{row[3]}</td>
-                                                </tr>
-                                            );
-                                        })} */}
                                     </tbody>
                                 </table>
 
