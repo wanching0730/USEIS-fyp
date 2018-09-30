@@ -51,7 +51,7 @@ class ManageMember extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.societyId}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={{pathname:`/perSociety/` + this.props.params.societyId, state: {societyName: this.props.location.state["societyName"]}}}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Manage Member</BreadcrumbItem>
                     </Breadcrumb>
                 </div>

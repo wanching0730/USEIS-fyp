@@ -128,7 +128,7 @@ class RegisterEvent extends Component {
               <Breadcrumb>
                 <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                 <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
-                <BreadcrumbItem><Link to={`/perEvent/` + this.props.params.eventId}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
+                <BreadcrumbItem><Link to={{pathname:`/perEvent/` + this.props.params.eventId, state: {eventName: this.props.location.state["eventName"]}}}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
                 <BreadcrumbItem active>Event Registration</BreadcrumbItem>
               </Breadcrumb>
             </div>

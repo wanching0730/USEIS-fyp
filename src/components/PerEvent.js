@@ -79,8 +79,8 @@ class PerEvent extends Component {
         let eventId = this.props.params.eventId;
 
         if(this.props.event != null) {
-            let eventState = {eventName: this.props.event.name};
             event = this.props.event;
+            let eventState = {eventName: event.name};
 
             toEditEvent = {
                 pathname: "/createEvent/event/" + eventId,

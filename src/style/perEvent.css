@@ -41,12 +41,14 @@
     background-color: blueviolet;
 }
 
-#commBoard {
+#manageParticipant {
     top: 460px;
+    background-color: sienna;
+}
+
+#commBoard {
+    top: 520px;
     background-color: limegreen;
 }
 
-#manageParticipant {
-    top: 520px;
-    background-color: sienna;
-}
+

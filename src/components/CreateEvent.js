@@ -159,7 +159,7 @@ class CreateEvent extends Component {
           <Breadcrumb>
             <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
             <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-            <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.id}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
+            <BreadcrumbItem><Link to={{pathname:`/perSociety/` + this.props.params.id, state: {societyName: this.props.location.state["societyName"]}}}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
             <BreadcrumbItem active>Create Event</BreadcrumbItem>
           </Breadcrumb>
     } else {
@@ -168,7 +168,7 @@ class CreateEvent extends Component {
           <Breadcrumb>
             <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
             <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
-            <BreadcrumbItem><Link to={`/perEvent/` + this.props.params.id}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
+            <BreadcrumbItem><Link to={{pathname:`/perEvent/` + this.props.params.id, state: {eventName: this.props.location.state["eventName"]}}}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
             <BreadcrumbItem active>Edit Event</BreadcrumbItem>
           </Breadcrumb>
     }
