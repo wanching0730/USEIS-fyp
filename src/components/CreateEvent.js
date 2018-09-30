@@ -151,18 +151,26 @@ class CreateEvent extends Component {
     {value:'lifelong', name:'Lifelong Learning & Information Management'}, {value:'moral', name:'Moral & Professional Ethics'}];
 
     var header;
-    var activeBreadCrumb, breadCrumb1, breadCrumb2;
+    var breadCrumb;
 
     if(this.props.params.type == "society") {
         header = <h1>Create Society Event<span>Create a new event for your society and start to promote it!</span></h1>
-        breadCrumb1 = <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.id}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
-        breadCrumb2 = <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-        activeBreadCrumb = <BreadcrumbItem active>Create Event</BreadcrumbItem>
+        breadCrumb = 
+          <Breadcrumb>
+            <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+            <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
+            <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.id}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
+            <BreadcrumbItem active>Create Event</BreadcrumbItem>
+          </Breadcrumb>
     } else {
       header = <h1>Edit Society Event<span>Edit your event details and make it better!</span></h1>
-      breadCrumb1 = <BreadcrumbItem><Link to={`/perEvent/` + this.props.params.id}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
-      breadCrumb2 = <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
-      activeBreadCrumb = <BreadcrumbItem active>Edit Event</BreadcrumbItem>
+      breadCrumb = 
+          <Breadcrumb>
+            <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+            <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
+            <BreadcrumbItem><Link to={`/perEvent/` + this.props.params.id}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
+            <BreadcrumbItem active>Edit Event</BreadcrumbItem>
+          </Breadcrumb>
     }
 
     return (
@@ -172,12 +180,7 @@ class CreateEvent extends Component {
             <NavBar />
 
             <div style={{ margin: 20 }}>
-                <Breadcrumb>
-                  <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                  {breadCrumb1}
-                  {breadCrumb2}
-                  {activeBreadCrumb}
-                </Breadcrumb>
+                {breadCrumb}
             </div>
 
             <div className="container" style={ContainerStyle}>
