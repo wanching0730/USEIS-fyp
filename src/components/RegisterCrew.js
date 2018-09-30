@@ -35,19 +35,19 @@ class RegisterCrew extends Component {
           this.n.show();
       }
 
-      const data = Object.keys(this.state).map((key) => {
-        return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
-      }).join('&');
+      // const data = Object.keys(this.state).map((key) => {
+      //   return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
+      // }).join('&');
 
-      fetch(`http://localhost:5000/puppies/create`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-      }).then(function(response) {
-        return response;
-      });
+      // fetch(`http://localhost:5000/puppies/create`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded'
+      //   },
+      //   body: data
+      // }).then(function(response) {
+      //   return response;
+      // });
 
   }
 
@@ -86,8 +86,8 @@ class RegisterCrew extends Component {
             <div style={{ margin: 20 }}>
               <Breadcrumb>
                 <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-                <BreadcrumbItem><Link to={`/perEvent/1`}>Cardio Night Run</Link></BreadcrumbItem>
+                <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
+                <BreadcrumbItem><Link to={`/perEvent/` + this.props.params.eventId}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
                 <BreadcrumbItem active>Crew Registration</BreadcrumbItem>
               </Breadcrumb>
             </div>
