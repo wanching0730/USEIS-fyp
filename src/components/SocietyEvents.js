@@ -64,7 +64,7 @@ class SocietyEvents extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/perSociety/1`}>IT Society</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.societyId}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Events</BreadcrumbItem>
                     </Breadcrumb>
                 </div>

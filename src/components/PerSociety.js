@@ -32,7 +32,13 @@ class PerSociety extends Component {
     }
 
     handleListEventClick(event) {
-        browserHistory.push("/societyEvents/" + this.props.params.societyId);
+        if(this.props.society != null) {
+            let toSocietyEvents = {
+                pathname: "/societyEvents/" + this.props.params.societyId,
+                state: {societyName: this.props.society.name}
+            }
+            browserHistory.push(toSocietyEvents);
+        }
     }
 
     componentDidMount() {

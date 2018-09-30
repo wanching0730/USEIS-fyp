@@ -35,19 +35,19 @@ class SubmitProposal extends Component {
           this.n.show();
       }
 
-      const data = Object.keys(this.state).map((key) => {
-        return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
-      }).join('&');
+      // const data = Object.keys(this.state).map((key) => {
+      //   return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
+      // }).join('&');
 
-      fetch(`http://localhost:5000/puppies/create`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-      }).then(function(response) {
-        return response;
-      });
+      // fetch(`http://localhost:5000/puppies/create`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded'
+      //   },
+      //   body: data
+      // }).then(function(response) {
+      //   return response;
+      // });
 
   }
 
