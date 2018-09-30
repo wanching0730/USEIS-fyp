@@ -17,6 +17,10 @@ class Event extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            sortType: "name"
+        };
+
         this.props.onRetrieveAll("event");
     }
 
@@ -28,6 +32,25 @@ class Event extends Component {
         console.log("clicked");
     }
 
+    sort(type, values) {
+        if(type === "name") {
+            return values.sort(function(a, b){
+                if(a["name"] < b["name"]) return -1;
+                if(a["name"] > b["name"]) return 1;
+                return 0;
+            });
+        } else {
+            return values.sort(function(a, b){
+                a = new Date(a["date"]);
+                b = new Date(b["date"]);
+                if(a < b) return -1;
+                if(a > b) return 1;
+                return 0;
+            });
+        }
+        
+    }
+
     render() {
         const { RaisedButtonStyle } = styles;
         let events = this.props.events;
@@ -36,9 +59,16 @@ class Event extends Component {
             var rows = [];
             var counter = 1;
             const categories = groupBy(events, event => event["category"]);
-            for (const [key, values] of categories.entries()) {
+            let mapsort = new Map([...categories.entries()].sort());
+            for (const [key, values] of mapsort) {
                 var subRows = [];
-                values.forEach(value => {
+                var sortedValues;
+                if(this.state.sortType === "name")
+                    sortedValues = this.sort("name", values);
+                else 
+                    sortedValues = this.sort("date", values);
+                
+                sortedValues.forEach(value => {
                     let toEvent = {
                         pathname: "/perEvent/" + value["id"],
                         state: {eventName: value["name"]}
@@ -47,6 +77,21 @@ class Event extends Component {
                         <li><Link to={toEvent}>{value["name"]}</Link></li>
                     );
                 });
+                // let mapsort2 = new Map([...values.entries()].sort((a,b) => {
+                //     console.log("a name: " + a["name"]);
+                //     console.log("b name: " + b["name"]);
+                //     a["name"]<b["name"] ? -1 : a["name"]>b["name"] ? 1 : 0
+                // }));
+                
+                // mapsort2.forEach(value => {
+                //     let toEvent = {
+                //         pathname: "/perEvent/" + value["id"],
+                //         state: {eventName: value["name"]}
+                //     }
+                //     subRows.push(
+                //         <li><Link to={toEvent}>{value["name"]}</Link></li>
+                //     );
+                // });
 
                 let stringId = "list-item-" + counter;
                 rows.push(
@@ -79,9 +124,8 @@ class Event extends Component {
                     <MuiThemeProvider>
                         <h1 style={{ margin: 20, color: '#083477' }}>Event List</h1>
 
-                        <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                        <RaisedButton label="Sort by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                        <RaisedButton label="Sort by Date" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "name"})}/>
+                        <RaisedButton label="Sort by Date" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "date"})}/>
 
                         <div className="wrapper">
                             <ul>

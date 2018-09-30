@@ -245,7 +245,8 @@ export function retrieveAll(type) {
                     events.push ({
                         category: reply[i]["category"],
                         id: reply[i]["eventId"],
-                        name: reply[i]["name"]
+                        name: reply[i]["name"],
+                        date: reply[i]["eventDateTime"]
                     });
                 }
                 dispatch(retrieveAllDataSuccessful(type, events));
