@@ -94,12 +94,28 @@ class CreateProfile extends Component {
     {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
     {value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}];
 
-    var header;
+    var header, breadCrumb;
 
     if(this.props.params.societyId == null) {
       header = <h1>Create Society Profile<span>Create your own society profile and start to promote it!</span></h1>;
+      breadCrumb = 
+        <Breadcrumb>
+          <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+          <BreadcrumbItem active>Create Society Profile</BreadcrumbItem>
+        </Breadcrumb>
     } else {
-      header = <h1>Edit Society Profile<span>Edit your own society profile and make it better!</span></h1>
+      var name;
+      if(this.props.society["name"] != '') {
+        name = this.props.society["name"];
+      }
+      header = <h1>Edit Society Profile<span>Edit your own society profile and make it better!</span></h1>;
+      breadCrumb = 
+        <Breadcrumb>
+          <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.societyId}>{name}</Link></BreadcrumbItem>
+          <BreadcrumbItem active>Edit Society Profile</BreadcrumbItem>
+        </Breadcrumb>
     }
 
     return (
@@ -109,10 +125,7 @@ class CreateProfile extends Component {
             <NavBar />
 
             <div style={{ margin: 20 }}>
-              <Breadcrumb>
-                <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                <BreadcrumbItem active>Society Profile</BreadcrumbItem>
-              </Breadcrumb>
+              {breadCrumb}
             </div>
 
             <div className="container" style={ContainerStyle}>
