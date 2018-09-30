@@ -47,25 +47,26 @@ class PerSociety extends Component {
         if(this.props.society != null) {
             society = this.props.society;
             let societyId = this.props.params.societyId;
+            let societyState = {societyName: this.props.society.name};
 
             toCommBoard = { 
                 pathname: "/commBoard/society/" + societyId, 
-                state: { societyName: this.props.society.name } 
+                state: societyState
             };
 
             toCreateEvent = {
                 pathname: "/createEvent/society/" + societyId,
-                state: {societyName: this.props.society.name}
+                state: societyState
             };
 
             toManageMember = {
                 pathname: "/manageMember/" + societyId,
-                state: {societyName: this.props.society.name}
+                state: societyState
             };
 
             toRegisterBooth = {
                 pathname: "/register_booth/society/" + societyId,
-                state: {societyName: this.props.society.name}
+                state: societyState
             };
         } else {
             society = {

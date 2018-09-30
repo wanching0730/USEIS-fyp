@@ -71,9 +71,9 @@ class PerEvent extends Component {
         var buttons, event, toEditEvent, toManageCrew, toCommBoard, toRegisterBooth, toManageParticipant;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
-        let eventState = {eventName: this.props.event.name};
 
         if(this.props.event != null) {
+            let eventState = {eventName: this.props.event.name};
             event = this.props.event;
 
             toEditEvent = {
