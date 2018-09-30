@@ -42,7 +42,7 @@ class PerSociety extends Component {
     render() {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
-        var society, toCommBoard, toCreateEvent, toManageMember;
+        var society, toCommBoard, toCreateEvent, toManageMember, toRegisterBooth;
         
         if(this.props.society != null) {
             society = this.props.society;
@@ -60,6 +60,11 @@ class PerSociety extends Component {
 
             toManageMember = {
                 pathname: "/manageMember/" + societyId,
+                state: {societyName: this.props.society.name}
+            };
+
+            toRegisterBooth = {
+                pathname: "/register_booth/society/" + societyId,
                 state: {societyName: this.props.society.name}
             };
         } else {
@@ -88,7 +93,7 @@ class PerSociety extends Component {
                 <div id="mySidenav" className="sidenav">
                     <Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /> Create Event</Link>
                     <Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
-                    <Link to="/register_booth" id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+                    <Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
                     <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
                     <Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
                     <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>

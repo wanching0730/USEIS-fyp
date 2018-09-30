@@ -32,6 +32,7 @@ class RegisterBooth extends Component {
   render() {
 
     const { RaisedButtonStyle } = styles;
+    var breadCrumb;
 
     const rows = [
       [{ number: 1 }, {number: 2}, {number: '3', isReserved: true}, null, {number: '4'}, {number: 5}, {number: 6}],
@@ -40,6 +41,25 @@ class RegisterBooth extends Component {
       [{ number: 1 }, {number: 2}, {number: 3}, null, {number: '4'}, {number: 5}, {number: 6}],
       [{ number: 1, isReserved: true }, {number: 2}, {number: '3', isReserved: true}, null, {number: '4'}, {number: 5}, {number: 6, isReserved: true}]
   ];
+
+  if(this.props.params.type === "society") {
+    breadCrumb = 
+      <Breadcrumb>
+          <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.id}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
+          <BreadcrumbItem active>Register Booth</BreadcrumbItem>
+      </Breadcrumb>
+  } else {
+    breadCrumb = 
+      <Breadcrumb>
+          <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to={`/event`}>Events</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to={`/perEvent/` + this.props.params.id}>{this.props.location.state["eventName"]}</Link></BreadcrumbItem>
+          <BreadcrumbItem active>Register Booth</BreadcrumbItem>
+      </Breadcrumb>
+  }
+  
   
   return (
 
@@ -50,12 +70,7 @@ class RegisterBooth extends Component {
         <NavBar />
 
         <div style={{ margin: 20 }}>
-            <Breadcrumb>
-                <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-                <BreadcrumbItem><Link to={`/perSociety/1`}>Cardio Night Run</Link></BreadcrumbItem>
-                <BreadcrumbItem active>Register Booth</BreadcrumbItem>
-            </Breadcrumb>
+            {breadCrumb}
         </div>
 
         <h2>Booth Registration</h2>
