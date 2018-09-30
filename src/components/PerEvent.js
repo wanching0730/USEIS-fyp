@@ -68,31 +68,37 @@ class PerEvent extends Component {
 
         console.log("event: " + this.props.event);
 
-        var buttons, event, toEditEvent, toManageCrew, toCommBoard, toRegisterBooth;
+        var buttons, event, toEditEvent, toManageCrew, toCommBoard, toRegisterBooth, toManageParticipant;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
+        let eventState = {eventName: this.props.event.name};
 
         if(this.props.event != null) {
             event = this.props.event;
 
             toEditEvent = {
                 pathname: "/createEvent/event/" + eventId,
-                state: {eventName: this.props.event.name}
+                state: eventState
             }
 
             toManageCrew = {
                 pathname: "/manageCrew/" + eventId,
-                state: {eventName: this.props.event.name}
+                state: eventState
             }
 
             toCommBoard = { 
                 pathname: "/commBoard/event/" + eventId, 
-                state: { eventName: this.props.event.name } 
+                state: eventState
             };
 
             toRegisterBooth = {
                 pathname: "/register_booth/event/" + eventId,
-                state: {eventName: this.props.event.name}
+                state: eventState
+            };
+
+            toManageParticipant = {
+                pathname: "/manageParticipant/" + eventId,
+                state: eventState
             };
         } else {
             event = {
@@ -138,7 +144,7 @@ class PerEvent extends Component {
                             <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
                             <Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
                             <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
-                            <Link to="/manageParticipant" id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
+                            <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
                             <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                         </div>
                 } else {
