@@ -63,6 +63,7 @@ class Event extends Component {
             for (const [key, values] of mapsort) {
                 var subRows = [];
                 var sortedValues;
+                
                 if(this.state.sortType === "name")
                     sortedValues = this.sort("name", values);
                 else 
@@ -77,21 +78,6 @@ class Event extends Component {
                         <li><Link to={toEvent}>{value["name"]}</Link></li>
                     );
                 });
-                // let mapsort2 = new Map([...values.entries()].sort((a,b) => {
-                //     console.log("a name: " + a["name"]);
-                //     console.log("b name: " + b["name"]);
-                //     a["name"]<b["name"] ? -1 : a["name"]>b["name"] ? 1 : 0
-                // }));
-                
-                // mapsort2.forEach(value => {
-                //     let toEvent = {
-                //         pathname: "/perEvent/" + value["id"],
-                //         state: {eventName: value["name"]}
-                //     }
-                //     subRows.push(
-                //         <li><Link to={toEvent}>{value["name"]}</Link></li>
-                //     );
-                // });
 
                 let stringId = "list-item-" + counter;
                 rows.push(
