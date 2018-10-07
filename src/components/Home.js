@@ -4,16 +4,15 @@ import Calendar from './Calendar';
 import Analysis from './Analysis';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { askForPermissioToReceiveNotifications, initializePush } from '../push-notification';
 import '../style/home.css';
 
 class Home extends Component {
 
-    // societies = [];
-
     constructor(props) {
         super(props);
 
-        // this.state = {society: []};
+        initializePush();
         this.state = {searchValue: ""}
 
     }
@@ -25,31 +24,9 @@ class Home extends Component {
       }
 
     componentDidMount() {
-        //this.listSocieties();
         window.scrollTo(0, 0);
         console.log(React.version);
     }
-
-    // listSocieties() {
-    //     //fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => this.setState({society: reply}));
-    //     fetch(`http://localhost:5000/puppies`).then(result => result.json()).then(reply => {
-    //         console.log(reply);
-    //         reply.forEach(element => {
-    //             this.societies.push({
-    //                 id: element[0],
-    //                 title: element[1],
-    //                 allDay: element[2],
-    //                 start: element[3],
-    //                 end: element[4]
-    //             });
-    //         });
-
-    //         this.setState({society: this.societies});
-    
-    //         console.log("societies: " + JSON.stringify(this.societies));
-            
-    //     });
-    // }
 
     render() {
 

@@ -7,8 +7,9 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import 'font-awesome/css/font-awesome.min.css';
-import { config } from "./firebaseConfig";
-import firebase from "firebase";
+
+// initialize firebase
+import { initializeFirebase } from './push-notification';
 
 //import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -22,14 +23,14 @@ import configureStore from './store/configureStore';
 
 const store = configureStore();
 
-firebase.initializeApp(config);
-
 console.log("State in store: " + JSON.stringify(store.getState()));
 
 ReactDOM.render(
     <Provider store={store}>
         <App />
     </Provider>,
-     document.getElementById('root'));
-     
-registerServiceWorker();
+     document.getElementById('root')
+);
+
+initializeFirebase();  
+//registerServiceWorker();
