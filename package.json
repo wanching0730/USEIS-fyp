@@ -11,6 +11,7 @@
     "chart.js": "^2.7.2",
     "circular-json": "^0.5.7",
     "downloadbutton": "^1.0.0",
+    "firebase": "^5.5.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "material-ui": "^0.20.1",
