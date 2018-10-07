@@ -7,6 +7,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import 'font-awesome/css/font-awesome.min.css';
+import { config } from "./firebaseConfig";
+import firebase from "firebase";
 
 //import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -19,6 +21,8 @@ import configureStore from './store/configureStore';
 // );
 
 const store = configureStore();
+
+firebase.initializeApp(config);
 
 console.log("State in store: " + JSON.stringify(store.getState()));
 
