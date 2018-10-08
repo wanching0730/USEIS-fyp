@@ -14,7 +14,6 @@ class Home extends Component {
 
         initializePush();
         this.state = {searchValue: ""}
-
     }
 
     handleSearch(value) {

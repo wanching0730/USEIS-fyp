@@ -1,31 +1,30 @@
 import firebase from 'firebase';
 
 export const initializeFirebase = () => {
-  firebase.initializeApp({
-    apiKey: "AIzaSyBkLaohp-Gm56OUnPetImLOTg46gV6LSQA",
-    authDomain: "pwa-app-36fe6.firebaseapp.com",
-    databaseURL: "https://pwa-app-36fe6.firebaseio.com",
-    projectId: "pwa-app-36fe6",
-    storageBucket: "pwa-app-36fe6.appspot.com",
-    messagingSenderId: "938674404737"
-  });
+    firebase.initializeApp({
+        apiKey: "AIzaSyBkLaohp-Gm56OUnPetImLOTg46gV6LSQA",
+        authDomain: "pwa-app-36fe6.firebaseapp.com",
+        databaseURL: "https://pwa-app-36fe6.firebaseio.com",
+        projectId: "pwa-app-36fe6",
+        storageBucket: "pwa-app-36fe6.appspot.com",
+        messagingSenderId: "938674404737"
+    });
 
-  if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('../firebase-messaging-sw.js')
     .then(function(registration) {
-      console.log('Registration successful, scope is:', registration.scope);
-      firebase.messaging().useServiceWorker(registration);
+        console.log('Registration successful, scope is:', registration.scope);
+        firebase.messaging().useServiceWorker(registration);
     }).catch(function(err) {
-      console.log('Service worker registration failed, error:', err);
+        console.log('Service worker registration failed, error:', err);
     });
-  }
+  
 
-  navigator.serviceWorker.ready
-    .then(function(serviceWorkerRegistration) {
-        return serviceWorkerRegistration.pushManager.subscribe({
-            userVisibleOnly: true
-        });
-    })
+    navigator.serviceWorker.ready
+        .then(function(serviceWorkerRegistration) {
+            return serviceWorkerRegistration.pushManager.subscribe({
+                userVisibleOnly: true
+            });
+        })
     .then(function(subscription) {console.log(subscription.endpoint);});
 }
 
@@ -40,6 +39,7 @@ export function initializePush() {
         })
         .then(token => {
             console.log("FCM Token:", token);
+            fetch(`http://localhost:5000/get/notification/` + token);
             //you probably want to send your new found FCM token to the
             //application server so that they can send any push
             //notification to you.
