@@ -27,26 +27,6 @@ export const initializeFirebase = () => {
         });
     })
     .then(function(subscription) {console.log(subscription.endpoint);});
-
-//   navigator.serviceWorker
-//     .register('../firebase-messaging-sw.js', {
-//         scope: '/'
-//     }).then((registration) => {
-//       firebase.messaging().useServiceWorker(registration);
-//     });
-}
-
-export const askForPermissioToReceiveNotifications = async () => {
-    try {
-      const messaging = firebase.messaging();
-      await messaging.requestPermission();
-      const token = await messaging.getToken();
-      console.log('token for noti permission:', token);
-      
-      return token;
-    } catch (error) {
-      console.error(error);
-    }
 }
 
 export function initializePush() {

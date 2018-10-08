@@ -4,7 +4,7 @@ import Calendar from './Calendar';
 import Analysis from './Analysis';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { askForPermissioToReceiveNotifications, initializePush } from '../push-notification';
+import { initializePush } from '../push-notification';
 import '../style/home.css';
 
 class Home extends Component {
