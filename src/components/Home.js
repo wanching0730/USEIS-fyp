@@ -4,15 +4,16 @@ import Calendar from './Calendar';
 import Analysis from './Analysis';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { initializePush } from '../push-notification';
 import '../style/home.css';
+
+import { connect } from 'react-redux';
 
 class Home extends Component {
 
     constructor(props) {
         super(props);
 
-        //initializePush();
+        fetch(`http://localhost:5000/get/notification/` + this.props.fcmToken);
         this.state = {searchValue: ""}
     }
 
@@ -115,4 +116,11 @@ class Home extends Component {
     };
 };
 
-export default Home;
+const mapStateToProps = (state, props) => {
+    console.log(JSON.stringify(state));
+    return {
+      fcmToken: state.auth.fcmToken
+    };
+  };
+  
+  export default connect(mapStateToProps)(Home);
