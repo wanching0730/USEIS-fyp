@@ -12,7 +12,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        initializePush();
+        //initializePush();
         this.state = {searchValue: ""}
     }
 

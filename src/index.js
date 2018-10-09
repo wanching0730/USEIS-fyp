@@ -9,7 +9,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 // initialize firebase
-import { initializeFirebase } from './push-notification';
+import { initializeFirebase, initializePush } from './push-notification';
 
 //import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -33,4 +33,5 @@ ReactDOM.render(
 );
 
 initializeFirebase();  
+setTimeout(initializePush, 3000);
 //registerServiceWorker();
