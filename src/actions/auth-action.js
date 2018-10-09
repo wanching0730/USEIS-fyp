@@ -1,13 +1,24 @@
 import {browserHistory} from 'react-router';
 import { verifyUser } from '../utils/http_function';
 import { confirmAlert } from 'react-confirm-alert';
+import firebase from 'firebase';
 
 import {
     LOGIN_USER_SUCCESS,
     // LOGIN_USER_FAILURE,
     // LOGIN_USER_REQUEST,
-    LOGOUT_USER
+    LOGOUT_USER,
+    GET_FCM_TOKEN
 } from '../constant';
+
+export function getFcmTokenSuccessful(token) {
+    return {
+        type: GET_FCM_TOKEN,
+        payload: {
+            fcmToken: token
+        }
+    }
+}
 
 export function loginUserSuccessful(userName, userId, id, societies, token) {
     localStorage.setItem('token', token);
@@ -36,6 +47,36 @@ export function logoutAndRedirect() {
         dispatch(logout());
         browserHistory.push('/');
     };
+}
+
+export function getFcmToken() {
+    return function (dispatch) {
+        const messaging = firebase.messaging();
+        messaging
+        .requestPermission()
+        .then(() => {
+            console.log("Have Permission");
+            return messaging.getToken();
+        })
+        .then(token => {
+            console.log("FCM Token:", token);
+            messaging.usePublicVapidKey("BKCWz7kE-vlcFudrN0S4M9z-RTZVp8J-ncVbYQoRgObAeDfJEO8bHNYL0dgtTlpxRclWNUci_YwvfYUtbUK9lqQ");
+            dispatch(getFcmTokenSuccessful(token));
+            //fetch(`http://localhost:5000/get/notification/` + token);
+        })
+        .catch(error => {
+            if (error.code === "messaging/permission-blocked") {
+                console.log("Please Unblock Notification Request Manually");
+            } else {
+                console.log("Error Occurred", error);
+            }
+        });
+
+        messaging.onMessage(function(payload) {
+            console.log('Message received. ', payload);
+            // ...
+        });
+    }
 }
 
 export function loginUser(postData) {

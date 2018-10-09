@@ -3,6 +3,7 @@ import {
     LOGIN_USER_FAILURE,
     LOGIN_USER_REQUEST,
     LOGOUT_USER,
+    GET_FCM_TOKEN
 } from '../constant';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
     isAuthenticated: false,
     isAuthenticating: false,
     statusText: null,
+    fcmToken: null
 };
 
 export default function authReducer(state = initialState, { type, payload }) {
@@ -33,6 +35,10 @@ export default function authReducer(state = initialState, { type, payload }) {
                 societies: null,
                 token: null,
                 isAuthenticated: false
+            });
+        case GET_FCM_TOKEN:
+            return Object.assign({}, state, {
+                fcmToken: payload.fcmToken
             });
         default: 
         // return initial state

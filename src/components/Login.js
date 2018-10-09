@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/auth-action';
+import { loginUser, getFcmToken } from '../actions/auth-action';
 
 import '../style/form.css';
 
@@ -18,6 +18,10 @@ class Login extends Component {
       name:'',
       password:''
     }
+
+    setTimeout(() => {
+      this.props.onGetFcmToken();
+    }, 3000);
 
     this.login = this.login.bind(this);
   }
@@ -33,8 +37,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log("user position: " + this.props.userPosition);
-    
     const { RaisedButtonStyle } = styles;
 
     return (
@@ -88,12 +90,14 @@ const mapStateToProps = (state, props) => {
     userName: state.auth.userName,
     userPosition: state.auth.userPosition,
     token: state.auth.token,
+    fcmToken: state.auth.fcmToken
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    onLoginUser: loginUser
+    onLoginUser: loginUser,
+    onGetFcmToken: getFcmToken
   }, dispatch);
 };
 
