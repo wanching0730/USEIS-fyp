@@ -11,11 +11,12 @@ import {
     GET_FCM_TOKEN
 } from '../constant';
 
-export function getFcmTokenSuccessful(token) {
+export function getFcmTokenSuccessful(token, messaging) {
     return {
         type: GET_FCM_TOKEN,
         payload: {
-            fcmToken: token
+            fcmToken: token,
+            messaging: messaging
         }
     }
 }
@@ -52,7 +53,7 @@ export function logoutAndRedirect() {
 export function getFcmToken() {
     return function (dispatch) {
         const messaging = firebase.messaging()
-        //messaging.usePublicVapidKey("BDq28YOZ7UT6TLuTeG4nClUtqCQky82AAshtQ2LlbN6oOCHFAQcAFqeRkQ48ZxGYOKbRT05ytbZlI_f8Yz3t6EU");
+        messaging.usePublicVapidKey("BKCWz7kE-vlcFudrN0S4M9z-RTZVp8J-ncVbYQoRgObAeDfJEO8bHNYL0dgtTlpxRclWNUci_YwvfYUtbUK9lqQ");
         messaging
         .requestPermission()
         .then(() => {
@@ -60,7 +61,7 @@ export function getFcmToken() {
             //messaging.usePublicVapidKey("BDq28YOZ7UT6TLuTeG4nClUtqCQky82AAshtQ2LlbN6oOCHFAQcAFqeRkQ48ZxGYOKbRT05ytbZlI_f8Yz3t6EU");
             messaging.getToken().then(token => {
                 console.log("FCM Token:", token);
-                dispatch(getFcmTokenSuccessful(token));
+                dispatch(getFcmTokenSuccessful(token, messaging));
                 
                 //fetch(`http://localhost:5000/get/notification/` + token);
             }).catch(error => console.log("failed token: " + error));

@@ -96,9 +96,9 @@ export const initializeFirebase = () => {
     //     return;
     //     });
 
-    messaging.onMessage(function(payload) {
-        console.log('Message received. ', payload);
-    });
+    // messaging.onMessage(function(payload) {
+    //     console.log('Message received. ', payload);
+    // });
 }
 
 // export function initializePush() {

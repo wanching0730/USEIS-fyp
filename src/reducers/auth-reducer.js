@@ -15,7 +15,8 @@ const initialState = {
     isAuthenticated: false,
     isAuthenticating: false,
     statusText: null,
-    fcmToken: null
+    fcmToken: null,
+    messaging: null
 };
 
 export default function authReducer(state = initialState, { type, payload }) {
@@ -38,7 +39,8 @@ export default function authReducer(state = initialState, { type, payload }) {
             });
         case GET_FCM_TOKEN:
             return Object.assign({}, state, {
-                fcmToken: payload.fcmToken
+                fcmToken: payload.fcmToken,
+                messaging: payload.messaging
             });
         default: 
         // return initial state
