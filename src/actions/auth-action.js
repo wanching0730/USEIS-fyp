@@ -63,7 +63,7 @@ export function getFcmToken() {
                 console.log("FCM Token:", token);
                 dispatch(getFcmTokenSuccessful(token, messaging));
                 
-                //fetch(`http://localhost:5000/get/notification/` + token);
+                // fetch(`http://localhost:5000/get/notification/` + token);
             }).catch(error => console.log("failed token: " + error));
             // return new Promise(function(resolve, reject) {
             //     var key = require('./service-account.json');

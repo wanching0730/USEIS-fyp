@@ -20,7 +20,9 @@ class Home extends Component {
             this.props.messaging.onMessage(function(payload) {
                 console.log('Message received. ', payload);
             });
-          }
+        }
+
+        fetch(`http://localhost:5000/get/notification/` + this.props.fcmToken);
     }
 
     handleSearch(value) {
