@@ -15,6 +15,12 @@ class Home extends Component {
 
         //fetch(`https://localhost:5000/get/notification/` + this.props.fcmToken);
         this.state = {searchValue: ""}
+
+        if(this.props.messaging != null) {
+            this.props.messaging.onMessage(function(payload) {
+                console.log('Message received. ', payload);
+            });
+          }
     }
 
     handleSearch(value) {
@@ -117,10 +123,11 @@ class Home extends Component {
 };
 
 const mapStateToProps = (state, props) => {
-    console.log(JSON.stringify(state));
+    //console.log(JSON.stringify(state));
     return {
-      fcmToken: state.auth.fcmToken
+      fcmToken: state.auth.fcmToken,
+      messaging: state.auth.messaging
     };
   };
   
-  export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Home);

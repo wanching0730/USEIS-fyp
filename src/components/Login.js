@@ -38,11 +38,6 @@ class Login extends Component {
 
   render() {
     const { RaisedButtonStyle } = styles;
-    if(this.props.messaging != null) {
-      this.props.messaging.onMessage(function(payload) {
-          console.log('Message received. ', payload);
-      });
-    }
 
     return (
       <div>
@@ -95,8 +90,8 @@ const mapStateToProps = (state, props) => {
     userName: state.auth.userName,
     userPosition: state.auth.userPosition,
     token: state.auth.token,
-    fcmToken: state.auth.fcmToken,
-    messaging: state.auth.messaging
+    fcmToken: state.auth.fcmToken
+    //messaging: state.auth.messaging
   };
 };
 
