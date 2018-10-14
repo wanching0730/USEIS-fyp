@@ -62,6 +62,7 @@ export function getFcmToken() {
             console.log("FCM Token:", token);
             messaging.usePublicVapidKey("BKCWz7kE-vlcFudrN0S4M9z-RTZVp8J-ncVbYQoRgObAeDfJEO8bHNYL0dgtTlpxRclWNUci_YwvfYUtbUK9lqQ");
             dispatch(getFcmTokenSuccessful(token));
+            
             //fetch(`http://localhost:5000/get/notification/` + token);
         })
         .catch(error => {
@@ -70,11 +71,6 @@ export function getFcmToken() {
             } else {
                 console.log("Error Occurred", error);
             }
-        });
-
-        messaging.onMessage(function(payload) {
-            console.log('Message received. ', payload);
-            // ...
         });
     }
 }

@@ -13,7 +13,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        fetch(`http://localhost:5000/get/notification/` + this.props.fcmToken);
+        //fetch(`https://localhost:5000/get/notification/` + this.props.fcmToken);
         this.state = {searchValue: ""}
     }
 
