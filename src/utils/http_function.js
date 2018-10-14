@@ -1,5 +1,5 @@
 export function verifyUser(data) {
-    return fetch(`https://localhost:5000/api/loginUser`, {
+    return fetch(`http://localhost:5000/api/login_user`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -10,7 +10,7 @@ export function verifyUser(data) {
 
 export function getData(type, id) {
     if(type === "society") {
-        return fetch(`https://localhost:5000/get/society/` + id);
+        return fetch(`http://localhost:5000/get/society/` + id);
     } else if(type === "event") {
         return fetch(`http://localhost:5000/get/event/` + id);
     } else if(type === "societyEvent") {

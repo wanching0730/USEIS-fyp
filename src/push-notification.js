@@ -1,5 +1,15 @@
 import firebase from 'firebase';
 
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/\-/g, '+')
+        .replace(/_/g, '/')
+      ;
+    const rawData = window.atob(base64);
+    return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)));
+}
+
 export const initializeFirebase = () => {
     firebase.initializeApp({
         apiKey: "AIzaSyBkLaohp-Gm56OUnPetImLOTg46gV6LSQA",
@@ -10,24 +20,48 @@ export const initializeFirebase = () => {
         messagingSenderId: "938674404737"
     });
 
+    // navigator.serviceWorker.ready.then(function(reg) {
+    //     reg.pushManager.getSubscription().then(function(subscription) {
+    //         console.log("subs: " + JSON.stringify(subscription));
+    //       subscription.unsubscribe().then(function(successful) {
+    //         console.log(successful);
+    //       }).catch(function(e) {
+    //         console.log(e);
+    //       })
+    //     })        
+    //   });
+
     navigator.serviceWorker.register('../firebase-messaging-sw.js')
     .then(function(registration) {
         console.log('Registration successful, scope is:', registration.scope);
         firebase.messaging().useServiceWorker(registration);
+        const subscribeOptions = {
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(
+              'BKCWz7kE-vlcFudrN0S4M9z-RTZVp8J-ncVbYQoRgObAeDfJEO8bHNYL0dgtTlpxRclWNUci_YwvfYUtbUK9lqQ'
+            )
+          };
+        return registration.pushManager.subscribe(subscribeOptions);
+    }).then(function(pushSubscription) {
+        console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+        return pushSubscription;
     }).catch(function(err) {
         console.log('Service worker registration failed, error:', err);
     });
 
-    setTimeout(() => {
-        navigator.serviceWorker.ready
-            .then(function(serviceWorkerRegistration) {
-                return serviceWorkerRegistration.pushManager.subscribe({
-                    userVisibleOnly: true
-                });
-            })
-            .then(function(subscription) {console.log("subscribed: " + subscription.endpoint);
-        });
-      }, 3000);
+    // setTimeout(() => {
+    //     navigator.serviceWorker.ready
+    //         .then(function(serviceWorkerRegistration) {
+    //             return serviceWorkerRegistration.pushManager.subscribe({
+    //                 userVisibleOnly: true,
+    //                 applicationServerKey: urlBase64ToUint8Array(
+    //                     'BDq28YOZ7UT6TLuTeG4nClUtqCQky82AAshtQ2LlbN6oOCHFAQcAFqeRkQ48ZxGYOKbRT05ytbZlI_f8Yz3t6EU'
+    //                 )
+    //             });
+    //         })
+    //         .then(function(subscription) {console.log("subscribed: " + subscription.endpoint);
+    //     });
+    //   }, 6000);
 
     const messaging = firebase.messaging();
 

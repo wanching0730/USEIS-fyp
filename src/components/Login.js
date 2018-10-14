@@ -21,7 +21,7 @@ class Login extends Component {
 
     setTimeout(() => {
       this.props.onGetFcmToken();
-    }, 3000);
+    }, 5000);
 
     this.login = this.login.bind(this);
   }

@@ -51,19 +51,36 @@ export function logoutAndRedirect() {
 
 export function getFcmToken() {
     return function (dispatch) {
-        const messaging = firebase.messaging();
+        const messaging = firebase.messaging()
+        //messaging.usePublicVapidKey("BDq28YOZ7UT6TLuTeG4nClUtqCQky82AAshtQ2LlbN6oOCHFAQcAFqeRkQ48ZxGYOKbRT05ytbZlI_f8Yz3t6EU");
         messaging
         .requestPermission()
         .then(() => {
             console.log("Have Permission");
-            return messaging.getToken();
-        })
-        .then(token => {
-            console.log("FCM Token:", token);
-            messaging.usePublicVapidKey("BKCWz7kE-vlcFudrN0S4M9z-RTZVp8J-ncVbYQoRgObAeDfJEO8bHNYL0dgtTlpxRclWNUci_YwvfYUtbUK9lqQ");
-            dispatch(getFcmTokenSuccessful(token));
-            
-            //fetch(`http://localhost:5000/get/notification/` + token);
+            //messaging.usePublicVapidKey("BDq28YOZ7UT6TLuTeG4nClUtqCQky82AAshtQ2LlbN6oOCHFAQcAFqeRkQ48ZxGYOKbRT05ytbZlI_f8Yz3t6EU");
+            messaging.getToken().then(token => {
+                console.log("FCM Token:", token);
+                dispatch(getFcmTokenSuccessful(token));
+                
+                //fetch(`http://localhost:5000/get/notification/` + token);
+            }).catch(error => console.log("failed token: " + error));
+            // return new Promise(function(resolve, reject) {
+            //     var key = require('./service-account.json');
+            //     var jwtClient = new google.auth.JWT(
+            //       key.client_email,
+            //       null,
+            //       key.private_key,
+            //       SCOPES,
+            //       null
+            //     );
+            //     jwtClient.authorize(function(err, tokens) {
+            //       if (err) {
+            //         reject(err);
+            //         return;
+            //       }
+            //       resolve(tokens.access_token);
+            //     });
+            //   });
         })
         .catch(error => {
             if (error.code === "messaging/permission-blocked") {
