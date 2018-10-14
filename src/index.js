@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
+import './index.css';
+
+// front-end design 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
@@ -11,15 +12,9 @@ import 'font-awesome/css/font-awesome.min.css';
 // initialize firebase
 import { initializeFirebase } from './push-notification';
 
-//import { createStore } from 'redux';
+// initialize redux
 import { Provider } from 'react-redux';
-//import allReducers from './reducers';
 import configureStore from './store/configureStore';
-
-// const store = createStore(
-//     allReducers, 
-//     window.devToolsExtension && window.devToolsExtension()
-// );
 
 const store = configureStore();
 
@@ -33,5 +28,3 @@ ReactDOM.render(
 );
 
 initializeFirebase();  
-// setTimeout(initializePush, 3000);
-//registerServiceWorker();

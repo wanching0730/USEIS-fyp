@@ -85,13 +85,11 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  //console.log(JSON.stringify(state));
   return {
     userName: state.auth.userName,
     userPosition: state.auth.userPosition,
     token: state.auth.token,
     fcmToken: state.auth.fcmToken
-    //messaging: state.auth.messaging
   };
 };
 

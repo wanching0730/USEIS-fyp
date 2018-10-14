@@ -13,9 +13,9 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        //fetch(`https://localhost:5000/get/notification/` + this.props.fcmToken);
         this.state = {searchValue: ""}
 
+        // onMessage is an observable, it only need to be called once to use
         if(this.props.messaging != null) {
             this.props.messaging.onMessage(function(payload) {
                 console.log('Message received. ', payload);
