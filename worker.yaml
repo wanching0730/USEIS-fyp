@@ -1,0 +1,5 @@
+service: worker
+version: uno
+manual_scaling:
+  instances: 1
+- script: firebase-messaging-sw.js

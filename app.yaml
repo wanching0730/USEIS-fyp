@@ -1,0 +1,12 @@
+# [START app_yaml]
+env: flex
+runtime: nodejs
+# [END app_yaml]
+
+handlers:
+- url: /
+  static_files: src/index.html
+  upload: src/index.html
+
+skip_files:
+- yarn.lock

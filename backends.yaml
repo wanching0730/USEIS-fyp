@@ -1,0 +1,3 @@
+backends: 
+- name: worker
+- start: firebase-messaging-sw.js
