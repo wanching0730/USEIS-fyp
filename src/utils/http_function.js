@@ -125,7 +125,15 @@ export function updateDataDouble(type, data) {
             },
             body: data
         });
-    } 
+    } else if(type === "fcmToken") {
+        return fetch(`http://localhost:5000/update/token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
+    }
 }
 
 export function deleteData(type, id, eventId) {

@@ -1,5 +1,5 @@
 import {browserHistory} from 'react-router';
-import { verifyUser } from '../utils/http_function';
+import { verifyUser, updateDataDouble } from '../utils/http_function';
 import { confirmAlert } from 'react-confirm-alert';
 import firebase from 'firebase';
 
@@ -50,7 +50,7 @@ export function logoutAndRedirect() {
     };
 }
 
-export function getFcmToken() {
+export function getFcmToken(postData) {
     return function (dispatch) {
         const messaging = firebase.messaging();
         // need credential before getting FCM token
@@ -61,7 +61,16 @@ export function getFcmToken() {
             console.log("Have Permission");
             messaging.getToken().then(token => {
                 console.log("FCM Token:", token);
-                dispatch(getFcmTokenSuccessful(token, messaging));
+                postData["fcmToken"] = token;
+
+                const data = Object.keys(postData).map((key) => {
+                    return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
+                }).join('&');
+
+                return updateDataDouble("fcmToken", data).then(result => result.json()).then(reply => {
+                    console.log("updated data reply: " + reply);
+                    dispatch(getFcmTokenSuccessful(token, messaging));
+                });
             }).catch(error => console.log("failed token: " + error));
         })
         .catch(error => {

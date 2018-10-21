@@ -19,10 +19,6 @@ class Login extends Component {
       password:''
     }
 
-    setTimeout(() => {
-      this.props.onGetFcmToken();
-    }, 5000);
-
     this.login = this.login.bind(this);
   }
 
@@ -88,15 +84,13 @@ const mapStateToProps = (state, props) => {
   return {
     userName: state.auth.userName,
     userPosition: state.auth.userPosition,
-    token: state.auth.token,
-    fcmToken: state.auth.fcmToken
+    token: state.auth.token
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    onLoginUser: loginUser,
-    onGetFcmToken: getFcmToken
+    onLoginUser: loginUser
   }, dispatch);
 };
 

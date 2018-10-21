@@ -6,7 +6,9 @@ import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/home.css';
 
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { getFcmToken } from '../actions/auth-action';
 
 class Home extends Component {
 
@@ -15,14 +17,23 @@ class Home extends Component {
 
         this.state = {searchValue: ""}
 
-        // onMessage is an observable, it only need to be called once to use
-        if(this.props.messaging != null) {
-            this.props.messaging.onMessage(function(payload) {
-                console.log('Message received. ', payload);
+        setTimeout(() => {
+            this.props.onGetFcmToken({
+              userId: this.props.userId,
+              fcmToken: ''
             });
-        }
+        }, 3000);
 
-        fetch(`http://localhost:5000/get/notification/` + this.props.fcmToken);
+        setTimeout(() => {
+            // onMessage is an observable, it only need to be called once to use
+            if(this.props.messaging != null) {
+                this.props.messaging.onMessage(function(payload) {
+                    console.log('Message received. ', payload);
+                });
+            }
+        }, 6000);
+
+        //fetch(`http://localhost:5000/get/notification/` + this.props.fcmToken);
     }
 
     handleSearch(value) {
@@ -127,9 +138,15 @@ class Home extends Component {
 const mapStateToProps = (state, props) => {
     //console.log(JSON.stringify(state));
     return {
-      fcmToken: state.auth.fcmToken,
-      messaging: state.auth.messaging
+        userId: state.auth.userId,
+        messaging: state.auth.messaging
     };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onGetFcmToken: getFcmToken
+    }, dispatch);
   };
   
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapActionsToProps)(Home);
