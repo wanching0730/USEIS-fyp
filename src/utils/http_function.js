@@ -1,5 +1,5 @@
 export function verifyUser(data) {
-    return fetch(`http://localhost:5000/api/login_user`, {
+    return fetch(`http://127.0.1:3306/api/login_user`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/x-www-form-urlencoded'

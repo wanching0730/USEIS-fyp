@@ -33,7 +33,9 @@ class Home extends Component {
             }
         }, 6000);
 
-        //fetch(`http://localhost:5000/get/notification/` + this.props.fcmToken);
+        // setTimeout(() => {
+        //     fetch(`http://localhost:5000/get/notification`);
+        // }, 9000);
     }
 
     handleSearch(value) {
@@ -139,7 +141,8 @@ const mapStateToProps = (state, props) => {
     //console.log(JSON.stringify(state));
     return {
         userId: state.auth.userId,
-        messaging: state.auth.messaging
+        messaging: state.auth.messaging,
+        //fcmToken: state.auth.fcmToken
     };
 };
 
