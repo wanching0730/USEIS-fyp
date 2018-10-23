@@ -1,4 +1,4 @@
-# Technologies and Tools Used
+# Technologies Used
 * React
 * Flask
 * MySQL Database
