@@ -2,8 +2,8 @@
 * React
 * Flask
 * MySQL Database
-* Cloud Services
-* Firebase
+* Cloud Services (Google Cloud SQL, Firebase Cloud Messaging)
+* MacOS Cron Job 
 
 # Scope
 
