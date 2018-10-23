@@ -8,11 +8,11 @@
 # Scope
 
 ## As a student 
-* login to their account.to
-* of past and upcoming co-curriculum events.
+* login to own account.
+* view list of past and upcoming co-curriculum events.
 * view list of existing societies.
-* search through the list of events. 
-* register for societies and events.
+* search through the list of societies and events. 
+* register for ineterested societies and events.
 * register as society member.
 * register as a crew for any event.
 * cancel the event registration. 
