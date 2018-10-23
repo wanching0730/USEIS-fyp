@@ -3,7 +3,7 @@
 * Flask
 * MySQL Database
 * Cloud Services (Google Cloud SQL, Firebase Cloud Messaging)
-* MacOS Cron Job 
+* macOS Cron Job 
 
 # Scope
 
