@@ -31,7 +31,9 @@ class NewsFeed extends Component {
             ownerCategory: null,
 
             societyOptions: null,
-            eventOptions: null
+            eventOptions: null,
+
+            //newsfeeds: null
         };
     
         this.openModal = this.openModal.bind(this);
@@ -41,6 +43,13 @@ class NewsFeed extends Component {
         this.handleOwner = this.handleOwner.bind(this);
 
         this.props.onRetrieveAll("newsfeeds");
+
+        setTimeout(() => {
+            this.setState({
+                newsfeeds: this.props.newsfeeds
+            });
+            console.log("newsfeeds in constructor: " + this.state.newsfeeds);
+        }, 6000);
     }
 
     componentDidMount() {
@@ -80,6 +89,10 @@ class NewsFeed extends Component {
             }, () => this.setDefault());
         }
     }
+
+    // componentWillUpdate(nextProps, nextState) {
+    //     this.forceUpdate();
+    // }
 
     openModal() {
         this.setState({modalIsOpen: true});
@@ -137,7 +150,7 @@ class NewsFeed extends Component {
     submit() {
         let current = moment();
         let data = {
-            id: this.state.ownerId,
+            ownerId: this.state.ownerId,
             name: this.state.ownerName,
             category: this.state.ownerCategory,
             desc: this.state.inputValue,
@@ -147,7 +160,19 @@ class NewsFeed extends Component {
 
         console.log("owner data: " + JSON.stringify(data));
 
+        // this.setState({
+        //     newsfeeds: [...this.state.newsfeeds, data]
+        // });
+
+        // setTimeout(() => {
+        //     console.log("newsfeeds in submit(): " + this.state.newsfeeds);
+        // }, 3000);
+
         this.props.onCreate("newsfeeds", data);
+        
+        setTimeout(() => {
+            this.props.onRetrieveAll("newsfeeds");
+        }, 4000);
 
         this.setState({
             status: "all",
@@ -155,7 +180,7 @@ class NewsFeed extends Component {
             ownerId: null,
             ownerName: null,
             ownerCategory: null
-        })
+        });
     }
 
     updateInputValue(event) {
@@ -199,12 +224,13 @@ class NewsFeed extends Component {
     }
 
     render() {
-        this.props.onRetrieveAll("newsfeeds");
-
+        //this.props.onRetrieveAll("newsfeeds");
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.props.newsfeeds;
         let filteredNewsfeeds = [];
         var dropdown;
+
+        console.log("newsfeed in render: " + newsfeeds);
             
         if(this.state.owner == "s") {
             if(this.state.societyOptions != null) {

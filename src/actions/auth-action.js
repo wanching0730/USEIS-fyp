@@ -69,6 +69,7 @@ export function getFcmToken(postData) {
 
                 return updateDataDouble("fcmToken", data).then(result => result.json()).then(reply => {
                     console.log("updated data reply: " + reply);
+                    console.log(messaging);
                     dispatch(getFcmTokenSuccessful(token, messaging));
                 });
             }).catch(error => console.log("failed token: " + error));

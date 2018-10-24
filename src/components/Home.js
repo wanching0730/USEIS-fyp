@@ -25,17 +25,19 @@ class Home extends Component {
         }, 3000);
 
         setTimeout(() => {
+            console.log("onmessage:");
+            console.log(this.props.onMessage);
             // onMessage is an observable, it only need to be called once to use
             if(this.props.messaging != null) {
                 this.props.messaging.onMessage(function(payload) {
                     console.log('Message received. ', payload);
                 });
             }
-        }, 6000);
+        }, 9000);
 
-        // setTimeout(() => {
-        //     fetch(`http://localhost:5000/get/notification`);
-        // }, 9000);
+        setTimeout(() => {
+            fetch(`http://localhost:5000/get/notification`);
+        }, 11000);
     }
 
     handleSearch(value) {
