@@ -1,4 +1,4 @@
-import { getData, getAllData } from '../utils/http_function';
+import { getData, getAllData, getDataWithUserId } from '../utils/http_function';
 
 import {
     RETRIEVE_SOCIETIES,
@@ -108,9 +108,9 @@ export function retrieveAllDataSuccessful(type, data) {
     }
 }
 
-export function retrieveData(type, id, userId) {
+export function retrieveDataWithUserId(type, id, userId) {
     return function (dispatch) {
-        return getData(type, id, userId).then(result => result.json()).then(reply => {
+        return getDataWithUserId(type, id, userId).then(result => result.json()).then(reply => {
             console.log("result of get society: " + JSON.stringify(reply));
 
             if(type === "society") {
@@ -143,11 +143,22 @@ export function retrieveData(type, id, userId) {
                     chairperson: reply[0]["chairperson"],
                     contact: reply[0]["contact"],
                     boothId: reply[0]["boothId"],
+                    participated: reply[0]["participated"]
                 }
 
                 console.log("event in action: " + JSON.stringify(event));
                 dispatch(retrieveSingleDataSuccessful("event", event));
-            } else if(type === "societyEvent") {
+            }
+        });
+    };
+}
+
+export function retrieveData(type, id) {
+    return function (dispatch) {
+        return getData(type, id).then(result => result.json()).then(reply => {
+            console.log("result of get society: " + JSON.stringify(reply));
+
+            if(type === "societyEvent") {
                 console.log("result of get society's event: " + JSON.stringify(reply));
 
                 var societyEvents = [];

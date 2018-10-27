@@ -10,7 +10,7 @@ import "../style/perSociety.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData } from '../actions/data-action';
+import { retrieveDataWithUserId } from '../actions/data-action';
 
 class PerSociety extends Component {
 
@@ -192,7 +192,7 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveData
+      onRetrieveData: retrieveDataWithUserId
     }, dispatch);
 };
 

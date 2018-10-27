@@ -12,14 +12,14 @@ import "../style/perEvent.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData } from '../actions/data-action';
+import { retrieveDataWithUserId, retrieveData } from '../actions/data-action';
 
 class PerEvent extends Component {
 
     constructor(props) {
         super(props);
 
-        this.props.onRetrieveData("event", this.props.params.eventId);
+        this.props.onRetrieveDataWithUserId("event", this.props.params.eventId, this.props.id);
         if(this.props.userName.substring(0,2) != "00")
             this.props.onRetrieveData("studentEvent", this.props.id);
 
@@ -122,26 +122,12 @@ class PerEvent extends Component {
             };
         }
 
-        if(this.props.userName.substring(0,2) == "00") {
-            buttons =
-                <div style={div3Style}>
-                    <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
-                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                </div>
-        } else {
-            buttons =
-                <div style={div3Style}>
-                    <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
-                    <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
-                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                </div>
-        }
-
         if(this.props.userEvents != null) {
             let userEvents = this.props.userEvents;
             var sideNavBar;
             for(var i = 0; i < userEvents.length; i++) {
                 let userEvent = userEvents[i];
+                console.log("user pos: " + userEvent["position"]);
                 if((userEvent["position"] == "chairperson" || userEvent["position"] == "vice_chairperson") && 
                 userEvent["eventId"] == eventId) {
                     sideNavBar = 
@@ -153,12 +139,44 @@ class PerEvent extends Component {
                             <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
                             <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                         </div>
+                        break;
                 } else {
                     sideNavBar = 
                         <div id="mySidenav" class="sidenav">
                             <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                         </div>
                 }
+            }
+        }
+
+        if(this.props.userName.substring(0,2) == "00") {
+            let event = this.props.event;
+            if(event["participated"]) {
+                buttons =
+                <div style={div3Style}>
+                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                </div>
+            } else {
+                buttons =
+                <div style={div3Style}>
+                    <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                </div>
+            }
+            
+        } else {
+            if(event["participated"]) {
+                buttons =
+                    <div style={div3Style}>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    </div>
+            } else {
+                buttons =
+                    <div style={div3Style}>
+                        <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                        <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    </div>
             }
         }
 
@@ -260,7 +278,8 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveData
+      onRetrieveData: retrieveData,
+      onRetrieveDataWithUserId: retrieveDataWithUserId
     }, dispatch);
 };
 
