@@ -17,9 +17,6 @@ class PerSociety extends Component {
     constructor(props) {
         super(props);
 
-        // this.props.onRetrieveData("society", this.props.params.societyId, this.props.id);
-        // console.log("society id: " + this.props.params.societyId);
-
         if(this.props.userName.substring(0,2) != "00") {
             this.props.onRetrieveDataWithUserId("studentSociety", this.props.params.societyId, this.props.id);
         } 

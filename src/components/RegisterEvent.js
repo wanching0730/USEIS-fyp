@@ -8,7 +8,6 @@ import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
 import moment from "moment";
 import '../style/form.css';
-// import NotificationModal from './NotificationModal';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -22,8 +21,7 @@ class RegisterEvent extends Component {
       emailNoti: false,
       webNoti: false,
       crewStatus: 0,
-      vegetarian: 1,
-      // showModal: false
+      vegetarian: 1
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,29 +31,6 @@ class RegisterEvent extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
-  // displayText() {
-
-  //     if(this.state.webNoti) {
-  //       if(this.n.supported()) 
-  //         this.n.show();
-  //     }
-
-  //     const data = Object.keys(this.state).map((key) => {
-  //       return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
-  //     }).join('&');
-
-  //     fetch(`http://localhost:5000/puppies/create`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/x-www-form-urlencoded'
-  //       },
-  //       body: data
-  //     }).then(function(response) {
-  //       return response;
-  //     });
-
-  // }
 
   handleNotiClick(event) {
     window.focus()
@@ -80,10 +55,6 @@ class RegisterEvent extends Component {
       this.props.onCreate("staffRegisterEvent", data);
     else
       this.props.onCreate("studentRegisterEvent", data);
-
-      //this.displayText();
-      //browserHistory.push("/perEvent/1");
-      // this.setState({showModal: this.state.value});
   }
 
   handleChange(event) {
@@ -99,20 +70,6 @@ class RegisterEvent extends Component {
   //   const target = event.target;
   //   const value = target.type === 'checkbox' ? target.checked : target.value;
   //   const name = target.name;
-
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // }
-
-  // renderModal() {
-  //     if(this.state.showModal) {
-  //         return <NotificationModal />;
-  //     } else {
-  //         return <p>hello</p>;
-  //     }
-    
-  // }
   
   render() {
 
@@ -196,7 +153,6 @@ class RegisterEvent extends Component {
     );
     }
 }
-
 
 const styles = {
   RaisedButtonStyle: {

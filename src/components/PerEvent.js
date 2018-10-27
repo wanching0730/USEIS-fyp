@@ -12,7 +12,7 @@ import "../style/perEvent.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveDataWithUserId, retrieveData } from '../actions/data-action';
+import { retrieveDataWithUserId } from '../actions/data-action';
 
 class PerEvent extends Component {
 
@@ -23,8 +23,6 @@ class PerEvent extends Component {
             this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
         else 
             this.props.onRetrieveDataWithUserId("staffEvent", this.props.params.eventId, this.props.id);
-        // if(this.props.userName.substring(0,2) != "00")
-        //     this.props.onRetrieveData("studentEvent", this.props.id);
 
         console.log("event id: " + this.props.params.eventId);
     }
@@ -125,34 +123,7 @@ class PerEvent extends Component {
                 boothId: null,
             };
         }
-
-        // if(this.props.userEvents != null) {
-        //     let userEvents = this.props.userEvents;
-        //     var sideNavBar;
-        //     for(var i = 0; i < userEvents.length; i++) {
-        //         let userEvent = userEvents[i];
-        //         console.log("user pos: " + userEvent["position"]);
-        //         if((userEvent["position"] == "chairperson" || userEvent["position"] == "vice_chairperson") && 
-        //         userEvent["eventId"] == eventId) {
-        //             sideNavBar = 
-        //                 <div id="mySidenav" class="sidenav">
-        //                     <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
-        //                     <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
-        //                     <Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-        //                     <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
-        //                     <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
-        //                     <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-        //                 </div>
-        //                 break;
-        //         } else {
-        //             sideNavBar = 
-        //                 <div id="mySidenav" class="sidenav">
-        //                     <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-        //                 </div>
-        //         }
-        //     }
-        // }
-
+        
         if(this.props.userName.substring(0,2) == "00") {
             if(event["participated"]) {
                 buttons =

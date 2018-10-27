@@ -79,31 +79,6 @@ class MyProfile extends Component {
                     </tr>
                 );
             }
-            // for(var i = 0; i < societies.length; i++) {
-            //     var events = [];
-            //     let society = societies[i];
-            //     for(var j = 0; j < societyEvents.length; j++) {
-            //         let societyEvent = societyEvents[j];
-            //         console.log("societyId : " + society["societyId"]);
-            //         console.log("society event's societyid : " + societyEvent["societyId"]);
-            //         if(society["societyId"] == societyEvent["societyId"]) {
-            //             events.push(
-            //                 <li><Link to={`/perEvent/` + societyEvent["eventId"]}>{societyEvent["eventName"]}</Link></li>
-            //             );
-            //         }
-            //     }
-            //     rows.push(
-            //         <tr>
-            //             <td>{i+1}</td>
-            //             <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
-            //             <td><Link to={`/perSociety/`+society["societyId"]}>{society["name"]}</Link></td>
-            //             <td>{society["joinDate"]}</td>
-            //             <td>{society["position"]}</td>
-            //             <td>{events}</td>
-            //             <td><Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link></td>
-            //         </tr>
-            //     );
-            // }
         }
         
         return (
