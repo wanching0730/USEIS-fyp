@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
+import $ from 'jquery';
 import "../style/perSociety.css";
 
 import { connect } from 'react-redux';
@@ -45,25 +46,57 @@ class PerSociety extends Component {
         }
     }
 
+    handleListCommitteeClick(event) {
+        if(this.props.society != null) {
+            let toCommBoard = { 
+                pathname: "/commBoard/society/" + this.props.params.societyId, 
+                state: {societyName: this.props.society.name}
+            };
+            browserHistory.push(toCommBoard);
+        }
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0);
     }
 
     render() {
+        $(document).ready(function(){
+            $('#zoomBtn').on('click', (function() {
+                $('.zoom-btn-sm').toggleClass('scale-out');
+                if (!$('.zoom-card').hasClass('scale-out')) {
+                $('.zoom-card').toggleClass('scale-out');
+                }
+            }));
+            
+            $('.zoom-btn-sm').on('click', (function() {
+                var btn = $(this);
+                var card = $('.zoom-card');
+                if ($('.zoom-card').hasClass('scale-out')) {
+                    $('.zoom-card').toggleClass('scale-out');
+                }
+                if (btn.hasClass('zoom-btn-person')) {
+                    card.css('background-color', '#d32f2f');
+                } else if (btn.hasClass('zoom-btn-doc')) {
+                    card.css('background-color', '#fbc02d');
+                } else if (btn.hasClass('zoom-btn-tangram')) {
+                    card.css('background-color', '#388e3c');
+                } else if (btn.hasClass('zoom-btn-report')) {
+                    card.css('background-color', '#1976d2');
+                } else {
+                    card.css('background-color', '#7b1fa2');
+                }
+            }));
+        });
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
-        var society, toCommBoard, toCreateEvent, toManageMember, toRegisterBooth;
-        var buttons = <div></div>, sideNavBar = <div></div>;
+        var society, toCreateEvent, toManageMember, toRegisterBooth;
+        var buttons = <div></div>;
         
         if(this.props.society != null) {
             society = this.props.society;
             let societyId = this.props.params.societyId;
             let societyState = {societyName: this.props.society.name};
-
-            toCommBoard = { 
-                pathname: "/commBoard/society/" + societyId, 
-                state: societyState
-            };
 
             toCreateEvent = {
                 pathname: "/createEvent/society/" + societyId,
@@ -92,31 +125,10 @@ class PerSociety extends Component {
                         <div>
                             <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
                             <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
+                            <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                         </div>
                 }
-
-                if(society["authorized"]) {
-                    sideNavBar = 
-                    <div class="zoom">
-                        <a class="zoom-fab zoom-btn-large" id="zoomBtn">Open</a>
-                        <ul class="zoom-menu">
-                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out">Action 1</a></li>
-                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out">Action 2</a></li>
-                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out">Action 3</a></li>
-                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out">Action 4</a></li>
-                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out">Action 5</a></li>
-                        </ul> 
-                    </div>
-                        // <div id="mySidenav" className="sidenav">
-                        //     <Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /> Create Event</Link>
-                        //     <Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
-                        //     <Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                        //     <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
-                        //     <Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
-                        //     <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                        // </div>;
-                } 
             } else {
                 buttons = 
                     <div>
@@ -147,7 +159,24 @@ class PerSociety extends Component {
                     </Breadcrumb>
                 </div>
 
-                {sideNavBar}
+                { society["authorized"] ?
+                    [
+                        <div class="zoom">
+                            <a class="zoom-fab zoom-btn-large" id="zoomBtn">Open</a>
+                            <ul class="zoom-menu">
+                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li>
+                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /></Link></a></li>
+                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
+                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
+                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
+                            </ul> 
+                        </div>
+                    ]
+                    : 
+                    [
+                        null
+                    ]
+                }
 
                 <div>
                     <MuiThemeProvider>
