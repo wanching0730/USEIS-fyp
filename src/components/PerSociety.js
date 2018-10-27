@@ -68,25 +68,31 @@ class PerSociety extends Component {
                 $('.zoom-card').toggleClass('scale-out');
                 }
             }));
-            
-            $('.zoom-btn-sm').on('click', (function() {
-                var btn = $(this);
-                var card = $('.zoom-card');
-                if ($('.zoom-card').hasClass('scale-out')) {
-                    $('.zoom-card').toggleClass('scale-out');
-                }
-                if (btn.hasClass('zoom-btn-person')) {
-                    card.css('background-color', '#d32f2f');
-                } else if (btn.hasClass('zoom-btn-doc')) {
-                    card.css('background-color', '#fbc02d');
-                } else if (btn.hasClass('zoom-btn-tangram')) {
-                    card.css('background-color', '#388e3c');
-                } else if (btn.hasClass('zoom-btn-report')) {
-                    card.css('background-color', '#1976d2');
-                } else {
-                    card.css('background-color', '#7b1fa2');
-                }
-            }));
+
+            $("#div2").hover(function () {
+                $(this).find("span").text("HOVERING!!!!!");
+            }, function () {
+                $(this).find("span").text("");
+            });
+        
+            // $('.zoom-btn-sm').on('click', (function() {
+            //     var btn = $(this);
+            //     var card = $('.zoom-card');
+            //     if ($('.zoom-card').hasClass('scale-out')) {
+            //         $('.zoom-card').toggleClass('scale-out');
+            //     }
+            //     if (btn.hasClass('zoom-btn-person')) {
+            //         card.css('background-color', '#d32f2f');
+            //     } else if (btn.hasClass('zoom-btn-doc')) {
+            //         card.css('background-color', '#fbc02d');
+            //     } else if (btn.hasClass('zoom-btn-tangram')) {
+            //         card.css('background-color', '#388e3c');
+            //     } else if (btn.hasClass('zoom-btn-report')) {
+            //         card.css('background-color', '#1976d2');
+            //     } else {
+            //         card.css('background-color', '#7b1fa2');
+            //     }
+            // }));
         });
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
@@ -162,10 +168,10 @@ class PerSociety extends Component {
                 { society["authorized"] ?
                     [
                         <div class="zoom">
-                            <a class="zoom-fab zoom-btn-large" id="zoomBtn">Open</a>
+                            <a class="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
                             <ul class="zoom-menu">
-                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li>
-                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /></Link></a></li>
+                                <div id="div1"><span></span><li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li></div>
+                                <div id="div1"><span></span><li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /></Link></a></li></div>
                                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
                                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
                                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
