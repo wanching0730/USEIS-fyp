@@ -11,11 +11,14 @@ import '../style/society.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData } from '../actions/data-action';
+import { updateDouble } from '../actions/post-action';
 
 class ManageMember extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {studentId: -1};
 
         this.props.onRetrieveData("societyMember", this.props.params.societyId);
     }
@@ -24,10 +27,37 @@ class ManageMember extends Component {
         window.scrollTo(0, 0)
     }
 
-    handleApprove() {
+    handleApprove(event) {
+        let studentId = event.target.value;
+        this.setState({studentId: studentId})
+
         confirmAlert({
             title: 'Approval Confirmation',
             message: 'Are you sure to approve this member?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+
+                    let data = {
+                            studentId: this.state.studentId,
+                            societyId: this.props.params.societyId
+                        }
+                    this.props.onUpdateData("member", data);
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => console.log('Click No')
+              }
+            ]
+          })
+    }
+
+    handleDelete() {
+        confirmAlert({
+            title: 'Delete Confirmation',
+            message: 'Are you sure to delete this crew?',
             buttons: [
               {
                 label: 'Yes',
@@ -145,7 +175,8 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveData
+      onRetrieveData: retrieveData,
+      onUpdateData: updateDouble
     }, dispatch);
 };
 

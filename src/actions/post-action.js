@@ -149,7 +149,9 @@ export function updateDouble(type, postData) {
                             onClick: () => {
                                 if(type === "crew") {
                                     browserHistory.push('/manageCrew/' + reply);
-                                } 
+                                } else if(type === "member") {
+                                    browserHistory.push('/manageMember/' + reply);
+                                }
                             }
                         }
                     ]
