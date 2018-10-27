@@ -98,14 +98,24 @@ class PerSociety extends Component {
 
                 if(society["authorized"]) {
                     sideNavBar = 
-                        <div id="mySidenav" className="sidenav">
-                            <Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /> Create Event</Link>
-                            <Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
-                            <Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                            <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
-                            <Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
-                            <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                        </div>;
+                    <div class="zoom">
+                        <a class="zoom-fab zoom-btn-large" id="zoomBtn">Open</a>
+                        <ul class="zoom-menu">
+                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out">Action 1</a></li>
+                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out">Action 2</a></li>
+                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out">Action 3</a></li>
+                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out">Action 4</a></li>
+                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out">Action 5</a></li>
+                        </ul> 
+                    </div>
+                        // <div id="mySidenav" className="sidenav">
+                        //     <Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /> Create Event</Link>
+                        //     <Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
+                        //     <Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+                        //     <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
+                        //     <Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
+                        //     <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                        // </div>;
                 } 
             } else {
                 buttons = 
