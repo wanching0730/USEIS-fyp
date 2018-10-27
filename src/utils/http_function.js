@@ -21,7 +21,11 @@ export function getDataWithUserId(type, id, userId) {
 }
 
 export function getData(type, id) {
-    if(type === "societyEvent") {
+    if(type === "society") {
+        return fetch(`http://localhost:5000/get/society/` + id);
+    } else if(type === "event") {
+        return fetch(`http://localhost:5000/get/event/` + id);
+    } else if(type === "societyEvent") {
         return fetch(`http://localhost:5000/get/societyEvent/` + id);
     } else if(type === "studentEvent") {
         return fetch(`http://localhost:5000/get/studentEvent/` + id);

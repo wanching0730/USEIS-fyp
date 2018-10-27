@@ -168,7 +168,41 @@ export function retrieveData(type, id) {
         return getData(type, id).then(result => result.json()).then(reply => {
             console.log("result of get society: " + JSON.stringify(reply));
 
-            if(type === "societyEvent") {
+            if(type === "society") {
+                let society = {
+                    id: reply[0]["societyId"],
+                    name: reply[0]["name"],
+                    category: reply[0]["category"],
+                    vision: reply[0]["vision"],
+                    mission: reply[0]["mission"],
+                    desc: reply[0]["description"],
+                    boothId: reply[0]["boothId"],
+                    participated: reply[0]["participated"]
+                }
+
+                dispatch(retrieveSingleDataSuccessful("society", society));
+            } else if(type === "event") {
+                console.log("result of get event: " + JSON.stringify(reply));
+
+                let event = {
+                    id: reply[0]["eventId"],
+                    name: reply[0]["name"],
+                    dateTime: reply[0]["eventDateTime"],
+                    organiserId: reply[0]["organiserId"],
+                    organiserName: reply[0]["organiserName"],
+                    desc: reply[0]["description"],
+                    venue: reply[0]["venue"],
+                    category: reply[0]["category"],
+                    fee: reply[0]["fee"],
+                    ssPoint: reply[0]["ssPoint"],
+                    chairperson: reply[0]["chairperson"],
+                    contact: reply[0]["contact"],
+                    boothId: reply[0]["boothId"],
+                }
+
+                console.log("event in action: " + JSON.stringify(event));
+                dispatch(retrieveSingleDataSuccessful("event", event));
+            } else if(type === "societyEvent") {
                 console.log("result of get society's event: " + JSON.stringify(reply));
 
                 var societyEvents = [];
