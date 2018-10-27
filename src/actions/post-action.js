@@ -84,10 +84,10 @@ export function create(type, postData) {
                                     browserHistory.push('/newsfeeds');
                                 } else if(type === "registerSociety") {
                                     dispatch(registerSocietySuccessfully);
-                                    browserHistory.push('/perSociety/' + reply);
+                                    browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["societyName"]}});
                                 } else if(type === "staffRegisterEvent" || type == "studentRegisterEvent") {
                                     dispatch(registerEventSuccessfully);
-                                    browserHistory.push('/perEvent/' + reply);
+                                    browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
                                 }
                                 
                             }

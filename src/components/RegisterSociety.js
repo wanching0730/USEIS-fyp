@@ -35,6 +35,7 @@ class RegisterSociety extends Component {
     let current = moment();
     let data = {
       societyId: this.props.params.societyId,
+      societyName: this.props.location.state["societyName"],
       studentId: this.props.id,
       position: "member",
       joinDate: moment(current).format("YYYY-MM-DD"),
@@ -170,7 +171,6 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log(JSON.stringify(state));
   return {
     id: state.auth.id
   };

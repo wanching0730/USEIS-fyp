@@ -66,6 +66,7 @@ class RegisterEvent extends Component {
     let current = moment();
     let data = {
       eventId: this.props.params.eventId,
+      eventName: this.props.location.state["eventName"],
       id: this.props.id,
       position: "participant",
       joinDate: moment(current).format("YYYY-MM-DD"),
@@ -209,7 +210,6 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log(JSON.stringify(state));
   return {
     id: state.auth.id,
     userName: state.auth.userName
