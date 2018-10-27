@@ -43,7 +43,7 @@ class ManageMember extends Component {
                             studentId: this.state.studentId,
                             societyId: this.props.params.societyId
                         }
-                    this.props.onUpdateData("member", data);
+                    this.props.onUpdateData("member", data, this.props.location.state["societyName"]);
                 }
               },
               {

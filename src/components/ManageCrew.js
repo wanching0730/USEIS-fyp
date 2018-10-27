@@ -44,7 +44,7 @@ class ManageCrew extends Component {
                             studentId: this.state.studentId,
                             eventId: this.props.params.eventId
                         }
-                        this.props.onUpdateData("crew", data);
+                        this.props.onUpdateData("crew", data, this.props.location.state["eventName"]);
                     }
                   },
                   {

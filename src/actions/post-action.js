@@ -130,7 +130,8 @@ export function update(type, id, name, postData) {
     };
 }
 
-export function updateDouble(type, postData) {
+export function updateDouble(type, postData, name) {
+    name = name || "";
     return function (dispatch) {
         const data = Object.keys(postData).map((key) => {
             return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
@@ -148,9 +149,9 @@ export function updateDouble(type, postData) {
                             label: 'Close',
                             onClick: () => {
                                 if(type === "crew") {
-                                    browserHistory.push('/manageCrew/' + reply);
+                                    browserHistory.push({pathname:`/manageCrew/` + reply, state: {eventName: name}});
                                 } else if(type === "member") {
-                                    browserHistory.push('/manageMember/' + reply);
+                                    browserHistory.push({pathname:`/manageMember/` + reply, state: {societyName: name}});
                                 }
                             }
                         }
