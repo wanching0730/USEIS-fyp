@@ -38,11 +38,17 @@ class SocietyEvents extends Component {
                 var rows = [];
                 for(var i = 0; i < societyEvents.length; i++) {
                     let societyEvent = societyEvents[i];
+
+                    let toEvent = {
+                        pathname: "/perEvent/" + societyEvent["id"],
+                        state: {eventName: societyEvent["name"]}
+                    }
+                    
                     rows.push(
                         <tr> 
                             <td>{i+1}</td>
                             <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
-                            <td><Link to={`/perEvent/` + societyEvent["id"]}>{societyEvent["name"]}</Link></td>
+                            <td><Link to={toEvent}>{societyEvent["name"]}</Link></td>
                             <td>{societyEvent["dateTime"]}</td>
                             <td>???</td>
                             <td>{societyEvent["venue"]}</td>

@@ -109,6 +109,11 @@ class MyEvent extends Component {
                         state: {eventName: event["name"]}
                     }
 
+                    let toSociety = {
+                        pathname: "/perSociety/" + event["organiserId"],
+                        state: {societyName: event["organiserName"]}
+                    }
+
                     if(event["position"] === "participant"){
                         position = <td>Participant</td>;
                         crewStatus = <td>-</td>;
@@ -138,7 +143,7 @@ class MyEvent extends Component {
                             <td>{i+1}</td>
                             <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
                             <td><Link to={toEvent}>{event["name"]}</Link></td>
-                            <td><Link to={`/perSociety/1`}>{event["organiser"]}</Link></td>
+                            <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
                             <td>{event["joinDate"]}</td>
                             {position}
                             {crewStatus}

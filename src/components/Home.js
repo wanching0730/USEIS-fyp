@@ -17,27 +17,29 @@ class Home extends Component {
 
         this.state = {searchValue: ""}
 
-        setTimeout(() => {
-            this.props.onGetFcmToken({
-              userId: this.props.userId,
-              fcmToken: ''
-            });
-        }, 3000);
-
-        setTimeout(() => {
-            console.log("onmessage:");
-            console.log(this.props.onMessage);
-            // onMessage is an observable, it only need to be called once to use
-            if(this.props.messaging != null) {
-                this.props.messaging.onMessage(function(payload) {
-                    console.log('Message received. ', payload);
+        if(this.props.fcmToken == null) {
+            setTimeout(() => {
+                this.props.onGetFcmToken({
+                  userId: this.props.userId,
+                  fcmToken: ''
                 });
-            }
-        }, 9000);
+            }, 3000);
+    
+            setTimeout(() => {
+                console.log("onmessage:");
+                console.log(this.props.onMessage);
+                // onMessage is an observable, it only need to be called once to use
+                if(this.props.messaging != null) {
+                    this.props.messaging.onMessage(function(payload) {
+                        console.log('Message received. ', payload);
+                    });
+                }
+            }, 9000);
+        }
 
-        setTimeout(() => {
-            fetch(`http://localhost:5000/get/notification`);
-        }, 11000);
+        // setTimeout(() => {
+        //     fetch(`http://localhost:5000/get/notification`);
+        // }, 11000);
     }
 
     handleSearch(value) {
@@ -144,7 +146,7 @@ const mapStateToProps = (state, props) => {
     return {
         userId: state.auth.userId,
         messaging: state.auth.messaging,
-        //fcmToken: state.auth.fcmToken
+        fcmToken: state.auth.fcmToken
     };
 };
 

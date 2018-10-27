@@ -48,7 +48,7 @@ class CreateProfile extends Component {
           mission: society["mission"], 
           desc: society["desc"]
         })   
-      }.bind(this), 2000)
+      }.bind(this), 3000)
     }
   }
 
@@ -69,11 +69,12 @@ class CreateProfile extends Component {
     } else {
       let societyId = this.props.params.societyId;
       let data = this.state
+      let societyName = data["name"];
       console.log("society content: " + JSON.stringify(data));
       if(societyId == null) {
         this.props.onCreate("society", data);
       } else {
-        this.props.onUpdate("society", societyId, data);
+        this.props.onUpdate("society", societyId, societyName, data);
       }
     }
   }
@@ -105,7 +106,7 @@ class CreateProfile extends Component {
         </Breadcrumb>
     } else {
       var name;
-      if(this.props.society["name"] != '') {
+      if(this.props.society != null) {
         name = this.props.society["name"];
       }
       header = <h1>Edit Society Profile<span>Edit your own society profile and make it better!</span></h1>;
@@ -185,7 +186,6 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log(JSON.stringify(state));
   return {
     createdSocietyId: state.create.createdSocietyId,
     society: state.data.society

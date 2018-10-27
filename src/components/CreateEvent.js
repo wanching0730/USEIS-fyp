@@ -25,7 +25,8 @@ class CreateEvent extends Component {
       endDate: '',
       desc: '',
       venue: '',
-      organiser: '',
+      organiserId: '',
+      organiserName: '',
       category: 'dance',
       ssCategory: 'communication',
       ssPoint: 0,
@@ -53,7 +54,8 @@ class CreateEvent extends Component {
         this.setState({
           name: event["name"],
           dateTime: event["dateTime"],
-          organiser: event["organiser"],
+          organiserId: event["organiserId"],
+          organiserName: event["organiserName"],
           desc: event["desc"], 
           venue: event["venue"],
           category: event["category"],
@@ -73,7 +75,7 @@ class CreateEvent extends Component {
     let p = this.props.params;
     if(p.type == "society") {
       this.setState({
-        organiser: p.id
+        organiserId: p.id
       });
     }
   }
@@ -97,7 +99,9 @@ class CreateEvent extends Component {
       })
       return false;
     } else {
+      let eventId = this.props.params.id;
       let data = this.state
+      let eventName = data["name"];
       // let eventId = this.props.params.id;
       console.log("event content: " + JSON.stringify(data));
       if(this.props.params.type == "society")
@@ -105,7 +109,7 @@ class CreateEvent extends Component {
       else {
         if(data.startDate == '')
           data.startDate = "" + moment(this.props.event["dateTime"]).format("YYYY-MM-DD hh:mm:ss")
-        this.props.onUpdate("event", this.props.params.id, data);
+        this.props.onUpdate("event", eventId, eventName, data);
       }
     }
   }
@@ -286,7 +290,6 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log(JSON.stringify(state));
   return {
     createdEventId: state.create.createdEventId,
     event: state.data.event

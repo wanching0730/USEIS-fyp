@@ -75,10 +75,10 @@ export function create(type, postData) {
                             onClick: () => {
                                 if(type === "society") {
                                     dispatch(createSocietySuccessful(reply));
-                                    browserHistory.push('/perSociety/' + reply);
+                                    browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["name"]}});
                                 } else if(type === "event") {
                                     dispatch(createEventSuccessful(reply));
-                                    browserHistory.push('/perEvent/' + reply);
+                                    browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["name"]}});
                                 } else if(type === "newsfeeds") {
                                     dispatch(createNewsfeedSuccessful(reply));
                                     browserHistory.push('/newsfeeds');
@@ -99,7 +99,7 @@ export function create(type, postData) {
     };
 }
 
-export function update(type, id, postData) {
+export function update(type, id, name, postData) {
     return function (dispatch) {
         const data = Object.keys(postData).map((key) => {
             return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
@@ -117,9 +117,9 @@ export function update(type, id, postData) {
                             label: 'Close',
                             onClick: () => {
                                 if(type === "society") {
-                                    browserHistory.push('/perSociety/' + id);
+                                    browserHistory.push({pathname:`/perSociety/` + id, state: {societyName: name}});
                                 } else if(type === "event") {
-                                    browserHistory.push('/perEvent/' + id);
+                                    browserHistory.push({pathname:`/perEvent/` + id, state: {eventName: name}});
                                 } 
                             }
                         }
