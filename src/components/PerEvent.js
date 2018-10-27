@@ -19,9 +19,12 @@ class PerEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.props.onRetrieveDataWithUserId("event", this.props.params.eventId, this.props.id);
-        if(this.props.userName.substring(0,2) != "00")
-            this.props.onRetrieveData("studentEvent", this.props.id);
+        if(this.props.userName.substring(0,2) != "00") 
+            this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
+        else 
+            this.props.onRetrieveDataWithUserId("staffEvent", this.props.params.eventId, this.props.id);
+        // if(this.props.userName.substring(0,2) != "00")
+        //     this.props.onRetrieveData("studentEvent", this.props.id);
 
         console.log("event id: " + this.props.params.eventId);
     }
@@ -74,7 +77,8 @@ class PerEvent extends Component {
 
         console.log("event: " + this.props.event);
 
-        var buttons, event, toEditEvent, toManageCrew, toCommBoard, toRegisterBooth, toManageParticipant;
+        var buttons = <div></div>, sideNavBar = <div></div>;
+        var event, toEditEvent, toManageCrew, toCommBoard, toRegisterBooth, toManageParticipant;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
 
@@ -122,35 +126,34 @@ class PerEvent extends Component {
             };
         }
 
-        if(this.props.userEvents != null) {
-            let userEvents = this.props.userEvents;
-            var sideNavBar;
-            for(var i = 0; i < userEvents.length; i++) {
-                let userEvent = userEvents[i];
-                console.log("user pos: " + userEvent["position"]);
-                if((userEvent["position"] == "chairperson" || userEvent["position"] == "vice_chairperson") && 
-                userEvent["eventId"] == eventId) {
-                    sideNavBar = 
-                        <div id="mySidenav" class="sidenav">
-                            <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
-                            <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
-                            <Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                            <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
-                            <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
-                            <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                        </div>
-                        break;
-                } else {
-                    sideNavBar = 
-                        <div id="mySidenav" class="sidenav">
-                            <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                        </div>
-                }
-            }
-        }
+        // if(this.props.userEvents != null) {
+        //     let userEvents = this.props.userEvents;
+        //     var sideNavBar;
+        //     for(var i = 0; i < userEvents.length; i++) {
+        //         let userEvent = userEvents[i];
+        //         console.log("user pos: " + userEvent["position"]);
+        //         if((userEvent["position"] == "chairperson" || userEvent["position"] == "vice_chairperson") && 
+        //         userEvent["eventId"] == eventId) {
+        //             sideNavBar = 
+        //                 <div id="mySidenav" class="sidenav">
+        //                     <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
+        //                     <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
+        //                     <Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+        //                     <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
+        //                     <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
+        //                     <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+        //                 </div>
+        //                 break;
+        //         } else {
+        //             sideNavBar = 
+        //                 <div id="mySidenav" class="sidenav">
+        //                     <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+        //                 </div>
+        //         }
+        //     }
+        // }
 
         if(this.props.userName.substring(0,2) == "00") {
-            let event = this.props.event;
             if(event["participated"]) {
                 buttons =
                 <div style={div3Style}>
@@ -165,6 +168,7 @@ class PerEvent extends Component {
             }
             
         } else {
+            console.log("authorized: " + event["authorized"]);
             if(event["participated"]) {
                 buttons =
                     <div style={div3Style}>
@@ -176,6 +180,23 @@ class PerEvent extends Component {
                         <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
                         <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
                         <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    </div>
+            }
+
+            if(event["authorized"]) {
+                sideNavBar = 
+                    <div id="mySidenav" class="sidenav">
+                        <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
+                        <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
+                        <Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+                        <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
+                        <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
+                        <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                    </div>
+            } else {
+                sideNavBar = 
+                    <div id="mySidenav" class="sidenav">
+                        <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
                     </div>
             }
         }
@@ -278,7 +299,6 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveData,
       onRetrieveDataWithUserId: retrieveDataWithUserId
     }, dispatch);
 };

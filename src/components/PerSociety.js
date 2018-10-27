@@ -17,8 +17,15 @@ class PerSociety extends Component {
     constructor(props) {
         super(props);
 
-        this.props.onRetrieveData("society", this.props.params.societyId, this.props.id);
-        console.log("society id: " + this.props.params.societyId);
+        // this.props.onRetrieveData("society", this.props.params.societyId, this.props.id);
+        // console.log("society id: " + this.props.params.societyId);
+
+        if(this.props.userName.substring(0,2) != "00") {
+            this.props.onRetrieveDataWithUserId("studentSociety", this.props.params.societyId, this.props.id);
+        } 
+        else {
+            this.props.onRetrieveDataWithUserId("staffSociety", this.props.params.societyId, this.props.id);
+        }
     }
 
     handleJoinClick(event) {
@@ -49,7 +56,7 @@ class PerSociety extends Component {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         var society, toCommBoard, toCreateEvent, toManageMember, toRegisterBooth;
-        var buttons;
+        var buttons = <div></div>, sideNavBar = <div></div>;
         
         if(this.props.society != null) {
             society = this.props.society;
@@ -76,20 +83,34 @@ class PerSociety extends Component {
                 state: societyState
             };
 
-            if(society["participated"]) {
-                buttons = 
-                    <div>
-                        <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
-                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>    
-                    </div> 
-            } else {
-                buttons = 
-                    <div>
-                        <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
-                        <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
-                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                    </div>
-            }
+            if(this.props.userName.substring(0,2) != "00") { 
+                if(society["participated"]) {
+                    buttons = 
+                        <div>
+                            <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
+                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>    
+                        </div> 
+                } else {
+                    buttons = 
+                        <div>
+                            <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
+                            <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
+                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                        </div>
+                }
+
+                if(society["authorized"]) {
+                    sideNavBar = 
+                        <div id="mySidenav" className="sidenav">
+                            <Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /> Create Event</Link>
+                            <Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
+                            <Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+                            <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
+                            <Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
+                            <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+                        </div>;
+                } 
+            } 
          } else {
             society = {
                 name: null,
@@ -113,14 +134,7 @@ class PerSociety extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div id="mySidenav" className="sidenav">
-                    <Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /> Create Event</Link>
-                    <Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /> Edit Profile</Link>
-                    <Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                    <Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /> Submit Proposal</Link>
-                    <Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /> Manage Member</Link>
-                    <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                </div>
+                {sideNavBar}
 
                 <div>
                     <MuiThemeProvider>
@@ -186,13 +200,14 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         society: state.data.society,
-        id: state.auth.id
+        id: state.auth.id,
+        userName: state.auth.userName
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveDataWithUserId
+        onRetrieveDataWithUserId: retrieveDataWithUserId
     }, dispatch);
 };
 

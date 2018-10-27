@@ -9,10 +9,14 @@ export function verifyUser(data) {
 }
 
 export function getDataWithUserId(type, id, userId) {
-    if(type === "society") {
-        return fetch(`http://localhost:5000/get/society/` + id + `/` + userId);
-    } else if(type === "event") {
-        return fetch(`http://localhost:5000/get/event/` + id + `/` + userId);
+    if(type === "studentSociety") {
+        return fetch(`http://localhost:5000/get/studentSociety/` + id + `/` + userId);
+    } else if(type === "staffSociety") {
+        return fetch(`http://localhost:5000/get/staffSociety/` + id + `/` + userId);
+    } else if(type === "studentEvent") {
+        return fetch(`http://localhost:5000/get/studentEvent/` + id + `/` + userId);
+    } else {
+        return fetch(`http://localhost:5000/get/staffEvent/` + id + `/` + userId);
     }
 }
 

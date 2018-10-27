@@ -113,7 +113,7 @@ export function retrieveDataWithUserId(type, id, userId) {
         return getDataWithUserId(type, id, userId).then(result => result.json()).then(reply => {
             console.log("result of get society: " + JSON.stringify(reply));
 
-            if(type === "society") {
+            if(type === "studentSociety" || type === "staffSociety") {
                 let society = {
                     id: reply[0]["societyId"],
                     name: reply[0]["name"],
@@ -122,11 +122,12 @@ export function retrieveDataWithUserId(type, id, userId) {
                     mission: reply[0]["mission"],
                     desc: reply[0]["description"],
                     boothId: reply[0]["boothId"],
-                    participated: reply[0]["participated"]
+                    participated: reply[0]["participated"],
+                    authorized: reply[0]["authorized"]
                 }
 
                 dispatch(retrieveSingleDataSuccessful("society", society));
-            } else if(type === "event") {
+            } else if(type === "studentEvent" || type === "staffEvent") {
                 console.log("result of get event: " + JSON.stringify(reply));
 
                 let event = {
@@ -143,7 +144,8 @@ export function retrieveDataWithUserId(type, id, userId) {
                     chairperson: reply[0]["chairperson"],
                     contact: reply[0]["contact"],
                     boothId: reply[0]["boothId"],
-                    participated: reply[0]["participated"]
+                    participated: reply[0]["participated"],
+                    authorized: reply[0]["authorized"]
                 }
 
                 console.log("event in action: " + JSON.stringify(event));
