@@ -136,7 +136,7 @@ class RegisterEvent extends Component {
 
             <div className="container" style={ContainerStyle}>
               <div className="form-style-10">
-                <h1>Register ???<span>Register the event now and get yourself a seat!</span></h1>
+                <h1>Register {this.props.location.state["eventName"]}<span>Register the event now and get yourself a seat!</span></h1>
                 <form>
                     <div class="section"><span>1</span>Vegetarian</div>
                     <div class="inner-wrap">

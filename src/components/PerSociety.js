@@ -17,7 +17,7 @@ class PerSociety extends Component {
     constructor(props) {
         super(props);
 
-        this.props.onRetrieveData("society", this.props.params.societyId);
+        this.props.onRetrieveData("society", this.props.params.societyId, this.props.id);
         console.log("society id: " + this.props.params.societyId);
     }
 
@@ -49,6 +49,7 @@ class PerSociety extends Component {
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         var society, toCommBoard, toCreateEvent, toManageMember, toRegisterBooth;
+        var buttons;
         
         if(this.props.society != null) {
             society = this.props.society;
@@ -74,7 +75,22 @@ class PerSociety extends Component {
                 pathname: "/register_booth/society/" + societyId,
                 state: societyState
             };
-        } else {
+
+            if(society["participated"]) {
+                buttons = 
+                    <div>
+                        <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>    
+                    </div> 
+            } else {
+                buttons = 
+                    <div>
+                        <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
+                        <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    </div>
+            }
+         } else {
             society = {
                 name: null,
                 category: null,
@@ -131,9 +147,7 @@ class PerSociety extends Component {
                             <br/>
                         </div>
                         <div style={div3Style}>
-                            <RaisedButton label="Join Society" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleJoinClick(event)}/>
-                            <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
-                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                            {buttons}
                         </div>
                     </MuiThemeProvider>
                 </div>
@@ -171,7 +185,8 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-        society: state.data.society
+        society: state.data.society,
+        id: state.auth.id
     };
 };
 

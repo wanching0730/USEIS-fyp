@@ -8,9 +8,9 @@ export function verifyUser(data) {
     });
 }
 
-export function getData(type, id) {
+export function getData(type, id, userId) {
     if(type === "society") {
-        return fetch(`http://localhost:5000/get/society/` + id);
+        return fetch(`http://localhost:5000/get/society/` + id + `/` + userId);
     } else if(type === "event") {
         return fetch(`http://localhost:5000/get/event/` + id);
     } else if(type === "societyEvent") {

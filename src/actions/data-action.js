@@ -108,9 +108,9 @@ export function retrieveAllDataSuccessful(type, data) {
     }
 }
 
-export function retrieveData(type, id) {
+export function retrieveData(type, id, userId) {
     return function (dispatch) {
-        return getData(type, id).then(result => result.json()).then(reply => {
+        return getData(type, id, userId).then(result => result.json()).then(reply => {
             console.log("result of get society: " + JSON.stringify(reply));
 
             if(type === "society") {
@@ -122,6 +122,7 @@ export function retrieveData(type, id) {
                     mission: reply[0]["mission"],
                     desc: reply[0]["description"],
                     boothId: reply[0]["boothId"],
+                    participated: reply[0]["participated"]
                 }
 
                 dispatch(retrieveSingleDataSuccessful("society", society));
