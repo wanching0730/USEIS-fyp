@@ -33,6 +33,8 @@ export function getData(type, id) {
         return fetch(`http://localhost:5000/get/societyComm/` + id);
     } else if(type === "eventComm") {
         return fetch(`http://localhost:5000/get/eventComm/` + id);
+    } else if(type === "societyMember") {
+        return fetch(`http://localhost:5000/get/societyMember/` + id);
     }
 }
 

@@ -12,7 +12,8 @@ import {
     RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
     RETRIEVE_EVENT_BOOTHS,
-    RETRIEVE_USER_EVENTS
+    RETRIEVE_USER_EVENTS,
+    RETRIEVE_SOCIETY_MEMBERS
 
 } from '../constant';
 
@@ -57,6 +58,13 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_COMM,
             payload: {
                 comm: data
+            }
+        }
+    } else if(type === "societyMembers") {
+        return {
+            type: RETRIEVE_SOCIETY_MEMBERS,
+            payload: {
+                societyMembers: data
             }
         }
     } 
@@ -229,7 +237,24 @@ export function retrieveData(type, id) {
                 }
                 console.log("committeee in action: " + JSON.stringify(comm));
                 dispatch(retrieveSingleDataSuccessful("comm", comm));
-            } 
+            }  else if(type === "societyMember") {
+                let societyMembers = [];
+                for(var i = 0; i < reply.length; i++) {
+                    societyMembers.push({
+                        studentId: reply[i]["studentId"],
+                        name: reply[i]["name"],
+                        ic: reply[i]["ic"],
+                        course: reply[i]["course"],
+                        year: reply[i]["year"], 
+                        semester: reply[i]["semester"],
+                        contact: reply[i]["contact"],
+                        email: reply[i]["email"],
+                        memberStatus: reply[i]["memberStatus"]
+                    })
+                }
+                console.log("society members in action: " + JSON.stringify(societyMembers));
+                dispatch(retrieveSingleDataSuccessful("societyMembers", societyMembers));
+            }  
         });
     };
 }

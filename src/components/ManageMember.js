@@ -3,17 +3,21 @@ import NavBar from './NavBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import $ from 'jquery';
-import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert'; 
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
 import '../style/society.css';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveData } from '../actions/data-action';
+
 class ManageMember extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onRetrieveData("societyMember", this.props.params.societyId);
     }
 
     componentDidMount() {
@@ -42,7 +46,40 @@ class ManageMember extends Component {
     render() {
 
         const { RaisedButtonStyle } = styles;
-        
+        let societyMembers = this.props.societyMembers;
+        var message = <div></div>;
+        var rows = [];
+
+        if(societyMembers != null) {
+            if(societyMembers.length != 0) {
+                for(var i = 0; i < societyMembers.length; i++) {
+                    let member = societyMembers[i];
+                    var approvedIcon;
+
+                    if(member["memberStatys"] == 1) 
+                        approvedIcon = <td><li className="fa fa-check"></li></td>
+                    else 
+                        approvedIcon = <td><li value={member["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li></td>
+
+                    rows.push(
+                        <tr> 
+                            <td>{i+1}</td>
+                            <td>{member["name"]}</td>
+                            <td>{member["ic"]}</td>
+                            <td>{member["course"]}</td>
+                            <td>Y{member["year"]}S{member["semester"]}</td>
+                            <td>{member["contact"]}</td>
+                            <td>{member["email"]}</td>
+                            {approvedIcon}
+                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
+                        </tr>
+                    )
+                }
+            } else {
+                message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No member for this society</div>;
+            }
+        }
+
         return (
             <div id="outerDiv"> 
                 <NavBar />
@@ -77,33 +114,13 @@ class ManageMember extends Component {
                                     </thead>
 
                                     <tbody>
-                                        <tr> 
-                                            <td>1</td>
-                                            <td>Lim Heng Hao</td>
-                                            <td>999999-99-9999</td>
-                                            <td>Software Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-9900990</td>
-                                            <td>henghao@hotmail.com</td>
-                                            <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
-                                        </tr> 
-                                        <tr> 
-                                            <td>4</td>
-                                            <td>Kenneth Teng</td>
-                                            <td>333333-33-3333</td>
-                                            <td>Electrical Engineering</td>
-                                            <td>Y3S3</td>
-                                            <td>012-2930560</td>
-                                            <td>kenneth@hotmail.com</td>
-                                            <td><FontAwesome.FaCheck /></td>
-                                        </tr>
+                                        {rows}                                       
                                     </tbody>
                                 </table>
 
                                 <div style= {{ textAlign: "center" }}>
                                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -112,7 +129,6 @@ class ManageMember extends Component {
         </div>
         );
     };
-    
 };
 
 const styles = {
@@ -121,4 +137,16 @@ const styles = {
     }
 }
 
-export default ManageMember;
+const mapStateToProps = (state, props) => {
+    return {
+        societyMembers: state.data.societyMembers
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveData: retrieveData
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(ManageMember);
