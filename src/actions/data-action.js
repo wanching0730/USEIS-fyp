@@ -232,7 +232,8 @@ export function retrieveData(type, id) {
                         joinDate: reply[i]["joinDate"],
                         position: reply[i]["position"],
                         crewStatus: reply[i]["crewStatus"],
-                        vegetarian: reply[i]["vegetarian"]
+                        vegetarian: reply[i]["vegetarian"],
+                        ratingStatus: reply[i]["ratingStatus"]
                     })
                 }
                 console.log("user's event in action: " + JSON.stringify(userEvents));

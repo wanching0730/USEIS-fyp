@@ -100,7 +100,7 @@ class MyEvent extends Component {
                 let events = this.props.userEvents;
                 console.log("events in profile: " + events.length);
 
-                var position, crewStatus, isVege, crewAction;
+                var position, crewStatus, isVege, crewAction, ratingStatus;
                 
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
@@ -138,11 +138,16 @@ class MyEvent extends Component {
                     else 
                         isVege = <td>Yes</td>;
 
-                    if(event["crewStatus"] === 0 && event["position"] != "participant") {
+                    if(event["crewStatus"] === 0 && event["position"] != "participant") 
                         crewAction = <td><li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-times-circle"></li></td>;
-                    } else {
+                    else 
                         crewAction = <td>-</td>
-                    }
+                    
+
+                    if(event["ratingStatus"] == 1) 
+                        ratingStatus = <td>Done</td>;
+                    else 
+                        ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
 
                     rows.push(
                         <tr>
@@ -154,7 +159,7 @@ class MyEvent extends Component {
                             {position}
                             {crewStatus}
                             {isVege}
-                            <td><Link to={toFeedback}>Undone</Link></td>
+                            {ratingStatus}
                             <td><li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
                             {crewAction}
                         </tr>
