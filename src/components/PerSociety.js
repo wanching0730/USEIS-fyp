@@ -174,7 +174,7 @@ class PerSociety extends Component {
                     :
                     [
                         <div>
-                            { society["authorized"] ?
+                            {society["authorized"] ?
                                 [
                                     <div className="zoom">
                                         <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
@@ -188,9 +188,7 @@ class PerSociety extends Component {
                                     </div>
                                 ]
                                 : 
-                                [
-                                    null
-                                ]
+                                [null]
                             }
 
                             <div>

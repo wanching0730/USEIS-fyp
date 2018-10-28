@@ -9,6 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { confirmAlert } from 'react-confirm-alert'; 
 import "../../node_modules/react-confirm-alert/src/react-confirm-alert.css";
+import $ from 'jquery';
 import "../style/perEvent.css";
 
 import { connect } from 'react-redux';
@@ -74,7 +75,26 @@ class PerEvent extends Component {
           })
     }
 
+    handleListCommitteeClick(event) {
+        if(this.props.event != null) {
+            let toCommBoard = { 
+                pathname: "/commBoard/event/" + this.props.params.eventId, 
+                state: {eventName: event.name}
+            };
+            browserHistory.push(toCommBoard);
+        }
+    }
+
     render() {
+
+        $(document).ready(function(){
+            $('#zoomBtn').on('click', (function() {
+                $('.zoom-btn-sm').toggleClass('scale-out');
+                if (!$('.zoom-card').hasClass('scale-out')) {
+                $('.zoom-card').toggleClass('scale-out');
+                }
+            }));
+        });
 
         console.log("loading: " + this.props.loading);
 
@@ -96,11 +116,6 @@ class PerEvent extends Component {
                 pathname: "/manageCrew/" + eventId,
                 state: eventState
             }
-
-            toCommBoard = { 
-                pathname: "/commBoard/event/" + eventId, 
-                state: eventState
-            };
 
             toRegisterBooth = {
                 pathname: "/register_booth/event/" + eventId,
@@ -131,12 +146,14 @@ class PerEvent extends Component {
             if(event["participated"]) {
                 buttons =
                 <div style={div3Style}>
+                    <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                 </div>
             } else {
                 buttons =
                 <div style={div3Style}>
                     <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                    <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                 </div>
             }
@@ -146,6 +163,7 @@ class PerEvent extends Component {
             if(event["participated"]) {
                 buttons =
                     <div style={div3Style}>
+                        <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
                         <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                     </div>
             } else {
@@ -153,26 +171,27 @@ class PerEvent extends Component {
                     <div style={div3Style}>
                         <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
                         <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
+                        <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
                         <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                     </div>
             }
 
-            if(event["authorized"]) {
-                sideNavBar = 
-                    <div id="mySidenav" class="sidenav">
-                        <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
-                        <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
-                        <Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-                        <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
-                        <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
-                        <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                    </div>
-            } else {
-                sideNavBar = 
-                    <div id="mySidenav" class="sidenav">
-                        <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-                    </div>
-            }
+            // if(event["authorized"]) {
+            //     sideNavBar = 
+            //         <div id="mySidenav" class="sidenav">
+            //             <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
+            //             <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
+            //             <Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
+            //             <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
+            //             <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
+            //             <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+            //         </div>
+            // } else {
+            //     sideNavBar = 
+            //         <div id="mySidenav" class="sidenav">
+            //             <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
+            //         </div>
+            // }
         }
 
         return (
@@ -192,7 +211,22 @@ class PerEvent extends Component {
                     :
                     [
                         <div>
-                            {sideNavBar}
+                            {event["authorized"] ?
+                                [
+                                    <div className="zoom">
+                                        <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
+                                        <ul className="zoom-menu">
+                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /></Link></a></li>
+                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /></Link></a></li>
+                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
+                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase /></Link></a></li>
+                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /></Link></a></li> 
+                                        </ul> 
+                                    </div>
+                                ]
+                                :
+                                [null]
+                            }
 
                             <div>
                                 <MuiThemeProvider>
