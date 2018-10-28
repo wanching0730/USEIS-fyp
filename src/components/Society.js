@@ -6,11 +6,13 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { groupBy } from '../common/common_function';
+import Loader from 'react-loader-spinner'
 import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveAll } from '../actions/data-action';
+import { AutoComplete } from 'material-ui';
 
 class Society extends Component {
 
@@ -76,29 +78,37 @@ class Society extends Component {
                 </div>
 
                 {this.props.loading ?
-                [
-
-                ]
-                :
-                [
-
-                ]
-
-                }
-                <div>
-                    <MuiThemeProvider>
-                        <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
-
-                        <RaisedButton label="Sort by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                        <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-
-                        <div className="wrapper">
-                            <ul>
-                                {rows}
-                            </ul>
+                    [
+                        <div style={{position: "fixed",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)"}}>
+                            <Loader 
+                                type="TailSpin"
+                                color="#00BFFF"
+                                height="70"	
+                                width="70"
+                            />  
                         </div>
-                        </MuiThemeProvider>
-                    </div>
+                    ]
+                    :
+                    [
+                        <div>
+                            <MuiThemeProvider>
+                                <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
+
+                                <RaisedButton label="Sort by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                                <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+
+                                <div className="wrapper">
+                                    <ul>
+                                        {rows}
+                                    </ul>
+                                </div>
+                            </MuiThemeProvider>
+                        </div>
+                    ]
+                }
             </div>
         );
     };
