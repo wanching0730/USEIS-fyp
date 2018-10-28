@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Card, CardText, CardBody,
+    CardTitle, CardSubtitle } from 'reactstrap';
 import '../style/newsfeed.css';
 import Modal from 'react-modal';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -12,7 +13,7 @@ import moment from "moment";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll } from '../actions/data-action';
+import { retrieveAll, updateLoadingBar } from '../actions/data-action';
 import { create } from '../actions/post-action';
 
 class NewsFeed extends Component {
@@ -32,8 +33,6 @@ class NewsFeed extends Component {
 
             societyOptions: null,
             eventOptions: null,
-
-            //newsfeeds: null
         };
     
         this.openModal = this.openModal.bind(this);
@@ -42,6 +41,7 @@ class NewsFeed extends Component {
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.handleOwner = this.handleOwner.bind(this);
 
+        this.props.onUpdateLoadingBar();
         this.props.onRetrieveAll("newsfeeds");
 
         setTimeout(() => {
@@ -89,10 +89,6 @@ class NewsFeed extends Component {
             }, () => this.setDefault());
         }
     }
-
-    // componentWillUpdate(nextProps, nextState) {
-    //     this.forceUpdate();
-    // }
 
     openModal() {
         this.setState({modalIsOpen: true});
@@ -160,14 +156,6 @@ class NewsFeed extends Component {
 
         console.log("owner data: " + JSON.stringify(data));
 
-        // this.setState({
-        //     newsfeeds: [...this.state.newsfeeds, data]
-        // });
-
-        // setTimeout(() => {
-        //     console.log("newsfeeds in submit(): " + this.state.newsfeeds);
-        // }, 3000);
-
         this.props.onCreate("newsfeeds", data);
         
         setTimeout(() => {
@@ -224,7 +212,6 @@ class NewsFeed extends Component {
     }
 
     render() {
-        //this.props.onRetrieveAll("newsfeeds");
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.props.newsfeeds;
         let filteredNewsfeeds = [];
@@ -352,9 +339,15 @@ class NewsFeed extends Component {
                     
                     </Modal>
         
-                    <div className="card">
-                        {rows}
-                    </div>
+                    {this.props.loading ?
+                        [<LoadingBar />]
+                        :
+                        [
+                            <div className="card">
+                                {rows}
+                            </div>
+                        ]
+                    }
                     
                 </div>
                 </MuiThemeProvider>
@@ -383,14 +376,16 @@ const mapStateToProps = (state, props) => {
     return {
       newsfeeds: state.data.newsfeeds,
       societies: state.auth.societies,
-      events: state.auth.events
+      events: state.auth.events,
+      loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveAll: retrieveAll,
-      onCreate: create
+      onCreate: create,
+      onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 
