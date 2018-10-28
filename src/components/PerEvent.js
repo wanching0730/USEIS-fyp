@@ -11,7 +11,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import "../../node_modules/react-confirm-alert/src/react-confirm-alert.css";
 import $ from 'jquery';
 import "../style/sidenav.css";
-import "../style/perEvent.css";
+import "../style/display.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

@@ -30,6 +30,10 @@
     color: black;
 }
 
+.row {
+    padding-top: 15px;
+}
+
 /* Create three unequal columns that floats next to each other */
 .column {
     padding-left: 25px;

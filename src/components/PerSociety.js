@@ -9,6 +9,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import $ from 'jquery';
 import "../style/sidenav.css";
+import "../style/display.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -197,23 +198,40 @@ class PerSociety extends Component {
                                         <img style={imageStyle} src={ require('../assets/images/its.jpg') } />
                                         <h1>{society["name"]}</h1>
                                     </div>
-                                    <div style={div2Style}>
-                                        <h5>Category:</h5>
-                                        <p>{society["category"]}</p>
-                                        <h5>Vision</h5>
-                                        <p>{society["vision"]}</p>
-                                        <h5>Mision</h5>
-                                        <p>{society["mission"]}</p>
-                                        <h5>Description:</h5>
-                                        <p>
-                                            {society["desc"]}
-                                            {/* The biggest challenge to IT in the future is security. 
-                                            Security could negatively impact connectivity to public networks. 
-                                            If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
-                                            The risks now are so great and getting worse every day that we even see foreign governments 
-                                            toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security. */}
-                                        </p>
-                                        <br/>
+
+                                    <div className="tableBody">
+                                        <div class="smallnav">
+                                            <div></div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="column side">
+                                                <h5>Category:</h5>
+                                                <p>{society["category"]}</p>
+                                                <br/><br/>
+                                            </div>
+                                            <div class="column middle">
+                                                <h5>Description:</h5>
+                                                <p>
+                                                    {/* {event["desc"]} */}
+                                                    The biggest challenge to IT in the future is security. 
+                                                    Security could negatively impact connectivity to public networks. 
+                                                    If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
+                                                    The risks now are so great and getting worse every day that we even see foreign governments 
+                                                    toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security.
+                                                </p>
+                                                <br/><br/>
+                                            </div>
+                                            <div class="column side">
+                                                <h5>Vision</h5>
+                                                <p>{society["vision"]}</p>
+                                                <h5>Mision</h5>
+                                                <p>{society["mission"]}</p>
+                                            </div>
+                                        </div>
+                                        <div class="smallnav">
+                                            <div></div>
+                                        </div>
                                     </div>
                                     <div style={div3Style}>
                                         {buttons}
