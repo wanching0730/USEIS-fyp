@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {browserHistory} from 'react-router';
+import moment from "moment";
 import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { groupBy } from '../common/common_function';
@@ -72,7 +73,7 @@ class MyProfile extends Component {
                         <td>{i+1}</td>
                         <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
                         <td><Link to={toSociety}>{society["name"]}</Link></td>
-                        <td>{society["joinDate"]}</td>
+                        <td>{moment(society["joinDate"]).format("DD/MM/YYYY")}</td>
                         <td>{society["position"]}</td>
                         <td>{events}</td>
                         <td><Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link></td>

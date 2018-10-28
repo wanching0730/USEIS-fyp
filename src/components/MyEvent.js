@@ -6,6 +6,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
+import moment from "moment";
 import '../style/society.css';
 
 import { connect } from 'react-redux';
@@ -144,7 +145,7 @@ class MyEvent extends Component {
                             <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
                             <td><Link to={toEvent}>{event["name"]}</Link></td>
                             <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
-                            <td>{event["joinDate"]}</td>
+                            <td>{moment(event["joinDate"]).format("DD/MM/YYYY")}</td>
                             {position}
                             {crewStatus}
                             {isVege}
