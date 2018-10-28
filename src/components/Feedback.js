@@ -2,31 +2,37 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import StarRatingComponent from 'react-star-rating-component';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/form.css';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { create } from '../actions/post-action';
 
 class Feedback extends Component {
 
     constructor(props){
       super(props);
       this.state={
-        first_name:'',
-        last_name:'',
-        email:'',
-        password:'',
-        rating: 1
+        score: 1
       };
     };
 
     onStarClick(nextValue, prevValue, name) {
-        this.setState({rating: nextValue});
+        this.setState({score: nextValue});
     }
 
     handleClick() {
-      browserHistory.push("/student");
+      // browserHistory.push("/student");
+      let data = {
+        id: this.props.id,
+        eventId: this.props.params.eventId,
+        score: this.state.score
+      };
+
+      
     }
 
     componentDidMount() {
@@ -36,7 +42,7 @@ class Feedback extends Component {
     render() {
   
       const { RaisedButtonStyle, ContainerStyle } = styles;
-      const { rating } = this.state;
+      const { score } = this.state;
   
       return (
         <div>
@@ -56,84 +62,19 @@ class Feedback extends Component {
                 <div className="form-style-10">
                   <h1>Rating Form<span>Leave your rating for this event!</span></h1>
                   <form>
-
-                    <div class="section"><span>1</span>Name &amp; ID</div>
-                      <div class="inner-wrap">
-                          <label>Full Name</label>  
-                          {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
-                          <input type="text" onChange={(event) => {
-                            this.setState({first_name:event.target.value});
-                            console.log("state value: " + this.state.first_name);
-                            }}/>
-                          <br/>
-                          <label>Student ID (Eg: 15UEB02834)</label>
-                          <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                      </div>
-
-                      <div class="section"><span>2</span>Course &amp; Year</div>
-                      <div class="inner-wrap">
-                        <label>Course (Eg: Software Engineering)</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                        <br/>
-                        <label>Year and Semester (Eg: Y1S1)</label> 
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                      </div>
-
-                      <div class="section"><span>3</span>Contact Number &amp; Email</div>
-                      <div class="inner-wrap">
-                        <label>Contact Number</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                        <br/>
-                        <label>Email Address (Eg: abc@hotmail.com)</label> 
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                        <br/> 
-                      </div>
-
-                      <div class="section"><span>4</span>Rating</div>
+                      <div class="section"><span>1</span>Rating</div>
                       <div class="inner-wrap">
                           <label>Select the stars for rating</label>
                           <StarRatingComponent 
                           name="rate1" 
                           starCount={10}
-                          value={rating}
+                          value={score}
                           onStarClick={this.onStarClick.bind(this)}
                           />
-                          <p>{this.state.rating}</p>
+                          <p>{this.state.score}</p>
                       </div>
 
-                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                      {/* <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/> */}
-                    {/* <TextField
-                      hintText="Enter your First Name"
-                      floatingLabelText="First Name"
-                      onChange = {(event,newValue) => this.setState({first_name:newValue})}
-                      />
-                    <br/>
-                    <TextField
-                      hintText="Enter your Last Name"
-                      floatingLabelText="Last Name"
-                      onChange = {(event,newValue) => this.setState({last_name:newValue})}
-                      />
-                    <br/>
-                    <TextField
-                      hintText="Enter your Email"
-                      type="email"
-                      floatingLabelText="Email"
-                      onChange = {(event,newValue) => this.setState({email:newValue})}
-                      />
-                    <br/>
-                    <TextField
-                      type = "password"
-                      hintText="Enter your Password"
-                      floatingLabelText="Password"
-                      onChange = {(event,newValue) => this.setState({password:newValue})}
-                      />
-                    <br/>
-                    <br/>
-
-                    
-                  
-                    <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/> */}
+                    <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                   </form>
                 </div>
               </div>
@@ -153,5 +94,17 @@ class Feedback extends Component {
     }
   };
   
-  export default Feedback;
+  const mapStateToProps = (state, props) => {
+    return {
+      id: state.auth.id,
+    };
+  };
+  
+  const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onCreate: create
+    }, dispatch);
+  };
+  
+  export default connect(mapStateToProps, mapActionsToProps)(Feedback);
 

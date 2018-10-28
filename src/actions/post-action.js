@@ -5,6 +5,7 @@ import {
     CREATE_SOCIETY,
     CREATE_EVENT,
     CREATE_NEWSFEED,
+    CREATE_RATING,
     REGISTER_SOCIETY,
     REGISTER_EVENT,
     UPDATE_SOCIETY,
@@ -34,6 +35,15 @@ export function createNewsfeedSuccessful(newsfeedId) {
         type: CREATE_NEWSFEED,
         payload: {
             createdNewsfeedId: newsfeedId
+        }
+    }
+}
+
+export function createRatingSuccessful(ratingId) {
+    return {
+        type: CREATE_RATING,
+        payload: {
+            createdRatingId: ratingId
         }
     }
 }
@@ -82,6 +92,9 @@ export function create(type, postData) {
                                 } else if(type === "newsfeeds") {
                                     dispatch(createNewsfeedSuccessful(reply));
                                     browserHistory.push('/newsfeeds');
+                                } else if(type === "rating") {
+                                    dispatch(createEventSuccessful(reply));
+                                    browserHistory.push('/myEvents');
                                 } else if(type === "registerSociety") {
                                     dispatch(registerSocietySuccessfully);
                                     browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["societyName"]}});

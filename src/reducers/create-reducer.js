@@ -2,6 +2,7 @@ import {
     CREATE_SOCIETY,
     CREATE_EVENT,
     CREATE_NEWSFEED,
+    CREATE_RATING,
     REGISTER_SOCIETY,
     REGISTER_EVENT
 } from '../constant';
@@ -10,6 +11,7 @@ const initialState = {
     createdSocietyId: null,
     createdEventId: null,
     createdNewsfeedId: null,
+    createdRatingId: null,
     registeredSocietyId: null,
     registeredEventId: null,
     refresh: false
@@ -28,6 +30,10 @@ export default function createReducer(state = initialState, { type, payload }) {
         case CREATE_NEWSFEED:
             return Object.assign({}, state, {
                 createdNewsfeedId: payload.createdNewsfeedId
+            });
+        case CREATE_RATING:
+            return Object.assign({}, state, {
+                createdRatingId: payload.createdRatingId
             });
         case REGISTER_SOCIETY:
             return Object.assign({}, state, {

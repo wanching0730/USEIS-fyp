@@ -83,6 +83,14 @@ export function createData(type, data) {
             },
             body: data
         });
+    } else if(type === "rating") {
+        return fetch(`http://localhost:5000/create/rating`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
     } else if(type === "registerSociety") {
             return fetch(`http://localhost:5000/register/society`, {
             method: 'POST',

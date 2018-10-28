@@ -115,6 +115,11 @@ class MyEvent extends Component {
                         state: {societyName: event["organiserName"]}
                     }
 
+                    let toFeedback = {
+                        pathname: "/feedback/" + event["eventId"],
+                        state: {eventName: event["name"]}
+                    }
+
                     if(event["position"] === "participant"){
                         position = <td>Participant</td>;
                         crewStatus = <td>-</td>;
@@ -149,7 +154,7 @@ class MyEvent extends Component {
                             {position}
                             {crewStatus}
                             {isVege}
-                            <td><Link to={`/feedback`}>Undone</Link></td>
+                            <td><Link to={toFeedback}>Undone</Link></td>
                             <td><li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
                             {crewAction}
                         </tr>
