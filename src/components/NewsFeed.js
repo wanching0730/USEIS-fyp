@@ -238,7 +238,7 @@ class NewsFeed extends Component {
         }
         
         if(newsfeeds != null) {
-            var url = "";
+            var toView;
             var type  = "";
             var rows = [];
 
@@ -257,13 +257,22 @@ class NewsFeed extends Component {
             for(var i = 0; i < filteredNewsfeeds.length; i++) {
                 let newsfeed = filteredNewsfeeds[i];
                 if(newsfeed["type"] == "s") {
-                    url = "/perSociety/" + newsfeed["ownerId"];
+                    // url = "/perSociety/" + newsfeed["ownerId"];
+                    toView = {
+                        pathname: "/perSociety/" + newsfeed["ownerId"],
+                        state: {societyName: newsfeed["name"]}
+                    }
                     type = " Society";
                 }
                 else {
-                    url = "/perEvent/" + newsfeed["ownerId"];
+                    // url = "/perEvent/" + newsfeed["ownerId"];
+                    toView = {
+                        pathname: "/perEvent/" + newsfeed["ownerId"],
+                        state: {eventName: newsfeed["name"]}
+                    }
                     type = " Event";
                 }
+
                 rows.push(
                     <Card>
                         <img className="image" src={ require('../assets/images/its.jpg') } />
@@ -272,7 +281,7 @@ class NewsFeed extends Component {
                         <CardSubtitle>| Category: {newsfeed["category"]} |</CardSubtitle>
                         <br/>
                         <CardText>{newsfeed["desc"]}</CardText>
-                        <Link to={url}>View</Link>
+                        <Link to={toView}>View</Link>
                         <CardText>
                             <small className="text-muted">{moment(newsfeed["dateCreate"]).format("MMM DD YYYY hh:mm A")}</small>
                         </CardText>
