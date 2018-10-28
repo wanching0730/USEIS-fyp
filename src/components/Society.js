@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { groupBy } from '../common/common_function';
-import Loader from 'react-loader-spinner'
 import '../style/society.css';
 
 import { connect } from 'react-redux';
@@ -79,17 +79,7 @@ class Society extends Component {
 
                 {this.props.loading ?
                     [
-                        <div style={{position: "fixed",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)"}}>
-                            <Loader 
-                                type="TailSpin"
-                                color="#00BFFF"
-                                height="70"	
-                                width="70"
-                            />  
-                        </div>
+                        <LoadingBar />
                     ]
                     :
                     [
