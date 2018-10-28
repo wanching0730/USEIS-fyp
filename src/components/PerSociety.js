@@ -8,7 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import $ from 'jquery';
-import "../style/perSociety.css";
+import "../style/sidenav.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

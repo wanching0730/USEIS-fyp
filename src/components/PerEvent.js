@@ -10,7 +10,7 @@ import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { confirmAlert } from 'react-confirm-alert'; 
 import "../../node_modules/react-confirm-alert/src/react-confirm-alert.css";
 import $ from 'jquery';
-import "../style/perEvent.css";
+import "../style/sidenav.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -175,23 +175,6 @@ class PerEvent extends Component {
                         <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                     </div>
             }
-
-            // if(event["authorized"]) {
-            //     sideNavBar = 
-            //         <div id="mySidenav" class="sidenav">
-            //             <Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /> Edit Event</Link>
-            //             <Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /> Delete Event</Link>
-            //             <Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /> Register Booth</Link>
-            //             <Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase />  Manage Crew</Link>
-            //             <Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /> Paricipants</Link>
-            //             <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-            //         </div>
-            // } else {
-            //     sideNavBar = 
-            //         <div id="mySidenav" class="sidenav">
-            //             <Link to={toCommBoard} id="commBoard"><FontAwesome.FaGroup /> Committee Board</Link>
-            //         </div>
-            // }
         }
 
         return (
