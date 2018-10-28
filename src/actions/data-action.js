@@ -242,6 +242,7 @@ export function retrieveData(type, id) {
                 for(var i = 0; i < reply.length; i++) {
                     eventCrew.push({
                         studentId: reply[i]["studentId"],
+                        name: reply[i]["name"],
                         ic: reply[i]["ic"],
                         course: reply[i]["course"],
                         year: reply[i]["year"], 
