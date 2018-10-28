@@ -15,6 +15,8 @@ import {
 } from '../constant';
 
 const initialState = {
+    loading: false,
+
     society: null,
     event: null,
     societyEvents: null,
@@ -47,7 +49,8 @@ export default function dataReducer(state = initialState, { type, payload }) {
             });
         case RETRIEVE_SOCIETIES:
             return Object.assign({}, state, {
-                societies: payload.societies
+                societies: payload.societies,
+                loading: payload.loading
             });
         case RETRIEVE_EVENTS:
             return Object.assign({}, state, {

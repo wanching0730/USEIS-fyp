@@ -75,7 +75,8 @@ export function retrieveAllDataSuccessful(type, data) {
         return {
             type: RETRIEVE_SOCIETIES,
             payload: {
-                societies: data
+                societies: data,
+                loading: true
             }
         }
     } else if(type === "event") {

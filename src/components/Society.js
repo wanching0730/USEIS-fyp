@@ -75,6 +75,16 @@ class Society extends Component {
                     </Breadcrumb>
                 </div>
 
+                {this.props.loading ?
+                [
+
+                ]
+                :
+                [
+
+                ]
+
+                }
                 <div>
                     <MuiThemeProvider>
                         <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
@@ -104,7 +114,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
     console.log("state in society: " + state.data.societies);
     return {
-      societies: state.data.societies
+      societies: state.data.societies,
+      loading: state.data.loading
     };
 };
 

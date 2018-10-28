@@ -143,11 +143,14 @@ class MyEvent extends Component {
                     else 
                         crewAction = <td>-</td>
                     
-
-                    if(event["ratingStatus"] == 1) 
-                        ratingStatus = <td>Done</td>;
-                    else 
-                        ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
+                    if(this.props.userName.substring(0,2) === "00") 
+                        ratingStatus = <td>-</td>;
+                    else {
+                        if(event["ratingStatus"] == 1) 
+                            ratingStatus = <td>Done</td>;
+                        else 
+                            ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
+                    }
 
                     rows.push(
                         <tr>
