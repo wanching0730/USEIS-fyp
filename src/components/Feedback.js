@@ -18,6 +18,8 @@ class Feedback extends Component {
       this.state={
         score: 1
       };
+
+      this.handleClick = this.handleClick.bind(this);
     };
 
     onStarClick(nextValue, prevValue, name) {
@@ -32,7 +34,7 @@ class Feedback extends Component {
         score: this.state.score
       };
 
-      
+      this.props.onCreate("rating", data);
     }
 
     componentDidMount() {

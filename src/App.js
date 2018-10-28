@@ -45,7 +45,7 @@ class App extends Component {
           <Route path="/perSociety/:societyId" component={PerSociety}/>
           <Route path="/perEvent/:eventId" component={PerEvent}/>
           <Route path="/student" component={Student}/>
-          <Route path="/feedback" component={Feedback}/>
+          <Route path="/feedback/:eventId" component={Feedback}/>
           <Route path="/register_event/:eventId" component={RegisterEvent}/>
           <Route path="/register_society/:societyId" component={RegisterSociety}/>
           <Route path="/register_crew/:eventId" component={RegisterCrew}/>
