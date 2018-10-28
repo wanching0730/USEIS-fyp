@@ -121,13 +121,7 @@ export function loginUser(postData) {
                 let id = user[0]["studentId"];
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
-                        societies.push({
-                            societyId: userSociety[i]["societyId"],
-                            name: userSociety[i]["name"],
-                            category: userSociety[i]["category"],
-                            position: userSociety[i]["position"],
-                            joinDate: userSociety[i]["joinDate"]
-                        })
+                        societies.push(userSociety[i]);
                     }
                 }
 

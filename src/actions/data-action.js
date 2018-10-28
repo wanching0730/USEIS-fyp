@@ -223,70 +223,28 @@ export function retrieveData(type, id) {
             } else if(type === "studentEvent" || type === "staffEvent") {
                 let userEvents = [];
                 for(var i = 0; i < reply.length; i++) {
-                    userEvents.push({
-                        eventId: reply[i]["eventId"],
-                        name: reply[i]["name"],
-                        category: reply[i]["category"], 
-                        organiserId: reply[0]["organiserId"],
-                        organiserName: reply[0]["organiserName"],
-                        joinDate: reply[i]["joinDate"],
-                        position: reply[i]["position"],
-                        crewStatus: reply[i]["crewStatus"],
-                        vegetarian: reply[i]["vegetarian"],
-                        ratingStatus: reply[i]["ratingStatus"]
-                    })
+                    userEvents.push(reply[i]);
                 }
                 console.log("user's event in action: " + JSON.stringify(userEvents));
                 dispatch(retrieveSingleDataSuccessful("userEvent", userEvents));
             } else if(type === "eventCrew") {
                 let eventCrew = [];
                 for(var i = 0; i < reply.length; i++) {
-                    eventCrew.push({
-                        studentId: reply[i]["studentId"],
-                        name: reply[i]["name"],
-                        ic: reply[i]["ic"],
-                        course: reply[i]["course"],
-                        year: reply[i]["year"], 
-                        semester: reply[i]["semester"],
-                        contact: reply[i]["contact"],
-                        email: reply[i]["email"],
-                        crewStatus: reply[i]["crewStatus"],
-                        position: reply[i]["position"]
-                    })
+                    eventCrew.push(reply[i]);
                 }
                 console.log("event's crew in action: " + JSON.stringify(eventCrew));
                 dispatch(retrieveSingleDataSuccessful("eventCrew", eventCrew));
             } else if(type === "societyComm" || type === "eventComm") {
                 let comm = [];
                 for(var i = 0; i < reply.length; i++) {
-                    comm.push({
-                        studentId: reply[i]["studentId"],
-                        name: reply[i]["name"],
-                        ic: reply[i]["ic"],
-                        course: reply[i]["course"],
-                        year: reply[i]["year"], 
-                        semester: reply[i]["semester"],
-                        contact: reply[i]["contact"],
-                        email: reply[i]["email"],
-                        position: reply[i]["position"]
-                    })
+                    comm.push(reply[i]);
                 }
                 console.log("committeee in action: " + JSON.stringify(comm));
                 dispatch(retrieveSingleDataSuccessful("comm", comm));
             }  else if(type === "societyMember") {
                 let societyMembers = [];
                 for(var i = 0; i < reply.length; i++) {
-                    societyMembers.push({
-                        studentId: reply[i]["studentId"],
-                        name: reply[i]["name"],
-                        ic: reply[i]["ic"],
-                        course: reply[i]["course"],
-                        year: reply[i]["year"], 
-                        semester: reply[i]["semester"],
-                        contact: reply[i]["contact"],
-                        email: reply[i]["email"],
-                        memberStatus: reply[i]["memberStatus"]
-                    })
+                    societyMembers.push(reply[i]);
                 }
                 console.log("society members in action: " + JSON.stringify(societyMembers));
                 dispatch(retrieveSingleDataSuccessful("societyMembers", societyMembers));
@@ -354,23 +312,13 @@ export function retrieveAll(type) {
                 dispatch(retrieveAllDataSuccessful(type, allSocietyEvents));
             } else if(type === "societyBooth") {
                 for(var i = 0; i < reply.length; i++) {
-                    societyBooths.push({
-                        societyId: reply[i]["societyId"],
-                        name: reply[i]["name"],
-                        boothId: reply[i]["boothId"],
-                        location: reply[i]["location"]
-                    })
+                    societyBooths.push(reply[i]);
                 }
                 console.log("all society booths: " + societyBooths);
                 dispatch(retrieveAllDataSuccessful(type, societyBooths));
             } else if(type === "eventBooth") {
                 for(var i = 0; i < reply.length; i++) {
-                    eventBooths.push({
-                        eventId: reply[i]["eventId"],
-                        name: reply[i]["name"],
-                        boothId: reply[i]["boothId"],
-                        location: reply[i]["location"]
-                    })
+                    eventBooths.push(reply[i]);
                 }
                 console.log("all event booths: " + eventBooths);
                 dispatch(retrieveAllDataSuccessful(type, eventBooths));
