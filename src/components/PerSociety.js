@@ -69,11 +69,11 @@ class PerSociety extends Component {
                 }
             }));
 
-            $("#div2").hover(function () {
-                $(this).find("span").text("HOVERING!!!!!");
-            }, function () {
-                $(this).find("span").text("");
-            });
+            // $("#div2").hover(function () {
+            //     $(this).find("span").text("HOVERING!!!!!");
+            // }, function () {
+            //     $(this).find("span").text("");
+            // });
         
             // $('.zoom-btn-sm').on('click', (function() {
             //     var btn = $(this);
@@ -124,6 +124,7 @@ class PerSociety extends Component {
                     buttons = 
                         <div>
                             <RaisedButton label="List Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListEventClick(event)}/>
+                            <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>    
                         </div> 
                 } else {
@@ -170,8 +171,8 @@ class PerSociety extends Component {
                         <div class="zoom">
                             <a class="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
                             <ul class="zoom-menu">
-                                <div id="div1"><span></span><li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li></div>
-                                <div id="div1"><span></span><li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /></Link></a></li></div>
+                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li>
+                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /></Link></a></li>
                                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
                                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
                                 <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
