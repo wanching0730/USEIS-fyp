@@ -235,7 +235,7 @@ const styles = {
     imageStyle: {
         height: "200px",
         width: "200px",
-        marginTop: "30px",
+        marginTop: "20px",
         
     }, 
     div1Style: {
