@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -8,12 +9,14 @@ import { Link } from 'react-router';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData } from '../actions/data-action';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
 
 class CommitteeBoard extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onUpdateLoadingBar();
 
         let parameter = this.props.params;
         if(parameter.type === "society")
@@ -82,39 +85,47 @@ class CommitteeBoard extends Component {
                 </div>
                     {breadCrumb}
                 <div>
-                    <MuiThemeProvider>
 
-                    <div className="container" id="tableContainer">
-                        <div className="row">
-                            <div className="panel-body">
-                                <table className="table table-hover table-light" border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Name</th>
-                                            <th>IC Number</th>   
-                                            <th>Course</th>  
-                                            <th>Year and Sem</th> 
-                                            <th>Phone Number</th>   
-                                            <th>Email Address</th>   
-                                            <th>Position</th>                 
-                                        </tr>
-                                    </thead>
+                    {this.props.loading ?
+                        [<LoadingBar />]
+                        :
+                        [
+                            <div>
+                                <MuiThemeProvider>
 
-                                    <tbody>
-                                        {rows}
-                                    </tbody>
-                                </table>
+                                <div className="container" id="tableContainer">
+                                    <div className="row">
+                                        <div className="panel-body">
+                                            <table className="table table-hover table-light" border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Name</th>
+                                                        <th>IC Number</th>   
+                                                        <th>Course</th>  
+                                                        <th>Year and Sem</th> 
+                                                        <th>Phone Number</th>   
+                                                        <th>Email Address</th>   
+                                                        <th>Position</th>                 
+                                                    </tr>
+                                                </thead>
 
-                                <div style= {{ textAlign: "center" }}>
-                                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                                <tbody>
+                                                    {rows}
+                                                </tbody>
+                                            </table>
+
+                                            <div style= {{ textAlign: "center" }}>
+                                                <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-
+                                </MuiThemeProvider>
                             </div>
-                        </div>
-
-                     </div>
-                </MuiThemeProvider>
+                        ]
+                    }
                 </div>
             </div>
         );
@@ -132,12 +143,14 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         comm: state.data.comm,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-        onRetrieveData: retrieveData
+        onRetrieveData: retrieveData,
+        onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 

@@ -1,5 +1,6 @@
-import React, { Component, createFactory } from 'react';
+import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -20,6 +21,8 @@ class MyEvent extends Component {
         super(props);
 
         this.state = {eventId: -1};
+
+        this.props.onUpdateLoadingBar();
 
         if(this.props.userName.substring(0,2) === "00") 
             this.props.onRetrieveData("staffEvent", this.props.userId);
@@ -191,38 +194,45 @@ class MyEvent extends Component {
                         <RaisedButton label="My Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
                     </div>
 
-                    <div className="container" id="tableContainer">
-                        <div className="row">
-                            <div className="panel-body">
-                                <table className="table table-hover table-light" border="1">
-                                <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Logo</th>
-                                            <th>Events</th> 
-                                            <th>Organisers</th> 
-                                            <th>Joined Date</th>
-                                            <th>Position</th>
-                                            <th>Crew Status</th>
-                                            <th>Vegetarian</th>
-                                            <th>Rating Status</th>    
-                                            <th colSpan="2">Actions</th>           
-                                        </tr>
-                                    </thead>
+                    {this.props.loading ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div>
+                            <div className="container" id="tableContainer">
+                                <div className="row">
+                                    <div className="panel-body">
+                                        <table className="table table-hover table-light" border="1">
+                                        <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Logo</th>
+                                                    <th>Events</th> 
+                                                    <th>Organisers</th> 
+                                                    <th>Joined Date</th>
+                                                    <th>Position</th>
+                                                    <th>Crew Status</th>
+                                                    <th>Vegetarian</th>
+                                                    <th>Rating Status</th>    
+                                                    <th colSpan="2">Actions</th>           
+                                                </tr>
+                                            </thead>
 
-                                    <tbody>
-                                        {rows}
-                                    </tbody>
-                                </table>
-                                {message}
+                                            <tbody>
+                                                {rows}
+                                            </tbody>
+                                        </table>
+                                        {message}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style= {{ textAlign: "center" }}>
+                                <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                             </div>
                         </div>
-                    </div>
-
-                    <div style= {{ textAlign: "center" }}>
-                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                    </div>
-
+                    ]
+                }
                 </div>
                 </MuiThemeProvider>
             </div>
@@ -246,13 +256,15 @@ const mapStateToProps = (state, props) => {
         userEvents: state.data.userEvents,
         userId: state.auth.id,
         userName: state.auth.userName,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
         onRetrieveData: retrieveData,
-        onDeleteParticipation: deleteParticipation
+        onDeleteParticipation: deleteParticipation,
+        onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 

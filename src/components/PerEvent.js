@@ -19,8 +19,7 @@ class PerEvent extends Component {
 
     constructor(props) {
         super(props);
-
-        console.log("loading in constructor: " + this.props.loading);
+        
         this.props.onUpdateLoadingBar();
 
         if(this.props.userName.substring(0,2) != "00") 

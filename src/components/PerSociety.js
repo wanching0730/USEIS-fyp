@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
@@ -11,12 +12,14 @@ import "../style/perSociety.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveDataWithUserId } from '../actions/data-action';
+import { retrieveDataWithUserId, updateLoadingBar } from '../actions/data-action';
 
 class PerSociety extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onUpdateLoadingBar();
 
         if(this.props.userName.substring(0,2) != "00") {
             this.props.onRetrieveDataWithUserId("studentSociety", this.props.params.societyId, this.props.id);
@@ -166,54 +169,62 @@ class PerSociety extends Component {
                     </Breadcrumb>
                 </div>
 
-                { society["authorized"] ?
+                {this.props.loading ?
+                    [<LoadingBar />]
+                    :
                     [
-                        <div class="zoom">
-                            <a class="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
-                            <ul class="zoom-menu">
-                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li>
-                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /></Link></a></li>
-                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
-                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
-                                <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
-                            </ul> 
+                        <div>
+                            { society["authorized"] ?
+                                [
+                                    <div class="zoom">
+                                        <a class="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
+                                        <ul class="zoom-menu">
+                                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li>
+                                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /></Link></a></li>
+                                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
+                                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
+                                            <li><a class="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
+                                        </ul> 
+                                    </div>
+                                ]
+                                : 
+                                [
+                                    null
+                                ]
+                            }
+
+                            <div>
+                                <MuiThemeProvider>
+                                    <div style={div1Style}>
+                                        <img style={imageStyle} src={ require('../assets/images/its.jpg') } />
+                                        <h1>{society["name"]}</h1>
+                                    </div>
+                                    <div style={div2Style}>
+                                        <h5>Category:</h5>
+                                        <p>{society["category"]}</p>
+                                        <h5>Vision</h5>
+                                        <p>{society["vision"]}</p>
+                                        <h5>Mision</h5>
+                                        <p>{society["mission"]}</p>
+                                        <h5>Description:</h5>
+                                        <p>
+                                            {society["desc"]}
+                                            {/* The biggest challenge to IT in the future is security. 
+                                            Security could negatively impact connectivity to public networks. 
+                                            If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
+                                            The risks now are so great and getting worse every day that we even see foreign governments 
+                                            toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security. */}
+                                        </p>
+                                        <br/>
+                                    </div>
+                                    <div style={div3Style}>
+                                        {buttons}
+                                    </div>
+                                </MuiThemeProvider>
+                            </div>
                         </div>
-                    ]
-                    : 
-                    [
-                        null
                     ]
                 }
-
-                <div>
-                    <MuiThemeProvider>
-                        <div style={div1Style}>
-                            <img style={imageStyle} src={ require('../assets/images/its.jpg') } />
-                            <h1>{society["name"]}</h1>
-                        </div>
-                        <div style={div2Style}>
-                            <h5>Category:</h5>
-                            <p>{society["category"]}</p>
-                            <h5>Vision</h5>
-                            <p>{society["vision"]}</p>
-                            <h5>Mision</h5>
-                            <p>{society["mission"]}</p>
-                            <h5>Description:</h5>
-                            <p>
-                                {society["desc"]}
-                                {/* The biggest challenge to IT in the future is security. 
-                                Security could negatively impact connectivity to public networks. 
-                                If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
-                                The risks now are so great and getting worse every day that we even see foreign governments 
-                                toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security. */}
-                            </p>
-                            <br/>
-                        </div>
-                        <div style={div3Style}>
-                            {buttons}
-                        </div>
-                    </MuiThemeProvider>
-                </div>
             </div>
         );
     };
@@ -250,13 +261,15 @@ const mapStateToProps = (state, props) => {
     return {
         society: state.data.society,
         id: state.auth.id,
-        userName: state.auth.userName
+        userName: state.auth.userName,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-        onRetrieveDataWithUserId: retrieveDataWithUserId
+        onRetrieveDataWithUserId: retrieveDataWithUserId,
+        onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 

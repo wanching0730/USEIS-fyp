@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -8,13 +9,14 @@ import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData } from '../actions/data-action';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
 
 class SocietyEvents extends Component {
 
     constructor(props) {
         super(props);
 
+        this.props.onUpdateLoadingBar();
         this.props.onRetrieveData("societyEvent", this.props.params.societyId);
     }
 
@@ -75,42 +77,48 @@ class SocietyEvents extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div> 
-                <MuiThemeProvider>
-                    <div className="container" id="tableContainer">
-                        <div className="row">
-                            <div className="panel-body">
-                                <table className="table table-hover table-light" border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Poster</th>
-                                            <th>Name</th>
-                                            <th>Date</th>   
-                                            <th>Time</th>  
-                                            <th>Venue</th> 
-                                            <th>Fee</th> 
-                                            <th>Chairperson</th>    
-                                            <th>Contact</th>                    
-                                        </tr>
-                                    </thead>
+                {this.props.loading ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div> 
+                            <MuiThemeProvider>
+                                <div className="container" id="tableContainer">
+                                    <div className="row">
+                                        <div className="panel-body">
+                                            <table className="table table-hover table-light" border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Poster</th>
+                                                        <th>Name</th>
+                                                        <th>Date</th>   
+                                                        <th>Time</th>  
+                                                        <th>Venue</th> 
+                                                        <th>Fee</th> 
+                                                        <th>Chairperson</th>    
+                                                        <th>Contact</th>                    
+                                                    </tr>
+                                                </thead>
 
-                                    <tbody>
-                                        {rows}
-                                    </tbody>
-                                </table>
+                                                <tbody>
+                                                    {rows}
+                                                </tbody>
+                                            </table>
 
-                                {message}
+                                            {message}
 
-                                <div style= {{ textAlign: "center" }}>
-                                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                            <div style= {{ textAlign: "center" }}>
+                                                <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-
-                            </div>
+                            </MuiThemeProvider>
                         </div>
-                    </div>
-                </MuiThemeProvider>
-                </div>
+                    ]
+                }
             </div>
         );
     };
@@ -130,13 +138,15 @@ const styles = {
 const mapStateToProps = (state, props) => {
     console.log("state in society: " + state.data.societies);
     return {
-        societyEvents: state.data.societyEvents
+        societyEvents: state.data.societyEvents,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveData
+      onRetrieveData: retrieveData,
+      onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 

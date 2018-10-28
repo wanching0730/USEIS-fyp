@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -10,7 +11,7 @@ import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData } from '../actions/data-action';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
 
 class ManageMember extends Component {
@@ -20,6 +21,7 @@ class ManageMember extends Component {
 
         this.state = {studentId: -1};
 
+        this.props.onUpdateLoadingBar();
         this.props.onRetrieveData("societyMember", this.props.params.societyId);
     }
 
@@ -123,40 +125,46 @@ class ManageMember extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div>
-                    <MuiThemeProvider>
+                {this.props.loading ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div>
+                            <MuiThemeProvider>
 
-                    <div className="container" id="tableContainer">
-                        <div className="row">
-                            <div className="panel-body">
-                                <table className="table table-hover table-light" border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Name</th>
-                                            <th>IC Number</th>   
-                                            <th>Course</th>  
-                                            <th>Year and Sem</th> 
-                                            <th>Phone Number</th>   
-                                            <th>Email Address</th>   
-                                            <th>Action</th>                 
-                                        </tr>
-                                    </thead>
+                            <div className="container" id="tableContainer">
+                                <div className="row">
+                                    <div className="panel-body">
+                                        <table className="table table-hover table-light" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Name</th>
+                                                    <th>IC Number</th>   
+                                                    <th>Course</th>  
+                                                    <th>Year and Sem</th> 
+                                                    <th>Phone Number</th>   
+                                                    <th>Email Address</th>   
+                                                    <th>Action</th>                 
+                                                </tr>
+                                            </thead>
 
-                                    <tbody>
-                                        {rows}                                       
-                                    </tbody>
-                                </table>
+                                            <tbody>
+                                                {rows}                                       
+                                            </tbody>
+                                        </table>
 
-                                <div style= {{ textAlign: "center" }}>
-                                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        <div style= {{ textAlign: "center" }}>
+                                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            </MuiThemeProvider>
                         </div>
-                    </div>
-                </MuiThemeProvider>
+                    ]
+                }
             </div>
-        </div>
         );
     };
 };
@@ -169,14 +177,16 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-        societyMembers: state.data.societyMembers
+        societyMembers: state.data.societyMembers,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveData: retrieveData,
-      onUpdateData: updateDouble
+      onUpdateData: updateDouble,
+      onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 
