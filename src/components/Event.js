@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -10,7 +11,7 @@ import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll } from '../actions/data-action';
+import { retrieveAll, updateLoadingBar } from '../actions/data-action';
 
 class Event extends Component {
 
@@ -21,6 +22,7 @@ class Event extends Component {
             sortType: "name"
         };
 
+        this.props.onUpdateLoadingBar();
         this.props.onRetrieveAll("event");
     }
 
@@ -106,24 +108,29 @@ class Event extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div>
-                    <MuiThemeProvider>
-                        <h1 style={{ margin: 20, color: '#083477' }}>Event List</h1>
+                {this.props.loading ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div>
+                            <MuiThemeProvider>
+                                <h1 style={{ margin: 20, color: '#083477' }}>Event List</h1>
 
-                        <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "name"})}/>
-                        <RaisedButton label="Sort by Date" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "date"})}/>
+                                <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "name"})}/>
+                                <RaisedButton label="Sort by Date" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "date"})}/>
 
-                        <div className="wrapper">
-                            <ul>
-                                {rows}
-                            </ul>
+                                <div className="wrapper">
+                                    <ul>
+                                        {rows}
+                                    </ul>
+                                </div>
+                            </MuiThemeProvider>
                         </div>
-                        </MuiThemeProvider>
-                    </div>
+                    ]
+                }
             </div>
         );
     };
-    
 };
 
 const styles = {
@@ -135,13 +142,15 @@ const styles = {
 const mapStateToProps = (state, props) => {
     console.log("state in event: " + state.data.events);
     return {
-      events: state.data.events
+      events: state.data.events,
+      loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveAll: retrieveAll
+      onRetrieveAll: retrieveAll,
+      onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 

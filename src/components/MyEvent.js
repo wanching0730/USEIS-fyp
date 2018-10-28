@@ -12,7 +12,7 @@ import '../style/society.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteParticipation } from '../actions/delete-action';
-import { retrieveData } from '../actions/data-action';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
 
 class MyEvent extends Component {
 

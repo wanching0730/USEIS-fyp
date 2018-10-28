@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
@@ -12,12 +13,15 @@ import "../style/perEvent.css";
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveDataWithUserId } from '../actions/data-action';
+import { retrieveDataWithUserId, updateLoadingBar } from '../actions/data-action';
 
 class PerEvent extends Component {
 
     constructor(props) {
         super(props);
+
+        console.log("loading in constructor: " + this.props.loading);
+        this.props.onUpdateLoadingBar();
 
         if(this.props.userName.substring(0,2) != "00") 
             this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
@@ -73,7 +77,7 @@ class PerEvent extends Component {
 
     render() {
 
-        console.log("event: " + this.props.event);
+        console.log("loading: " + this.props.loading);
 
         var buttons = <div></div>, sideNavBar = <div></div>;
         var event, toEditEvent, toManageCrew, toCommBoard, toRegisterBooth, toManageParticipant;
@@ -184,49 +188,57 @@ class PerEvent extends Component {
                     </Breadcrumb>
                 </div>
 
-                {sideNavBar}
+                {this.props.loading ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div>
+                            {sideNavBar}
 
-                <div>
-                    <MuiThemeProvider>
-                        <div style={div1Style}>
-                            <img style={imageStyle} src={ require('../assets/images/cardio.jpg') } />
-                            <h1>{event["name"]}</h1>
+                            <div>
+                                <MuiThemeProvider>
+                                    <div style={div1Style}>
+                                        <img style={imageStyle} src={ require('../assets/images/cardio.jpg') } />
+                                        <h1>{event["name"]}</h1>
+                                    </div>
+                                    <div style={div2Style}>
+                                        <h5>Category:</h5>
+                                        <p>{event["category"]}</p>
+                                        <h5>Organiser:</h5>
+                                        <p>{event["organiser"]} Society</p>
+                                        <h5>Description:</h5>
+                                        <p>
+                                            {event["desc"]}
+                                            {/* The biggest challenge to IT in the future is security. 
+                                            Security could negatively impact connectivity to public networks. 
+                                            If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
+                                            The risks now are so great and getting worse every day that we even see foreign governments 
+                                            toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security. */}
+                                        </p>
+                                        <h5>Date:</h5>
+                                        <p>{event["dateTime"]}</p>
+                                        <h5>Time:</h5>
+                                        <p>{event["dateTime"]}</p>
+                                        <h5>Venue:</h5>
+                                        <p>{event["venue"]}</p>
+                                        <h5>Fee:</h5>
+                                        <p>RM{event["fee"]}</p>
+                                        <h5>Soft Skill Points:</h5>
+                                        <p>{event["ssPoint"]}</p>
+                                        <h5>Soft Skill Category:</h5>
+                                        <p>???</p>
+                                        <h5>Chairperson:</h5>
+                                        <p><a href="https://www.facebook.com/ho.m.hm">{event["chairperson"]}</a></p>
+                                        <h5>Contact Number:</h5>
+                                        <p>{event["contact"]}</p>
+                                        <br/>
+                                    </div>
+                                {buttons}
+                                </MuiThemeProvider>
+                            </div>
                         </div>
-                        <div style={div2Style}>
-                            <h5>Category:</h5>
-                            <p>{event["category"]}</p>
-                            <h5>Organiser:</h5>
-                            <p>{event["organiser"]} Society</p>
-                            <h5>Description:</h5>
-                            <p>
-                                {event["desc"]}
-                                {/* The biggest challenge to IT in the future is security. 
-                                Security could negatively impact connectivity to public networks. 
-                                If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
-                                The risks now are so great and getting worse every day that we even see foreign governments 
-                                toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security. */}
-                            </p>
-                            <h5>Date:</h5>
-                            <p>{event["dateTime"]}</p>
-                            <h5>Time:</h5>
-                            <p>{event["dateTime"]}</p>
-                            <h5>Venue:</h5>
-                            <p>{event["venue"]}</p>
-                            <h5>Fee:</h5>
-                            <p>RM{event["fee"]}</p>
-                            <h5>Soft Skill Points:</h5>
-                            <p>{event["ssPoint"]}</p>
-                            <h5>Soft Skill Category:</h5>
-                            <p>???</p>
-                            <h5>Chairperson:</h5>
-                            <p><a href="https://www.facebook.com/ho.m.hm">{event["chairperson"]}</a></p>
-                            <h5>Contact Number:</h5>
-                            <p>{event["contact"]}</p>
-                            <br/>
-                        </div>
-                       {buttons}
-                    </MuiThemeProvider>
-                </div>
+                    ]
+                }
             </div>
         );
     };
@@ -264,13 +276,15 @@ const mapStateToProps = (state, props) => {
         event: state.data.event,
         userEvents: state.data.userEvents,
         userName: state.auth.userName,
-        id: state.auth.id
+        id: state.auth.id,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveDataWithUserId: retrieveDataWithUserId
+      onRetrieveDataWithUserId: retrieveDataWithUserId,
+      onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 

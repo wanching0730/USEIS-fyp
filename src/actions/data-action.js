@@ -1,6 +1,7 @@
 import { getData, getAllData, getDataWithUserId } from '../utils/http_function';
 
 import {
+    UPDATE_LOADINGBAR,
     RETRIEVE_SOCIETIES,
     RETRIEVE_EVENTS,
     RETRIEVE_ONE_SOCIETY, 
@@ -14,57 +15,72 @@ import {
     RETRIEVE_EVENT_BOOTHS,
     RETRIEVE_USER_EVENTS,
     RETRIEVE_SOCIETY_MEMBERS
-
 } from '../constant';
+
+export function updateLoadingBarSuccessful() {
+    return {
+        type: UPDATE_LOADINGBAR,
+        payload: {
+            loading: true
+        }
+    };
+}
 
 export function retrieveSingleDataSuccessful(type, data) {
     if(type === "society") {
         return {
             type: RETRIEVE_ONE_SOCIETY,
             payload: {
-                society: data
+                society: data,
+                loading: false
             }
         };
     } else if(type === "event") {
         return {
             type: RETRIEVE_ONE_EVENT,
             payload: {
-                event: data
+                event: data,
+                loading: false
             }
         };
     } else if(type === "societyEvent") {
         return {
             type: RETRIEVE_ONE_SOCIETY_EVENTS,
             payload: {
-                societyEvents: data
+                societyEvents: data,
+                loading: false
             }
         };
     } else if(type === "userEvent") {
         return {
             type: RETRIEVE_USER_EVENTS,
             payload: {
-                userEvents: data
+                userEvents: data,
+                loading: false
             }
         }
     } else if(type === "eventCrew") {
         return {
             type: RETRIEVE_ONE_EVENT_CREW,
             payload: {
-                eventCrew: data
+                eventCrew: data,
+                loading: false
             }
         }
     } else if(type === "comm") {
         return {
             type: RETRIEVE_COMM,
             payload: {
-                comm: data
+                comm: data,
+                loading: false
             }
         }
     } else if(type === "societyMembers") {
         return {
             type: RETRIEVE_SOCIETY_MEMBERS,
             payload: {
-                societyMembers: data
+                societyMembers: data,
+                loading: false
             }
         }
     } 
@@ -83,37 +99,48 @@ export function retrieveAllDataSuccessful(type, data) {
         return {
             type: RETRIEVE_EVENTS,
             payload: {
-                events: data
+                events: data,
+                loading: false
             }
         }
     } else if(type === "newsfeeds") {
         return {
             type: RETRIEVE_NEWSFEED,
             payload: {
-                newsfeeds: data
+                newsfeeds: data,
+                loading: false
             }
         }
     } else if(type === "allSocietyEvent") {
         return {
             type: RETRIEVE_ALL_SOCIETY_EVENTS,
             payload: {
-                allSocietyEvents: data
+                allSocietyEvents: data,
+                loading: false
             }
         }
     } else if(type === "societyBooth") {
         return {
             type: RETRIEVE_SOCIETY_BOOTHS,
             payload: {
-                societyBooths: data
+                societyBooths: data,
+                loading: false
             }
         }
     } else if(type === "eventBooth") {
         return {
             type: RETRIEVE_EVENT_BOOTHS,
             payload: {
-                eventBooths: data
+                eventBooths: data,
+                loading: false
             }
         }
+    }
+}
+
+export function updateLoadingBar() {
+    return function (dispatch) {
+        dispatch(updateLoadingBarSuccessful());
     }
 }
 

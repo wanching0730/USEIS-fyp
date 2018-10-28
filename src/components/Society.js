@@ -11,14 +11,14 @@ import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll } from '../actions/data-action';
-import { AutoComplete } from 'material-ui';
+import { retrieveAll, updateLoadingBar } from '../actions/data-action';
 
 class Society extends Component {
 
     constructor(props) {
         super(props);
 
+        this.props.onUpdateLoadingBar();
         this.props.onRetrieveAll("society");
     }
 
@@ -78,9 +78,7 @@ class Society extends Component {
                 </div>
 
                 {this.props.loading ?
-                    [
-                        <LoadingBar />
-                    ]
+                    [<LoadingBar />]
                     :
                     [
                         <div>
@@ -121,7 +119,8 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveAll: retrieveAll
+      onRetrieveAll: retrieveAll,
+      onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 
