@@ -9,7 +9,8 @@ import moment from "moment";
 import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { groupBy } from '../common/common_function';
-import '../style/society.css';
+// import '../style/society.css';
+import '../style/table.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -107,31 +108,28 @@ class MyProfile extends Component {
                         :
                         [
                             <div>
-                                <div className="container" id="tableContainer">
-                                    <div className="row">
-                                        <div className="panel-body">
-                                            <table className="table table-hover table-light" border="1">
+                                <div className="container" id="profileContainer">
+                                    <div className="row">  
+                                        <table id="table1">
                                             <thead>
-                                                    <tr>
-                                                        <th>No.</th>
-                                                        <th>Logo</th>
-                                                        <th>Society</th>  
-                                                        <th>Joined Date</th>
-                                                        <th>Position</th>
-                                                        <th>Events</th>   
-                                                        <th>Action</th>           
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    {rows}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Logo</th>
+                                                    <th>Society</th>  
+                                                    <th>Joined Date</th>
+                                                    <th>Position</th>
+                                                    <th>Events</th>   
+                                                    <th>Action</th>           
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {rows}
+                                            </tbody>
+                                        </table>  
                                     </div>
                                 </div>
 
-                                <div style= {{ textAlign: "center" }}>
+                                <div style= {{ margin: "0 auto" }}>
                                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                 </div>
                             </div>

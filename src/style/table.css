@@ -65,7 +65,7 @@ only screen and (max-width: 760px),
 	#memberContainer #table1 td:nth-of-type(2):before { content: "Name"; }
 	#memberContainer #table1 td:nth-of-type(3):before { content: "IC Number"; }
 	#memberContainer #table1 td:nth-of-type(4):before { content: "Course"; }
-	#memberContainer #table1 td:nth-of-type(5):before { content: "Year and Sem?"; }
+	#memberContainer #table1 td:nth-of-type(5):before { content: "Year and Sem"; }
 	#memberContainer #table1 td:nth-of-type(6):before { content: "Phone Number"; }
 	#memberContainer #table1 td:nth-of-type(7):before { content: "Email Address"; }
 	#memberContainer #table1 td:nth-of-type(8):before { content: "Action"; }
@@ -74,9 +74,17 @@ only screen and (max-width: 760px),
 	#crewContainer #table1 td:nth-of-type(2):before { content: "Name"; }
 	#crewContainer #table1 td:nth-of-type(3):before { content: "IC Number"; }
 	#crewContainer #table1 td:nth-of-type(4):before { content: "Course"; }
-	#crewContainer #table1 td:nth-of-type(5):before { content: "Year and Sem?"; }
+	#crewContainer #table1 td:nth-of-type(5):before { content: "Year and Sem"; }
 	#crewContainer #table1 td:nth-of-type(6):before { content: "Phone Number"; }
 	#crewContainer #table1 td:nth-of-type(7):before { content: "Email Address"; }
 	#crewContainer #table1 td:nth-of-type(8):before { content: "Position"; }
 	#crewContainer #table1 td:nth-of-type(8):before { content: "Actions"; }
+
+	#profileContainer #table1 td:nth-of-type(1):before { content: "No."; }
+	#profileContainer #table1 td:nth-of-type(2):before { content: "Logo"; }
+	#profileContainer #table1 td:nth-of-type(3):before { content: "Society"; }
+	#profileContainer #table1 td:nth-of-type(4):before { content: "Joined Date"; }
+	#profileContainer #table1 td:nth-of-type(5):before { content: "Position"; }
+	#profileContainer #table1 td:nth-of-type(6):before { content: "Events"; }
+	#profileContainer #table1 td:nth-of-type(7):before { content: "Action"; }
 }
