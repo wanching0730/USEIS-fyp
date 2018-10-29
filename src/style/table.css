@@ -1,50 +1,68 @@
-#table1 {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
-    table-layout: fixed;
-    width: 100%;
+#table1 { 
+    width: 100%; 
+    border-collapse: collapse; 
   }
-  
-  #table1 tr {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: .35em;
+  /* Zebra striping */
+  #table1 tr:nth-of-type(odd) { 
+    background: #eee; 
   }
-  
-  #table1 th,
-  #table1 td {
-    padding: .625em;
-    text-align: center;
+  #table1 th { 
+    background: #333; 
+    color: white; 
+    font-weight: bold; 
+  }
+  #table1 td, #table1 th { 
+    padding: 6px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
   }
 
-  @media screen and (max-width: 600px) {
-    #table1 thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-    
-    #table1 tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-    }
-    
-    #table1 td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      text-align: right;
-    }
-    
-    #table1 td::before {
-      content: attr(data-label);
-      float: left;
-    }
-  }
-  
+  @media 
+only screen and (max-width: 760px),
+(min-width: 768px) and (max-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	#table1, #table1 thead, #table1 tbody, #table1 th, #table1 td, #table1 tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#table1 thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	#table1 tr { border: 1px solid #ccc; }
+	
+	#table1 td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	#table1 td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	#table1 td:nth-of-type(1):before { content: "No."; }
+	#table1 td:nth-of-type(2):before { content: "Name"; }
+	#table1 td:nth-of-type(3):before { content: "IC Number"; }
+	#table1 td:nth-of-type(4):before { content: "Course"; }
+	#table1 td:nth-of-type(5):before { content: "Year and Sem?"; }
+	#table1 td:nth-of-type(6):before { content: "Phone Number"; }
+	#table1 td:nth-of-type(7):before { content: "Email Address"; }
+	#table1 td:nth-of-type(8):before { content: "Action"; }
+}

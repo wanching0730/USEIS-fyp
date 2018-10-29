@@ -133,7 +133,7 @@ class ManageMember extends Component {
                         <div>
                             <MuiThemeProvider>
 
-                                <table id="table1">
+                                {/* <table id="table1">
                                     <caption>Statement Summary</caption>
                                     <thead>
                                         <tr>
@@ -199,12 +199,10 @@ class ManageMember extends Component {
                                             <td data-label="period1">03/01/2016 - 03/31/2016</td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> */}
 
-                            {/* <div className="container" id="tableContainer">
-                                <div className="row">
-                                    <div className="panel-body">
-                                        <table className="table table-hover table-light" border="1">
+                            {/* <div className="container" id="tableContainer"> */}
+                                        <table id="table1">
                                             <thead>
                                                 <tr>
                                                     <th>No.</th>
@@ -214,7 +212,7 @@ class ManageMember extends Component {
                                                     <th>Year and Sem</th> 
                                                     <th>Phone Number</th>   
                                                     <th>Email Address</th>   
-                                                    <th>Action</th>                 
+                                                    <th  colSpan="2">Action</th>                 
                                                 </tr>
                                             </thead>
 
@@ -223,12 +221,10 @@ class ManageMember extends Component {
                                             </tbody>
                                         </table>
 
-                                        <div style= {{ textAlign: "center" }}>
+                                        {/* <div style= {{ textAlign: "center" }}>
                                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
+                                        </div> */}
+                            {/* </div> */}
                             </MuiThemeProvider>
                         </div>
                     ]
