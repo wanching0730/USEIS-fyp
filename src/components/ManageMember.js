@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
 import '../style/society.css';
+import '../style/table.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -132,7 +133,75 @@ class ManageMember extends Component {
                         <div>
                             <MuiThemeProvider>
 
-                            <div className="container" id="tableContainer">
+                                <table id="table1">
+                                    <caption>Statement Summary</caption>
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">Account</th>
+                                        <th scope="col">Due Date</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Period</th>
+                                        <th scope="col">account1</th>
+                                        <th scope="col">duedate1</th>
+                                        <th scope="col">amount1</th>
+                                        <th scope="col">period1</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td data-label="Account">Visa - 3412</td>
+                                            <td data-label="Due Date">04/01/2016</td>
+                                            <td data-label="Amount">$1,190</td>
+                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
+                                            <td data-label="account1">Visa - 3412</td>
+                                            <td data-label="duedate1">04/01/2016</td>
+                                            <td data-label="amount1">$1,190</td>
+                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Account">Visa - 3412</td>
+                                            <td data-label="Due Date">04/01/2016</td>
+                                            <td data-label="Amount">$1,190</td>
+                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
+                                            <td data-label="account1">Visa - 3412</td>
+                                            <td data-label="duedate1">04/01/2016</td>
+                                            <td data-label="amount1">$1,190</td>
+                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Account">Visa - 3412</td>
+                                            <td data-label="Due Date">04/01/2016</td>
+                                            <td data-label="Amount">$1,190</td>
+                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
+                                            <td data-label="account1">Visa - 3412</td>
+                                            <td data-label="duedate1">04/01/2016</td>
+                                            <td data-label="amount1">$1,190</td>
+                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Account">Visa - 3412</td>
+                                            <td data-label="Due Date">04/01/2016</td>
+                                            <td data-label="Amount">$1,190</td>
+                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
+                                            <td data-label="account1">Visa - 3412</td>
+                                            <td data-label="duedate1">04/01/2016</td>
+                                            <td data-label="amount1">$1,190</td>
+                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-label="Account">Visa - 3412</td>
+                                            <td data-label="Due Date">04/01/2016</td>
+                                            <td data-label="Amount">$1,190</td>
+                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
+                                            <td data-label="account1">Visa - 3412</td>
+                                            <td data-label="duedate1">04/01/2016</td>
+                                            <td data-label="amount1">$1,190</td>
+                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            {/* <div className="container" id="tableContainer">
                                 <div className="row">
                                     <div className="panel-body">
                                         <table className="table table-hover table-light" border="1">
@@ -159,7 +228,7 @@ class ManageMember extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             </MuiThemeProvider>
                         </div>
                     ]

@@ -1,0 +1,50 @@
+#table1 {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  #table1 tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+  #table1 th,
+  #table1 td {
+    padding: .625em;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 600px) {
+    #table1 thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    #table1 tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+    }
+    
+    #table1 td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      text-align: right;
+    }
+    
+    #table1 td::before {
+      content: attr(data-label);
+      float: left;
+    }
+  }
+  
