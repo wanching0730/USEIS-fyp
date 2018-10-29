@@ -7,7 +7,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
-import '../style/society.css';
 import '../style/table.css';
 
 import { connect } from 'react-redux';
@@ -132,76 +131,8 @@ class ManageMember extends Component {
                     [
                         <div>
                             <MuiThemeProvider>
-
-                                {/* <table id="table1">
-                                    <caption>Statement Summary</caption>
-                                    <thead>
-                                        <tr>
-                                        <th scope="col">Account</th>
-                                        <th scope="col">Due Date</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Period</th>
-                                        <th scope="col">account1</th>
-                                        <th scope="col">duedate1</th>
-                                        <th scope="col">amount1</th>
-                                        <th scope="col">period1</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td data-label="Account">Visa - 3412</td>
-                                            <td data-label="Due Date">04/01/2016</td>
-                                            <td data-label="Amount">$1,190</td>
-                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                                            <td data-label="account1">Visa - 3412</td>
-                                            <td data-label="duedate1">04/01/2016</td>
-                                            <td data-label="amount1">$1,190</td>
-                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Account">Visa - 3412</td>
-                                            <td data-label="Due Date">04/01/2016</td>
-                                            <td data-label="Amount">$1,190</td>
-                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                                            <td data-label="account1">Visa - 3412</td>
-                                            <td data-label="duedate1">04/01/2016</td>
-                                            <td data-label="amount1">$1,190</td>
-                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Account">Visa - 3412</td>
-                                            <td data-label="Due Date">04/01/2016</td>
-                                            <td data-label="Amount">$1,190</td>
-                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                                            <td data-label="account1">Visa - 3412</td>
-                                            <td data-label="duedate1">04/01/2016</td>
-                                            <td data-label="amount1">$1,190</td>
-                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Account">Visa - 3412</td>
-                                            <td data-label="Due Date">04/01/2016</td>
-                                            <td data-label="Amount">$1,190</td>
-                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                                            <td data-label="account1">Visa - 3412</td>
-                                            <td data-label="duedate1">04/01/2016</td>
-                                            <td data-label="amount1">$1,190</td>
-                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Account">Visa - 3412</td>
-                                            <td data-label="Due Date">04/01/2016</td>
-                                            <td data-label="Amount">$1,190</td>
-                                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                                            <td data-label="account1">Visa - 3412</td>
-                                            <td data-label="duedate1">04/01/2016</td>
-                                            <td data-label="amount1">$1,190</td>
-                                            <td data-label="period1">03/01/2016 - 03/31/2016</td>
-                                        </tr>
-                                    </tbody>
-                                </table> */}
-
-                            {/* <div className="container" id="tableContainer"> */}
+                                <div className="container" id="tableContainer">
+                                    <div className="row">  
                                         <table id="table1">
                                             <thead>
                                                 <tr>
@@ -215,16 +146,16 @@ class ManageMember extends Component {
                                                     <th  colSpan="2">Action</th>                 
                                                 </tr>
                                             </thead>
-
                                             <tbody>
                                                 {rows}                                       
                                             </tbody>
                                         </table>
 
-                                        {/* <div style= {{ textAlign: "center" }}>
+                                        <div style= {{ margin: "0 auto" }}>
                                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                                        </div> */}
-                            {/* </div> */}
+                                        </div>
+                                    </div>
+                                </div>
                             </MuiThemeProvider>
                         </div>
                     ]
