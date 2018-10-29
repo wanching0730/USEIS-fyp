@@ -4,7 +4,8 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
-import '../style/society.css';
+// import '../style/society.css';
+import '../style/table.css';
 
 class ManageParticipant extends Component {
 

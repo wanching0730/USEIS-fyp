@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
-import '../style/society.css';
+import '../style/table.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -137,35 +137,33 @@ class ManageCrew extends Component {
                         <div>
                             <MuiThemeProvider>
 
-                                <div className="container" id="tableContainer">
-                                    <div className="row">
-                                        <div className="panel-body">
-                                            <table className="table table-hover table-light" border="1">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No.</th>
-                                                        <th>Name</th>
-                                                        <th>IC Number</th>   
-                                                        <th>Course</th>  
-                                                        <th>Year and Sem</th> 
-                                                        <th>Phone Number</th>   
-                                                        <th>Email Address</th>   
-                                                        <th>Position</th>  
-                                                        <th colSpan="2">Actions</th>               
-                                                    </tr>
-                                                </thead>
+                                <div className="container" id="crewContainer">
+                                    <div className="row">           
+                                        <table id="table1" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Name</th>
+                                                    <th>IC Number</th>   
+                                                    <th>Course</th>  
+                                                    <th>Year and Sem</th> 
+                                                    <th>Phone Number</th>   
+                                                    <th>Email Address</th>   
+                                                    <th>Position</th>  
+                                                    <th colSpan="2">Actions</th>               
+                                                </tr>
+                                            </thead>
 
-                                                <tbody>
-                                                    {rows}
-                                                </tbody>
-                                            </table>
+                                            <tbody>
+                                                {rows}
+                                            </tbody>
+                                        </table>
 
-                                            {message}
+                                        {message}
 
-                                            <div style= {{ textAlign: "center" }}>
-                                                <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                                            </div>
-                                        </div>
+                                        <div style= {{ margin: "0 auto" }}>
+                                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        </div> 
                                     </div>
                                 </div>
                             </MuiThemeProvider>

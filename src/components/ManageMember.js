@@ -131,7 +131,7 @@ class ManageMember extends Component {
                     [
                         <div>
                             <MuiThemeProvider>
-                                <div className="container" id="tableContainer">
+                                <div className="container" id="memberContainer">
                                     <div className="row">  
                                         <table id="table1">
                                             <thead>

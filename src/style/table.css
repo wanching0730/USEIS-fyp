@@ -1,6 +1,6 @@
 #table1 { 
     width: 100%; 
-    border-collapse: collapse; 
+		border-collapse: collapse; 
 	}
 	
   /* Zebra striping */
@@ -60,12 +60,23 @@ only screen and (max-width: 760px),
 	/*
 	Label the data
 	*/
-	#table1 td:nth-of-type(1):before { content: "No."; }
-	#table1 td:nth-of-type(2):before { content: "Name"; }
-	#table1 td:nth-of-type(3):before { content: "IC Number"; }
-	#table1 td:nth-of-type(4):before { content: "Course"; }
-	#table1 td:nth-of-type(5):before { content: "Year and Sem?"; }
-	#table1 td:nth-of-type(6):before { content: "Phone Number"; }
-	#table1 td:nth-of-type(7):before { content: "Email Address"; }
-	#table1 td:nth-of-type(8):before { content: "Action"; }
+
+	#memberContainer #table1 td:nth-of-type(1):before { content: "No."; }
+	#memberContainer #table1 td:nth-of-type(2):before { content: "Name"; }
+	#memberContainer #table1 td:nth-of-type(3):before { content: "IC Number"; }
+	#memberContainer #table1 td:nth-of-type(4):before { content: "Course"; }
+	#memberContainer #table1 td:nth-of-type(5):before { content: "Year and Sem?"; }
+	#memberContainer #table1 td:nth-of-type(6):before { content: "Phone Number"; }
+	#memberContainer #table1 td:nth-of-type(7):before { content: "Email Address"; }
+	#memberContainer #table1 td:nth-of-type(8):before { content: "Action"; }
+
+	#crewContainer #table1 td:nth-of-type(1):before { content: "No."; }
+	#crewContainer #table1 td:nth-of-type(2):before { content: "Name"; }
+	#crewContainer #table1 td:nth-of-type(3):before { content: "IC Number"; }
+	#crewContainer #table1 td:nth-of-type(4):before { content: "Course"; }
+	#crewContainer #table1 td:nth-of-type(5):before { content: "Year and Sem?"; }
+	#crewContainer #table1 td:nth-of-type(6):before { content: "Phone Number"; }
+	#crewContainer #table1 td:nth-of-type(7):before { content: "Email Address"; }
+	#crewContainer #table1 td:nth-of-type(8):before { content: "Position"; }
+	#crewContainer #table1 td:nth-of-type(8):before { content: "Actions"; }
 }
