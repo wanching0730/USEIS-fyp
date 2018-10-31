@@ -126,11 +126,11 @@ class MyProfile extends Component {
                                                 {rows}
                                             </tbody>
                                         </table>  
-                                    </div>
-                                </div>
 
-                                <div style= {{ margin: "0 auto" }}>
-                                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        <div style= {{ margin: "0 auto" }}>
+                                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         ]
