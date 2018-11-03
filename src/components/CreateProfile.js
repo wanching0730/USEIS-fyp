@@ -89,7 +89,7 @@ class CreateProfile extends Component {
 
   render() {
 
-    const { RaisedButtonStyle, ContainerStyle } = styles;
+    const { RaisedButtonStyle } = styles;
 
     const societyCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
     {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
@@ -129,7 +129,7 @@ class CreateProfile extends Component {
               {breadCrumb}
             </div>
 
-            <div className="container" style={ContainerStyle}>
+            <div className="container">
               <div className="form-style-10">
                 { header }
                 <form>
@@ -179,9 +179,6 @@ class CreateProfile extends Component {
 const styles = {
   RaisedButtonStyle: {
     margin: 15
-  },
-  ContainerStyle: {
-    margin: 45
   }
 };
 

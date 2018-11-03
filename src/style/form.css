@@ -1,6 +1,5 @@
 .container {
-    display: flex;
-    justify-content: center;
+    margin: auto;
 }  
 
 /* Login form */
@@ -189,7 +188,7 @@
 
 @media screen and (max-width: 600px) {
     .form-style-10{
-        width:80%;
+        width:90%;
         margin: 0 0 1em 0;
     }
 }
@@ -200,6 +199,11 @@
 }
 
 @media (max-width: 576px) {
+    .form-style-10{
+        width:80%;
+        margin: 0 0 1em 0;
+    }
+
     .form-style-8 {
         width: 300px;
     }
@@ -234,11 +238,6 @@
         width: 290px;
     }
 }
-
-/* RaisedButton {
-    background-color: #083477;
-    color: #083477;
-} */
 
 
 

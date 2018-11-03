@@ -50,7 +50,7 @@ class RegisterSociety extends Component {
   
   render() {
 
-    const { RaisedButtonStyle, ContainerStyle } = styles;
+    const { RaisedButtonStyle } = styles;
 
     return (
       <div>
@@ -67,7 +67,7 @@ class RegisterSociety extends Component {
                 </Breadcrumb>
             </div>
 
-            <div className="container" style={ContainerStyle}>
+            <div className="container">
               <div className="form-style-10">
                 <h1>Register {this.props.location.state["societyName"]}<span>Register society and looking forward for the upcoming events!</span></h1>
                 <form>
@@ -119,9 +119,6 @@ class RegisterSociety extends Component {
 const styles = {
   RaisedButtonStyle: {
     margin: 15
-  },
-  ContainerStyle: {
-    margin: 45
   }
 };
 

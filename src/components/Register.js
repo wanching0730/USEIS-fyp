@@ -30,7 +30,7 @@ class Register extends Component {
   
   render() {
 
-    const { RaisedButtonStyle, ContainerStyle } = styles;
+    const { RaisedButtonStyle } = styles;
 
     return (
       <div>

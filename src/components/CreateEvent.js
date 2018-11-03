@@ -144,7 +144,7 @@ class CreateEvent extends Component {
     console.log("society id in create event: " + JSON.stringify(this.props.params.id));
     console.log("category: " + this.state.category);
 
-    const { RaisedButtonStyle, ContainerStyle } = styles;
+    const { RaisedButtonStyle } = styles;
 
     const eventCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
     {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
@@ -187,7 +187,7 @@ class CreateEvent extends Component {
                 {breadCrumb}
             </div>
 
-            <div className="container" style={ContainerStyle}>
+            <div className="container">
               <div className="form-style-10">
                 {header}
                 <form>
@@ -283,9 +283,6 @@ class CreateEvent extends Component {
 const styles = {
   RaisedButtonStyle: {
     margin: 15
-  },
-  ContainerStyle: {
-    margin: 45
   }
 };
 

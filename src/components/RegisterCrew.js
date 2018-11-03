@@ -34,21 +34,6 @@ class RegisterCrew extends Component {
         if(this.n.supported()) 
           this.n.show();
       }
-
-      // const data = Object.keys(this.state).map((key) => {
-      //   return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
-      // }).join('&');
-
-      // fetch(`http://localhost:5000/puppies/create`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/x-www-form-urlencoded'
-      //   },
-      //   body: data
-      // }).then(function(response) {
-      //   return response;
-      // });
-
   }
 
   handleNotiClick(event) {
@@ -72,7 +57,7 @@ class RegisterCrew extends Component {
   
   render() {
 
-    const { RaisedButtonStyle, ContainerStyle } = styles;
+    const { RaisedButtonStyle } = styles;
     const positions = [{value:'secretary', name:'Secretary'}, {value:'treasurer', name:'Treasurer'}, {value:'programme', name:'Programme HOD'},
     {value:'publicity', name:'Publicity HOD'}, {value:'logistics', name:'Logistics HOD'}, {value:'decoration', name:'Decoration HOD'},
     {value:'editorial', name:'Editorial HOD'}, {value:'technical', name:'Technical HOD'}];
@@ -92,7 +77,7 @@ class RegisterCrew extends Component {
               </Breadcrumb>
             </div>
 
-            <div className="container" style={ContainerStyle}>
+            <div className="container">
               <div className="form-style-10">
                 <h1>Register Crew<span>Register as event crew now and get yourself a chance for more exploration!</span></h1>
                 <form>
@@ -143,11 +128,6 @@ class RegisterCrew extends Component {
 const styles = {
   RaisedButtonStyle: {
     margin: 15
-  }, 
-  ContainerStyle: {
-    margin: "30px",
-    position: "absolute",
-    width: "100%"
   }
 };
 
