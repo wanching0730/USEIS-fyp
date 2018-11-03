@@ -2,6 +2,10 @@
     margin: auto;
 }  
 
+textarea {
+    width: 400px;
+}
+
 /* Login form */
 .form-style-8{
     font-family: 'Open Sans Condensed', arial, sans;
@@ -64,7 +68,7 @@
 /* Register form */
 
 .form-style-10{
-    width:500px;
+    width:600px;
     padding:30px;
     /* margin:40px auto; */
     background: #FFF;
@@ -188,8 +192,12 @@
 
 @media screen and (max-width: 600px) {
     .form-style-10{
-        width:90%;
+        width:95%;
         margin: 0 0 1em 0;
+    }
+
+    textarea {
+        width: 250px;
     }
 }
 
@@ -200,7 +208,7 @@
 
 @media (max-width: 576px) {
     .form-style-10{
-        width:80%;
+        width:90%;
         margin: 0 0 1em 0;
     }
 
@@ -219,9 +227,18 @@
     .form-style-8 h2 {
         width: 300px;
     }
+
+    textarea {
+        width: 200px;
+    }
 }
 
   @media (max-width: 320px) {
+    .form-style-10{
+        width:90%;
+        margin: 0 0 1em 0;
+    }
+
     .form-style-8 {
         width: 290px;
     }
@@ -236,6 +253,10 @@
 
     .form-style-8 h2 {
         width: 290px;
+    }
+
+    textarea {
+        width: 150px;
     }
 }
 
