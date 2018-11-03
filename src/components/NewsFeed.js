@@ -5,11 +5,11 @@ import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem, Card, CardText, CardBody,
     CardTitle, CardSubtitle } from 'reactstrap';
-import '../style/newsfeed.css';
 import Modal from 'react-modal';
 import RaisedButton from 'material-ui/RaisedButton';
 import { confirmAlert } from 'react-confirm-alert';
 import moment from "moment";
+import '../style/newsfeed.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -100,13 +100,23 @@ class NewsFeed extends Component {
 
         if(this.state.inputValue == "") {
             confirmAlert({
-              title: 'Warning',
-              message: 'Please fill in all empty fields before proceed',
-              buttons: [
-                  {
-                      label: 'Close'
+                customUI: ({ onClose }) => {
+                    return (
+                      <div className='custom-alert'>
+                            <h1>Warning</h1>
+                            <p>Please fill in all empty fields before proceed</p>
+                            <button>Close</button>
+                      </div>
+                    )
                   }
-              ]
+
+            //   title: 'Warning',
+            //   message: 'Please fill in all empty fields before proceed',
+            //   buttons: [
+            //       {
+            //           label: 'Close'
+            //       }
+            //   ]
             })
             return false;
           } else {

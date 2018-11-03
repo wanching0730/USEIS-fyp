@@ -116,8 +116,8 @@ class Event extends Component {
                             <MuiThemeProvider>
                                 <h1 style={{ margin: 20, color: '#083477' }}>Event List</h1>
 
-                                <RaisedButton label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "name"})}/>
-                                <RaisedButton label="Sort by Date" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "date"})}/>
+                                <RaisedButton className="buttons" label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "name"})}/>
+                                <RaisedButton className="buttons" label="Sort by Date" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "date"})}/>
 
                                 <div className="wrapper">
                                     <ul>
