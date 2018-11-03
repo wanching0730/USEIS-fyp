@@ -101,7 +101,7 @@ class ManageMember extends Component {
                             <td>{member["course"]}</td>
                             <td>Y{member["year"]}S{member["semester"]}</td>
                             <td>{member["contact"]}</td>
-                            <td>{member["email"]}</td>
+                            <td><span>{member["email"]}</span></td>
                             {approvedIcon}
                             <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
                         </tr>

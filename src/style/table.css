@@ -36,7 +36,10 @@ only screen and (max-width: 760px),
 		left: -9999px;
 	}
 	
-	#table1 tr { border: 1px solid #083477; }
+	#table1 tr { 
+		border: 1px solid #083477; 
+		margin-bottom: 10px;
+	}
 	
 	#table1 td { 
 		/* Behave  like a "row" */

@@ -9,7 +9,6 @@ import moment from "moment";
 import RaisedButton from 'material-ui/RaisedButton';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { groupBy } from '../common/common_function';
-// import '../style/society.css';
 import '../style/table.css';
 
 import { connect } from 'react-redux';
