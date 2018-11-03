@@ -88,7 +88,7 @@ class ManageMember extends Component {
                     let member = societyMembers[i];
                     var approvedIcon;
 
-                    if(member["memberStatys"] == 1) 
+                    if(member["memberStatus"] == 1) 
                         approvedIcon = <td><li className="fa fa-check"></li></td>
                     else 
                         approvedIcon = <td><li value={member["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li></td>
