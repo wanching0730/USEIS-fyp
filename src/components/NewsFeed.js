@@ -102,21 +102,15 @@ class NewsFeed extends Component {
             confirmAlert({
                 customUI: ({ onClose }) => {
                     return (
-                      <div className='custom-alert'>
-                            <h1>Warning</h1>
-                            <p>Please fill in all empty fields before proceed</p>
-                            <button>Close</button>
-                      </div>
+                        <MuiThemeProvider>
+                            <div className='custom-alert'>
+                                <h1>Warning</h1>
+                                <p>Please fill in all empty fields before proceed</p>
+                                <RaisedButton label="Close" primary={true} onClick={() => onClose()}/>
+                            </div>
+                        </MuiThemeProvider>
                     )
                   }
-
-            //   title: 'Warning',
-            //   message: 'Please fill in all empty fields before proceed',
-            //   buttons: [
-            //       {
-            //           label: 'Close'
-            //       }
-            //   ]
             })
             return false;
           } else {
