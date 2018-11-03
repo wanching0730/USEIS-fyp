@@ -32,9 +32,7 @@
     -moz-box-sizing: border-box;
     outline: none;
     display: block;
-    width: 100%;
     padding: 7px;
-    display: flex;
     justify-content: center;
     border: none;
     border-bottom: 1px solid #ddd;
@@ -199,6 +197,42 @@
 .button-section {
     display: flex;
     justify-content: center;
+}
+
+@media (max-width: 576px) {
+    .form-style-8 {
+        width: 300px;
+    }
+
+    .form-style-8 TextField,
+    .form-style-8 #button2
+    {
+        width: 350px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .form-style-8 h2 {
+        width: 300px;
+    }
+}
+
+  @media (max-width: 320px) {
+    .form-style-8 {
+        width: 290px;
+    }
+
+    .form-style-8 TextField,
+    .form-style-8 #button2
+    {
+        width: 300px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .form-style-8 h2 {
+        width: 290px;
+    }
 }
 
 /* RaisedButton {
