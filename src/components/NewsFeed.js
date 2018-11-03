@@ -10,6 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { confirmAlert } from 'react-confirm-alert';
 import moment from "moment";
 import '../style/newsfeed.css';
+import '../style/alert.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -110,7 +111,7 @@ class NewsFeed extends Component {
                             </div>
                         </MuiThemeProvider>
                     )
-                  }
+                }
             })
             return false;
           } else {

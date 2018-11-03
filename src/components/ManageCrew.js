@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
 import '../style/table.css';
+import '../style/alert.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -35,45 +36,43 @@ class ManageCrew extends Component {
 
         setTimeout(() => {
             confirmAlert({
-                title: 'Approval Confirmation',
-                message: 'Are you sure to approve this crew?',
-                buttons: [
-                  {
-                    label: 'Yes',
-                    onClick: () => {
-                        
-                        let data = {
-                            studentId: this.state.studentId,
-                            eventId: this.props.params.eventId
-                        }
-                        this.props.onUpdateData("crew", data, this.props.location.state["eventName"]);
-                    }
-                  },
-                  {
-                    label: 'No',
-                    onClick: () => console.log('Click No')
-                  }
-                ]
+                customUI: ({ onClose }) => {
+                    return (
+                        <MuiThemeProvider>
+                            <div className='custom-alert'>
+                                <h1>Approval Confirmation</h1>
+                                <p>Are you sure to approve this crew?</p>
+                                <RaisedButton label="Yes" primary={true} onClick={() => {
+                                            let data = {
+                                                studentId: this.state.studentId,
+                                                eventId: this.props.params.eventId
+                                            }
+                                            this.props.onUpdateData("crew", data, this.props.location.state["eventName"]);
+                                        }
+                                    }/>
+                                <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                            </div>
+                        </MuiThemeProvider>
+                    )
+                }
               })
         }, 2000);
     }
 
     handleDelete() {
         confirmAlert({
-            title: 'Delete Confirmation',
-            message: 'Are you sure to delete this crew?',
-            buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-                    console.log('Click Yes');
-                }
-              },
-              {
-                label: 'No',
-                onClick: () => console.log('Click No')
-              }
-            ]
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h1>Delete Confirmation</h1>
+                            <p>Are you sure to delete this crew?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => console.log("clicked yes")}/>
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
           })
     }
 

@@ -34,25 +34,25 @@ class ManageMember extends Component {
         this.setState({studentId: studentId})
 
         confirmAlert({
-            title: 'Approval Confirmation',
-            message: 'Are you sure to approve this member?',
-            buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-
-                    let data = {
-                            studentId: this.state.studentId,
-                            societyId: this.props.params.societyId
-                        }
-                    this.props.onUpdateData("member", data, this.props.location.state["societyName"]);
-                }
-              },
-              {
-                label: 'No',
-                onClick: () => console.log('Click No')
-              }
-            ]
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h1>Approval Confirmation</h1>
+                            <p>Are you sure to approve this member?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {
+                                        let data = {
+                                            studentId: this.state.studentId,
+                                            societyId: this.props.params.societyId
+                                        }
+                                        this.props.onUpdateData("member", data, this.props.location.state["societyName"]);
+                                    }
+                                }/>
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
           })
     }
 
