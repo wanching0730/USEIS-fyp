@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
 import '../style/table.css';
+import '../style/alert.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

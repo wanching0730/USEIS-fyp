@@ -87,7 +87,7 @@ class ManageParticipant extends Component {
 
                                 <div className="container" id="participantContainer">
                                     <div className="row"> 
-                                        <table className="table1" border="1">
+                                        <table id="table1" border="1">
                                             <thead>
                                                 <tr>
                                                     <th>No.</th>
@@ -97,7 +97,8 @@ class ManageParticipant extends Component {
                                                     <th>Year and Sem</th> 
                                                     <th>Phone Number</th>   
                                                     <th>Email Address</th>   
-                                                    <th>Vegetarian</th>                 
+                                                    <th>Vegetarian</th>    
+                                                    <th  colSpan="2">Actions</th>        
                                                 </tr>
                                             </thead>
 
