@@ -5,6 +5,7 @@ import {
     RETRIEVE_ONE_SOCIETY_EVENTS,
     RETRIEVE_ONE_EVENT_CREW,
     RETRIEVE_COMM,
+    RETRIEVE_PARTICIPANT,
     RETRIEVE_SOCIETIES,
     RETRIEVE_EVENTS,
     RETRIEVE_NEWSFEED,
@@ -25,6 +26,7 @@ const initialState = {
     eventCrew: null,
     comm: null,
     societyMembers: null,
+    eventParticipant: null,
    
     societies: null,
     events: null,
@@ -103,6 +105,11 @@ export default function dataReducer(state = initialState, { type, payload }) {
         case RETRIEVE_SOCIETY_MEMBERS:
             return Object.assign({}, state, {
                 societyMembers: payload.societyMembers,
+                loading: payload.loading
+            });
+        case RETRIEVE_PARTICIPANT:
+            return Object.assign({}, state, {
+                eventParticipant: payload.eventParticipant,
                 loading: payload.loading
             });
         default: 

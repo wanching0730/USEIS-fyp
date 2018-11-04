@@ -9,6 +9,7 @@ import {
     RETRIEVE_ONE_SOCIETY_EVENTS,
     RETRIEVE_ONE_EVENT_CREW,
     RETRIEVE_COMM,
+    RETRIEVE_PARTICIPANT,
     RETRIEVE_NEWSFEED,
     RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
@@ -80,6 +81,14 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_SOCIETY_MEMBERS,
             payload: {
                 societyMembers: data,
+                loading: false
+            }
+        }
+    } else if(type === "eventParticipant") {
+        return {
+            type: RETRIEVE_PARTICIPANT,
+            payload: {
+                eventParticipant: data,
                 loading: false
             }
         }
@@ -276,6 +285,13 @@ export function retrieveData(type, id) {
                 }
                 console.log("society members in action: " + JSON.stringify(societyMembers));
                 dispatch(retrieveSingleDataSuccessful("societyMembers", societyMembers));
+            }  else if(type === "eventParticipant") {
+                let eventParticipants = [];
+                for(var i = 0; i < reply.length; i++) {
+                    eventParticipants.push(reply[i]);
+                }
+                console.log("event participants in action: " + JSON.stringify(eventParticipants));
+                dispatch(retrieveSingleDataSuccessful("eventParticipant", eventParticipants));
             }  
         });
     };
