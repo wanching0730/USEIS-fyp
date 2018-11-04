@@ -100,7 +100,7 @@ class PerEvent extends Component {
         console.log("loading: " + this.props.loading);
 
         var buttons = <div></div>, sideNavBar = <div></div>;
-        var event, toEditEvent, toManageCrew, toCommBoard, toRegisterBooth, toManageParticipant;
+        var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
 
@@ -146,16 +146,16 @@ class PerEvent extends Component {
         if(this.props.userName.substring(0,2) == "00") {
             if(event["participated"]) {
                 buttons =
-                <div style={div3Style}>
-                    <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
-                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                <div id="div3">
+                    <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+                    <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                 </div>
             } else {
                 buttons =
-                <div style={div3Style}>
-                    <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
-                    <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
-                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                <div id="div3">
+                    <RaisedButton id="buttons" label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                    <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+                    <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                 </div>
             }
             
@@ -163,17 +163,17 @@ class PerEvent extends Component {
             console.log("authorized: " + event["authorized"]);
             if(event["participated"]) {
                 buttons =
-                    <div style={div3Style}>
-                        <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
-                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    <div id="div3">
+                        <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+                        <RaisedButton id="buttons"mlabel="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                     </div>
             } else {
                 buttons =
-                    <div style={div3Style}>
-                        <RaisedButton label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
-                        <RaisedButton label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
-                        <RaisedButton label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
-                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    <div id="div3">
+                        <RaisedButton id="buttons" label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                        <RaisedButton id="buttons" label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
+                        <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+                        <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                     </div>
             }
         }
@@ -268,9 +268,7 @@ class PerEvent extends Component {
                                         <div></div>
                                     </div>
                                 </div>
-                                <div style={div3Style}>
-                                    {buttons}
-                                </div>
+                                {buttons}
                                 </MuiThemeProvider>
                             </div>
                         </div>
@@ -301,10 +299,9 @@ const styles = {
         marginLeft: "20px"
     }, 
     div3Style: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        margin: "auto",
+        overflow: "hidden"
     }
 }
 

@@ -58,6 +58,13 @@
     clear: both;
 }
 
+#div3 {
+    justify-content: center;
+    margin: auto;
+    display: flex;
+    overflow: hidden;
+}
+
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
     .tableBody {
@@ -65,5 +72,16 @@
     }
     .column.side, .column.middle {
         width: 100%;
+    }
+
+    #buttons {
+        float: none;
+        width: 100%;
+    }
+
+    #div3 {
+        justify-content: center;
+        margin: auto;
+        display: block;
     }
 }
