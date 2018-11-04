@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
 import '../style/table.css';
 import '../style/alert.css';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
+import { updateDouble } from '../actions/post-action';
+
 class ManageParticipant extends Component {
 
     constructor(props) {
         super(props);
+
+        this.props.onUpdateLoadingBar();
+        this.props.onRetrieveData("eventParticipant", this.props.params.eventId);
     }
 
     componentDidMount() {
@@ -20,6 +30,40 @@ class ManageParticipant extends Component {
     render() {
 
         const { RaisedButtonStyle } = styles;
+        let eventParticipant = this.props.eventParticipant;
+        var message = <div></div>;
+        var rows = [];
+
+        if(eventParticipant != null) {
+            if(eventParticipant.length != 0) {
+                for(var i = 0; i < eventParticipant.length; i++) {
+                    let participant = eventParticipant[i];
+                    var approvedIcon;
+
+                    if(participant["participantStatus"] == 1) 
+                        approvedIcon = <td><li className="fa fa-check"></li></td>
+                    else 
+                        approvedIcon = <td><li value={participant["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li></td>
+
+                    rows.push(
+                        <tr> 
+                            <td>{i+1}</td>
+                            <td>{participant["name"]}</td>
+                            <td>{participant["ic"]}</td>
+                            <td>{participant["course"]}</td>
+                            <td>Y{participant["year"]}S{participant["semester"]}</td>
+                            <td>{participant["contact"]}</td>
+                            <td>{participant["email"]}</td>
+                            <td>{participant["vegetarian"]}</td>
+                            {approvedIcon}
+                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
+                        </tr>
+                    )
+                }
+            } else {
+                message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No participant for this event</div>;
+            }
+        }
         
         return (
             <div id="outerDiv"> 
@@ -34,50 +78,44 @@ class ManageParticipant extends Component {
                     </Breadcrumb>
                 </div>
 
-                <div>
-                    <MuiThemeProvider>
+                {this.props.loading ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div>
+                            <MuiThemeProvider>
 
-                    <div className="container" id="tableContainer">
-                        <div className="row">
-                            <div className="panel-body">
-                                <table className="table table-hover table-light" border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Name</th>
-                                            <th>IC Number</th>   
-                                            <th>Course</th>  
-                                            <th>Year and Sem</th> 
-                                            <th>Phone Number</th>   
-                                            <th>Email Address</th>   
-                                            <th>Vegetarian</th>                 
-                                        </tr>
-                                    </thead>
+                                <div className="container" id="participantContainer">
+                                    <div className="row"> 
+                                        <table className="table1" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Name</th>
+                                                    <th>IC Number</th>   
+                                                    <th>Course</th>  
+                                                    <th>Year and Sem</th> 
+                                                    <th>Phone Number</th>   
+                                                    <th>Email Address</th>   
+                                                    <th>Vegetarian</th>                 
+                                                </tr>
+                                            </thead>
 
-                                    <tbody>
-                                        <tr> 
-                                            <td>1</td>
-                                            <td>Lim Heng Hao</td>
-                                            <td>999999-99-9999</td>
-                                            <td>Software Engineering</td>
-                                            <td>Y1S3</td>
-                                            <td>018-9900990</td>
-                                            <td>henghao@hotmail.com</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            <tbody>
+                                                {rows}
+                                            </tbody>
+                                        </table>
 
-                                <div style= {{ textAlign: "center" }}>
-                                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        <div style= {{ margin: "0 auto" }}>
+                                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        </div>     
+                                    </div>
                                 </div>
-
-                            </div>
+                            </MuiThemeProvider>
                         </div>
-                    </div>
-                </MuiThemeProvider>
+                    ]
+                }
             </div>
-        </div>
         );
     };
     
@@ -89,4 +127,19 @@ const styles = {
     }
 }
 
-export default ManageParticipant;
+const mapStateToProps = (state, props) => {
+    return {
+        eventParticipant: state.data.eventParticipant,
+        loading: state.data.loading
+    };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+    return bindActionCreators({
+      onRetrieveData: retrieveData,
+      onUpdateData: updateDouble,
+      onUpdateLoadingBar: updateLoadingBar
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(ManageParticipant);

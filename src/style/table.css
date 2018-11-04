@@ -110,4 +110,14 @@ only screen and (max-width: 760px),
 	#committeeContainer #table1 td:nth-of-type(6):before { content: "Phone Number"; }
 	#committeeContainer #table1 td:nth-of-type(7):before { content: "Email Address"; }
 	#committeeContainer #table1 td:nth-of-type(8):before { content: "Position"; }
+
+	#participantContainer #table1 td:nth-of-type(1):before { content: "No."; }
+	#participantContainer #table1 td:nth-of-type(2):before { content: "Name"; }
+	#participantContainer #table1 td:nth-of-type(3):before { content: "IC Number"; }
+	#participantContainer #table1 td:nth-of-type(4):before { content: "Course"; }
+	#participantContainer #table1 td:nth-of-type(5):before { content: "Year and Sem"; }
+	#participantContainer #table1 td:nth-of-type(6):before { content: "Phone Number"; }
+	#participantContainer #table1 td:nth-of-type(7):before { content: "Email Address"; }
+	#participantContainer #table1 td:nth-of-type(8):before { content: "Vegetarian"; }
+
 }

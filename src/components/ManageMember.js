@@ -133,7 +133,7 @@ class ManageMember extends Component {
                             <MuiThemeProvider>
                                 <div className="container" id="memberContainer">
                                     <div className="row">  
-                                        <table id="table1">
+                                        <table id="table1" border="1">
                                             <thead>
                                                 <tr>
                                                     <th>No.</th>
