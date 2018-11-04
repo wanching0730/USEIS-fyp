@@ -166,6 +166,8 @@ export function updateDouble(type, postData, name) {
                                     browserHistory.push({pathname:`/manageCrew/` + reply, state: {eventName: name}});
                                 } else if(type === "member") {
                                     browserHistory.push({pathname:`/manageMember/` + reply, state: {societyName: name}});
+                                } else if(type === "participant") {
+                                    browserHistory.push({pathname:`/manageParticipant/` + reply, state: {eventName: name}});
                                 }
                             }
                         }

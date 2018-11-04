@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
+import { confirmAlert } from 'react-confirm-alert'; 
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
@@ -25,6 +26,52 @@ class ManageParticipant extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0)
+    }
+
+    handleApprove(event) {
+        let studentId = event.target.value;
+        this.setState({studentId: studentId})
+
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h1>Approval Confirmation</h1>
+                            <p>Are you sure to approve this participant?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {
+                                        let data = {
+                                            studentId: this.state.studentId,
+                                            eventId: this.props.params.eventId
+                                        }
+                                        this.props.onUpdateData("participant", data, this.props.location.state["eventName"]);
+                                    }
+                                }/>
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
+          })
+    }
+
+    handleDelete() {
+        confirmAlert({
+            title: 'Delete Confirmation',
+            message: 'Are you sure to delete this participant?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => {
+                    console.log('Click Yes');
+                }
+              },
+              {
+                label: 'No',
+                onClick: () => console.log('Click No')
+              }
+            ]
+          })
     }
 
     render() {
