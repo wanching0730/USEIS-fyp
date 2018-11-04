@@ -4,8 +4,8 @@ import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../style/society.css';
 import { Link } from 'react-router';
+import '../style/table.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -81,52 +81,46 @@ class CommitteeBoard extends Component {
                 <NavBar />
 
                 <div style={{ margin: 20 }}>
-                    
-                </div>
                     {breadCrumb}
-                <div>
-
-                    {this.props.loading ?
-                        [<LoadingBar />]
-                        :
-                        [
-                            <div>
-                                <MuiThemeProvider>
-
-                                <div className="container" id="tableContainer">
-                                    <div className="row">
-                                        <div className="panel-body">
-                                            <table className="table table-hover table-light" border="1">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No.</th>
-                                                        <th>Name</th>
-                                                        <th>IC Number</th>   
-                                                        <th>Course</th>  
-                                                        <th>Year and Sem</th> 
-                                                        <th>Phone Number</th>   
-                                                        <th>Email Address</th>   
-                                                        <th>Position</th>                 
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    {rows}
-                                                </tbody>
-                                            </table>
-
-                                            <div style= {{ textAlign: "center" }}>
-                                                <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                </MuiThemeProvider>
-                            </div>
-                        ]
-                    }
                 </div>
+
+                {this.props.loading ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div>
+                            <MuiThemeProvider>
+
+                            <div className="container" id="committeeContainer">
+                                <div className="row"> 
+                                    <table id="table1" border="1">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Name</th>
+                                                <th>IC Number</th>   
+                                                <th>Course</th>  
+                                                <th>Year and Sem</th> 
+                                                <th>Phone Number</th>   
+                                                <th>Email Address</th>   
+                                                <th>Position</th>                 
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {rows}
+                                        </tbody>
+                                    </table>
+
+                                    <div style= {{ margin: "0 auto" }}>
+                                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                    </div>  
+                                </div>
+                            </div>
+                            </MuiThemeProvider>
+                        </div>
+                    ]
+                }
             </div>
         );
     };

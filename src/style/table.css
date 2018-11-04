@@ -101,4 +101,13 @@ only screen and (max-width: 760px),
 	#myEventContainer #table1 td:nth-of-type(8):before { content: "Vegetarian"; }
 	#myEventContainer #table1 td:nth-of-type(9):before { content: "Rating Status"; }
 	#myEventContainer #table1 td:nth-of-type(10):before { content: "Actions"; }
+
+	#committeeContainer #table1 td:nth-of-type(1):before { content: "No."; }
+	#committeeContainer #table1 td:nth-of-type(2):before { content: "Name"; }
+	#committeeContainer #table1 td:nth-of-type(3):before { content: "IC Number"; }
+	#committeeContainer #table1 td:nth-of-type(4):before { content: "Course"; }
+	#committeeContainer #table1 td:nth-of-type(5):before { content: "Year and Sem"; }
+	#committeeContainer #table1 td:nth-of-type(6):before { content: "Phone Number"; }
+	#committeeContainer #table1 td:nth-of-type(7):before { content: "Email Address"; }
+	#committeeContainer #table1 td:nth-of-type(8):before { content: "Position"; }
 }
