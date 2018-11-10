@@ -4,7 +4,6 @@ import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import { confirmAlert } from 'react-confirm-alert'; 
-import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
 import '../style/table.css';
@@ -14,6 +13,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
+import { deleteParticipation } from '../actions/delete-action';
 
 class ManageParticipant extends Component {
 
@@ -22,6 +22,9 @@ class ManageParticipant extends Component {
 
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveData("eventParticipant", this.props.params.eventId);
+
+        this.handleApprove = this.handleApprove.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -55,23 +58,28 @@ class ManageParticipant extends Component {
           })
     }
 
-    handleDelete() {
+    handleDelete(event) {
+        let targetParticipantId = event.target.value;
+        let targetEventId = this.props.params.eventId;
         confirmAlert({
-            title: 'Delete Confirmation',
-            message: 'Are you sure to delete this participant?',
-            buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-                    console.log('Click Yes');
-                }
-              },
-              {
-                label: 'No',
-                onClick: () => console.log('Click No')
-              }
-            ]
-          })
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h1>Delete Confirmation</h1>
+                            <p>Are you sure to delete this participant?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {    
+                                if(this.props.userName.substring(0,2) === "00") 
+                                this.props.onDeleteParticipation("staffParticipation", targetParticipantId, targetEventId);
+                            else 
+                                this.props.onDeleteParticipation("studentParticipation", targetParticipantId, targetEventId);
+                            }}/>
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
+        })
     }
 
     render() {
@@ -103,7 +111,7 @@ class ManageParticipant extends Component {
                             <td>{participant["email"]}</td>
                             <td>{participant["vegetarian"]}</td>
                             {approvedIcon}
-                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
+                            <td><li value={participant["studentId"]} onClick={(event) => this.handleDelete(event)} className="fa fa-trash"></li></td>
                         </tr>
                     )
                 }
@@ -178,6 +186,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         eventParticipant: state.data.eventParticipant,
+        userName: state.auth.userName,
         loading: state.data.loading
     };
 };
@@ -186,6 +195,7 @@ const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveData: retrieveData,
       onUpdateData: updateDouble,
+      onDeleteParticipation: deleteParticipation,
       onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };

@@ -82,7 +82,7 @@ class ManageCrew extends Component {
                     </MuiThemeProvider>
                 )
             }
-          })
+        })
     }
 
     render() {
@@ -193,7 +193,6 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         eventCrew: state.data.eventCrew,
-        userId: state.auth.id,
         userName: state.auth.userName,
         loading: state.data.loading
     };
