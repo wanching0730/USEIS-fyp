@@ -165,7 +165,7 @@ class PerEvent extends Component {
                 buttons =
                     <div id="div3">
                         <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
-                        <RaisedButton id="buttons"mlabel="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                        <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                     </div>
             } else {
                 buttons =

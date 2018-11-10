@@ -185,5 +185,17 @@ export function deleteData(type, id, eventId) {
         return fetch(`http://localhost:5000/delete/staffEvent/` + id + '/' + eventId, {
             method: 'DELETE'
         });
-    }
+    } else if(type === "eventCrew") {
+        return fetch(`http://localhost:5000/delete/eventCrew/` + id + '/' + eventId, {
+            method: 'DELETE'
+        });
+    } else if(type === "studentParticipant") {
+        return fetch(`http://localhost:5000/delete/studentParticipant/` + id + '/' + eventId, {
+            method: 'DELETE'
+        });
+    } else if(type === "staffParticipant") {
+        return fetch(`http://localhost:5000/delete/staffParticipant/` + id + '/' + eventId, {
+            method: 'DELETE'
+        });
+    } 
 }

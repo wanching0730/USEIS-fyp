@@ -5,7 +5,6 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
-import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { Link } from 'react-router';
 import '../style/table.css';
 import '../style/alert.css';
@@ -14,16 +13,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
+import { deleteParticipation } from '../actions/delete-action';
 
 class ManageCrew extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {studentId: -1};
+        this.state = {
+            studentId: -1
+        };
 
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveData("eventCrew", this.props.params.eventId);
+
+        this.handleApprove = this.handleApprove.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -59,7 +64,9 @@ class ManageCrew extends Component {
         }, 2000);
     }
 
-    handleDelete() {
+    handleDelete(event) {
+        let targetCrewId = event.target.value;
+        let targetEventId = this.props.params.eventId;
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
@@ -67,7 +74,9 @@ class ManageCrew extends Component {
                         <div className='custom-alert'>
                             <h1>Delete Confirmation</h1>
                             <p>Are you sure to delete this crew?</p>
-                            <RaisedButton label="Yes" primary={true} onClick={() => console.log("clicked yes")}/>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {    
+                                this.props.onDeleteParticipation("eventCrew", targetCrewId, targetEventId);
+                            }}/>
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
                         </div>
                     </MuiThemeProvider>
@@ -107,7 +116,7 @@ class ManageCrew extends Component {
                             <td>{crew["email"]}</td>
                             <td>{crew["position"]}</td>
                             {approvedIcon}
-                            <td><Link onClick={this.handleDelete}><FontAwesome.FaTrash /></Link></td>
+                            <td><li value={crew["studentId"]} onClick={(event) => this.handleDelete(event)} className="fa fa-trash"></li></td>
                         </tr>
                     )
                 }
@@ -184,6 +193,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         eventCrew: state.data.eventCrew,
+        userId: state.auth.id,
+        userName: state.auth.userName,
         loading: state.data.loading
     };
 };
@@ -192,6 +203,7 @@ const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveData: retrieveData,
       onUpdateData: updateDouble,
+      onDeleteParticipation: deleteParticipation,
       onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
