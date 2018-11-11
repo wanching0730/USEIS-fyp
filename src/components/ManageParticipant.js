@@ -31,9 +31,8 @@ class ManageParticipant extends Component {
         window.scrollTo(0, 0)
     }
 
-    handleApprove(event) {
-        let studentId = event.target.value;
-        this.setState({studentId: studentId})
+    handleApprove(event, username) {
+        let targetParticipantId = event.target.value;
 
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -44,10 +43,13 @@ class ManageParticipant extends Component {
                             <p>Are you sure to approve this participant?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {
                                         let data = {
-                                            studentId: this.state.studentId,
+                                            id: targetParticipantId,
                                             eventId: this.props.params.eventId
                                         }
-                                        this.props.onUpdateData("participant", data, this.props.location.state["eventName"]);
+                                        if(username.substring(0,2) === "00") 
+                                            this.props.onUpdateData("staffParticipant", data, this.props.location.state["eventName"]);
+                                        else 
+                                        this.props.onUpdateData("studentParticipant", data, this.props.location.state["eventName"]);
                                     }
                                 }/>
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
@@ -58,7 +60,7 @@ class ManageParticipant extends Component {
           })
     }
 
-    handleDelete(event) {
+    handleDelete(event, username) {
         let targetParticipantId = event.target.value;
         let targetEventId = this.props.params.eventId;
         confirmAlert({
@@ -69,10 +71,10 @@ class ManageParticipant extends Component {
                             <h1>Delete Confirmation</h1>
                             <p>Are you sure to delete this participant?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {    
-                                if(this.props.userName.substring(0,2) === "00") 
-                                this.props.onDeleteParticipation("staffParticipation", targetParticipantId, targetEventId);
-                            else 
-                                this.props.onDeleteParticipation("studentParticipation", targetParticipantId, targetEventId);
+                                if(username.substring(0,2) === "00") 
+                                    this.props.onDeleteParticipation("staffParticipation", targetParticipantId, targetEventId);
+                                else 
+                                    this.props.onDeleteParticipation("studentParticipation", targetParticipantId, targetEventId);
                             }}/>
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
                         </div>
@@ -84,40 +86,73 @@ class ManageParticipant extends Component {
 
     render() {
 
-        const { RaisedButtonStyle } = styles;
-        let eventParticipant = this.props.eventParticipant;
-        var message = <div></div>;
-        var rows = [];
+        console.log(this.props.studentParticipant);
+        console.log(this.props.staffParticipant);
 
-        if(eventParticipant != null) {
-            if(eventParticipant.length != 0) {
-                for(var i = 0; i < eventParticipant.length; i++) {
-                    let participant = eventParticipant[i];
+        const { RaisedButtonStyle } = styles;
+        let studentParticipants = this.props.studentParticipant;
+        let staffParticipants = this.props.staffParticipant;
+        var message = studentMessage = staffMessage = <div></div>;
+        var studentRows = staffRows = studentHeader = staffHeader = [];
+
+        if(studentParticipants != null || staffParticipants != null) {
+            if(studentParticipants.length != 0) {
+                for(var i = 0; i < studentParticipants.length; i++) {
+                    let studentParticipant = studentParticipants[i];
                     var approvedIcon;
 
-                    if(participant["participantStatus"] == 1) 
+                    if(studentParticipant["participantStatus"] == 1) 
                         approvedIcon = <td><li className="fa fa-check"></li></td>
                     else 
-                        approvedIcon = <td><li value={participant["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li></td>
+                        approvedIcon = <td><li value={studentParticipant["id"]} onClick={(event) => this.handleApprove(event, studentParticipant["username"])} className="fa fa-plus"></li></td>
 
-                    rows.push(
+                    studentRows.push(
                         <tr> 
                             <td>{i+1}</td>
-                            <td>{participant["studentName"]}</td>
-                            <td>{participant["ic"]}</td>
-                            <td>{participant["course"]}</td>
-                            <td>Y{participant["year"]}S{participant["semester"]}</td>
-                            <td>{participant["contact"]}</td>
-                            <td>{participant["email"]}</td>
-                            <td>{participant["vegetarian"]}</td>
+                            <td>{studentParticipant["name"]}</td>
+                            <td>{studentParticipant["ic"]}</td>
+                            <td>{studentParticipant["course"]}</td>
+                            <td>Y{studentParticipant["year"]}S{studentParticipant["semester"]}</td>
+                            <td>{studentParticipant["contact"]}</td>
+                            <td>{studentParticipant["email"]}</td>
+                            <td>{studentParticipant["vegetarian"]}</td>
                             {approvedIcon}
-                            <td><li value={participant["studentId"]} onClick={(event) => this.handleDelete(event)} className="fa fa-trash"></li></td>
+                            <td><li value={studentParticipant["id"]} onClick={(event) => this.handleDelete(event, studentParticipant["username"])} className="fa fa-trash"></li></td>
                         </tr>
                     )
                 }
             } else {
-                message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No participant for this event</div>;
+                studentMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No student participant for this event</div>;
             }
+
+            if(staffParticipants.length != 0) {
+                for(var i = 0; i < staffParticipants.length; i++) {
+                    let staffParticipant = staffParticipants[i];
+                    var approvedIcon;
+
+                    if(staffParticipant["participantStatus"] == 1) 
+                        approvedIcon = <td><li className="fa fa-check"></li></td>
+                    else 
+                        approvedIcon = <td><li value={staffParticipant["id"]} onClick={(event) => this.handleApprove(event, staffParticipant["username"])} className="fa fa-plus"></li></td>
+
+                    staffRows.push(
+                        <tr> 
+                            <td>{i+1}</td>
+                            <td>{staffParticipant["name"]}</td>
+                            <td>{staffParticipant["ic"]}</td>
+                            <td>{staffParticipant["contact"]}</td>
+                            <td>{staffParticipant["email"]}</td>
+                            <td>{staffParticipant["vegetarian"]}</td>
+                            {approvedIcon}
+                            <td><li value={staffParticipant["id"]} onClick={(event) => this.handleDelete(event, staffParticipant["username"])} className="fa fa-trash"></li></td>
+                        </tr>
+                    )
+                }
+            } else {
+                staffMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No staff participant for this event</div>;
+            } 
+        } else {
+            message = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No participant for this event</div>;
         }
         
         return (
@@ -139,8 +174,7 @@ class ManageParticipant extends Component {
                     [
                         <div>
                             <MuiThemeProvider>
-
-                                <div className="container" id="participantContainer">
+                                <div className="container" id="studentParticipantContainer">
                                     <div className="row"> 
                                         <table id="table1" border="1">
                                             <thead>
@@ -158,15 +192,41 @@ class ManageParticipant extends Component {
                                             </thead>
 
                                             <tbody>
-                                                {rows}
+                                                {studentRows}
                                             </tbody>
-                                        </table>
-
-                                        <div style= {{ margin: "0 auto" }}>
-                                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                                        </div>     
+                                        </table>    
+                                        {studentMessage}  
                                     </div>
                                 </div>
+
+                                <div className="container" id="staffParticipantContainer">
+                                    <div className="row"> 
+                                        <table id="table1" border="1">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Name</th>
+                                                    <th>IC Number</th>   
+                                                    <th>Phone Number</th>   
+                                                    <th>Email Address</th>   
+                                                    <th>Vegetarian</th>    
+                                                    <th  colSpan="2">Actions</th>        
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {staffRows}
+                                            </tbody>
+                                        </table>
+                                        {staffMessage}
+                                    </div>
+                                </div>
+
+                                {message}
+
+                                <div style= {{ textAlign: "center", marginTop: "20px" }}>
+                                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                </div>    
                             </MuiThemeProvider>
                         </div>
                     ]
@@ -185,8 +245,8 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-        eventParticipant: state.data.eventParticipant,
-        userName: state.auth.userName,
+        studentParticipant: state.data.studentParticipant,
+        staffParticipant: state.data.staffParticipant,
         loading: state.data.loading
     };
 };

@@ -26,7 +26,8 @@ const initialState = {
     eventCrew: null,
     comm: null,
     societyMembers: null,
-    eventParticipant: null,
+    studentParticipant: null,
+    staffParticipant: null,
    
     societies: null,
     events: null,
@@ -109,7 +110,8 @@ export default function dataReducer(state = initialState, { type, payload }) {
             });
         case RETRIEVE_PARTICIPANT:
             return Object.assign({}, state, {
-                eventParticipant: payload.eventParticipant,
+                studentParticipant: payload.studentParticipant,
+                staffParticipant: payload.staffParticipant,
                 loading: payload.loading
             });
         default: 

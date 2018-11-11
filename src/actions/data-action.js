@@ -84,15 +84,20 @@ export function retrieveSingleDataSuccessful(type, data) {
                 loading: false
             }
         }
-    } else if(type === "eventParticipant") {
+    } 
+}
+
+export function retrieveSingleMultipleDataSuccessful(type, data1, data2) {
+    if(type === "eventParticipant") {
         return {
             type: RETRIEVE_PARTICIPANT,
             payload: {
-                eventParticipant: data,
+                studentParticipant: data1,
+                staffParticipant: data2,
                 loading: false
             }
-        }
-    } 
+        };
+    }
 }
 
 export function retrieveAllDataSuccessful(type, data) {
@@ -286,12 +291,19 @@ export function retrieveData(type, id) {
                 console.log("society members in action: " + JSON.stringify(societyMembers));
                 dispatch(retrieveSingleDataSuccessful("societyMembers", societyMembers));
             }  else if(type === "eventParticipant") {
-                let eventParticipants = [];
-                for(var i = 0; i < reply.length; i++) {
-                    eventParticipants.push(reply[i]);
+                let studentParticipants = [];
+                let staffParticipants = [];
+                let students = reply["students"];
+                let staffs = reply["staffs"];
+                for(var i = 0; i < students.length; i++) {
+                    studentParticipants.push(students[i]);
                 }
-                console.log("event participants in action: " + JSON.stringify(eventParticipants));
-                dispatch(retrieveSingleDataSuccessful("eventParticipant", eventParticipants));
+                for(var i = 0; i < staffs.length; i++) {
+                    staffParticipants.push(staffs[i]);
+                }
+                console.log("student participants in action: " + JSON.stringify(studentParticipants));
+                console.log("staff participants in action: " + JSON.stringify(staffParticipants));
+                dispatch(retrieveSingleMultipleDataSuccessful("eventParticipant", studentParticipants, staffParticipants));
             }  
         });
     };
