@@ -14,7 +14,7 @@ import '../style/alert.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { retrieveAll, retrieveData, updateLoadingBar } from '../actions/data-action';
 import { create } from '../actions/post-action';
 
 class NewsFeed extends Component {
@@ -43,6 +43,7 @@ class NewsFeed extends Component {
         this.handleOwner = this.handleOwner.bind(this);
 
         this.props.onUpdateLoadingBar();
+        this.props.onRetrieveData("studentEvent", this.props.userId);
         this.props.onRetrieveAll("newsfeeds");
 
         setTimeout(() => {
@@ -73,22 +74,24 @@ class NewsFeed extends Component {
             }, () => this.setDefault());
         } 
         
-        if(this.props.events != null) {
-            let events = this.props.events;
-            let options = [];
-            for(var i = 0; i < events.length; i++) {
-                let event = events[i];
-                if(event["position"] == "chairperson" || event["position"] == "secretary") {
-                    options.push({
-                        value: event["eventId"],
-                        name: event["name"]
-                    });
+        setTimeout(() => {
+            if(this.props.userEvents != null) {
+                let events = this.props.userEvents;
+                let options = [];
+                for(var i = 0; i < events.length; i++) {
+                    let event = events[i];
+                    if(event["position"] == "chairperson" || event["position"] == "secretary") {
+                        options.push({
+                            value: event["eventId"],
+                            name: event["name"]
+                        });
+                    }
                 }
+                this.setState({
+                    eventOptions: options
+                }, () => this.setDefault());
             }
-            this.setState({
-                eventOptions: options
-            }, () => this.setDefault());
-        }
+        }, 1500);
     }
 
     openModal() {
@@ -217,6 +220,7 @@ class NewsFeed extends Component {
     }
 
     render() {
+        console.log("user event: " + this.props.userEvents);
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.props.newsfeeds;
         let filteredNewsfeeds = [];
@@ -388,18 +392,20 @@ const styles = {
 const mapStateToProps = (state, props) => {
     console.log("state in newsfeed: " + state.data.newsfeeds);
     return {
-      newsfeeds: state.data.newsfeeds,
-      societies: state.auth.societies,
-      events: state.auth.events,
-      loading: state.data.loading
+        userId: state.auth.id,
+        newsfeeds: state.data.newsfeeds,
+        societies: state.auth.societies,
+        userEvents: state.data.userEvents,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveAll: retrieveAll,
-      onCreate: create,
-      onUpdateLoadingBar: updateLoadingBar
+        onRetrieveAll: retrieveAll,
+        onRetrieveData: retrieveData,
+        onCreate: create,
+        onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
 
