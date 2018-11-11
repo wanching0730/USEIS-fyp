@@ -101,6 +101,10 @@ class NewsFeed extends Component {
     closeModal() {
         this.setState({modalIsOpen: false});
         console.log("closemodal ownerId:" + this.state.ownerId);
+    }
+
+    clickSave() {
+        this.setState({modalIsOpen: false});
 
         if(this.state.inputValue == "") {
             confirmAlert({
@@ -128,7 +132,7 @@ class NewsFeed extends Component {
                             ownerName: society["name"],
                             ownerCategory: society["category"]
                         }, () => {
-                            this.submit();
+                            this.submitData();
                         })
                         return;
                     }
@@ -142,7 +146,7 @@ class NewsFeed extends Component {
                             ownerName: event["name"],
                             ownerCategory: event["category"]
                         }, () => {
-                            this.submit();
+                            this.submitData();
                         })
                         return;
                     }
@@ -151,7 +155,7 @@ class NewsFeed extends Component {
           }
     }
 
-    submit() {
+    submitData() {
         let current = moment();
         let data = {
             ownerId: this.state.ownerId,
@@ -354,7 +358,7 @@ class NewsFeed extends Component {
                             <br/>
                             <textarea onChange={this.updateInputValue}></textarea>
                             <br/><br/>
-                            <RaisedButton label="Save" primary={true} style={RaisedButtonStyle} onClick={(event) => this.closeModal()}/>
+                            <RaisedButton label="Save" primary={true} style={RaisedButtonStyle} onClick={(event) => this.clickSave()}/>
                         </form>
                     
                     </Modal>

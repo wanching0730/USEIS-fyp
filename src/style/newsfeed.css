@@ -5,6 +5,11 @@
     margin-left: 20px;
 }
 
+.ReactModal__Content.ReactModal__Content--after-open {
+    border-radius: 20px !important;
+    border: 1px solid #083477 !important;
+}
+
 @media only screen and (max-width: 768px) {
     select, textarea {
         -webkit-appearance: none;
