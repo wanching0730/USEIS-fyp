@@ -91,7 +91,7 @@ class NewsFeed extends Component {
                     eventOptions: options
                 }, () => this.setDefault());
             }
-        }, 1500);
+        }, 2000);
     }
 
     openModal() {
@@ -134,7 +134,7 @@ class NewsFeed extends Component {
                     }
                 }
             } else {
-                let events = this.props.events;
+                let events = this.props.userEvents;
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
                     if(event["eventId"] == this.state.ownerId) {
@@ -239,8 +239,8 @@ class NewsFeed extends Component {
         } else {
             if(this.state.eventOptions != null) {
                 dropdown = <select value={this.state.ownerId} onChange={this.handleOwner}>
-                                    {this.state.eventOptions.map(this.mapItem)}
-                                </select>
+                                {this.state.eventOptions.map(this.mapItem)}
+                            </select>
             } else {
                 dropdown = "No events available";
             }
@@ -335,9 +335,9 @@ class NewsFeed extends Component {
 
                         <h2 ref={subtitle => this.subtitle = subtitle}>What's new?</h2>
                         <br/>
-                        <br/>
                         <form style={{textAlign:"center"}}>
-                            <label>Choose: </label>
+                            <label><strong>Choose: </strong></label>
+                            <br/>
                             <input type="radio" value="s" 
                                 checked={this.state.owner === 's'} 
                                 onChange={this.handleOptionChange} /> Society 
@@ -345,13 +345,15 @@ class NewsFeed extends Component {
                             <input type="radio" value="e" 
                                 checked={this.state.owner === 'e'} 
                                 onChange={this.handleOptionChange} /> Event
+                            <br/><br/>
+                            <label><strong>Post From: </strong></label>
                             <br/>
-                            <label>Post From: </label>
                             {dropdown}
+                            <br/><br/>
+                            <label><strong>Status: </strong></label>
                             <br/>
-                            <label>Status: </label>
-                            <input onChange={this.updateInputValue} />
-                            <br/>
+                            <textarea onChange={this.updateInputValue}></textarea>
+                            <br/><br/>
                             <RaisedButton label="Save" primary={true} style={RaisedButtonStyle} onClick={(event) => this.closeModal()}/>
                         </form>
                     
