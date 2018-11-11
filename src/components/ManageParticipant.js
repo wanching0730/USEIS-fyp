@@ -21,6 +21,7 @@ class ManageParticipant extends Component {
         super(props);
 
         this.props.onUpdateLoadingBar();
+        console.log("loading in par: " + this.props.loading);
         this.props.onRetrieveData("eventParticipant", this.props.params.eventId);
 
         this.handleApprove = this.handleApprove.bind(this);
@@ -87,13 +88,15 @@ class ManageParticipant extends Component {
     render() {
 
         console.log(this.props.studentParticipant);
-        console.log(this.props.staffParticipant);
+        console.log(window.screen.availWidth);
 
         const { RaisedButtonStyle } = styles;
         let studentParticipants = this.props.studentParticipant;
         let staffParticipants = this.props.staffParticipant;
-        var message = studentMessage = staffMessage = <div></div>;
-        var studentRows = staffRows = studentHeader = staffHeader = [];
+        var studentMessage = <div></div>;
+        var staffMessage = <div></div>;
+        var studentRows = [];
+        var staffRows = [];
 
         if(studentParticipants != null || staffParticipants != null) {
             if(studentParticipants.length != 0) {
@@ -151,9 +154,9 @@ class ManageParticipant extends Component {
             } else {
                 staffMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No staff participant for this event</div>;
             } 
-        } else {
-            message = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No participant for this event</div>;
-        }
+        } 
+
+        console.log(this.props.loading);
         
         return (
             <div id="outerDiv"> 
@@ -174,57 +177,72 @@ class ManageParticipant extends Component {
                     [
                         <div>
                             <MuiThemeProvider>
-                                <div className="container" id="studentParticipantContainer">
-                                    <div className="row"> 
-                                        <table id="table1" border="1">
-                                            <thead>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>Name</th>
-                                                    <th>IC Number</th>   
-                                                    <th>Course</th>  
-                                                    <th>Year and Sem</th> 
-                                                    <th>Phone Number</th>   
-                                                    <th>Email Address</th>   
-                                                    <th>Vegetarian</th>    
-                                                    <th  colSpan="2">Actions</th>        
-                                                </tr>
-                                            </thead>
+                                <div style= {{ textAlign: "center", marginTop: "20px"}}><strong>Student Participants</strong></div>
+                                {window.screen.availWidth < 768 && this.props.studentParticipant == null ?
+                                [
+                                    <div style= {{ textAlign: "center", marginTop: "20px"}}>{studentMessage}</div>
+                                ]
+                                :
+                                [
+                                    <div className="container" id="studentParticipantContainer">
+                                        <div className="row"> 
+                                            <table id="table1" border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Name</th>
+                                                        <th>IC Number</th>   
+                                                        <th>Course</th>  
+                                                        <th>Year and Sem</th> 
+                                                        <th>Phone Number</th>   
+                                                        <th>Email Address</th>   
+                                                        <th>Vegetarian</th>    
+                                                        <th  colSpan="2">Actions</th>        
+                                                    </tr>
+                                                </thead>
 
-                                            <tbody>
-                                                {studentRows}
-                                            </tbody>
-                                        </table>    
-                                        {studentMessage}  
+                                                <tbody>
+                                                    {studentRows}
+                                                </tbody>
+                                            </table>    
+                                            {studentMessage}  
+                                        </div>
                                     </div>
-                                </div>
+                                ]}
+                                
+                                <br/>
+                                <div style= {{ textAlign: "center", marginTop: "50px"}}><strong>Staff Participants</strong></div>
+                                {window.screen.availWidth < 768 && this.props.staffParticipant == null ?
+                                [
+                                    <div style= {{ textAlign: "center", marginTop: "20px"}}>{staffMessage}</div>
+                                ]
+                                :
+                                [
+                                    <div className="container" id="staffParticipantContainer">
+                                        <div className="row"> 
+                                            <table id="table1" border="1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Name</th>
+                                                        <th>IC Number</th>   
+                                                        <th>Phone Number</th>   
+                                                        <th>Email Address</th>   
+                                                        <th>Vegetarian</th>    
+                                                        <th  colSpan="2">Actions</th>        
+                                                    </tr>
+                                                </thead>
 
-                                <div className="container" id="staffParticipantContainer">
-                                    <div className="row"> 
-                                        <table id="table1" border="1">
-                                            <thead>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>Name</th>
-                                                    <th>IC Number</th>   
-                                                    <th>Phone Number</th>   
-                                                    <th>Email Address</th>   
-                                                    <th>Vegetarian</th>    
-                                                    <th  colSpan="2">Actions</th>        
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                {staffRows}
-                                            </tbody>
-                                        </table>
-                                        {staffMessage}
+                                                <tbody>
+                                                    {staffRows}
+                                                </tbody>
+                                            </table>
+                                            {staffMessage}
+                                        </div>
                                     </div>
-                                </div>
+                                ]}
 
-                                {message}
-
-                                <div style= {{ textAlign: "center", marginTop: "20px" }}>
+                                <div style= {{ textAlign: "center", marginTop: "40px" }}>
                                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                 </div>    
                             </MuiThemeProvider>
