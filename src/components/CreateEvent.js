@@ -60,11 +60,13 @@ class CreateEvent extends Component {
           venue: event["venue"],
           category: event["category"],
           fee: event["fee"],
+          ssCategory: event["ssCategory"],
           ssPoint: event["ssPoint"],
           chairperson: event["chairperson"], 
           contact: event["contact"],
           boothId: event["boothId"],
-          selectedStartDate: moment(event["dateTime"])
+          selectedStartDate: moment(event["startDate"]),
+          selectedEndDate: moment(event["endDate"])
         });
         console.log("converted date: " + this.state.selectedStartDate);
       }
@@ -143,6 +145,10 @@ class CreateEvent extends Component {
   render() {
     console.log("society id in create event: " + JSON.stringify(this.props.params.id));
     console.log("category: " + this.state.category);
+
+    console.log("startDate: " + this.state.selectedStartDate);
+    console.log("endDate: " + this.state.selectedEndDate);
+    console.log("now: " + moment());
 
     const { RaisedButtonStyle } = styles;
 
