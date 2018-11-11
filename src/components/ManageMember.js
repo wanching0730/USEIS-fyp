@@ -97,7 +97,7 @@ class ManageMember extends Component {
                     rows.push(
                         <tr> 
                             <td>{i+1}</td>
-                            <td>{member["name"]}</td>
+                            <td>{member["studentName"]}</td>
                             <td>{member["ic"]}</td>
                             <td>{member["course"]}</td>
                             <td>Y{member["year"]}S{member["semester"]}</td>

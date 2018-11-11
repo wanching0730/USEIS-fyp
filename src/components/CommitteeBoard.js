@@ -46,7 +46,7 @@ class CommitteeBoard extends Component {
                 rows.push(
                     <tr> 
                         <td>{i+1}</td>
-                        <td>{comm["name"]}</td>
+                        <td>{comm["studentName"]}</td>
                         <td>{comm["ic"]}</td>
                         <td>{comm["course"]}</td>
                         <td>Y{comm["year"]}S{comm["semester"]}</td>

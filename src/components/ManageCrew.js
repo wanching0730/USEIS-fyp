@@ -108,7 +108,7 @@ class ManageCrew extends Component {
                     rows.push(
                         <tr> 
                             <td>{i+1}</td>
-                            <td>{crew["name"]}</td>
+                            <td>{crew["studentName"]}</td>
                             <td>{crew["ic"]}</td>
                             <td>{crew["course"]}</td>
                             <td>Y{crew["year"]}S{crew["semester"]}</td>

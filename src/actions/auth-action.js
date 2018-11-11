@@ -97,7 +97,7 @@ export function loginUser(postData) {
             let token = reply["token"];
             var societies = [];
             
-            let userName = user[0]["name"];
+            let userName = user[0]["username"];
             let userId = user[0]["userId"];
 
             if(userName.substring(0,2) === "00") {

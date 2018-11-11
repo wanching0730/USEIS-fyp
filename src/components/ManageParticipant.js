@@ -103,7 +103,7 @@ class ManageParticipant extends Component {
                     rows.push(
                         <tr> 
                             <td>{i+1}</td>
-                            <td>{participant["name"]}</td>
+                            <td>{participant["studentName"]}</td>
                             <td>{participant["ic"]}</td>
                             <td>{participant["course"]}</td>
                             <td>Y{participant["year"]}S{participant["semester"]}</td>
