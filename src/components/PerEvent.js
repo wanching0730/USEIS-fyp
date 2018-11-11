@@ -10,6 +10,7 @@ import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { confirmAlert } from 'react-confirm-alert'; 
 import "../../node_modules/react-confirm-alert/src/react-confirm-alert.css";
 import $ from 'jquery';
+import moment from "moment";
 import "../style/sidenav.css";
 import "../style/display.css";
 
@@ -233,7 +234,7 @@ class PerEvent extends Component {
                                             <h5>Soft Skill Points:</h5>
                                             <p>{event["ssPoint"]}</p>
                                             <h5>Soft Skill Category:</h5>
-                                            <p>???</p>
+                                            <p>{event["ssCategory"]}</p>
                                             <br/><br/>
                                         </div>
                                         <div class="column middle">
@@ -247,10 +248,10 @@ class PerEvent extends Component {
                                                 toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security.
                                             </p>
                                             <br/><br/>
-                                            <h5>Date:</h5>
-                                            <p>{event["dateTime"]}</p>
-                                            <h5>Time:</h5>
-                                            <p>{event["dateTime"]}</p>
+                                            <h5>Start Date:</h5>
+                                            <p>{moment(event["startDate"]).format("YYYY-MM-DD HH:mm")}</p>
+                                            <h5>End Date:</h5>
+                                            <p>{moment(event["endDate"]).format("YYYY-MM-DD HH:mm")}</p>
                                             <h5>Venue:</h5>
                                             <p>{event["venue"]}</p>
                                             <h5>Fee:</h5>

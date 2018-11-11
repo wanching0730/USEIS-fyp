@@ -48,29 +48,28 @@ class CreateEvent extends Component {
     this.setOrganiserId();
 
     // wait after 2 seconds just set state
-    setTimeout(function() { 
-      if(this.props.event != null && this.props.params.type == "event") {
-        let event = this.props.event;
-        this.setState({
-          name: event["name"],
-          dateTime: event["dateTime"],
-          organiserId: event["organiserId"],
-          organiserName: event["organiserName"],
-          desc: event["desc"], 
-          venue: event["venue"],
-          category: event["category"],
-          fee: event["fee"],
-          ssCategory: event["ssCategory"],
-          ssPoint: event["ssPoint"],
-          chairperson: event["chairperson"], 
-          contact: event["contact"],
-          boothId: event["boothId"],
-          selectedStartDate: moment(event["startDate"]),
-          selectedEndDate: moment(event["endDate"])
-        });
-        console.log("converted date: " + this.state.selectedStartDate);
-      }
-    }.bind(this), 2000)
+    if(this.props.event != null && this.props.params.type == "event") {
+      let event = this.props.event;
+      this.setState({
+        name: event["name"],
+        organiserId: event["organiserId"],
+        organiserName: event["organiserName"],
+        desc: event["desc"], 
+        venue: event["venue"],
+        category: event["category"],
+        fee: event["fee"],
+        ssCategory: event["ssCategory"],
+        ssPoint: event["ssPoint"],
+        chairperson: event["chairperson"], 
+        contact: event["contact"],
+        boothId: event["boothId"],
+        selectedStartDate: moment(event["startDate"]),
+        selectedEndDate: moment(event["endDate"])
+      });
+      console.log("event date: " + event["startDate"]);
+      console.log("event date: " + moment());
+      console.log("event date: " + moment(event["startDate"]));
+    }
   }
 
   setOrganiserId() {
@@ -109,24 +108,29 @@ class CreateEvent extends Component {
       if(this.props.params.type == "society")
         this.props.onCreate("event", data);
       else {
-        if(data.startDate == '')
-          data.startDate = "" + moment(this.props.event["dateTime"]).format("YYYY-MM-DD hh:mm:ss")
+        if(data.startDate == '') {
+          data.startDate = "" + moment(this.props.event["startDate"]).format("YYYY-MM-DD HH:mm");
+        }
+        if(data.endDate == '') {
+          data.endDate = "" + moment(this.props.event["endDate"]).format("YYYY-MM-DD HH:mm");
+        }
         this.props.onUpdate("event", eventId, eventName, data);
       }
     }
   }
 
   handleStart(date) {
+    console.log("handle: " + date);
     this.setState({
       selectedStartDate: date,
-      startDate: "" + moment(date).format("YYYY-MM-DD hh:mm:ss")
+      startDate: "" + moment(date).format("YYYY-MM-DD HH:mm")
     });
   }
 
   handleEnd(date) {
     this.setState({
       selectedEndDate: date,
-      endDate: "" + moment(date).format("YYYY-MM-DD hh:mm:ss")
+      endDate: "" + moment(date).format("YYYY-MM-DD HH:mm")
     });
   }
 
@@ -225,7 +229,7 @@ class CreateEvent extends Component {
                         showTimeSelect
                         timeFormat="HH:mm"
                         timeIntervals={15}
-                        dateFormat="LLL"
+                        dateFormat="YYYY-MM-DD HH:mm:ss"
                         timeCaption="time"
                       />
                       <br/>
@@ -236,7 +240,7 @@ class CreateEvent extends Component {
                         showTimeSelect
                         timeFormat="HH:mm"
                         timeIntervals={15}
-                        dateFormat="LLL"
+                        dateFormat="YYYY-MM-DD HH:mm:ss"
                         timeCaption="time"
                       />
                       <br/>
