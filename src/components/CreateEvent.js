@@ -308,6 +308,7 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
+  console.log("loading in create event state: " + state.create.loading);
   return {
     createdEventId: state.create.createdEventId,
     event: state.data.event,

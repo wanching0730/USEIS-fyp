@@ -1,7 +1,7 @@
 import { getData, getAllData, getDataWithUserId } from '../utils/http_function';
 
 import {
-    UPDATE_LOADINGBAR,
+    UPDATE_RETRIEVE_LOADINGBAR,
     RETRIEVE_SOCIETIES,
     RETRIEVE_EVENTS,
     RETRIEVE_ONE_SOCIETY, 
@@ -20,7 +20,7 @@ import {
 
 export function updateLoadingBarSuccessful() {
     return {
-        type: UPDATE_LOADINGBAR,
+        type: UPDATE_RETRIEVE_LOADINGBAR,
         payload: {
             loading: true
         }

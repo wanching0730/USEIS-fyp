@@ -1,5 +1,5 @@
 import {
-    UPDATE_LOADINGBAR,
+    UPDATE_RETRIEVE_LOADINGBAR,
     RETRIEVE_ONE_SOCIETY,
     RETRIEVE_ONE_EVENT,
     RETRIEVE_ONE_SOCIETY_EVENTS,
@@ -39,7 +39,7 @@ const initialState = {
 
 export default function dataReducer(state = initialState, { type, payload }) {
     switch(type) {
-        case UPDATE_LOADINGBAR: 
+        case UPDATE_RETRIEVE_LOADINGBAR: 
             return Object.assign({}, state, {
                 loading: payload.loading
             });

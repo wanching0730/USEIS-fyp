@@ -1,5 +1,5 @@
 import {
-    UPDATE_LOADINGBAR,
+    UPDATE_POST_LOADINGBAR,
     CREATE_SOCIETY,
     CREATE_EVENT,
     CREATE_NEWSFEED,
@@ -22,7 +22,7 @@ const initialState = {
 
 export default function createReducer(state = initialState, { type, payload }) {
     switch(type) {
-        case UPDATE_LOADINGBAR: 
+        case UPDATE_POST_LOADINGBAR: 
             return Object.assign({}, state, {
                 loading: payload.loading
             });

@@ -3,7 +3,7 @@ import { createData, updateData, updateDataDouble } from '../utils/http_function
 import { confirmAlert } from 'react-confirm-alert';
 import '../style/alert.css';
 import {
-    UPDATE_LOADINGBAR,
+    UPDATE_POST_LOADINGBAR,
     CREATE_SOCIETY,
     CREATE_EVENT,
     CREATE_NEWSFEED,
@@ -16,7 +16,7 @@ import {
 
 export function updateLoadingBarSuccessful() {
     return {
-        type: UPDATE_LOADINGBAR,
+        type: UPDATE_POST_LOADINGBAR,
         payload: {
             loading: true
         }
