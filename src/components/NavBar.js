@@ -31,8 +31,10 @@ class NavBar extends Component {
             browserHistory.push("/faq");
         } else if(clickedTab == "manageBooth") {
             browserHistory.push("/manageBooth");
-        } else {
+        } else if(clickedTab == "manageProposal") {
             browserHistory.push("/manageProposal");
+        } else if(clickedTab == "aboutMe") {
+            browserHistory.push("/aboutMe");
         }
     }
 
@@ -147,6 +149,9 @@ class NavBar extends Component {
                                 <DropdownMenu left>
                                     <DropdownItem name="logout" onClick={this.logout}>
                                         Logout
+                                    </DropdownItem>
+                                    <DropdownItem name="aboutMe" onClick={this.onClick}>
+                                        About Me
                                     </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

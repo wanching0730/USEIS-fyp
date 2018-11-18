@@ -29,6 +29,7 @@ import SocietyEvents from './components/SocietyEvents';
 import RecruitmentBooth from './components/RecruitmentBooth';
 import SubmitProposal from './components/SubmitProposal';
 import Faq from './components/Faq';
+import AboutMe from './components/AboutMe';
 import './App.css';
 
 class App extends Component {
@@ -66,6 +67,7 @@ class App extends Component {
           <Route path="/recruitmentBooth" component={RecruitmentBooth}/>
           <Route path="/submitProposal" component={SubmitProposal}/>
           <Route path="/faq" component={Faq}/>
+          <Route path="/aboutMe" component={AboutMe}/>
         </Router>
         
     );

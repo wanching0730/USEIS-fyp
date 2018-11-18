@@ -73,9 +73,9 @@ class ManageParticipant extends Component {
                             <p>Are you sure to delete this participant?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {    
                                 if(username.substring(0,2) === "00") 
-                                    this.props.onDeleteParticipation("staffParticipation", targetParticipantId, targetEventId);
+                                    this.props.onDeleteParticipation("staffParticipant", targetParticipantId, targetEventId);
                                 else 
-                                    this.props.onDeleteParticipation("studentParticipation", targetParticipantId, targetEventId);
+                                    this.props.onDeleteParticipation("studentParticipant", targetParticipantId, targetEventId);
                             }}/>
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
                         </div>
