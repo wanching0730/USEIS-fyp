@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -11,7 +12,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create } from '../actions/post-action';
+import { create, updateLoadingBar } from '../actions/post-action';
 
 class RegisterSociety extends Component {
 
@@ -31,6 +32,8 @@ class RegisterSociety extends Component {
   }
 
   handleClick(event) {
+    this.props.onUpdateLoadingBar();
+
     let current = moment();
     let data = {
       societyId: this.props.params.societyId,
@@ -67,48 +70,53 @@ class RegisterSociety extends Component {
                 </Breadcrumb>
             </div>
 
-            <div className="container">
-              <div className="form-style-10">
-                <h1>Register {this.props.location.state["societyName"]}<span>Register society and looking forward for the upcoming events!</span></h1>
-                <form>
-                    <div class="section"><span>1</span>Allow Notification</div>
-                    <div class="inner-wrap">
-                      <label>Allow Email Notification</label>
-                      <ToggleButton
-                        value={ this.state.emailNoti || false }
-                        onToggle={(value) => {
-                            this.setState({
-                            emailNoti: !value,
-                            })
-                        }} />
-                      <br/>
-                      <label>Allow Web Notification</label>
-                      <ToggleButton
-                          value={ this.state.webNoti || false }
+            {this.props.loading ?
+            [<LoadingBar />]
+            :
+            [
+              <div className="container">
+                <div className="form-style-10">
+                  <h1>Register {this.props.location.state["societyName"]}<span>Register society and looking forward for the upcoming events!</span></h1>
+                  <form>
+                      <div class="section"><span>1</span>Allow Notification</div>
+                      <div class="inner-wrap">
+                        <label>Allow Email Notification</label>
+                        <ToggleButton
+                          value={ this.state.emailNoti || false }
                           onToggle={(value) => {
                               this.setState({
-                              webNoti: !value,
+                              emailNoti: !value,
                               })
                           }} />
-                      <br/>
-                      <ReactNotifications
-                        onRef={ref => (this.n = ref)} // Required
-                        title="Some Title" // Required
-                        body="This is the body!"
-                        icon="devices-logo.png"
-                        tag="abcdef"
-                        timeout="1000"
-                        onClick={event => this.handleNotiClick(event)}
-                      />
-                    </div>
+                        <br/>
+                        <label>Allow Web Notification</label>
+                        <ToggleButton
+                            value={ this.state.webNoti || false }
+                            onToggle={(value) => {
+                                this.setState({
+                                webNoti: !value,
+                                })
+                            }} />
+                        <br/>
+                        <ReactNotifications
+                          onRef={ref => (this.n = ref)} // Required
+                          title="Some Title" // Required
+                          body="This is the body!"
+                          icon="devices-logo.png"
+                          tag="abcdef"
+                          timeout="1000"
+                          onClick={event => this.handleNotiClick(event)}
+                        />
+                      </div>
 
-                    <div class="button-section">
-                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                      <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                    </div>
-                </form>
+                      <div class="button-section">
+                        <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                      </div>
+                  </form>
+                </div>
               </div>
-            </div>
+            ]}
           </div>
           </MuiThemeProvider>
       </div>
@@ -123,14 +131,17 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
+  console.log("loading in register society: " + state.create.loading);
   return {
-    id: state.auth.id
+    id: state.auth.id,
+    loading: state.create.loading
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
-    onCreate: create
+    onCreate: create,
+    onUpdateLoadingBar: updateLoadingBar
   }, dispatch);
 };
 
