@@ -146,14 +146,28 @@ class NavBar extends Component {
                                 <DropdownToggle nav caret>
                                     {this.props.userName}
                                 </DropdownToggle>
-                                <DropdownMenu left>
-                                    <DropdownItem name="logout" onClick={this.logout}>
-                                        Logout
-                                    </DropdownItem>
-                                    <DropdownItem name="aboutMe" onClick={this.onClick}>
-                                        About Me
-                                    </DropdownItem>
-                                </DropdownMenu>
+    
+                                {this.props.userName.substring(0,2) != "00" ? 
+                                [
+                                    <DropdownMenu left>
+                                        <DropdownItem name="aboutMe" onClick={this.onClick}>
+                                            About Me
+                                        </DropdownItem>
+                                        <DropdownItem name="logout" onClick={this.logout}>
+                                            Logout
+                                        </DropdownItem>             
+                                    </DropdownMenu>
+                                ]
+                                : 
+                                [
+                                    <DropdownMenu left>
+                                        <DropdownItem name="logout" onClick={this.logout}>
+                                            Logout
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                ]
+                                }
+                                       
                             </UncontrolledDropdown>
                         </Nav>
                     </Collapse>

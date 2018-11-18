@@ -11,6 +11,7 @@ const initialState = {
     userName: null,
     userId: null,
     id: null,
+    user: null,
     societies: null,
     isAuthenticated: false,
     isAuthenticating: false,
@@ -26,6 +27,7 @@ export default function authReducer(state = initialState, { type, payload }) {
                 userName: payload.userName,
                 userId: payload.userId,
                 id: payload.id,
+                user: payload.user,
                 societies: payload.societies,
                 token: payload.token,
                 isAuthenticated: true

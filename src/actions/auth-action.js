@@ -21,7 +21,7 @@ export function getFcmTokenSuccessful(token, messaging) {
     }
 }
 
-export function loginUserSuccessful(userName, userId, id, societies, token) {
+export function loginUserSuccessful(userName, userId, id, user, societies, token) {
     localStorage.setItem('token', token);
 
     return {
@@ -30,6 +30,7 @@ export function loginUserSuccessful(userName, userId, id, societies, token) {
             userName: userName,
             userId: userId,
             id: id,
+            user: user,
             societies: societies,
             token: token
         }
@@ -125,7 +126,7 @@ export function loginUser(postData) {
                     }
                 }
 
-                dispatch(loginUserSuccessful(userName, userId, id, societies, token));
+                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token));
             }
 
             browserHistory.push("/home");
