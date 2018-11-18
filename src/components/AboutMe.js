@@ -33,48 +33,47 @@ class AboutMe extends Component {
                         </Breadcrumb>
                     </div>
 
-                    <div style= {{ textAlign: "center" }}>
-                        <RaisedButton label="My Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSocieties(event)}/>
-                        <RaisedButton label="My Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
-                    </div>
-
                     <div>
-                        <div className="container" id="myEventContainer">
+                        <div className="aboutMeContainer">
+                            <h2>About {user["studentName"]}</h2>
                             <div className="row">
-                                <table id="table1">
-                                    <thead>
+                                <table id="aboutMeTable">
                                         <tr>
-                                            <th>Full Name</th>
-                                            <th>StudentID</th>
-                                            <th>Email</th> 
-                                            <th>Phone Number</th> 
-                                            <th>Course</th>
-                                            <th>Year</th>
-                                            <th>Semester</th>          
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
+                                            <th><i className="fa fa-user"></i>   Full Name</th>
                                             <td>{user["studentName"]}</td>
-                                            <td>{user["username"]}</td>
-                                            <td>{user["email"]}</td>
-                                            <td>{user["contact"]}</td>
-                                            <td>{user["course"]}</td>
-                                            <td>{user["year"]}</td>
-                                            <td>{user["semester"]}</td>
                                         </tr>
-                                    </tbody>
+                                        <tr> 
+                                            <th><i class="fa fa-id-card"></i>   StudentID</th>
+                                            <td>{user["username"]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><i class="fa fa-envelope-open"></i>   Email</th> 
+                                            <td>{user["email"]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><i class="fa fa-phone"></i>   Phone Number</th> 
+                                            <td>{user["contact"]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><i class="fa fa-book"></i>   Course</th>
+                                            <td>{user["course"]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><i class="fa fa-calendar"></i>   Year</th>
+                                            <td>{user["year"]}</td>
+                                        </tr>
+                                        <tr>
+                                            <th><i class="fa fa-calendar"></i>  Semester</th> 
+                                            <td>{user["semester"]}</td>
+                                        </tr>         
                                 </table>
-                                    
-
+                                
                                 <div style= {{ margin: "0 auto" }}>
                                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                 </div>
                             </div>
                         </div>  
                     </div>
-                }
                 </div>
                 </MuiThemeProvider>
             </div>
