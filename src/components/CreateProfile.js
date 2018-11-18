@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,7 +10,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create, update } from '../actions/post-action';
+import { create, update, updateLoadingBar } from '../actions/post-action';
 import { retrieveData } from '../actions/data-action';
 
 class CreateProfile extends Component {
@@ -32,6 +33,7 @@ class CreateProfile extends Component {
 
     //console.log("nammeeee: " + this.props.society["name"]);
 
+    this.handleClick = this.handleClick.bind(this);
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
   }
 
@@ -53,6 +55,8 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
+    this.props.onUpdateLoadingBar();
+
     const { name, desc, vision, mission } = this.state;
 
     if(name == '' || desc == '' || vision == '' ||  mission == '') {
@@ -88,6 +92,7 @@ class CreateProfile extends Component {
   }
 
   render() {
+    console.log("loading flag: " + this.props.loading);
 
     const { RaisedButtonStyle } = styles;
 
@@ -129,46 +134,51 @@ class CreateProfile extends Component {
               {breadCrumb}
             </div>
 
-            <div className="container">
-              <div className="form-style-10">
-                { header }
-                <form>
-                    <div class="section"><span>1</span>Name &amp; Category</div>
-                    <div class="inner-wrap">
-                        <label>Society Name</label>  
-                        <input type="text" value={this.state.name} onChange={(event) => {
-                          this.setState({name:event.target.value});
-                          console.log("state value: " + this.state.name);
-                          }}/>
+            {this.props.loading ?
+            [<LoadingBar />]
+            :
+            [
+              <div className="container">
+                <div className="form-style-10">
+                  { header }
+                  <form>
+                      <div class="section"><span>1</span>Name &amp; Category</div>
+                      <div class="inner-wrap">
+                          <label>Society Name</label>  
+                          <input type="text" value={this.state.name} onChange={(event) => {
+                            this.setState({name:event.target.value});
+                            console.log("state value: " + this.state.name);
+                            }}/>
+                          <br/>
+                          <label>Society Category (Eg: Technology)</label>
+                          <select value={this.state.category} onChange={this.handleSocietyCategory}>
+                            {societyCategories.map(this.mapItem)}
+                          </select>
+                      </div>
+
+                      <div class="section"><span>2</span>Vision &amp; Mision</div>
+                      <div class="inner-wrap">
+                        <label>Society Vision</label>
+                        <input type="text" value={this.state.vision} onChange={(event) => {this.setState({vision:event.target.value})}}/>
                         <br/>
-                        <label>Society Category (Eg: Technology)</label>
-                        <select value={this.state.category} onChange={this.handleSocietyCategory}>
-                          {societyCategories.map(this.mapItem)}
-                        </select>
-                    </div>
+                        <label>Society Mision</label> 
+                        <input type="text" value={this.state.mission} onChange={(event) => {this.setState({mission:event.target.value})}}/>
+                      </div>
 
-                    <div class="section"><span>2</span>Vision &amp; Mision</div>
-                    <div class="inner-wrap">
-                      <label>Society Vision</label>
-                      <input type="text" value={this.state.vision} onChange={(event) => {this.setState({vision:event.target.value})}}/>
-                      <br/>
-                      <label>Society Mision</label> 
-                      <input type="text" value={this.state.mission} onChange={(event) => {this.setState({mission:event.target.value})}}/>
-                    </div>
+                      <div class="section"><span>3</span>Description</div>
+                          <div class="inner-wrap">
+                          <label>Society Description</label>
+                          <textarea id="txtArea" value={this.state.desc} onChange={(event) => {this.setState({desc:event.target.value})}}></textarea>
+                      </div>
 
-                    <div class="section"><span>3</span>Description</div>
-                        <div class="inner-wrap">
-                        <label>Society Description</label>
-                        <textarea id="txtArea" value={this.state.desc} onChange={(event) => {this.setState({desc:event.target.value})}}></textarea>
-                    </div>
-
-                    <div class="button-section">
-                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                      <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                    </div>
-                </form>
-              </div>
-            </div>
+                      <div class="button-section">
+                        <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                      </div>
+                  </form>
+                </div>
+             </div>
+            ]}
           </div>
           </MuiThemeProvider>
       </div>
@@ -185,7 +195,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     createdSocietyId: state.create.createdSocietyId,
-    society: state.data.society
+    society: state.data.society,
+    loading: state.create.loading
   };
 };
 
@@ -193,7 +204,8 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
     onUpdate: update,
-    onRetrieveData: retrieveData
+    onRetrieveData: retrieveData,
+    onUpdateLoadingBar: updateLoadingBar
   }, dispatch);
 };
 

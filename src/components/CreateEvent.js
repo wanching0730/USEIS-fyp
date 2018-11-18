@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -12,7 +13,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create, update } from '../actions/post-action';
+import { create, update, updateLoadingBar } from '../actions/post-action';
 
 class CreateEvent extends Component {
 
@@ -37,6 +38,9 @@ class CreateEvent extends Component {
       selectedEndDate: moment()
     }
 
+    console.log("loading flag: " + this.props.loading);
+
+    this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleEventCategory = this.handleEventCategory.bind(this);
@@ -82,6 +86,7 @@ class CreateEvent extends Component {
   }
 
   handleClick(event) {
+    this.props.onUpdateLoadingBar();
     // console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
     // console.log("end date: " + moment(this.state.selectedStartDate).format("YYYY-MM-DD hh:mm:ss"));
     // console.log("event category: " + this.state.eventCategory);
@@ -147,12 +152,13 @@ class CreateEvent extends Component {
   }
 
   render() {
-    console.log("society id in create event: " + JSON.stringify(this.props.params.id));
-    console.log("category: " + this.state.category);
+    console.log("loading flag: " + this.props.loading);
+    // console.log("society id in create event: " + JSON.stringify(this.props.params.id));
+    // console.log("category: " + this.state.category);
 
-    console.log("startDate: " + this.state.selectedStartDate);
-    console.log("endDate: " + this.state.selectedEndDate);
-    console.log("now: " + moment());
+    // console.log("startDate: " + this.state.selectedStartDate);
+    // console.log("endDate: " + this.state.selectedEndDate);
+    // console.log("now: " + moment());
 
     const { RaisedButtonStyle } = styles;
 
@@ -197,92 +203,97 @@ class CreateEvent extends Component {
                 {breadCrumb}
             </div>
 
-            <div className="container">
-              <div className="form-style-10">
-                {header}
-                <form>
-                    <div class="section"><span>1</span>Name &amp; Category &amp; Description</div>
-                    <div class="inner-wrap">
-                        <label>Event Name</label>  
-                        <input type="text" value={this.state.name} ref="name" onChange={(event) => {
-                          this.setState({name:event.target.value});
-                          console.log("state value: " + this.state.name);
-                          }}/>
+            {this.props.loading ?
+            [<LoadingBar />]
+            :
+            [
+              <div className="container">
+                <div className="form-style-10">
+                  {header}
+                  <form>
+                      <div class="section"><span>1</span>Name &amp; Category &amp; Description</div>
+                      <div class="inner-wrap">
+                          <label>Event Name</label>  
+                          <input type="text" value={this.state.name} ref="name" onChange={(event) => {
+                            this.setState({name:event.target.value});
+                            console.log("state value: " + this.state.name);
+                            }}/>
+                          <br/>
+                          <label>Event Category (Eg: Technology)</label>
+                          <select value={this.state.category} onChange={this.handleEventCategory}>
+                            {eventCategories.map(this.mapItem)}
+                          </select>
+                          <br/>
+                          <label>Event Description</label>
+                          <textarea name="desc" value={this.state.desc} onChange={(event) => {
+                            this.setState({desc: event.target.value});
+                          }}></textarea>
+                      </div>
+
+                      <div class="section"><span>2</span>Date &amp; Time &amp; Venue</div>
+                      <div class="inner-wrap">
+                        <label>Event Start Date &amp; Time </label>
+                        <DatePicker
+                          selected={this.state.selectedStartDate}
+                          onChange={this.handleStart.bind(this)}
+                          showTimeSelect
+                          timeFormat="HH:mm"
+                          timeIntervals={15}
+                          dateFormat="YYYY-MM-DD HH:mm:ss"
+                          timeCaption="time"
+                        />
                         <br/>
-                        <label>Event Category (Eg: Technology)</label>
-                        <select value={this.state.category} onChange={this.handleEventCategory}>
-                          {eventCategories.map(this.mapItem)}
+                        <label>Event End Date &amp; Time </label>
+                        <DatePicker
+                          selected={this.state.selectedEndDate}
+                          onChange={this.handleEnd.bind(this)}
+                          showTimeSelect
+                          timeFormat="HH:mm"
+                          timeIntervals={15}
+                          dateFormat="YYYY-MM-DD HH:mm:ss"
+                          timeCaption="time"
+                        />
+                        <br/>
+                        <label>Event Venue</label> 
+                        <input type="text" value={this.state.venue} name="venue" onChange={(event) => {this.setState({venue:event.target.value})}}/>
+                      </div>
+
+                      <div class="section"><span>3</span>Fee</div>
+                          <div class="inner-wrap">
+                          <label>Event Fee</label>
+                          <input type="text" value={this.state.fee} name="fee" onChange={(event) => {this.setState({fee:event.target.value})}}/>
+                      </div>
+
+                      <div class="section"><span>4</span>Organizing Chairperson Name &amp; Contact Number</div>
+                      <div class="inner-wrap">
+                        <label>Chairperson Name</label>
+                        <input type="text" value={this.state.chairperson} name="chairperson" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
+                        <br/>
+                        <label>Chairperson Contact Number</label> 
+                        <input type="text" value={this.state.contact} name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
+                        <br/>
+                      </div>
+
+                      <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
+                      <div class="inner-wrap">
+                        <label>Soft Skill Points</label>
+                        <input type="text" value={this.state.ssPoint} name="ssPoint" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
+                        <br/>
+                        <label>Soft Skill Category</label> 
+                        <select value={this.state.ssCategory} onChange={this.handleSoftskilltCategory}>
+                          {softSkillCategories.map(this.mapItem)}
                         </select>
                         <br/>
-                        <label>Event Description</label>
-                        <textarea name="desc" value={this.state.desc} onChange={(event) => {
-                          this.setState({desc: event.target.value});
-                        }}></textarea>
-                    </div>
+                      </div>
 
-                    <div class="section"><span>2</span>Date &amp; Time &amp; Venue</div>
-                    <div class="inner-wrap">
-                      <label>Event Start Date &amp; Time </label>
-                      <DatePicker
-                        selected={this.state.selectedStartDate}
-                        onChange={this.handleStart.bind(this)}
-                        showTimeSelect
-                        timeFormat="HH:mm"
-                        timeIntervals={15}
-                        dateFormat="YYYY-MM-DD HH:mm:ss"
-                        timeCaption="time"
-                      />
-                      <br/>
-                      <label>Event End Date &amp; Time </label>
-                      <DatePicker
-                        selected={this.state.selectedEndDate}
-                        onChange={this.handleEnd.bind(this)}
-                        showTimeSelect
-                        timeFormat="HH:mm"
-                        timeIntervals={15}
-                        dateFormat="YYYY-MM-DD HH:mm:ss"
-                        timeCaption="time"
-                      />
-                      <br/>
-                      <label>Event Venue</label> 
-                      <input type="text" value={this.state.venue} name="venue" onChange={(event) => {this.setState({venue:event.target.value})}}/>
-                    </div>
-
-                    <div class="section"><span>3</span>Fee</div>
-                        <div class="inner-wrap">
-                        <label>Event Fee</label>
-                        <input type="text" value={this.state.fee} name="fee" onChange={(event) => {this.setState({fee:event.target.value})}}/>
-                    </div>
-
-                    <div class="section"><span>4</span>Organizing Chairperson Name &amp; Contact Number</div>
-                    <div class="inner-wrap">
-                      <label>Chairperson Name</label>
-                      <input type="text" value={this.state.chairperson} name="chairperson" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
-                      <br/>
-                      <label>Chairperson Contact Number</label> 
-                      <input type="text" value={this.state.contact} name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
-                      <br/>
-                    </div>
-
-                    <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
-                    <div class="inner-wrap">
-                      <label>Soft Skill Points</label>
-                      <input type="text" value={this.state.ssPoint} name="ssPoint" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
-                      <br/>
-                      <label>Soft Skill Category</label> 
-                      <select value={this.state.ssCategory} onChange={this.handleSoftskilltCategory}>
-                        {softSkillCategories.map(this.mapItem)}
-                      </select>
-                      <br/>
-                    </div>
-
-                    <div class="button-section">
-                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                      <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                    </div>
-                </form>
+                      <div class="button-section">
+                        <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                      </div>
+                  </form>
+                </div>
               </div>
-            </div>
+            ]}
           </div>
           </MuiThemeProvider>
       </div>
@@ -299,14 +310,16 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     createdEventId: state.create.createdEventId,
-    event: state.data.event
+    event: state.data.event,
+    loading: state.create.loading
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
-    onUpdate: update
+    onUpdate: update,
+    onUpdateLoadingBar: updateLoadingBar
   }, dispatch);
 };
 

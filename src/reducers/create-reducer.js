@@ -1,4 +1,5 @@
 import {
+    UPDATE_LOADINGBAR,
     CREATE_SOCIETY,
     CREATE_EVENT,
     CREATE_NEWSFEED,
@@ -8,6 +9,8 @@ import {
 } from '../constant';
 
 const initialState = {
+    loading: false,
+
     createdSocietyId: null,
     createdEventId: null,
     createdNewsfeedId: null,
@@ -19,29 +22,40 @@ const initialState = {
 
 export default function createReducer(state = initialState, { type, payload }) {
     switch(type) {
+        case UPDATE_LOADINGBAR: 
+            return Object.assign({}, state, {
+                loading: payload.loading
+            });
+
         case CREATE_SOCIETY: 
             return Object.assign({}, state, {
-                createdSocietyId: payload.createdSocietyId
+                createdSocietyId: payload.createdSocietyId,
+                loading: payload.loading
             });
         case CREATE_EVENT:
             return Object.assign({}, state, {
-                createdEventId: payload.createdEventId
+                createdEventId: payload.createdEventId,
+                loading: payload.loading
             });
         case CREATE_NEWSFEED:
             return Object.assign({}, state, {
-                createdNewsfeedId: payload.createdNewsfeedId
+                createdNewsfeedId: payload.createdNewsfeedId,
+                loading: payload.loading
             });
         case CREATE_RATING:
             return Object.assign({}, state, {
-                createdRatingId: payload.createdRatingId
+                createdRatingId: payload.createdRatingId,
+                loading: payload.loading
             });
         case REGISTER_SOCIETY:
             return Object.assign({}, state, {
-                registeredSocietyId: payload.registeredSocietyId
+                registeredSocietyId: payload.registeredSocietyId,
+                loading: payload.loading
             });
         case REGISTER_EVENT:
             return Object.assign({}, state, {
-                registeredEventId: payload.registeredEventId
+                registeredEventId: payload.registeredEventId,
+                loading: payload.loading
             });
         default: 
         // return initial state

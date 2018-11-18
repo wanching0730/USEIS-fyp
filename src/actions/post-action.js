@@ -3,6 +3,7 @@ import { createData, updateData, updateDataDouble } from '../utils/http_function
 import { confirmAlert } from 'react-confirm-alert';
 import '../style/alert.css';
 import {
+    UPDATE_LOADINGBAR,
     CREATE_SOCIETY,
     CREATE_EVENT,
     CREATE_NEWSFEED,
@@ -13,11 +14,21 @@ import {
     UPDATE_EVENT
 } from '../constant';
 
+export function updateLoadingBarSuccessful() {
+    return {
+        type: UPDATE_LOADINGBAR,
+        payload: {
+            loading: true
+        }
+    };
+}
+
 export function createSocietySuccessful(societyId) {
     return {
         type: CREATE_SOCIETY,
         payload: {
-            createdSocietyId: societyId
+            createdSocietyId: societyId,
+            loading: false
         }
     }
 }
@@ -26,7 +37,8 @@ export function createEventSuccessful(eventId) {
     return {
         type: CREATE_EVENT,
         payload: {
-            createdEventId: eventId
+            createdEventId: eventId,
+            loading: false
         }
     }
 }
@@ -35,7 +47,8 @@ export function createNewsfeedSuccessful(newsfeedId) {
     return {
         type: CREATE_NEWSFEED,
         payload: {
-            createdNewsfeedId: newsfeedId
+            createdNewsfeedId: newsfeedId,
+            loading: false
         }
     }
 }
@@ -44,7 +57,8 @@ export function createRatingSuccessful(ratingId) {
     return {
         type: CREATE_RATING,
         payload: {
-            createdRatingId: ratingId
+            createdRatingId: ratingId,
+            loading: false
         }
     }
 }
@@ -53,7 +67,8 @@ export function registerSocietySuccessfully(registeredSocietyId) {
     return {
         type: REGISTER_SOCIETY,
         payload: {
-            registeredSocietyId: registeredSocietyId
+            registeredSocietyId: registeredSocietyId,
+            loading: false
         }
     }
 }
@@ -62,8 +77,16 @@ export function registerEventSuccessfully(registeredEventId) {
     return {
         type: REGISTER_EVENT,
         payload: {
-            registeredEventId: registeredEventId
+            registeredEventId: registeredEventId,
+            loading: false
         }
+    }
+}
+
+export function updateLoadingBar() {
+    console.log("update create loading bar called");
+    return function (dispatch) {
+        dispatch(updateLoadingBarSuccessful());
     }
 }
 
@@ -75,7 +98,6 @@ export function create(type, postData) {
 
         return createData(type, data).then(result => result.json()).then(reply => {
             console.log("post data reply: " + reply);
-
             if(reply != null) {
                 confirmAlert({
                     title: 'Message',

@@ -153,6 +153,7 @@ export function retrieveAllDataSuccessful(type, data) {
 }
 
 export function updateLoadingBar() {
+    console.log("update retrieve loading bar called");
     return function (dispatch) {
         dispatch(updateLoadingBarSuccessful());
     }
