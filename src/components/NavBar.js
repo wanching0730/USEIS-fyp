@@ -117,26 +117,32 @@ class NavBar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mr-auto" navbar>
                             <NavItem>
-                                <Link to="/home">Home</Link>
+                                <i class="fa fa-home"></i><Link to="/home">Home</Link>
                             </NavItem>
+                            &nbsp;
                             <NavItem>
-                                <Link to="/newsFeed">NewsFeed</Link>
+                                <i class="fa fa-align-left"></i><Link to="/newsFeed">NewsFeed</Link>
                             </NavItem>
+                            &nbsp;
                             <NavItem>
-                                <Link to="/society">Societies</Link>
+                                <i class="fa fa-globe"></i><Link to="/society">Societies</Link>
                             </NavItem>
+                            &nbsp;
                             <NavItem>
-                                <Link to="/event">Events</Link>
+                                <i class="fa fa-calendar"></i><Link to="/event">Events</Link>
                             </NavItem>
+                            &nbsp;
                             <NavItem>
-                                <Link to="/recruitmentBooth">Booths</Link>
+                                <i class="fa fa-compass"></i><Link to="/recruitmentBooth">Booths</Link>
                             </NavItem>
+                            &nbsp;
                             <NavItem>
-                                <Link to="/myProfile">My Profile</Link>
+                                <i class="fa fa-user"></i><Link to="/myProfile">My Profile</Link>
                             </NavItem>
+                            &nbsp;
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
-                                    Manage
+                                    <i class="fa fa-cog"></i>  Manage
                                 </DropdownToggle>
                                 {dropDownItem}
                             </UncontrolledDropdown>
@@ -144,7 +150,7 @@ class NavBar extends Component {
                         <Nav className="ml-auto" navbar>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
-                                    {this.props.userName}
+                                    <i class="fa fa-user-circle"></i> {this.props.userName}
                                 </DropdownToggle>
     
                                 {this.props.userName.substring(0,2) != "00" ? 

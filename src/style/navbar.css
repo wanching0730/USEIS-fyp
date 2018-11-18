@@ -35,6 +35,10 @@ Nav {
   width: 100px;
 }
 
+.dropdown-menu.show {
+  left: -50px !important;
+}
+
 @media screen and (max-width: 600px) {
   Nav {
     height: 100%;
