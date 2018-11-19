@@ -12,7 +12,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create, updateLoadingBar} from '../actions/post-action';
+import { create, updatePostLoadingBar} from '../actions/post-action';
 
 class RegisterEvent extends Component {
 
@@ -179,7 +179,7 @@ const mapStateToProps = (state, props) => {
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
-    onUpdateLoadingBar: updateLoadingBar
+    onUpdateLoadingBar: updatePostLoadingBar
   }, dispatch);
 };
 

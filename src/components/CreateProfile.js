@@ -10,7 +10,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create, update, updateLoadingBar } from '../actions/post-action';
+import { create, update, updatePostLoadingBar } from '../actions/post-action';
 import { retrieveData } from '../actions/data-action';
 
 class CreateProfile extends Component {
@@ -205,7 +205,7 @@ const mapActionsToProps = (dispatch, props) => {
     onCreate: create,
     onUpdate: update,
     onRetrieveData: retrieveData,
-    onUpdateLoadingBar: updateLoadingBar
+    onUpdateLoadingBar: updatePostLoadingBar
   }, dispatch);
 };
 

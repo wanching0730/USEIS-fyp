@@ -14,7 +14,7 @@ import {
     UPDATE_EVENT
 } from '../constant';
 
-export function updateLoadingBarSuccessful() {
+export function updatePostLoadingBarSuccessful() {
     return {
         type: UPDATE_POST_LOADINGBAR,
         payload: {
@@ -83,10 +83,10 @@ export function registerEventSuccessfully(registeredEventId) {
     }
 }
 
-export function updateLoadingBar() {
+export function updatePostLoadingBar() {
     console.log("update create loading bar called");
     return function (dispatch) {
-        dispatch(updateLoadingBarSuccessful());
+        dispatch(updatePostLoadingBarSuccessful());
     }
 }
 
@@ -119,10 +119,10 @@ export function create(type, postData) {
                                     dispatch(createEventSuccessful(reply));
                                     browserHistory.push('/myEvents');
                                 } else if(type === "registerSociety") {
-                                    dispatch(registerSocietySuccessfully);
+                                    dispatch(registerSocietySuccessfully());
                                     browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["societyName"]}});
                                 } else if(type === "staffRegisterEvent" || type == "studentRegisterEvent") {
-                                    dispatch(registerEventSuccessfully);
+                                    dispatch(registerEventSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
                                 }
                                 
