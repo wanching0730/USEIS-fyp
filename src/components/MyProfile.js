@@ -41,8 +41,6 @@ class MyProfile extends Component {
         const { imageStyle, RaisedButtonStyle } = styles;
         let societies = this.props.societies;
         let societyEvents = this.props.allSocietyEvents;
-        console.log("societies in profile: " + JSON.stringify(societies));
-        console.log("society events: " + JSON.stringify(this.props.societyEvents));
 
         if(societies != null && societyEvents != null) {
             var rows = [];
@@ -153,7 +151,6 @@ const styles = {
 }
 
 const mapStateToProps = (state, props) => {
-    console.log("state in society: " + state.data.societies);
     return {
         societies: state.auth.societies,
         allSocietyEvents: state.data.allSocietyEvents,

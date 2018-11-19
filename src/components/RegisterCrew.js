@@ -44,7 +44,6 @@ class RegisterCrew extends Component {
 
   handleClick(event) {
       this.displayText();
-      console.log("position: " + this.state.position);
       browserHistory.push("/myProfile");
   }
 
@@ -88,7 +87,6 @@ class RegisterCrew extends Component {
                         {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
                         <input type="text" onChange={(event) => {
                           this.setState({first_name:event.target.value});
-                          console.log("state value: " + this.state.first_name);
                           }}/>
                         <br/>
                         <label>Student ID (Eg: 15UEB02834)</label>

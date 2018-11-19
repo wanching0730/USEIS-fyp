@@ -18,8 +18,6 @@ import configureStore from './store/configureStore';
 
 const store = configureStore();
 
-console.log("State in store: " + JSON.stringify(store.getState()));
-
 ReactDOM.render(
     <Provider store={store}>
         <App />

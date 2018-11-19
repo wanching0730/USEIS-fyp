@@ -27,7 +27,6 @@ class SocietyEvents extends Component {
     render() {
 
         const { imageStyle, RaisedButtonStyle } = styles;
-        console.log("society's events: " + JSON.stringify(this.props.societyEvents));
 
         if(this.props.societyEvents != null) {
             var message = <div></div>;
@@ -136,7 +135,6 @@ const styles = {
 }
 
 const mapStateToProps = (state, props) => {
-    console.log("state in society: " + state.data.societies);
     return {
         societyEvents: state.data.societyEvents,
         loading: state.data.loading

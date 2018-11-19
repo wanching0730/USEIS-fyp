@@ -51,7 +51,6 @@ class NewsFeed extends Component {
             this.setState({
                 newsfeeds: this.props.newsfeeds
             });
-            console.log("newsfeeds in constructor: " + this.state.newsfeeds);
         }, 6000);
     }
 
@@ -101,7 +100,6 @@ class NewsFeed extends Component {
 
     closeModal() {
         this.setState({modalIsOpen: false});
-        console.log("closemodal ownerId:" + this.state.ownerId);
     }
 
     clickSave() {
@@ -169,8 +167,6 @@ class NewsFeed extends Component {
             type: this.state.owner
         };
 
-        console.log("owner data: " + JSON.stringify(data));
-
         this.props.onCreate("newsfeeds", data);
         
         setTimeout(() => {
@@ -227,13 +223,10 @@ class NewsFeed extends Component {
     }
 
     render() {
-        console.log("user event: " + this.props.userEvents);
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.props.newsfeeds;
         let filteredNewsfeeds = [];
         var dropdown;
-
-        console.log("newsfeed in render: " + newsfeeds);
             
         if(this.state.owner == "s") {
             if(this.state.societyOptions != null) {

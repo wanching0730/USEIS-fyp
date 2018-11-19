@@ -153,7 +153,6 @@ export function retrieveAllDataSuccessful(type, data) {
 }
 
 export function updateLoadingBar() {
-    console.log("update retrieve loading bar called");
     return function (dispatch) {
         dispatch(updateLoadingBarSuccessful());
     }
@@ -162,7 +161,6 @@ export function updateLoadingBar() {
 export function retrieveDataWithUserId(type, id, userId) {
     return function (dispatch) {
         return getDataWithUserId(type, id, userId).then(result => result.json()).then(reply => {
-            console.log("result of get society: " + JSON.stringify(reply));
 
             if(type === "studentSociety" || type === "staffSociety") {
                 let society = {
@@ -179,8 +177,6 @@ export function retrieveDataWithUserId(type, id, userId) {
 
                 dispatch(retrieveSingleDataSuccessful("society", society));
             } else if(type === "studentEvent" || type === "staffEvent") {
-                console.log("result of get event: " + JSON.stringify(reply));
-
                 let event = {
                     id: reply[0]["eventId"],
                     name: reply[0]["name"],
@@ -200,8 +196,6 @@ export function retrieveDataWithUserId(type, id, userId) {
                     participated: reply[0]["participated"],
                     authorized: reply[0]["authorized"]
                 }
-
-                console.log("event in action: " + JSON.stringify(event));
                 dispatch(retrieveSingleDataSuccessful("event", event));
             }
         });
@@ -211,8 +205,6 @@ export function retrieveDataWithUserId(type, id, userId) {
 export function retrieveData(type, id) {
     return function (dispatch) {
         return getData(type, id).then(result => result.json()).then(reply => {
-            console.log("result of get society: " + JSON.stringify(reply));
-
             if(type === "society") {
                 let society = {
                     id: reply[0]["societyId"],
@@ -227,8 +219,6 @@ export function retrieveData(type, id) {
 
                 dispatch(retrieveSingleDataSuccessful("society", society));
             } else if(type === "event") {
-                console.log("result of get event: " + JSON.stringify(reply));
-
                 let event = {
                     id: reply[0]["eventId"],
                     name: reply[0]["name"],
@@ -247,11 +237,8 @@ export function retrieveData(type, id) {
                     boothId: reply[0]["boothId"],
                 }
 
-                console.log("event in action: " + event);
                 dispatch(retrieveSingleDataSuccessful("event", event));
             } else if(type === "societyEvent") {
-                console.log("result of get society's event: " + JSON.stringify(reply));
-
                 var societyEvents = [];
                 for(var i = 0; i < reply.length; i++) {
                     societyEvents.push({
@@ -265,35 +252,34 @@ export function retrieveData(type, id) {
                     });
                 }
 
-                console.log("society's event in action: " + JSON.stringify(societyEvents));
                 dispatch(retrieveSingleDataSuccessful("societyEvent", societyEvents));
             } else if(type === "studentEvent" || type === "staffEvent") {
                 let userEvents = [];
                 for(var i = 0; i < reply.length; i++) {
                     userEvents.push(reply[i]);
                 }
-                console.log("user's event in action: " + JSON.stringify(userEvents));
+
                 dispatch(retrieveSingleDataSuccessful("userEvent", userEvents));
             } else if(type === "eventCrew") {
                 let eventCrew = [];
                 for(var i = 0; i < reply.length; i++) {
                     eventCrew.push(reply[i]);
                 }
-                console.log("event's crew in action: " + JSON.stringify(eventCrew));
+
                 dispatch(retrieveSingleDataSuccessful("eventCrew", eventCrew));
             } else if(type === "societyComm" || type === "eventComm") {
                 let comm = [];
                 for(var i = 0; i < reply.length; i++) {
                     comm.push(reply[i]);
                 }
-                console.log("committeee in action: " + JSON.stringify(comm));
+
                 dispatch(retrieveSingleDataSuccessful("comm", comm));
             }  else if(type === "societyMember") {
                 let societyMembers = [];
                 for(var i = 0; i < reply.length; i++) {
                     societyMembers.push(reply[i]);
                 }
-                console.log("society members in action: " + JSON.stringify(societyMembers));
+
                 dispatch(retrieveSingleDataSuccessful("societyMembers", societyMembers));
             }  else if(type === "eventParticipant") {
                 let studentParticipants = [];
@@ -306,8 +292,7 @@ export function retrieveData(type, id) {
                 for(var i = 0; i < staffs.length; i++) {
                     staffParticipants.push(staffs[i]);
                 }
-                console.log("student participants in action: " + JSON.stringify(studentParticipants));
-                console.log("staff participants in action: " + JSON.stringify(staffParticipants));
+
                 dispatch(retrieveSingleMultipleDataSuccessful("eventParticipant", studentParticipants, staffParticipants));
             }  
         });
@@ -317,8 +302,6 @@ export function retrieveData(type, id) {
 export function retrieveAll(type) {
     return function (dispatch) {
         return getAllData(type).then(result => result.json()).then(reply => {
-            console.log("societies: " + JSON.stringify(reply));
-
             let societies = [];
             let events = [];
             let newsfeeds = [];
@@ -334,7 +317,7 @@ export function retrieveAll(type) {
                         name: reply[i]["name"]
                     });
                 }
-                console.log("societies in action: " + societies);
+
                 dispatch(retrieveAllDataSuccessful(type, societies));
             } else if(type === "event") {
                 for(var i = 0; i < reply.length; i++) {
@@ -347,8 +330,6 @@ export function retrieveAll(type) {
                 }
                 dispatch(retrieveAllDataSuccessful(type, events));
             } else if(type === "newsfeeds") {
-                console.log("all newsfeeds: " + reply);
-
                 for(var i = 0; i < reply.length; i++) {
                     newsfeeds.push({
                         ownerId: reply[i]["societyId"],
@@ -359,7 +340,7 @@ export function retrieveAll(type) {
                         type: reply[i]["type"]
                     })
                 }
-                console.log("all newsfeeds 2: " + newsfeeds);
+
                 dispatch(retrieveAllDataSuccessful(type, newsfeeds));
             } else if(type === "allSocietyEvent") {
                 for(var i = 0; i < reply.length; i++) {
@@ -369,19 +350,19 @@ export function retrieveAll(type) {
                         eventName: reply[i]["name"]
                     })
                 }
-                console.log("all society events: " + allSocietyEvents);
+
                 dispatch(retrieveAllDataSuccessful(type, allSocietyEvents));
             } else if(type === "societyBooth") {
                 for(var i = 0; i < reply.length; i++) {
                     societyBooths.push(reply[i]);
                 }
-                console.log("all society booths: " + societyBooths);
+
                 dispatch(retrieveAllDataSuccessful(type, societyBooths));
             } else if(type === "eventBooth") {
                 for(var i = 0; i < reply.length; i++) {
                     eventBooths.push(reply[i]);
                 }
-                console.log("all event booths: " + eventBooths);
+
                 dispatch(retrieveAllDataSuccessful(type, eventBooths));
             }
         });

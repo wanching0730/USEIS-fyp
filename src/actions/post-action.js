@@ -84,7 +84,6 @@ export function registerEventSuccessfully(registeredEventId) {
 }
 
 export function updatePostLoadingBar() {
-    console.log("update create loading bar called");
     return function (dispatch) {
         dispatch(updatePostLoadingBarSuccessful());
     }
@@ -97,7 +96,6 @@ export function create(type, postData) {
         }).join('&');
 
         return createData(type, data).then(result => result.json()).then(reply => {
-            console.log("post data reply: " + reply);
             if(reply != null) {
                 confirmAlert({
                     title: 'Message',
@@ -142,8 +140,6 @@ export function update(type, id, name, postData) {
         }).join('&');
 
         return updateData(type, id, data).then(result => result.json()).then(reply => {
-            console.log("updated data reply: " + reply);
-
             if(reply != "true") {
                 confirmAlert({
                     title: 'Message',
@@ -174,8 +170,6 @@ export function updateDouble(type, postData, name) {
         }).join('&');
 
         return updateDataDouble(type, data).then(result => result.json()).then(reply => {
-            console.log("updated double data reply: " + reply);
-
             if(reply != "true") {
                 confirmAlert({
                     title: 'Message',

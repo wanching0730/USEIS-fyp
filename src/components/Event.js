@@ -140,7 +140,6 @@ const styles = {
 }
 
 const mapStateToProps = (state, props) => {
-    console.log("state in event: " + state.data.events);
     return {
       events: state.data.events,
       loading: state.data.loading

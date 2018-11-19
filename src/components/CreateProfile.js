@@ -26,12 +26,8 @@ class CreateProfile extends Component {
       mission: ''
     }
 
-    console.log("societyid: " + this.props.params.societyId);
-
     if(this.props.params.societyId != null) 
       this.props.onRetrieveData("society", this.props.params.societyId);
-
-    //console.log("nammeeee: " + this.props.society["name"]);
 
     this.handleClick = this.handleClick.bind(this);
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
@@ -74,7 +70,7 @@ class CreateProfile extends Component {
       let societyId = this.props.params.societyId;
       let data = this.state
       let societyName = data["name"];
-      console.log("society content: " + JSON.stringify(data));
+
       if(societyId == null) {
         this.props.onCreate("society", data);
       } else {
@@ -92,8 +88,6 @@ class CreateProfile extends Component {
   }
 
   render() {
-    console.log("loading flag: " + this.props.loading);
-
     const { RaisedButtonStyle } = styles;
 
     const societyCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
@@ -147,7 +141,6 @@ class CreateProfile extends Component {
                           <label>Society Name</label>  
                           <input type="text" value={this.state.name} onChange={(event) => {
                             this.setState({name:event.target.value});
-                            console.log("state value: " + this.state.name);
                             }}/>
                           <br/>
                           <label>Society Category (Eg: Technology)</label>

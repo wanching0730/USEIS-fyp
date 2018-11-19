@@ -29,8 +29,6 @@ class PerEvent extends Component {
             this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
         else 
             this.props.onRetrieveDataWithUserId("staffEvent", this.props.params.eventId, this.props.id);
-
-        console.log("event id: " + this.props.params.eventId);
     }
 
     componentDidMount() {
@@ -97,8 +95,6 @@ class PerEvent extends Component {
                 }
             }));
         });
-
-        console.log("loading: " + this.props.loading);
 
         var buttons = <div></div>, sideNavBar = <div></div>;
         var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant;

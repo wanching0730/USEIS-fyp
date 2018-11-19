@@ -33,7 +33,6 @@ class RecruitmentBooth extends Component {
 
         if(this.state.type === "society") {
             let societyBooths = this.props.societyBooths;
-            console.log("society booths: " + this.props.societyBooths);
 
             if(societyBooths != null) {
                 var header = 
@@ -56,7 +55,6 @@ class RecruitmentBooth extends Component {
             } 
         } else {
             let eventBooths = this.props.eventBooths;
-            console.log("event booths: " + this.props.eventBooths);
 
             if(eventBooths != null) {
                 var header = 
@@ -141,7 +139,6 @@ const styles = {
 }
 
 const mapStateToProps = (state, props) => {
-    console.log("state in society: " + state.data.societies);
     return {
         societyBooths: state.data.societyBooths,
         eventBooths: state.data.eventBooths

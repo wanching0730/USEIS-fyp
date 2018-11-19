@@ -69,7 +69,6 @@ export function getFcmToken(postData) {
                 }).join('&');
 
                 return updateDataDouble("fcmToken", data).then(result => result.json()).then(reply => {
-                    console.log("updated data reply: " + reply);
                     console.log(messaging);
                     dispatch(getFcmTokenSuccessful(token, messaging));
                 });
@@ -102,7 +101,6 @@ export function loginUser(postData) {
             let userId = user[0]["userId"];
 
             if(userName.substring(0,2) === "00") {
-                console.log("username substring: " + userName.substring(0,2));
                 let id = user[0]["staffId"];
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
@@ -113,12 +111,10 @@ export function loginUser(postData) {
                             joinDate: "-"
                         })
                     }
-                    console.log("user societies: " + societies);
                 }
                 
                 dispatch(loginUserSuccessful(userName, userId, id, societies, token));
             } else {
-                console.log("username substring: " + userName.substring(0,2));
                 let id = user[0]["studentId"];
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
@@ -132,7 +128,6 @@ export function loginUser(postData) {
             browserHistory.push("/home");
 
             console.log("token: " + reply["token"]);
-            console.log("token in local storage: " + localStorage.getItem('token'));
         })
         .catch(error => {
             confirmAlert({

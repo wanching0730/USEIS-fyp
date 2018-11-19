@@ -24,7 +24,6 @@ class Login extends Component {
 
   login(event) {
     let data = this.state;
-    console.log("data content: " + JSON.stringify(data));
     this.props.onLoginUser(data);
   }
 

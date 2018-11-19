@@ -21,7 +21,6 @@ class ManageParticipant extends Component {
         super(props);
 
         this.props.onUpdateLoadingBar();
-        console.log("loading in par: " + this.props.loading);
         this.props.onRetrieveData("eventParticipant", this.props.params.eventId);
 
         this.handleApprove = this.handleApprove.bind(this);
@@ -86,10 +85,6 @@ class ManageParticipant extends Component {
     }
 
     render() {
-
-        console.log(this.props.studentParticipant);
-        console.log(window.screen.availWidth);
-
         const { RaisedButtonStyle } = styles;
         let studentParticipants = this.props.studentParticipant;
         let staffParticipants = this.props.staffParticipant;
@@ -155,8 +150,6 @@ class ManageParticipant extends Component {
                 staffMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No staff participant for this event</div>;
             } 
         } 
-
-        console.log(this.props.loading);
         
         return (
             <div id="outerDiv"> 

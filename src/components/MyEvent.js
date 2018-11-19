@@ -66,7 +66,6 @@ class MyEvent extends Component {
     handleCancelEvent(event) {
         let eventId = event.target.value;
         this.setState({eventId: eventId})
-        console.log("event to delete: " + this.state.eventId);
 
         setTimeout(() => {
             confirmAlert({
@@ -101,7 +100,6 @@ class MyEvent extends Component {
 
             if(this.props.userEvents.length != 0) {
                 let events = this.props.userEvents;
-                console.log("events in profile: " + events.length);
 
                 var position, crewStatus, isVege, crewAction, ratingStatus;
                 

@@ -131,7 +131,6 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log("loading in register society: " + state.create.loading);
   return {
     id: state.auth.id,
     loading: state.create.loading

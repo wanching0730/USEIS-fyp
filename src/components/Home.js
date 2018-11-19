@@ -50,7 +50,6 @@ class Home extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        console.log(React.version);
     }
 
     render() {
@@ -142,7 +141,6 @@ class Home extends Component {
 };
 
 const mapStateToProps = (state, props) => {
-    //console.log(JSON.stringify(state));
     return {
         userId: state.auth.userId,
         messaging: state.auth.messaging,

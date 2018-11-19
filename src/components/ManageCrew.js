@@ -91,13 +91,11 @@ class ManageCrew extends Component {
         let eventCrew = this.props.eventCrew;
         var message = <div></div>;
         var rows = [];
-        console.log("event's crew: " + JSON.stringify(this.props.eventCrew));
 
         if(eventCrew != null) {
             if(eventCrew.length != 0) {
                 for(var i = 0; i < eventCrew.length; i++) {
                     let crew = eventCrew[i];
-                    console.log("student id: " + crew["studentId"]);
                     var approvedIcon;
 
                     if(crew["crewStatus"] == 1) 

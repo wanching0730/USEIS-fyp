@@ -38,13 +38,6 @@ table tbody tr td :nth-child(5) {
 
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
-/* body{
-  font-family: "Roboto", "Sans Serif";
-  font-size: 18pt;
-  color: #fff;
-  background: #3498db;
-} */
-
 .wrapper{
   margin: 20px;
   width: 200px;

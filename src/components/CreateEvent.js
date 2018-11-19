@@ -38,8 +38,6 @@ class CreateEvent extends Component {
       selectedEndDate: moment()
     }
 
-    console.log("loading flag: " + this.props.loading);
-
     this.handleClick = this.handleClick.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
@@ -70,9 +68,6 @@ class CreateEvent extends Component {
         selectedStartDate: moment(event["startDate"]),
         selectedEndDate: moment(event["endDate"])
       });
-      console.log("event date: " + event["startDate"]);
-      console.log("event date: " + moment());
-      console.log("event date: " + moment(event["startDate"]));
     }
   }
 
@@ -108,8 +103,7 @@ class CreateEvent extends Component {
       let eventId = this.props.params.id;
       let data = this.state
       let eventName = data["name"];
-      // let eventId = this.props.params.id;
-      console.log("event content: " + JSON.stringify(data));
+
       if(this.props.params.type == "society")
         this.props.onCreate("event", data);
       else {
@@ -125,7 +119,6 @@ class CreateEvent extends Component {
   }
 
   handleStart(date) {
-    console.log("handle: " + date);
     this.setState({
       selectedStartDate: date,
       startDate: "" + moment(date).format("YYYY-MM-DD HH:mm")
@@ -152,14 +145,6 @@ class CreateEvent extends Component {
   }
 
   render() {
-    console.log("loading flag: " + this.props.loading);
-    // console.log("society id in create event: " + JSON.stringify(this.props.params.id));
-    // console.log("category: " + this.state.category);
-
-    // console.log("startDate: " + this.state.selectedStartDate);
-    // console.log("endDate: " + this.state.selectedEndDate);
-    // console.log("now: " + moment());
-
     const { RaisedButtonStyle } = styles;
 
     const eventCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
@@ -216,7 +201,6 @@ class CreateEvent extends Component {
                           <label>Event Name</label>  
                           <input type="text" value={this.state.name} ref="name" onChange={(event) => {
                             this.setState({name:event.target.value});
-                            console.log("state value: " + this.state.name);
                             }}/>
                           <br/>
                           <label>Event Category (Eg: Technology)</label>
@@ -308,7 +292,6 @@ const styles = {
 };
 
 const mapStateToProps = (state, props) => {
-  console.log("loading in create event state: " + state.create.loading);
   return {
     createdEventId: state.create.createdEventId,
     event: state.data.event,
