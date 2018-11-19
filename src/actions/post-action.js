@@ -116,7 +116,7 @@ export function create(type, postData) {
                                     dispatch(createNewsfeedSuccessful(reply));
                                     browserHistory.push('/newsfeeds');
                                 } else if(type === "rating") {
-                                    dispatch(createEventSuccessful(reply));
+                                    dispatch(createRatingSuccessful(reply));
                                     browserHistory.push('/myEvents');
                                 } else if(type === "registerSociety") {
                                     dispatch(registerSocietySuccessfully());

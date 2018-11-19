@@ -15,7 +15,7 @@ import '../style/alert.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveAll, retrieveData, updateLoadingBar } from '../actions/data-action';
-import { create } from '../actions/post-action';
+import { create, updatePostLoadingBar } from '../actions/post-action';
 
 class NewsFeed extends Component {
 
@@ -41,6 +41,7 @@ class NewsFeed extends Component {
         this.updateInputValue = this.updateInputValue.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.handleOwner = this.handleOwner.bind(this);
+        this.clickSave = this.clickSave.bind(this);
 
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveData("studentEvent", this.props.userId);
@@ -104,6 +105,8 @@ class NewsFeed extends Component {
     }
 
     clickSave() {
+        this.props.onUpdatePostLoadingBar();
+
         this.setState({modalIsOpen: false});
 
         if(this.state.inputValue == "") {
@@ -363,7 +366,7 @@ class NewsFeed extends Component {
                     
                     </Modal>
         
-                    {this.props.loading ?
+                    {this.props.retrieveLoading || this.props.postLoading ?
                         [<LoadingBar />]
                         :
                         [
@@ -402,7 +405,8 @@ const mapStateToProps = (state, props) => {
         newsfeeds: state.data.newsfeeds,
         societies: state.auth.societies,
         userEvents: state.data.userEvents,
-        loading: state.data.loading
+        retrieveLoading: state.data.loading,
+        postLoading: state.create.loading
     };
 };
 
@@ -411,7 +415,8 @@ const mapActionsToProps = (dispatch, props) => {
         onRetrieveAll: retrieveAll,
         onRetrieveData: retrieveData,
         onCreate: create,
-        onUpdateLoadingBar: updateLoadingBar
+        onUpdateLoadingBar: updateLoadingBar,
+        onUpdatePostLoadingBar: updatePostLoadingBar
     }, dispatch);
 };
 

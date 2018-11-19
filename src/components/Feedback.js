@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
@@ -9,7 +10,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create } from '../actions/post-action';
+import { create, updatePostLoadingBar } from '../actions/post-action';
 
 class Feedback extends Component {
 
@@ -27,7 +28,8 @@ class Feedback extends Component {
     }
 
     handleClick() {
-      // browserHistory.push("/student");
+      this.props.onUpdateLoadingBar();
+
       let data = {
         id: this.props.id,
         eventId: this.props.params.eventId,
@@ -60,26 +62,31 @@ class Feedback extends Component {
                   </Breadcrumb>
               </div>
 
-              <div className="container" style={ContainerStyle}>
-                <div className="form-style-10">
-                  <h1>Rating Form<span>Leave your rating for this event!</span></h1>
-                  <form>
-                      <div class="section"><span>1</span>Rating</div>
-                      <div class="inner-wrap">
-                          <label>Select the stars for rating</label>
-                          <StarRatingComponent 
-                          name="rate1" 
-                          starCount={10}
-                          value={score}
-                          onStarClick={this.onStarClick.bind(this)}
-                          />
-                          <p>{this.state.score}</p>
-                      </div>
+              {this.props.loading ?
+              [<LoadingBar />]
+              :
+              [
+                <div className="container" style={ContainerStyle}>
+                  <div className="form-style-10">
+                    <h1>Rating Form<span>Leave your rating for this event!</span></h1>
+                    <form>
+                        <div class="section"><span>1</span>Rating</div>
+                        <div class="inner-wrap">
+                            <label>Select the stars for rating</label>
+                            <StarRatingComponent 
+                            name="rate1" 
+                            starCount={10}
+                            value={score}
+                            onStarClick={this.onStarClick.bind(this)}
+                            />
+                            <p>{this.state.score}</p>
+                        </div>
 
-                    <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                  </form>
+                      <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                    </form>
+                  </div>
                 </div>
-              </div>
+              ]}
             </div>
             </MuiThemeProvider>
         </div>
@@ -99,12 +106,14 @@ class Feedback extends Component {
   const mapStateToProps = (state, props) => {
     return {
       id: state.auth.id,
+      loading: state.create.loading
     };
   };
   
   const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onCreate: create
+      onCreate: create,
+      onUpdateLoadingBar: updatePostLoadingBar
     }, dispatch);
   };
   
