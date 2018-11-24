@@ -1,3 +1,10 @@
+.card {
+    border: 1px solid gray !important;
+    margin: 10px;
+    margin-right: 18px;
+    margin-left: 18px;
+}
+
 .image {
     height: 100px;
     width: 100px;

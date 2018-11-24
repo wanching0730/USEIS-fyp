@@ -35,7 +35,8 @@ class AboutMe extends Component {
 
                     <div>
                         <div className="aboutMeContainer">
-                            <h2>About {user["studentName"]}</h2>
+                        <div className="imageContainer"><img src={ require('../assets/images/profile.png') } alt="profile" /></div>
+                            <h2>{user["studentName"]}</h2>
                             <div className="row">
                                 <table id="aboutMeTable">
                                         <tr>

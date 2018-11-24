@@ -32,6 +32,17 @@
 	  text-align: center;
   } 
 
+  .imageContainer {
+	  vertical-align: middle;
+	  text-align: center;
+	  margin-bottom: 16px;
+  }
+
+  .imageContainer img {
+	width: 200px;
+	height: 200px;
+}
+
   #aboutMeTable {
 	  margin: 10px;
 	  margin-bottom: 15px;
@@ -63,15 +74,32 @@
 
   }
 
+  @media only screen and (max-width: 478px) {
+	.imageContainer img {
+		width: 100px;
+		height: 100px;
+	}
+  }
+
   @media only screen and (max-width: 360px) {
 	#aboutMeTable {
 		font-size: 12px;
+	}
+
+	.imageContainer img {
+		width: 80px;
+		height: 80px;
 	}
   }
 
 @media 
 only screen and (max-width: 760px),
 (min-width: 768px) and (max-width: 1024px)  {
+
+	.imageContainer img {
+		width: 100px;
+		height: 100px;
+	}
 
 	/* Force table to not be like tables anymore */
 	#table1, #table1 thead, #table1 tbody, #table1 th, #table1 td, #table1 tr { 

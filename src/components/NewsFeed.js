@@ -102,19 +102,13 @@ class NewsFeed extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("latest newsfeed: " + JSON.stringify(nextProps.newsfeeds));
-        console.log("current props: " + JSON.stringify(this.props.newsfeeds));
         if((nextProps.newsfeeds != this.props.newsfeeds) || (this.props.newsfeeds == null)) {
           this.setState({newsfeeds: nextProps.newsfeeds });
-          console.log("this state: " + JSON.stringify(this.state.newsfeeds));
         }
     }
 
     updateNewsfeeds(newsfeedItem) {
-        console.log("new in socket: " + JSON.stringify(newsfeedItem));
-        var newsfeeds = this.state.newsfeeds;
-        newsfeeds = [newsfeedItem, ...newsfeeds];
-        this.setState({ newsfeeds: newsfeeds});
+        this.setState({ newsfeeds: [newsfeedItem, ...this.state.newsfeeds] });
     }
 
     openModal() {
@@ -242,7 +236,6 @@ class NewsFeed extends Component {
     }
 
     render() {
-        console.log("updated newsfeed state: " + JSON.stringify(this.state.newsfeeds));
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.state.newsfeeds;
         let filteredNewsfeeds = [];
@@ -383,7 +376,7 @@ class NewsFeed extends Component {
                         [<LoadingBar />]
                         :
                         [
-                            <div className="card">
+                            <div className="cardlist">
                                 {rows}
                             </div>
                         ]
@@ -412,7 +405,6 @@ const styles = {
 }
 
 const mapStateToProps = (state, props) => {
-    console.log("state in newsfeed: " + state.data.newsfeeds);
     return {
         userId: state.auth.id,
         newsfeeds: state.data.newsfeeds,

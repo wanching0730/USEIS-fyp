@@ -27,7 +27,7 @@ class Home extends Component {
     
             setTimeout(() => {
                 console.log("onmessage:");
-                console.log(this.props.onMessage);
+                console.log(this.props.messaging);
                 // onMessage is an observable, it only need to be called once to use
                 if(this.props.messaging != null) {
                     this.props.messaging.onMessage(function(payload) {
