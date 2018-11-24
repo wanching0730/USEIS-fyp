@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import RaisedButton from 'material-ui/RaisedButton';
 import { confirmAlert } from 'react-confirm-alert';
 import moment from "moment";
+import openSocket from 'socket.io-client';
 import '../style/newsfeed.css';
 import '../style/alert.css';
 
@@ -34,11 +35,14 @@ class NewsFeed extends Component {
 
             societyOptions: null,
             eventOptions: null,
+
+            newsfeeds: null
         };
-    
+
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.updateInputValue = this.updateInputValue.bind(this);
+        this.updateNewsfeeds = this.updateNewsfeeds.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.handleOwner = this.handleOwner.bind(this);
         this.clickSave = this.clickSave.bind(this);
@@ -56,6 +60,9 @@ class NewsFeed extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
+
+        const socket = openSocket('http://localhost:5000');
+        socket.on('updateNewsfeed', this.updateNewsfeeds);
 
         if(this.props.societies != null) {
             let societies = this.props.societies;
@@ -92,6 +99,22 @@ class NewsFeed extends Component {
                 }, () => this.setDefault());
             }
         }, 2000);
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("latest newsfeed: " + JSON.stringify(nextProps.newsfeeds));
+        console.log("current props: " + JSON.stringify(this.props.newsfeeds));
+        if((nextProps.newsfeeds != this.props.newsfeeds) || (this.props.newsfeeds == null)) {
+          this.setState({newsfeeds: nextProps.newsfeeds });
+          console.log("this state: " + JSON.stringify(this.state.newsfeeds));
+        }
+    }
+
+    updateNewsfeeds(newsfeedItem) {
+        console.log("new in socket: " + JSON.stringify(newsfeedItem));
+        var newsfeeds = this.state.newsfeeds;
+        newsfeeds = [newsfeedItem, ...newsfeeds];
+        this.setState({ newsfeeds: newsfeeds});
     }
 
     openModal() {
@@ -168,10 +191,6 @@ class NewsFeed extends Component {
         };
 
         this.props.onCreate("newsfeeds", data);
-        
-        setTimeout(() => {
-            this.props.onRetrieveAll("newsfeeds");
-        }, 4000);
 
         this.setState({
             status: "all",
@@ -223,8 +242,9 @@ class NewsFeed extends Component {
     }
 
     render() {
+        console.log("updated newsfeed state: " + JSON.stringify(this.state.newsfeeds));
         const { RaisedButtonStyle, content } = styles;
-        let newsfeeds = this.props.newsfeeds;
+        let newsfeeds = this.state.newsfeeds;
         let filteredNewsfeeds = [];
         var dropdown;
             
@@ -289,7 +309,7 @@ class NewsFeed extends Component {
                         <CardTitle>{newsfeed["name"]}{type}</CardTitle>
                         <CardSubtitle>| Category: {newsfeed["category"]} |</CardSubtitle>
                         <br/>
-                        <CardText>{newsfeed["desc"]}</CardText>
+                        <CardText>{newsfeed["description"]}</CardText>
                         <Link to={toView}>View</Link>
                         <CardText>
                             <small className="text-muted">{moment(newsfeed["dateCreate"]).format("MMM DD YYYY hh:mm A")}</small>

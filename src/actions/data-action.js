@@ -335,7 +335,7 @@ export function retrieveAll(type) {
                         ownerId: reply[i]["societyId"],
                         name: reply[i]["name"],
                         category: reply[i]["category"],
-                        desc: reply[i]["description"],
+                        description: reply[i]["description"],
                         dateCreate: reply[i]["dateCreate"],
                         type: reply[i]["type"]
                     })
