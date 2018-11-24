@@ -50,8 +50,8 @@ class RegisterEvent extends Component {
       joinDate: moment(current).format("YYYY-MM-DD"),
       crewStatus: this.state.crewStatus,
       vegetarian: this.state.vegetarian,
-      emailNoti: this.state.emailNoti,
-      webNoti: this.state.webNoti
+      emailNoti: this.state.emailNoti ? 1 : 0,
+      webNoti: this.state.webNoti ? 1 : 0
     };
 
     if(this.props.userName.substring(0,2) === "00")
