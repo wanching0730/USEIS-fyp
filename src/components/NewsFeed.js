@@ -120,8 +120,6 @@ class NewsFeed extends Component {
     }
 
     clickSave() {
-        this.props.onUpdatePostLoadingBar();
-
         this.setState({modalIsOpen: false});
 
         if(this.state.inputValue == "") {
@@ -131,7 +129,7 @@ class NewsFeed extends Component {
                         <MuiThemeProvider>
                             <div className='custom-alert'>
                                 <h1>Warning</h1>
-                                <p>Please fill in all empty fields before proceed</p>
+                                <p>Please fill in status description before proceed</p>
                                 <RaisedButton label="Close" primary={true} onClick={() => onClose()}/>
                             </div>
                         </MuiThemeProvider>
@@ -140,6 +138,8 @@ class NewsFeed extends Component {
             })
             return false;
           } else {
+            this.props.onUpdatePostLoadingBar();
+            
             if(this.state.owner == "s") {
                 let societies = this.props.societies;
                 for(var i = 0; i < societies.length; i++) {
