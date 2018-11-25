@@ -101,7 +101,7 @@ class MyEvent extends Component {
             if(this.props.userEvents.length != 0) {
                 let events = this.props.userEvents;
 
-                var position, crewStatus, isVege, crewAction, ratingStatus;
+                var position, crewStatus, isVege, crewAction, participantAction, ratingStatus;
                 
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
@@ -143,6 +143,11 @@ class MyEvent extends Component {
                         crewAction = <td><li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-times-circle"></li></td>;
                     else 
                         crewAction = <td>-</td>
+
+                    if(event["participantStatus"] === 1) 
+                        participantAction = <td><li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>;
+                    else 
+                        participantAction = <td>-</td>
                     
                     if(this.props.userName.substring(0,2) === "00") 
                         ratingStatus = <td>-</td>;
@@ -164,7 +169,7 @@ class MyEvent extends Component {
                             {crewStatus}
                             {isVege}
                             {ratingStatus}
-                            <td><li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>
+                            {participantAction}
                             {crewAction}
                         </tr>
                     )

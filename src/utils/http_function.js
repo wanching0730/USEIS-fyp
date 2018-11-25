@@ -117,7 +117,15 @@ export function createData(type, data) {
             },
             body: data
         });
-    } 
+    } else if(type === "registerEventCrew") {
+        return fetch(`http://localhost:5000/register/eventCrew`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: data
+    });
+} 
 }
 
 export function updateData(type, id, data) {

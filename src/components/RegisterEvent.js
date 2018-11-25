@@ -3,7 +3,7 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import {RaisedButton, Checkbox } from 'material-ui';
+import { RaisedButton, Checkbox } from 'material-ui';
 import { Link } from 'react-router';
 import ToggleButton from 'react-toggle-button';
 import ReactNotifications from 'react-browser-notifications';
@@ -21,8 +21,7 @@ class RegisterEvent extends Component {
     this.state={
       emailNoti: false,
       webNoti: false,
-      crewStatus: 0,
-      vegetarian: 1
+      vegetarian: 0
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -48,7 +47,7 @@ class RegisterEvent extends Component {
       id: this.props.id,
       position: "participant",
       joinDate: moment(current).format("YYYY-MM-DD"),
-      crewStatus: this.state.crewStatus,
+      crewStatus: 0,
       vegetarian: this.state.vegetarian,
       emailNoti: this.state.emailNoti ? 1 : 0,
       webNoti: this.state.webNoti ? 1 : 0
@@ -135,6 +134,7 @@ class RegisterEvent extends Component {
                                 })
                             }} />
                         <br/>
+
                         <ReactNotifications
                           onRef={ref => (this.n = ref)} // Required
                           title="Some Title" // Required

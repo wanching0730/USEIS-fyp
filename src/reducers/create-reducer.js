@@ -5,7 +5,8 @@ import {
     CREATE_NEWSFEED,
     CREATE_RATING,
     REGISTER_SOCIETY,
-    REGISTER_EVENT
+    REGISTER_EVENT,
+    REGISTER_CREW
 } from '../constant';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
     createdRatingId: null,
     registeredSocietyId: null,
     registeredEventId: null,
+    registeredCrewEventId: null,
     refresh: false
 };
 
@@ -55,6 +57,11 @@ export default function createReducer(state = initialState, { type, payload }) {
         case REGISTER_EVENT:
             return Object.assign({}, state, {
                 registeredEventId: payload.registeredEventId,
+                loading: payload.loading
+            });
+        case REGISTER_CREW:
+            return Object.assign({}, state, {
+                registeredCrewEventId: payload.registeredCrewEventId,
                 loading: payload.loading
             });
         default: 

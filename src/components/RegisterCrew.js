@@ -3,21 +3,25 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import RaisedButton from 'material-ui/RaisedButton';
-import {browserHistory} from 'react-router';
+import { RaisedButton, Checkbox } from 'material-ui';
+import ToggleButton from 'react-toggle-button';
 import { Link } from 'react-router';
+import moment from "moment";
 import '../style/form.css';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { create, updatePostLoadingBar} from '../actions/post-action';
 
 class RegisterCrew extends Component {
 
   constructor(props){
     super(props);
     this.state={
-      first_name:'',
-      last_name:'',
       emailNoti: false,
       webNoti: false,
-      position: 'secretary'
+      position: 'secretary',
+      vegetarian: 0
       // showModal: false
     }
 
@@ -30,7 +34,6 @@ class RegisterCrew extends Component {
   }
 
   displayText() {
-
       if(this.state.webNoti) {
         if(this.n.supported()) 
           this.n.show();
@@ -44,7 +47,22 @@ class RegisterCrew extends Component {
 
   handleClick(event) {
       this.displayText();
-      browserHistory.push("/myProfile");
+      
+      this.props.onUpdateLoadingBar();
+      let current = moment();
+      let data = {
+        eventId: this.props.params.eventId,
+        eventName: this.props.location.state["eventName"],
+        id: this.props.id,
+        position: this.state.position,
+        joinDate: moment(current).format("YYYY-MM-DD"),
+        crewStatus: 0,
+        vegetarian: this.state.vegetarian,
+        emailNoti: this.state.emailNoti ? 1 : 0,
+        webNoti: this.state.webNoti ? 1 : 0
+      };
+
+      this.props.onCreate("registerEventCrew", data);
   }
 
   handleChange(event) {
@@ -77,47 +95,66 @@ class RegisterCrew extends Component {
               </Breadcrumb>
             </div>
 
-            <div className="container">
-              <div className="form-style-10">
-                <h1>Register Crew<span>Register as event crew now and get yourself a chance for more exploration!</span></h1>
-                <form>
-                    <div class="section"><span>1</span>Full Name &amp; ID</div>
-                    <div class="inner-wrap">
-                        <label>Full Name</label>  
-                        {/* <TextField onChange = {(event,newValue) => {this.setState({first_name:newValue})}} /> */}
-                        <input type="text" onChange={(event) => {
-                          this.setState({first_name:event.target.value});
-                          }}/>
-                        <br/>
-                        <label>Student ID (Eg: 15UEB02834)</label>
-                        <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                    </div>
-
-                    <div class="section"><span>2</span>Email &amp; Phone</div>
-                    <div class="inner-wrap">
-                      <label>Email Address</label>
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                      <label>Phone Number</label> 
-                      <input type="text" onChange={(event) => {this.setState({first_name:event.target.value})}}/>
-                    </div>
-
-                    <div class="section"><span>3</span>Position</div>
+            {this.props.loading ?
+            [<LoadingBar />]
+            :
+            [
+              <div className="container">
+                <div className="form-style-10">
+                  <h1>Register Crew<span>Register as event crew now and get yourself a chance for more exploration!</span></h1>
+                  <form>
+                      <div class="section"><span>3</span>Position</div>
+                        <div class="inner-wrap">
+                          <label>Position (Eg: Logistics HOD)</label>
+                          <select value={this.state.position} onChange={this.handleChange}>
+                            {positions.map(this.mapItem)}
+                          </select>
+                          
+                          {/* <ButtonToolbar>{this.renderDropdownButton}</ButtonToolbar> */}
+                      </div>
+                      <div class="section"><span>1</span>Vegetarian</div>
                       <div class="inner-wrap">
-                        <label>Position (Eg: Logistics HOD)</label>
-                        <select value={this.state.position} onChange={this.handleChange}>
-                          {positions.map(this.mapItem)}
-                        </select>
-                        
-                        {/* <ButtonToolbar>{this.renderDropdownButton}</ButtonToolbar> */}
-                    </div>
-                    <div class="button-section">
-                      <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                      <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                    </div>
-                </form>
+                      Vegetarian
+                      <Checkbox onCheck={(e, checked) => {
+                          if(checked)
+                            this.setState({vegetarian: 1});
+                          else 
+                            this.setState({vegetarian: 0});
+                          console.log("vegetarian checked: " + this.state.vegetarian);
+                        }}
+                      /> 
+                      </div>
+
+                      <div class="section"><span>2</span>Allow Notification</div>
+                      <div class="inner-wrap">
+                        <label>Allow Email Notification</label>
+                        <ToggleButton
+                          value={ this.state.emailNoti || false }
+                          onToggle={(value) => {
+                              this.setState({
+                              emailNoti: !value,
+                              })
+                          }} />
+                        <br/>
+                        <label>Allow Web Notification</label>
+                        <ToggleButton
+                            value={ this.state.webNoti || false }
+                            onToggle={(value) => {
+                                this.setState({
+                                webNoti: !value,
+                                })
+                            }} />
+                        <br/>
+                      </div>
+                      <div class="button-section">
+                        <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                      </div>
+                  </form>
                 </div>
-          </div>
-          </div>
+              </div>
+            ]}
+            </div> 
           </MuiThemeProvider>
       </div>
     );
@@ -130,4 +167,18 @@ const styles = {
   }
 };
 
-export default RegisterCrew;
+const mapStateToProps = (state, props) => {
+  return {
+    id: state.auth.id,
+    loading: state.create.loading
+  };
+};
+
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    onCreate: create,
+    onUpdateLoadingBar: updatePostLoadingBar
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(RegisterCrew);

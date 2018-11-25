@@ -10,6 +10,7 @@ import {
     CREATE_RATING,
     REGISTER_SOCIETY,
     REGISTER_EVENT,
+    REGISTER_CREW,
     UPDATE_SOCIETY,
     UPDATE_EVENT
 } from '../constant';
@@ -83,6 +84,16 @@ export function registerEventSuccessfully(registeredEventId) {
     }
 }
 
+export function registerCrewSuccessfully(registeredCrewEventId) {
+    return {
+        type: REGISTER_CREW,
+        payload: {
+            registeredCrewEventId: registeredCrewEventId,
+            loading: false
+        }
+    }
+}
+
 export function updatePostLoadingBar() {
     return function (dispatch) {
         dispatch(updatePostLoadingBarSuccessful());
@@ -122,8 +133,10 @@ export function create(type, postData) {
                                 } else if(type === "staffRegisterEvent" || type == "studentRegisterEvent") {
                                     dispatch(registerEventSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
-                                }
-                                
+                                } else if(type === "registerEventCrew") {
+                                    dispatch(registerCrewSuccessfully());
+                                    browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
+                                } 
                             }
                         }
                     ]
