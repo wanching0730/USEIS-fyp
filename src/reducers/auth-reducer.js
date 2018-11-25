@@ -1,4 +1,5 @@
 import {
+    UPDATE_AUTH_LOADINGBAR,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILURE,
     LOGIN_USER_REQUEST,
@@ -7,6 +8,8 @@ import {
 } from '../constant';
 
 const initialState = {
+    loading: false,
+    
     token: null,
     userName: null,
     userId: null,
@@ -22,6 +25,10 @@ const initialState = {
 
 export default function authReducer(state = initialState, { type, payload }) {
     switch(type) {
+        case UPDATE_AUTH_LOADINGBAR: 
+            return Object.assign({}, state, {
+                loading: payload.loading
+            });
         case LOGIN_USER_SUCCESS: 
             return Object.assign({}, state, {
                 userName: payload.userName,
@@ -30,7 +37,8 @@ export default function authReducer(state = initialState, { type, payload }) {
                 user: payload.user,
                 societies: payload.societies,
                 token: payload.token,
-                isAuthenticated: true
+                isAuthenticated: true,
+                loading: payload.loading
             });
         case LOGOUT_USER:
             return Object.assign({}, state, {

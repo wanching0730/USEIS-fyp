@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import Calendar from './Calendar';
 import Analysis from './Analysis';
 import SearchBar from '@opuscapita/react-searchbar';
@@ -71,70 +72,73 @@ class Home extends Component {
                     />
                 </div>
 
-                <div className="pull-left col-md-8 col-lg-8 col-sm-8" id="col-9" style={{ marginTop: 20}}>
-                    <Calendar />
-                </div>
+                {this.props.loading ?
+                [<LoadingBar />]
+                :
+                [
+                    <div>
+                        <div className="pull-left col-md-8 col-lg-8 col-sm-8" id="col-9" style={{ marginTop: 20}}>
+                            <Calendar />
+                        </div>
 
-                <div className="pull-right col-md-4 col-lg-4 col-sm-4" id="col-3" style={{ marginTop: 20}}>
-                    {/* <h4>Event Recommendations</h4> */}
-                    {/* <table className="table table-hover table-light" border="1">
-                        <thead>
-                            <tr>
-                                <th>Events</th>
-                                <th>Organiser</th>
-                                <th>Attendance</th>                  
-                            </tr>
-                        </thead>
+                        <div className="pull-right col-md-4 col-lg-4 col-sm-4" id="col-3" style={{ marginTop: 20}}>
+                            {/* <h4>Event Recommendations</h4> */}
+                            {/* <table className="table table-hover table-light" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Events</th>
+                                        <th>Organiser</th>
+                                        <th>Attendance</th>                  
+                                    </tr>
+                                </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>Work Shop</td>
-                                <td>IT Society</td>
-                                <td>45</td>
-                            </tr>
-                            <tr>
-                                <td>USTAR 8</td>
-                                <td>Music Society</td>
-                                <td>40</td>
-                            </tr>
-                            <tr>
-                                <td>Performance</td>
-                                <td>Wushu Society</td>
-                                <td>38</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                <tbody>
+                                    <tr>
+                                        <td>Work Shop</td>
+                                        <td>IT Society</td>
+                                        <td>45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>USTAR 8</td>
+                                        <td>Music Society</td>
+                                        <td>40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Performance</td>
+                                        <td>Wushu Society</td>
+                                        <td>38</td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
-                    <br/>
-                    <br/>
+                            <br/>
+                            <br/>
 
-                    <h4>Society Recommendations</h4>
-                    <table className="table table-hover table-light" border="1">
-                        <thead>
-                            <tr>
-                                <th>Societies</th>             
-                            </tr>
-                        </thead>
+                            <h4>Society Recommendations</h4>
+                            <table className="table table-hover table-light" border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Societies</th>             
+                                    </tr>
+                                </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>IT Society</td>
-                            </tr>
-                            <tr>
-                                <td>Music Society</td>
-                            </tr>
-                            <tr>
-                                <td>Wushu Society</td>
-                            </tr>
-                        </tbody>
-                    </table> */}
-
-                    <br/>
-
-                    <Analysis />
-
-                </div>
-
+                                <tbody>
+                                    <tr>
+                                        <td>IT Society</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Music Society</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wushu Society</td>
+                                    </tr>
+                                </tbody>
+                            </table> */}
+                            <br/>
+                            <Analysis />
+                        </div>
+                    </div>
+                ]}
             </div>
         );
     };
@@ -144,7 +148,8 @@ const mapStateToProps = (state, props) => {
     return {
         userId: state.auth.userId,
         messaging: state.auth.messaging,
-        fcmToken: state.auth.fcmToken
+        fcmToken: state.auth.fcmToken,
+        loading: state.auth.loading
     };
 };
 

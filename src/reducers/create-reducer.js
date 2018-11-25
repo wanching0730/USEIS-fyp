@@ -32,7 +32,6 @@ export default function createReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 loading: payload.loading
             });
-
         case CREATE_SOCIETY: 
             return Object.assign({}, state, {
                 createdSocietyId: payload.createdSocietyId,

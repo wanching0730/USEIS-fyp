@@ -4,12 +4,22 @@ import { confirmAlert } from 'react-confirm-alert';
 import firebase from 'firebase';
 
 import {
+    UPDATE_AUTH_LOADINGBAR,
     LOGIN_USER_SUCCESS,
     // LOGIN_USER_FAILURE,
     // LOGIN_USER_REQUEST,
     LOGOUT_USER,
     GET_FCM_TOKEN
 } from '../constant';
+
+export function updateAuthLoadingBarSuccessful() {
+    return {
+        type: UPDATE_AUTH_LOADINGBAR,
+        payload: {
+            loading: true
+        }
+    };
+}
 
 export function getFcmTokenSuccessful(token, messaging) {
     return {
@@ -32,8 +42,15 @@ export function loginUserSuccessful(userName, userId, id, user, societies, token
             id: id,
             user: user,
             societies: societies,
-            token: token
+            token: token, 
+            loading: false
         }
+    }
+}
+
+export function updateAuthLoadingBar() {
+    return function (dispatch) {
+        dispatch(updateAuthLoadingBarSuccessful());
     }
 }
 
