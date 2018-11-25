@@ -94,6 +94,26 @@ export function registerCrewSuccessfully(registeredCrewEventId) {
     }
 }
 
+export function updateSocietySuccessfully(updatedSocietyId) {
+    return {
+        type: UPDATE_SOCIETY,
+        payload: {
+            updatedSocietyId: updatedSocietyId,
+            loading: false
+        }
+    }
+}
+
+export function updateEventSuccessfully(updatedEventId) {
+    return {
+        type: UPDATE_EVENT,
+        payload: {
+            updatedEventId: updatedEventId,
+            loading: false
+        }
+    }
+}
+
 export function updatePostLoadingBar() {
     return function (dispatch) {
         dispatch(updatePostLoadingBarSuccessful());
@@ -153,7 +173,7 @@ export function update(type, id, name, postData) {
         }).join('&');
 
         return updateData(type, id, data).then(result => result.json()).then(reply => {
-            if(reply != "true") {
+            if(reply != 0) {
                 confirmAlert({
                     title: 'Message',
                     message: 'Data has been updated successfully',
@@ -162,8 +182,10 @@ export function update(type, id, name, postData) {
                             label: 'Close',
                             onClick: () => {
                                 if(type === "society") {
+                                    dispatch(updateSocietySuccessfully(reply));
                                     browserHistory.push({pathname:`/perSociety/` + id, state: {societyName: name}});
                                 } else if(type === "event") {
+                                    dispatch(updateEventSuccessfully(reply));
                                     browserHistory.push({pathname:`/perEvent/` + id, state: {eventName: name}});
                                 } 
                             }

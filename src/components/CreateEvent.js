@@ -81,7 +81,6 @@ class CreateEvent extends Component {
   }
 
   handleClick(event) {
-    this.props.onUpdateLoadingBar();
     // console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
     // console.log("end date: " + moment(this.state.selectedStartDate).format("YYYY-MM-DD hh:mm:ss"));
     // console.log("event category: " + this.state.eventCategory);
@@ -100,6 +99,8 @@ class CreateEvent extends Component {
       })
       return false;
     } else {
+      this.props.onUpdateLoadingBar();
+      
       let eventId = this.props.params.id;
       let data = this.state
       let eventName = data["name"];

@@ -11,7 +11,7 @@ import '../style/form.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create, update, updatePostLoadingBar } from '../actions/post-action';
-import { retrieveData } from '../actions/data-action';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
 
 class CreateProfile extends Component {
 
@@ -26,8 +26,12 @@ class CreateProfile extends Component {
       mission: ''
     }
 
-    if(this.props.params.societyId != null) 
+    console.log("society id params: " + this.props.params.societyId);
+    if(this.props.params.societyId) {
+      console.log("run");
+      this.props.onUpdateRetrieveLoadingBar();
       this.props.onRetrieveData("society", this.props.params.societyId);
+    }
 
     this.handleClick = this.handleClick.bind(this);
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
@@ -36,7 +40,7 @@ class CreateProfile extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    if(this.props.params.societyId != null) {
+    if(this.props.params.societyId) {
       setTimeout(function() { 
         let society = this.props.society;
         this.setState({
@@ -46,13 +50,11 @@ class CreateProfile extends Component {
           mission: society["mission"], 
           desc: society["desc"]
         })   
-      }.bind(this), 3000)
+      }.bind(this), 5000)
     }
   }
 
   handleClick(event) {
-    this.props.onUpdateLoadingBar();
-
     const { name, desc, vision, mission } = this.state;
 
     if(name == '' || desc == '' || vision == '' ||  mission == '') {
@@ -67,6 +69,8 @@ class CreateProfile extends Component {
       })
       return false;
     } else {
+      this.props.onUpdateCreateLoadingBar();
+
       let societyId = this.props.params.societyId;
       let data = this.state
       let societyName = data["name"];
@@ -88,6 +92,9 @@ class CreateProfile extends Component {
   }
 
   render() {
+    console.log("create load: " + this.props.createLoading);
+    console.log("retrieve load: " + this.props.retrieveLoading);
+    
     const { RaisedButtonStyle } = styles;
 
     const societyCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
@@ -128,7 +135,7 @@ class CreateProfile extends Component {
               {breadCrumb}
             </div>
 
-            {this.props.loading ?
+            {this.props.createLoading || this.props.retrieveLoading ?
             [<LoadingBar />]
             :
             [
@@ -189,7 +196,8 @@ const mapStateToProps = (state, props) => {
   return {
     createdSocietyId: state.create.createdSocietyId,
     society: state.data.society,
-    loading: state.create.loading
+    createLoading: state.create.loading,
+    retrieveLoading: state.data.loading
   };
 };
 
@@ -198,7 +206,8 @@ const mapActionsToProps = (dispatch, props) => {
     onCreate: create,
     onUpdate: update,
     onRetrieveData: retrieveData,
-    onUpdateLoadingBar: updatePostLoadingBar
+    onUpdateRetrieveLoadingBar: updateLoadingBar,
+    onUpdateCreateLoadingBar: updatePostLoadingBar
   }, dispatch);
 };
 

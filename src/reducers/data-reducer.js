@@ -17,7 +17,7 @@ import {
 } from '../constant';
 
 const initialState = {
-    loading: true,
+    loading: false,
 
     society: null,
     event: null,
