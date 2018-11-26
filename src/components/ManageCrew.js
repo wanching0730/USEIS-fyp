@@ -3,11 +3,13 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
+import Tooltip from 'rc-tooltip';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
 import { Link } from 'react-router';
 import '../style/table.css';
 import '../style/alert.css';
+import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -99,9 +101,20 @@ class ManageCrew extends Component {
                     var approvedIcon;
 
                     if(crew["crewStatus"] == 1) 
-                        approvedIcon = <td><li className="fa fa-check"></li></td>
+                        approvedIcon = 
+                            <td>
+                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Crew approved</span>}>
+                                    <li className="fa fa-check"></li>
+                                </Tooltip>
+                            </td>
                     else 
-                        approvedIcon = <td><li value={crew["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li></td>
+                        approvedIcon = 
+                            <td>
+                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve this crew</span>}>
+                                    <li value={crew["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li>
+                                </Tooltip>
+                            </td>
+                                
 
                     rows.push(
                         <tr> 
@@ -114,7 +127,11 @@ class ManageCrew extends Component {
                             <td>{crew["email"]}</td>
                             <td>{crew["position"]}</td>
                             {approvedIcon}
-                            <td><li value={crew["studentId"]} onClick={(event) => this.handleDelete(event)} className="fa fa-trash"></li></td>
+                            <td>
+                                <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject this crew</span>}>
+                                    <li value={crew["studentId"]} onClick={(event) => this.handleDelete(event)} className="fa fa-trash"></li>
+                                </Tooltip>
+                            </td>
                         </tr>
                     )
                 }
