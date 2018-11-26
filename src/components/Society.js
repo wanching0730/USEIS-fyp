@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
+import Tooltip from 'rc-tooltip';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { groupBy } from '../common/common_function';
 import '../style/society.css';
+import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -54,7 +56,9 @@ class Society extends Component {
                 rows.push(
                     <li>
                         <input type="checkbox" id={stringId} />
-                        <label for={stringId} className="first">{key}   <FontAwesome.FaHandORight /></label>
+                        <Tooltip placement="right" trigger={['hover']} overlay={<span>Click to view more</span>}>
+                            <label for={stringId} className="first">{key}   <FontAwesome.FaHandORight /></label>
+                        </Tooltip>
                         <ul>
                             {subRows}
                         </ul>

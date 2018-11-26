@@ -6,9 +6,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
+import Tooltip from 'rc-tooltip';
 import {browserHistory} from 'react-router';
 import moment from "moment";
 import '../style/table.css';
+import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -140,12 +142,22 @@ class MyEvent extends Component {
                         isVege = <td>Yes</td>;
 
                     if(event["crewStatus"] === 0 && event["position"] != "participant") 
-                        crewAction = <td><li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-times-circle"></li></td>;
+                        crewAction = 
+                            <td>
+                                <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
+                                    <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-times-circle"></li>
+                                </Tooltip>
+                            </td>;
                     else 
                         crewAction = <td>-</td>
 
                     if(event["participantStatus"] === 1) 
-                        participantAction = <td><li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li></td>;
+                        participantAction = 
+                            <td>
+                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
+                                    <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
+                                </Tooltip>
+                            </td>;
                     else 
                         participantAction = <td>-</td>
                     

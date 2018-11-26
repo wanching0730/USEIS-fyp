@@ -7,9 +7,11 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {browserHistory} from 'react-router';
 import moment from "moment";
 import RaisedButton from 'material-ui/RaisedButton';
+import Tooltip from 'rc-tooltip';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { groupBy } from '../common/common_function';
 import '../style/table.css';
+import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -76,7 +78,11 @@ class MyProfile extends Component {
                         <td>{moment(society["joinDate"]).format("DD/MM/YYYY")}</td>
                         <td>{society["position"]}</td>
                         <td>{events}</td>
-                        <td><Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link></td>
+                        <td>
+                            <Tooltip placement="right" trigger={['hover']} overlay={<span>Edit Society Profile</span>}>
+                                <Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link>
+                            </Tooltip> 
+                        </td>
                     </tr>
                 );
             }
