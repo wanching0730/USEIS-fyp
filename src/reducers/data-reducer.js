@@ -13,7 +13,9 @@ import {
     RETRIEVE_SOCIETY_BOOTHS,
     RETRIEVE_EVENT_BOOTHS,
     RETRIEVE_USER_EVENTS,
-    RETRIEVE_SOCIETY_MEMBERS
+    RETRIEVE_SOCIETY_MEMBERS,
+    SEARCH_SOCIETY,
+    SEARCH_EVENT
 } from '../constant';
 
 const initialState = {
@@ -34,7 +36,10 @@ const initialState = {
     newsfeeds: null,
     allSocietyEvents: null,
     societyBooths: null,
-    eventBooths: null
+    eventBooths: null,
+
+    societiesFound: null,
+    eventsFound: null
 };
 
 export default function dataReducer(state = initialState, { type, payload }) {
@@ -113,6 +118,14 @@ export default function dataReducer(state = initialState, { type, payload }) {
                 studentParticipant: payload.studentParticipant,
                 staffParticipant: payload.staffParticipant,
                 loading: payload.loading
+            });
+        case SEARCH_SOCIETY:
+            return Object.assign({}, state, {
+                societiesFound: payload.societiesFound
+            });
+        case SEARCH_EVENT:
+            return Object.assign({}, state, {
+                eventsFound: payload.eventsFound
             });
         default: 
             return state;

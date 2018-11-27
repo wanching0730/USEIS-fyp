@@ -184,6 +184,26 @@ export function updateDataDouble(type, data) {
     }
 }
 
+export function searchAllData(type, keyword) {
+    if(type === "society") {
+        return fetch(`http://localhost:5000/get/society/keyword`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
+    } else {
+        return fetch(`http://localhost:5000/get/event/keyword`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
+    }
+}
+
 export function deleteData(type, id, eventId) {
     if(type === "studentEvent") {
         return fetch(`http://localhost:5000/delete/studentEvent/` + id + '/' + eventId, {

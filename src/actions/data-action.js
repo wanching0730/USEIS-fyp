@@ -1,4 +1,4 @@
-import { getData, getAllData, getDataWithUserId } from '../utils/http_function';
+import { getData, getAllData, getDataWithUserId, searchAllData } from '../utils/http_function';
 
 import {
     UPDATE_RETRIEVE_LOADINGBAR,
@@ -15,7 +15,9 @@ import {
     RETRIEVE_SOCIETY_BOOTHS,
     RETRIEVE_EVENT_BOOTHS,
     RETRIEVE_USER_EVENTS,
-    RETRIEVE_SOCIETY_MEMBERS
+    RETRIEVE_SOCIETY_MEMBERS,
+    SEARCH_SOCIETY,
+    SEARCH_EVENT
 } from '../constant';
 
 export function updateLoadingBarSuccessful() {
@@ -25,6 +27,24 @@ export function updateLoadingBarSuccessful() {
             loading: true
         }
     };
+}
+
+export function searchDataSuccessful(data) {
+    if(type === "society") {
+        return {
+            type: SEARCH_SOCIETY,
+            payload: {
+                societiesFound: data
+            }
+        };
+    } else {
+        return {
+            type: SEARCH_EVENT,
+            payload: {
+                eventsFound: data
+            }
+        };
+    }
 }
 
 export function retrieveSingleDataSuccessful(type, data) {
@@ -364,6 +384,29 @@ export function retrieveAll(type) {
                 }
 
                 dispatch(retrieveAllDataSuccessful(type, eventBooths));
+            }
+        });
+    };
+}
+
+export function searchData(type, keyword) {
+    return function (dispatch) {
+        return searchAllData(type, keyword).then(result => result.json()).then(reply => {
+            let societiesFound = [];
+            let eventsFound = [];
+
+            if(type === "society") {
+                for(var i = 0; i < reply.length; i++) {
+                    societiesFound.push(reply[i]);
+                }
+
+                dispatch(searchDataSuccessful(type, societiesFound));
+            } else {
+                for(var i = 0; i < reply.length; i++) {
+                    eventsFound.push(reply[i]);
+                }
+
+                dispatch(searchDataSuccessful(type, eventsFound));
             }
         });
     };

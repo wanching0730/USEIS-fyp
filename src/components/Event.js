@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Tooltip from 'rc-tooltip';
+import SearchBar from 'material-ui-search-bar'
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -21,7 +22,8 @@ class Event extends Component {
         super(props);
 
         this.state = {
-            sortType: "name"
+            sortType: "name",
+            searchWord: ""
         };
 
         this.props.onUpdateLoadingBar();
@@ -34,6 +36,10 @@ class Event extends Component {
 
     handleClick(event) {
         console.log("clicked");
+    }
+
+    handleSearch(event) {
+        console.log("search");
     }
 
     sort(type, values) {
@@ -51,11 +57,11 @@ class Event extends Component {
                 if(a > b) return 1;
                 return 0;
             });
-        }
-        
+        }   
     }
 
     render() {
+        console.log(this.state.searchWord);
         const { RaisedButtonStyle } = styles;
         let events = this.props.events;
 
@@ -119,6 +125,15 @@ class Event extends Component {
                         <div>
                             <MuiThemeProvider>
                                 <h1 style={{ margin: 20, color: '#083477' }}>Event List</h1>
+
+                                 <SearchBar
+                                    onChange={(newValue) => this.setState({ searchWord: newValue })}
+                                    onRequestSearch={() => this.handleSearch()}
+                                    style={{
+                                        margin: '0 auto',
+                                        maxWidth: 800
+                                    }}
+                                />
 
                                 <RaisedButton className="buttons" label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "name"})}/>
                                 <RaisedButton className="buttons" label="Sort by Date" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({sortType: "date"})}/>
