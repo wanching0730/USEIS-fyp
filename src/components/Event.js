@@ -14,7 +14,7 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { retrieveAll, updateLoadingBar, searchData } from '../actions/data-action';
 
 class Event extends Component {
 
@@ -25,6 +25,8 @@ class Event extends Component {
             sortType: "name",
             searchWord: ""
         };
+
+        this.handleSearch = this.handleSearch.bind(this);
 
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveAll("event");
@@ -38,8 +40,8 @@ class Event extends Component {
         console.log("clicked");
     }
 
-    handleSearch(event) {
-        console.log("search");
+    handleSearch() {
+        this.props.onSearchData("event", this.state.searchWord);
     }
 
     sort(type, values) {
@@ -128,7 +130,7 @@ class Event extends Component {
 
                                  <SearchBar
                                     onChange={(newValue) => this.setState({ searchWord: newValue })}
-                                    onRequestSearch={() => this.handleSearch()}
+                                    onRequestSearch={this.handleSearch.bind(this)}
                                     style={{
                                         margin: '0 auto',
                                         maxWidth: 800
@@ -168,6 +170,7 @@ const mapStateToProps = (state, props) => {
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveAll: retrieveAll,
+      onSearchData: searchData,
       onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };

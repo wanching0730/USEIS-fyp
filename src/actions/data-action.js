@@ -29,7 +29,7 @@ export function updateLoadingBarSuccessful() {
     };
 }
 
-export function searchDataSuccessful(data) {
+export function searchDataSuccessful(type, data) {
     if(type === "society") {
         return {
             type: SEARCH_SOCIETY,

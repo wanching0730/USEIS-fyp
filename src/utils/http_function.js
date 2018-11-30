@@ -60,6 +60,14 @@ export function getAllData(type) {
     } 
 }
 
+export function searchAllData(type, keyword) {
+    if(type === "society") {
+        return fetch(`http://localhost:5000/get/search/society/` + keyword);
+    } else if(type === "event") {
+        return fetch(`http://localhost:5000/get/search/event/` + keyword);
+    } 
+}
+
 export function createData(type, data) {
     if(type === "society") {
         return fetch(`http://localhost:5000/create/society`, {
@@ -175,26 +183,6 @@ export function updateDataDouble(type, data) {
         });
     } else if(type === "fcmToken") {
         return fetch(`http://localhost:5000/update/token`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: data
-        });
-    }
-}
-
-export function searchAllData(type, keyword) {
-    if(type === "society") {
-        return fetch(`http://localhost:5000/get/society/keyword`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: data
-        });
-    } else {
-        return fetch(`http://localhost:5000/get/event/keyword`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
