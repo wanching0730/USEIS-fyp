@@ -36,6 +36,7 @@ class MyEvent extends Component {
             this.props.onRetrieveData("studentEvent", this.props.userId);
 
         this.handleCancelEvent = this.handleCancelEvent.bind(this);
+        this.handleCancelCrew = this.handleCancelCrew.bind(this);
         this.updateList = this.updateList.bind(this);
     }
 
@@ -74,7 +75,10 @@ class MyEvent extends Component {
         browserHistory.push("/myEvents");
     }
 
-    handleCancelCrew() {
+    handleCancelCrew(event) {
+        let eventId = event.target.value;
+        this.setState({eventId: eventId});
+
         confirmAlert({
             title: 'Cancel Crew Registration Confirmation',
             message: 'Are you sure to cancel joining as crew for this event?',
@@ -83,6 +87,7 @@ class MyEvent extends Component {
                 label: 'Yes',
                 onClick: () => {
                     console.log('Click Yes');
+                    this.props.onDeleteParticipation("eventCrew", this.props.userId, this.state.eventId);
                 }
               },
               {
@@ -95,7 +100,7 @@ class MyEvent extends Component {
 
     handleCancelEvent(event) {
         let eventId = event.target.value;
-        this.setState({eventId: eventId})
+        this.setState({eventId: eventId});
 
         setTimeout(() => {
             confirmAlert({
