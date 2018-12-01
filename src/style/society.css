@@ -100,3 +100,7 @@ input[type="checkbox"]:checked + label{
   padding-top: 15px;
   text-align: center;
 }
+
+input#undefined-Search-undefined-16703:parent:parent:parent:parent {
+  width: 300px;
+}

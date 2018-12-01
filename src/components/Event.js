@@ -182,8 +182,10 @@ class Event extends Component {
                                     onChange={(newValue) => this.setState({ searchWord: newValue })}
                                     onRequestSearch={this.handleSearch.bind(this)}
                                     style={{
-                                        margin: '0 auto',
-                                        maxWidth: 800
+                                        marginLeft: 20,
+                                        marginBottom: 20,
+                                        maxWidth: 290,
+                                        borderRadius: 6
                                     }}
                                 />
 
