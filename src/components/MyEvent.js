@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
 import Tooltip from 'rc-tooltip';
 import {browserHistory} from 'react-router';
+import openSocket from 'socket.io-client';
 import moment from "moment";
 import '../style/table.css';
 import 'rc-tooltip/assets/bootstrap_white.css';
@@ -22,7 +23,10 @@ class MyEvent extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {eventId: -1};
+        this.state = {
+            eventId: -1,
+            userEvents: null
+        };
 
         this.props.onUpdateLoadingBar();
 
@@ -32,10 +36,34 @@ class MyEvent extends Component {
             this.props.onRetrieveData("studentEvent", this.props.userId);
 
         this.handleCancelEvent = this.handleCancelEvent.bind(this);
+        this.updateList = this.updateList.bind(this);
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);
+
+        const socket = openSocket('http://localhost:5000');
+        socket.on('updateParticipation', this.updateList);
+    }
+
+    componentWillReceiveProps(nextProps){
+        if((nextProps.userEvents != this.props.userEvents) && (nextProps.userEvents != null)) {
+            this.setState({
+                userEvents: nextProps.userEvents
+            });
+        }
+    }
+
+    updateList(data) {
+        let list = this.state.userEvents;
+        for(var i = 0; i < list.length; i++) {
+            let item = list[i];
+            if(item["studentId"] == data["studentId"] && item["eventId"] == data["eventId"]) {
+                var index = list.indexOf(item);
+                list.splice(index, 1);
+            }
+        }
+        this.setState({ userEvents: list });
     }
     
     handleSocieties(event) {
@@ -93,15 +121,14 @@ class MyEvent extends Component {
     }
     
     render() {
-
         const { imageStyle, RaisedButtonStyle } = styles;
 
-        if(this.props.userEvents != null) {
+        if(this.state.userEvents != null) {
             var message = <div></div>;
             var rows = [];
 
-            if(this.props.userEvents.length != 0) {
-                let events = this.props.userEvents;
+            if(this.state.userEvents.length != 0) {
+                let events = this.state.userEvents;
 
                 var position, crewStatus, isVege, crewAction, participantAction, ratingStatus;
                 
