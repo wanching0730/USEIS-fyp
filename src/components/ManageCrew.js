@@ -7,6 +7,7 @@ import Tooltip from 'rc-tooltip';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
 import { Link } from 'react-router';
+import openSocket from 'socket.io-client';
 import '../style/table.css';
 import '../style/alert.css';
 import 'rc-tooltip/assets/bootstrap_white.css';
@@ -23,7 +24,8 @@ class ManageCrew extends Component {
         super(props);
 
         this.state = {
-            studentId: -1
+            studentId: -1,
+            eventCrew: null
         };
 
         this.props.onUpdateLoadingBar();
@@ -31,10 +33,40 @@ class ManageCrew extends Component {
 
         this.handleApprove = this.handleApprove.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.updateList = this.updateList.bind(this);
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
+
+        const socket = openSocket('http://localhost:5000');
+        socket.on('updateParticipation', this.updateList);
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("this props: " + JSON.stringify(this.props.eventCrew));
+        console.log("next props: " + JSON.stringify(nextProps.eventCrew));
+        if((nextProps.eventCrew != this.props.eventCrew) && (nextProps.eventCrew != null)) {
+            this.setState({
+                eventCrew: nextProps.eventCrew
+            });
+        }
+
+        console.log(this.state.eventCrew);
+    }
+
+    updateList(data) {
+        let list = this.state.eventCrew;
+        console.log(this.state.eventCrew);
+        for(var i = 0; i < list.length; i++) {
+            let item = list[i];
+            if(item["studentId"] == data["studentId"] && item["eventId"] == data["eventId"]) {
+                var index = list.indexOf(item);
+                list.splice(index, 1);
+            }
+        }
+        this.setState({ eventCrew: list });
+        console.log(this.state.eventCrew);
     }
 
     handleApprove(event) {
@@ -88,9 +120,10 @@ class ManageCrew extends Component {
     }
 
     render() {
-
+        console.log(this.state.eventCrew);
+        
         const { RaisedButtonStyle } = styles;
-        let eventCrew = this.props.eventCrew;
+        let eventCrew = this.state.eventCrew;
         var message = <div></div>;
         var rows = [];
 

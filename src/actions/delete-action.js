@@ -43,7 +43,7 @@ export function deleteParticipation(type, id, eventId) {
                         {
                             label: 'Close',
                             onClick: () => {
-                                browserHistory.push("/myEvents");
+                                //browserHistory.push("/myEvents");
                             }
                         }
                     ]
