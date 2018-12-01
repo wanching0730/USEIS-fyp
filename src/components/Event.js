@@ -3,13 +3,15 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Tooltip from 'rc-tooltip';
-import SearchBar from 'material-ui-search-bar'
+import SearchBar from 'material-ui-search-bar';
+import { confirmAlert } from 'react-confirm-alert';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { groupBy } from '../common/common_function';
 import '../style/society.css';
+import '../style/alert.css';
 import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
@@ -34,6 +36,53 @@ class Event extends Component {
 
     async componentDidMount() {
         window.scrollTo(0, 0);
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("this props: " + this.props.eventsFound);
+        console.log("next props: " + nextProps.eventsFound);
+
+        if((nextProps.eventsFound != this.props.eventsFound) && (nextProps.eventsFound != null)) {
+            console.log("found: " + this.props.eventsFound);
+            let eventsFound = nextProps.eventsFound;
+            var resultRows = [];
+
+            for(var i = 0; i < eventsFound.length; i++) {
+                let eventFound = eventsFound[i];
+                let toEvent = {
+                    pathname: "/perEvent/" + eventFound["eventId"],
+                    state: {eventName: eventFound["name"]}
+                }
+
+                resultRows.push(
+                    <tr>
+                        <td key={eventFound["eventId"]}><Link key={eventFound["eventId"]} to={toEvent}>{eventFound["name"]} - {eventFound["category"]}</Link></td>
+                    </tr>
+                )
+            }
+
+            confirmAlert({
+                customUI: ({ onClose }) => {
+                    return (
+                        <MuiThemeProvider>
+                            <div className='search-alert'>
+                                <table id="searchModal">
+                                    <thead>
+                                        <tr>
+                                            <th>Events</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {resultRows}
+                                    </tbody>
+                                </table>
+                                <RaisedButton label="Close" primary={true} onClick={() => onClose()} style={{ marginTop: 15 }}/>
+                            </div>
+                        </MuiThemeProvider>
+                    )
+                }
+            })
+        }
     }
 
     handleClick(event) {
@@ -63,7 +112,8 @@ class Event extends Component {
     }
 
     render() {
-        console.log(this.state.searchWord);
+        console.log("found 1: " + this.props.eventsFound);
+
         const { RaisedButtonStyle } = styles;
         let events = this.props.events;
 
@@ -163,6 +213,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
       events: state.data.events,
+      eventsFound: state.data.eventsFound,
       loading: state.data.loading
     };
 };

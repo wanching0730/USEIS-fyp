@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Router, browserHistory, Route, Link } from 'react-router';
-import Register from '../src/components/Register';
+import { Router, browserHistory, Route } from 'react-router';
 import Login from '../src/components/Login';
 import Home from '../src/components/Home';
 import NewsFeed from './components/NewsFeed';
@@ -35,7 +34,6 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      
         <Router history={browserHistory}>
           <Route path="/" component={Login}/>
           <Route path="/home" component={Home}/>
