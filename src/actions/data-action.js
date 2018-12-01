@@ -34,14 +34,16 @@ export function searchDataSuccessful(type, data) {
         return {
             type: SEARCH_SOCIETY,
             payload: {
-                societiesFound: data
+                societiesFound: data,
+                loading: false
             }
         };
     } else {
         return {
             type: SEARCH_EVENT,
             payload: {
-                eventsFound: data
+                eventsFound: data,
+                loading: false
             }
         };
     }

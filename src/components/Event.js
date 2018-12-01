@@ -66,16 +66,24 @@ class Event extends Component {
                     return (
                         <MuiThemeProvider>
                             <div className='search-alert'>
-                                <table id="searchModal">
-                                    <thead>
-                                        <tr>
-                                            <th>Events</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {resultRows}
-                                    </tbody>
-                                </table>
+
+                                {eventsFound.length > 0 ?
+                                    [
+                                        <table id="searchModal">
+                                            <thead>
+                                                <tr>
+                                                    <th>Events</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {resultRows}
+                                            </tbody>
+                                        </table>
+                                    ]:
+                                    [
+                                        <div>No result found</div>
+                                    ]
+                                }
                                 <RaisedButton label="Close" primary={true} onClick={() => onClose()} style={{ marginTop: 15 }}/>
                             </div>
                         </MuiThemeProvider>
@@ -90,6 +98,7 @@ class Event extends Component {
     }
 
     handleSearch() {
+        this.props.onUpdateLoadingBar();
         this.props.onSearchData("event", this.state.searchWord);
     }
 

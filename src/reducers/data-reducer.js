@@ -121,11 +121,13 @@ export default function dataReducer(state = initialState, { type, payload }) {
             });
         case SEARCH_SOCIETY:
             return Object.assign({}, state, {
-                societiesFound: payload.societiesFound
+                societiesFound: payload.societiesFound,
+                loading: payload.loading
             });
         case SEARCH_EVENT:
             return Object.assign({}, state, {
-                eventsFound: payload.eventsFound
+                eventsFound: payload.eventsFound,
+                loading: payload.loading
             });
         default: 
             return state;
