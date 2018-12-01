@@ -3,6 +3,8 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import Tooltip from 'rc-tooltip';
+import SearchBar from 'material-ui-search-bar';
+import { confirmAlert } from 'react-confirm-alert';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -13,12 +15,16 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { retrieveAll, updateLoadingBar, searchData } from '../actions/data-action';
 
 class Society extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            searchWord: ""
+        };
 
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveAll("society");
@@ -28,8 +34,68 @@ class Society extends Component {
         window.scrollTo(0,0);
     }
 
+    componentWillReceiveProps(nextProps){
+        console.log("this props: " + this.props.societiesFound);
+        console.log("next props: " + nextProps.societiesFound);
+
+        if((nextProps.societiesFound != this.props.societiesFound) && (nextProps.societiesFound != null)) {
+            console.log("found: " + this.props.societiesFound);
+            let societiesFound = nextProps.societiesFound;
+            var resultRows = [];
+
+            for(var i = 0; i < societiesFound.length; i++) {
+                let societyFound = societiesFound[i];
+                let toSociety = {
+                    pathname: "/perSociety/" + societyFound["societyId"],
+                    state: {societyName: societyFound["name"]}
+                }
+
+                resultRows.push(
+                    <tr>
+                        <td key={societyFound["societyId"]}><Link key={societyFound["societyId"]} to={toSociety}>{societyFound["name"]} - {societyFound["category"]}</Link></td>
+                    </tr>
+                )
+            }
+
+            confirmAlert({
+                customUI: ({ onClose }) => {
+                    return (
+                        <MuiThemeProvider>
+                            <div className='search-alert'>
+
+                                {societiesFound.length > 0 ?
+                                    [
+                                        <table id="searchModal">
+                                            <thead>
+                                                <tr>
+                                                    <th>Societies</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {resultRows}
+                                            </tbody>
+                                        </table>
+                                    ]:
+                                    [
+                                        <div>No result found</div>
+                                    ]
+                                }
+                                <RaisedButton label="Close" primary={true} onClick={() => onClose()} style={{ marginTop: 15 }}/>
+                            </div>
+                        </MuiThemeProvider>
+                    )
+                }
+            })
+        }
+    }
+
     handleClick(event) {
         console.log("clicked");
+    }
+
+    handleSearch() {
+        this.props.onUpdateLoadingBar();
+        this.props.onSearchData("society", this.state.searchWord);
     }
 
     render() {
@@ -89,6 +155,17 @@ class Society extends Component {
                             <MuiThemeProvider>
                                 <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
 
+                                <SearchBar
+                                    onChange={(newValue) => this.setState({ searchWord: newValue })}
+                                    onRequestSearch={this.handleSearch.bind(this)}
+                                    style={{
+                                        marginLeft: 20,
+                                        marginBottom: 20,
+                                        maxWidth: 290,
+                                        borderRadius: 6
+                                    }}
+                                />
+
                                 <RaisedButton className="buttons" label="Sort by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
                                 <RaisedButton className="buttons" label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
 
@@ -117,6 +194,7 @@ const mapStateToProps = (state, props) => {
     console.log("state in society: " + state.data.societies);
     return {
       societies: state.data.societies,
+      societiesFound: state.data.societiesFound,
       loading: state.data.loading
     };
 };
@@ -124,6 +202,7 @@ const mapStateToProps = (state, props) => {
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveAll: retrieveAll,
+      onSearchData: searchData,
       onUpdateLoadingBar: updateLoadingBar
     }, dispatch);
 };
