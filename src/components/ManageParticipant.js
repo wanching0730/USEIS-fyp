@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { confirmAlert } from 'react-confirm-alert'; 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
+import openSocket from 'socket.io-client';
 import '../style/table.css';
 import '../style/alert.css';
 
@@ -20,15 +21,47 @@ class ManageParticipant extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            studentParticipant: null,
+            staffParticipant: null
+        };
+
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveData("eventParticipant", this.props.params.eventId);
 
         this.handleApprove = this.handleApprove.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.updateList = this.updateList.bind(this);
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
+
+        const socket = openSocket('http://localhost:5000');
+        socket.on('updateParticipation', this.updateList);
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("this props: " + JSON.stringify(this.props.studentParticipant));
+        console.log("next props: " + JSON.stringify(nextProps.studentParticipant));
+        if((nextProps.studentParticipant != this.props.studentParticipant) && (nextProps.studentParticipant != null)) {
+            this.setState({
+                studentParticipant: nextProps.studentParticipant
+            });
+        }
+    }
+
+    updateList(data) {
+        let list = this.state.studentParticipant;
+        console.log("state in update list: " + JSON.stringify(this.state.studentParticipant));
+        for(var i = 0; i < list.length; i++) {
+            let item = list[i];
+            if(item["id"] == data["studentId"] && item["eventId"] == data["eventId"]) {
+                var index = list.indexOf(item);
+                list.splice(index, 1);
+            }
+        }
+        this.setState({ studentParticipant: list });
     }
 
     handleApprove(event, username) {
@@ -85,15 +118,16 @@ class ManageParticipant extends Component {
     }
 
     render() {
+        console.log("state in render: " + this.state.studentParticipant);
         const { RaisedButtonStyle } = styles;
-        let studentParticipants = this.props.studentParticipant;
+        let studentParticipants = this.state.studentParticipant;
         let staffParticipants = this.props.staffParticipant;
         var studentMessage = <div></div>;
         var staffMessage = <div></div>;
         var studentRows = [];
         var staffRows = [];
 
-        if(studentParticipants != null || staffParticipants != null) {
+        if(studentParticipants != null) {
             if(studentParticipants.length != 0) {
                 for(var i = 0; i < studentParticipants.length; i++) {
                     let studentParticipant = studentParticipants[i];
@@ -122,7 +156,9 @@ class ManageParticipant extends Component {
             } else {
                 studentMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No student participant for this event</div>;
             }
+        }
 
+        if(staffParticipants != null) {
             if(staffParticipants.length != 0) {
                 for(var i = 0; i < staffParticipants.length; i++) {
                     let staffParticipant = staffParticipants[i];
@@ -150,7 +186,7 @@ class ManageParticipant extends Component {
                 staffMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No staff participant for this event</div>;
             } 
         } 
-        
+    
         return (
             <div id="outerDiv"> 
                 <NavBar />

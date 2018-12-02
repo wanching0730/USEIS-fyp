@@ -51,8 +51,6 @@ class ManageCrew extends Component {
                 eventCrew: nextProps.eventCrew
             });
         }
-
-        console.log(this.state.eventCrew);
     }
 
     updateList(data) {
@@ -111,6 +109,7 @@ class ManageCrew extends Component {
                             <RaisedButton label="Yes" primary={true} onClick={() => {    
                                 this.props.onDeleteParticipation("eventCrew", targetCrewId, targetEventId);
                             }}/>
+                            &nbsp;&nbsp;&nbsp;
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
                         </div>
                     </MuiThemeProvider>
