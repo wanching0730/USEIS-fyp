@@ -13,6 +13,7 @@ class LoadingBar extends Component {
                     color="#00BFFF"
                     height="70"	
                     width="70"
+                    z-index="999"
                 />  
             </div>
         );

@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import '../style/form.css';
+import '../style/spinner.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

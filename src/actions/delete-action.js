@@ -1,6 +1,31 @@
 import {browserHistory} from 'react-router';
 import { deleteData } from '../utils/http_function';
 import { confirmAlert } from 'react-confirm-alert';
+import { UPDATE_DELETE_LOADINGBAR, DELETE_DATA } from '../constant';
+
+export function updateDeleteLoadingBarSuccessful() {
+    return {
+        type: UPDATE_DELETE_LOADINGBAR,
+        payload: {
+            loading: true
+        }
+    };
+}
+
+export function deleteDataSuccessful() {
+    return {
+        type: DELETE_DATA,
+        payload: {
+            loading: false
+        }
+    };
+}
+
+export function updateDeleteLoadingBar() {
+    return function (dispatch) {
+        dispatch(updateDeleteLoadingBarSuccessful());
+    }
+}
 
 // export function deletes(type, id) {
 //     return function (dispatch) {
@@ -36,6 +61,7 @@ export function deleteParticipation(type, id, eventId) {
             console.log("deleted data reply: " + reply);
 
             if(reply != "true") {
+                dispatch(deleteDataSuccessful());
                 confirmAlert({
                     title: 'Message',
                     message: 'Event participation has been deleted successfully',

@@ -9,12 +9,13 @@ import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
 import '../style/table.css';
 import '../style/alert.css';
+import '../style/spinner.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
-import { deleteParticipation } from '../actions/delete-action';
+import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
 class ManageParticipant extends Component {
 
@@ -79,10 +80,13 @@ class ManageParticipant extends Component {
                                             id: targetParticipantId,
                                             eventId: this.props.params.eventId
                                         }
+
                                         if(username.substring(0,2) === "00") 
                                             this.props.onUpdateData("staffParticipant", data, this.props.location.state["eventName"]);
                                         else 
                                         this.props.onUpdateData("studentParticipant", data, this.props.location.state["eventName"]);
+
+                                        
                                     }
                                 }/>
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
@@ -104,10 +108,14 @@ class ManageParticipant extends Component {
                             <h1>Delete Confirmation</h1>
                             <p>Are you sure to delete this participant?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {    
+                                this.props.onUpdateDeleteLoadingBar();
+
                                 if(username.substring(0,2) === "00") 
                                     this.props.onDeleteParticipation("staffParticipant", targetParticipantId, targetEventId);
                                 else 
                                     this.props.onDeleteParticipation("studentParticipant", targetParticipantId, targetEventId);
+
+                                onClose();
                             }}/>
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
                         </div>
@@ -118,7 +126,7 @@ class ManageParticipant extends Component {
     }
 
     render() {
-        console.log("state in render: " + this.state.studentParticipant);
+        console.log("loading in render: " + this.props.deleteLoading);
         const { RaisedButtonStyle } = styles;
         let studentParticipants = this.state.studentParticipant;
         let staffParticipants = this.props.staffParticipant;
@@ -202,6 +210,14 @@ class ManageParticipant extends Component {
 
                 {this.props.loading ?
                     [<LoadingBar />]
+                    : this.props.deleteLoading ? 
+                    [
+                        <div class="spinner">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                    ]
                     :
                     [
                         <div>
@@ -294,7 +310,8 @@ const mapStateToProps = (state, props) => {
     return {
         studentParticipant: state.data.studentParticipant,
         staffParticipant: state.data.staffParticipant,
-        loading: state.data.loading
+        loading: state.data.loading,
+        deleteLoading: state.delete.loading
     };
 };
 
@@ -303,7 +320,8 @@ const mapActionsToProps = (dispatch, props) => {
       onRetrieveData: retrieveData,
       onUpdateData: updateDouble,
       onDeleteParticipation: deleteParticipation,
-      onUpdateLoadingBar: updateLoadingBar
+      onUpdateLoadingBar: updateLoadingBar,
+      onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 
