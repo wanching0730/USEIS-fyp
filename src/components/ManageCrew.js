@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
-import { deleteParticipation } from '../actions/delete-action';
+import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
 class ManageCrew extends Component {
 
@@ -106,8 +106,11 @@ class ManageCrew extends Component {
                         <div className='custom-alert'>
                             <h1>Delete Confirmation</h1>
                             <p>Are you sure to delete this crew?</p>
-                            <RaisedButton label="Yes" primary={true} onClick={() => {    
+                            <RaisedButton label="Yes" primary={true} onClick={() => {   
+                                this.props.onUpdateDeleteLoadingBar(); 
                                 this.props.onDeleteParticipation("eventCrew", targetCrewId, targetEventId);
+
+                                onClose();
                             }}/>
                             &nbsp;&nbsp;&nbsp;
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
@@ -185,7 +188,7 @@ class ManageCrew extends Component {
                     </Breadcrumb>
                 </div>
 
-                {this.props.loading ?
+                {this.props.loading || this.props.deleteLoading ?
                     [<LoadingBar />]
                     :
                     [
@@ -241,7 +244,8 @@ const mapStateToProps = (state, props) => {
     return {
         eventCrew: state.data.eventCrew,
         userName: state.auth.userName,
-        loading: state.data.loading
+        loading: state.data.loading,
+        deleteLoading: state.delete.loading
     };
 };
 
@@ -250,7 +254,8 @@ const mapActionsToProps = (dispatch, props) => {
       onRetrieveData: retrieveData,
       onUpdateData: updateDouble,
       onDeleteParticipation: deleteParticipation,
-      onUpdateLoadingBar: updateLoadingBar
+      onUpdateLoadingBar: updateLoadingBar,
+      onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 
