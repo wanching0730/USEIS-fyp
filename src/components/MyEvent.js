@@ -11,11 +11,12 @@ import {browserHistory} from 'react-router';
 import openSocket from 'socket.io-client';
 import moment from "moment";
 import '../style/table.css';
+import '../style/alert.css';
 import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteParticipation } from '../actions/delete-action';
+import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
 
 class MyEvent extends Component {
@@ -80,22 +81,26 @@ class MyEvent extends Component {
         this.setState({eventId: eventId});
 
         confirmAlert({
-            title: 'Cancel Crew Registration Confirmation',
-            message: 'Are you sure to cancel joining as crew for this event?',
-            buttons: [
-              {
-                label: 'Yes',
-                onClick: () => {
-                    console.log('Click Yes');
-                    this.props.onDeleteParticipation("eventCrew", this.props.userId, this.state.eventId);
-                }
-              },
-              {
-                label: 'No',
-                onClick: () => console.log('Click No')
-              }
-            ]
-          })
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h1>Cancel Crew Registration Confirmation</h1>
+                            <p>Are you sure to cancel joining as crew for this event?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {
+                                        this.props.onUpdateDeleteLoadingBar();
+                                        this.props.onDeleteParticipation("eventCrew", this.props.userId, this.state.eventId);
+                    
+                                        onClose();
+                                    }
+                                }/>
+                                &nbsp;&nbsp;&nbsp;
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
+        })
     }
 
     handleCancelEvent(event) {
@@ -104,23 +109,29 @@ class MyEvent extends Component {
 
         setTimeout(() => {
             confirmAlert({
-                title: 'Cancel Participation Confirmation',
-                message: 'Are you sure to cancel participating this event?',
-                buttons: [
-                    {
-                        label: 'Yes',
-                        onClick: () => {
-                            if(this.props.userName.substring(0,2) === "00") 
-                                this.props.onDeleteParticipation("staffEvent", this.props.userId, this.state.eventId);
-                            else 
-                                this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
-                        }
-                    },
-                    {
-                        label: 'No',
-                        onClick: () => console.log('Click No')
-                    }
-                ]
+                customUI: ({ onClose }) => {
+                    return (
+                        <MuiThemeProvider>
+                            <div className='custom-alert'>
+                                <h1>Cancel Crew Participation Confirmation</h1>
+                                <p>Are you sure to cancel participating this event?</p>
+                                <RaisedButton label="Yes" primary={true} onClick={() => {
+                                            this.props.onUpdateDeleteLoadingBar();
+
+                                            if(this.props.userName.substring(0,2) === "00") 
+                                                this.props.onDeleteParticipation("staffEvent", this.props.userId, this.state.eventId);
+                                            else 
+                                                this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
+                
+                                            onClose();
+                                        }
+                                    }/>
+                                    &nbsp;&nbsp;&nbsp;
+                                <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                            </div>
+                        </MuiThemeProvider>
+                    )
+                }
             })
         }, 2000);
     }
@@ -241,7 +252,7 @@ class MyEvent extends Component {
                         <RaisedButton label="My Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
                     </div>
 
-                    {this.props.loading ?
+                    {this.props.loading || this.props.deleteLoading ?
                     [<LoadingBar />]
                     :
                     [
@@ -301,7 +312,8 @@ const mapStateToProps = (state, props) => {
         userEvents: state.data.userEvents,
         userId: state.auth.id,
         userName: state.auth.userName,
-        loading: state.data.loading
+        loading: state.data.loading,
+        deleteLoading: state.delete.loading
     };
 };
 
@@ -309,7 +321,8 @@ const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
         onRetrieveData: retrieveData,
         onDeleteParticipation: deleteParticipation,
-        onUpdateLoadingBar: updateLoadingBar
+        onUpdateLoadingBar: updateLoadingBar,
+        onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 

@@ -88,6 +88,7 @@ class ManageParticipant extends Component {
                                         
                                     }
                                 }/>
+                                &nbsp;&nbsp;&nbsp;
                             <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
                         </div>
                     </MuiThemeProvider>
@@ -309,11 +310,11 @@ const mapStateToProps = (state, props) => {
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveData: retrieveData,
-      onUpdateData: updateDouble,
-      onDeleteParticipation: deleteParticipation,
-      onUpdateLoadingBar: updateLoadingBar,
-      onUpdateDeleteLoadingBar: updateDeleteLoadingBar
+        onRetrieveData: retrieveData,
+        onUpdateData: updateDouble,
+        onDeleteParticipation: deleteParticipation,
+        onUpdateLoadingBar: updateLoadingBar,
+        onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 
