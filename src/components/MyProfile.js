@@ -75,7 +75,10 @@ class MyProfile extends Component {
                         <td>{i+1}</td>
                         <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
                         <td><Link to={toSociety}>{society["name"]}</Link></td>
-                        <td>{moment(society["joinDate"]).format("DD/MM/YYYY")}</td>
+                        <td>
+                            {this.props.userName.substring(0,2) != "00" ? 
+                                moment(society["joinDate"]).format("DD/MM/YYYY") : society["joinDate"]}
+                        </td>
                         <td>{society["position"]}</td>
                         <td>{events}</td>
                         <td>
@@ -158,6 +161,7 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
+        userName: state.auth.userName,
         societies: state.auth.societies,
         allSocietyEvents: state.data.allSocietyEvents,
         loading: state.data.loading

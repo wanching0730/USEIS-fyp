@@ -77,7 +77,7 @@ class ManageCrew extends Component {
                     return (
                         <MuiThemeProvider>
                             <div className='custom-alert'>
-                                <h1>Approval Confirmation</h1>
+                                <h2>Approval Confirmation</h2>
                                 <p>Are you sure to approve this crew?</p>
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
                                             let data = {
@@ -104,7 +104,7 @@ class ManageCrew extends Component {
                 return (
                     <MuiThemeProvider>
                         <div className='custom-alert'>
-                            <h1>Delete Confirmation</h1>
+                            <h2>Delete Confirmation</h2>
                             <p>Are you sure to delete this crew?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {   
                                 this.props.onUpdateDeleteLoadingBar(); 

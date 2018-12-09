@@ -85,7 +85,7 @@ class MyEvent extends Component {
                 return (
                     <MuiThemeProvider>
                         <div className='custom-alert'>
-                            <h1>Cancel Crew Registration Confirmation</h1>
+                            <h2>Cancel Crew Registration Confirmation</h2>
                             <p>Are you sure to cancel joining as crew for this event?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {
                                         this.props.onUpdateDeleteLoadingBar();
@@ -113,7 +113,7 @@ class MyEvent extends Component {
                     return (
                         <MuiThemeProvider>
                             <div className='custom-alert'>
-                                <h1>Cancel Crew Participation Confirmation</h1>
+                                <h2>Cancel Crew Participation Confirmation</h2>
                                 <p>Are you sure to cancel participating this event?</p>
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
                                             this.props.onUpdateDeleteLoadingBar();

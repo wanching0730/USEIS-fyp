@@ -72,7 +72,7 @@ class ManageParticipant extends Component {
                 return (
                     <MuiThemeProvider>
                         <div className='custom-alert'>
-                            <h1>Approval Confirmation</h1>
+                            <h2>Approval Confirmation</h2>
                             <p>Are you sure to approve this participant?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {
                                         let data = {

@@ -130,7 +130,7 @@ export function loginUser(postData) {
                     }
                 }
                 
-                dispatch(loginUserSuccessful(userName, userId, id, societies, token));
+                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token));
             } else {
                 let id = user[0]["studentId"];
                 if(userSociety.length > 0) {
