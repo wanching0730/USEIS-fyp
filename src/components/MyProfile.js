@@ -69,11 +69,13 @@ class MyProfile extends Component {
                         });
                     }    
                 }
+
+                console.log("url: " + society["logoUrl"]);
                 
                 rows.push(
                     <tr>
                         <td>{i+1}</td>
-                        <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
+                        <td><img style={imageStyle} src={society["logoUrl"]} /></td>
                         <td><Link to={toSociety}>{society["name"]}</Link></td>
                         <td>
                             {this.props.userName.substring(0,2) != "00" ? 

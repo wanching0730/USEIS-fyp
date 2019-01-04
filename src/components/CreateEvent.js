@@ -34,6 +34,7 @@ class CreateEvent extends Component {
       fee: 0,
       chairperson: '',
       contact: '',
+      logoUrl: '',
       selectedStartDate: moment(),
       selectedEndDate: moment()
     }
@@ -64,6 +65,7 @@ class CreateEvent extends Component {
         ssPoint: event["ssPoint"],
         chairperson: event["chairperson"], 
         contact: event["contact"],
+        logoUrl: event["logoUrl"],
         boothId: event["boothId"],
         selectedStartDate: moment(event["startDate"]),
         selectedEndDate: moment(event["endDate"])
@@ -85,9 +87,9 @@ class CreateEvent extends Component {
     // console.log("end date: " + moment(this.state.selectedStartDate).format("YYYY-MM-DD hh:mm:ss"));
     // console.log("event category: " + this.state.eventCategory);
     // console.log("softskill category: " + this.state.softskillCategory);
-    const { name, desc, venue, chairperson, contact } = this.state;
+    const { name, desc, venue, chairperson, contact, logoUrl } = this.state;
     
-    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' ) {
+    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' || logoUrl == '' ) {
       confirmAlert({
         title: 'Warning',
         message: 'Please fill in all empty fields before proceed',
@@ -269,6 +271,12 @@ class CreateEvent extends Component {
                           {softSkillCategories.map(this.mapItem)}
                         </select>
                         <br/>
+                      </div>
+
+                      <div class="section"><span>6</span>Logo</div>
+                          <div class="inner-wrap">
+                          <label>Society Logo</label>
+                          <input type="text" value={this.state.logoUrl} onChange={(event) => {this.setState({logoUrl:event.target.value})}}/>
                       </div>
 
                       <div class="button-section">

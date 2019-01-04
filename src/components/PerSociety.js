@@ -181,7 +181,7 @@ class PerSociety extends Component {
                                         <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
                                         <ul className="zoom-menu">
                                             <li><a className="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li>
-                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaBook /></Link></a></li>
+                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaEdit /></Link></a></li>
                                             <li><a className="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
                                             <li><a className="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
                                             <li><a className="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
@@ -195,7 +195,7 @@ class PerSociety extends Component {
                             <div>
                                 <MuiThemeProvider>
                                     <div style={div1Style}>
-                                        <img style={imageStyle} src={ require('../assets/images/its.jpg') } />
+                                        <img style={imageStyle} src={society["logoUrl"]} />
                                         <h1>{society["name"]}</h1>
                                     </div>
 

@@ -23,7 +23,8 @@ class CreateProfile extends Component {
       desc:'',
       category: 'dance',
       vision: '',
-      mission: ''
+      mission: '',
+      logoUrl: ''
     }
 
     console.log("society id params: " + this.props.params.societyId);
@@ -48,16 +49,17 @@ class CreateProfile extends Component {
           category: society["category"],
           vision: society["vision"],
           mission: society["mission"], 
-          desc: society["desc"]
+          desc: society["desc"],
+          logoUrl: society["logoUrl"]
         })   
       }.bind(this), 5000)
     }
   }
 
   handleClick(event) {
-    const { name, desc, vision, mission } = this.state;
+    const { name, desc, vision, mission, logoUrl } = this.state;
 
-    if(name == '' || desc == '' || vision == '' ||  mission == '') {
+    if(name == '' || desc == '' || vision == '' ||  mission == '' || logoUrl == '') {
       confirmAlert({
         title: 'Warning',
         message: 'Please fill in all empty fields before proceed',
@@ -169,6 +171,12 @@ class CreateProfile extends Component {
                           <div class="inner-wrap">
                           <label>Society Description</label>
                           <textarea id="txtArea" value={this.state.desc} onChange={(event) => {this.setState({desc:event.target.value})}}></textarea>
+                      </div>
+
+                      <div class="section"><span>4</span>Logo</div>
+                          <div class="inner-wrap">
+                          <label>Society Logo</label>
+                          <input type="text" value={this.state.logoUrl} onChange={(event) => {this.setState({logoUrl:event.target.value})}}/>
                       </div>
 
                       <div class="button-section">

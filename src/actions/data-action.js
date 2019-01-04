@@ -192,6 +192,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     vision: reply[0]["vision"],
                     mission: reply[0]["mission"],
                     desc: reply[0]["description"],
+                    logoUrl: reply[0]["logoUrl"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
                     authorized: reply[0]["authorized"]
@@ -214,6 +215,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     ssPoint: reply[0]["ssPoint"],
                     chairperson: reply[0]["chairperson"],
                     contact: reply[0]["contact"],
+                    logoUrl: reply[0]["logoUrl"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
                     authorized: reply[0]["authorized"]
@@ -235,6 +237,7 @@ export function retrieveData(type, id) {
                     vision: reply[0]["vision"],
                     mission: reply[0]["mission"],
                     desc: reply[0]["description"],
+                    logoUrl: reply[0]["logoUrl"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"]
                 }
@@ -257,6 +260,7 @@ export function retrieveData(type, id) {
                     chairperson: reply[0]["chairperson"],
                     contact: reply[0]["contact"],
                     boothId: reply[0]["boothId"],
+                    logoUrl: reply[0]["logoUrl"]
                 }
 
                 dispatch(retrieveSingleDataSuccessful("event", event));

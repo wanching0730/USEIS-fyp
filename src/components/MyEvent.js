@@ -216,7 +216,8 @@ class MyEvent extends Component {
                     rows.push(
                         <tr>
                             <td>{i+1}</td>
-                            <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td>
+                            <td><img style={imageStyle} src={event["logoUrl"]} /></td>
+                            {/* <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td> */}
                             <td><Link to={toEvent}>{event["name"]}</Link></td>
                             <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
                             <td>{moment(event["joinDate"]).format("DD/MM/YYYY")}</td>

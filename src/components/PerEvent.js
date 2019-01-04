@@ -212,7 +212,7 @@ class PerEvent extends Component {
                             <div>
                                 <MuiThemeProvider>
                                 <div style={div1Style}>
-                                    <img style={imageStyle} src={ require('../assets/images/cardio.jpg') } />
+                                    <img style={imageStyle} src={event["logoUrl"]} />
                                     <h1>{event["name"]}</h1>
                                 </div>
 
