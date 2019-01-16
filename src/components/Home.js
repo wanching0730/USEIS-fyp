@@ -39,7 +39,7 @@ class Home extends Component {
         }
 
         // setTimeout(() => {
-        //     fetch(`http://localhost:5000/get/notification`);
+        //     fetch(`http://localhost:5000/api/v1/notification`);
         // }, 11000);
     }
 

@@ -1,7 +1,7 @@
 const mainApiRoute = `http://localhost:5000/api/v1`;
 
 export function verifyUser(data) {
-    return fetch(mainApiRoute + `/login_user`, {
+    return fetch(mainApiRoute + `/login`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -10,69 +10,69 @@ export function verifyUser(data) {
     });
 }
 
-export function getDataWithUserId(type, id, userId) {
-    if(type === "studentSociety") {
-        return fetch(mainApiRoute + `/get/studentSociety/` + id + `/` + userId);
-    } else if(type === "staffSociety") {
-        return fetch(mainApiRoute + `/get/staffSociety/` + id + `/` + userId);
+export function getData(type, id) {
+    if(type === "society") {
+        return fetch(mainApiRoute + `/society/` + id);
+    } else if(type === "event") {
+        return fetch(mainApiRoute + `/event/` + id);
+    } else if(type === "societyEvent") {
+        return fetch(mainApiRoute + `/societyEvent/` + id);
     } else if(type === "studentEvent") {
-        return fetch(mainApiRoute + `/get/studentEvent/` + id + `/` + userId);
-    } else {
-        return fetch(mainApiRoute + `/get/staffEvent/` + id + `/` + userId);
+        return fetch(mainApiRoute + `/studentEvent/` + id);
+    } else if(type === "staffEvent") {
+        return fetch(mainApiRoute + `/staffEvent/` + id);
+    } else if(type === "eventCrew") {
+        return fetch(mainApiRoute + `/eventCrew/` + id);
+    } else if(type === "societyComm") {
+        return fetch(mainApiRoute + `/societyComm/` + id);
+    } else if(type === "eventComm") {
+        return fetch(mainApiRoute + `/eventComm/` + id);
+    } else if(type === "societyMember") {
+        return fetch(mainApiRoute + `/societyMember/` + id);
+    } else if(type === "eventParticipant") {
+        return fetch(mainApiRoute + `/eventParticipant/` + id);
     }
 }
 
-export function getData(type, id) {
-    if(type === "society") {
-        return fetch(mainApiRoute + `/get/society/` + id);
-    } else if(type === "event") {
-        return fetch(mainApiRoute + `/get/event/` + id);
-    } else if(type === "societyEvent") {
-        return fetch(mainApiRoute + `/get/societyEvent/` + id);
+export function getDataWithUserId(type, id, userId) {
+    if(type === "studentSociety") {
+        return fetch(mainApiRoute + `/studentSociety/` + id + `/` + userId);
+    } else if(type === "staffSociety") {
+        return fetch(mainApiRoute + `/staffSociety/` + id + `/` + userId);
     } else if(type === "studentEvent") {
-        return fetch(mainApiRoute + `/get/studentEvent/` + id);
-    } else if(type === "staffEvent") {
-        return fetch(mainApiRoute + `/get/staffEvent/` + id);
-    } else if(type === "eventCrew") {
-        return fetch(mainApiRoute + `/get/eventCrew/` + id);
-    } else if(type === "societyComm") {
-        return fetch(mainApiRoute + `/get/societyComm/` + id);
-    } else if(type === "eventComm") {
-        return fetch(mainApiRoute + `/get/eventComm/` + id);
-    } else if(type === "societyMember") {
-        return fetch(mainApiRoute + `/get/societyMember/` + id);
-    } else if(type === "eventParticipant") {
-        return fetch(mainApiRoute + `/get/eventParticipant/` + id);
+        return fetch(mainApiRoute + `/studentEvent/` + id + `/` + userId);
+    } else {
+        return fetch(mainApiRoute + `/staffEvent/` + id + `/` + userId);
     }
 }
 
 export function getAllData(type) {
     if(type === "society") {
-        return fetch(mainApiRoute + `/get/societies`);
+        return fetch(mainApiRoute + `/societies`);
     } else if(type === "event") {
-        return fetch(mainApiRoute + `/get/events`);
+        return fetch(mainApiRoute + `/events`);
     } else if(type === "newsfeeds") {
-        return fetch(mainApiRoute + `/get/newsfeeds`);
+        return fetch(mainApiRoute + `/newsfeeds`);
     } else if(type === "allSocietyEvent") {
-        return fetch(mainApiRoute + `/get/societyEvent`);
+        return fetch(mainApiRoute + `/societyEvent`);
     } else if(type === "societyBooth") {
-        return fetch(mainApiRoute + `/get/societyBooth`);
+        return fetch(mainApiRoute + `/societyBooth`);
     } else if(type === "eventBooth") {
-        return fetch(mainApiRoute + `/get/eventBooth`);
+        return fetch(mainApiRoute + `/eventBooth`);
     } 
 }
 
 export function searchAllData(type, keyword) {
     if(type === "society") {
-        return fetch(mainApiRoute + `/get/search/society/` + keyword);
+        return fetch(mainApiRoute + `/search/society/` + keyword);
     } else if(type === "event") {
-        return fetch(mainApiRoute + `/get/search/event/` + keyword);
+        return fetch(mainApiRoute + `/search/event/` + keyword);
     } 
 }
 
 export function createData(type, data) {
     if(type === "society") {
-        return fetch(mainApiRoute + `/create/society`, {
+        return fetch(mainApiRoute + `/society`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -80,7 +80,7 @@ export function createData(type, data) {
             body: data
         });
     } else if(type === "event") {
-            return fetch(mainApiRoute + `/create/event`, {
+            return fetch(mainApiRoute + `/event`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -88,7 +88,7 @@ export function createData(type, data) {
             body: data
         });
     } else if(type === "newsfeeds") {
-            return fetch(mainApiRoute + `/create/newsfeeds`, {
+            return fetch(mainApiRoute + `/newsfeeds`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -96,7 +96,7 @@ export function createData(type, data) {
             body: data
         });
     } else if(type === "rating") {
-        return fetch(mainApiRoute + `/create/rating`, {
+        return fetch(mainApiRoute + `/rating`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -140,16 +140,16 @@ export function createData(type, data) {
 
 export function updateData(type, id, data) {
     if(type === "society") {
-        return fetch(mainApiRoute + `/update/society/`+ id, {
-            method: 'POST',
+        return fetch(mainApiRoute + `/society/`+ id, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: data
         });
     } else if(type === "event") {
-            return fetch(mainApiRoute + `/update/event/` + id, {
-            method: 'POST',
+            return fetch(mainApiRoute + `/event/` + id, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -160,31 +160,31 @@ export function updateData(type, id, data) {
 
 export function updateDataDouble(type, data) {
     if(type === "crew") {
-        return fetch(mainApiRoute + `/update/crew`, {
-            method: 'POST',
+        return fetch(mainApiRoute + `/crew`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: data
         });
     } else if(type === "member") {
-        return fetch(mainApiRoute + `/update/member`, {
-            method: 'POST',
+        return fetch(mainApiRoute + `/member`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: data
         });
     } else if(type === "participant") {
-        return fetch(mainApiRoute + `/update/participant`, {
-            method: 'POST',
+        return fetch(mainApiRoute + `/participant`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: data
         });
     } else if(type === "fcmToken") {
-        return fetch(mainApiRoute + `/update/token`, {
+        return fetch(mainApiRoute + `/token`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -196,23 +196,23 @@ export function updateDataDouble(type, data) {
 
 export function deleteData(type, id, eventId) {
     if(type === "studentEvent") {
-        return fetch(mainApiRoute + `/delete/studentEvent/` + id + '/' + eventId, {
+        return fetch(mainApiRoute + `/studentEvent/` + id + '/' + eventId, {
             method: 'DELETE'
         });
     } else if(type === "staffEvent") {
-        return fetch(mainApiRoute + `/delete/staffEvent/` + id + '/' + eventId, {
+        return fetch(mainApiRoute + `/staffEvent/` + id + '/' + eventId, {
             method: 'DELETE'
         });
     } else if(type === "eventCrew") {
-        return fetch(mainApiRoute + `/delete/eventCrew/` + id + '/' + eventId, {
+        return fetch(mainApiRoute + `/eventCrew/` + id + '/' + eventId, {
             method: 'DELETE'
         });
     } else if(type === "studentParticipant") {
-        return fetch(mainApiRoute + `/delete/studentParticipant/` + id + '/' + eventId, {
+        return fetch(mainApiRoute + `/studentParticipant/` + id + '/' + eventId, {
             method: 'DELETE'
         });
     } else if(type === "staffParticipant") {
-        return fetch(mainApiRoute + `/delete/staffParticipant/` + id + '/' + eventId, {
+        return fetch(mainApiRoute + `/staffParticipant/` + id + '/' + eventId, {
             method: 'DELETE'
         });
     } 
