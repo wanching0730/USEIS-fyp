@@ -147,7 +147,7 @@ export function retrieveAllDataSuccessful(type, data) {
                 loading: false
             }
         }
-    } else if(type === "allSocietyEvent") {
+    } else if(type === "societyEvent") {
         return {
             type: RETRIEVE_ALL_SOCIETY_EVENTS,
             payload: {
@@ -368,7 +368,7 @@ export function retrieveAll(type) {
                 }
 
                 dispatch(retrieveAllDataSuccessful(type, newsfeeds));
-            } else if(type === "allSocietyEvent") {
+            } else if(type === "societyEvent") {
                 for(var i = 0; i < reply.length; i++) {
                     allSocietyEvents.push({
                         societyId: reply[i]["societyId"],

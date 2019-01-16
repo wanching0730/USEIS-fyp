@@ -23,7 +23,7 @@ class MyProfile extends Component {
         super(props);
 
         this.props.onUpdateLoadingBar();
-        this.props.onRetrieveAll("allSocietyEvent");
+        this.props.onRetrieveAll("societyEvent");
     }
 
     componentDidMount() {
