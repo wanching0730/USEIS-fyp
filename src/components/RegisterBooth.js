@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Seatmap from './Seatmap.jsx';
 import NavBar from './NavBar';
 import { Link } from 'react-router';
-import {browserHistory} from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
@@ -13,6 +12,7 @@ import '../style/form.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { updateDouble, updatePostLoadingBar, update} from '../actions/post-action';
 
 class RegisterBooth extends Component {
 
@@ -28,10 +28,11 @@ class RegisterBooth extends Component {
         [{ number: 1}, {number: 2}, {number: '3'}, null, {number: '4'}, {number: 5}, {number: 6,}],
         [{ number: 1}, {number: 2}, {number: '3'}, null, {number: '4'}, {number: 5}, {number: 6}],
         [{ number: 1}, {number: 2}, {number: '3'}, null, {number: '4'}, {number: 5}, {number: 6}]
-      ]
+      ], selectedRow: -1, selectedSeat: -1
     };
     
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelectedSeat = this.handleSelectedSeat.bind(this);
 
     this.props.onUpdateLoadingBar();
     this.props.onRetrieveAll("allBooths");
@@ -58,16 +59,28 @@ class RegisterBooth extends Component {
     }
   }
 
-  handleClick() {
-    browserHistory.push("/perSociety/1");
+  handleSubmit() {
+    this.props.onUpdateLoadingBar();
+
+    let data = {
+      type: this.props.params.type,
+      id: this.props.params.id,
+      name: this.props.params.type == "society" ? this.props.location.state["societyName"] : this.props.location.state["eventName"],
+      selectedRow: this.state.selectedRow,
+      selectedSeat: this.state.selectedSeat
+    }
+
+    this.props.onUpdateDouble("booth", data, data["name"]);
   }
 
-  selectedSeat = (dataFromChild) => {
-    console.log("data from child: " + dataFromChild);
+  handleSelectedSeat(row, seat) {
+    console.log("row: " + row.charCodeAt(0) + " seat: " + seat);
+    this.setState({selectedRow: parseInt(row.charCodeAt(0)) - 65, selectedSeat: seat});
   }
 
   render() {
-    console.log(this.state.seatMap);
+    console.log(this.props.params);
+    console.log(this.state.selectedRow + "," + this.state.selectedSeat);
 
     const { RaisedButtonStyle } = styles;
     var breadCrumb;
@@ -105,11 +118,11 @@ class RegisterBooth extends Component {
           <h2>Booth Registration</h2>
 
           <div className="container">
-            <Seatmap rows={this.state.seatMap} maxReservableSeats={1} alpha selected={this.selectedSeat} />
+            <Seatmap rows={this.state.seatMap} maxReservableSeats={1} alpha handleSelectedSeat={this.handleSelectedSeat} />
           </div>
 
           <div class="button-section">
-            <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+            <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSubmit(event)}/>
             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
           </div>
 
@@ -141,14 +154,17 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
   return {
-    allBooths: state.data.allBooths
+    allBooths: state.data.allBooths,
+    loading: state.create.loading
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onRetrieveAll: retrieveAll,
-    onUpdateLoadingBar: updateLoadingBar
+    onUpdateDouble: updateDouble,
+    onUpdateLoadingBar: updateLoadingBar,
+    onUpdateLoadingBar: updatePostLoadingBar
   }, dispatch);
 };
 

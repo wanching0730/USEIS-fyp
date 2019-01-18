@@ -26,7 +26,7 @@ class RegisterCrew extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -45,7 +45,7 @@ class RegisterCrew extends Component {
     this.n.close(event.target.tag);
   }
 
-  handleClick(event) {
+  handleSubmit(event) {
       this.displayText();
       
       this.props.onUpdateLoadingBar();
@@ -147,7 +147,7 @@ class RegisterCrew extends Component {
                         <br/>
                       </div>
                       <div class="button-section">
-                        <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                        <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSubmit(event)}/>
                         <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                       </div>
                   </form>

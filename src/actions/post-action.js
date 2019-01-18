@@ -11,6 +11,7 @@ import {
     REGISTER_SOCIETY,
     REGISTER_EVENT,
     REGISTER_CREW,
+    REGISTER_BOOTH,
     UPDATE_SOCIETY,
     UPDATE_EVENT
 } from '../constant';
@@ -84,9 +85,18 @@ export function registerEventSuccessfully(registeredEventId) {
     }
 }
 
-export function registerCrewSuccessfully(registeredCrewEventId) {
+export function registerCrewSuccessfully() {
     return {
         type: REGISTER_CREW,
+        payload: {
+            loading: false
+        }
+    }
+}
+
+export function registerBoothSuccessfully(registeredCrewEventId) {
+    return {
+        type: REGISTER_BOOTH,
         payload: {
             registeredCrewEventId: registeredCrewEventId,
             loading: false
@@ -156,7 +166,7 @@ export function create(type, postData) {
                                 } else if(type === "registerEventCrew") {
                                     dispatch(registerCrewSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
-                                } 
+                                }
                             }
                         }
                     ]
@@ -205,7 +215,7 @@ export function updateDouble(type, postData, name) {
         }).join('&');
 
         return updateDataDouble(type, data).then(result => result.json()).then(reply => {
-            if(reply != "true") {
+            if(reply != 0) {
                 confirmAlert({
                     title: 'Message',
                     message: 'Data has been updated successfully',
@@ -219,7 +229,12 @@ export function updateDouble(type, postData, name) {
                                     browserHistory.push({pathname:`/manageMember/` + reply, state: {societyName: name}});
                                 } else if(type === "participant") {
                                     browserHistory.push({pathname:`/manageParticipant/` + reply, state: {eventName: name}});
-                                }
+                                } else if(type === "booth") {
+                                    if(postData["type"] == "society")
+                                        browserHistory.push({pathname:`/register_booth/society/` + reply, state: {societyName: name}});
+                                    else 
+                                        browserHistory.push({pathname:`/register_booth/event/` + reply, state: {eventName: name}});
+                                } 
                             }
                         }
                     ]

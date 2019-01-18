@@ -14,6 +14,7 @@ export default class Seatmap extends React.Component {
         alpha: PropTypes.bool,
         removeSeatCallback: PropTypes.func,
         maxReservableSeats: PropTypes.number,
+        handleSelectedSeat: PropTypes.func,
         rows: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
             number: PropTypes.oneOfType([
                 PropTypes.string,
@@ -27,6 +28,7 @@ export default class Seatmap extends React.Component {
     static defaultProps = {
         addSeatCallback: (row, number) => {
             console.log(`Added seat ${number}, row ${row}`);
+            
             // return (row, number);
         },
         removeSeatCallback: (row, number) => {
@@ -75,7 +77,7 @@ export default class Seatmap extends React.Component {
 
     selectSeat = (row, number) => {
         const { selectedSeats, size } = this.state;
-        const { maxReservableSeats, addSeatCallback, removeSeatCallback } = this.props;
+        const { maxReservableSeats, addSeatCallback, removeSeatCallback, handleSelectedSeat } = this.props;
         const seatAlreadySelected = selectedSeats.get(row, Set()).includes(number);
 
         if (size < maxReservableSeats && !seatAlreadySelected) {
@@ -85,6 +87,7 @@ export default class Seatmap extends React.Component {
                 // selectedNumber: number,
                 // selectedRow: row
             }, () => addSeatCallback(row, number));
+            handleSelectedSeat(row, number);
         } else if (selectedSeats.has(row) && seatAlreadySelected) {
             this.setState({
                 selectedSeats: selectedSeats.update(row, seats => seats.delete(number)),
@@ -145,3 +148,4 @@ export default class Seatmap extends React.Component {
         });
     }
 }
+
