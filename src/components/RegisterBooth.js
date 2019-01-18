@@ -105,7 +105,7 @@ class RegisterBooth extends Component {
           <h2>Booth Registration</h2>
 
           <div className="container">
-            <Seatmap rows={this.state.seatMap} maxReservableSeats={3} alpha selected={this.selectedSeat} />
+            <Seatmap rows={this.state.seatMap} maxReservableSeats={1} alpha selected={this.selectedSeat} />
           </div>
 
           <div class="button-section">
