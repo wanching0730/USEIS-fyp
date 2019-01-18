@@ -78,7 +78,7 @@ export default class Seatmap extends React.Component {
         const { maxReservableSeats, addSeatCallback, removeSeatCallback } = this.props;
         const seatAlreadySelected = selectedSeats.get(row, Set()).includes(number);
 
-        if (size < maxReservableSeats && !seatAlreadySelected) {
+        if (size < 1 && !seatAlreadySelected) {
             this.setState({
                 selectedSeats: selectedSeats.mergeDeep({[row]: Set([number])}),
                 size: size + 1,
@@ -90,7 +90,7 @@ export default class Seatmap extends React.Component {
                 selectedSeats: selectedSeats.update(row, seats => seats.delete(number)),
                 size: size - 1
             }, () => removeSeatCallback(row, number))
-        } else if (size == maxReservableSeats) {
+        } else if (size == 1) {
             this.handleMax();
         } else {
             console.log("not available");
@@ -136,7 +136,7 @@ export default class Seatmap extends React.Component {
             const props = {
                 isSelected,
                 isReserved: seat.isReserved,
-                isEnabled: size < maxReservableSeats,
+                isEnabled: size < 1,
                 selectSeat: this.selectSeat.bind(this, rowNumber, seat.number),
                 seatNumber: seat.number,
                 key: index
