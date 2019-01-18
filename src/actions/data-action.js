@@ -14,6 +14,7 @@ import {
     RETRIEVE_ALL_SOCIETY_EVENTS,
     RETRIEVE_SOCIETY_BOOTHS,
     RETRIEVE_EVENT_BOOTHS,
+    RETRIEVE_ALL_BOOTHS,
     RETRIEVE_USER_EVENTS,
     RETRIEVE_SOCIETY_MEMBERS,
     SEARCH_SOCIETY,
@@ -168,6 +169,14 @@ export function retrieveAllDataSuccessful(type, data) {
             type: RETRIEVE_EVENT_BOOTHS,
             payload: {
                 eventBooths: data,
+                loading: false
+            }
+        }
+    } else if(type === "allBooths") {
+        return {
+            type: RETRIEVE_ALL_BOOTHS,
+            payload: {
+                allBooths: data,
                 loading: false
             }
         }
@@ -334,6 +343,7 @@ export function retrieveAll(type) {
             let allSocietyEvents = [];
             let societyBooths = [];
             let eventBooths = [];
+            let allBooths = [];
             
             if(type === "society") {
                 for(var i = 0; i < reply.length; i++) {
@@ -390,7 +400,13 @@ export function retrieveAll(type) {
                 }
 
                 dispatch(retrieveAllDataSuccessful(type, eventBooths));
-            }
+            } else if(type === "allBooths") {
+                for(var i = 0; i < reply.length; i++) {
+                    allBooths.push(reply[i]);
+                }
+
+                dispatch(retrieveAllDataSuccessful(type, allBooths));
+            } 
         });
     };
 }

@@ -70,7 +70,7 @@ export default class Seatmap extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState.selectedSeats !== this.state.selectedSeats;
+        return nextProps.selectedSeats !== this.state.selectedSeats;
     }
 
     selectSeat = (row, number) => {
