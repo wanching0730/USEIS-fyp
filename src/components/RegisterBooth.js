@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import openSocket from 'socket.io-client';
 import '../style/main.scss';
 import '../style/main.css';
 import '../style/form.css';
@@ -21,16 +22,14 @@ class RegisterBooth extends Component {
 
     this.state = {
       seatMap: [
-        [{ number: 1 }, {number: 2}, {number: '3'}, null, {number: '4'}, {number: 5}, {number: 6}],
-        [{ number: 1}, {number: 2}, {number: '3'}, null, {number: '4'}, {number: 5}, {number: 6}],
-        [{ number: 1 }, {number: 2}, {number: 3}, null, {number: '4'}, {number: 5}, {number: 6}],
-        [{ number: 1 }, {number: 2}, {number: 3}, null, {number: '4'}, {number: 5}, {number: 6}],
-        [{ number: 1}, {number: 2}, {number: '3'}, null, {number: '4'}, {number: 5}, {number: 6,}],
-        [{ number: 1}, {number: 2}, {number: '3'}, null, {number: '4'}, {number: 5}, {number: 6}],
-        [{ number: 1}, {number: 2}, {number: '3'}, null, {number: '4'}, {number: 5}, {number: 6}]
-      ], selectedRow: -1, selectedSeat: -1
+        [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
+        [{ number: 1}, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
+        [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
+        [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}]
+      ], selectedRow: -1, selectedSeat: -1, currentRow: -1, currentSeat: -1
     };
     
+    this.updateList = this.updateList.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelectedSeat = this.handleSelectedSeat.bind(this);
 
@@ -40,23 +39,35 @@ class RegisterBooth extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    const socket = openSocket('http://localhost:5000');
+    socket.on('updateList', this.updateList);
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("this props: " + JSON.stringify(this.props.allBooths));
-    console.log("next props: " + JSON.stringify(nextProps.allBooths));
+    // console.log("this props: " + JSON.stringify(this.props.allBooths));
+    // console.log("next props: " + JSON.stringify(nextProps.allBooths));
     if((nextProps.allBooths != this.props.allBooths) && (nextProps.allBooths != null)) {
       for(var i = 0; i < nextProps.allBooths.length; i++) {
         let booth = nextProps.allBooths[i];
         var newSeatMap = this.state.seatMap;
-        console.log(newSeatMap);
-        console.log(newSeatMap[booth["row"]][booth["seat"]]);
+        // console.log(booth["row"] + " " + booth["seat"]);
+        // console.log(newSeatMap[booth["row"]][booth["seat"]]);
         
         newSeatMap[booth["row"]][booth["seat"]]["isReserved"] = true;
-        console.log(newSeatMap);
         this.setState({seatMap: newSeatMap});
+
+        if(booth["id"] == this.props.params.id)
+          this.setState({currentRow: booth["row"], currentSeat: booth["seat"]});
       }
     }
+  }
+
+  updateList(data) {
+    var newSeatMap = this.state.seatMap;
+    newSeatMap[data["selectedRow"]][data["selectedSeat"]]["isReserved"] = true;
+    delete newSeatMap[this.state.currentRow][this.state.currentSeat].isReserved;
+    this.setState({seatMap: newSeatMap});
   }
 
   handleSubmit() {
@@ -75,12 +86,12 @@ class RegisterBooth extends Component {
 
   handleSelectedSeat(row, seat) {
     console.log("row: " + row.charCodeAt(0) + " seat: " + seat);
-    this.setState({selectedRow: parseInt(row.charCodeAt(0)) - 65, selectedSeat: seat});
+    this.setState({selectedRow: parseInt(row.charCodeAt(0)) - 65, selectedSeat: seat - 1});
   }
 
   render() {
-    console.log(this.props.params);
-    console.log(this.state.selectedRow + "," + this.state.selectedSeat);
+    // console.log(this.props.params);
+    // console.log(this.state.selectedRow + "," + this.state.selectedSeat);
 
     const { RaisedButtonStyle } = styles;
     var breadCrumb;
