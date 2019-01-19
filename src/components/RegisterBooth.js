@@ -26,7 +26,7 @@ class RegisterBooth extends Component {
         [{ number: 1}, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
         [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
         [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}]
-      ], selectedRow: -1, selectedSeat: -1, currentRow: -1, currentSeat: -1
+      ], selectedRow: -1, selectedSeat: -1
     };
     
     this.updateList = this.updateList.bind(this);
@@ -56,9 +56,6 @@ class RegisterBooth extends Component {
         
         newSeatMap[booth["row"]][booth["seat"]]["isReserved"] = true;
         this.setState({seatMap: newSeatMap});
-
-        if(booth["id"] == this.props.params.id)
-          this.setState({currentRow: booth["row"], currentSeat: booth["seat"]});
       }
     }
   }
@@ -66,7 +63,7 @@ class RegisterBooth extends Component {
   updateList(data) {
     var newSeatMap = this.state.seatMap;
     newSeatMap[data["selectedRow"]][data["selectedSeat"]]["isReserved"] = true;
-    delete newSeatMap[this.state.currentRow][this.state.currentSeat].isReserved;
+    delete newSeatMap[data["previousRow"]][data["previousSeat"]].isReserved;
     this.setState({seatMap: newSeatMap});
   }
 
@@ -78,7 +75,9 @@ class RegisterBooth extends Component {
       id: this.props.params.id,
       name: this.props.params.type == "society" ? this.props.location.state["societyName"] : this.props.location.state["eventName"],
       selectedRow: this.state.selectedRow,
-      selectedSeat: this.state.selectedSeat
+      selectedSeat: this.state.selectedSeat,
+      previousRow: this.state.currentRow,
+      previousSeat: this.state.currentSeat
     }
 
     this.props.onUpdateDouble("booth", data, data["name"]);
