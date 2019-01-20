@@ -8,10 +8,11 @@ import {
     CREATE_EVENT,
     CREATE_NEWSFEED,
     CREATE_RATING,
-    REGISTER_SOCIETY,
-    REGISTER_EVENT,
-    REGISTER_CREW,
-    REGISTER_BOOTH,
+    REGISTER,
+    // REGISTER_SOCIETY,
+    // REGISTER_EVENT,
+    // REGISTER_CREW,
+    // REGISTER_BOOTH,
     UPDATE_SOCIETY,
     UPDATE_EVENT
 } from '../constant';
@@ -65,40 +66,39 @@ export function createRatingSuccessful(ratingId) {
     }
 }
 
-export function registerSocietySuccessfully(registeredSocietyId) {
-    return {
-        type: REGISTER_SOCIETY,
-        payload: {
-            registeredSocietyId: registeredSocietyId,
-            loading: false
-        }
-    }
-}
+// export function registerSocietySuccessfully(registeredSocietyId) {
+//     return {
+//         type: REGISTER_SOCIETY,
+//         payload: {
+//             registeredSocietyId: registeredSocietyId,
+//             loading: false
+//         }
+//     }
+// }
 
-export function registerEventSuccessfully(registeredEventId) {
-    return {
-        type: REGISTER_EVENT,
-        payload: {
-            registeredEventId: registeredEventId,
-            loading: false
-        }
-    }
-}
+// export function registerEventSuccessfully(registeredEventId) {
+//     return {
+//         type: REGISTER_EVENT,
+//         payload: {
+//             registeredEventId: registeredEventId,
+//             loading: false
+//         }
+//     }
+// }
 
-export function registerCrewSuccessfully() {
-    return {
-        type: REGISTER_CREW,
-        payload: {
-            loading: false
-        }
-    }
-}
+// export function registerCrewSuccessfully() {
+//     return {
+//         type: REGISTER_CREW,
+//         payload: {
+//             loading: false
+//         }
+//     }
+// }
 
-export function registerBoothSuccessfully(registeredCrewEventId) {
+export function registerSuccessfully() {
     return {
-        type: REGISTER_BOOTH,
+        type: REGISTER,
         payload: {
-            registeredCrewEventId: registeredCrewEventId,
             loading: false
         }
     }
@@ -158,13 +158,13 @@ export function create(type, postData) {
                                     dispatch(createRatingSuccessful(reply));
                                     browserHistory.push('/myEvents');
                                 } else if(type === "registerSociety") {
-                                    dispatch(registerSocietySuccessfully());
+                                    dispatch(registerSuccessfully());
                                     browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["societyName"]}});
                                 } else if(type === "staffRegisterEvent" || type == "studentRegisterEvent") {
-                                    dispatch(registerEventSuccessfully());
+                                    dispatch(registerSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
                                 } else if(type === "registerEventCrew") {
-                                    dispatch(registerCrewSuccessfully());
+                                    dispatch(registerSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
                                 }
                             }
@@ -230,6 +230,8 @@ export function updateDouble(type, postData, name) {
                                 } else if(type === "participant") {
                                     browserHistory.push({pathname:`/manageParticipant/` + reply, state: {eventName: name}});
                                 } else if(type === "booth") {
+                                    dispatch(registerSuccessfully());
+                                    
                                     if(postData["type"] == "society")
                                         browserHistory.push({pathname:`/register_booth/society/` + reply, state: {societyName: name}});
                                     else 

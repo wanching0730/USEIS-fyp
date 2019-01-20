@@ -70,7 +70,7 @@ class RegisterBooth extends Component {
   }
 
   handleSubmit() {
-    this.props.onUpdateLoadingBar();
+    this.props.onUpdatePostLoadingBar();
 
     let data = {
       type: this.props.params.type,
@@ -127,7 +127,7 @@ class RegisterBooth extends Component {
               {breadCrumb}
           </div>
 
-          {this.props.loading ?
+          {this.props.loading || this.props.postLoading ?
             [<LoadingBar />]
             :
             [
@@ -176,7 +176,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     allBooths: state.data.allBooths,
-    loading: state.data.loading
+    loading: state.data.loading,
+    postLoading: state.create.loading
   };
 };
 
