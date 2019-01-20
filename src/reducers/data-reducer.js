@@ -97,8 +97,7 @@ export default function dataReducer(state = initialState, { type, payload }) {
             });
         case RETRIEVE_ALL_BOOTHS:
             return Object.assign({}, state, {
-                allBooths: payload.allBooths,
-                loading: payload.loading
+                allBooths: payload.allBooths
             });
         case RETRIEVE_USER_EVENTS:
             return Object.assign({}, state, {

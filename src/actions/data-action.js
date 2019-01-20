@@ -30,6 +30,15 @@ export function updateLoadingBarSuccessful() {
     };
 }
 
+export function updateEndLoadingBarSuccessful() {
+    return {
+        type: UPDATE_RETRIEVE_LOADINGBAR,
+        payload: {
+            loading: false
+        }
+    };
+}
+
 export function searchDataSuccessful(type, data) {
     if(type === "society") {
         return {
@@ -176,8 +185,7 @@ export function retrieveAllDataSuccessful(type, data) {
         return {
             type: RETRIEVE_ALL_BOOTHS,
             payload: {
-                allBooths: data,
-                loading: false
+                allBooths: data
             }
         }
     }
@@ -186,6 +194,12 @@ export function retrieveAllDataSuccessful(type, data) {
 export function updateLoadingBar() {
     return function (dispatch) {
         dispatch(updateLoadingBarSuccessful());
+    }
+}
+
+export function updateEndLoadingBar() {
+    return function (dispatch) {
+        dispatch(updateEndLoadingBarSuccessful());
     }
 }
 

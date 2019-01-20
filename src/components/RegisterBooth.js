@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Seatmap from './Seatmap.jsx';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -12,7 +13,7 @@ import '../style/form.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { retrieveAll, updateLoadingBar, updateEndLoadingBar } from '../actions/data-action';
 import { updateDouble, updatePostLoadingBar, update} from '../actions/post-action';
 
 class RegisterBooth extends Component {
@@ -57,6 +58,7 @@ class RegisterBooth extends Component {
         newSeatMap[booth["row"]][booth["seat"]]["isReserved"] = true;
         this.setState({seatMap: newSeatMap});
       }
+      this.props.onUpdateEndLoadingBar();
     }
   }
 
@@ -89,7 +91,7 @@ class RegisterBooth extends Component {
   }
 
   render() {
-    // console.log(this.props.params);
+    console.log(this.props.loading);
     // console.log(this.state.selectedRow + "," + this.state.selectedSeat);
 
     const { RaisedButtonStyle } = styles;
@@ -125,16 +127,25 @@ class RegisterBooth extends Component {
               {breadCrumb}
           </div>
 
-          <h2>Booth Registration</h2>
+          {this.props.loading ?
+            [<LoadingBar />]
+            :
+            [
+              <div>
+                <h2>Booth Registration</h2>
+                <br/>
 
-          <div className="container">
-            <Seatmap rows={this.state.seatMap} maxReservableSeats={1} alpha handleSelectedSeat={this.handleSelectedSeat} />
-          </div>
+                <div className="container">
+                  <Seatmap rows={this.state.seatMap} maxReservableSeats={1} alpha handleSelectedSeat={this.handleSelectedSeat} />
+                </div>
 
-          <div class="button-section">
-            <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSubmit(event)}/>
-            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-          </div>
+                <div class="button-section">
+                  <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSubmit(event)}/>
+                  <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                </div>
+              </div>
+            ]
+          }
 
         </div>
       </MuiThemeProvider>
@@ -165,7 +176,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     allBooths: state.data.allBooths,
-    loading: state.create.loading
+    loading: state.data.loading
   };
 };
 
@@ -174,7 +185,8 @@ const mapActionsToProps = (dispatch, props) => {
     onRetrieveAll: retrieveAll,
     onUpdateDouble: updateDouble,
     onUpdateLoadingBar: updateLoadingBar,
-    onUpdateLoadingBar: updatePostLoadingBar
+    onUpdateEndLoadingBar: updateEndLoadingBar,
+    onUpdatePostLoadingBar: updatePostLoadingBar
   }, dispatch);
 };
 
