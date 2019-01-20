@@ -5,10 +5,6 @@ import {
     CREATE_NEWSFEED,
     CREATE_RATING,
     REGISTER,
-    // REGISTER_SOCIETY,
-    // REGISTER_EVENT,
-    // REGISTER_CREW, 
-    // REGISTER_BOOTH,
     UPDATE_SOCIETY,
     UPDATE_EVENT
 } from '../constant';
@@ -58,25 +54,6 @@ export default function createReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 loading: payload.loading
             });
-        // case REGISTER_SOCIETY:
-        //     return Object.assign({}, state, {
-        //         registeredSocietyId: payload.registeredSocietyId,
-        //         loading: payload.loading
-        //     });
-        // case REGISTER_EVENT:
-        //     return Object.assign({}, state, {
-        //         registeredEventId: payload.registeredEventId,
-        //         loading: payload.loading
-        //     });
-        // case REGISTER_CREW:
-        //     return Object.assign({}, state, {
-        //         registeredCrewEventId: payload.registeredCrewEventId,
-        //         loading: payload.loading
-        //     });
-        // case REGISTER_BOOTH:
-        //     return Object.assign({}, state, {
-        //         loading: payload.loading
-        //     });
         case UPDATE_SOCIETY:
             return Object.assign({}, state, {
                 updatedSocietyId: payload.updatedSocietyId,

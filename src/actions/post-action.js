@@ -9,10 +9,6 @@ import {
     CREATE_NEWSFEED,
     CREATE_RATING,
     REGISTER,
-    // REGISTER_SOCIETY,
-    // REGISTER_EVENT,
-    // REGISTER_CREW,
-    // REGISTER_BOOTH,
     UPDATE_SOCIETY,
     UPDATE_EVENT
 } from '../constant';
@@ -65,35 +61,6 @@ export function createRatingSuccessful(ratingId) {
         }
     }
 }
-
-// export function registerSocietySuccessfully(registeredSocietyId) {
-//     return {
-//         type: REGISTER_SOCIETY,
-//         payload: {
-//             registeredSocietyId: registeredSocietyId,
-//             loading: false
-//         }
-//     }
-// }
-
-// export function registerEventSuccessfully(registeredEventId) {
-//     return {
-//         type: REGISTER_EVENT,
-//         payload: {
-//             registeredEventId: registeredEventId,
-//             loading: false
-//         }
-//     }
-// }
-
-// export function registerCrewSuccessfully() {
-//     return {
-//         type: REGISTER_CREW,
-//         payload: {
-//             loading: false
-//         }
-//     }
-// }
 
 export function registerSuccessfully() {
     return {
@@ -231,7 +198,7 @@ export function updateDouble(type, postData, name) {
                                     browserHistory.push({pathname:`/manageParticipant/` + reply, state: {eventName: name}});
                                 } else if(type === "booth") {
                                     dispatch(registerSuccessfully());
-                                    
+
                                     if(postData["type"] == "society")
                                         browserHistory.push({pathname:`/register_booth/society/` + reply, state: {societyName: name}});
                                     else 
