@@ -199,7 +199,7 @@ export function updateDouble(type, postData, name) {
                                 } else if(type === "booth") {
                                     dispatch(registerSuccessfully());
 
-                                    if(postData["type"] == "society")
+                                    if(postData["type"] === "society")
                                         browserHistory.push({pathname:`/register_booth/society/` + reply, state: {societyName: name}});
                                     else 
                                         browserHistory.push({pathname:`/register_booth/event/` + reply, state: {eventName: name}});

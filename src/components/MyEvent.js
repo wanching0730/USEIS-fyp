@@ -146,7 +146,7 @@ class MyEvent extends Component {
             if(this.state.userEvents.length != 0) {
                 let events = this.state.userEvents;
 
-                var position, crewStatus, isVege, crewAction, participantAction, ratingStatus;
+                var status, isVege, crewAction, participantAction, ratingStatus;
                 
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
@@ -166,25 +166,17 @@ class MyEvent extends Component {
                         state: {eventName: event["name"]}
                     }
 
-                    if(event["position"] === "participant"){
-                        position = <td>Participant</td>;
-                        crewStatus = <td>-</td>;
-                    } else {
-                        if(event["crewStatus"] === 0) {
-                            position = <td>-</td>;
-                            crewStatus = <td>Pending</td>;
-                        } else {
-                            position = <td>{event["position"]}</td>;
-                            crewStatus = <td>Approved</td>;
-                        }
-                    }
+                    if(event["status"] === 0)  
+                        status = <td>Pending</td>;
+                    else 
+                        status = <td>Approved</td>;
 
-                    if(event["vegetarian"] == 0)
+                    if(event["vegetarian"] === 0)
                         isVege = <td>No</td>;
                     else 
                         isVege = <td>Yes</td>;
 
-                    if(event["crewStatus"] === 0 && event["position"] != "participant") 
+                    if(event["status"] === 0 && event["position"] != "participant") 
                         crewAction = 
                             <td>
                                 <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
@@ -194,7 +186,7 @@ class MyEvent extends Component {
                     else 
                         crewAction = <td></td>
 
-                    if(event["participantStatus"] === 1) 
+                    if(event["status"] === 1) 
                         participantAction = 
                             <td>
                                 <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
@@ -221,8 +213,8 @@ class MyEvent extends Component {
                             <td><Link to={toEvent}>{event["name"]}</Link></td>
                             <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
                             <td>{moment(event["joinDate"]).format("DD/MM/YYYY")}</td>
-                            {position}
-                            {crewStatus}
+                            <td>{event["position"]}</td>
+                            {status}
                             {isVege}
                             {ratingStatus}
                             {participantAction}

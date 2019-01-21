@@ -135,7 +135,7 @@ class ManageCrew extends Component {
                     let crew = eventCrew[i];
                     var approvedIcon;
 
-                    if(crew["crewStatus"] == 1) 
+                    if(crew["status"] == 1) 
                         approvedIcon = 
                             <td>
                                 <Tooltip placement="left" trigger={['hover']} overlay={<span>Crew approved</span>}>

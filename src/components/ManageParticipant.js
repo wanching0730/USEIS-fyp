@@ -142,7 +142,7 @@ class ManageParticipant extends Component {
                     let studentParticipant = studentParticipants[i];
                     var approvedIcon;
 
-                    if(studentParticipant["participantStatus"] == 1) 
+                    if(studentParticipant["status"] == 1) 
                         approvedIcon = <td><li className="fa fa-check"></li></td>
                     else 
                         approvedIcon = <td><li value={studentParticipant["id"]} onClick={(event) => this.handleApprove(event, studentParticipant["username"])} className="fa fa-plus"></li></td>
@@ -173,7 +173,7 @@ class ManageParticipant extends Component {
                     let staffParticipant = staffParticipants[i];
                     var approvedIcon;
 
-                    if(staffParticipant["participantStatus"] == 1) 
+                    if(staffParticipant["status"] == 1) 
                         approvedIcon = <td><li className="fa fa-check"></li></td>
                     else 
                         approvedIcon = <td><li value={staffParticipant["id"]} onClick={(event) => this.handleApprove(event, staffParticipant["username"])} className="fa fa-plus"></li></td>

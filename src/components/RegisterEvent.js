@@ -45,7 +45,7 @@ class RegisterEvent extends Component {
       eventId: this.props.params.eventId,
       eventName: this.props.location.state["eventName"],
       id: this.props.id,
-      position: "participant",
+      position: "Participant",
       joinDate: moment(current).format("YYYY-MM-DD"),
       crewStatus: 0,
       vegetarian: this.state.vegetarian,
