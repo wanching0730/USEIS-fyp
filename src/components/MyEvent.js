@@ -192,7 +192,7 @@ class MyEvent extends Component {
                                 </Tooltip>
                             </td>;
                     else 
-                        crewAction = <td>-</td>
+                        crewAction = <td></td>
 
                     if(event["participantStatus"] === 1) 
                         participantAction = 
@@ -202,7 +202,7 @@ class MyEvent extends Component {
                                 </Tooltip>
                             </td>;
                     else 
-                        participantAction = <td>-</td>
+                        participantAction = <td></td>
                     
                     if(this.props.userName.substring(0,2) === "00") 
                         ratingStatus = <td>-</td>;

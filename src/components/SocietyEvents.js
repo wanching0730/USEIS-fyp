@@ -34,7 +34,7 @@ class SocietyEvents extends Component {
 
             if(this.props.societyEvents.length == 0) {
                 var rows = [];
-                message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No events for this society</div>;
+                message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No event for this society</div>;
             } else {
                 let societyEvents = this.props.societyEvents;
                 var rows = [];

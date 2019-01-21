@@ -49,6 +49,7 @@ class MyProfile extends Component {
             for(var i = 0; i < societies.length; i++) {
                 var events = [];
                 let society = societies[i];
+                var editIcon;
 
                 let toSociety = {
                     pathname: "/perSociety/" + society["societyId"],
@@ -70,7 +71,18 @@ class MyProfile extends Component {
                     }    
                 }
 
-                console.log("url: " + society["logoUrl"]);
+                if(society["position"] == 'chairperson' ||  society["position"] == 'vice_chairperson') {
+                    editIcon = 
+                        <td>
+                            <Tooltip placement="right" trigger={['hover']} overlay={<span>Edit Society Profile</span>}>
+                                <Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link>
+                            </Tooltip>
+                        </td>
+                } else {
+                    editIcon = <td></td>
+                }
+
+                console.log(society["position"]);
                 
                 rows.push(
                     <tr>
@@ -83,11 +95,7 @@ class MyProfile extends Component {
                         </td>
                         <td>{society["position"]}</td>
                         <td>{events}</td>
-                        <td>
-                            <Tooltip placement="right" trigger={['hover']} overlay={<span>Edit Society Profile</span>}>
-                                <Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link>
-                            </Tooltip> 
-                        </td>
+                        {editIcon}
                     </tr>
                 );
             }
