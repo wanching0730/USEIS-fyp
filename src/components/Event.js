@@ -98,8 +98,11 @@ class Event extends Component {
     }
 
     handleSearch() {
-        this.props.onUpdateLoadingBar();
-        this.props.onSearchData("event", this.state.searchWord);
+        if(this.state.searchWord != "") {
+            this.props.onUpdateLoadingBar();
+            this.props.onSearchData("event", this.state.searchWord);
+            this.setState({searchWord: ""});
+        }
     }
 
     sort(type, values) {

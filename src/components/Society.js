@@ -90,8 +90,11 @@ class Society extends Component {
     }
 
     handleSearch() {
-        this.props.onUpdateLoadingBar();
-        this.props.onSearchData("society", this.state.searchWord);
+        if(this.state.searchWord != "") {
+            this.props.onUpdateLoadingBar();
+            this.props.onSearchData("society", this.state.searchWord);
+            this.setState({searchWord: ""});
+        }
     }
 
     render() {
