@@ -47,6 +47,7 @@ class NewsFeed extends Component {
         this.updateDeletedNewsfeeds = this.updateDeletedNewsfeeds.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.handleOwner = this.handleOwner.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.clickSave = this.clickSave.bind(this);
 
         this.props.onUpdateLoadingBar();
@@ -129,6 +130,7 @@ class NewsFeed extends Component {
 
     openModal() {
         this.setState({modalIsOpen: true});
+        this.setDefault();
     }
 
     closeModal() {
@@ -280,6 +282,7 @@ class NewsFeed extends Component {
     }
 
     render() {
+        console.log("owner id: " + this.state.ownerId);
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.state.newsfeeds;
         let filteredNewsfeeds = [];
