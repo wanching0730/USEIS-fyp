@@ -190,11 +190,11 @@ export function updateDouble(type, postData, name) {
                         {
                             label: 'Close',
                             onClick: () => {
-                                if(type === "crew") {
+                                if(type === "crew" || type === "rejectCrew") {
                                     browserHistory.push({pathname:`/manageCrew/` + reply, state: {eventName: name}});
                                 } else if(type === "member") {
                                     browserHistory.push({pathname:`/manageMember/` + reply, state: {societyName: name}});
-                                } else if(type === "participant") {
+                                } else if(type === "studentParticipant" || type === "staffParticipant") {
                                     browserHistory.push({pathname:`/manageParticipant/` + reply, state: {eventName: name}});
                                 } else if(type === "booth") {
                                     dispatch(registerSuccessfully());

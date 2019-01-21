@@ -168,8 +168,10 @@ class MyEvent extends Component {
 
                     if(event["status"] === 0)  
                         status = <td>Pending</td>;
-                    else 
+                    else if(event["status"] === 1)
                         status = <td>Approved</td>;
+                    else 
+                        status = <td style={{color: "red"}}>Rejected</td>;
 
                     if(event["vegetarian"] === 0)
                         isVege = <td>No</td>;

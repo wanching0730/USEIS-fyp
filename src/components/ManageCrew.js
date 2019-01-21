@@ -32,7 +32,7 @@ class ManageCrew extends Component {
         this.props.onRetrieveData("eventCrew", this.props.params.eventId);
 
         this.handleApprove = this.handleApprove.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+        this.handleReject = this.handleReject.bind(this);
         this.updateList = this.updateList.bind(this);
     }
 
@@ -96,19 +96,22 @@ class ManageCrew extends Component {
         }, 2000);
     }
 
-    handleDelete(event) {
+    handleReject(event) {
         let targetCrewId = event.target.value;
-        let targetEventId = this.props.params.eventId;
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
                     <MuiThemeProvider>
                         <div className='custom-alert'>
                             <h2>Delete Confirmation</h2>
-                            <p>Are you sure to delete this crew?</p>
+                            <p>Are you sure to reject this crew?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {   
-                                this.props.onUpdateDeleteLoadingBar(); 
-                                this.props.onDeleteParticipation("eventCrew", targetCrewId, targetEventId);
+                                
+                                let data = {
+                                    studentId: targetCrewId,
+                                    eventId: this.props.params.eventId
+                                }
+                                this.props.onUpdateData("rejectCrew", data, this.props.location.state["eventName"]);
 
                                 onClose();
                             }}/>
@@ -134,41 +137,43 @@ class ManageCrew extends Component {
                 for(var i = 0; i < eventCrew.length; i++) {
                     let crew = eventCrew[i];
                     var approvedIcon;
+                    
+                    if(crew["status"] != 2) {
+                        if(crew["status"] == 1) 
+                            approvedIcon = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Crew approved</span>}>
+                                        <li className="fa fa-check"></li>
+                                    </Tooltip>
+                                </td>
+                        else 
+                            approvedIcon = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve this crew</span>}>
+                                        <li value={crew["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li>
+                                    </Tooltip>
+                                </td>
+                                    
 
-                    if(crew["status"] == 1) 
-                        approvedIcon = 
-                            <td>
-                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Crew approved</span>}>
-                                    <li className="fa fa-check"></li>
-                                </Tooltip>
-                            </td>
-                    else 
-                        approvedIcon = 
-                            <td>
-                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve this crew</span>}>
-                                    <li value={crew["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li>
-                                </Tooltip>
-                            </td>
-                                
-
-                    rows.push(
-                        <tr> 
-                            <td>{i+1}</td>
-                            <td>{crew["studentName"]}</td>
-                            <td>{crew["ic"]}</td>
-                            <td>{crew["course"]}</td>
-                            <td>Y{crew["year"]}S{crew["semester"]}</td>
-                            <td>{crew["contact"]}</td>
-                            <td>{crew["email"]}</td>
-                            <td>{crew["position"]}</td>
-                            {approvedIcon}
-                            <td>
-                                <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject this crew</span>}>
-                                    <li value={crew["studentId"]} onClick={(event) => this.handleDelete(event)} className="fa fa-trash"></li>
-                                </Tooltip>
-                            </td>
-                        </tr>
-                    )
+                        rows.push(
+                            <tr> 
+                                <td>{i+1}</td>
+                                <td>{crew["studentName"]}</td>
+                                <td>{crew["ic"]}</td>
+                                <td>{crew["course"]}</td>
+                                <td>Y{crew["year"]}S{crew["semester"]}</td>
+                                <td>{crew["contact"]}</td>
+                                <td>{crew["email"]}</td>
+                                <td>{crew["position"]}</td>
+                                {approvedIcon}
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject this crew</span>}>
+                                        <li value={crew["studentId"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>
+                            </tr>
+                        )
+                    }
                 }
             } else {
                 message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No crew for this event</div>;
