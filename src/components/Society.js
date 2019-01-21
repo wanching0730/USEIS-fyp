@@ -155,6 +155,7 @@ class Society extends Component {
                                 <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
 
                                 <SearchBar
+                                    hintText="Search name or category..."
                                     onChange={(newValue) => this.setState({ searchWord: newValue })}
                                     onRequestSearch={this.handleSearch.bind(this)}
                                     style={{
