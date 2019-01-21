@@ -89,24 +89,20 @@ class Society extends Component {
         }
     }
 
-    handleClick(event) {
-        console.log("clicked");
-    }
-
     handleSearch() {
         this.props.onUpdateLoadingBar();
         this.props.onSearchData("society", this.state.searchWord);
     }
 
     render() {
-        const { RaisedButtonStyle } = styles;
         let societies = this.props.societies;
 
         if(societies != null) {
             var rows = [];
             var counter = 1;
             const categories = groupBy(societies, society => society["category"]);
-            for (const [key, values] of categories.entries()) {
+            let mapsort = new Map([...categories.entries()].sort());
+            for (const [key, values] of mapsort) {
                 var subRows = [];
                 values.forEach(value => {
                     let toSociety = {
@@ -166,9 +162,6 @@ class Society extends Component {
                                     }}
                                 />
 
-                                <RaisedButton className="buttons" label="Sort by Category" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                                <RaisedButton className="buttons" label="Sort by Alphabet" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-
                                 <div className="wrapper">
                                     <ul>
                                         {rows}
@@ -183,12 +176,6 @@ class Society extends Component {
     };
     
 };
-
-const styles = {
-    RaisedButtonStyle: {
-        marginLeft: 20
-    }
-}
 
 const mapStateToProps = (state, props) => {
     console.log("state in society: " + state.data.societies);
