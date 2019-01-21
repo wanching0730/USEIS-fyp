@@ -293,7 +293,8 @@ export function retrieveData(type, id) {
                     societyEvents.push({
                         id: reply[i]["eventId"],
                         name: reply[i]["name"],
-                        dateTime: reply[i]["eventDateTime"],
+                        startDate: reply[i]["startDate"],
+                        endDate: reply[i]["endDate"],
                         venue: reply[i]["venue"],
                         fee: reply[i]["fee"],
                         chairperson: reply[i]["chairperson"],

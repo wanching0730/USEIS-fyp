@@ -5,6 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
+import moment from "moment";
 import '../style/society.css';
 
 import { connect } from 'react-redux';
@@ -50,8 +51,8 @@ class SocietyEvents extends Component {
                             <td>{i+1}</td>
                             <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
                             <td><Link to={toEvent}>{societyEvent["name"]}</Link></td>
-                            <td>{societyEvent["dateTime"]}</td>
-                            <td>???</td>
+                            <td>{moment(societyEvent["startDate"]).format("YYYY-MM-DD HH:mm")}</td>
+                            <td>{moment(societyEvent["endDate"]).format("YYYY-MM-DD HH:mm")}</td>
                             <td>{societyEvent["venue"]}</td>
                             <td>{societyEvent["fee"]}</td>
                             <td>{societyEvent["chairperson"]}</td>
@@ -71,7 +72,7 @@ class SocietyEvents extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
                         <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.societyId}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={{pathname:`/perSociety/` + this.props.params.societyId, state: {societyName: this.props.location.state["societyName"]}}}>{this.props.location.state["societyName"]}</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Events</BreadcrumbItem>
                     </Breadcrumb>
                 </div>
@@ -91,8 +92,8 @@ class SocietyEvents extends Component {
                                                         <th>No.</th>
                                                         <th>Poster</th>
                                                         <th>Name</th>
-                                                        <th>Date</th>   
-                                                        <th>Time</th>  
+                                                        <th>Start Date</th>   
+                                                        <th>End Date</th>  
                                                         <th>Venue</th> 
                                                         <th>Fee</th> 
                                                         <th>Chairperson</th>    
