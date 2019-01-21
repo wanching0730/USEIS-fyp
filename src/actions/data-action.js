@@ -382,6 +382,7 @@ export function retrieveAll(type) {
             } else if(type === "newsfeeds") {
                 for(var i = 0; i < reply.length; i++) {
                     newsfeeds.push({
+                        newsfeedId: reply[i]["sNewsfeedId"],
                         ownerId: reply[i]["societyId"],
                         name: reply[i]["name"],
                         category: reply[i]["category"],

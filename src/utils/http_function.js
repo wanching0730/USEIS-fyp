@@ -100,7 +100,13 @@ export function updateDataDouble(type, data) {
     }
 }
 
-export function deleteData(type, id, eventId) {
+export function removeData(type, id) {
+    return fetch(mainApiRoute + `/` + type + `/` + id, {
+        method: 'DELETE'
+    });
+}
+
+export function removeParticipation(type, id, eventId) {
     return fetch(mainApiRoute + `/` + type + `/` + id + `/` + eventId, {
         method: 'DELETE'
     });

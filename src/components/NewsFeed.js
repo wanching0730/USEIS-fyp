@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveAll, retrieveData, updateLoadingBar } from '../actions/data-action';
 import { create, updatePostLoadingBar } from '../actions/post-action';
+import { deleteData, updateDeleteLoadingBar } from '../actions/delete-action';
 
 class NewsFeed extends Component {
 
@@ -42,7 +43,8 @@ class NewsFeed extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.updateInputValue = this.updateInputValue.bind(this);
-        this.updateNewsfeeds = this.updateNewsfeeds.bind(this);
+        this.updateAddedNewsfeeds = this.updateAddedNewsfeeds.bind(this);
+        this.updateDeletedNewsfeeds = this.updateDeletedNewsfeeds.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.handleOwner = this.handleOwner.bind(this);
         this.clickSave = this.clickSave.bind(this);
@@ -62,7 +64,8 @@ class NewsFeed extends Component {
         window.scrollTo(0, 0);
 
         const socket = openSocket('http://localhost:5000');
-        socket.on('updateNewsfeed', this.updateNewsfeeds);
+        socket.on('updateAddedNewsfeed', this.updateAddedNewsfeeds);
+        socket.on('updateDeletedNewsfeed', this.updateDeletedNewsfeeds);
 
         if(this.props.societies != null) {
             let societies = this.props.societies;
@@ -107,8 +110,21 @@ class NewsFeed extends Component {
         }
     }
 
-    updateNewsfeeds(newsfeedItem) {
+    updateAddedNewsfeeds(newsfeedItem) {
         this.setState({ newsfeeds: [newsfeedItem, ...this.state.newsfeeds] });
+    }
+
+    updateDeletedNewsfeeds(newsfeedItem) {
+        let list = this.state.newsfeeds;
+        console.log("newsfeeds in update list: " + JSON.stringify(this.state.newsfeeds));
+        for(var i = 0; i < list.length; i++) {
+            let item = list[i];
+            if(item["newsfeedId"] == newsfeedItem["newsfeedId"] && item["type"] == newsfeedItem["type"]) {
+                var index = list.indexOf(item);
+                list.splice(index, 1);
+            }
+        }
+        this.setState({ newsfeeds: list });
     }
 
     openModal() {
@@ -193,6 +209,34 @@ class NewsFeed extends Component {
             ownerName: null,
             ownerCategory: null
         });
+    }
+
+    handleDelete(targetNewsfeedId, type) {
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h2>Delete Confirmation</h2>
+                            <p>Are you sure to delete this newsfeed?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {   
+                                console.log(targetNewsfeedId);
+                                this.props.onUpdateDeleteLoadingBar(); 
+
+                                if(type == "s")
+                                    this.props.onDeleteData("sNewsfeed", targetNewsfeedId);
+                                else 
+                                this.props.onDeleteData("eNewsfeed", targetNewsfeedId);
+
+                                onClose();
+                            }}/>
+                            &nbsp;&nbsp;&nbsp;
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
+        })
     }
 
     updateInputValue(event) {
@@ -303,7 +347,7 @@ class NewsFeed extends Component {
                         <CardSubtitle>| Category: {newsfeed["category"]} |</CardSubtitle>
                         <br/>
                         <CardText>{newsfeed["description"]}</CardText>
-                        <Link to={toView}>View</Link>
+                        <Link to={toView}>View</Link>&nbsp;&nbsp;&nbsp;<a href="#" onClick={() => this.handleDelete(newsfeed["newsfeedId"], newsfeed["type"])}>Delete</a>
                         <CardText>
                             <small className="text-muted">{moment(newsfeed["dateCreate"]).format("MMM DD YYYY hh:mm A")}</small>
                         </CardText>
@@ -421,7 +465,9 @@ const mapActionsToProps = (dispatch, props) => {
         onRetrieveData: retrieveData,
         onCreate: create,
         onUpdateLoadingBar: updateLoadingBar,
-        onUpdatePostLoadingBar: updatePostLoadingBar
+        onUpdatePostLoadingBar: updatePostLoadingBar,
+        onDeleteData: deleteData,
+        onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 

@@ -1,6 +1,7 @@
 import {
     UPDATE_DELETE_LOADINGBAR,
-    DELETE_DATA
+    DELETE_DATA,
+    DELETE_PARTICIPATION
 } from '../constant';
 
 const initialState = {
@@ -13,10 +14,14 @@ export default function deleteReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 loading: payload.loading
             });
+        case DELETE_PARTICIPATION: 
+            return Object.assign({}, state, {
+                loading: payload.loading
+            });
         case DELETE_DATA: 
-        return Object.assign({}, state, {
-            loading: payload.loading
-        });
+            return Object.assign({}, state, {
+                loading: payload.loading
+            });
         default: 
             return state;
     }
