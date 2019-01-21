@@ -21,6 +21,15 @@ export function updateAuthLoadingBarSuccessful() {
     };
 }
 
+export function updateEndAuthLoadingBar() {
+    return {
+        type: UPDATE_AUTH_LOADINGBAR,
+        payload: {
+            loading: false
+        }
+    };
+}
+
 export function getFcmTokenSuccessful(token, messaging) {
     return {
         type: GET_FCM_TOKEN,
@@ -147,14 +156,16 @@ export function loginUser(postData) {
             console.log("token: " + reply["token"]);
         })
         .catch(error => {
+            console.log("login error: " + error);
             confirmAlert({
                 title: 'Invalid Login',
-                message: 'Your user name and password are not valid' + error,
+                message: 'Your user name and password are not valid',
                 buttons: [
                     {
                         label: 'Close',
                         onClick: () => {
-                            console.log('Click close');
+                            dispatch(updateEndAuthLoadingBar());
+                            browserHistory.push({pathname:`/`});
                         }
                     }
                 ]
