@@ -30,7 +30,7 @@ class ManageParticipant extends Component {
         this.props.onRetrieveData("eventParticipant", this.props.params.eventId);
 
         this.handleApprove = this.handleApprove.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+        this.handleReject = this.handleReject.bind(this);
         this.updateList = this.updateList.bind(this);
     }
 
@@ -97,23 +97,26 @@ class ManageParticipant extends Component {
           })
     }
 
-    handleDelete(event, username) {
+    handleReject(event, username) {
         let targetParticipantId = event.target.value;
-        let targetEventId = this.props.params.eventId;
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
                     <MuiThemeProvider>
                         <div className='custom-alert'>
                             <h1>Delete Confirmation</h1>
-                            <p>Are you sure to delete this participant?</p>
+                            <p>Are you sure to reject this participant?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {    
-                                this.props.onUpdateDeleteLoadingBar();
+                                
+                                let data = {
+                                    id: targetParticipantId,
+                                    eventId: this.props.params.eventId
+                                }
 
                                 if(username.substring(0,2) === "00") 
-                                    this.props.onDeleteParticipation("staffParticipant", targetParticipantId, targetEventId);
+                                    this.props.onUpdateData("rejectStaffEvent", data, this.props.location.state["eventName"]);
                                 else 
-                                    this.props.onDeleteParticipation("studentParticipant", targetParticipantId, targetEventId);
+                                this.props.onUpdateData("rejectStudentEvent", data, this.props.location.state["eventName"]);
 
                                 onClose();
                             }}/>
@@ -158,7 +161,7 @@ class ManageParticipant extends Component {
                             <td>{studentParticipant["email"]}</td>
                             <td>{studentParticipant["vegetarian"]}</td>
                             {approvedIcon}
-                            <td><li value={studentParticipant["id"]} onClick={(event) => this.handleDelete(event, studentParticipant["username"])} className="fa fa-trash"></li></td>
+                            <td><li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li></td>
                         </tr>
                     )
                 }
@@ -187,7 +190,7 @@ class ManageParticipant extends Component {
                             <td>{staffParticipant["email"]}</td>
                             <td>{staffParticipant["vegetarian"]}</td>
                             {approvedIcon}
-                            <td><li value={staffParticipant["id"]} onClick={(event) => this.handleDelete(event, staffParticipant["username"])} className="fa fa-trash"></li></td>
+                            <td><li value={staffParticipant["id"]} onClick={(event) => this.handleReject(event, staffParticipant["username"])} className="fa fa-trash"></li></td>
                         </tr>
                     )
                 }

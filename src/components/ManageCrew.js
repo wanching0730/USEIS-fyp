@@ -108,7 +108,7 @@ class ManageCrew extends Component {
                             <RaisedButton label="Yes" primary={true} onClick={() => {   
                                 
                                 let data = {
-                                    studentId: targetCrewId,
+                                    id: targetCrewId,
                                     eventId: this.props.params.eventId
                                 }
                                 this.props.onUpdateData("rejectCrew", data, this.props.location.state["eventName"]);
