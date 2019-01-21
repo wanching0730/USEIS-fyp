@@ -41,13 +41,20 @@ class RecruitmentBooth extends Component {
                         <th>Society</th>
                         <th>Booth Number</th>                 
                     </tr>
+
                 var body = [];
                 for(var i = 0; i < societyBooths.length; i++) {
                     let societyBooth = societyBooths[i];
+
+                    let toSociety = {
+                        pathname: "/perSociety/" + societyBooth["societyId"],
+                        state: {societyName: societyBooth["name"]}
+                    }
+
                     body.push(
                         <tr>
                             <td>{i+1}</td>
-                            <td><Link to={`/perSociety/`+societyBooth["societyId"]}>{societyBooth["name"]}</Link></td>
+                            <td><Link to={toSociety}>{societyBooth["name"]}</Link></td>
                             <td>{societyBooth["location"]}</td>
                         </tr>
                     );
@@ -63,13 +70,20 @@ class RecruitmentBooth extends Component {
                         <th>Event</th>
                         <th>Booth Number</th>                 
                     </tr>
+
                 var body = [];
                 for(var i = 0; i < eventBooths.length; i++) {
                     let eventBooth = eventBooths[i];
+
+                    let toEvent = {
+                        pathname: "/perEvent/" + eventBooth["eventId"],
+                        state: {eventName: eventBooth["name"]}
+                    }
+
                     body.push(
                         <tr>
                             <td>{i+1}</td>
-                            <td><Link to={`/perEvent/`+eventBooth["eventId"]}>{eventBooth["name"]}</Link></td>
+                            <td><Link to={toEvent}>{eventBooth["name"]}</Link></td>
                             <td>{eventBooth["location"]}</td>
                         </tr>
                     );
