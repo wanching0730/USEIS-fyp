@@ -142,7 +142,7 @@ class ManageCrew extends Component {
                         if(crew["status"] == 1) 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Crew approved</span>}>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
                                         <li className="fa fa-check"></li>
                                     </Tooltip>
                                 </td>

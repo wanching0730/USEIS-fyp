@@ -16,7 +16,8 @@ import {
     RETRIEVE_USER_EVENTS,
     RETRIEVE_SOCIETY_MEMBERS,
     SEARCH_SOCIETY,
-    SEARCH_EVENT
+    SEARCH_EVENT,
+    CHECK_IS_REGISTERED
 } from '../constant';
 
 const initialState = {
@@ -41,7 +42,9 @@ const initialState = {
     allBooths: null,
 
     societiesFound: null,
-    eventsFound: null
+    eventsFound: null,
+
+    isRegistered: null
 };
 
 export default function dataReducer(state = initialState, { type, payload }) {
@@ -134,6 +137,10 @@ export default function dataReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 eventsFound: payload.eventsFound,
                 loading: payload.loading
+            });
+        case CHECK_IS_REGISTERED:
+            return Object.assign({}, state, {
+                isRegistered: payload.isRegistered
             });
         default: 
             return state;

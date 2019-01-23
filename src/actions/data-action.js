@@ -18,7 +18,8 @@ import {
     RETRIEVE_USER_EVENTS,
     RETRIEVE_SOCIETY_MEMBERS,
     SEARCH_SOCIETY,
-    SEARCH_EVENT
+    SEARCH_EVENT,
+    CHECK_IS_REGISTERED
 } from '../constant';
 
 export function updateLoadingBarSuccessful() {
@@ -116,7 +117,14 @@ export function retrieveSingleDataSuccessful(type, data) {
                 loading: false
             }
         }
-    } 
+    } else if(type === "checkIsRegistered") {
+        return {
+            type: CHECK_IS_REGISTERED,
+            payload: {
+                isRegistered: data
+            }
+        }
+    }
 }
 
 export function retrieveSingleMultipleDataSuccessful(type, data1, data2) {
@@ -188,7 +196,7 @@ export function retrieveAllDataSuccessful(type, data) {
                 allBooths: data
             }
         }
-    }
+    } 
 }
 
 export function updateLoadingBar() {
@@ -244,6 +252,14 @@ export function retrieveDataWithUserId(type, id, userId) {
                     authorized: reply[0]["authorized"]
                 }
                 dispatch(retrieveSingleDataSuccessful("event", event));
+            } else if(type === "checkIsRegistered") {
+                console.log(reply.length);
+                if(reply.length === 0) 
+                    var isRegistered = false;
+                else 
+                    var isRegistered = true;
+
+                dispatch(retrieveSingleDataSuccessful("checkIsRegistered", isRegistered));
             }
         });
     };
