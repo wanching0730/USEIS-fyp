@@ -3,12 +3,14 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
+import Tooltip from 'rc-tooltip';
 import { confirmAlert } from 'react-confirm-alert'; 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
 import '../style/table.css';
 import '../style/alert.css';
+import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -146,9 +148,19 @@ class ManageParticipant extends Component {
                     var approvedIcon;
 
                     if(studentParticipant["status"] == 1) 
-                        approvedIcon = <td><li className="fa fa-check"></li></td>
+                        approvedIcon = 
+                            <td>
+                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
+                                    <li className="fa fa-check"></li>
+                                </Tooltip>
+                            </td>
                     else 
-                        approvedIcon = <td><li value={studentParticipant["id"]} onClick={(event) => this.handleApprove(event, studentParticipant["username"])} className="fa fa-plus"></li></td>
+                        approvedIcon = 
+                            <td>
+                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve participant</span>}>
+                                    <li value={studentParticipant["id"]} onClick={(event) => this.handleApprove(event, studentParticipant["username"])} className="fa fa-plus"></li>
+                                </Tooltip>
+                            </td>
 
                     studentRows.push(
                         <tr> 
@@ -161,7 +173,11 @@ class ManageParticipant extends Component {
                             <td>{studentParticipant["email"]}</td>
                             <td>{studentParticipant["vegetarian"]}</td>
                             {approvedIcon}
-                            <td><li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li></td>
+                            <td>
+                                <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
+                                    <li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li>
+                                </Tooltip>
+                            </td>
                         </tr>
                     )
                 }
