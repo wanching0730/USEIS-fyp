@@ -11,7 +11,8 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create, updatePostLoadingBar} from '../actions/post-action';
+import { create, updatePostLoadingBar, updateDouble} from '../actions/post-action';
+import { retrieveDataWithUserId } from '../actions/data-action';
 
 class RegisterCrew extends Component {
 
@@ -31,6 +32,8 @@ class RegisterCrew extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.props.onRetrieveDataWithUserId("checkIsRegistered", this.props.params.eventId, this.props.id);
   }
 
   displayText() {
@@ -62,7 +65,10 @@ class RegisterCrew extends Component {
         webNoti: this.state.webNoti ? 1 : 0
       };
 
-      this.props.onCreate("registerEventCrew", data);
+      if(!this.props.isRegistered)
+        this.props.onCreate("registerEventCrew", data);
+      else 
+        this.props.onUpdateData("resubmitStudentParticipant", data, this.props.location.state["eventName"]);
   }
 
   handleChange(event) {
@@ -170,14 +176,17 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     id: state.auth.id,
-    loading: state.create.loading
+    loading: state.create.loading,
+    isRegistered: state.data.isRegistered
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
-    onUpdateLoadingBar: updatePostLoadingBar
+    onUpdateLoadingBar: updatePostLoadingBar,
+    onRetrieveDataWithUserId: retrieveDataWithUserId,
+    onUpdateData: updateDouble,
   }, dispatch);
 };
 
