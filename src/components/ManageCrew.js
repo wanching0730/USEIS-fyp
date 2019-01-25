@@ -154,7 +154,12 @@ class ManageCrew extends Component {
                                     </Tooltip>
                                 </td>
                         else 
-                            approvedIcon = <td>-</td>
+                            approvedIcon = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancelled</span>}>
+                                        <div>-</div>
+                                    </Tooltip>
+                                </td>
                                     
 
                         rows.push(

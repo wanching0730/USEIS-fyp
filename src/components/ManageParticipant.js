@@ -163,27 +163,32 @@ class ManageParticipant extends Component {
                                     </Tooltip>
                                 </td>
                         else 
-                            approvedIcon = <td>-</td>
-
-                        studentRows.push(
-                            <tr> 
-                                <td>{i+1}</td>
-                                <td>{studentParticipant["name"]}</td>
-                                <td>{studentParticipant["ic"]}</td>
-                                <td>{studentParticipant["course"]}</td>
-                                <td>Y{studentParticipant["year"]}S{studentParticipant["semester"]}</td>
-                                <td>{studentParticipant["contact"]}</td>
-                                <td>{studentParticipant["email"]}</td>
-                                <td>{studentParticipant["vegetarian"]}</td>
-                                {approvedIcon}
+                            approvedIcon = 
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
-                                        <li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancelled</span>}>
+                                        <div>-</div>
                                     </Tooltip>
                                 </td>
-                            </tr>
-                        )
-                    }
+
+                        studentRows.push(
+                                <tr> 
+                                    <td>{i+1}</td>
+                                    <td>{studentParticipant["name"]}</td>
+                                    <td>{studentParticipant["ic"]}</td>
+                                    <td>{studentParticipant["course"]}</td>
+                                    <td>Y{studentParticipant["year"]}S{studentParticipant["semester"]}</td>
+                                    <td>{studentParticipant["contact"]}</td>
+                                    <td>{studentParticipant["email"]}</td>
+                                    <td>{studentParticipant["vegetarian"]}</td>
+                                    {approvedIcon}
+                                    <td>
+                                        <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
+                                            <li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li>
+                                        </Tooltip>
+                                    </td>
+                                </tr>
+                            )
+                        }
                 }
                 
             } else {
