@@ -195,20 +195,24 @@ class MyEvent extends Component {
                         isVege = <td>Yes</td>;
                         
 
-                    if(event["position"] === "Participant") 
-                        action = 
-                            <td>
-                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
-                                    <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
-                                </Tooltip>
-                            </td>;
-                    else 
-                        action = 
-                            <td>
-                                <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
-                                    <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-trash"></li>
-                                </Tooltip>
-                            </td>;
+                    if(event["status"] != 1) {
+                        if(event["position"] === "Participant") 
+                            action = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
+                                        <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>;
+                        else 
+                            action = 
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
+                                        <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>;
+                    } else {
+                        action = <td>-</td>;
+                    }
                     
                     if(this.props.userName.substring(0,2) === "00") 
                         ratingStatus = <td>-</td>;
