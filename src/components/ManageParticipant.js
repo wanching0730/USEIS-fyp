@@ -202,23 +202,42 @@ class ManageParticipant extends Component {
                     let staffParticipant = staffParticipants[i];
                     var approvedIcon;
 
-                    if(staffParticipant["status"] == 1) 
-                        approvedIcon = <td><li className="fa fa-check"></li></td>
-                    else 
-                        approvedIcon = <td><li value={staffParticipant["id"]} onClick={(event) => this.handleApprove(event, staffParticipant["username"])} className="fa fa-plus"></li></td>
+                    if(staffParticipant["status"] != 2) {
+                        if(staffParticipant["status"] == 1) 
+                            approvedIcon = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
+                                        <li className="fa fa-check"></li>
+                                    </Tooltip>
+                                </td>;
+                        else if(staffParticipant["status"] == 0) {
+                            approvedIcon = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve participant</span>}>
+                                        <li value={staffParticipant["id"]} onClick={(event) => this.handleApprove(event, staffParticipant["username"])} className="fa fa-plus"></li>
+                                    </Tooltip>
+                                </td>;
+                        } else 
+                            approvedIcon = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancelled</span>}>
+                                        <div>-</div>
+                                    </Tooltip>
+                                </td>;
 
-                    staffRows.push(
-                        <tr> 
-                            <td>{i+1}</td>
-                            <td>{staffParticipant["name"]}</td>
-                            <td>{staffParticipant["ic"]}</td>
-                            <td>{staffParticipant["contact"]}</td>
-                            <td>{staffParticipant["email"]}</td>
-                            <td>{staffParticipant["vegetarian"]}</td>
-                            {approvedIcon}
-                            <td><li value={staffParticipant["id"]} onClick={(event) => this.handleReject(event, staffParticipant["username"])} className="fa fa-trash"></li></td>
-                        </tr>
-                    )
+                        staffRows.push(
+                            <tr> 
+                                <td>{i+1}</td>
+                                <td>{staffParticipant["name"]}</td>
+                                <td>{staffParticipant["ic"]}</td>
+                                <td>{staffParticipant["contact"]}</td>
+                                <td>{staffParticipant["email"]}</td>
+                                <td>{staffParticipant["vegetarian"]}</td>
+                                {approvedIcon}
+                                <td><li value={staffParticipant["id"]} onClick={(event) => this.handleReject(event, staffParticipant["username"])} className="fa fa-trash"></li></td>
+                            </tr>
+                        )
+                    }
                 }
             } else {
                 staffMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No staff participant for this event</div>;

@@ -252,7 +252,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     authorized: reply[0]["authorized"]
                 }
                 dispatch(retrieveSingleDataSuccessful("event", event));
-            } else if(type === "checkIsRegistered") {
+            } else if(type === "checkIsStudentRegistered" || type === "checkIsStaffRegistered") {
                 console.log(reply.length);
                 if(reply.length === 0) 
                     var isRegistered = false;

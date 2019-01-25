@@ -167,77 +167,79 @@ class MyEvent extends Component {
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
 
-                    let toEvent = {
-                        pathname: "/perEvent/" + event["eventId"],
-                        state: {eventName: event["name"]}
-                    }
+                    if(event["status"] != 3) {
+                        let toEvent = {
+                            pathname: "/perEvent/" + event["eventId"],
+                            state: {eventName: event["name"]}
+                        }
 
-                    let toSociety = {
-                        pathname: "/perSociety/" + event["organiserId"],
-                        state: {societyName: event["organiserName"]}
-                    }
+                        let toSociety = {
+                            pathname: "/perSociety/" + event["organiserId"],
+                            state: {societyName: event["organiserName"]}
+                        }
 
-                    let toFeedback = {
-                        pathname: "/feedback/" + event["eventId"],
-                        state: {eventName: event["name"]}
-                    }
+                        let toFeedback = {
+                            pathname: "/feedback/" + event["eventId"],
+                            state: {eventName: event["name"]}
+                        }
 
-                    if(event["status"] === 0)  
-                        status = <td>Pending</td>;
-                    else if(event["status"] === 1)
-                        status = <td>Approved</td>;
-                    else 
-                        status = <td style={{color: "red"}}>Rejected</td>;
+                        if(event["status"] === 0)  
+                            status = <td>Pending</td>;
+                        else if(event["status"] === 1)
+                            status = <td>Approved</td>;
+                        else if(event["status"] === 2)
+                            status = <td style={{color: "red"}}>Rejected</td>;
 
-                    if(event["vegetarian"] === 0)
-                        isVege = <td>No</td>;
-                    else 
-                        isVege = <td>Yes</td>;
+                        if(event["vegetarian"] === 0)
+                            isVege = <td>No</td>;
+                        else 
+                            isVege = <td>Yes</td>;
                         
 
-                    if(event["status"] != 1) {
-                        if(event["position"] === "Participant") 
-                            action = 
-                                <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
-                                        <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
-                                    </Tooltip>
-                                </td>;
-                        else 
-                            action = 
-                                <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
-                                        <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-trash"></li>
-                                    </Tooltip>
-                                </td>;
-                    } else {
-                        action = <td>-</td>;
-                    }
-                    
-                    if(this.props.userName.substring(0,2) === "00") 
-                        ratingStatus = <td>-</td>;
-                    else {
-                        if(event["ratingStatus"] == 1) 
-                            ratingStatus = <td>Done</td>;
-                        else 
-                            ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
-                    }
+                        if(event["status"] != 1) {
+                            if(event["position"] === "Participant") 
+                                action = 
+                                    <td>
+                                        <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
+                                            <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
+                                        </Tooltip>
+                                    </td>;
+                            else 
+                                action = 
+                                    <td>
+                                        <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
+                                            <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-trash"></li>
+                                        </Tooltip>
+                                    </td>;
+                        } else {
+                            action = <td>-</td>;
+                        }
+                        
+                        if(this.props.userName.substring(0,2) === "00") 
+                            ratingStatus = <td>-</td>;
+                        else {
+                            if(event["ratingStatus"] == 1) 
+                                ratingStatus = <td>Done</td>;
+                            else 
+                                ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
+                        }
 
-                    rows.push(
-                        <tr>
-                            <td>{i+1}</td>
-                            <td><img style={imageStyle} src={event["logoUrl"]} /></td>
-                            {/* <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td> */}
-                            <td><Link to={toEvent}>{event["name"]}</Link></td>
-                            <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
-                            <td>{moment(event["joinDate"]).format("DD/MM/YYYY")}</td>
-                            <td>{event["position"]}</td>
-                            {status}
-                            {isVege}
-                            {ratingStatus}
-                            {action}
-                        </tr>
-                    )
+                        rows.push(
+                                <tr>
+                                    <td>{i+1}</td>
+                                    <td><img style={imageStyle} src={event["logoUrl"]} /></td>
+                                    {/* <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td> */}
+                                    <td><Link to={toEvent}>{event["name"]}</Link></td>
+                                    <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
+                                    <td>{moment(event["joinDate"]).format("DD/MM/YYYY")}</td>
+                                    <td>{event["position"]}</td>
+                                    {status}
+                                    {isVege}
+                                    {ratingStatus}
+                                    {action}
+                                </tr>
+                            )
+                        }
                 }
             } else {
                 message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No events participated</div>;
