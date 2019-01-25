@@ -147,40 +147,45 @@ class ManageParticipant extends Component {
                     let studentParticipant = studentParticipants[i];
                     var approvedIcon;
 
-                    if(studentParticipant["status"] == 1) 
-                        approvedIcon = 
-                            <td>
-                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
-                                    <li className="fa fa-check"></li>
-                                </Tooltip>
-                            </td>
-                    else 
-                        approvedIcon = 
-                            <td>
-                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve participant</span>}>
-                                    <li value={studentParticipant["id"]} onClick={(event) => this.handleApprove(event, studentParticipant["username"])} className="fa fa-plus"></li>
-                                </Tooltip>
-                            </td>
+                    if(studentParticipant["status"] != 2) {
+                        if(studentParticipant["status"] == 1) 
+                            approvedIcon = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
+                                        <li className="fa fa-check"></li>
+                                    </Tooltip>
+                                </td>
+                        else if(studentParticipant["status"] == 0)
+                            approvedIcon = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve participant</span>}>
+                                        <li value={studentParticipant["id"]} onClick={(event) => this.handleApprove(event, studentParticipant["username"])} className="fa fa-plus"></li>
+                                    </Tooltip>
+                                </td>
+                        else 
+                            approvedIcon = <td>-</td>
 
-                    studentRows.push(
-                        <tr> 
-                            <td>{i+1}</td>
-                            <td>{studentParticipant["name"]}</td>
-                            <td>{studentParticipant["ic"]}</td>
-                            <td>{studentParticipant["course"]}</td>
-                            <td>Y{studentParticipant["year"]}S{studentParticipant["semester"]}</td>
-                            <td>{studentParticipant["contact"]}</td>
-                            <td>{studentParticipant["email"]}</td>
-                            <td>{studentParticipant["vegetarian"]}</td>
-                            {approvedIcon}
-                            <td>
-                                <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
-                                    <li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li>
-                                </Tooltip>
-                            </td>
-                        </tr>
-                    )
+                        studentRows.push(
+                            <tr> 
+                                <td>{i+1}</td>
+                                <td>{studentParticipant["name"]}</td>
+                                <td>{studentParticipant["ic"]}</td>
+                                <td>{studentParticipant["course"]}</td>
+                                <td>Y{studentParticipant["year"]}S{studentParticipant["semester"]}</td>
+                                <td>{studentParticipant["contact"]}</td>
+                                <td>{studentParticipant["email"]}</td>
+                                <td>{studentParticipant["vegetarian"]}</td>
+                                {approvedIcon}
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
+                                        <li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>
+                            </tr>
+                        )
+                    }
                 }
+                
             } else {
                 studentMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px" }}>No student participant for this event</div>;
             }

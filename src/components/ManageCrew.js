@@ -146,13 +146,15 @@ class ManageCrew extends Component {
                                         <li className="fa fa-check"></li>
                                     </Tooltip>
                                 </td>
-                        else 
+                        else if(crew["status"] == 0) 
                             approvedIcon = 
                                 <td>
                                     <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve this crew</span>}>
                                         <li value={crew["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li>
                                     </Tooltip>
                                 </td>
+                        else 
+                            approvedIcon = <td>-</td>
                                     
 
                         rows.push(
