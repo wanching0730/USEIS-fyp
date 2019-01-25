@@ -146,7 +146,7 @@ class MyEvent extends Component {
             if(this.state.userEvents.length != 0) {
                 let events = this.state.userEvents;
 
-                var status, isVege, crewAction, participantAction, ratingStatus;
+                var status, isVege, action, ratingStatus;
                 
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
@@ -177,26 +177,22 @@ class MyEvent extends Component {
                         isVege = <td>No</td>;
                     else 
                         isVege = <td>Yes</td>;
+                        
 
-                    if(event["status"] === 0 && event["position"] != "participant") 
-                        crewAction = 
-                            <td>
-                                <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
-                                    <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-times-circle"></li>
-                                </Tooltip>
-                            </td>;
-                    else 
-                        crewAction = <td></td>
-
-                    if(event["status"] === 1) 
-                        participantAction = 
+                    if(event["position"] === "Participant") 
+                        action = 
                             <td>
                                 <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
                                     <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
                                 </Tooltip>
                             </td>;
                     else 
-                        participantAction = <td></td>
+                        action = 
+                            <td>
+                                <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
+                                    <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-trash"></li>
+                                </Tooltip>
+                            </td>;
                     
                     if(this.props.userName.substring(0,2) === "00") 
                         ratingStatus = <td>-</td>;
@@ -219,8 +215,7 @@ class MyEvent extends Component {
                             {status}
                             {isVege}
                             {ratingStatus}
-                            {participantAction}
-                            {crewAction}
+                            {action}
                         </tr>
                     )
                 }
@@ -263,10 +258,10 @@ class MyEvent extends Component {
                                                 <th>Organisers</th> 
                                                 <th>Joined Date</th>
                                                 <th>Position</th>
-                                                <th>Crew Status</th>
+                                                <th>Status</th>
                                                 <th>Vegetarian</th>
                                                 <th>Rating Status</th>    
-                                                <th colSpan="2">Actions</th>           
+                                                <th>Actions</th>           
                                             </tr>
                                         </thead>
 
