@@ -44,26 +44,44 @@ class ManageParticipant extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("this props: " + JSON.stringify(this.props.studentParticipant));
-        console.log("next props: " + JSON.stringify(nextProps.studentParticipant));
+        console.log("this props: " + JSON.stringify(this.props.staffParticipant));
+        console.log("next props: " + JSON.stringify(nextProps.staffParticipant));
+
         if((nextProps.studentParticipant != this.props.studentParticipant) && (nextProps.studentParticipant != null)) {
             this.setState({
                 studentParticipant: nextProps.studentParticipant
             });
         }
+
+        if((nextProps.staffParticipant != this.props.staffParticipant) && (nextProps.staffParticipant != null)) {
+            this.setState({
+                staffParticipant: nextProps.staffParticipant
+            });
+        }
     }
 
     updateList(data) {
-        let list = this.state.studentParticipant;
-        console.log("state in update list: " + JSON.stringify(this.state.studentParticipant));
-        for(var i = 0; i < list.length; i++) {
-            let item = list[i];
-            if(item["id"] == data["studentId"] && item["eventId"] == data["eventId"]) {
-                var index = list.indexOf(item);
-                list.splice(index, 1);
+        if(data["type"] == "student") {
+            let list = this.state.studentParticipant;
+            for(var i = 0; i < list.length; i++) {
+                let item = list[i];
+                if(item["eventId"] == data["eventId"]) {
+                    var index = list.indexOf(item);
+                    list.splice(index, 1);
+                }
             }
+            this.setState({ studentParticipant: list });
+        } else {
+            let list = this.state.staffParticipant;
+            for(var i = 0; i < list.length; i++) {
+                let item = list[i];
+                if(item["eventId"] == data["eventId"]) {
+                    var index = list.indexOf(item);
+                    list.splice(index, 1);
+                }
+            }
+            this.setState({ staffParticipant: list });
         }
-        this.setState({ studentParticipant: list });
     }
 
     handleApprove(event, username) {
@@ -135,7 +153,7 @@ class ManageParticipant extends Component {
         console.log("loading in render: " + this.props.deleteLoading);
         const { RaisedButtonStyle } = styles;
         let studentParticipants = this.state.studentParticipant;
-        let staffParticipants = this.props.staffParticipant;
+        let staffParticipants = this.state.staffParticipant;
         var studentMessage = <div></div>;
         var staffMessage = <div></div>;
         var studentRows = [];
