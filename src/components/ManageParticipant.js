@@ -182,7 +182,7 @@ class ManageParticipant extends Component {
                     )
                 }
             } else {
-                studentMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px"}}>No student participant for this event</div>;
+                studentMessage = <div style= {{ margin: "0 auto", marginBottom: "20px", marginTop: "20px" }}>No student participant for this event</div>;
             }
         }
 

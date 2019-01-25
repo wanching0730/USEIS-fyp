@@ -65,8 +65,12 @@ class RegisterBooth extends Component {
   updateList(data) {
     var newSeatMap = this.state.seatMap;
     newSeatMap[data["selectedRow"]][data["selectedSeat"]]["isReserved"] = true;
-    delete newSeatMap[data["previousRow"]][data["previousSeat"]].isReserved;
-    this.setState({seatMap: newSeatMap});
+
+    console.log(data["previousRow"]);
+    if(data["previousRow"] != -1 && data["previousSeat"] != -1) {
+      delete newSeatMap[data["previousRow"]][data["previousSeat"]].isReserved;
+      this.setState({seatMap: newSeatMap});
+    }
   }
 
   handleSubmit() {
@@ -77,9 +81,9 @@ class RegisterBooth extends Component {
       id: this.props.params.id,
       name: this.props.params.type == "society" ? this.props.location.state["societyName"] : this.props.location.state["eventName"],
       selectedRow: this.state.selectedRow,
-      selectedSeat: this.state.selectedSeat,
-      previousRow: this.state.currentRow,
-      previousSeat: this.state.currentSeat
+      selectedSeat: this.state.selectedSeat
+      // previousRow: this.state.currentRow,
+      // previousSeat: this.state.currentSeat
     }
 
     this.props.onUpdateDouble("booth", data, data["name"]);

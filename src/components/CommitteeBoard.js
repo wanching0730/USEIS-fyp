@@ -36,10 +36,10 @@ class CommitteeBoard extends Component {
         
         const { RaisedButtonStyle } = styles;
         let committee = this.props.comm;
-        console.log("comm: " + committee);
         var rows = [], breadCrumb;
+        var message = <div></div>;
 
-        if(committee != null) {
+        if(committee != null && committee.length > 0) {
             for(var i = 0; i < committee.length; i++) {
                 let comm = committee[i];
 
@@ -56,6 +56,8 @@ class CommitteeBoard extends Component {
                     </tr>
                 )
             }
+        } else {
+            message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No crew for this event</div>;
         }
 
         if(this.props.params.type === "society") {
@@ -111,6 +113,8 @@ class CommitteeBoard extends Component {
                                             {rows}
                                         </tbody>
                                     </table>
+
+                                    {message}
 
                                     <div style= {{ margin: "0 auto" }}>
                                         <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
