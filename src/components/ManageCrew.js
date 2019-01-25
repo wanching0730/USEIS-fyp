@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
-import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
+// import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
 class ManageCrew extends Component {
 
@@ -258,9 +258,9 @@ const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveData: retrieveData,
       onUpdateData: updateDouble,
-      onDeleteParticipation: deleteParticipation,
+    //   onDeleteParticipation: deleteParticipation,
       onUpdateLoadingBar: updateLoadingBar,
-      onUpdateDeleteLoadingBar: updateDeleteLoadingBar
+    //   onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 

@@ -16,8 +16,9 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
+// import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
+import { updateDouble } from '../actions/post-action';
 
 class MyEvent extends Component {
 
@@ -60,7 +61,8 @@ class MyEvent extends Component {
         let list = this.state.userEvents;
         for(var i = 0; i < list.length; i++) {
             let item = list[i];
-            if(item["studentId"] == data["studentId"] && item["eventId"] == data["eventId"]) {
+            console.log("student id to delete: " + item["studentId"]);
+            if(item["eventId"] == data["eventId"]) {
                 var index = list.indexOf(item);
                 list.splice(index, 1);
             }
@@ -88,8 +90,15 @@ class MyEvent extends Component {
                             <h2>Cancel Crew Registration Confirmation</h2>
                             <p>Are you sure to cancel joining as crew for this event?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {
-                                        this.props.onUpdateDeleteLoadingBar();
-                                        this.props.onDeleteParticipation("eventCrew", this.props.userId, this.state.eventId);
+                                        // this.props.onUpdateDeleteLoadingBar();
+                                        // this.props.onDeleteParticipation("eventCrew", this.props.userId, this.state.eventId);
+
+                                        let data = {
+                                            id: this.props.userId,
+                                            eventId: eventId
+                                        }
+
+                                        this.props.onUpdateData("cancelStudentEvent", data, ""); 
                     
                                         onClose();
                                     }
@@ -116,12 +125,19 @@ class MyEvent extends Component {
                                 <h2>Cancel Crew Participation Confirmation</h2>
                                 <p>Are you sure to cancel participating this event?</p>
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
-                                            this.props.onUpdateDeleteLoadingBar();
+                                            //this.props.onUpdateDeleteLoadingBar();
 
-                                            if(this.props.userName.substring(0,2) === "00") 
-                                                this.props.onDeleteParticipation("staffEvent", this.props.userId, this.state.eventId);
+                                            let data = {
+                                                id: this.props.userId,
+                                                eventId: eventId
+                                            }
+
+                                            if(this.props.userName.substring(0,2) === "00")
+                                                this.props.onUpdateData("cancelStaffEvent", data, ""); 
+                                                // this.props.onDeleteParticipation("staffEvent", this.props.userId, this.state.eventId);
                                             else 
-                                                this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
+                                                this.props.onUpdateData("cancelStudentEvent", data, ""); 
+                                                // this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
                 
                                             onClose();
                                         }
@@ -310,9 +326,10 @@ const mapStateToProps = (state, props) => {
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
         onRetrieveData: retrieveData,
-        onDeleteParticipation: deleteParticipation,
+        // onDeleteParticipation: deleteParticipation,
         onUpdateLoadingBar: updateLoadingBar,
-        onUpdateDeleteLoadingBar: updateDeleteLoadingBar
+        onUpdateData: updateDouble
+        // onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 
