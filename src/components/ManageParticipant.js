@@ -63,25 +63,29 @@ class ManageParticipant extends Component {
 
     updateList(data) {
         if(data["type"] == "student") {
-            let list = this.state.studentParticipant;
-            for(var i = 0; i < list.length; i++) {
-                let item = list[i];
-                if(item["eventId"] == data["eventId"]) {
-                    var index = list.indexOf(item);
-                    list.splice(index, 1);
+            if(this.state.studentParticipant != null) {
+                let list = this.state.studentParticipant;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+                    if(item["eventId"] == data["eventId"]) {
+                        var index = list.indexOf(item);
+                        list.splice(index, 1);
+                    }
                 }
+                this.setState({ studentParticipant: list });
             }
-            this.setState({ studentParticipant: list });
         } else {
-            let list = this.state.staffParticipant;
-            for(var i = 0; i < list.length; i++) {
-                let item = list[i];
-                if(item["eventId"] == data["eventId"]) {
-                    var index = list.indexOf(item);
-                    list.splice(index, 1);
+            if(this.state.staffParticipant != null) {
+                let list = this.state.staffParticipant;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+                    if(item["eventId"] == data["eventId"]) {
+                        var index = list.indexOf(item);
+                        list.splice(index, 1);
+                    }
                 }
+                this.setState({ staffParticipant: list });
             }
-            this.setState({ staffParticipant: list });
         }
     }
 

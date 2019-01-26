@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
-// import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
+import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
 class ManageCrew extends Component {
 
@@ -33,6 +33,7 @@ class ManageCrew extends Component {
 
         this.handleApprove = this.handleApprove.bind(this);
         this.handleReject = this.handleReject.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
         this.updateList = this.updateList.bind(this);
     }
 
@@ -54,17 +55,19 @@ class ManageCrew extends Component {
     }
 
     updateList(data) {
-        let list = this.state.eventCrew;
-        console.log(this.state.eventCrew);
-        for(var i = 0; i < list.length; i++) {
-            let item = list[i];
-            if(item["studentId"] == data["studentId"] && item["eventId"] == data["eventId"]) {
-                var index = list.indexOf(item);
-                list.splice(index, 1);
+        if(this.state.eventCrew != null) {
+            let list = this.state.eventCrew;
+            console.log(this.state.eventCrew);
+            for(var i = 0; i < list.length; i++) {
+                let item = list[i];
+                if(item["studentId"] == data["id"] && item["eventId"] == data["eventId"]) {
+                    var index = list.indexOf(item);
+                    list.splice(index, 1);
+                }
             }
+            this.setState({ eventCrew: list });
+            console.log(this.state.eventCrew);
         }
-        this.setState({ eventCrew: list });
-        console.log(this.state.eventCrew);
     }
 
     handleApprove(event) {
@@ -103,7 +106,7 @@ class ManageCrew extends Component {
                 return (
                     <MuiThemeProvider>
                         <div className='custom-alert'>
-                            <h2>Delete Confirmation</h2>
+                            <h2>Reject Confirmation</h2>
                             <p>Are you sure to reject this crew?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {   
                                 
@@ -112,6 +115,31 @@ class ManageCrew extends Component {
                                     eventId: this.props.params.eventId
                                 }
                                 this.props.onUpdateData("rejectCrew", data, this.props.location.state["eventName"]);
+
+                                onClose();
+                            }}/>
+                            &nbsp;&nbsp;&nbsp;
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
+        })
+    }
+
+    handleRemove(event) {
+        let targetCrewId = event.target.value;
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h2>Delete Confirmation</h2>
+                            <p>Are you sure to remove this crew?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {   
+                                
+                                this.props.onUpdateDeleteLoadingBar(); 
+                                this.props.onDeleteParticipation("eventCrew", targetCrewId, this.props.params.eventId);
 
                                 onClose();
                             }}/>
@@ -136,7 +164,7 @@ class ManageCrew extends Component {
             if(eventCrew.length != 0) {
                 for(var i = 0; i < eventCrew.length; i++) {
                     let crew = eventCrew[i];
-                    var approvedIcon;
+                    var approvedIcon, deleteIcon;
                     
                     if(crew["status"] != 2) {
                         if(crew["status"] == 1) 
@@ -160,6 +188,22 @@ class ManageCrew extends Component {
                                         <div>-</div>
                                     </Tooltip>
                                 </td>
+
+                        if(crew["status"] !=3) {
+                            deleteIcon = 
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject crew</span>}>
+                                        <li value={crew["studentId"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>
+                        } else {
+                            deleteIcon =
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove crew</span>}>
+                                        <li value={crew["studentId"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>
+                        }
                                     
 
                         rows.push(
@@ -173,11 +217,7 @@ class ManageCrew extends Component {
                                 <td>{crew["email"]}</td>
                                 <td>{crew["position"]}</td>
                                 {approvedIcon}
-                                <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject this crew</span>}>
-                                        <li value={crew["studentId"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
-                                    </Tooltip>
-                                </td>
+                                {deleteIcon}
                             </tr>
                         )
                     }

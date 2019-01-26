@@ -58,16 +58,18 @@ class MyEvent extends Component {
     }
 
     updateList(data) {
-        let list = this.state.userEvents;
-        for(var i = 0; i < list.length; i++) {
-            let item = list[i];
-            console.log("student id to delete: " + item["studentId"]);
-            if(item["eventId"] == data["eventId"]) {
-                var index = list.indexOf(item);
-                list.splice(index, 1);
+        if(this.state.userEvents != null) {
+            let list = this.state.userEvents;
+            for(var i = 0; i < list.length; i++) {
+                let item = list[i];
+                console.log("student id to delete: " + item["studentId"]);
+                if(item["eventId"] == data["eventId"]) {
+                    var index = list.indexOf(item);
+                    list.splice(index, 1);
+                }
             }
+            this.setState({ userEvents: list });
         }
-        this.setState({ userEvents: list });
     }
     
     handleSocieties(event) {

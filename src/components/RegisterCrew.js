@@ -33,7 +33,7 @@ class RegisterCrew extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    this.props.onRetrieveDataWithUserId("checkIsRegistered", this.props.params.eventId, this.props.id);
+    this.props.onRetrieveDataWithUserId("checkIsStudentRegistered", this.props.params.eventId, this.props.id);
   }
 
   displayText() {
