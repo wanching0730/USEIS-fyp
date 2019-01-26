@@ -33,6 +33,7 @@ class ManageParticipant extends Component {
 
         this.handleApprove = this.handleApprove.bind(this);
         this.handleReject = this.handleReject.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
         this.updateList = this.updateList.bind(this);
     }
 
@@ -124,7 +125,7 @@ class ManageParticipant extends Component {
                 return (
                     <MuiThemeProvider>
                         <div className='custom-alert'>
-                            <h1>Delete Confirmation</h1>
+                            <h1>Reject Confirmation</h1>
                             <p>Are you sure to reject this participant?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {    
                                 
@@ -136,7 +137,37 @@ class ManageParticipant extends Component {
                                 if(username.substring(0,2) === "00") 
                                     this.props.onUpdateData("rejectStaffEvent", data, this.props.location.state["eventName"]);
                                 else 
-                                this.props.onUpdateData("rejectStudentEvent", data, this.props.location.state["eventName"]);
+                                    this.props.onUpdateData("rejectStudentEvent", data, this.props.location.state["eventName"]);
+
+                                onClose();
+                            }}/>
+                            &nbsp;&nbsp;&nbsp;
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
+        })
+    }
+
+    handleRemove(event, username) {
+        let targetParticipantId = event.target.value;
+        let targetEventId = this.props.params.eventId;
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h1>Delete Confirmation</h1>
+                            <p>Are you sure to remove this participant?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {    
+                                
+                                this.props.onUpdateDeleteLoadingBar();
+
+                                if(username.substring(0,2) === "00") 
+                                    this.props.onDeleteParticipation("staffParticipant", targetParticipantId, targetEventId);
+                                else 
+                                    this.props.onDeleteParticipation("studentParticipant", targetParticipantId, targetEventId);
 
                                 onClose();
                             }}/>
@@ -163,7 +194,7 @@ class ManageParticipant extends Component {
             if(studentParticipants.length != 0) {
                 for(var i = 0; i < studentParticipants.length; i++) {
                     let studentParticipant = studentParticipants[i];
-                    var approvedIcon;
+                    var approvedIcon, deleteIcon;
 
                     if(studentParticipant["status"] != 2) {
                         if(studentParticipant["status"] == 1) 
@@ -188,6 +219,22 @@ class ManageParticipant extends Component {
                                     </Tooltip>
                                 </td>
 
+                        if(studentParticipant["status"] != 3) {
+                            deleteIcon = 
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
+                                        <li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>
+                        } else {
+                            deleteIcon = 
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove participant</span>}>
+                                        <li value={studentParticipant["id"]} onClick={(event) => this.handleRemove(event, studentParticipant["username"])} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>
+                        }
+
                         studentRows.push(
                                 <tr> 
                                     <td>{i+1}</td>
@@ -199,11 +246,7 @@ class ManageParticipant extends Component {
                                     <td>{studentParticipant["email"]}</td>
                                     <td>{studentParticipant["vegetarian"]}</td>
                                     {approvedIcon}
-                                    <td>
-                                        <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
-                                            <li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li>
-                                        </Tooltip>
-                                    </td>
+                                    {deleteIcon}
                                 </tr>
                             )
                         }
