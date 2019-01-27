@@ -12,7 +12,7 @@ import '../style/form.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create, updatePostLoadingBar, updateDouble} from '../actions/post-action';
-import { retrieveDataWithUserId } from '../actions/data-action';
+import { retrieveDataWithUserId, retrieveData } from '../actions/data-action';
 
 class RegisterCrew extends Component {
 
@@ -22,8 +22,8 @@ class RegisterCrew extends Component {
       emailNoti: false,
       webNoti: false,
       position: 'secretary',
-      vegetarian: 0
-      // showModal: false
+      vegetarian: 0,
+      positionOptions: []
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,6 +34,28 @@ class RegisterCrew extends Component {
     window.scrollTo(0, 0);
 
     this.props.onRetrieveDataWithUserId("checkIsStudentRegistered", this.props.params.eventId, this.props.id);
+    this.props.onRetrieveData("crewPosition", this.props.params.eventId);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if((nextProps.crewPositions != this.props.crewPositions) || (this.props.crewPositions != null)) {
+      var positionOptions = [];
+      var positions = nextProps.crewPositions[0];
+      positions = positions.split(",");
+
+      for(var i = 0; i < positions.length; i++) {
+        if(positions[i] != "") {
+          let position = positions[i];
+          positionOptions.push({
+            value: position,
+            name: position
+          });
+        }
+      }
+      console.log(positionOptions);
+      this.setState({positionOptions: positionOptions});
+      console.log(this.state.positionOptions);
+    }
   }
 
   displayText() {
@@ -80,12 +102,8 @@ class RegisterCrew extends Component {
   }
   
   render() {
-
     const { RaisedButtonStyle } = styles;
-    const positions = [{value:'Secretary', name:'Secretary'}, {value:'Treasurer', name:'Treasurer'}, {value:'Programme HOD', name:'Programme HOD'},
-    {value:'Publicity HOD', name:'Publicity HOD'}, {value:'Logistics HOD', name:'Logistics HOD'}, {value:'Decoration HOD', name:'Decoration HOD'},
-    {value:'Editorial HOD', name:'Editorial HOD'}, {value:'Technical HOD', name:'Technical HOD'}];
-    
+
     return (
       <div>
         <MuiThemeProvider>
@@ -113,7 +131,7 @@ class RegisterCrew extends Component {
                         <div class="inner-wrap">
                           <label>Position (Eg: Logistics HOD)</label>
                           <select value={this.state.position} onChange={this.handleChange}>
-                            {positions.map(this.mapItem)}
+                            {this.state.positionOptions.map(this.mapItem)}
                           </select>
                           
                           {/* <ButtonToolbar>{this.renderDropdownButton}</ButtonToolbar> */}
@@ -177,7 +195,8 @@ const mapStateToProps = (state, props) => {
   return {
     id: state.auth.id,
     loading: state.create.loading,
-    isRegistered: state.data.isRegistered
+    isRegistered: state.data.isRegistered,
+    crewPositions: state.data.crewPositions,
   };
 };
 
@@ -186,6 +205,7 @@ const mapActionsToProps = (dispatch, props) => {
     onCreate: create,
     onUpdateLoadingBar: updatePostLoadingBar,
     onRetrieveDataWithUserId: retrieveDataWithUserId,
+    onRetrieveData: retrieveData,
     onUpdateData: updateDouble,
   }, dispatch);
 };
