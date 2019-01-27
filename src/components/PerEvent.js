@@ -96,9 +96,7 @@ class PerEvent extends Component {
             }));
         });
 
-        var buttons = <div></div>, sideNavBar = <div></div>;
-        var commonButton1 = <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
-        var commonButton2 = <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+        var buttons = <div></div>, sideNavBar = <div></div>, message = <div></div>;
         var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
@@ -159,9 +157,6 @@ class PerEvent extends Component {
             }
             
         } else {
-            // console.log("currentParticipant: " + event["currentParticipant"]);
-            // console.log("currentCrew: " + event["currentCrew"]);
-            // console.log("totalParticipant: " + event["totalParticipant"]);
 
             if(event["participated"] || (event["currentCrew"] >= event["totalCrew"] && event["currentParticipant"] >= event["totalParticipant"])) {
                 buttons =
@@ -194,6 +189,9 @@ class PerEvent extends Component {
                     </div>
             }
         }
+
+        if(event["currentCrew"] >= event["totalCrew"] && event["currentParticipant"] >= event["totalParticipant"])
+            message = <div style={{ color: "red", fontSize: 20 }}>FULL</div>;
 
         return (
             <div>
@@ -232,8 +230,9 @@ class PerEvent extends Component {
                             <div>
                                 <MuiThemeProvider>
                                 <div style={div1Style}>
+                                    {message}
                                     <img style={imageStyle} src={event["logoUrl"]} />
-                                    <h1>{event["name"]}</h1>
+                                    <h1>{event["name"]}</h1> 
                                 </div>
 
                                 <div className="tableBody">
