@@ -265,7 +265,7 @@ class ManageParticipant extends Component {
             if(staffParticipants.length != 0) {
                 for(var i = 0; i < staffParticipants.length; i++) {
                     let staffParticipant = staffParticipants[i];
-                    var approvedIcon;
+                    var approvedIcon, deleteIcon;
 
                     if(staffParticipant["status"] != 2) {
                         if(staffParticipant["status"] == 1) 
@@ -290,6 +290,22 @@ class ManageParticipant extends Component {
                                     </Tooltip>
                                 </td>;
 
+                        if(staffParticipant["status"] != 3) {
+                            deleteIcon = 
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
+                                        <li value={staffParticipant["id"]} onClick={(event) => this.handleReject(event, staffParticipant["username"])} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>
+                        } else {
+                            deleteIcon = 
+                                <td>
+                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove participant</span>}>
+                                        <li value={staffParticipant["id"]} onClick={(event) => this.handleRemove(event, staffParticipant["username"])} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>
+                        }
+
                         staffRows.push(
                             <tr> 
                                 <td>{i+1}</td>
@@ -299,7 +315,7 @@ class ManageParticipant extends Component {
                                 <td>{staffParticipant["email"]}</td>
                                 <td>{staffParticipant["vegetarian"]}</td>
                                 {approvedIcon}
-                                <td><li value={staffParticipant["id"]} onClick={(event) => this.handleReject(event, staffParticipant["username"])} className="fa fa-trash"></li></td>
+                                {deleteIcon}
                             </tr>
                         )
                     }

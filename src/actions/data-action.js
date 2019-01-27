@@ -249,10 +249,13 @@ export function retrieveDataWithUserId(type, id, userId) {
                     logoUrl: reply[0]["logoUrl"],
                     totalParticipant: reply[0]["totalParticipant"],
                     totalCrew: reply[0]["totalCrew"],
+                    currentParticipant: reply[0]["currentParticipant"],
+                    currentCrew: reply[0]["currentCrew"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
                     authorized: reply[0]["authorized"]
                 }
+                console.log(event);
                 dispatch(retrieveSingleDataSuccessful("event", event));
             } else if(type === "checkIsStudentRegistered" || type === "checkIsStaffRegistered") {
                 console.log(reply.length);

@@ -97,6 +97,8 @@ class PerEvent extends Component {
         });
 
         var buttons = <div></div>, sideNavBar = <div></div>;
+        var commonButton1 = <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+        var commonButton2 = <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
         var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
@@ -141,24 +143,7 @@ class PerEvent extends Component {
         }
         
         if(this.props.userName.substring(0,2) == "00") {
-            if(event["participated"]) {
-                buttons =
-                <div id="div3">
-                    <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
-                    <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                </div>
-            } else {
-                buttons =
-                <div id="div3">
-                    <RaisedButton id="buttons" label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
-                    <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
-                    <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                </div>
-            }
-            
-        } else {
-            console.log("authorized: " + event["authorized"]);
-            if(event["participated"]) {
+            if(event["participated"] || event["currentParticipant"] >= event["totalParticipant"]) {
                 buttons =
                     <div id="div3">
                         <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
@@ -166,6 +151,41 @@ class PerEvent extends Component {
                     </div>
             } else {
                 buttons =
+                    <div id="div3">
+                        <RaisedButton id="buttons" label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                        <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+                        <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    </div>
+            }
+            
+        } else {
+            // console.log("currentParticipant: " + event["currentParticipant"]);
+            // console.log("currentCrew: " + event["currentCrew"]);
+            // console.log("totalParticipant: " + event["totalParticipant"]);
+
+            if(event["participated"] || (event["currentCrew"] >= event["totalCrew"] && event["currentParticipant"] >= event["totalParticipant"])) {
+                buttons =
+                    <div id="div3">
+                        <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+                        <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    </div>
+            } else {
+                if(event["currentParticipant"] >= event["totalParticipant"])
+                    buttons =
+                        <div id="div3">
+                            <RaisedButton id="buttons" label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
+                            <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+                            <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                        </div>
+                else if(event["currentCrew"] >= event["totalCrew"]) 
+                    buttons =
+                    <div id="div3">
+                        <RaisedButton id="buttons" label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
+                        <RaisedButton id="buttons" label="Committee Board" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleListCommitteeClick(event)}/>
+                        <RaisedButton id="buttons" label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                    </div>
+                else 
+                    buttons =
                     <div id="div3">
                         <RaisedButton id="buttons" label="Join Event" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvent(event)}/>
                         <RaisedButton id="buttons" label="Join Crew" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleCrew(event)}/>
