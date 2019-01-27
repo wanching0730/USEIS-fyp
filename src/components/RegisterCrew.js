@@ -46,10 +46,21 @@ class RegisterCrew extends Component {
       for(var i = 0; i < positions.length; i++) {
         if(positions[i] != "") {
           let position = positions[i];
-          positionOptions.push({
-            value: position,
-            name: position
-          });
+          if(position == "Chairperson" || position == "Vice Chairperson" || position == "Secretary" || position == "Vice Secretary" || position == "Treasurer" || position == "Vice Treasurer" || position == "Editor") {
+            positionOptions.push({
+              value: position,
+              name: position
+            });
+          } else {
+            positionOptions.push({
+              value: position + " HOD",
+              name: position + " HOD"
+            });
+            positionOptions.push({
+              value: position + " Assistant",
+              name: position + " Assistant"
+            });
+          }
         }
       }
       console.log(positionOptions);
