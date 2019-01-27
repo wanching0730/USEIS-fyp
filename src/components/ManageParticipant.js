@@ -188,6 +188,7 @@ class ManageParticipant extends Component {
     exportData() {
         this.props.onExportData("eventParticipant", this.props.params.eventId);
     }
+    
     render() {
         const { RaisedButtonStyle } = styles;
         let studentParticipants = this.state.studentParticipant;

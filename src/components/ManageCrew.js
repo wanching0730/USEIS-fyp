@@ -14,7 +14,7 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData, updateLoadingBar } from '../actions/data-action';
+import { retrieveData, updateLoadingBar, exportData } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
 import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
@@ -35,6 +35,7 @@ class ManageCrew extends Component {
         this.handleReject = this.handleReject.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.updateList = this.updateList.bind(this);
+        this.exportData = this.exportData.bind(this);
     }
 
     componentDidMount() {
@@ -148,6 +149,10 @@ class ManageCrew extends Component {
                 )
             }
         })
+    }
+
+    exportData() {
+        this.props.onExportData("eventCrew", this.props.params.eventId);
     }
 
     render() {
@@ -268,6 +273,7 @@ class ManageCrew extends Component {
                                         {message}
 
                                         <div style= {{ margin: "0 auto" }}>
+                                            <RaisedButton label="Download" primary={true} style={RaisedButtonStyle} onClick={(event) => this.exportData()}/>
                                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                         </div> 
                                     </div>
@@ -301,9 +307,10 @@ const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveData: retrieveData,
       onUpdateData: updateDouble,
-    //   onDeleteParticipation: deleteParticipation,
+      onDeleteParticipation: deleteParticipation,
       onUpdateLoadingBar: updateLoadingBar,
-    //   onUpdateDeleteLoadingBar: updateDeleteLoadingBar
+      onUpdateDeleteLoadingBar: updateDeleteLoadingBar,
+      onExportData: exportData
     }, dispatch);
 };
 
