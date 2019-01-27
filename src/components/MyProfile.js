@@ -81,8 +81,6 @@ class MyProfile extends Component {
                 } else {
                     editIcon = <td></td>
                 }
-
-                console.log(society["position"]);
                 
                 rows.push(
                     <tr>

@@ -88,10 +88,6 @@ class CreateEvent extends Component {
   }
 
   handleClick(event) {
-    // console.log("start date: " + moment(this.state.startDate).format("hh:mm a"));
-    // console.log("end date: " + moment(this.state.selectedStartDate).format("YYYY-MM-DD hh:mm:ss"));
-    // console.log("event category: " + this.state.eventCategory);
-    // console.log("softskill category: " + this.state.softskillCategory);
     const { name, desc, venue, chairperson, contact, logoUrl } = this.state;
     
     if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' || logoUrl == '' ) {

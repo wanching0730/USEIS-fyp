@@ -46,14 +46,10 @@ class RegisterBooth extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    // console.log("this props: " + JSON.stringify(this.props.allBooths));
-    // console.log("next props: " + JSON.stringify(nextProps.allBooths));
     if((nextProps.allBooths != this.props.allBooths) && (nextProps.allBooths != null)) {
       for(var i = 0; i < nextProps.allBooths.length; i++) {
         let booth = nextProps.allBooths[i];
         var newSeatMap = this.state.seatMap;
-        // console.log(booth["row"] + " " + booth["seat"]);
-        // console.log(newSeatMap[booth["row"]][booth["seat"]]);
         
         newSeatMap[booth["row"]][booth["seat"]]["isReserved"] = true;
         this.setState({seatMap: newSeatMap});
@@ -82,8 +78,6 @@ class RegisterBooth extends Component {
       name: this.props.params.type == "society" ? this.props.location.state["societyName"] : this.props.location.state["eventName"],
       selectedRow: this.state.selectedRow,
       selectedSeat: this.state.selectedSeat
-      // previousRow: this.state.currentRow,
-      // previousSeat: this.state.currentSeat
     }
 
     this.props.onUpdateDouble("booth", data, data["name"]);
@@ -95,9 +89,6 @@ class RegisterBooth extends Component {
   }
 
   render() {
-    console.log(this.props.loading);
-    // console.log(this.state.selectedRow + "," + this.state.selectedSeat);
-
     const { RaisedButtonStyle } = styles;
     var breadCrumb;
 

@@ -27,9 +27,7 @@ class CreateProfile extends Component {
       logoUrl: ''
     }
 
-    console.log("society id params: " + this.props.params.societyId);
     if(this.props.params.societyId) {
-      console.log("run");
       this.props.onUpdateRetrieveLoadingBar();
       this.props.onRetrieveData("society", this.props.params.societyId);
     }
@@ -94,9 +92,6 @@ class CreateProfile extends Component {
   }
 
   render() {
-    console.log("create load: " + this.props.createLoading);
-    console.log("retrieve load: " + this.props.retrieveLoading);
-    
     const { RaisedButtonStyle } = styles;
 
     const societyCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},

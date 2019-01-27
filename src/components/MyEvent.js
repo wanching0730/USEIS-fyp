@@ -62,7 +62,6 @@ class MyEvent extends Component {
             let list = this.state.userEvents;
             for(var i = 0; i < list.length; i++) {
                 let item = list[i];
-                console.log("student id to delete: " + item["studentId"]);
                 if(item["eventId"] == data["eventId"]) {
                     var index = list.indexOf(item);
                     list.splice(index, 1);

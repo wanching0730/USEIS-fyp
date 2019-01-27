@@ -185,7 +185,6 @@ class ManageParticipant extends Component {
     }
 
     render() {
-        console.log("loading in render: " + this.props.deleteLoading);
         const { RaisedButtonStyle } = styles;
         let studentParticipants = this.state.studentParticipant;
         let staffParticipants = this.state.staffParticipant;

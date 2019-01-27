@@ -57,7 +57,6 @@ class ManageCrew extends Component {
     updateList(data) {
         if(this.state.eventCrew != null) {
             let list = this.state.eventCrew;
-            console.log(this.state.eventCrew);
             for(var i = 0; i < list.length; i++) {
                 let item = list[i];
                 if(item["studentId"] == data["id"] && item["eventId"] == data["eventId"]) {
@@ -66,7 +65,6 @@ class ManageCrew extends Component {
                 }
             }
             this.setState({ eventCrew: list });
-            console.log(this.state.eventCrew);
         }
     }
 
@@ -153,8 +151,6 @@ class ManageCrew extends Component {
     }
 
     render() {
-        console.log(this.state.eventCrew);
-        
         const { RaisedButtonStyle } = styles;
         let eventCrew = this.state.eventCrew;
         var message = <div></div>;
