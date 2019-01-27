@@ -10,6 +10,10 @@ export function verifyUser(data) {
     });
 }
 
+export function downloadData(type, id) {
+    return fetch(mainApiRoute + `/export/` + type + `/` + id);
+}
+
 export function getData(type, id) {
     return fetch(mainApiRoute + `/` + type + `/` + id);
 }

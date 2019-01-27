@@ -1,4 +1,4 @@
-import { getData, getAllData, getDataWithUserId, searchAllData } from '../utils/http_function';
+import { getData, getAllData, getDataWithUserId, searchAllData, downloadData } from '../utils/http_function';
 
 import {
     UPDATE_RETRIEVE_LOADINGBAR,
@@ -216,6 +216,14 @@ export function updateLoadingBar() {
 export function updateEndLoadingBar() {
     return function (dispatch) {
         dispatch(updateEndLoadingBarSuccessful());
+    }
+}
+
+export function exportData(type, id) {
+    return function() {
+        return downloadData(type, id).then(result => result.json()).then(reply => {
+            console.log(reply);
+        });
     }
 }
 

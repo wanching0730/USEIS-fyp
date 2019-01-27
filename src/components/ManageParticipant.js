@@ -14,7 +14,7 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData, updateLoadingBar } from '../actions/data-action';
+import { retrieveData, updateLoadingBar, exportData } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
 import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
@@ -35,6 +35,7 @@ class ManageParticipant extends Component {
         this.handleReject = this.handleReject.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.updateList = this.updateList.bind(this);
+        this.exportData = this.exportData.bind(this);
     }
 
     componentDidMount() {
@@ -184,6 +185,9 @@ class ManageParticipant extends Component {
         })
     }
 
+    exportData() {
+        this.props.onExportData("eventParticipant", this.props.params.eventId);
+    }
     render() {
         const { RaisedButtonStyle } = styles;
         let studentParticipants = this.state.studentParticipant;
@@ -409,6 +413,7 @@ class ManageParticipant extends Component {
                                 ]}
 
                                 <div style= {{ textAlign: "center", marginTop: "40px" }}>
+                                    <RaisedButton label="Download" primary={true} style={RaisedButtonStyle} onClick={(event) => this.exportData()}/>
                                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                 </div>    
                             </MuiThemeProvider>
@@ -442,7 +447,8 @@ const mapActionsToProps = (dispatch, props) => {
         onUpdateData: updateDouble,
         onDeleteParticipation: deleteParticipation,
         onUpdateLoadingBar: updateLoadingBar,
-        onUpdateDeleteLoadingBar: updateDeleteLoadingBar
+        onUpdateDeleteLoadingBar: updateDeleteLoadingBar,
+        onExportData: exportData
     }, dispatch);
 };
 
