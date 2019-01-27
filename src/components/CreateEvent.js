@@ -39,7 +39,8 @@ class CreateEvent extends Component {
       totalCrew: 0,
       selectedStartDate: moment(),
       selectedEndDate: moment(),
-      position: 'Chairperson,Vice Chairperson,'
+      position: 'Chairperson,Vice Chairperson,',
+      userId: this.props.userId
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -378,6 +379,7 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
   return {
+    userId: state.auth.id,
     createdEventId: state.create.createdEventId,
     event: state.data.event,
     loading: state.create.loading
