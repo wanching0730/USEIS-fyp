@@ -3,7 +3,7 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import RaisedButton from 'material-ui/RaisedButton';
+import { RaisedButton, Checkbox } from 'material-ui';
 import { Link } from 'react-router';
 import moment from "moment";
 import DatePicker from "react-datepicker";
@@ -38,7 +38,8 @@ class CreateEvent extends Component {
       totalParticipant: 0,
       totalCrew: 0,
       selectedStartDate: moment(),
-      selectedEndDate: moment()
+      selectedEndDate: moment(),
+      position: 'Chairperson,Vice Chairperson,'
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -292,6 +293,64 @@ class CreateEvent extends Component {
                             <label>Total amount of Crew</label>
                             <input type="text" value={this.state.totalCrew} onChange={(event) => {this.setState({totalCrew:event.target.value})}}/>
                             <br/>
+                      </div>
+
+                      <div class="section"><span>7</span>Crew Positions</div>
+                        <div class="inner-wrap">
+                          <label>Secretary</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Secretary,'}); 
+                            }}
+                          /> 
+                          <label>Vice Secretary</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Secretary,'}); 
+                            }}
+                          /> 
+                          <label>Vice Treasurer</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Treasurer,'}); 
+                            }}
+                          /> 
+                          <label>Programme HOD</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Programme HOD,'}); 
+                            }}
+                          /> 
+                           <label>Publicity HOD</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Programme HOD,'}); 
+                            }}
+                          /> 
+                           <label>Logistics HOD</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Programme HOD,'}); 
+                            }}
+                          /> 
+                           <label>Decoration HOD</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Programme HOD,'}); 
+                            }}
+                          /> 
+                           <label>Editorial HOD</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Programme HOD,'}); 
+                            }}
+                          /> 
+                           <label>Technical HOD</label>
+                          <Checkbox onCheck={(e, checked) => {
+                              if(checked)
+                                this.setState({position: this.state.position + 'Programme HOD,'}); 
+                            }}
+                          /> 
                       </div>
 
                       <div class="button-section">

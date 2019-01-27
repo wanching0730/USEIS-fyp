@@ -82,9 +82,9 @@ class RegisterCrew extends Component {
   render() {
 
     const { RaisedButtonStyle } = styles;
-    const positions = [{value:'Secretary', name:'Secretary'}, {value:'Treasurer', name:'Treasurer'}, {value:'Programme', name:'Programme HOD'},
-    {value:'Publicity', name:'Publicity HOD'}, {value:'Logistics', name:'Logistics HOD'}, {value:'Decoration', name:'Decoration HOD'},
-    {value:'Editorial', name:'Editorial HOD'}, {value:'Technical', name:'Technical HOD'}];
+    const positions = [{value:'Secretary', name:'Secretary'}, {value:'Treasurer', name:'Treasurer'}, {value:'Programme HOD', name:'Programme HOD'},
+    {value:'Publicity HOD', name:'Publicity HOD'}, {value:'Logistics HOD', name:'Logistics HOD'}, {value:'Decoration HOD', name:'Decoration HOD'},
+    {value:'Editorial HOD', name:'Editorial HOD'}, {value:'Technical HOD', name:'Technical HOD'}];
     
     return (
       <div>

@@ -134,7 +134,7 @@ class RegisterEvent extends Component {
                           value={ this.state.emailNoti || false }
                           onToggle={(value) => {
                               this.setState({
-                              emailNoti: !value,
+                                emailNoti: !value,
                               })
                           }} />
                         <br/>
@@ -143,7 +143,7 @@ class RegisterEvent extends Component {
                             value={ this.state.webNoti || false }
                             onToggle={(value) => {
                                 this.setState({
-                                webNoti: !value,
+                                  webNoti: !value,
                                 })
                             }} />
                         <br/>
