@@ -35,6 +35,8 @@ class CreateEvent extends Component {
       chairperson: '',
       contact: '',
       logoUrl: '',
+      totalParticipant: 0,
+      totalCrew: 0,
       selectedStartDate: moment(),
       selectedEndDate: moment()
     }
@@ -66,6 +68,8 @@ class CreateEvent extends Component {
         chairperson: event["chairperson"], 
         contact: event["contact"],
         logoUrl: event["logoUrl"],
+        totalParticipant: event["totalParticipant"],
+        totalCrew: event["totalCrew"],
         boothId: event["boothId"],
         selectedStartDate: moment(event["startDate"]),
         selectedEndDate: moment(event["endDate"])
@@ -277,6 +281,17 @@ class CreateEvent extends Component {
                           <div class="inner-wrap">
                           <label>Society Logo</label>
                           <input type="text" value={this.state.logoUrl} onChange={(event) => {this.setState({logoUrl:event.target.value})}}/>
+                          <br/>
+                      </div>
+
+                      <div class="section"><span>7</span>Availability</div>
+                          <div class="inner-wrap">
+                            <label>Total amount of Participants</label>
+                            <input type="text" value={this.state.totalParticipant} onChange={(event) => {this.setState({totalParticipant:event.target.value})}}/>
+                            <br/>
+                            <label>Total amount of Crew</label>
+                            <input type="text" value={this.state.totalCrew} onChange={(event) => {this.setState({totalCrew:event.target.value})}}/>
+                            <br/>
                       </div>
 
                       <div class="button-section">
