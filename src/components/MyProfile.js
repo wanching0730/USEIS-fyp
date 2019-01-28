@@ -49,7 +49,7 @@ class MyProfile extends Component {
             for(var i = 0; i < societies.length; i++) {
                 var events = [];
                 let society = societies[i];
-                var editIcon;
+                var editIcon, status;
 
                 let toSociety = {
                     pathname: "/perSociety/" + society["societyId"],
@@ -82,6 +82,13 @@ class MyProfile extends Component {
                     editIcon = <td></td>
                 }
                 
+                if(society["memberStatus"] === 0)  
+                    status = <td>Pending</td>;
+                else if(society["memberStatus"] === 1)
+                    status = <td>Approved</td>;
+                else if(society["memberStatus"] === 2)
+                    status = <td style={{color: "red"}}>Rejected</td>;
+
                 rows.push(
                     <tr>
                         <td>{i+1}</td>
@@ -92,6 +99,7 @@ class MyProfile extends Component {
                                 moment(society["joinDate"]).format("DD/MM/YYYY") : society["joinDate"]}
                         </td>
                         <td>{society["position"]}</td>
+                        {status}
                         <td>{events}</td>
                         {editIcon}
                     </tr>
@@ -132,6 +140,7 @@ class MyProfile extends Component {
                                                     <th>Society</th>  
                                                     <th>Joined Date</th>
                                                     <th>Position</th>
+                                                    <th>Status</th>
                                                     <th>Events</th>   
                                                     <th>Action</th>           
                                                 </tr>
