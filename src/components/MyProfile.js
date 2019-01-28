@@ -57,7 +57,7 @@ class MyProfile extends Component {
             let list = this.state.societies;
             for(var i = 0; i < list.length; i++) {
                 let item = list[i];
-                if(item["societyId"] == data["societyId"]) {
+                if(item["societyId"] == data["societyId"] && this.props.userId == data["id"]) {
                     var index = list.indexOf(item);
                     list.splice(index, 1);
                 }

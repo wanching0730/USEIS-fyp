@@ -42,7 +42,7 @@ class ManageCrew extends Component {
         window.scrollTo(0, 0);
 
         const socket = openSocket('http://localhost:5000');
-        socket.on('updateParticipation', this.updateList);
+        socket.on('updateManage', this.updateList);
     }
 
     componentWillReceiveProps(nextProps){

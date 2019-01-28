@@ -192,7 +192,7 @@ export function updateDouble(type, postData, name) {
                             onClick: () => {
                                 if(type === "crew" || type === "rejectCrew") {
                                     browserHistory.push({pathname:`/manageCrew/` + reply, state: {eventName: name}});
-                                } else if(type === "member") {
+                                } else if(type === "member" || type === "rejectStudentSociety") {
                                     browserHistory.push({pathname:`/manageMember/` + reply, state: {societyName: name}});
                                 } else if(type === "studentParticipant" || type === "staffParticipant" || type === "rejectStudentEvent" || type === "rejectStaffEvent") {
 

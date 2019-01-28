@@ -42,7 +42,7 @@ class ManageParticipant extends Component {
         window.scrollTo(0, 0);
 
         const socket = openSocket('http://localhost:5000');
-        socket.on('updateParticipation', this.updateList);
+        socket.on('updateManage', this.updateList);
     }
 
     componentWillReceiveProps(nextProps){
@@ -68,7 +68,7 @@ class ManageParticipant extends Component {
                 let list = this.state.studentParticipant;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["eventId"] == data["eventId"]) {
+                    if(item["id"] == data["id"] && item["eventId"] == data["eventId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
@@ -80,7 +80,7 @@ class ManageParticipant extends Component {
                 let list = this.state.staffParticipant;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["eventId"] == data["eventId"]) {
+                    if(item["id"] == data["id"] && item["eventId"] == data["eventId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }

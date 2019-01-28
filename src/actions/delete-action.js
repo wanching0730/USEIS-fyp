@@ -72,7 +72,7 @@ export function deleteParticipation(type, id, eventId) {
                 dispatch(deleteParticipationSuccessful());
                 confirmAlert({
                     title: 'Message',
-                    message: 'Event participation has been deleted successfully',
+                    message: 'Participation has been deleted successfully',
                     buttons: [
                         {
                             label: 'Close',
