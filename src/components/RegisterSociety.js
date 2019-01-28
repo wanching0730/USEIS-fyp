@@ -12,7 +12,8 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create, updatePostLoadingBar } from '../actions/post-action';
+import { create, updatePostLoadingBar, updateDouble } from '../actions/post-action';
+import { retrieveDataWithUserId } from '../actions/data-action';
 
 class RegisterSociety extends Component {
 
@@ -29,6 +30,8 @@ class RegisterSociety extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.props.onRetrieveDataWithUserId("checkIsSocietyRegistered", this.props.params.societyId, this.props.id);
   }
 
   handleClick(event) {
@@ -44,7 +47,14 @@ class RegisterSociety extends Component {
       emailNoti: this.state.emailNoti,
       webNoti: this.state.webNoti
     };
-    this.props.onCreate("registerSociety", data);
+
+    console.log(this.props.isRegistered);
+
+    if(!this.props.isRegistered)
+      this.props.onCreate("registerSociety", data);
+    else
+      this.props.onUpdateData("resubmitMemberRegistration", data, this.props.location.state["societyName"]);
+    
   }
 
   handleChange(event) {
@@ -52,6 +62,7 @@ class RegisterSociety extends Component {
   }
   
   render() {
+    console.log(this.props.isRegistered);
 
     const { RaisedButtonStyle } = styles;
 
@@ -133,14 +144,17 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     id: state.auth.id,
-    loading: state.create.loading
+    loading: state.create.loading,
+    isRegistered: state.data.isRegistered
   };
 };
 
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
-    onUpdateLoadingBar: updatePostLoadingBar
+    onUpdateLoadingBar: updatePostLoadingBar,
+    onRetrieveDataWithUserId: retrieveDataWithUserId,
+    onUpdateData: updateDouble
   }, dispatch);
 };
 

@@ -273,12 +273,14 @@ export function retrieveDataWithUserId(type, id, userId) {
                 }
                 console.log(event);
                 dispatch(retrieveSingleDataSuccessful("event", event));
-            } else if(type === "checkIsStudentRegistered" || type === "checkIsStaffRegistered") {
+            } else if(type === "checkIsStudentRegistered" || type === "checkIsStaffRegistered" || type === "checkIsSocietyRegistered") {
                 console.log(reply.length);
                 if(reply.length === 0) 
                     var isRegistered = false;
                 else 
                     var isRegistered = true;
+
+                console.log(isRegistered);
 
                 dispatch(retrieveSingleDataSuccessful("checkIsRegistered", isRegistered));
             }
