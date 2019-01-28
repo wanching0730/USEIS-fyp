@@ -284,7 +284,7 @@ class MyEvent extends Component {
                                                 <th>Status</th>
                                                 <th>Vegetarian</th>
                                                 <th>Rating Status</th>    
-                                                <th>Actions</th>           
+                                                <th>Action</th>           
                                             </tr>
                                         </thead>
 
