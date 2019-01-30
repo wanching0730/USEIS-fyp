@@ -24,7 +24,8 @@ class CreateProfile extends Component {
       category: 'dance',
       vision: '',
       mission: '',
-      logoUrl: ''
+      logoUrl: '',
+      userId: this.props.userId
     }
 
     if(this.props.params.societyId) {
@@ -197,6 +198,7 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
   return {
+    userId: state.auth.id,
     createdSocietyId: state.create.createdSocietyId,
     society: state.data.society,
     createLoading: state.create.loading,

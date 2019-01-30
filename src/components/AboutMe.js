@@ -29,7 +29,7 @@ class AboutMe extends Component {
                     <div style={{ margin: 20 }}>
                         <Breadcrumb>
                             <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>My Events</BreadcrumbItem>
+                            <BreadcrumbItem active>About Me</BreadcrumbItem>
                         </Breadcrumb>
                     </div>
 
@@ -45,7 +45,7 @@ class AboutMe extends Component {
                                         </tr>
                                         <tr> 
                                             <th><i class="fa fa-id-card"></i>   StudentID</th>
-                                            <td>{user["username"]}</td>
+                                            <td>{user["officialId"]}</td>
                                         </tr>
                                         <tr>
                                             <th><i class="fa fa-envelope-open"></i>   Email</th> 
