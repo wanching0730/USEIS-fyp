@@ -41,7 +41,7 @@ class ManageMember extends Component {
         window.scrollTo(0, 0);
 
         const socket = openSocket('http://localhost:5000');
-        socket.on('updateManageMember', this.updateList);
+        socket.on('updateManage', this.updateList);
     }
 
     componentWillReceiveProps(nextProps){
@@ -61,6 +61,8 @@ class ManageMember extends Component {
                 let list = this.state.societyMembers;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
+                    console.log(item["studentId"]);
+                    console.log(data["id"]);
                     if(item["studentId"] == data["id"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
