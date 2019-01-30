@@ -26,7 +26,6 @@ class MyEvent extends Component {
         super(props);
 
         this.state = {
-            eventId: -1,
             userEvents: null
         };
 
@@ -82,7 +81,6 @@ class MyEvent extends Component {
 
     handleCancelCrew(event) {
         let eventId = event.target.value;
-        this.setState({eventId: eventId});
 
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -92,9 +90,7 @@ class MyEvent extends Component {
                             <h2>Cancel Crew Registration Confirmation</h2>
                             <p>Are you sure to cancel joining as crew for this event?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {
-                                        // this.props.onUpdateDeleteLoadingBar();
-                                        // this.props.onDeleteParticipation("eventCrew", this.props.userId, this.state.eventId);
-
+                                       
                                         let data = {
                                             id: this.props.userId,
                                             eventId: eventId
@@ -116,7 +112,6 @@ class MyEvent extends Component {
 
     handleCancelEvent(event) {
         let eventId = event.target.value;
-        this.setState({eventId: eventId});
 
         setTimeout(() => {
             confirmAlert({
@@ -127,7 +122,6 @@ class MyEvent extends Component {
                                 <h2>Cancel Crew Participation Confirmation</h2>
                                 <p>Are you sure to cancel participating this event?</p>
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
-                                            //this.props.onUpdateDeleteLoadingBar();
 
                                             let data = {
                                                 id: this.props.userId,
@@ -136,10 +130,8 @@ class MyEvent extends Component {
 
                                             if(this.props.userName.substring(0,2) === "00")
                                                 this.props.onUpdateData("cancelStaffEvent", data, ""); 
-                                                // this.props.onDeleteParticipation("staffEvent", this.props.userId, this.state.eventId);
                                             else 
                                                 this.props.onUpdateData("cancelStudentEvent", data, ""); 
-                                                // this.props.onDeleteParticipation("studentEvent", this.props.userId, this.state.eventId);
                 
                                             onClose();
                                         }
