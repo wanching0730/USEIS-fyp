@@ -17,6 +17,7 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateDouble } from '../actions/post-action';
+import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 import { retrieveAll, updateLoadingBar } from '../actions/data-action';
 
 class MyProfile extends Component {
@@ -33,6 +34,7 @@ class MyProfile extends Component {
 
         this.updateList = this.updateList.bind(this);
         this.handleCancelSociety = this.handleCancelSociety.bind(this);
+        this.handleRemoveSociety = this.handleRemoveSociety.bind(this);
     }
 
     componentDidMount() {
@@ -53,16 +55,22 @@ class MyProfile extends Component {
     }
 
     updateList(data) {
-        if(this.state.societies != null) {
-            let list = this.state.societies;
-            for(var i = 0; i < list.length; i++) {
-                let item = list[i];
-                if(item["societyId"] == data["societyId"] && this.props.userId == data["id"]) {
-                    var index = list.indexOf(item);
-                    list.splice(index, 1);
+        if(data["type"] === "removeSociety") {
+            if(this.state.societies != null) {
+                let list = this.state.societies;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+                    console.log(item["societyId"]);
+                    console.log(data["societyId"]);
+                    console.log(data["id"]);
+                    console.log(this.props.userId);
+                    if(item["societyId"] == data["societyId"] && this.props.userId == data["id"]) {
+                        var index = list.indexOf(item);
+                        list.splice(index, 1);
+                    }
                 }
+                this.setState({ societies: list });
             }
-            this.setState({ societies: list });
         }
     }
 
@@ -93,6 +101,35 @@ class MyProfile extends Component {
                                             }
 
                                             this.props.onUpdateData("cancelStudentSociety", data, ""); 
+
+                                            onClose();
+                                        }
+                                    }/>
+                                    &nbsp;&nbsp;&nbsp;
+                                <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                            </div>
+                        </MuiThemeProvider>
+                    )
+                }
+            })
+        }, 2000);
+    }
+
+    handleRemoveSociety(event) {
+        let societyId = event.target.value;
+
+        setTimeout(() => {
+            confirmAlert({
+                customUI: ({ onClose }) => {
+                    return (
+                        <MuiThemeProvider>
+                            <div className='custom-alert'>
+                                <h2>Remove Society Registration Confirmation</h2>
+                                <p>Are you sure to remove registration of this society?</p>
+                                <RaisedButton label="Yes" primary={true} onClick={() => {
+
+                                            this.props.onUpdateDeleteLoadingBar();
+                                            this.props.onDeleteParticipation("studentSociety", this.props.userId, societyId);
 
                                             onClose();
                                         }
@@ -141,12 +178,21 @@ class MyProfile extends Component {
                     }
 
                     if(society["memberStatus"] != 1) {
-                        action = 
-                            <td>
-                                <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel society registration</span>}>
-                                    <li value={society["societyId"]} onClick={(event) => this.handleCancelSociety(event)} className="fa fa-trash"></li>
-                                </Tooltip>
-                            </td>;
+                        if(society["memberStatus"] != 2) {
+                            action = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel society registration</span>}>
+                                        <li value={society["societyId"]} onClick={(event) => this.handleCancelSociety(event)} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>;
+                        } else {
+                            action = 
+                                <td>
+                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Remove society registration</span>}>
+                                        <li value={society["societyId"]} onClick={(event) => this.handleRemoveSociety(event)} className="fa fa-trash"></li>
+                                    </Tooltip>
+                                </td>;
+                        }
                     } else {
                         action = <td>-</td>;
                     }
@@ -274,7 +320,9 @@ const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveAll: retrieveAll,
       onUpdateLoadingBar: updateLoadingBar,
-      onUpdateData: updateDouble
+      onUpdateData: updateDouble,
+      onDeleteParticipation: deleteParticipation,
+      onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 

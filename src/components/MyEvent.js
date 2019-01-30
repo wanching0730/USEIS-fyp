@@ -160,11 +160,6 @@ class MyEvent extends Component {
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
                                             this.props.onUpdateDeleteLoadingBar();
 
-                                            let data = {
-                                                id: this.props.userId,
-                                                eventId: eventId
-                                            }
-
                                             if(this.props.userName.substring(0,2) === "00")
                                                 this.props.onDeleteParticipation("staffEvent", this.props.userId, eventId);
                                             else 
