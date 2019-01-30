@@ -16,7 +16,7 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
+import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
 
@@ -39,6 +39,7 @@ class MyEvent extends Component {
 
         this.handleCancelEvent = this.handleCancelEvent.bind(this);
         this.handleCancelCrew = this.handleCancelCrew.bind(this);
+        this.handleRemoveEvent = this.handleRemoveEvent.bind(this);
         this.updateList = this.updateList.bind(this);
     }
 
@@ -152,6 +153,43 @@ class MyEvent extends Component {
             })
         }, 2000);
     }
+
+    handleRemoveEvent(event) {
+        let eventId = event.target.value;
+
+        setTimeout(() => {
+            confirmAlert({
+                customUI: ({ onClose }) => {
+                    return (
+                        <MuiThemeProvider>
+                            <div className='custom-alert'>
+                                <h2>Rmeove Crew Participation Confirmation</h2>
+                                <p>Are you sure to remove participation in this event?</p>
+                                <RaisedButton label="Yes" primary={true} onClick={() => {
+                                            this.props.onUpdateDeleteLoadingBar();
+
+                                            let data = {
+                                                id: this.props.userId,
+                                                eventId: eventId
+                                            }
+
+                                            if(this.props.userName.substring(0,2) === "00")
+                                                this.props.onDeleteParticipation("staffEvent", this.props.userId, eventId);
+                                            else 
+                                                this.props.onDeleteParticipation("studentEvent", this.props.userId, eventId);
+                
+                                            onClose();
+                                        }
+                                    }/>
+                                    &nbsp;&nbsp;&nbsp;
+                                <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                            </div>
+                        </MuiThemeProvider>
+                    )
+                }
+            })
+        }, 2000);
+    }
     
     render() {
         const { imageStyle, RaisedButtonStyle } = styles;
@@ -198,20 +236,37 @@ class MyEvent extends Component {
                         
 
                         if(event["status"] != 1) {
-                            if(event["position"] === "Participant") 
-                                action = 
-                                    <td>
-                                        <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
-                                            <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
-                                        </Tooltip>
-                                    </td>;
-                            else 
-                                action = 
-                                    <td>
-                                        <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
-                                            <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-trash"></li>
-                                        </Tooltip>
-                                    </td>;
+                            if(event["status"] != 2) {
+                                if(event["position"] === "Participant") 
+                                    action = 
+                                        <td>
+                                            <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
+                                                <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
+                                            </Tooltip>
+                                        </td>;
+                                else 
+                                    action = 
+                                        <td>
+                                            <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
+                                                <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-trash"></li>
+                                            </Tooltip>
+                                        </td>;
+                            } else {
+                                if(event["position"] === "Participant") 
+                                    action = 
+                                        <td>
+                                            <Tooltip placement="left" trigger={['hover']} overlay={<span>Remove event registration</span>}>
+                                                <li value={event["eventId"]} onClick={(event) => this.handleRemoveEvent(event)} className="fa fa-trash"></li>
+                                            </Tooltip>
+                                        </td>;
+                                else 
+                                    action = 
+                                        <td>
+                                            <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove crew registration</span>}>
+                                                <li value={event["eventId"]} onClick={(event) => this.handleRemoveEvent(event)} className="fa fa-trash"></li>
+                                            </Tooltip>
+                                        </td>;
+                            }
                         } else {
                             action = <td>-</td>;
                         }
@@ -333,10 +388,10 @@ const mapStateToProps = (state, props) => {
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
         onRetrieveData: retrieveData,
-        // onDeleteParticipation: deleteParticipation,
+        onDeleteParticipation: deleteParticipation,
         onUpdateLoadingBar: updateLoadingBar,
-        onUpdateData: updateDouble
-        // onUpdateDeleteLoadingBar: updateDeleteLoadingBar
+        onUpdateData: updateDouble,
+        onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 
