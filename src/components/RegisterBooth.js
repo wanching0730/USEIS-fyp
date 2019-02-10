@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import Modal from 'react-responsive-modal';
 import openSocket from 'socket.io-client';
 import '../style/main.scss';
 import '../style/main.css';
@@ -32,7 +33,7 @@ class RegisterBooth extends Component {
     // };
 
     this.state = {
-      seatMap: [], selectedRow: -1, selectedSeat: -1
+      seatMap: [], selectedRow: -1, selectedSeat: -1, open: false
     };
     
     this.updateList = this.updateList.bind(this);
@@ -91,9 +92,15 @@ class RegisterBooth extends Component {
       //   }));
       // }
     }
-
-    
   }
+
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
 
   updateList(data) {
     var newSeatMap = this.state.seatMap;
@@ -126,10 +133,8 @@ class RegisterBooth extends Component {
   }
 
   render() {
-    console.log("total booth amount: " + this.props.totalBooth);
-    console.log(this.state.seatMap);
-
-    const { RaisedButtonStyle } = styles;
+    const { RaisedButtonStyle, imageStyle } = styles;
+    const { open } = this.state;
     var breadCrumb;
 
     if(this.props.params.type === "society") {
@@ -160,6 +165,13 @@ class RegisterBooth extends Component {
 
           <div style={{ margin: 20 }}>
               {breadCrumb}
+          </div>
+
+          <div>
+            <button onClick={this.onOpenModal}>Open modal</button>
+            <Modal open={open} onClose={this.onCloseModal} center>
+              <img style={imageStyle} src="https://www.roomsketcher.com/wp-content/uploads/2016/10/1-Bedroom-Floor-Plan-600x450.jpg" />
+            </Modal>
           </div>
 
           {this.props.loading || this.props.postLoading ?
@@ -201,10 +213,12 @@ class RegisterBooth extends Component {
 }
 
 const styles = {
+  imageStyle: {
+    height: "400px",
+    width: "400px"
+  },
   RaisedButtonStyle: {
     margin: 15,
-    // display: "flex",
-    // justifyContent: "center"
   }
 }
 
