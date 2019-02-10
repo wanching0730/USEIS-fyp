@@ -168,9 +168,8 @@ class RegisterBooth extends Component {
           </div>
 
           <div>
-            <button onClick={this.onOpenModal}>Open modal</button>
             <Modal open={open} onClose={this.onCloseModal} center>
-              <img style={imageStyle} src="https://www.roomsketcher.com/wp-content/uploads/2016/10/1-Bedroom-Floor-Plan-600x450.jpg" />
+              <img id="floorPlanImg" src="https://www.roomsketcher.com/wp-content/uploads/2016/10/1-Bedroom-Floor-Plan-600x450.jpg" />
             </Modal>
           </div>
 
@@ -187,7 +186,8 @@ class RegisterBooth extends Component {
                 </div>
 
                 <div class="button-section">
-                  <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSubmit(event)}/>
+                  <RaisedButton label="Submit" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSubmit(event)}/>
+                  <RaisedButton label="Floor Plan" primary={true} style={RaisedButtonStyle} onClick={this.onOpenModal}/>
                   <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                 </div>
               </div>
@@ -214,8 +214,8 @@ class RegisterBooth extends Component {
 
 const styles = {
   imageStyle: {
-    height: "400px",
-    width: "400px"
+    height: "350px",
+    width: "350px"
   },
   RaisedButtonStyle: {
     margin: 15,

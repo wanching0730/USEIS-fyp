@@ -190,6 +190,11 @@ textarea {
     text-align: right;
 }
 
+#floorPlanImg {
+    height: 400px;
+    width: 400px;
+}
+
 @media screen and (max-width: 600px) {
     .form-style-10{
         width:95%;
@@ -198,6 +203,11 @@ textarea {
 
     textarea {
         width: 250px;
+    }
+
+    #floorPlanImg {
+        height: 340px;
+        width: 340px;
     }
 }
 
@@ -231,6 +241,11 @@ textarea {
     textarea {
         width: 200px;
     }
+
+    #floorPlanImg {
+        height: 310px;
+        width: 310px;
+    }
 }
 
   @media (max-width: 320px) {
@@ -257,6 +272,11 @@ textarea {
 
     textarea {
         width: 150px;
+    }
+
+    #floorPlanImg {
+        height: 250px;
+        width: 250px;
     }
 }
 
