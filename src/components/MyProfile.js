@@ -60,10 +60,6 @@ class MyProfile extends Component {
                 let list = this.state.societies;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    console.log(item["societyId"]);
-                    console.log(data["societyId"]);
-                    console.log(data["id"]);
-                    console.log(this.props.userId);
                     if(item["societyId"] == data["societyId"] && this.props.userId == data["id"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);

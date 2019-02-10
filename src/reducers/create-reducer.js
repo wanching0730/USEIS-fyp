@@ -4,6 +4,7 @@ import {
     CREATE_EVENT,
     CREATE_NEWSFEED,
     CREATE_RATING,
+    CREATE,
     REGISTER,
     UPDATE_SOCIETY,
     UPDATE_EVENT
@@ -30,24 +31,28 @@ export default function createReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 loading: payload.loading
             });
-        case CREATE_SOCIETY: 
+        // case CREATE_SOCIETY: 
+        //     return Object.assign({}, state, {
+        //         createdSocietyId: payload.createdSocietyId,
+        //         loading: payload.loading
+        //     });
+        // case CREATE_EVENT:
+        //     return Object.assign({}, state, {
+        //         createdEventId: payload.createdEventId,
+        //         loading: payload.loading
+        //     });
+        // case CREATE_NEWSFEED:
+        //     return Object.assign({}, state, {
+        //         createdNewsfeedId: payload.createdNewsfeedId,
+        //         loading: payload.loading
+        //     });
+        // case CREATE_RATING:
+        //     return Object.assign({}, state, {
+        //         createdRatingId: payload.createdRatingId,
+        //         loading: payload.loading
+        //     });
+        case CREATE: 
             return Object.assign({}, state, {
-                createdSocietyId: payload.createdSocietyId,
-                loading: payload.loading
-            });
-        case CREATE_EVENT:
-            return Object.assign({}, state, {
-                createdEventId: payload.createdEventId,
-                loading: payload.loading
-            });
-        case CREATE_NEWSFEED:
-            return Object.assign({}, state, {
-                createdNewsfeedId: payload.createdNewsfeedId,
-                loading: payload.loading
-            });
-        case CREATE_RATING:
-            return Object.assign({}, state, {
-                createdRatingId: payload.createdRatingId,
                 loading: payload.loading
             });
         case REGISTER:

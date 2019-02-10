@@ -4,10 +4,11 @@ import { confirmAlert } from 'react-confirm-alert';
 import '../style/alert.css';
 import {
     UPDATE_POST_LOADINGBAR,
-    CREATE_SOCIETY,
-    CREATE_EVENT,
-    CREATE_NEWSFEED,
-    CREATE_RATING,
+    // CREATE_SOCIETY,
+    // CREATE_EVENT,
+    // CREATE_NEWSFEED,
+    // CREATE_RATING,
+    CREATE,
     REGISTER,
     UPDATE_SOCIETY,
     UPDATE_EVENT
@@ -22,45 +23,54 @@ export function updatePostLoadingBarSuccessful() {
     };
 }
 
-export function createSocietySuccessful(societyId) {
+export function createSuccessfully() {
     return {
-        type: CREATE_SOCIETY,
+        type: CREATE,
         payload: {
-            createdSocietyId: societyId,
             loading: false
         }
     }
 }
 
-export function createEventSuccessful(eventId) {
-    return {
-        type: CREATE_EVENT,
-        payload: {
-            createdEventId: eventId,
-            loading: false
-        }
-    }
-}
+// export function createSocietySuccessful(societyId) {
+//     return {
+//         type: CREATE_SOCIETY,
+//         payload: {
+//             createdSocietyId: societyId,
+//             loading: false
+//         }
+//     }
+// }
 
-export function createNewsfeedSuccessful(newsfeedId) {
-    return {
-        type: CREATE_NEWSFEED,
-        payload: {
-            createdNewsfeedId: newsfeedId,
-            loading: false
-        }
-    }
-}
+// export function createEventSuccessful(eventId) {
+//     return {
+//         type: CREATE_EVENT,
+//         payload: {
+//             createdEventId: eventId,
+//             loading: false
+//         }
+//     }
+// }
 
-export function createRatingSuccessful(ratingId) {
-    return {
-        type: CREATE_RATING,
-        payload: {
-            createdRatingId: ratingId,
-            loading: false
-        }
-    }
-}
+// export function createNewsfeedSuccessful(newsfeedId) {
+//     return {
+//         type: CREATE_NEWSFEED,
+//         payload: {
+//             createdNewsfeedId: newsfeedId,
+//             loading: false
+//         }
+//     }
+// }
+
+// export function createRatingSuccessful(ratingId) {
+//     return {
+//         type: CREATE_RATING,
+//         payload: {
+//             createdRatingId: ratingId,
+//             loading: false
+//         }
+//     }
+// }
 
 export function registerSuccessfully() {
     return {
@@ -113,16 +123,16 @@ export function create(type, postData) {
                             label: 'Close',
                             onClick: () => {
                                 if(type === "society") {
-                                    dispatch(createSocietySuccessful(reply));
+                                    dispatch(createSuccessfully());
                                     browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["name"]}});
                                 } else if(type === "event") {
-                                    dispatch(createEventSuccessful(reply));
+                                    dispatch(createSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["name"]}});
                                 } else if(type === "newsfeeds") {
-                                    dispatch(createNewsfeedSuccessful(reply));
+                                    dispatch(createSuccessfully());
                                     browserHistory.push('/newsfeeds');
                                 } else if(type === "rating") {
-                                    dispatch(createRatingSuccessful(reply));
+                                    dispatch(createSuccessfully());
                                     browserHistory.push('/myEvents');
                                 } else if(type === "registerSociety") {
                                     dispatch(registerSuccessfully());
@@ -133,7 +143,10 @@ export function create(type, postData) {
                                 } else if(type === "registerEventCrew") {
                                     dispatch(registerSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
-                                }
+                                } else if(type === "totalBooth") {
+                                    dispatch(createSuccessfully());
+                                    browserHistory.push('/myProfile');
+                                } 
                             }
                         }
                     ]

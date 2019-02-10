@@ -146,7 +146,7 @@ class CreateProfile extends Component {
                           <label>Society Name</label>  
                           <input type="text" value={this.state.name} onChange={(event) => {
                             this.setState({name:event.target.value});
-                            }}/>
+                          }}/>
                           <br/>
                           <label>Society Category (Eg: Technology)</label>
                           <select value={this.state.category} onChange={this.handleSocietyCategory}>
