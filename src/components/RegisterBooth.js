@@ -41,7 +41,7 @@ class RegisterBooth extends Component {
 
     this.props.onUpdateLoadingBar();
     this.props.onRetrieveAll("allBooths");
-    this.props.onRetrieveData("totalBooth", 8);
+    this.props.onRetrieveData("totalBooth", 1);
   }
 
   componentDidMount() {

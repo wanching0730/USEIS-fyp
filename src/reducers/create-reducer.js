@@ -1,27 +1,28 @@
 import {
     UPDATE_POST_LOADINGBAR,
-    CREATE_SOCIETY,
-    CREATE_EVENT,
-    CREATE_NEWSFEED,
-    CREATE_RATING,
+    // CREATE_SOCIETY,
+    // CREATE_EVENT,
+    // CREATE_NEWSFEED,
+    // CREATE_RATING,
     CREATE,
     REGISTER,
-    UPDATE_SOCIETY,
-    UPDATE_EVENT
+    UPDATE
+    // UPDATE_SOCIETY,
+    // UPDATE_EVENT
 } from '../constant';
 
 const initialState = {
     loading: false,
 
-    createdSocietyId: null,
-    createdEventId: null,
-    createdNewsfeedId: null,
-    createdRatingId: null,
-    registeredSocietyId: null,
-    registeredEventId: null,
-    registeredCrewEventId: null,
-    updatedSocietyId: null,
-    updatedEventId: null,
+    // createdSocietyId: null,
+    // createdEventId: null,
+    // createdNewsfeedId: null,
+    // createdRatingId: null,
+    // registeredSocietyId: null,
+    // registeredEventId: null,
+    // registeredCrewEventId: null,
+    // updatedSocietyId: null,
+    // updatedEventId: null,
     refresh: false
 };
 
@@ -59,16 +60,20 @@ export default function createReducer(state = initialState, { type, payload }) {
             return Object.assign({}, state, {
                 loading: payload.loading
             });
-        case UPDATE_SOCIETY:
+        case UPDATE:
             return Object.assign({}, state, {
-                updatedSocietyId: payload.updatedSocietyId,
                 loading: payload.loading
             });
-        case UPDATE_EVENT:
-            return Object.assign({}, state, {
-                updatedEventId: payload.updatedEventId,
-                loading: payload.loading
-            });
+        // case UPDATE_SOCIETY:
+        //     return Object.assign({}, state, {
+        //         updatedSocietyId: payload.updatedSocietyId,
+        //         loading: payload.loading
+        //     });
+        // case UPDATE_EVENT:
+        //     return Object.assign({}, state, {
+        //         updatedEventId: payload.updatedEventId,
+        //         loading: payload.loading
+        //     });
         default: 
         // return initial state
             return state;

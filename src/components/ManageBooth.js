@@ -9,7 +9,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create, updatePostLoadingBar } from '../actions/post-action';
+import { update, updatePostLoadingBar } from '../actions/post-action';
 
 class ManageBooth extends Component {
 
@@ -75,7 +75,7 @@ class ManageBooth extends Component {
             }
 
             this.props.onUpdateCreateLoadingBar();
-            this.props.onCreate("totalBooth", data);
+            this.props.onUpdate("totalBooth", 1, "", data);
         }
       }
 
@@ -181,7 +181,7 @@ const mapStateToProps = (state, props) => {
   
   const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onCreate: create,
+      onUpdate: update,
       onUpdateCreateLoadingBar: updatePostLoadingBar
     }, dispatch);
   };

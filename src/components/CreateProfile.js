@@ -199,7 +199,6 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     userId: state.auth.id,
-    createdSocietyId: state.create.createdSocietyId,
     society: state.data.society,
     createLoading: state.create.loading,
     retrieveLoading: state.data.loading

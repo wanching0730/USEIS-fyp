@@ -396,7 +396,6 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     userId: state.auth.id,
-    createdEventId: state.create.createdEventId,
     event: state.data.event,
     loading: state.create.loading
   };

@@ -10,8 +10,9 @@ import {
     // CREATE_RATING,
     CREATE,
     REGISTER,
-    UPDATE_SOCIETY,
-    UPDATE_EVENT
+    UPDATE
+    // UPDATE_SOCIETY,
+    // UPDATE_EVENT
 } from '../constant';
 
 export function updatePostLoadingBarSuccessful() {
@@ -81,25 +82,34 @@ export function registerSuccessfully() {
     }
 }
 
-export function updateSocietySuccessfully(updatedSocietyId) {
+export function updateSuccessfully() {
     return {
-        type: UPDATE_SOCIETY,
+        type: UPDATE,
         payload: {
-            updatedSocietyId: updatedSocietyId,
             loading: false
         }
     }
 }
 
-export function updateEventSuccessfully(updatedEventId) {
-    return {
-        type: UPDATE_EVENT,
-        payload: {
-            updatedEventId: updatedEventId,
-            loading: false
-        }
-    }
-}
+// export function updateSocietySuccessfully(updatedSocietyId) {
+//     return {
+//         type: UPDATE_SOCIETY,
+//         payload: {
+//             updatedSocietyId: updatedSocietyId,
+//             loading: false
+//         }
+//     }
+// }
+
+// export function updateEventSuccessfully(updatedEventId) {
+//     return {
+//         type: UPDATE_EVENT,
+//         payload: {
+//             updatedEventId: updatedEventId,
+//             loading: false
+//         }
+//     }
+// }
 
 export function updatePostLoadingBar() {
     return function (dispatch) {
@@ -143,9 +153,6 @@ export function create(type, postData) {
                                 } else if(type === "registerEventCrew") {
                                     dispatch(registerSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
-                                } else if(type === "totalBooth") {
-                                    dispatch(createSuccessfully());
-                                    browserHistory.push('/myProfile');
                                 } 
                             }
                         }
@@ -172,11 +179,14 @@ export function update(type, id, name, postData) {
                             label: 'Close',
                             onClick: () => {
                                 if(type === "society") {
-                                    dispatch(updateSocietySuccessfully(reply));
+                                    dispatch(updateSuccessfully());
                                     browserHistory.push({pathname:`/perSociety/` + id, state: {societyName: name}});
                                 } else if(type === "event") {
-                                    dispatch(updateEventSuccessfully(reply));
+                                    dispatch(updateSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + id, state: {eventName: name}});
+                                } else if(type === "totalBooth") {
+                                    dispatch(updateSuccessfully());
+                                    browserHistory.push('/myProfile');
                                 } 
                             }
                         }
