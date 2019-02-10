@@ -16,6 +16,7 @@ import {
     RETRIEVE_USER_EVENTS,
     RETRIEVE_SOCIETY_MEMBERS,
     RETRIEVE_CREW_POSITION,
+    RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
     CHECK_IS_REGISTERED
@@ -34,6 +35,7 @@ const initialState = {
     studentParticipant: null,
     staffParticipant: null,
     crewPositions: null,
+    totalBooth: null,
    
     societies: null,
     events: null,
@@ -133,6 +135,11 @@ export default function dataReducer(state = initialState, { type, payload }) {
         case RETRIEVE_CREW_POSITION:
             return Object.assign({}, state, {
                 crewPositions: payload.crewPositions,
+            });
+        case RETRIEVE_BOOTH_AMOUNT:
+            return Object.assign({}, state, {
+                totalBooth: payload.totalBooth,
+                loading: payload.loading
             });
         case SEARCH_SOCIETY:
             return Object.assign({}, state, {

@@ -13,7 +13,7 @@ import '../style/form.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll, updateLoadingBar, updateEndLoadingBar } from '../actions/data-action';
+import { retrieveAll, retrieveData, updateLoadingBar, updateEndLoadingBar } from '../actions/data-action';
 import { updateDouble, updatePostLoadingBar, update} from '../actions/post-action';
 
 class RegisterBooth extends Component {
@@ -36,6 +36,7 @@ class RegisterBooth extends Component {
 
     this.props.onUpdateLoadingBar();
     this.props.onRetrieveAll("allBooths");
+    this.props.onRetrieveData("totalBooth", 1);
   }
 
   componentDidMount() {
@@ -89,6 +90,8 @@ class RegisterBooth extends Component {
   }
 
   render() {
+    console.log("total booth amount: " + this.props.totalBooth);
+
     const { RaisedButtonStyle } = styles;
     var breadCrumb;
 
@@ -171,6 +174,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     allBooths: state.data.allBooths,
+    totalBooth: state.data.totalBooth,
     loading: state.data.loading,
     postLoading: state.create.loading
   };
@@ -179,6 +183,7 @@ const mapStateToProps = (state, props) => {
 const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onRetrieveAll: retrieveAll,
+    onRetrieveData: retrieveData,
     onUpdateDouble: updateDouble,
     onUpdateLoadingBar: updateLoadingBar,
     onUpdateEndLoadingBar: updateEndLoadingBar,

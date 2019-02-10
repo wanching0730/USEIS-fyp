@@ -37,7 +37,7 @@ class ManageBooth extends Component {
     handleClick(event) {
         const { boothAmount, floorPlanUrl } = this.state;
     
-        if(boothAmount == '' || floorPlanUrl) {
+        if(boothAmount == '' || floorPlanUrl == '') {
           confirmAlert({
             title: 'Warning',
             message: 'Please fill in all empty fields before proceed',

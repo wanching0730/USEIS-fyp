@@ -18,6 +18,7 @@ import {
     RETRIEVE_USER_EVENTS,
     RETRIEVE_SOCIETY_MEMBERS,
     RETRIEVE_CREW_POSITION,
+    RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
     CHECK_IS_REGISTERED
@@ -130,6 +131,14 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_CREW_POSITION,
             payload: {
                 crewPositions: data
+            }
+        }
+    } else if(type === "totalBooth") {
+        return {
+            type: RETRIEVE_BOOTH_AMOUNT,
+            payload: {
+                totalBooth: data,
+                loading: false
             }
         }
     }
@@ -391,7 +400,11 @@ export function retrieveData(type, id) {
                 crewPositions.push(reply[0].crewPosition);
 
                 dispatch(retrieveSingleDataSuccessful("crewPosition", crewPositions));
-            }  
+            } else if(type === "totalBooth") {
+                let totalBooth = reply[0].totalBooth;
+
+                dispatch(retrieveSingleDataSuccessful("totalBooth", totalBooth));
+            } 
         });
     };
 }
