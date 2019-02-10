@@ -137,7 +137,7 @@ export function retrieveSingleDataSuccessful(type, data) {
         return {
             type: RETRIEVE_BOOTH_AMOUNT,
             payload: {
-                totalBooth: data,
+                overallBooth: data,
                 loading: false
             }
         }
@@ -401,9 +401,10 @@ export function retrieveData(type, id) {
 
                 dispatch(retrieveSingleDataSuccessful("crewPosition", crewPositions));
             } else if(type === "totalBooth") {
-                let totalBooth = reply[0].totalBooth;
+                console.log(reply[0]);
+                let overallBooth = reply[0];
 
-                dispatch(retrieveSingleDataSuccessful("totalBooth", totalBooth));
+                dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
             } 
         });
     };

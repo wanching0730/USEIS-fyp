@@ -54,8 +54,8 @@ class RegisterBooth extends Component {
 
   componentWillReceiveProps(nextProps){
     console.log(nextProps);
-    if((nextProps.totalBooth != this.props.totalBooth) && (nextProps.totalBooth != null)) {
-      this.setState({seatMap: JSON.parse(nextProps.totalBooth)}, () => {
+    if((nextProps.overallBooth != this.props.overallBooth) && (nextProps.overallBooth != null)) {
+      this.setState({seatMap: JSON.parse(nextProps.overallBooth.totalBooth)}, () => {
         if((nextProps.allBooths != null)) {
           for(var i = 0; i < nextProps.allBooths.length; i++) {
             let booth = nextProps.allBooths[i];
@@ -169,7 +169,7 @@ class RegisterBooth extends Component {
 
           <div>
             <Modal open={open} onClose={this.onCloseModal} center>
-              <img id="floorPlanImg" src="https://www.roomsketcher.com/wp-content/uploads/2016/10/1-Bedroom-Floor-Plan-600x450.jpg" />
+              <img id="floorPlanImg" src={this.props.overallBooth != null ? this.props.overallBooth.floorPlanUrl : ""}/>
             </Modal>
           </div>
 
@@ -225,7 +225,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     allBooths: state.data.allBooths,
-    totalBooth: state.data.totalBooth,
+    overallBooth: state.data.overallBooth,
     loading: state.data.loading,
     postLoading: state.create.loading
   };

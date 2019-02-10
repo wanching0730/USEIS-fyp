@@ -35,7 +35,7 @@ const initialState = {
     studentParticipant: null,
     staffParticipant: null,
     crewPositions: null,
-    totalBooth: null,
+    overallBooth: null,
    
     societies: null,
     events: null,
@@ -138,7 +138,7 @@ export default function dataReducer(state = initialState, { type, payload }) {
             });
         case RETRIEVE_BOOTH_AMOUNT:
             return Object.assign({}, state, {
-                totalBooth: payload.totalBooth,
+                overallBooth: payload.overallBooth,
                 loading: payload.loading
             });
         case SEARCH_SOCIETY:
