@@ -49,14 +49,37 @@ class ManageBooth extends Component {
           })
           return false;
         } else {
-            let data = this.state
+            let totalRows = Math.trunc(this.state.boothAmount / 6);
+            let remainingSeats = this.state.boothAmount % 6;
+            let newRow = [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}];
+            var lastRow = [];
+            var seatMap = [];
+
+            if(totalRows != 0) {
+                for(var i = 0; i < totalRows; i++) 
+                seatMap = [...seatMap, newRow];
+            }
+
+            if(remainingSeats != 0) {
+                for(var j = 0; j < remainingSeats; j++) {
+                let newSeat = { number: j+1 };
+                lastRow = [...lastRow, newSeat];
+                }
+
+                seatMap = [...seatMap, lastRow]
+            }
+
+            let data = {
+                seatMap: JSON.stringify(seatMap),
+                floorPlanUrl: this.state.floorPlanUrl
+            }
+
             this.props.onUpdateCreateLoadingBar();
             this.props.onCreate("totalBooth", data);
         }
       }
 
     render() {
-
         const { RaisedButtonStyle } = styles;
         
         return (

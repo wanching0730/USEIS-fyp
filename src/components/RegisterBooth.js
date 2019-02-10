@@ -21,13 +21,18 @@ class RegisterBooth extends Component {
   constructor(props) {
     super(props);
 
+    // this.state = {
+    //   seatMap: [
+    //     [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
+    //     [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
+    //     [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
+    //     [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
+    //     [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}]
+    //   ], selectedRow: -1, selectedSeat: -1
+    // };
+
     this.state = {
-      seatMap: [
-        [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
-        [{ number: 1}, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
-        [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 6}],
-        [{ number: 1 }, {number: 5}, {number: 6}]
-      ], selectedRow: -1, selectedSeat: -1
+      seatMap: [], selectedRow: -1, selectedSeat: -1
     };
     
     this.updateList = this.updateList.bind(this);
@@ -36,7 +41,7 @@ class RegisterBooth extends Component {
 
     this.props.onUpdateLoadingBar();
     this.props.onRetrieveAll("allBooths");
-    this.props.onRetrieveData("totalBooth", 1);
+    this.props.onRetrieveData("totalBooth", 8);
   }
 
   componentDidMount() {
@@ -47,16 +52,47 @@ class RegisterBooth extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if((nextProps.allBooths != this.props.allBooths) && (nextProps.allBooths != null)) {
-      for(var i = 0; i < nextProps.allBooths.length; i++) {
-        let booth = nextProps.allBooths[i];
-        var newSeatMap = this.state.seatMap;
-        
-        newSeatMap[booth["row"]][booth["seat"]]["isReserved"] = true;
-        this.setState({seatMap: newSeatMap});
-      }
-      this.props.onUpdateEndLoadingBar();
+    console.log(nextProps);
+    if((nextProps.totalBooth != this.props.totalBooth) && (nextProps.totalBooth != null)) {
+      this.setState({seatMap: JSON.parse(nextProps.totalBooth)}, () => {
+        if((nextProps.allBooths != null)) {
+          for(var i = 0; i < nextProps.allBooths.length; i++) {
+            let booth = nextProps.allBooths[i];
+            var newSeatMap = this.state.seatMap;
+          
+            console.log(newSeatMap[booth["row"]][booth["seat"]]);
+            newSeatMap[booth["row"]][booth["seat"]]["isReserved"] = true;
+            this.setState({seatMap: newSeatMap});
+          }
+          this.props.onUpdateEndLoadingBar();
+        } 
+      });
+      // let totalBooth = nextProps.totalBooth;
+      // let totalRows = Math.trunc(totalBooth / 6);
+      // let remainingSeats = totalBooth % 6;
+      // let newRow = [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}];
+      // var lastRow = [];
+
+      // if(totalRows != 0) {
+      //   for(var i = 0; i < totalRows; i++) 
+      //     this.setState(prevState => ({
+      //       seatMap: [...prevState.seatMap, newRow]
+      //     }));
+      // }
+
+      // if(remainingSeats != 0) {
+      //   for(var j = 0; j < remainingSeats; j++) {
+      //     let newSeat = { number: j+1 };
+      //     lastRow = [...lastRow, newSeat];
+      //   }
+
+      //   this.setState(prevState => ({
+      //     seatMap: [...prevState.seatMap, lastRow]
+      //   }));
+      // }
     }
+
+    
   }
 
   updateList(data) {
@@ -91,6 +127,7 @@ class RegisterBooth extends Component {
 
   render() {
     console.log("total booth amount: " + this.props.totalBooth);
+    console.log(this.state.seatMap);
 
     const { RaisedButtonStyle } = styles;
     var breadCrumb;
