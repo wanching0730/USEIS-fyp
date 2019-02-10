@@ -291,44 +291,45 @@ export function retrieveDataWithUserId(type, id, userId) {
 export function retrieveData(type, id) {
     return function (dispatch) {
         return getData(type, id).then(result => result.json()).then(reply => {
-            if(type === "society") {
-                let society = {
-                    id: reply[0]["societyId"],
-                    name: reply[0]["name"],
-                    category: reply[0]["category"],
-                    vision: reply[0]["vision"],
-                    mission: reply[0]["mission"],
-                    desc: reply[0]["description"],
-                    logoUrl: reply[0]["logoUrl"],
-                    boothId: reply[0]["boothId"],
-                    participated: reply[0]["participated"]
-                }
+            // if(type === "society") {
+            //     let society = {
+            //         id: reply[0]["societyId"],
+            //         name: reply[0]["name"],
+            //         category: reply[0]["category"],
+            //         vision: reply[0]["vision"],
+            //         mission: reply[0]["mission"],
+            //         desc: reply[0]["description"],
+            //         logoUrl: reply[0]["logoUrl"],
+            //         boothId: reply[0]["boothId"],
+            //         participated: reply[0]["participated"]
+            //     }
 
-                dispatch(retrieveSingleDataSuccessful("society", society));
-            } else if(type === "event") {
-                let event = {
-                    id: reply[0]["eventId"],
-                    name: reply[0]["name"],
-                    startDate: reply[0]["startDate"],
-                    endDate: reply[0]["endDate"],
-                    organiserId: reply[0]["organiserId"],
-                    organiserName: reply[0]["organiserName"],
-                    desc: reply[0]["description"],
-                    venue: reply[0]["venue"],
-                    category: reply[0]["category"],
-                    fee: reply[0]["fee"],
-                    ssCategory: reply[0]["ssCategory"],
-                    ssPoint: reply[0]["ssPoint"],
-                    chairperson: reply[0]["chairperson"],
-                    contact: reply[0]["contact"],
-                    boothId: reply[0]["boothId"],
-                    logoUrl: reply[0]["logoUrl"],
-                    totalParticipant: reply[0]["totalParticipant"],
-                    totalCrew: reply[0]["totalCrew"]
-                }
+            //     dispatch(retrieveSingleDataSuccessful("society", society));
+            // } else if(type === "event") {
+            //     let event = {
+            //         id: reply[0]["eventId"],
+            //         name: reply[0]["name"],
+            //         startDate: reply[0]["startDate"],
+            //         endDate: reply[0]["endDate"],
+            //         organiserId: reply[0]["organiserId"],
+            //         organiserName: reply[0]["organiserName"],
+            //         desc: reply[0]["description"],
+            //         venue: reply[0]["venue"],
+            //         category: reply[0]["category"],
+            //         fee: reply[0]["fee"],
+            //         ssCategory: reply[0]["ssCategory"],
+            //         ssPoint: reply[0]["ssPoint"],
+            //         chairperson: reply[0]["chairperson"],
+            //         contact: reply[0]["contact"],
+            //         boothId: reply[0]["boothId"],
+            //         logoUrl: reply[0]["logoUrl"],
+            //         totalParticipant: reply[0]["totalParticipant"],
+            //         totalCrew: reply[0]["totalCrew"]
+            //     }
 
-                dispatch(retrieveSingleDataSuccessful("event", event));
-            } else if(type === "societyEvent") {
+            //     dispatch(retrieveSingleDataSuccessful("event", event));
+            // } else 
+            if(type === "societyEvent") {
                 var societyEvents = [];
                 for(var i = 0; i < reply.length; i++) {
                     societyEvents.push({
