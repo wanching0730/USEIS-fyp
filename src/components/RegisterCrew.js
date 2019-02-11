@@ -21,7 +21,7 @@ class RegisterCrew extends Component {
     this.state={
       emailNoti: false,
       webNoti: false,
-      position: 'secretary',
+      position: 'Chairperson',
       vegetarian: 0,
       positionOptions: []
     }
@@ -46,7 +46,7 @@ class RegisterCrew extends Component {
       for(var i = 0; i < positions.length; i++) {
         if(positions[i] != "") {
           let position = positions[i];
-          if(position == "Chairperson" || position == "Vice Chairperson" || position == "Secretary" || position == "Vice Secretary" || position == "Treasurer" || position == "Vice Treasurer" || position == "Editor") {
+          if(position === "Chairperson" || position === "ViceChairperson" || position === "Secretary" || position === "Vice Secretary" || position === "Treasurer" || position === "Vice Treasurer" || position === "Editor") {
             positionOptions.push({
               value: position,
               name: position
@@ -63,9 +63,7 @@ class RegisterCrew extends Component {
           }
         }
       }
-      console.log(positionOptions);
       this.setState({positionOptions: positionOptions});
-      console.log(this.state.positionOptions);
     }
   }
 
@@ -138,7 +136,7 @@ class RegisterCrew extends Component {
                 <div className="form-style-10">
                   <h1>Register Crew<span>Register as event crew now and get yourself a chance for more exploration!</span></h1>
                   <form>
-                      <div class="section"><span>3</span>Position</div>
+                      <div class="section"><span>1</span>Position</div>
                         <div class="inner-wrap">
                           <label>Position (Eg: Logistics HOD)</label>
                           <select value={this.state.position} onChange={this.handleChange}>
@@ -147,7 +145,7 @@ class RegisterCrew extends Component {
                           
                           {/* <ButtonToolbar>{this.renderDropdownButton}</ButtonToolbar> */}
                       </div>
-                      <div class="section"><span>1</span>Vegetarian</div>
+                      <div class="section"><span>2</span>Vegetarian</div>
                       <div class="inner-wrap">
                       Vegetarian
                       <Checkbox onCheck={(e, checked) => {
@@ -155,12 +153,11 @@ class RegisterCrew extends Component {
                             this.setState({vegetarian: 1});
                           else 
                             this.setState({vegetarian: 0});
-                          console.log("vegetarian checked: " + this.state.vegetarian);
                         }}
                       /> 
                       </div>
 
-                      <div class="section"><span>2</span>Allow Notification</div>
+                      <div class="section"><span>3</span>Allow Notification</div>
                       <div class="inner-wrap">
                         <label>Allow Email Notification</label>
                         <ToggleButton
