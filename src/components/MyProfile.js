@@ -173,7 +173,7 @@ class MyProfile extends Component {
                         }    
                     }
 
-                    if(society["memberStatus"] != 1) {
+                    if(society["memberStatus"] != 1 && this.props.userName.substring(0,2) !== "00") {
                         if(society["memberStatus"] != 2) {
                             action = 
                                 <td>
