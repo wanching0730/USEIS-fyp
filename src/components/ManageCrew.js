@@ -152,6 +152,7 @@ class ManageCrew extends Component {
     }
 
     exportData() {
+        this.props.onUpdateLoadingBar();
         this.props.onExportData("eventCrew", this.props.params.eventId);
     }
 

@@ -155,6 +155,7 @@ class ManageMember extends Component {
     }
 
     exportData() {
+        this.props.onUpdateLoadingBar();
         this.props.onExportData("societyMember", this.props.params.societyId);
     }
 

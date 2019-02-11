@@ -1,5 +1,5 @@
 import { getData, getAllData, getDataWithUserId, searchAllData, downloadData } from '../utils/http_function';
-
+import { confirmAlert } from 'react-confirm-alert';
 import {
     UPDATE_RETRIEVE_LOADINGBAR,
     RETRIEVE_SOCIETIES,
@@ -21,7 +21,8 @@ import {
     RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
-    CHECK_IS_REGISTERED
+    CHECK_IS_REGISTERED,
+    EXPORT_DATA
 } from '../constant';
 
 export function updateLoadingBarSuccessful() {
@@ -213,6 +214,13 @@ export function retrieveAllDataSuccessful(type, data) {
                 allBooths: data
             }
         }
+    } else if(type === "exportData") {
+        return {
+            type: EXPORT_DATA,
+            payload: {
+                loading: false
+            }
+        }
     } 
 }
 
@@ -229,9 +237,25 @@ export function updateEndLoadingBar() {
 }
 
 export function exportData(type, id) {
-    return function() {
+    return function(dispatch) {
         return downloadData(type, id).then(result => result.json()).then(reply => {
-            console.log(reply);
+            if(reply) {
+                console.log("exported");
+                dispatch(retrieveAllDataSuccessful("exportData", reply));
+
+                confirmAlert({
+                    title: 'Message',
+                    message: 'Data has been exported successfully',
+                    buttons: [
+                        {
+                            label: 'Close',
+                            onClick: () => {}
+                        }
+                    ]
+                  })
+            }
+            else 
+                console.log("error");
         });
     }
 }

@@ -157,7 +157,7 @@ export function create(type, postData) {
                             }
                         }
                     ]
-                  })
+                })
             }
         });
     };
