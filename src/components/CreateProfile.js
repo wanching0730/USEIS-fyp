@@ -25,7 +25,8 @@ class CreateProfile extends Component {
       vision: '',
       mission: '',
       logoUrl: '',
-      userId: this.props.userId
+      userId: this.props.userId,
+      authorizedPositions: ''
     }
 
     if(this.props.params.societyId) {
@@ -33,6 +34,7 @@ class CreateProfile extends Component {
       this.props.onRetrieveData("society", this.props.params.societyId);
     }
 
+    this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
   }
@@ -43,6 +45,7 @@ class CreateProfile extends Component {
     if(this.props.params.societyId) {
       setTimeout(function() { 
         let society = this.props.society;
+
         this.setState({
           name: society["name"],
           category: society["category"],
@@ -50,9 +53,14 @@ class CreateProfile extends Component {
           mission: society["mission"], 
           desc: society["desc"],
           logoUrl: society["logoUrl"]
-        })   
+        });
+
       }.bind(this), 5000)
     }
+  }
+
+  handleChange(event) {
+    this.setState({authorizedPositions: this.state.authorizedPositions + event.target.value + ','}); 
   }
 
   handleClick(event) {
@@ -98,6 +106,9 @@ class CreateProfile extends Component {
     const societyCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
     {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
     {value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}];
+
+    const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
+      {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'} ]
 
     var header, breadCrumb;
 
@@ -173,6 +184,26 @@ class CreateProfile extends Component {
                           <div class="inner-wrap">
                           <label>Society Logo</label>
                           <input type="text" value={this.state.logoUrl} onChange={(event) => {this.setState({logoUrl:event.target.value})}}/>
+                      </div>
+
+                      <div class="section"><span>5</span>Authorized Position</div>
+                        <div class="inner-wrap">
+                          <label>First position</label>
+                          <select onChange={this.handleChange}>
+                            {positionOptions.map(this.mapItem)}
+                          </select>
+                          <br/>
+                          <label>Second position</label>
+                          <select onChange={this.handleChange}>
+                            {positionOptions.map(this.mapItem)}
+                          </select>
+                          <br/>
+                          <label>Third position</label>
+                          <select onChange={this.handleChange}>
+                            {positionOptions.map(this.mapItem)}
+                          </select>
+                          
+                          {/* <ButtonToolbar>{this.renderDropdownButton}</ButtonToolbar> */}
                       </div>
 
                       <div class="button-section">

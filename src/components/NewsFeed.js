@@ -112,12 +112,13 @@ class NewsFeed extends Component {
     }
 
     updateAddedNewsfeeds(newsfeedItem) {
-        this.setState({ newsfeeds: [newsfeedItem, ...this.state.newsfeeds] });
+        this.setState({ newsfeeds: [newsfeedItem, ...this.state.newsfeeds] }, function() {
+            this.setState(this.state);
+        });
     }
 
     updateDeletedNewsfeeds(newsfeedItem) {
         let list = this.state.newsfeeds;
-        console.log("newsfeeds in update list: " + JSON.stringify(this.state.newsfeeds));
         for(var i = 0; i < list.length; i++) {
             let item = list[i];
             if(item["newsfeedId"] == newsfeedItem["newsfeedId"] && item["type"] == newsfeedItem["type"]) {
@@ -222,7 +223,6 @@ class NewsFeed extends Component {
                             <h2>Delete Confirmation</h2>
                             <p>Are you sure to delete this newsfeed?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {   
-                                console.log(targetNewsfeedId);
                                 this.props.onUpdateDeleteLoadingBar(); 
 
                                 if(type == "s")
@@ -282,7 +282,6 @@ class NewsFeed extends Component {
     }
 
     render() {
-        console.log("owner id: " + this.state.ownerId);
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.state.newsfeeds;
         let filteredNewsfeeds = [];

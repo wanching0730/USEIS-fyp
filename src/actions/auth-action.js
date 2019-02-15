@@ -123,11 +123,11 @@ export function loginUser(postData) {
             let token = reply["token"];
             var societies = [];
             
-            let userName = user[0]["username"];
-            let userId = user[0]["userId"];
+            let userName = user["user"]["username"];
+            let userId = user["user"]["userId"];
 
             if(userName.substring(0,2) === "00") {
-                let id = user[0]["staffId"];
+                let id = user["staffId"];
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
                         societies.push({
@@ -141,7 +141,7 @@ export function loginUser(postData) {
                 
                 dispatch(loginUserSuccessful(userName, userId, id, user, societies, token));
             } else {
-                let id = user[0]["studentId"];
+                let id = user["studentId"];
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
                         societies.push(userSociety[i]);
