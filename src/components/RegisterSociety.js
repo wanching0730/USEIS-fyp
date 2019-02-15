@@ -21,7 +21,8 @@ class RegisterSociety extends Component {
     super(props);
     this.state = {
       emailNoti: false,
-      webNoti: false
+      webNoti: false,
+      position: 'Member'
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -42,7 +43,7 @@ class RegisterSociety extends Component {
       societyId: this.props.params.societyId,
       societyName: this.props.location.state["societyName"],
       studentId: this.props.id,
-      position: "member",
+      position: this.state.position,
       joinDate: moment(current).format("YYYY-MM-DD"),
       emailNoti: this.state.emailNoti,
       webNoti: this.state.webNoti
@@ -58,14 +59,21 @@ class RegisterSociety extends Component {
   }
 
   handleChange(event) {
-    this.setState({course: event.target.value});
+    this.setState({position: event.target.value});
+  }
+
+  mapItem(item) {
+    return <option value={item.value}>{item.name}</option>;
   }
   
   render() {
     console.log(this.props.isRegistered);
 
     const { RaisedButtonStyle } = styles;
+    const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
+      {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}, {value:'Member', name:'Member'}]
 
+    console.log(positionOptions);
     return (
       <div>
         <MuiThemeProvider>
@@ -118,6 +126,14 @@ class RegisterSociety extends Component {
                           timeout="1000"
                           onClick={event => this.handleNotiClick(event)}
                         />
+                      </div>
+
+                      <div class="section"><span>2</span>Position</div>
+                        <div class="inner-wrap">
+                          <label>Position</label>
+                          <select onChange={this.handleChange}>
+                            {positionOptions.map(this.mapItem)}
+                          </select>
                       </div>
 
                       <div class="button-section">

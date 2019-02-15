@@ -108,7 +108,7 @@ class CreateProfile extends Component {
     {value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}];
 
     const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
-      {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'} ]
+      {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}]
 
     var header, breadCrumb;
 
@@ -202,8 +202,6 @@ class CreateProfile extends Component {
                           <select onChange={this.handleChange}>
                             {positionOptions.map(this.mapItem)}
                           </select>
-                          
-                          {/* <ButtonToolbar>{this.renderDropdownButton}</ButtonToolbar> */}
                       </div>
 
                       <div class="button-section">
