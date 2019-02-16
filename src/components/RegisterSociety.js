@@ -13,7 +13,7 @@ import '../style/form.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create, updatePostLoadingBar, updateDouble } from '../actions/post-action';
-import { retrieveDataWithUserId, retrieveData } from '../actions/data-action';
+import { retrieveDataWithUserId, retrieveAll } from '../actions/data-action';
 
 class RegisterSociety extends Component {
 
@@ -22,7 +22,7 @@ class RegisterSociety extends Component {
     this.state = {
       emailNoti: false,
       webNoti: false,
-      position: 'Member',
+      sRoleId: 1,
       positionOptions: []
     }
 
@@ -34,16 +34,16 @@ class RegisterSociety extends Component {
     window.scrollTo(0, 0);
 
     this.props.onRetrieveDataWithUserId("checkIsSocietyRegistered", this.props.params.societyId, this.props.id);
+    this.props.onRetrieveAll("societyRole");
   }
 
   componentWillReceiveProps(nextProps){
     if((nextProps.roles != this.props.roles) || (this.props.roles != null)) {
       var positionOptions = [];
-      var positions = nextProps.roles[0];
-      positions = positions.split(",");
+      var positions = nextProps.roles;
 
       for(var i = 0; i < positions.length; i++) {
-        if(positions[i] != "") {
+        if(positions[i] != null) {
           let position = positions[i];
           positionOptions.push({
             value: position["sRoleId"],
@@ -63,13 +63,11 @@ class RegisterSociety extends Component {
       societyId: this.props.params.societyId,
       societyName: this.props.location.state["societyName"],
       studentId: this.props.id,
-      position: this.state.position,
+      sRoleId: this.state.sRoleId,
       joinDate: moment(current).format("YYYY-MM-DD"),
       emailNoti: this.state.emailNoti,
       webNoti: this.state.webNoti
     };
-
-    console.log(this.props.isRegistered);
 
     if(!this.props.isRegistered)
       this.props.onCreate("registerSociety", data);
@@ -79,7 +77,7 @@ class RegisterSociety extends Component {
   }
 
   handleChange(event) {
-    this.setState({position: event.target.value});
+    this.setState({sRoleId: event.target.value});
   }
 
   mapItem(item) {
@@ -87,13 +85,10 @@ class RegisterSociety extends Component {
   }
   
   render() {
-    console.log(this.props.isRegistered);
-
     const { RaisedButtonStyle } = styles;
     // const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
     //   {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}, {value:'Member', name:'Member'}]
 
-    console.log(this.state.positionOptions);
     return (
       <div>
         <MuiThemeProvider>
@@ -190,7 +185,7 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
     onUpdateLoadingBar: updatePostLoadingBar,
-    onRetrieveData: retrieveData,
+    onRetrieveAll: retrieveAll,
     onRetrieveDataWithUserId: retrieveDataWithUserId,
     onUpdateData: updateDouble
   }, dispatch);

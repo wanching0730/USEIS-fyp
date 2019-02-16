@@ -11,7 +11,8 @@ import '../style/form.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create, update, updatePostLoadingBar } from '../actions/post-action';
-import { retrieveData, updateLoadingBar } from '../actions/data-action';
+import { retrieveData, retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { removeData } from '../utils/http_function';
 
 class CreateProfile extends Component {
 
@@ -26,12 +27,14 @@ class CreateProfile extends Component {
       mission: '',
       logoUrl: '',
       userId: this.props.userId,
-      position1: '', position2: '', position3: ''
+      position1: '', position2: '', position3: '',
+      positionOptions: []
     }
 
     if(this.props.params.societyId) {
       this.props.onUpdateRetrieveLoadingBar();
       this.props.onRetrieveData("society", this.props.params.societyId);
+      this.props.onRetrieveAll("societyRole");
     }
 
     //this.handleChange = this.handleChange.bind(this);
@@ -253,6 +256,7 @@ const mapActionsToProps = (dispatch, props) => {
     onCreate: create,
     onUpdate: update,
     onRetrieveData: retrieveData,
+    onRetrieveAll: retrieveAll,
     onUpdateRetrieveLoadingBar: updateLoadingBar,
     onUpdateCreateLoadingBar: updatePostLoadingBar
   }, dispatch);

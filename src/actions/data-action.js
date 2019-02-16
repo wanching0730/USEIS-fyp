@@ -152,15 +152,7 @@ export function retrieveSingleDataSuccessful(type, data) {
                 loading: false
             }
         }
-    } else if(type === "roles") {
-        return {
-            type: RETRIEVE_ROLES,
-            payload: {
-                roles: data,
-                loading: false
-            }
-        }
-    }
+    } 
 }
 
 export function retrieveSingleMultipleDataSuccessful(type, data1, data2) {
@@ -239,7 +231,15 @@ export function retrieveAllDataSuccessful(type, data) {
                 loading: false
             }
         }
-    } 
+    } else if(type === "roles") {
+        return {
+            type: RETRIEVE_ROLES,
+            payload: {
+                roles: data,
+                loading: false
+            }
+        }
+    }
 }
 
 export function updateLoadingBar() {
@@ -460,11 +460,6 @@ export function retrieveData(type, id) {
                 let overallBooth = reply[0];
 
                 dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
-            } else if(type === "societyRole" || type === "eventRole") {
-                console.log(reply[0]);
-                let roles = reply[0];
-
-                dispatch(retrieveSingleDataSuccessful("roles", roles));
             } 
         });
     };
@@ -543,6 +538,11 @@ export function retrieveAll(type) {
                 }
 
                 dispatch(retrieveAllDataSuccessful(type, allBooths));
+            } else if(type === "societyRole" || type === "eventRole") {
+                console.log(reply);
+                let roles = reply;
+
+                dispatch(retrieveAllDataSuccessful("roles", roles));
             } 
         });
     };
