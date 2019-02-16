@@ -13,7 +13,7 @@ import '../style/form.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create, updatePostLoadingBar, updateDouble } from '../actions/post-action';
-import { retrieveDataWithUserId } from '../actions/data-action';
+import { retrieveDataWithUserId, retrieveData } from '../actions/data-action';
 
 class RegisterSociety extends Component {
 
@@ -22,7 +22,8 @@ class RegisterSociety extends Component {
     this.state = {
       emailNoti: false,
       webNoti: false,
-      position: 'Member'
+      position: 'Member',
+      positionOptions: []
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,6 +34,25 @@ class RegisterSociety extends Component {
     window.scrollTo(0, 0);
 
     this.props.onRetrieveDataWithUserId("checkIsSocietyRegistered", this.props.params.societyId, this.props.id);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if((nextProps.roles != this.props.roles) || (this.props.roles != null)) {
+      var positionOptions = [];
+      var positions = nextProps.roles[0];
+      positions = positions.split(",");
+
+      for(var i = 0; i < positions.length; i++) {
+        if(positions[i] != "") {
+          let position = positions[i];
+          positionOptions.push({
+            value: position["sRoleId"],
+            name: position["roleName"]
+          });
+        }
+      }
+      this.setState({positionOptions: positionOptions});
+    }
   }
 
   handleClick(event) {
@@ -70,10 +90,10 @@ class RegisterSociety extends Component {
     console.log(this.props.isRegistered);
 
     const { RaisedButtonStyle } = styles;
-    const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
-      {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}, {value:'Member', name:'Member'}]
+    // const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
+    //   {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}, {value:'Member', name:'Member'}]
 
-    console.log(positionOptions);
+    console.log(this.state.positionOptions);
     return (
       <div>
         <MuiThemeProvider>
@@ -89,7 +109,7 @@ class RegisterSociety extends Component {
                 </Breadcrumb>
             </div>
 
-            {this.props.loading ?
+            {this.props.loading || this.state.positionOptions.length == 0 ?
             [<LoadingBar />]
             :
             [
@@ -132,7 +152,7 @@ class RegisterSociety extends Component {
                         <div class="inner-wrap">
                           <label>Position</label>
                           <select onChange={this.handleChange}>
-                            {positionOptions.map(this.mapItem)}
+                            {this.state.positionOptions.map(this.mapItem)}
                           </select>
                       </div>
 
@@ -161,7 +181,8 @@ const mapStateToProps = (state, props) => {
   return {
     id: state.auth.id,
     loading: state.create.loading,
-    isRegistered: state.data.isRegistered
+    isRegistered: state.data.isRegistered,
+    roles: state.data.roles
   };
 };
 
@@ -169,6 +190,7 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
     onUpdateLoadingBar: updatePostLoadingBar,
+    onRetrieveData: retrieveData,
     onRetrieveDataWithUserId: retrieveDataWithUserId,
     onUpdateData: updateDouble
   }, dispatch);

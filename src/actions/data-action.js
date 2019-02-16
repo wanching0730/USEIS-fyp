@@ -19,6 +19,7 @@ import {
     RETRIEVE_USER_EVENTS,
     RETRIEVE_SOCIETY_MEMBERS,
     RETRIEVE_CREW_POSITION,
+    RETRIEVE_ROLES,
     RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
@@ -148,6 +149,14 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_BOOTH_AMOUNT,
             payload: {
                 overallBooth: data,
+                loading: false
+            }
+        }
+    } else if(type === "roles") {
+        return {
+            type: RETRIEVE_ROLES,
+            payload: {
+                roles: data,
                 loading: false
             }
         }
@@ -285,7 +294,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     authorizedPosition: reply[0]["authorizedPosition"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
-                    position: reply[0]["position"],
+                    position: reply[0]["roleName"],
                     status: reply[0]["status"]      
                 }
 
@@ -315,7 +324,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
                     authorized: reply[0]["authorized"],
-                    position: reply[0]["position"],
+                    position: reply[0]["roleName"],
                     status: reply[0]["status"]
                 }
                 console.log(event);
@@ -451,6 +460,11 @@ export function retrieveData(type, id) {
                 let overallBooth = reply[0];
 
                 dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
+            } else if(type === "societyRole" || type === "eventRole") {
+                console.log(reply[0]);
+                let roles = reply[0];
+
+                dispatch(retrieveSingleDataSuccessful("roles", roles));
             } 
         });
     };

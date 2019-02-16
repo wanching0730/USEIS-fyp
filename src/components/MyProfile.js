@@ -224,7 +224,7 @@ class MyProfile extends Component {
                                 {this.props.userName.substring(0,2) != "00" ? 
                                     moment(society["joinDate"]).format("DD/MM/YYYY") : society["joinDate"]}
                             </td>
-                            <td>{society["position"]}</td>
+                            <td>{society["roleName"]}</td>
                             {status}
                             <td>{events}</td>
                             {action}

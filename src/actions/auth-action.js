@@ -133,7 +133,7 @@ export function loginUser(postData) {
                         societies.push({
                             societyId: userSociety[i]["societyId"],
                             name: userSociety[i]["name"],         
-                            position: userSociety[i]["position"],
+                            roleName: userSociety[i]["roleName"],
                             joinDate: "-"
                         })
                     }
