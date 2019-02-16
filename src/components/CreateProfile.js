@@ -56,15 +56,11 @@ class CreateProfile extends Component {
         });
 
         let authorizedPositions = society["authorizedPosition"].split(",");
-        console.log(authorizedPositions[0]);
-        console.log(authorizedPositions[1]);
         this.setState({
           position1: authorizedPositions[0],
           position2: authorizedPositions[1],
           position3: authorizedPositions[2]
-        }, function() {
-          this.setState(this.state);
-        })
+        });
 
       }.bind(this), 5000)
     }
@@ -102,7 +98,6 @@ class CreateProfile extends Component {
       else
         data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
       
-
       if(societyId == null) {
         this.props.onCreate("society", data);
       } else {

@@ -42,11 +42,11 @@ class CreateEvent extends Component {
       position: '',
       userId: this.props.userId,
       vegetarian: 0,
-      authorizedPositions: 'Chairperson,Vice Chairperson,'
+      position1: '', position2: '', position3: ''
     }
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleEventCategory = this.handleEventCategory.bind(this);
@@ -79,6 +79,13 @@ class CreateEvent extends Component {
         selectedStartDate: moment(event["startDate"]),
         selectedEndDate: moment(event["endDate"])
       });
+
+      let authorizedPositions = event["authorizedPosition"].split(",");
+        this.setState({
+          position1: authorizedPositions[0],
+          position2: authorizedPositions[1],
+          position3: authorizedPositions[2]
+        });
     }
   }
 
@@ -91,9 +98,9 @@ class CreateEvent extends Component {
     }
   }
 
-  handleChange(event) {
-    this.setState({authorizedPositions: this.state.authorizedPositions + event.target.value + ','}); 
-  }
+  // handleChange(event) {
+  //   this.setState({authorizedPositions: this.state.authorizedPositions + event.target.value + ','}); 
+  // }
 
   handleClick(event) {
     const { name, desc, venue, chairperson, contact, logoUrl } = this.state;
@@ -112,9 +119,15 @@ class CreateEvent extends Component {
     } else {
       this.props.onUpdateLoadingBar();
       
+      let authorizedPositions = this.state.position1 + ',' + this.state.position2 + ',' + this.state.position3;
       let eventId = this.props.params.id;
       let data = this.state
       let eventName = data["name"];
+
+      if(this.props.params.eventId)
+        data["authorizedPositions"]= authorizedPositions == '' ? this.props.event["authorizedPosition"] : authorizedPositions;
+      else
+        data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
 
       if(this.props.params.type == "society")
         this.props.onCreate("event", data);
@@ -167,7 +180,7 @@ class CreateEvent extends Component {
     {value:'eq', name:'Emotional Intelligence & Teamwork Skills'}, {value:'entrepreneur', name:'Entrepreneurship Skills'}, {value:'leadership', name:'Leadership Skills'},
     {value:'lifelong', name:'Lifelong Learning & Information Management'}, {value:'moral', name:'Moral & Professional Ethics'}];
 
-    const positionOptions = [{value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
+    const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
       {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Editorial', name:'Editorial'}]
 
     var header;
@@ -384,17 +397,17 @@ class CreateEvent extends Component {
                       <div class="section"><span>9</span>Authorized Position</div>
                         <div class="inner-wrap">
                           <label>First position</label>
-                          <select onChange={this.handleChange}>
+                          <select value={this.state.position1} onChange={(event) => {this.setState({position1:event.target.value})}}>
                             {positionOptions.map(this.mapItem)}
                           </select>
                           <br/>
                           <label>Second position</label>
-                          <select onChange={this.handleChange}>
+                          <select value={this.state.position2} onChange={(event) => {this.setState({position2:event.target.value})}}>
                             {positionOptions.map(this.mapItem)}
                           </select>
                           <br/>
                           <label>Third position</label>
-                          <select onChange={this.handleChange}>
+                          <select value={this.state.position3} onChange={(event) => {this.setState({position3:event.target.value})}}>
                             {positionOptions.map(this.mapItem)}
                           </select>
                       </div>

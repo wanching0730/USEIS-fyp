@@ -368,6 +368,7 @@ export function retrieveData(type, id) {
                     ssPoint: reply[0]["ssPoint"],
                     chairperson: reply[0]["chairperson"],
                     contact: reply[0]["contact"],
+                    authorizedPosition: reply[0]["authorizedPosition"],
                     boothId: reply[0]["boothId"],
                     logoUrl: reply[0]["logoUrl"],
                     totalParticipant: reply[0]["totalParticipant"],
