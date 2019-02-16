@@ -175,12 +175,12 @@ class PerSociety extends Component {
                     </Breadcrumb>
                 </div>
 
-                {this.props.loading ?
+                {this.props.loading || this.props.society == null ?
                     [<LoadingBar />]
                     :
                     [
                         <div>
-                            {society["authorized"] || this.props.userName.substring(0,2) == "00" ?
+                            {(society["authorizedPosition"].split(",").includes(society["position"]) && society["status"] == 1) || this.props.userName.substring(0,2) == "00" ?
                                 [
                                     <div className="zoom">
                                         <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>

@@ -26,7 +26,7 @@ class CreateProfile extends Component {
       mission: '',
       logoUrl: '',
       userId: this.props.userId,
-      authorizedPositions: ''
+      position1: '', position2: '', position3: ''
     }
 
     if(this.props.params.societyId) {
@@ -34,7 +34,7 @@ class CreateProfile extends Component {
       this.props.onRetrieveData("society", this.props.params.societyId);
     }
 
-    this.handleChange = this.handleChange.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
   }
@@ -55,13 +55,25 @@ class CreateProfile extends Component {
           logoUrl: society["logoUrl"]
         });
 
+        let authorizedPositions = society["authorizedPosition"].split(",");
+        console.log(authorizedPositions[0]);
+        console.log(authorizedPositions[1]);
+        this.setState({
+          position1: authorizedPositions[0],
+          position2: authorizedPositions[1],
+          position3: authorizedPositions[2]
+        }, function() {
+          this.setState(this.state);
+        })
+
       }.bind(this), 5000)
     }
   }
 
-  handleChange(event) {
-    this.setState({authorizedPositions: this.state.authorizedPositions + event.target.value + ','}); 
-  }
+  // handleChange(event) {
+  //   if(this.state.authorizedPositions.indexOf(event.target.value) >= 0)
+  //     this.setState({authorizedPositions: this.state.authorizedPositions + event.target.value + ','}); 
+  // }
 
   handleClick(event) {
     const { name, desc, vision, mission, logoUrl } = this.state;
@@ -80,9 +92,16 @@ class CreateProfile extends Component {
     } else {
       this.props.onUpdateCreateLoadingBar();
 
+      let authorizedPositions = this.state.position1 + ',' + this.state.position2 + ',' + this.state.position3;
       let societyId = this.props.params.societyId;
-      let data = this.state
+      let data = this.state;
       let societyName = data["name"];
+
+      if(this.props.params.societyId)
+        data["authorizedPositions"]= authorizedPositions == '' ? this.props.society["authorizedPosition"] : authorizedPositions;
+      else
+        data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
+      
 
       if(societyId == null) {
         this.props.onCreate("society", data);
@@ -189,17 +208,17 @@ class CreateProfile extends Component {
                       <div class="section"><span>5</span>Authorized Position</div>
                         <div class="inner-wrap">
                           <label>First position</label>
-                          <select onChange={this.handleChange}>
+                          <select value={this.state.position1} onChange={(event) => {this.setState({position1:event.target.value})}}>
                             {positionOptions.map(this.mapItem)}
                           </select>
                           <br/>
                           <label>Second position</label>
-                          <select onChange={this.handleChange}>
+                          <select value={this.state.position2} onChange={(event) => {this.setState({position2:event.target.value})}}>
                             {positionOptions.map(this.mapItem)}
                           </select>
                           <br/>
                           <label>Third position</label>
-                          <select onChange={this.handleChange}>
+                          <select value={this.state.position3} onChange={(event) => {this.setState({position3:event.target.value})}}>
                             {positionOptions.map(this.mapItem)}
                           </select>
                       </div>

@@ -282,9 +282,11 @@ export function retrieveDataWithUserId(type, id, userId) {
                     mission: reply[0]["mission"],
                     desc: reply[0]["description"],
                     logoUrl: reply[0]["logoUrl"],
+                    authorizedPosition: reply[0]["authorizedPosition"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
-                    authorized: reply[0]["authorized"]
+                    position: reply[0]["position"],
+                    status: reply[0]["status"]      
                 }
 
                 dispatch(retrieveSingleDataSuccessful("society", society));
@@ -344,6 +346,7 @@ export function retrieveData(type, id) {
                     mission: reply[0]["mission"],
                     desc: reply[0]["description"],
                     logoUrl: reply[0]["logoUrl"],
+                    authorizedPosition: reply[0]["authorizedPosition"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"]
                 }

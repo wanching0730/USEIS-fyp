@@ -39,12 +39,14 @@ class CreateEvent extends Component {
       totalCrew: 0,
       selectedStartDate: moment(),
       selectedEndDate: moment(),
-      position: 'Chairperson,Vice Chairperson,',
+      position: '',
       userId: this.props.userId,
-      vegetarian: 0
+      vegetarian: 0,
+      authorizedPositions: 'Chairperson,Vice Chairperson,'
     }
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleEventCategory = this.handleEventCategory.bind(this);
@@ -87,6 +89,10 @@ class CreateEvent extends Component {
         organiserId: p.id
       });
     }
+  }
+
+  handleChange(event) {
+    this.setState({authorizedPositions: this.state.authorizedPositions + event.target.value + ','}); 
   }
 
   handleClick(event) {
@@ -161,6 +167,9 @@ class CreateEvent extends Component {
     {value:'eq', name:'Emotional Intelligence & Teamwork Skills'}, {value:'entrepreneur', name:'Entrepreneurship Skills'}, {value:'leadership', name:'Leadership Skills'},
     {value:'lifelong', name:'Lifelong Learning & Information Management'}, {value:'moral', name:'Moral & Professional Ethics'}];
 
+    const positionOptions = [{value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
+      {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Editorial', name:'Editorial'}]
+
     var header;
     var breadCrumb;
 
@@ -174,7 +183,7 @@ class CreateEvent extends Component {
             <BreadcrumbItem active>Create Event</BreadcrumbItem>
           </Breadcrumb>
     } else {
-      header = <h1>Edit Society Event<span>Edit your event details and make it better!</span></h1>
+      header = <h1>Edit Event<span>Edit your event details and make it better!</span></h1>
       breadCrumb = 
           <Breadcrumb>
             <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
@@ -302,7 +311,7 @@ class CreateEvent extends Component {
                             <br/>
                       </div>
 
-                      <div class="section"><span>7</span>Crew Departments</div>
+                      <div class="section"><span>8</span>Crew Departments</div>
                         <div class="inner-wrap">
                           <label>Secretary</label>
                           <Checkbox onCheck={(e, checked) => {
@@ -370,6 +379,24 @@ class CreateEvent extends Component {
                                 this.setState({position: this.state.position + 'Editor,'}); 
                             }}
                           />
+                      </div>
+
+                      <div class="section"><span>9</span>Authorized Position</div>
+                        <div class="inner-wrap">
+                          <label>First position</label>
+                          <select onChange={this.handleChange}>
+                            {positionOptions.map(this.mapItem)}
+                          </select>
+                          <br/>
+                          <label>Second position</label>
+                          <select onChange={this.handleChange}>
+                            {positionOptions.map(this.mapItem)}
+                          </select>
+                          <br/>
+                          <label>Third position</label>
+                          <select onChange={this.handleChange}>
+                            {positionOptions.map(this.mapItem)}
+                          </select>
                       </div>
 
                       <div class="button-section">
