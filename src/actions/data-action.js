@@ -8,6 +8,7 @@ import {
     RETRIEVE_ONE_EVENT,
     RETRIEVE_ONE_SOCIETY_EVENTS,
     RETRIEVE_ONE_EVENT_CREW,
+    RETRIEVE_ONE_SOCIETY_CREW,
     RETRIEVE_COMM,
     RETRIEVE_PARTICIPANT,
     RETRIEVE_NEWSFEED,
@@ -101,6 +102,14 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_ONE_EVENT_CREW,
             payload: {
                 eventCrew: data,
+                loading: false
+            }
+        }
+    } else if(type === "societyCrew") {
+        return {
+            type: RETRIEVE_ONE_SOCIETY_CREW,
+            payload: {
+                societyCrew: data,
                 loading: false
             }
         }
@@ -391,6 +400,13 @@ export function retrieveData(type, id) {
                 }
 
                 dispatch(retrieveSingleDataSuccessful("eventCrew", eventCrew));
+            } else if(type === "societyCrew") {
+                let societyCrew = [];
+                for(var i = 0; i < reply.length; i++) {
+                    societyCrew.push(reply[i]);
+                }
+
+                dispatch(retrieveSingleDataSuccessful("societyCrew", societyCrew));
             } else if(type === "societyComm" || type === "eventComm") {
                 let comm = [];
                 for(var i = 0; i < reply.length; i++) {
