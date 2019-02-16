@@ -39,7 +39,7 @@ class CreateEvent extends Component {
       totalCrew: 0,
       selectedStartDate: moment(),
       selectedEndDate: moment(),
-      position: '',
+      position: 'Chairperson, Vice Chairperson',
       userId: this.props.userId,
       vegetarian: 0,
       position1: '', position2: '', position3: ''

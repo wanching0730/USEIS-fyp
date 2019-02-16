@@ -86,7 +86,6 @@ class PerEvent extends Component {
     }
 
     render() {
-        console.log(this.props.event);
         $(document).ready(function(){
             $('#zoomBtn').on('click', (function() {
                 $('.zoom-btn-sm').toggleClass('scale-out');
@@ -97,7 +96,7 @@ class PerEvent extends Component {
         });
 
         var buttons = <div></div>, sideNavBar = <div></div>, message = <div></div>;
-        var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant;
+        var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant, studentPosition;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
 
@@ -124,6 +123,16 @@ class PerEvent extends Component {
                 pathname: "/manageParticipant/" + eventId,
                 state: eventState
             };
+
+            // Handle department HOD and Assistant issue
+            let splitPosition = event["position"].split(" ");
+            if(splitPosition[0] != "Vice")
+                studentPosition = splitPosition[0];
+            else 
+                studentPosition = event["position"];
+
+            console.log(studentPosition);
+            console.log(event["authorizedPosition"]);
         } else {
             event = {
                 name: null,
@@ -210,7 +219,7 @@ class PerEvent extends Component {
                     :
                     [
                         <div>
-                            {(event["authorizedPosition"].split(",").includes(event["position"]) && event["status"] == 1) || (this.props.userName.substring(0,2) == "00") ?
+                            {(event["authorizedPosition"].split(",").includes(studentPosition) && event["status"] == 1) || (this.props.userName.substring(0,2) == "00") ?
                                 [
                                     <div className="zoom">
                                         <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>

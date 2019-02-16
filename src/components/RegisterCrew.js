@@ -128,7 +128,7 @@ class RegisterCrew extends Component {
               </Breadcrumb>
             </div>
 
-            {this.props.loading ?
+            {this.props.loading || this.state.positionOptions.length == 0 ?
             [<LoadingBar />]
             :
             [
