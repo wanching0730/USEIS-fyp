@@ -187,6 +187,7 @@ class MyEvent extends Component {
 
             if(this.state.userEvents.length != 0) {
                 let events = this.state.userEvents;
+                console.log(events);
 
                 var status, isVege, action, ratingStatus;
                 
@@ -224,7 +225,7 @@ class MyEvent extends Component {
 
                         if(event["status"] != 1) {
                             if(event["status"] != 2) {
-                                if(event["position"] === "Participant") 
+                                if(event["eRoleId"] === 1) 
                                     action = 
                                         <td>
                                             <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
@@ -239,7 +240,7 @@ class MyEvent extends Component {
                                             </Tooltip>
                                         </td>;
                             } else {
-                                if(event["position"] === "Participant") 
+                                if(event["eRoleId"] === 1) 
                                     action = 
                                         <td>
                                             <Tooltip placement="left" trigger={['hover']} overlay={<span>Remove event registration</span>}>
@@ -275,7 +276,7 @@ class MyEvent extends Component {
                                     <td><Link to={toEvent}>{event["name"]}</Link></td>
                                     <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
                                     <td>{moment(event["joinDate"]).format("DD/MM/YYYY")}</td>
-                                    <td>{event["position"]}</td>
+                                    <td>{event["roleName"]}</td>
                                     {status}
                                     {isVege}
                                     {ratingStatus}
