@@ -308,10 +308,12 @@ export function retrieveDataWithUserId(type, id, userId) {
                     totalParticipant: reply[0]["totalParticipant"],
                     totalCrew: reply[0]["totalCrew"],
                     currentParticipant: reply[0]["currentParticipant"],
+                    authorizedPosition: reply[0]["authorizedPosition"],
                     currentCrew: reply[0]["currentCrew"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
-                    authorized: reply[0]["authorized"]
+                    position: reply[0]["position"],
+                    status: reply[0]["status"]
                 }
                 console.log(event);
                 dispatch(retrieveSingleDataSuccessful("event", event));

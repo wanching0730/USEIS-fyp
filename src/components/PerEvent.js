@@ -86,7 +86,7 @@ class PerEvent extends Component {
     }
 
     render() {
-
+        console.log(this.props.event);
         $(document).ready(function(){
             $('#zoomBtn').on('click', (function() {
                 $('.zoom-btn-sm').toggleClass('scale-out');
@@ -205,12 +205,12 @@ class PerEvent extends Component {
                     </Breadcrumb>
                 </div>
 
-                {this.props.loading ?
+                {this.props.loading || this.props.event == null ?
                     [<LoadingBar />]
                     :
                     [
                         <div>
-                            {event["authorized"] || this.props.userName.substring(0,2) == "00" ?
+                            {(event["authorizedPosition"].split(",").includes(event["position"]) && event["status"] == 1) || (this.props.userName.substring(0,2) == "00") ?
                                 [
                                     <div className="zoom">
                                         <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
@@ -324,7 +324,6 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         event: state.data.event,
-        userEvents: state.data.userEvents,
         userName: state.auth.userName,
         id: state.auth.id,
         loading: state.data.loading
