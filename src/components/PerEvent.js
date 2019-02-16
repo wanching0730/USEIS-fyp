@@ -96,7 +96,7 @@ class PerEvent extends Component {
         });
 
         var buttons = <div></div>, sideNavBar = <div></div>, message = <div></div>;
-        var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant, studentPosition;
+        var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant;
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
         let eventId = this.props.params.eventId;
 
@@ -124,15 +124,13 @@ class PerEvent extends Component {
                 state: eventState
             };
 
-            // Handle department HOD and Assistant issue
-            let splitPosition = event["position"].split(" ");
-            if(splitPosition[0] != "Vice")
-                studentPosition = splitPosition[0];
-            else 
-                studentPosition = event["position"];
+            // // Handle department HOD and Assistant issue
+            // let splitPosition = event["position"].split(" ");
+            // if(splitPosition[0] != "Vice")
+            //     studentPosition = splitPosition[0];
+            // else 
+            //     studentPosition = event["position"];
 
-            console.log(studentPosition);
-            console.log(event["authorizedPosition"]);
         } else {
             event = {
                 name: null,
@@ -219,7 +217,7 @@ class PerEvent extends Component {
                     :
                     [
                         <div>
-                            {(event["authorizedPosition"].split(",").includes(studentPosition) && event["status"] == 1) || (this.props.userName.substring(0,2) == "00") || (event["authorized"]) ?
+                            {(event["specificAuthorized"]) || (this.props.userName.substring(0,2) == "00") || (event["authorized"]) ?
                                 [
                                     <div className="zoom">
                                         <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>

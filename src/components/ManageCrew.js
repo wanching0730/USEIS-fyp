@@ -301,7 +301,7 @@ class ManageCrew extends Component {
                                 <td>Y{singleCrew["year"]}S{singleCrew["semester"]}</td>
                                 <td>{singleCrew["contact"]}</td>
                                 <td>{singleCrew["email"]}</td>
-                                <td>{singleCrew["position"]}</td>
+                                <td>{singleCrew["roleName"]}</td>
                                 {approvedIcon}
                                 {deleteIcon}
                             </tr>

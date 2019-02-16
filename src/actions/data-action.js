@@ -294,7 +294,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     authorizedPosition: reply[0]["authorizedPosition"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
-                    position: reply[0]["roleName"],
+                    specificAuthorized: reply[0]["specificAuthorized"],
                     status: reply[0]["status"]      
                 }
 
@@ -324,7 +324,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
                     authorized: reply[0]["authorized"],
-                    position: reply[0]["roleName"],
+                    specificAuthorized: reply[0]["specificAuthorized"],
                     status: reply[0]["status"]
                 }
                 console.log(event);
