@@ -152,7 +152,7 @@ class MyProfile extends Component {
                 let society = societies[i];
                 var action, status;
 
-                if(society["memberStatus"] != 3) {
+                if(society["status"] != 3) {
                     let toSociety = {
                         pathname: "/perSociety/" + society["societyId"],
                         state: {societyName: society["name"]}
@@ -173,8 +173,8 @@ class MyProfile extends Component {
                         }    
                     }
 
-                    if(society["memberStatus"] != 1 && this.props.userName.substring(0,2) !== "00") {
-                        if(society["memberStatus"] != 2) {
+                    if(society["status"] != 1 && this.props.userName.substring(0,2) !== "00") {
+                        if(society["status"] != 2) {
                             action = 
                                 <td>
                                     <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel society registration</span>}>
@@ -207,11 +207,11 @@ class MyProfile extends Component {
                     if(this.props.userName.substring(0,2) === "00") {
                         status = <td>-</td>;
                     } else {
-                        if(society["memberStatus"] === 0)  
+                        if(society["status"] === 0)  
                             status = <td>Pending</td>;
-                        else if(society["memberStatus"] === 1)
+                        else if(society["status"] === 1)
                             status = <td>Approved</td>;
-                        else if(society["memberStatus"] === 2)
+                        else if(society["status"] === 2)
                             status = <td style={{color: "red"}}>Rejected</td>; 
                     }
 

@@ -111,7 +111,7 @@ class PerEvent extends Component {
             }
 
             toManageCrew = {
-                pathname: "/manageCrew/" + eventId,
+                pathname: "/manageCrew/event/" + eventId,
                 state: eventState
             }
 

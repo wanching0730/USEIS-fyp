@@ -70,7 +70,11 @@ class ManageCrew extends Component {
     }
 
     updateList(data) {
-        if(this.props.params.type === "event")
+        console.log("called");
+        console.log(this.state.societyCrew);
+        console.log(this.props.params.type);
+        console.log(data["type"]);
+        if(this.props.params.type === "event" && data["type"] == "student") {
             if(this.state.eventCrew != null) {
                 let list = this.state.eventCrew;
                 for(var i = 0; i < list.length; i++) {
@@ -82,11 +86,18 @@ class ManageCrew extends Component {
                 }
                 this.setState({ eventCrew: list });
             }
-        else
-            if(this.state.societyCrew != null) {
+        }
+        else {
+            console.log(this.state.societyCrew != null);
+            console.log(data["type"] == "studentSociety");
+            if(this.state.societyCrew != null && data["type"] == "studentSociety") {
                 let list = this.state.societyCrew;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
+                    console.log(item["studentId"]);
+                    console.log(data["id"]);
+                    console.log(item["societyId"]);
+                    console.log(data["societyId"]);
                     if(item["studentId"] == data["id"] && item["societyId"] == data["societyId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
@@ -94,6 +105,7 @@ class ManageCrew extends Component {
                 }
                 this.setState({ societyCrew: list });
             }
+        }
     }
 
     handleApprove(event) {

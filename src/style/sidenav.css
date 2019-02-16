@@ -36,7 +36,7 @@
     position: absolute;
     right: 15%;
     left: auto;
-    top: 0%;
+    top: -45%;
     bottom:20%;
     transform: translateY(-300%);
     height: 100%;
@@ -87,6 +87,10 @@
 .zoom-btn-feedback { background-color: #9c27b0; }
 
 .zoom-btn-feedback:hover { background-color: #ba68c8; }
+
+.zoom-btn-crew { background-color: blue; }
+
+.zoom-btn-crew:hover { background-color: lightskyblue; }
 
 .scale-transition { transition: transform 0.3s cubic-bezier(0.53, 0.01, 0.36, 1.63) !important; }
 

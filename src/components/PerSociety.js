@@ -100,7 +100,7 @@ class PerSociety extends Component {
         });
 
         const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
-        var society, toCreateEvent, toManageMember, toRegisterBooth;
+        var society, toCreateEvent, toManageCrew, toManageMember, toRegisterBooth;
         var buttons = <div></div>;
         
         if(this.props.society != null) {
@@ -112,6 +112,11 @@ class PerSociety extends Component {
                 pathname: "/createEvent/society/" + societyId,
                 state: societyState
             };
+
+            toManageCrew = {
+                pathname: "/manageCrew/society/" + societyId,
+                state: societyState
+            }
 
             toManageMember = {
                 pathname: "/manageMember/" + societyId,
@@ -184,6 +189,7 @@ class PerSociety extends Component {
                                             <li><a className="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaEdit /></Link></a></li>
                                             <li><a className="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
                                             <li><a className="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
+                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-crew scale-transition scale-out"><Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase /></Link></a></li>
                                             <li><a className="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
                                         </ul> 
                                     </div>
