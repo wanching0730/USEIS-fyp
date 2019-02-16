@@ -314,6 +314,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     currentCrew: reply[0]["currentCrew"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
+                    authorized: reply[0]["authorized"],
                     position: reply[0]["position"],
                     status: reply[0]["status"]
                 }

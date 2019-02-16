@@ -219,7 +219,7 @@ class PerEvent extends Component {
                     :
                     [
                         <div>
-                            {(event["authorizedPosition"].split(",").includes(studentPosition) && event["status"] == 1) || (this.props.userName.substring(0,2) == "00") ?
+                            {(event["authorizedPosition"].split(",").includes(studentPosition) && event["status"] == 1) || (this.props.userName.substring(0,2) == "00") || (event["authorized"]) ?
                                 [
                                     <div className="zoom">
                                         <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
