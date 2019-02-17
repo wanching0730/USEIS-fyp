@@ -348,6 +348,7 @@ export function retrieveData(type, id) {
     return function (dispatch) {
         return getData(type, id).then(result => result.json()).then(reply => {
             if(type === "society") {
+                console.log(reply);
                 let society = {
                     id: reply[0]["societyId"],
                     name: reply[0]["name"],
@@ -356,7 +357,7 @@ export function retrieveData(type, id) {
                     mission: reply[0]["mission"],
                     desc: reply[0]["description"],
                     logoUrl: reply[0]["logoUrl"],
-                    authorizedPosition: reply[0]["authorizedPosition"],
+                    roles: reply[0]["roles"],
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"]
                 }

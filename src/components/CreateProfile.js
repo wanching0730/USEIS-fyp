@@ -27,7 +27,7 @@ class CreateProfile extends Component {
       logoUrl: '',
       userId: this.props.userId,
       positionOptions: [],
-      position1: 1, position2: 1, position3: 1
+      position1: 0, position2: 0, position3: 0
     }
 
     if(this.props.params.societyId) {
@@ -58,13 +58,16 @@ class CreateProfile extends Component {
           logoUrl: society["logoUrl"]
         });
 
-        // let authorizedPositions = society["authorizedPosition"].split(",");
-        // this.setState({
-        //   position1: authorizedPositions[0],
-        //   position2: authorizedPositions[1],
-        //   position3: authorizedPositions[2]
-        // });
-
+        console.log(society["roles"]);
+        if(society["roles"].length > 0) {
+          let authorizedPositions = society["roles"];
+          if(authorizedPositions[0] != null)
+            this.setState({ position1: authorizedPositions[0]["sRoleId"]});
+          if(authorizedPositions[1] != null)
+            this.setState({ position2: authorizedPositions[1]["sRoleId"]});
+          if(authorizedPositions[2] != null)
+            this.setState({ position3: authorizedPositions[2]["sRoleId"]});
+        }
       }.bind(this), 5000)
     }
   }
@@ -77,10 +80,18 @@ class CreateProfile extends Component {
       for(var i = 0; i < positions.length; i++) {
         if(positions[i] != null) {
           let position = positions[i];
-          positionOptions.push({
-            value: position["sRoleId"],
-            name: position["roleName"]
-          });
+
+          if(position["sRoleId"] == 1) {
+            positionOptions.push({
+              value: 0,
+              name: "None"
+            });
+          } else {
+            positionOptions.push({
+              value: position["sRoleId"],
+              name: position["roleName"]
+            });
+          }
         }
       }
       this.setState({positionOptions: positionOptions});
@@ -114,19 +125,17 @@ class CreateProfile extends Component {
 
       var authorizedPositions = [];
 
-      if(this.state.position1 != 1)
+      if(this.state.position1 != 0)
         authorizedPositions.push(this.state.position1);
-      if(this.state.position2 != 1)
+      if(this.state.position2 != 0)
         authorizedPositions.push(this.state.position2);
-      if(this.state.position3 != 1)
+      if(this.state.position3 != 0)
         authorizedPositions.push(this.state.position3);
 
       let societyId = this.props.params.societyId;
       let data = this.state;
       let societyName = data["name"];
       data["authorizedPositions"] = authorizedPositions
-
-      console.log(authorizedPositions);
 
       // if(this.props.params.societyId)
       //   data["authorizedPositions"]= authorizedPositions == '' ? this.props.society["authorizedPosition"] : authorizedPositions;
@@ -178,7 +187,7 @@ class CreateProfile extends Component {
         <Breadcrumb>
           <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
           <BreadcrumbItem><Link to={`/society`}>Societies</Link></BreadcrumbItem>
-          <BreadcrumbItem><Link to={`/perSociety/` + this.props.params.societyId}>{name}</Link></BreadcrumbItem>
+          <BreadcrumbItem><Link to={{pathname:`/perSociety/` + this.props.params.societyId, state: {societyName: name}}}>{name}</Link></BreadcrumbItem>
           <BreadcrumbItem active>Edit Society Profile</BreadcrumbItem>
         </Breadcrumb>
     }
