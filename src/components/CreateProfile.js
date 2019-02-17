@@ -124,7 +124,6 @@ class CreateProfile extends Component {
       this.props.onUpdateCreateLoadingBar();
 
       var authorizedPositions = [];
-
       if(this.state.position1 != 0)
         authorizedPositions.push(this.state.position1);
       if(this.state.position2 != 0)

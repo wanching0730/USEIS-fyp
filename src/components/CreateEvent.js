@@ -14,6 +14,7 @@ import '../style/form.css';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create, update, updatePostLoadingBar } from '../actions/post-action';
+import { retrieveAll, updateLoadingBar } from '../actions/data-action';
 
 class CreateEvent extends Component {
 
@@ -42,8 +43,11 @@ class CreateEvent extends Component {
       position: 'Chairperson, Vice Chairperson',
       userId: this.props.userId,
       vegetarian: 0,
-      position1: '', position2: '', position3: ''
+      positionOptions: [],
+      position1: 0, position2: 0, position3: 0
     }
+
+    this.props.onRetrieveAll("eventRole");
 
     this.handleClick = this.handleClick.bind(this);
     //this.handleChange = this.handleChange.bind(this);
@@ -80,12 +84,42 @@ class CreateEvent extends Component {
         selectedEndDate: moment(event["endDate"])
       });
 
-      let authorizedPositions = event["authorizedPosition"].split(",");
-        this.setState({
-          position1: authorizedPositions[0],
-          position2: authorizedPositions[1],
-          position3: authorizedPositions[2]
-        });
+      console.log(event["roles"]);
+      if(event["roles"].length > 0) {
+        let authorizedPositions = event["roles"];
+        if(authorizedPositions[0] != null)
+          this.setState({ position1: authorizedPositions[0]["eRoleId"]});
+        if(authorizedPositions[1] != null)
+          this.setState({ position2: authorizedPositions[1]["eRoleId"]});
+        if(authorizedPositions[2] != null)
+          this.setState({ position3: authorizedPositions[2]["eRoleId"]});
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if((nextProps.roles != this.props.roles) || (this.props.roles != null)) {
+      var positionOptions = [];
+      var positions = nextProps.roles;
+
+      for(var i = 0; i < positions.length; i++) {
+        if(positions[i] != null) {
+          let position = positions[i];
+
+          if(position["eRoleId"] == 1) {
+            positionOptions.push({
+              value: 0,
+              name: "None"
+            });
+          } else {
+            positionOptions.push({
+              value: position["eRoleId"],
+              name: position["roleName"]
+            });
+          }
+        }
+      }
+      this.setState({positionOptions: positionOptions});
     }
   }
 
@@ -118,16 +152,25 @@ class CreateEvent extends Component {
       return false;
     } else {
       this.props.onUpdateLoadingBar();
+
+      var authorizedPositions = [];
+      if(this.state.position1 != 0)
+        authorizedPositions.push(this.state.position1);
+      if(this.state.position2 != 0)
+        authorizedPositions.push(this.state.position2);
+      if(this.state.position3 != 0)
+        authorizedPositions.push(this.state.position3);
       
-      let authorizedPositions = this.state.position1 + ',' + this.state.position2 + ',' + this.state.position3;
+      //let authorizedPositions = this.state.position1 + ',' + this.state.position2 + ',' + this.state.position3;
       let eventId = this.props.params.id;
       let data = this.state
       let eventName = data["name"];
+      data["authorizedPositions"] = authorizedPositions
 
-      if(this.props.params.eventId)
-        data["authorizedPositions"]= authorizedPositions == '' ? this.props.event["authorizedPosition"] : authorizedPositions;
-      else
-        data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
+      // if(this.props.params.eventId)
+      //   data["authorizedPositions"]= authorizedPositions == '' ? this.props.event["authorizedPosition"] : authorizedPositions;
+      // else
+      //   data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
 
       if(this.props.params.type == "society")
         this.props.onCreate("event", data);
@@ -180,8 +223,8 @@ class CreateEvent extends Component {
     {value:'eq', name:'Emotional Intelligence & Teamwork Skills'}, {value:'entrepreneur', name:'Entrepreneurship Skills'}, {value:'leadership', name:'Leadership Skills'},
     {value:'lifelong', name:'Lifelong Learning & Information Management'}, {value:'moral', name:'Moral & Professional Ethics'}];
 
-    const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
-      {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Editorial', name:'Editorial'}]
+    // const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
+    //   {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Editorial', name:'Editorial'}]
 
     var header;
     var breadCrumb;
@@ -216,7 +259,7 @@ class CreateEvent extends Component {
                 {breadCrumb}
             </div>
 
-            {this.props.loading ?
+            {this.props.loading || this.props.retrieveLoading || this.state.positionOptions.length == 0?
             [<LoadingBar />]
             :
             [
@@ -398,17 +441,17 @@ class CreateEvent extends Component {
                         <div class="inner-wrap">
                           <label>First position</label>
                           <select value={this.state.position1} onChange={(event) => {this.setState({position1:event.target.value})}}>
-                            {positionOptions.map(this.mapItem)}
+                            {this.state.positionOptions.map(this.mapItem)}
                           </select>
                           <br/>
                           <label>Second position</label>
                           <select value={this.state.position2} onChange={(event) => {this.setState({position2:event.target.value})}}>
-                            {positionOptions.map(this.mapItem)}
+                            {this.state.positionOptions.map(this.mapItem)}
                           </select>
                           <br/>
                           <label>Third position</label>
                           <select value={this.state.position3} onChange={(event) => {this.setState({position3:event.target.value})}}>
-                            {positionOptions.map(this.mapItem)}
+                            {this.state.positionOptions.map(this.mapItem)}
                           </select>
                       </div>
 
@@ -437,7 +480,9 @@ const mapStateToProps = (state, props) => {
   return {
     userId: state.auth.id,
     event: state.data.event,
-    loading: state.create.loading
+    loading: state.create.loading,
+    retrieveLoading: state.data.loading,
+    roles: state.data.roles
   };
 };
 
@@ -445,6 +490,8 @@ const mapActionsToProps = (dispatch, props) => {
   return bindActionCreators({
     onCreate: create,
     onUpdate: update,
+    onRetrieveAll: retrieveAll,
+    onUpdateRetrieveLoadingBar: updateLoadingBar,
     onUpdateLoadingBar: updatePostLoadingBar
   }, dispatch);
 };
