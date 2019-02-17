@@ -56,12 +56,12 @@ class NavBar extends Component {
 
         if(societies != null) {
             for(var i = 0; i < societies.length; i++) {
-                let p = societies[i]["position"];
-                if(p == "chairperson" || p == "secretary") {
+                let p = societies[i]["roleName"];
+                if(p == "Chairperson" || p == "Secretary") {
                     position = "committee";
                     break;
                 }
-                else if(p == "officer" || p == "advisor") {
+                else if(p == "Officer" || p == "Advisor") {
                     position = "staff";
                     break;
                 }
@@ -76,9 +76,6 @@ class NavBar extends Component {
                 <DropdownItem name="manageBooth" onClick={this.onClick}>
                     Manage Booth
                 </DropdownItem>
-                <DropdownItem name="createProfile" onClick={this.onClick}>
-                    Create Society Profile
-                </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem name="faq" onClick={this.onClick}>
                     FAQ
@@ -87,9 +84,15 @@ class NavBar extends Component {
         } else if(position == "staff") {
             dropDownItem = 
             <DropdownMenu left="true">
-                <DropdownItem name="manageProposal" onClick={this.onClick}>
-                    Manage Proposal
+                <DropdownItem name="manageBooth" onClick={this.onClick}>
+                    Manage Booth
                 </DropdownItem>
+                <DropdownItem name="createProfile" onClick={this.onClick}>
+                    Create Society Profile
+                </DropdownItem>
+                {/* <DropdownItem name="manageProposal" onClick={this.onClick}>
+                    Manage Proposal
+                </DropdownItem> */}
                 <DropdownItem divider />
                 <DropdownItem name="faq" onClick={this.onClick}>
                     FAQ

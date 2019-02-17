@@ -12,7 +12,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { create, update, updatePostLoadingBar } from '../actions/post-action';
 import { retrieveData, retrieveAll, updateLoadingBar } from '../actions/data-action';
-import { removeData } from '../utils/http_function';
 
 class CreateProfile extends Component {
 
@@ -27,15 +26,16 @@ class CreateProfile extends Component {
       mission: '',
       logoUrl: '',
       userId: this.props.userId,
-      position1: '', position2: '', position3: '',
-      positionOptions: []
+      positionOptions: [],
+      position1: 1, position2: 1, position3: 1
     }
 
     if(this.props.params.societyId) {
       this.props.onUpdateRetrieveLoadingBar();
       this.props.onRetrieveData("society", this.props.params.societyId);
-      this.props.onRetrieveAll("societyRole");
     }
+
+    this.props.onRetrieveAll("societyRole");
 
     //this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -58,26 +58,47 @@ class CreateProfile extends Component {
           logoUrl: society["logoUrl"]
         });
 
-        let authorizedPositions = society["authorizedPosition"].split(",");
-        this.setState({
-          position1: authorizedPositions[0],
-          position2: authorizedPositions[1],
-          position3: authorizedPositions[2]
-        });
+        // let authorizedPositions = society["authorizedPosition"].split(",");
+        // this.setState({
+        //   position1: authorizedPositions[0],
+        //   position2: authorizedPositions[1],
+        //   position3: authorizedPositions[2]
+        // });
 
       }.bind(this), 5000)
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    if((nextProps.roles != this.props.roles) || (this.props.roles != null)) {
+      var positionOptions = [];
+      var positions = nextProps.roles;
+
+      for(var i = 0; i < positions.length; i++) {
+        if(positions[i] != null) {
+          let position = positions[i];
+          positionOptions.push({
+            value: position["sRoleId"],
+            name: position["roleName"]
+          });
+        }
+      }
+      this.setState({positionOptions: positionOptions});
+    }
+  }
+
   // handleChange(event) {
-  //   if(this.state.authorizedPositions.indexOf(event.target.value) >= 0)
-  //     this.setState({authorizedPositions: this.state.authorizedPositions + event.target.value + ','}); 
+  //   console.log(event.target.value);
+  //   // this.setState(prevState => (
+  //   //   { 
+  //   //     authorizedPositions: [...prevState.authorizedPositions, event.target.value]
+  //   //   }));
   // }
 
   handleClick(event) {
-    const { name, desc, vision, mission, logoUrl } = this.state;
+    const { name, desc, vision, mission, logoUrl, position1, position2, position3 } = this.state;
 
-    if(name == '' || desc == '' || vision == '' ||  mission == '' || logoUrl == '') {
+    if(name == '' || desc == '' || vision == '' ||  mission == '' || logoUrl == '' || (position1 == 1 && position2 == 1 && position3 == 1)) {
       confirmAlert({
         title: 'Warning',
         message: 'Please fill in all empty fields before proceed',
@@ -91,15 +112,26 @@ class CreateProfile extends Component {
     } else {
       this.props.onUpdateCreateLoadingBar();
 
-      let authorizedPositions = this.state.position1 + ',' + this.state.position2 + ',' + this.state.position3;
+      var authorizedPositions = [];
+
+      if(this.state.position1 != 1)
+        authorizedPositions.push(this.state.position1);
+      if(this.state.position2 != 1)
+        authorizedPositions.push(this.state.position2);
+      if(this.state.position3 != 1)
+        authorizedPositions.push(this.state.position3);
+
       let societyId = this.props.params.societyId;
       let data = this.state;
       let societyName = data["name"];
+      data["authorizedPositions"] = authorizedPositions
 
-      if(this.props.params.societyId)
-        data["authorizedPositions"]= authorizedPositions == '' ? this.props.society["authorizedPosition"] : authorizedPositions;
-      else
-        data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
+      console.log(authorizedPositions);
+
+      // if(this.props.params.societyId)
+      //   data["authorizedPositions"]= authorizedPositions == '' ? this.props.society["authorizedPosition"] : authorizedPositions;
+      // else
+      //   data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
       
       if(societyId == null) {
         this.props.onCreate("society", data);
@@ -161,7 +193,7 @@ class CreateProfile extends Component {
               {breadCrumb}
             </div>
 
-            {this.props.createLoading || this.props.retrieveLoading ?
+            {this.props.createLoading || this.props.retrieveLoading || this.state.positionOptions.length == 0 ?
             [<LoadingBar />]
             :
             [
@@ -207,17 +239,17 @@ class CreateProfile extends Component {
                         <div class="inner-wrap">
                           <label>First position</label>
                           <select value={this.state.position1} onChange={(event) => {this.setState({position1:event.target.value})}}>
-                            {positionOptions.map(this.mapItem)}
+                            {this.state.positionOptions.map(this.mapItem)}
                           </select>
                           <br/>
                           <label>Second position</label>
                           <select value={this.state.position2} onChange={(event) => {this.setState({position2:event.target.value})}}>
-                            {positionOptions.map(this.mapItem)}
+                            {this.state.positionOptions.map(this.mapItem)}
                           </select>
                           <br/>
                           <label>Third position</label>
-                          <select value={this.state.position3} onChange={(event) => {this.setState({position3:event.target.value})}}>
-                            {positionOptions.map(this.mapItem)}
+                          <select value={this.state.position3}  onChange={(event) => {this.setState({position3:event.target.value})}}>
+                            {this.state.positionOptions.map(this.mapItem)}
                           </select>
                       </div>
 
@@ -247,7 +279,8 @@ const mapStateToProps = (state, props) => {
     userId: state.auth.id,
     society: state.data.society,
     createLoading: state.create.loading,
-    retrieveLoading: state.data.loading
+    retrieveLoading: state.data.loading,
+    roles: state.data.roles
   };
 };
 
