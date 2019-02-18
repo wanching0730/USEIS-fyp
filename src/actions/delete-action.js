@@ -40,7 +40,6 @@ export function updateDeleteLoadingBar() {
 export function deleteData(type, id) {
     return function (dispatch) {
         return removeData(type, id).then(result => result.json()).then(reply => {
-            console.log("deleted data reply: " + reply);
 
             if(reply != "true") {
                 dispatch(deleteDataSuccessful());
@@ -66,7 +65,6 @@ export function deleteData(type, id) {
 export function deleteParticipation(type, id, eventId) {
     return function (dispatch) {
         return removeParticipation(type, id, eventId).then(result => result.json()).then(reply => {
-            console.log("deleted data reply: " + reply);
 
             if(reply != "true") {
                 dispatch(deleteParticipationSuccessful());

@@ -43,7 +43,6 @@ class Event extends Component {
         console.log("next props: " + nextProps.eventsFound);
 
         if((nextProps.eventsFound != this.props.eventsFound) && (nextProps.eventsFound != null)) {
-            console.log("found: " + this.props.eventsFound);
             let eventsFound = nextProps.eventsFound;
             var resultRows = [];
 
@@ -94,7 +93,6 @@ class Event extends Component {
     }
 
     handleClick(event) {
-        console.log("clicked");
     }
 
     handleSearch() {
@@ -124,8 +122,6 @@ class Event extends Component {
     }
 
     render() {
-        console.log("found 1: " + this.props.eventsFound);
-
         const { RaisedButtonStyle } = styles;
         let events = this.props.events;
 

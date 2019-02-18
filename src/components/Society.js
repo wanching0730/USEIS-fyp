@@ -39,7 +39,6 @@ class Society extends Component {
         console.log("next props: " + nextProps.societiesFound);
 
         if((nextProps.societiesFound != this.props.societiesFound) && (nextProps.societiesFound != null)) {
-            console.log("found: " + this.props.societiesFound);
             let societiesFound = nextProps.societiesFound;
             var resultRows = [];
 
@@ -182,7 +181,6 @@ class Society extends Component {
 };
 
 const mapStateToProps = (state, props) => {
-    console.log("state in society: " + state.data.societies);
     return {
       societies: state.data.societies,
       societiesFound: state.data.societiesFound,

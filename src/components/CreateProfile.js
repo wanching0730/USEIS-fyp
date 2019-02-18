@@ -58,7 +58,6 @@ class CreateProfile extends Component {
           logoUrl: society["logoUrl"]
         });
 
-        console.log(society["roles"]);
         if(society["roles"].length > 0) {
           let authorizedPositions = society["roles"];
           if(authorizedPositions[0] != null)

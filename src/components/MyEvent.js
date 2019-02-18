@@ -187,7 +187,6 @@ class MyEvent extends Component {
 
             if(this.state.userEvents.length != 0) {
                 let events = this.state.userEvents;
-                console.log(events);
 
                 var status, isVege, action, ratingStatus;
                 
@@ -269,21 +268,21 @@ class MyEvent extends Component {
                         }
 
                         rows.push(
-                                <tr>
-                                    <td>{i+1}</td>
-                                    <td><img style={imageStyle} src={event["logoUrl"]} /></td>
-                                    {/* <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td> */}
-                                    <td><Link to={toEvent}>{event["name"]}</Link></td>
-                                    <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
-                                    <td>{moment(event["joinDate"]).format("DD/MM/YYYY")}</td>
-                                    <td>{event["roleName"]}</td>
-                                    {status}
-                                    {isVege}
-                                    {ratingStatus}
-                                    {action}
-                                </tr>
-                            )
-                        }
+                            <tr>
+                                <td>{i+1}</td>
+                                <td><img style={imageStyle} src={event["logoUrl"]} /></td>
+                                {/* <td><img style={imageStyle} src={ require('../assets/images/sport.jpg') } /></td> */}
+                                <td><Link to={toEvent}>{event["name"]}</Link></td>
+                                <td><Link to={toSociety}>{event["organiserName"]}</Link></td>
+                                <td>{moment(event["joinDate"]).format("DD/MM/YYYY")}</td>
+                                <td>{event["roleName"]}</td>
+                                {status}
+                                {isVege}
+                                {ratingStatus}
+                                {action}
+                            </tr>
+                        )
+                    }
                 }
             } else {
                 message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No events participated</div>;

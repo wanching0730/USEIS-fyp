@@ -5,6 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
+import moment from "moment";
 import '../style/table.css';
 
 import { connect } from 'react-redux';
@@ -23,9 +24,6 @@ class CommitteeBoard extends Component {
             this.props.onRetrieveData("societyComm", parameter.id);
         else 
             this.props.onRetrieveData("eventComm", parameter.id);
-
-        console.log("params location: " + JSON.stringify(this.props.location));
-        console.log("params type: " + this.props.params.type);
     }
 
     componentDidMount() {
@@ -52,7 +50,8 @@ class CommitteeBoard extends Component {
                         <td>Y{comm["year"]}S{comm["semester"]}</td>
                         <td>{comm["contact"]}</td>
                         <td>{comm["email"]}</td>
-                        <td>{comm["position"]}</td>
+                        <td>{comm["roleName"]}</td>
+                        <td>{moment(comm["joinDate"]).format("YY") + "/" + parseInt(parseInt(moment(comm["joinDate"]).format("YY")) + 1)}</td>
                     </tr>
                 )
             }
@@ -105,7 +104,8 @@ class CommitteeBoard extends Component {
                                                 <th>Year and Sem</th> 
                                                 <th>Phone Number</th>   
                                                 <th>Email Address</th>   
-                                                <th>Position</th>                 
+                                                <th>Position</th>  
+                                                <th>Term</th>               
                                             </tr>
                                         </thead>
 

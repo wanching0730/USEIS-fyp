@@ -46,7 +46,7 @@ class RegisterCrew extends Component {
       for(var i = 0; i < positions.length; i++) {
         if(positions[i] != "") {
           let position = positions[i];
-          if(position === "Chairperson" || position === "ViceChairperson" || position === "Secretary" || position === "Vice Secretary" || position === "Treasurer" || position === "Vice Treasurer" || position === "Editor") {
+          if(position === "Chairperson" || position === "Vice Chairperson" || position === "Secretary" || position === "Vice Secretary" || position === "Treasurer" || position === "Vice Treasurer" || position === "Editor") {
             positionOptions.push({
               value: position,
               name: position

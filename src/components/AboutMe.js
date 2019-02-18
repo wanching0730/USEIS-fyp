@@ -18,8 +18,6 @@ class AboutMe extends Component {
         let user = this.props.user[0];
         const { RaisedButtonStyle } = styles;
 
-        console.log("user in about me " + JSON.stringify(user));
-
         return (
             <div>
                 <MuiThemeProvider>

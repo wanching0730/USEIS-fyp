@@ -258,7 +258,6 @@ export function exportData(type, id) {
     return function(dispatch) {
         return downloadData(type, id).then(result => result.json()).then(reply => {
             if(reply) {
-                console.log("exported");
                 dispatch(retrieveAllDataSuccessful("exportData", reply));
 
                 confirmAlert({
@@ -328,16 +327,12 @@ export function retrieveDataWithUserId(type, id, userId) {
                     roles: reply[0]["roles"],
                     status: reply[0]["status"]
                 }
-                console.log(event);
                 dispatch(retrieveSingleDataSuccessful("event", event));
             } else if(type === "checkIsStudentRegistered" || type === "checkIsStaffRegistered" || type === "checkIsSocietyRegistered") {
-                console.log(reply.length);
                 if(reply.length === 0) 
                     var isRegistered = false;
                 else 
                     var isRegistered = true;
-
-                console.log(isRegistered);
 
                 dispatch(retrieveSingleDataSuccessful("checkIsRegistered", isRegistered));
             }
@@ -349,7 +344,6 @@ export function retrieveData(type, id) {
     return function (dispatch) {
         return getData(type, id).then(result => result.json()).then(reply => {
             if(type === "society") {
-                console.log(reply);
                 let society = {
                     id: reply[0]["societyId"],
                     name: reply[0]["name"],
@@ -458,7 +452,6 @@ export function retrieveData(type, id) {
 
                 dispatch(retrieveSingleDataSuccessful("crewPosition", crewPositions));
             } else if(type === "totalBooth") {
-                console.log(reply[0]);
                 let overallBooth = reply[0];
 
                 dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
@@ -541,7 +534,6 @@ export function retrieveAll(type) {
 
                 dispatch(retrieveAllDataSuccessful(type, allBooths));
             } else if(type === "societyRole" || type === "eventRole") {
-                console.log(reply);
                 let roles = reply;
 
                 dispatch(retrieveAllDataSuccessful("roles", roles));

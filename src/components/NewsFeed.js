@@ -73,7 +73,7 @@ class NewsFeed extends Component {
             let options = [];
             for(var i = 0; i < societies.length; i++) {
                 let society = societies[i];
-                if(society["position"] == "chairperson" || society["position"] == "secretary") {
+                if([2,3,9].includes(society["sRoleId"])) {
                     options.push({
                         value: society["societyId"],
                         name: society["name"]
@@ -91,7 +91,7 @@ class NewsFeed extends Component {
                 let options = [];
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
-                    if(event["position"] == "chairperson" || event["position"] == "secretary") {
+                    if([2,3,10].includes(event["eRoleId"])) {
                         options.push({
                             value: event["eventId"],
                             name: event["name"]

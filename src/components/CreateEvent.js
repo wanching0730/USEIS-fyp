@@ -40,7 +40,7 @@ class CreateEvent extends Component {
       totalCrew: 0,
       selectedStartDate: moment(),
       selectedEndDate: moment(),
-      position: 'Chairperson, Vice Chairperson',
+      position: 'Chairperson,Vice Chairperson',
       userId: this.props.userId,
       vegetarian: 0,
       positionOptions: [],
@@ -84,7 +84,6 @@ class CreateEvent extends Component {
         selectedEndDate: moment(event["endDate"])
       });
 
-      console.log(event["roles"]);
       if(event["roles"].length > 0) {
         let authorizedPositions = event["roles"];
         if(authorizedPositions[0] != null)
