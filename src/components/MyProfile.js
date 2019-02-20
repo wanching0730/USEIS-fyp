@@ -30,8 +30,12 @@ class MyProfile extends Component {
         };
 
         this.props.onUpdateLoadingBar();
-        this.props.onRetrieveData("studentSociety", this.props.userId);
         this.props.onRetrieveAll("societyEvent");
+
+        if(this.props.userName.substring(0,2) === "00") 
+            this.props.onRetrieveData("staffSociety", this.props.userId);
+        else
+            this.props.onRetrieveData("studentSociety", this.props.userId);
 
         this.updateList = this.updateList.bind(this);
         this.handleCancelSociety = this.handleCancelSociety.bind(this);
@@ -223,7 +227,7 @@ class MyProfile extends Component {
                             <td><Link to={toSociety}>{society["name"]}</Link></td>
                             <td>
                                 {this.props.userName.substring(0,2) != "00" ? 
-                                    moment(society["joinDate"]).format("DD/MM/YYYY") : society["joinDate"]}
+                                    moment(society["joinDate"]).format("DD/MM/YYYY") : "-"}
                             </td>
                             <td>{society["roleName"]}</td>
                             {status}
