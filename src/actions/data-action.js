@@ -17,6 +17,7 @@ import {
     RETRIEVE_EVENT_BOOTHS,
     RETRIEVE_ALL_BOOTHS,
     RETRIEVE_USER_EVENTS,
+    RETRIEVE_USER_SOCIETIES,
     RETRIEVE_SOCIETY_MEMBERS,
     RETRIEVE_CREW_POSITION,
     RETRIEVE_ROLES,
@@ -95,6 +96,14 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_USER_EVENTS,
             payload: {
                 userEvents: data,
+                loading: false
+            }
+        }
+    } else if(type === "userSociety") {
+        return {
+            type: RETRIEVE_USER_SOCIETIES,
+            payload: {
+                userSocieties: data,
                 loading: false
             }
         }
@@ -405,6 +414,13 @@ export function retrieveData(type, id) {
                 }
 
                 dispatch(retrieveSingleDataSuccessful("userEvent", userEvents));
+            } else if(type === "studentSociety" || type === "staffSociety") {
+                let userSocieties = [];
+                for(var i = 0; i < reply.length; i++) {
+                    userSocieties.push(reply[i]);
+                }
+
+                dispatch(retrieveSingleDataSuccessful("userSociety", userSocieties));
             } else if(type === "eventCrew") {
                 let eventCrew = [];
                 for(var i = 0; i < reply.length; i++) {

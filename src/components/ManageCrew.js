@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
 import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
+import moment from "moment";
 import '../style/table.css';
 import '../style/alert.css';
 import 'rc-tooltip/assets/bootstrap_white.css';
@@ -70,10 +71,6 @@ class ManageCrew extends Component {
     }
 
     updateList(data) {
-        console.log("called");
-        console.log(this.state.societyCrew);
-        console.log(this.props.params.type);
-        console.log(data["type"]);
         if(this.props.params.type === "event" && data["type"] == "student") {
             if(this.state.eventCrew != null) {
                 let list = this.state.eventCrew;
@@ -88,16 +85,10 @@ class ManageCrew extends Component {
             }
         }
         else {
-            console.log(this.state.societyCrew != null);
-            console.log(data["type"] == "studentSociety");
             if(this.state.societyCrew != null && data["type"] == "studentSociety") {
                 let list = this.state.societyCrew;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    console.log(item["studentId"]);
-                    console.log(data["id"]);
-                    console.log(item["societyId"]);
-                    console.log(data["societyId"]);
                     if(item["studentId"] == data["id"] && item["societyId"] == data["societyId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
@@ -219,7 +210,7 @@ class ManageCrew extends Component {
     render() {
         const { RaisedButtonStyle } = styles;
         var message = <div></div>;
-        var rows = [], breadcrumbs, crew;
+        var rows = [], breadcrumbs, crew, termTh, termTd;
         
         if(this.props.params.type === "event") {
             crew = this.state.eventCrew;
@@ -234,6 +225,8 @@ class ManageCrew extends Component {
                 </div>
         } else {
             crew = this.state.societyCrew;
+
+            termTh = <th>Term</th>;
 
             breadcrumbs = 
                 <div style={{ margin: 20 }}>
@@ -251,6 +244,9 @@ class ManageCrew extends Component {
                 for(var i = 0; i < crew.length; i++) {
                     let singleCrew = crew[i];
                     var approvedIcon, deleteIcon;
+
+                    if(this.props.params.type === "society")
+                        termTd = <td>{moment(singleCrew["joinDate"]).format("YY") + "/" + parseInt(parseInt(moment(singleCrew["joinDate"]).format("YY")) + 1)}</td>
                     
                     if(singleCrew["status"] != 2) {
                         if(singleCrew["status"] == 1) 
@@ -302,6 +298,7 @@ class ManageCrew extends Component {
                                 <td>{singleCrew["contact"]}</td>
                                 <td>{singleCrew["email"]}</td>
                                 <td>{singleCrew["roleName"]}</td>
+                                {termTd}
                                 {approvedIcon}
                                 {deleteIcon}
                             </tr>
@@ -339,6 +336,7 @@ class ManageCrew extends Component {
                                                     <th>Phone Number</th>   
                                                     <th>Email Address</th>   
                                                     <th>Position</th>  
+                                                    {termTh}
                                                     <th colSpan="2">Actions</th>               
                                                 </tr>
                                             </thead>

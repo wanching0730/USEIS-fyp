@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateDouble } from '../actions/post-action';
 import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
-import { retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { retrieveAll, retrieveData, updateLoadingBar } from '../actions/data-action';
 
 class MyProfile extends Component {
 
@@ -30,6 +30,7 @@ class MyProfile extends Component {
         };
 
         this.props.onUpdateLoadingBar();
+        this.props.onRetrieveData("studentSociety", this.props.userId);
         this.props.onRetrieveAll("societyEvent");
 
         this.updateList = this.updateList.bind(this);
@@ -45,11 +46,11 @@ class MyProfile extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(this.props.societies);
-        console.log(nextProps.societies);
-        if((nextProps.societies != this.props.societies) || (nextProps.societies != null)) {
+        console.log(this.props.userSocieties);
+        console.log(nextProps.userSocieties);
+        if((nextProps.userSocieties != this.props.userSocieties) || (nextProps.userSocieties != null)) {
             this.setState({
-                societies: nextProps.societies
+                societies: nextProps.userSocieties
             });
         }
     }
@@ -304,9 +305,10 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-        userId: state.auth.userId,
+        userId: state.auth.id,
         userName: state.auth.userName,
-        societies: state.auth.societies,
+        userSocieties: state.data.userSocieties,
+        //societies: state.auth.societies,
         allSocietyEvents: state.data.allSocietyEvents,
         loading: state.data.loading
     };
@@ -315,6 +317,7 @@ const mapStateToProps = (state, props) => {
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveAll: retrieveAll,
+      onRetrieveData: retrieveData,
       onUpdateLoadingBar: updateLoadingBar,
       onUpdateData: updateDouble,
       onDeleteParticipation: deleteParticipation,
