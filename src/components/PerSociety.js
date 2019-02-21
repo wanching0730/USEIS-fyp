@@ -180,7 +180,7 @@ class PerSociety extends Component {
                     :
                     [
                         <div>
-                            {(society["specificAuthorized"]) || this.props.userName.substring(0,2) == "00" ?
+                            {(society["specificAuthorized"]) ?
                                 [
                                     <div className="zoom">
                                         <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>

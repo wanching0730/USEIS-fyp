@@ -34,12 +34,17 @@ class CommitteeBoard extends Component {
         
         const { RaisedButtonStyle } = styles;
         let committee = this.props.comm;
-        var rows = [], breadCrumb;
+        var rows = [], breadCrumb, termTh, termTd;
         var message = <div></div>;
 
         if(committee != null && committee.length > 0) {
             for(var i = 0; i < committee.length; i++) {
                 let comm = committee[i];
+
+                if(this.props.params.type === "society") {
+                    termTh = <th>Term</th>;
+                    termTd = <td>{moment(comm["joinDate"]).format("YY") + "/" + parseInt(parseInt(moment(comm["joinDate"]).format("YY")) + 1)}</td>
+                } 
 
                 rows.push(
                     <tr> 
@@ -51,7 +56,7 @@ class CommitteeBoard extends Component {
                         <td>{comm["contact"]}</td>
                         <td>{comm["email"]}</td>
                         <td>{comm["roleName"]}</td>
-                        <td>{moment(comm["joinDate"]).format("YY") + "/" + parseInt(parseInt(moment(comm["joinDate"]).format("YY")) + 1)}</td>
+                        {termTd}
                     </tr>
                 )
             }
@@ -105,7 +110,7 @@ class CommitteeBoard extends Component {
                                                 <th>Phone Number</th>   
                                                 <th>Email Address</th>   
                                                 <th>Position</th>  
-                                                <th>Term</th>               
+                                                {termTh}
                                             </tr>
                                         </thead>
 
