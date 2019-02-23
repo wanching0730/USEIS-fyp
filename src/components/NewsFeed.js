@@ -425,7 +425,7 @@ class NewsFeed extends Component {
                     
                     </Modal>
         
-                    {this.props.retrieveLoading || this.props.postLoading ?
+                    {this.props.retrieveLoading || this.props.postLoading || this.state.newsfeeds == null ? 
                         [<LoadingBar />]
                         :
                         [

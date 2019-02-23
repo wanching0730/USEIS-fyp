@@ -4,6 +4,7 @@ import {
     UPDATE_RETRIEVE_LOADINGBAR,
     RETRIEVE_SOCIETIES,
     RETRIEVE_EVENTS,
+    RETRIEVE_CALENDAR_EVENTS,
     RETRIEVE_ONE_SOCIETY, 
     RETRIEVE_ONE_EVENT,
     RETRIEVE_ONE_SOCIETY_EVENTS,
@@ -191,6 +192,14 @@ export function retrieveAllDataSuccessful(type, data) {
             type: RETRIEVE_EVENTS,
             payload: {
                 events: data,
+                loading: false
+            }
+        }
+    } else if(type === "calendarEvent") {
+        return {
+            type: RETRIEVE_CALENDAR_EVENTS,
+            payload: {
+                calendarEvents: data,
                 loading: false
             }
         }
@@ -481,6 +490,7 @@ export function retrieveAll(type) {
         return getAllData(type).then(result => result.json()).then(reply => {
             let societies = [];
             let events = [];
+            let calendarEvents = [];
             let newsfeeds = [];
             let allSocietyEvents = [];
             let societyBooths = [];
@@ -507,6 +517,14 @@ export function retrieveAll(type) {
                     });
                 }
                 dispatch(retrieveAllDataSuccessful(type, events));
+            } else if(type === "calendarEvent") {
+                console.log(reply);
+                calendarEvents = reply;
+                // for(var i = 0; i < reply.length; i++) {
+                //     calendarEvents.push(reply[i]);
+                // }
+
+                dispatch(retrieveAllDataSuccessful(type, calendarEvents));
             } else if(type === "newsfeeds") {
                 for(var i = 0; i < reply.length; i++) {
                     newsfeeds.push({
