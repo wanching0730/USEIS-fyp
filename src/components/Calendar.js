@@ -69,7 +69,7 @@ class Calendar extends Component {
               resources={venues}
               resourceIdAccessor="id"
               resourceTitleAccessor="venue"
-              onSelectEvent={event=>browserHistory.push("/perEvent/"+event.id)}
+              onSelectEvent={event=>browserHistory.push({ pathname: "/perEvent/"+event.id, state: {eventName: event.title}})}
             />
           ]}
           </div>
