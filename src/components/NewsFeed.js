@@ -256,14 +256,14 @@ class NewsFeed extends Component {
     setDefault() {
         if(this.state.owner == "s") {
             let first = this.state.societyOptions;
-            if(first != null) {
+            if(first.length != 0) {
                 this.setState({
                     ownerId: first[0]["value"]
                 });
             }
         } else {
             let first = this.state.eventOptions;
-            if(first != null) {
+            if(first.length != 0) {
                 this.setState({
                     ownerId: first[0]["value"]
                 });
@@ -285,24 +285,33 @@ class NewsFeed extends Component {
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.state.newsfeeds;
         let filteredNewsfeeds = [];
-        var dropdown;
+        var dropdown,createButton;
             
         if(this.state.owner == "s") {
             if(this.state.societyOptions != null) {
-                dropdown = <select value={this.state.ownerId} onChange={this.handleOwner}>
-                                {this.state.societyOptions.map(this.mapItem)}
-                            </select>;
-            } else {
-                dropdown = "No societies available";
-            }
+                if(this.state.societyOptions.length != 0)
+                    dropdown = <select value={this.state.ownerId} onChange={this.handleOwner}>
+                                    {this.state.societyOptions.map(this.mapItem)}
+                                </select>;
+                else 
+                    dropdown = "No societies available";
+            } 
         } else {
             if(this.state.eventOptions != null) {
-                dropdown = <select value={this.state.ownerId} onChange={this.handleOwner}>
-                                {this.state.eventOptions.map(this.mapItem)}
-                            </select>
-            } else {
-                dropdown = "No events available";
+                if(this.state.eventOptions.length != 0)
+                    dropdown = <select value={this.state.ownerId} onChange={this.handleOwner}>
+                                    {this.state.eventOptions.map(this.mapItem)}
+                                </select>
+                else 
+                    dropdown = "No events available";
             }
+        }
+
+        if(this.state.societyOptions != null && this.state.eventOptions != null) {
+            if(this.state.societyOptions.length != 0 || this.state.eventOptions.length != 0)
+                createButton = <div style= {{ textAlign: "left" }}>
+                                    <RaisedButton label="Create New" primary={false} style={RaisedButtonStyle} onClick={(event) => this.openModal()}/>
+                                </div>;
         }
         
         if(newsfeeds != null) {
@@ -379,9 +388,7 @@ class NewsFeed extends Component {
                         <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "e"})}/>
                     </div>
                     
-                    <div style= {{ textAlign: "left" }}>
-                        <RaisedButton label="Create New" primary={false} style={RaisedButtonStyle} onClick={(event) => this.openModal()}/>
-                    </div>
+                    {createButton}
 
                     <Modal
                         isOpen={this.state.modalIsOpen}
