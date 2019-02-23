@@ -46,12 +46,6 @@ class Calendar extends Component {
     }
 
   render() {
-    const venues = [
-      { id: 1, venue: 'Board room' },
-      { id: 2, venue: 'Training room' },
-      { id: 3, venue: 'Meeting room 1' }
-    ]
-    
     return (
           <div style={{ height: 700 }}>
             {this.props.loading || this.state.calendarEvents.length == 0 ?
@@ -66,7 +60,6 @@ class Calendar extends Component {
               step={60}
               showMultiDayTimes
               defaultDate={new Date()}
-              resources={venues}
               resourceIdAccessor="id"
               resourceTitleAccessor="venue"
               onSelectEvent={event=>browserHistory.push({ pathname: "/perEvent/"+event.id, state: {eventName: event.title}})}
