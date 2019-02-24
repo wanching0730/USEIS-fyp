@@ -82,10 +82,38 @@ class NewsFeed extends Component {
             }
             this.setState({
                 societyOptions: options
-            }, () => this.setDefault());
+            }, () => {
+                this.setDefault();
+                this.setState(this.state);
+            });
         } 
         
-        setTimeout(() => {
+        // setTimeout(() => {
+        //     if(this.props.userEvents != null) {
+        //         let events = this.props.userEvents;
+        //         let options = [];
+        //         for(var i = 0; i < events.length; i++) {
+        //             let event = events[i];
+        //             if([2,3,10].includes(event["eRoleId"])) {
+        //                 options.push({
+        //                     value: event["eventId"],
+        //                     name: event["name"]
+        //                 });
+        //             }
+        //         }
+        //         this.setState({
+        //             eventOptions: options
+        //         }, () => this.setDefault());
+        //     }
+        // }, 2000);
+    }
+
+    componentWillReceiveProps(nextProps){
+        if((nextProps.newsfeeds != this.props.newsfeeds) || (this.props.newsfeeds == null)) {
+          this.setState({newsfeeds: nextProps.newsfeeds });
+        }
+
+        if((nextProps.userEvents != this.props.userEvents) || (this.props.userEvents != null)) {
             if(this.props.userEvents != null) {
                 let events = this.props.userEvents;
                 let options = [];
@@ -102,12 +130,6 @@ class NewsFeed extends Component {
                     eventOptions: options
                 }, () => this.setDefault());
             }
-        }, 2000);
-    }
-
-    componentWillReceiveProps(nextProps){
-        if((nextProps.newsfeeds != this.props.newsfeeds) || (this.props.newsfeeds == null)) {
-          this.setState({newsfeeds: nextProps.newsfeeds });
         }
     }
 
@@ -282,6 +304,9 @@ class NewsFeed extends Component {
     }
 
     render() {
+        console.log("society: " + this.state.societyOptions);
+        console.log("event: " + this.state.eventOptions);
+
         const { RaisedButtonStyle, content } = styles;
         let newsfeeds = this.state.newsfeeds;
         let filteredNewsfeeds = [];

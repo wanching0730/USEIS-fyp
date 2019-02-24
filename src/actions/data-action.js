@@ -418,9 +418,12 @@ export function retrieveData(type, id) {
                 dispatch(retrieveSingleDataSuccessful("societyEvent", societyEvents));
             } else if(type === "studentEvent" || type === "staffEvent") {
                 let userEvents = [];
+                
                 for(var i = 0; i < reply.length; i++) {
                     userEvents.push(reply[i]);
                 }
+
+                console.log(userEvents);
 
                 dispatch(retrieveSingleDataSuccessful("userEvent", userEvents));
             } else if(type === "studentSociety" || type === "staffSociety") {
