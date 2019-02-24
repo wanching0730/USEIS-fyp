@@ -5,6 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import '../style/form.css';
 import '../style/spinner.css';
+import { Auth } from "aws-amplify";
+import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -23,9 +25,58 @@ class Login extends Component {
   }
 
   login(event) {
+    var poolData = {
+        UserPoolId : 'us-east-2_lcnWhMXnd', 
+        ClientId : '32j9lqg5k0sa3q6tts3lel12be' 
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    var userData = {
+        Username : this.state.name, 
+        Pool : userPool
+    };
+
+    var authenticationData = {
+      Username : this.state.name, 
+      Password : this.state.password 
+  };
+
+    var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+     
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function (result) {
+            var accessToken = result.getAccessToken().getJwtToken();
+            console.log(JSON.stringify(accessToken));
+        },
+  
+        onFailure: function(err) {
+            console.log(err);
+        },
+        mfaRequired: function(codeDeliveryDetails) {
+            var verificationCode = prompt('Please input verification code' ,'');
+            cognitoUser.sendMFACode(verificationCode, this);
+        },
+
+        newPasswordRequired: function(userAttributes, requiredAttributes) {
+          console.log("called");
+          // User was signed up by an admin and must provide new 
+          // password and required attributes, if any, to complete 
+          // authentication.
+
+          // userAttributes: object, which is the user's current profile. It will list all attributes that are associated with the user. 
+          // Required attributes according to schema, which don’t have any values yet, will have blank values.
+          // requiredAttributes: list of attributes that must be set by the user along with new password to complete the sign-in.
+
+          
+          // Get these details and call 
+          // newPassword: password that user has given
+          // attributesData: object with key as attribute name and value that the user has given.
+          cognitoUser.completeNewPasswordChallenge(authenticationData.Password, {name: "abc"}, this)
+        }
+      });
+    
     this.props.onUpdateAuthLoadingBar();
-    let data = this.state;
-    this.props.onLoginUser(data);
+    this.props.onLoginUser({username: cognitoUser.username});
   }
 
   componentDidMount() {
