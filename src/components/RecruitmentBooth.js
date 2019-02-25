@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -8,7 +9,7 @@ import { Link } from 'react-router';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll } from '../actions/data-action';
+import { retrieveAll, updateLoadingBar } from '../actions/data-action';
 
 class RecruitmentBooth extends Component {
 
@@ -18,6 +19,8 @@ class RecruitmentBooth extends Component {
         this.state = {
             type: "society"
         }
+
+        this.props.onUpdateLoadingBar();
 
         this.props.onRetrieveAll("societyBooth");
         this.props.onRetrieveAll("eventBooth");
@@ -102,7 +105,7 @@ class RecruitmentBooth extends Component {
                     <div style={{ margin: 20 }}>
                         <Breadcrumb>
                             <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>View Booths</BreadcrumbItem>
+                            <BreadcrumbItem active>Booths</BreadcrumbItem>
                         </Breadcrumb>
                     </div>
 
@@ -111,37 +114,37 @@ class RecruitmentBooth extends Component {
                         <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => {this.setState({type: "event"})}}/>
                     </div>
 
-                    <div>
-                        <MuiThemeProvider>
+                    {this.props.loading || this.props.societyBooths == null || this.props.eventBooths == null ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div>
+                            <div className="container" id="tableContainer">
+                                <div className="row">
+                                    <div className="panel-body">
+                                        <table className="table table-hover table-light" border="1">
+                                            <thead>
+                                                {header}
+                                            </thead>
 
-                        <div className="container" id="tableContainer">
-                            <div className="row">
-                                <div className="panel-body">
-                                    <table className="table table-hover table-light" border="1">
-                                        <thead>
-                                            {header}
-                                        </thead>
+                                            <tbody>
+                                                {body}
+                                            </tbody>
+                                        </table>
 
-                                        <tbody>
-                                            {body}
-                                        </tbody>
-                                    </table>
-
-                                    <div style= {{ textAlign: "center" }}>
-                                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        <div style= {{ textAlign: "center" }}>
+                                            <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                    </MuiThemeProvider>
+                    ]}
                 </div>
+                </MuiThemeProvider>
             </div>
-        </MuiThemeProvider>
-        </div>
         );
     };
-    
 };
 
 const styles = {
@@ -155,13 +158,15 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         societyBooths: state.data.societyBooths,
-        eventBooths: state.data.eventBooths
+        eventBooths: state.data.eventBooths,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onRetrieveAll: retrieveAll
+      onRetrieveAll: retrieveAll,
+      onUpdateLoadingBar: updateLoadingBar,
     }, dispatch);
 };
 

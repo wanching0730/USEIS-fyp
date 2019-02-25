@@ -307,7 +307,7 @@ class MyEvent extends Component {
                         <RaisedButton label="My Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
                     </div>
 
-                    {this.props.loading || this.props.deleteLoading ?
+                    {this.props.loading || this.props.deleteLoading || this.state.userEvents == null ?
                     [<LoadingBar />]
                     :
                     [

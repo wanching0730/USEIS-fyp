@@ -45,8 +45,9 @@ class Login extends Component {
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
-            var accessToken = result.getAccessToken().getJwtToken();
-            console.log(JSON.stringify(accessToken));
+            //var accessToken = result.getAccessToken().getJwtToken();
+            const refreshToken = result.getRefreshToken().getToken();
+            console.log(JSON.stringify(refreshToken));
         },
   
         onFailure: function(err) {

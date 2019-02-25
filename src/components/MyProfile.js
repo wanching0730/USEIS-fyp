@@ -257,7 +257,7 @@ class MyProfile extends Component {
                         <RaisedButton label="My Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
                     </div>
 
-                    {this.props.loading ?
+                    {this.props.loading || this.state.societies == null ?
                         [<LoadingBar />]
                         :
                         [
