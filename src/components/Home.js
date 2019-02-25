@@ -54,7 +54,11 @@ class Home extends Component {
     }
 
     render() {
-
+        // console.log(localStorage.getItem("token"));
+        // var jwtDecode = require('jwt-decode');
+        // console.log(jwtDecode(localStorage.getItem("token")).exp);
+        // console.log(Date.now() / 1000);
+        // console.log(jwtDecode(localStorage.getItem("token")).exp < Date.now() / 1000);
         return (
             <div id="outerDiv"> 
                 <NavBar />

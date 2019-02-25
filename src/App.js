@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Router, browserHistory, Route } from 'react-router';
+import { Router, browserHistory, Route, Redirect } from 'react-router';
+import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
+// import { SecureRoute } from 'react-route-guard';
 import Login from '../src/components/Login';
 import Home from '../src/components/Home';
 import NewsFeed from './components/NewsFeed';
@@ -31,12 +33,41 @@ import Faq from './components/Faq';
 import AboutMe from './components/AboutMe';
 import './App.css';
 
+const poolData = {
+  UserPoolId : 'us-east-2_lcnWhMXnd', 
+  ClientId : '32j9lqg5k0sa3q6tts3lel12be' 
+};
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+
 class App extends Component {
   render() {
+    function PrivateRoute ({component: Component, authed, ...rest}) {
+      return (
+        <Route
+          {...rest}
+          render={(props) => authed === true
+            ? <Component {...props} />
+            : <Redirect to={{pathname: "/", state: {from: props.location}}} />}
+        />
+      )
+    }
+
+    function isAuthenticated() {
+      if(userPool.getCurrentUser())
+        return true;
+      else 
+        return false;
+    }
+
+    //var jwtDecode = require('jwt-decode');
+    //console.log(jwtDecode(localStorage.getItem("token")));
+    
     return (
         <Router history={browserHistory}>
           <Route path="/" component={Login}/>
-          <Route path="/home" component={Home}/>
+          <PrivateRoute authed={isAuthenticated} path='/home' component={Home} />
+          {/* <SecureRoute path="/home" component={Home} routeGuard={new UserRouteGuard()} redirectToPathWhenFail="/"/> */}
+          {/* <Route path="/home" component={Home}/> */}
           <Route path="/newsFeed" component={NewsFeed}/>
           <Route path="/society" component={Society}/>
           <Route path="/event" component={Event}/>

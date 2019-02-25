@@ -1,5 +1,6 @@
 import {browserHistory} from 'react-router';
 import { verifyUser, updateDataDouble } from '../utils/http_function';
+import { CognitoUserPool } from "amazon-cognito-identity-js";
 import { confirmAlert } from 'react-confirm-alert';
 import firebase from 'firebase';
 
@@ -64,7 +65,6 @@ export function updateAuthLoadingBar() {
 }
 
 export function logout() {
-    localStorage.removeItem('token');
     return {
         type: LOGOUT_USER
     };
@@ -72,6 +72,14 @@ export function logout() {
 
 export function logoutAndRedirect() {
     return (dispatch) => {
+        var poolData = {
+            UserPoolId : 'us-east-2_lcnWhMXnd', 
+            ClientId : '32j9lqg5k0sa3q6tts3lel12be' 
+        };
+        var userPool = new CognitoUserPool(poolData); 
+        userPool.getCurrentUser().signOut();
+        localStorage.removeItem('token');
+
         dispatch(logout());
         browserHistory.push('/');
     };

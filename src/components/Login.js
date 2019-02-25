@@ -5,8 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import '../style/form.css';
 import '../style/spinner.css';
-import { Auth } from "aws-amplify";
-import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
+import { AuthenticationDetails, CognitoUser, CognitoUserPool } from "amazon-cognito-identity-js";
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -29,7 +28,7 @@ class Login extends Component {
         UserPoolId : 'us-east-2_lcnWhMXnd', 
         ClientId : '32j9lqg5k0sa3q6tts3lel12be' 
     };
-    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    var userPool = new CognitoUserPool(poolData);
     var userData = {
         Username : this.state.name, 
         Pool : userPool
@@ -40,14 +39,15 @@ class Login extends Component {
       Password : this.state.password 
   };
 
-    var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+    var authenticationDetails = new AuthenticationDetails(authenticationData);
      
-    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    var cognitoUser = new CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
             //var accessToken = result.getAccessToken().getJwtToken();
             const refreshToken = result.getRefreshToken().getToken();
-            console.log(JSON.stringify(refreshToken));
+            //console.log(JSON.stringify(refreshToken));
+            console.log(userPool.getCurrentUser());
         },
   
         onFailure: function(err) {

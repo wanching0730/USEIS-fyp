@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
+import { CognitoUserPool } from "amazon-cognito-identity-js";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav,  NavItem, UncontrolledDropdown, 
     DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router';
@@ -53,6 +54,12 @@ class NavBar extends Component {
         var dropDownItem;
         var position;
         let societies = this.props.societies;
+
+        var poolData = {
+            UserPoolId : 'us-east-2_lcnWhMXnd', 
+            ClientId : '32j9lqg5k0sa3q6tts3lel12be' 
+        };
+        var userPool = new CognitoUserPool(poolData);
 
         if(societies != null) {
             for(var i = 0; i < societies.length; i++) {
@@ -110,89 +117,88 @@ class NavBar extends Component {
         return (
             <div>
                 {
-                    this.props.isAuthenticated ?
+                    userPool.getCurrentUser() != null ? [
                 
-                    <Navbar className="topnav" dark expand="md">
-                    <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="mr-auto" navbar>
-                            <NavItem>
-                                <i class="fa fa-home"></i><Link to="/home">Home</Link>
-                            </NavItem>
-                            &nbsp;
-                            <NavItem>
-                                <i class="fa fa-align-left"></i><Link to="/newsFeed">NewsFeed</Link>
-                            </NavItem>
-                            &nbsp;
-                            <NavItem>
-                                <i class="fa fa-globe"></i><Link to="/society">Societies</Link>
-                            </NavItem>
-                            &nbsp;
-                            <NavItem>
-                                <i class="fa fa-calendar"></i><Link to="/event">Events</Link>
-                            </NavItem>
-                            &nbsp;
-                            <NavItem>
-                                <i class="fa fa-compass"></i><Link to="/recruitmentBooth">Booths</Link>
-                            </NavItem>
-                            &nbsp;
-                            <NavItem>
-                                <i class="fa fa-user"></i><Link to="/myProfile">My Profile</Link>
-                            </NavItem>
-                            &nbsp;
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    <i class="fa fa-cog"></i>  Manage
-                                </DropdownToggle>
-                                {dropDownItem}
-                            </UncontrolledDropdown>
-                        </Nav>
-                        <Nav className="ml-auto" navbar>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    <i class="fa fa-user-circle"></i> {this.props.userName}
-                                </DropdownToggle>
-    
-                                {this.props.userName.substring(0,2) != "00" ? 
-                                [
-                                    <DropdownMenu left>
-                                        <DropdownItem name="aboutMe" onClick={this.onClick}>
-                                            About Me
-                                        </DropdownItem>
-                                        <DropdownItem name="logout" onClick={this.logout}>
-                                            Logout
-                                        </DropdownItem>             
-                                    </DropdownMenu>
-                                ]
-                                : 
-                                [
-                                    <DropdownMenu left>
-                                        <DropdownItem name="logout" onClick={this.logout}>
-                                            Logout
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                ]
-                                }
-                                       
-                            </UncontrolledDropdown>
-                        </Nav>
-                    </Collapse>
-                    </Navbar>
-                    
-                    :
-                    <Navbar className="topnav" dark expand="md">
-                    <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    {/* <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <Link to="/login">Login</Link>
-                            </NavItem>
-                        </Nav>
-                    </Collapse> */}
-                    </Navbar>  
-                }     
+                        <Navbar className="topnav" dark expand="md">
+                        <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="mr-auto" navbar>
+                                <NavItem>
+                                    <i class="fa fa-home"></i><Link to="/home">Home</Link>
+                                </NavItem>
+                                &nbsp;
+                                <NavItem>
+                                    <i class="fa fa-align-left"></i><Link to="/newsFeed">NewsFeed</Link>
+                                </NavItem>
+                                &nbsp;
+                                <NavItem>
+                                    <i class="fa fa-globe"></i><Link to="/society">Societies</Link>
+                                </NavItem>
+                                &nbsp;
+                                <NavItem>
+                                    <i class="fa fa-calendar"></i><Link to="/event">Events</Link>
+                                </NavItem>
+                                &nbsp;
+                                <NavItem>
+                                    <i class="fa fa-compass"></i><Link to="/recruitmentBooth">Booths</Link>
+                                </NavItem>
+                                &nbsp;
+                                <NavItem>
+                                    <i class="fa fa-user"></i><Link to="/myProfile">My Profile</Link>
+                                </NavItem>
+                                &nbsp;
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        <i class="fa fa-cog"></i>  Manage
+                                    </DropdownToggle>
+                                    {dropDownItem}
+                                </UncontrolledDropdown>
+                            </Nav>
+                            <Nav className="ml-auto" navbar>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        <i class="fa fa-user-circle"></i> {this.props.userName}
+                                    </DropdownToggle>
+        
+                                    {this.props.userName != null && this.props.userName.substring(0,2) != "00" ? 
+                                    [
+                                        <DropdownMenu left>
+                                            <DropdownItem name="aboutMe" onClick={this.onClick}>
+                                                About Me
+                                            </DropdownItem>
+                                            <DropdownItem name="logout" onClick={this.logout}>
+                                                Logout
+                                            </DropdownItem>             
+                                        </DropdownMenu>
+                                    ]
+                                    : 
+                                    [
+                                        <DropdownMenu left>
+                                            <DropdownItem name="logout" onClick={this.logout}>
+                                                Logout
+                                            </DropdownItem>
+                                        </DropdownMenu>
+                                    ]
+                                    }
+                                        
+                                </UncontrolledDropdown>
+                            </Nav>
+                        </Collapse>
+                        </Navbar>
+                    ]:[ 
+                        <Navbar className="topnav" dark expand="md">
+                        <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        {/* <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <Link to="/login">Login</Link>
+                                </NavItem>
+                            </Nav>
+                        </Collapse> */}
+                        </Navbar>  
+                    ]}     
             </div>
         );
     }
