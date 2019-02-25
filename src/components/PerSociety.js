@@ -259,14 +259,14 @@ const styles = {
     imageStyle: {
         height: "200px",
         width: "200px",
-        marginTop: "20px",
+        margin: "auto",
+        marginTop: "20px"
         
     }, 
     div1Style: {
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center"
+        textAlign: "center"
     }, 
     div2Style: {
         marginLeft: "20px"

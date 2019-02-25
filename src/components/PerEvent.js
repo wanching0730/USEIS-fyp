@@ -95,9 +95,9 @@ class PerEvent extends Component {
             }));
         });
 
-        var buttons = <div></div>, sideNavBar = <div></div>, message = <div></div>;
+        var buttons = <div></div>, message = <div></div>;
         var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant;
-        const { RaisedButtonStyle, imageStyle, div1Style, div2Style, div3Style } = styles;
+        const { RaisedButtonStyle, imageStyle, div1Style } = styles;
         let eventId = this.props.params.eventId;
 
         if(this.props.event != null) {
@@ -309,23 +309,22 @@ const styles = {
     imageStyle: {
         height: "200px",
         width: "200px",
-        marginTop: "30px",
-        
+        margin: "auto",
+        marginTop: "30px"
     }, 
     div1Style: {
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center"
+        textAlign: "center"
     }, 
-    div2Style: {
-        marginLeft: "20px"
-    }, 
-    div3Style: {
-        justifyContent: "center",
-        margin: "auto",
-        overflow: "hidden"
-    }
+    // div2Style: {
+    //     marginLeft: "20px"
+    // }, 
+    // div3Style: {
+    //     justifyContent: "center",
+    //     margin: "auto",
+    //     overflow: "hidden"
+    // }
 }
 
 const mapStateToProps = (state, props) => {

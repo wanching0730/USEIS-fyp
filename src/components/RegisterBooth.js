@@ -159,7 +159,6 @@ class RegisterBooth extends Component {
 
       <div>
       <MuiThemeProvider>
-
         <div>
           <NavBar />
 
