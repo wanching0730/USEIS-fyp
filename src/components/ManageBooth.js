@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -97,27 +98,32 @@ class ManageBooth extends Component {
                 <div>
                     <MuiThemeProvider>
 
-                    <div className="container">
-                        <div className="form-style-10">
-                            <form>
-                                <div class="section"><span>1</span>Name &amp; Category</div>
-                                <div class="inner-wrap">
-                                    <label>Booth Amount</label>  
-                                    <input type="text" onChange={(event) => {
-                                        this.setState({boothAmount:event.target.value});
-                                    }}/>
-                                    <br/>
-                                    <label>Floor Plan URL</label>
-                                    <input type="text" onChange={(event) => {this.setState({floorPlanUrl:event.target.value})}}/>
-                                </div>
+                    {this.props.createLoading ?
+                    [<LoadingBar />]
+                    :
+                    [
+                        <div className="container">
+                            <div className="form-style-10">
+                                <form>
+                                    <div class="section"><span>1</span>Name &amp; Category</div>
+                                    <div class="inner-wrap">
+                                        <label>Booth Amount</label>  
+                                        <input type="text" onChange={(event) => {
+                                            this.setState({boothAmount:event.target.value});
+                                        }}/>
+                                        <br/>
+                                        <label>Floor Plan URL</label>
+                                        <input type="text" onChange={(event) => {this.setState({floorPlanUrl:event.target.value})}}/>
+                                    </div>
 
-                                <div class="button-section">
-                                    <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
-                                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                                </div>
-                            </form>
+                                    <div class="button-section">
+                                        <RaisedButton label="Submit" id="button2" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleClick(event)}/>
+                                        <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
+                    ]}
 
                     {/* <div style= {{ textAlign: "center" }}>
                         <RaisedButton label="My Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSocieties(event)}/>

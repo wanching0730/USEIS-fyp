@@ -65,7 +65,7 @@ class Feedback extends Component {
                   </Breadcrumb>
               </div>
 
-              {this.props.loading ?
+              {this.props.createLoading ?
               [<LoadingBar />]
               :
               [
