@@ -106,7 +106,7 @@ class ManageParticipant extends Component {
                                             eventId: this.props.params.eventId
                                         }
 
-                                        if(username.substring(0,2) === "00") 
+                                        if(parseInt(this.props.userName) == 0) 
                                             this.props.onUpdateData("staffParticipant", data, this.props.location.state["eventName"]);
                                         else 
                                         this.props.onUpdateData("studentParticipant", data, this.props.location.state["eventName"]);
@@ -139,7 +139,7 @@ class ManageParticipant extends Component {
                                     eventId: this.props.params.eventId
                                 }
 
-                                if(username.substring(0,2) === "00") 
+                                if(parseInt(this.props.userName) == 0) 
                                     this.props.onUpdateData("rejectStaffEvent", data, this.props.location.state["eventName"]);
                                 else 
                                     this.props.onUpdateData("rejectStudentEvent", data, this.props.location.state["eventName"]);
@@ -169,7 +169,7 @@ class ManageParticipant extends Component {
                                 
                                 this.props.onUpdateDeleteLoadingBar();
 
-                                if(username.substring(0,2) === "00") 
+                                if(parseInt(this.props.userName) == 0) 
                                     this.props.onDeleteParticipation("staffParticipant", targetParticipantId, targetEventId);
                                 else 
                                     this.props.onDeleteParticipation("studentParticipant", targetParticipantId, targetEventId);

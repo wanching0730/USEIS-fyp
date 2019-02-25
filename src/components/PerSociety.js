@@ -22,7 +22,7 @@ class PerSociety extends Component {
 
         this.props.onUpdateLoadingBar();
 
-        if(this.props.userName.substring(0,2) != "00") {
+        if(parseInt(this.props.userName) != 0) {
             this.props.onRetrieveDataWithUserId("studentSociety", this.props.params.societyId, this.props.id);
         } 
         else {
@@ -128,7 +128,7 @@ class PerSociety extends Component {
                 state: societyState
             };
 
-            if(this.props.userName.substring(0,2) != "00") { 
+            if(parseInt(this.props.userName) != 0)  { 
                 if(society["participated"]) {
                     buttons = 
                         <div>

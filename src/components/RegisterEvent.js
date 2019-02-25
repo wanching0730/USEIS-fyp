@@ -32,7 +32,7 @@ class RegisterEvent extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    if(this.props.userName.substring(0,2) === "00") 
+    if(parseInt(this.props.userName) == 0) 
       this.props.onRetrieveDataWithUserId("checkIsStaffRegistered", this.props.params.eventId, this.props.id);
     else
       this.props.onRetrieveDataWithUserId("checkIsStudentRegistered", this.props.params.eventId, this.props.id);
@@ -59,7 +59,7 @@ class RegisterEvent extends Component {
       webNoti: this.state.webNoti ? 1 : 0
     };
 
-    if(this.props.userName.substring(0,2) === "00") {
+    if(parseInt(this.props.userName) == 0) {
       if(!this.props.isRegistered)
         this.props.onCreate("staffRegisterEvent", data);
       else

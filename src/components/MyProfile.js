@@ -32,7 +32,7 @@ class MyProfile extends Component {
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveAll("societyEvent");
 
-        if(this.props.userName.substring(0,2) === "00") 
+        if(parseInt(this.props.userName) == 0)  
             this.props.onRetrieveData("staffSociety", this.props.userId);
         else
             this.props.onRetrieveData("studentSociety", this.props.userId);
@@ -178,7 +178,7 @@ class MyProfile extends Component {
                         }    
                     }
 
-                    if(society["status"] != 1 && this.props.userName.substring(0,2) !== "00") {
+                    if(society["status"] != 1 && (parseInt(this.props.userName) == 0)) {
                         if(society["status"] != 2) {
                             action = 
                                 <td>
@@ -209,7 +209,7 @@ class MyProfile extends Component {
                 //     editIcon = <td></td>
                 // }
                     
-                    if(this.props.userName.substring(0,2) === "00") {
+                    if(parseInt(this.props.userName) == 0) {
                         status = <td>-</td>;
                     } else {
                         if(society["status"] === 0)  
@@ -226,7 +226,7 @@ class MyProfile extends Component {
                             <td><img style={imageStyle} src={society["logoUrl"]} /></td>
                             <td><Link to={toSociety}>{society["name"]}</Link></td>
                             <td>
-                                {this.props.userName.substring(0,2) != "00" ? 
+                                {parseInt(this.props.userName) == 0 ? 
                                     moment(society["joinDate"]).format("DD/MM/YYYY") : "-"}
                             </td>
                             <td>{society["roleName"]}</td>

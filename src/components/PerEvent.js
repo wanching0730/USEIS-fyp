@@ -25,7 +25,7 @@ class PerEvent extends Component {
         
         this.props.onUpdateLoadingBar();
 
-        if(this.props.userName.substring(0,2) != "00") 
+        if(parseInt(this.props.userName) != 0)
             this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
         else 
             this.props.onRetrieveDataWithUserId("staffEvent", this.props.params.eventId, this.props.id);
@@ -147,7 +147,7 @@ class PerEvent extends Component {
             };
         }
         
-        if(this.props.userName.substring(0,2) == "00") {
+        if(parseInt(this.props.userName) == 0)  {
             if(event["participated"] || event["currentParticipant"] >= event["totalParticipant"]) {
                 buttons =
                     <div id="div3">
