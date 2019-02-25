@@ -31,7 +31,7 @@ class MyEvent extends Component {
 
         this.props.onUpdateLoadingBar();
 
-        if(this.props.userName.substring(0,2) === "00") 
+        if(parseInt(this.props.userName) == 0) 
             this.props.onRetrieveData("staffEvent", this.props.userId);
         else 
             this.props.onRetrieveData("studentEvent", this.props.userId);
@@ -128,7 +128,7 @@ class MyEvent extends Component {
                                                 eventId: eventId
                                             }
 
-                                            if(this.props.userName.substring(0,2) === "00")
+                                            if(parseInt(this.props.userName) == 0) 
                                                 this.props.onUpdateData("cancelStaffEvent", data, ""); 
                                             else 
                                                 this.props.onUpdateData("cancelStudentEvent", data, ""); 
@@ -160,7 +160,7 @@ class MyEvent extends Component {
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
                                             this.props.onUpdateDeleteLoadingBar();
 
-                                            if(this.props.userName.substring(0,2) === "00")
+                                            if(parseInt(this.props.userName) == 0)
                                                 this.props.onDeleteParticipation("staffEvent", this.props.userId, eventId);
                                             else 
                                                 this.props.onDeleteParticipation("studentEvent", this.props.userId, eventId);
@@ -257,15 +257,11 @@ class MyEvent extends Component {
                         } else {
                             action = <td>-</td>;
                         }
-                        
-                        if(this.props.userName.substring(0,2) === "00") 
-                            ratingStatus = <td>-</td>;
-                        else {
-                            if(event["ratingStatus"] == 1) 
-                                ratingStatus = <td>Done</td>;
-                            else 
-                                ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
-                        }
+                         
+                        if(event["ratingStatus"] == 1) 
+                            ratingStatus = <td>Done</td>;
+                        else 
+                            ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
 
                         rows.push(
                             <tr>
