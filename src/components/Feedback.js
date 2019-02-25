@@ -10,7 +10,7 @@ import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { create, updatePostLoadingBar } from '../actions/post-action';
+import { update, updatePostLoadingBar } from '../actions/post-action';
 
 class Feedback extends Component {
 
@@ -28,7 +28,7 @@ class Feedback extends Component {
     }
 
     handleClick() {
-      this.props.onUpdateLoadingBar();
+      this.props.onUpdateCreateLoadingBar();
 
       let data = {
         id: this.props.id,
@@ -36,7 +36,10 @@ class Feedback extends Component {
         score: this.state.score
       };
 
-      this.props.onCreate("rating", data);
+      if(this.props.userName.substring(0,2) == "00") 
+        this.props.onUpdate("staffRating", data.id, "", data);
+      else
+        this.props.onUpdate("studentRating", data.id, "", data);
     }
 
     componentDidMount() {
@@ -106,14 +109,15 @@ class Feedback extends Component {
   const mapStateToProps = (state, props) => {
     return {
       id: state.auth.id,
-      loading: state.create.loading
+      userName: state.auth.userName,
+      createLoading: state.create.loading
     };
   };
   
   const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
-      onCreate: create,
-      onUpdateLoadingBar: updatePostLoadingBar
+      onUpdate: update,
+      onUpdateCreateLoadingBar: updatePostLoadingBar
     }, dispatch);
   };
   

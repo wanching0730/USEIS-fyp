@@ -141,9 +141,6 @@ export function create(type, postData) {
                                 } else if(type === "newsfeeds") {
                                     dispatch(createSuccessfully());
                                     browserHistory.push('/newsfeeds');
-                                } else if(type === "rating") {
-                                    dispatch(createSuccessfully());
-                                    browserHistory.push('/myEvents');
                                 } else if(type === "registerSociety") {
                                     dispatch(registerSuccessfully());
                                     browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["societyName"]}});
@@ -187,7 +184,10 @@ export function update(type, id, name, postData) {
                                 } else if(type === "totalBooth") {
                                     dispatch(updateSuccessfully());
                                     browserHistory.push('/myProfile');
-                                } 
+                                } else if(type === "studentRating" || type === "staffRating") {
+                                    dispatch(updateSuccessfully());
+                                    browserHistory.push('/myEvents');
+                                }
                             }
                         }
                     ]

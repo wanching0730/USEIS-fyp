@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Router, browserHistory, Route, Redirect } from 'react-router';
+import { Router, browserHistory, Route } from 'react-router';
+import { Redirect, Switch } from 'react-router-dom';
 import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
 // import { SecureRoute } from 'react-route-guard';
 import Login from '../src/components/Login';
@@ -41,16 +42,29 @@ const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 class App extends Component {
   render() {
-    function PrivateRoute ({component: Component, authed, ...rest}) {
+    const PrivateRoute = ({ component: Component, authed, path, ...rest }) => {
       return (
         <Route
+          path={path}
           {...rest}
-          render={(props) => authed === true
-            ? <Component {...props} />
-            : <Redirect to={{pathname: "/", state: {from: props.location}}} />}
+          render={props => {
+            return authed ? (
+              <Component {...props} />
+            ) : (
+              <Redirect
+                to={{
+                  pathname: "/",
+                  state: {
+                    prevLocation: path,
+                    error: "You need to login first!",
+                  },
+                }}
+              />
+            );
+          }}
         />
-      )
-    }
+      );
+    };
 
     function isAuthenticated() {
       if(userPool.getCurrentUser())
@@ -64,8 +78,10 @@ class App extends Component {
     
     return (
         <Router history={browserHistory}>
+        <Switch>
           <Route path="/" component={Login}/>
           <PrivateRoute authed={isAuthenticated} path='/home' component={Home} />
+          </Switch>
           {/* <SecureRoute path="/home" component={Home} routeGuard={new UserRouteGuard()} redirectToPathWhenFail="/"/> */}
           {/* <Route path="/home" component={Home}/> */}
           <Route path="/newsFeed" component={NewsFeed}/>
