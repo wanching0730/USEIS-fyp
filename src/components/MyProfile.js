@@ -226,7 +226,7 @@ class MyProfile extends Component {
                             <td><img style={imageStyle} src={society["logoUrl"]} /></td>
                             <td><Link to={toSociety}>{society["name"]}</Link></td>
                             <td>
-                                {parseInt(this.props.userName) == 0 ? 
+                                {parseInt(this.props.userName) != 0 ? 
                                     moment(society["joinDate"]).format("DD/MM/YYYY") : "-"}
                             </td>
                             <td>{society["roleName"]}</td>

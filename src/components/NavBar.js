@@ -161,7 +161,7 @@ class NavBar extends Component {
                                         <i class="fa fa-user-circle"></i> {this.props.userName}
                                     </DropdownToggle>
         
-                                    {this.props.userName != null && parseInt(this.props.userName) == 0 ? 
+                                    {this.props.userName != null && parseInt(this.props.userName) != 0 ? 
                                     [
                                         <DropdownMenu left>
                                             <DropdownItem name="aboutMe" onClick={this.onClick}>
