@@ -5,6 +5,7 @@ import Calendar from './Calendar';
 import Analysis from './Analysis';
 import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { notification, NotificationContainer } from "react-notification-popup";
 import '../style/home.css';
 
 import { bindActionCreators } from 'redux';
@@ -33,6 +34,17 @@ class Home extends Component {
                 if(this.props.messaging != null) {
                     this.props.messaging.onMessage(function(payload) {
                         console.log('Message received. ', payload);
+                        notification.emit(
+                            { 
+                              title: "Disk Not Ejected Properly",
+                              description:
+                                "Eject Time Machine before disconnecting or turning it off"
+                            },
+                            {
+                              onClick: () => console.log("Click!!"),
+                              onClose: () => console.log("Close!!")
+                            }
+                          );
                     });
                 }
             }, 9000);

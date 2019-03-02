@@ -6,7 +6,6 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 import { confirmAlert } from 'react-confirm-alert';
-import Validate from "react-validate-form"
 import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
