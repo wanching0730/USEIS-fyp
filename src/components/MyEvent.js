@@ -257,11 +257,16 @@ class MyEvent extends Component {
                         } else {
                             action = <td>-</td>;
                         }
-                         
-                        if(event["ratingStatus"] == 1) 
-                            ratingStatus = <td>Done</td>;
-                        else 
-                            ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
+                         console.log(moment(event["startDate"]).format("DD/MM/YYYY"));
+                         console.log(moment(new Date()).format("DD/MM/YYYY"));
+                        if(event["status"] == 1 && moment(event["startDate"]).format("DD/MM/YYYY") <= moment(new Date()).format("DD/MM/YYYY")) {
+                            if(event["ratingStatus"] == 1) 
+                                ratingStatus = <td>Done</td>;
+                            else 
+                                ratingStatus = <td><Link to={toFeedback}>Undone</Link></td>;
+                        } else {
+                            ratingStatus = <td>-</td>;
+                        }
 
                         rows.push(
                             <tr>
