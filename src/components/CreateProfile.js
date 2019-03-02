@@ -6,6 +6,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 import { confirmAlert } from 'react-confirm-alert';
+import Validate from "react-validate-form"
 import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
@@ -159,6 +160,10 @@ class CreateProfile extends Component {
   render() {
     const { RaisedButtonStyle } = styles;
 
+    const validations = {
+      name: ["required", "min:3", "max:15"],
+     }
+
     const societyCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
     {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
     {value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}];
@@ -210,15 +215,15 @@ class CreateProfile extends Component {
                   <form>
                       <div class="section"><span>1</span>Name &amp; Category</div>
                       <div class="inner-wrap">
-                          <label>Society Name</label>  
-                          <input type="text" value={this.state.name} onChange={(event) => {
-                            this.setState({name:event.target.value});
-                          }}/>
-                          <br/>
-                          <label>Society Category (Eg: Technology)</label>
-                          <select value={this.state.category} onChange={this.handleSocietyCategory}>
-                            {societyCategories.map(this.mapItem)}
-                          </select>
+                        <label>Society Name</label>  
+                        <input type="text" value={this.state.name} onChange={(event) => {
+                          this.setState({name:event.target.value});
+                        }}/>
+                        <br/>
+                        <label>Society Category (Eg: Technology)</label>
+                        <select value={this.state.category} onChange={this.handleSocietyCategory}>
+                          {societyCategories.map(this.mapItem)}
+                        </select>
                       </div>
 
                       <div class="section"><span>2</span>Vision &amp; Mision</div>
