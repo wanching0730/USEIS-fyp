@@ -450,7 +450,7 @@ class NewsFeed extends Component {
                     
                     </Modal>
         
-                    {this.props.retrieveLoading || this.props.postLoading || this.state.newsfeeds == null ? 
+                    {this.props.retrieveLoading || this.props.postLoading || this.props.deleteLoading || this.state.newsfeeds == null ? 
                         [<LoadingBar />]
                         :
                         [
@@ -489,7 +489,8 @@ const mapStateToProps = (state, props) => {
         societies: state.auth.societies,
         userEvents: state.data.userEvents,
         retrieveLoading: state.data.loading,
-        postLoading: state.create.loading
+        postLoading: state.create.loading,
+        deleteLoading: state.delete.loading
     };
 };
 

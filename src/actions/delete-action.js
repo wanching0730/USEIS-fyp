@@ -40,26 +40,24 @@ export function updateDeleteLoadingBar() {
 export function deleteData(type, id) {
     return function (dispatch) {
         return removeData(type, id).then(result => result.json()).then(reply => {
-
-            if(reply != "true") {
-                dispatch(deleteDataSuccessful());
-                confirmAlert({
-                    title: 'Message',
-                    message: 'Data has been deleted successfully',
-                    buttons: [
-                        {
-                            label: 'Close',
-                            onClick: () => {
-                                if(type === "sNewsfeed" || type === "eNewsfeed") {
-                                    browserHistory.push('/newsFeed');
-                                } else if (type === "event") {
-                                    browserHistory.push('/event');
-                                }
+            // if(reply != "true") {
+            dispatch(deleteDataSuccessful());
+            confirmAlert({
+                title: 'Message',
+                message: reply != "true" ? 'Data has been deleted successfully' : 'Data cannot be deleted',
+                buttons: [
+                    {
+                        label: 'Close',
+                        onClick: () => {
+                            if(type === "sNewsfeed" || type === "eNewsfeed") {
+                                browserHistory.push('/newsFeed');
+                            } else if (type === "event") {
+                                browserHistory.push('/event');
                             }
                         }
-                    ]
-                  })
-            }
+                    }
+                ]})
+            //}
         });
     };
 }

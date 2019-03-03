@@ -29,8 +29,8 @@ class CreateEvent extends Component {
       venue: '',
       organiserId: '',
       organiserName: '',
-      category: 'dance',
-      ssCategory: 'communication',
+      category: 'Dance',
+      ssCategory: 'Communication & Language Skills',
       ssPoint: 0,
       fee: 0,
       chairperson: '',
@@ -80,8 +80,8 @@ class CreateEvent extends Component {
         totalParticipant: event["totalParticipant"],
         totalCrew: event["totalCrew"],
         boothId: event["boothId"],
-        selectedStartDate: moment(event["startDate"]),
-        selectedEndDate: moment(event["endDate"])
+        selectedStartDate: event["startDate"] == "0000-00-00 00:00:00" ? moment() : moment(event["startDate"]),
+        selectedEndDate: event["endDate"] == "0000-00-00 00:00:00" ? moment() : moment(event["endDate"])
       });
 
       if(event["roles"].length > 0) {
@@ -136,9 +136,15 @@ class CreateEvent extends Component {
   // }
 
   handleClick(event) {
-    const { name, desc, venue, chairperson, contact, logoUrl } = this.state;
+    // console.log(typeof this.state.selectedStartDate == "string");
+    // console.log(this.state.selectedStartDate);
+    // console.log(moment());
+    // console.log(this.state.selectedStartDate._d);
+    // console.log(moment().format("YYYY-MM-DD HH:mm"));
+    // console.log(moment(moment()._d).format("YYYY-MM-DD HH:mm"))
+    const { name, desc, venue, chairperson, contact, logoUrl, position1, position2, position3 } = this.state;
     
-    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' || logoUrl == '' ) {
+    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' || logoUrl == '' || (position1 == 0 && position2 == 0 && position3 == 0)) {
       confirmAlert({
         title: 'Warning',
         message: 'Please fill in all empty fields before proceed',
@@ -161,10 +167,11 @@ class CreateEvent extends Component {
         authorizedPositions.push(this.state.position3);
       
       //let authorizedPositions = this.state.position1 + ',' + this.state.position2 + ',' + this.state.position3;
-      let eventId = this.props.params.id;
+      //let eventId = this.props.params.id;
       let data = this.state
       let eventName = data["name"];
       data["authorizedPositions"] = authorizedPositions
+      //data["selectedStartDate"] = typeof this.state.selectedStartDate != "string" ? "" + moment().format("YYYY-MM-DD HH:mm") : data["selectedStartDate"];
 
       // if(this.props.params.eventId)
       //   data["authorizedPositions"]= authorizedPositions == '' ? this.props.event["authorizedPosition"] : authorizedPositions;
@@ -180,7 +187,7 @@ class CreateEvent extends Component {
         if(data.endDate == '') {
           data.endDate = "" + moment(this.props.event["endDate"]).format("YYYY-MM-DD HH:mm");
         }
-        this.props.onUpdate("event", eventId, eventName, data);
+        this.props.onUpdate("event", this.props.params.id, eventName, data);
       }
     }
   }
@@ -189,7 +196,9 @@ class CreateEvent extends Component {
     this.setState({
       selectedStartDate: date,
       startDate: "" + moment(date).format("YYYY-MM-DD HH:mm")
-    });
+    }), function() {
+      this.setState(this.state);
+    };
   }
 
   handleEnd(date) {
@@ -214,13 +223,13 @@ class CreateEvent extends Component {
   render() {
     const { RaisedButtonStyle } = styles;
 
-    const eventCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
-    {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
-    {value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}];
+    const eventCategories = [{value:'Dance', name:'Dance'}, {value:'Design', name:'Design'}, {value:'Education', name:'Education'},
+    {value:'Entertainment', name:'Entertainment'}, {value:'Music', name:'Music'}, {value:'Soft Skill', name:'Soft Skill'}, 
+    {value:'Sport', name:'Sport'}, {value:'Music', name:'Music'}];
 
-    const softSkillCategories = [{value:'communication', name:'Communication & Language Skills'}, {value:'criticalThinking', name:'Critical Thinking & Problem Solving'}, {value:'digitalLiteracy', name:'Digital Literacy'},
-    {value:'eq', name:'Emotional Intelligence & Teamwork Skills'}, {value:'entrepreneur', name:'Entrepreneurship Skills'}, {value:'leadership', name:'Leadership Skills'},
-    {value:'lifelong', name:'Lifelong Learning & Information Management'}, {value:'moral', name:'Moral & Professional Ethics'}];
+    const softSkillCategories = [{value:'Communication & Language Skills', name:'Communication & Language Skills'}, {value:'Critical Thinking & Problem Solving', name:'Critical Thinking & Problem Solving'}, {value:'digitalLiteracy', name:'Digital Literacy'},
+    {value:'Emotional Intelligence & Teamwork Skills', name:'Emotional Intelligence & Teamwork Skills'}, {value:'Entrepreneur Skills', name:'Entrepreneurship Skills'}, {value:'Leadership Skills', name:'Leadership Skills'},
+    {value:'Lifelong Learning & Information Management', name:'Lifelong Learning & Information Management'}, {value:'Moral & Professional Ethics', name:'Moral & Professional Ethics'}];
 
     // const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
     //   {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Editorial', name:'Editorial'}]
