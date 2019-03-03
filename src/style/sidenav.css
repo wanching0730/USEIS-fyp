@@ -36,11 +36,11 @@
     position: absolute;
     right: 15%;
     left: auto;
-    top: -45%;
+    top: 10%;
     bottom:20%;
     transform: translateY(-300%);
     height: 100%;
-    width: 500px;
+    width: 50px;
     list-style: none;
     text-align: right;
   }

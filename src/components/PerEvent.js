@@ -5,12 +5,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import Tooltip from '@material-ui/core/Tooltip';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
 import { confirmAlert } from 'react-confirm-alert'; 
-import "../../node_modules/react-confirm-alert/src/react-confirm-alert.css";
 import $ from 'jquery';
 import moment from "moment";
+import "../../node_modules/react-confirm-alert/src/react-confirm-alert.css";
 import "../style/sidenav.css";
 import "../style/display.css";
 
@@ -223,14 +224,26 @@ class PerEvent extends Component {
                             {(event["specificAuthorized"]) || (event["authorized"]) ?
                                 [
                                     <div className="zoom">
-                                        <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
-                                            <ul className="zoom-menu">   
+                                        <Tooltip title="Actions" placement="left">
+                                            <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
+                                        </Tooltip>
+                                        <ul className="zoom-menu">   
+                                            <Tooltip title="Edit Event" placement="left">
                                                 <li><a className="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toEditEvent} id="editEvent"><FontAwesome.FaEdit /></Link></a></li>
+                                            </Tooltip>
+                                            <Tooltip title="Delete Event" placement="left">
                                                 <li><a className="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link onClick={this.handleDelete} id="deleteEvent"><FontAwesome.FaTrash /></Link></a></li>
+                                            </Tooltip>
+                                            <Tooltip title="Register Booth" placement="left">
                                                 <li><a className="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
+                                            </Tooltip>
+                                            <Tooltip title="Manage Crew" placement="left">
                                                 <li><a className="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase /></Link></a></li>
+                                            </Tooltip>
+                                            <Tooltip title="Manage Participant" placement="left">
                                                 <li><a className="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageParticipant} id="manageParticipant"><FontAwesome.FaUser /></Link></a></li> 
-                                            </ul> 
+                                            </Tooltip>
+                                        </ul> 
                                     </div>
                                 ]
                                 :

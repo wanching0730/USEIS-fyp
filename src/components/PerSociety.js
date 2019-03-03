@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import RaisedButton from 'material-ui/RaisedButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import {browserHistory} from 'react-router';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -183,15 +184,30 @@ class PerSociety extends Component {
                             {(society["specificAuthorized"]) ?
                                 [
                                     <div className="zoom">
-                                        <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
+                                       <Tooltip title="Actions" placement="left">
+                                            <a className="zoom-fab zoom-btn-large" id="zoomBtn"><FontAwesome.FaCog /></a>
+                                        </Tooltip>
                                         <ul className="zoom-menu">
-                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li>
-                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaEdit /></Link></a></li>
-                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
-                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
-                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-crew scale-transition scale-out"><Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase /></Link></a></li>
-                                            <li><a className="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
+                                            <Tooltip title="Add Event" placement="left">
+                                                <li><a className="zoom-fab zoom-btn-sm zoom-btn-person scale-transition scale-out"><Link to={toCreateEvent} id="addEvent"><FontAwesome.FaPlus /></Link></a></li>
+                                            </Tooltip>
+                                            <Tooltip title="Edit Society" placement="left">
+                                                <li><a className="zoom-fab zoom-btn-sm zoom-btn-doc scale-transition scale-out"><Link to={`/createProfile/` + this.props.params.societyId} id="editProfile"><FontAwesome.FaEdit /></Link></a></li>
+                                            </Tooltip>
+                                            <Tooltip title="Register Booth" placement="left">
+                                                <li><a className="zoom-fab zoom-btn-sm zoom-btn-tangram scale-transition scale-out"><Link to={toRegisterBooth} id="bidSocietyBooth"><FontAwesome.FaAlignJustify /></Link></a></li>
+                                            </Tooltip>
+                                            {/* <Tooltip title="Submit Proposal" placement="left">
+                                                <li><a className="zoom-fab zoom-btn-sm zoom-btn-report scale-transition scale-out"><Link to="/submitProposal" id="submitProposal"><FontAwesome.FaFile /></Link></a></li>
+                                            </Tooltip> */}
+                                            <Tooltip title="Manage Crew" placement="left">
+                                                <li><a className="zoom-fab zoom-btn-sm zoom-btn-crew scale-transition scale-out"><Link to={toManageCrew} id="manageCrew"><FontAwesome.FaBriefcase /></Link></a></li>
+                                            </Tooltip>
+                                            <Tooltip title="Manage Member" placement="left">
+                                                <li><a className="zoom-fab zoom-btn-sm zoom-btn-feedback scale-transition scale-out"><Link to={toManageMember} id="manageMember"><FontAwesome.FaUser /></Link></a></li> 
+                                            </Tooltip>
                                         </ul> 
+                                        
                                     </div>
                                 ]
                                 : 
