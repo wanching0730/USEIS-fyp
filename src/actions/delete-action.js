@@ -44,15 +44,19 @@ export function deleteData(type, id) {
             dispatch(deleteDataSuccessful());
             confirmAlert({
                 title: 'Message',
-                message: reply != "true" ? 'Data has been deleted successfully' : 'Data cannot be deleted',
+                message: reply["responseCode"] != 500 ? 'Data has been deleted successfully' : 'Data cannot be deleted: ' + reply["message"],
                 buttons: [
                     {
                         label: 'Close',
                         onClick: () => {
-                            if(type === "sNewsfeed" || type === "eNewsfeed") {
-                                browserHistory.push('/newsFeed');
-                            } else if (type === "event") {
-                                browserHistory.push('/event');
+                            if(reply["responseCode"] == 500) {
+                                browserHistory.push('/home');
+                            } else {
+                                if(type === "sNewsfeed" || type === "eNewsfeed") {
+                                    browserHistory.push('/newsFeed');
+                                } else if (type === "event") {
+                                    browserHistory.push('/event');
+                                }
                             }
                         }
                     }
@@ -65,23 +69,19 @@ export function deleteData(type, id) {
 export function deleteParticipation(type, id, eventId) {
     return function (dispatch) {
         return removeParticipation(type, id, eventId).then(result => result.json()).then(reply => {
-
-            if(reply != "true") {
-                dispatch(deleteParticipationSuccessful());
-                confirmAlert({
-                    title: 'Message',
-                    message: 'Participation has been deleted successfully',
-                    buttons: [
-                        {
-                            label: 'Close',
-                            onClick: () => {
-                                console.log("yes");
-                                //browserHistory.push("/myEvents");
-                            }
+            dispatch(deleteParticipationSuccessful());
+            confirmAlert({
+                title: 'Message',
+                message: reply["responseCode"] != 500 ? 'Data has been deleted successfully' : 'Data cannot be deleted: ' + reply["message"],
+                buttons: [
+                    {
+                        label: 'Close',
+                        onClick: () => {
+                            console.log("yes");
                         }
-                    ]
-                  })
-            }
+                    }
+                ]
+            })
         })
     }
 }

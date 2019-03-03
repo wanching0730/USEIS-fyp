@@ -221,7 +221,6 @@ export function updateDouble(type, postData, name) {
                         label: 'Close',
                         onClick: () => {
                             if(reply["responseCode"] == 500) {
-                                dispatch(updateSuccessfully());
                                 browserHistory.push('/home');
                             } else {
                                 if(type === "crew" || type === "rejectCrew") {
