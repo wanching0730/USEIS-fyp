@@ -244,7 +244,7 @@ class ManageMember extends Component {
                     </Breadcrumb>
                 </div>
 
-                {this.props.loading ?
+                {this.props.loading || this.props.deleteLoading ?
                     [<LoadingBar />]
                     :
                     [
@@ -294,7 +294,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         societyMembers: state.data.societyMembers,
-        loading: state.data.loading
+        loading: state.data.loading,
+        deleteLoading: state.delete.loading
     };
 };
 

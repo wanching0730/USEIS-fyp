@@ -17,6 +17,7 @@ import "../style/display.css";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveDataWithUserId, updateLoadingBar } from '../actions/data-action';
+import { deleteData, updateDeleteLoadingBar } from '../actions/delete-action';
 
 class PerEvent extends Component {
 
@@ -29,6 +30,8 @@ class PerEvent extends Component {
             this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
         else 
             this.props.onRetrieveDataWithUserId("staffEvent", this.props.params.eventId, this.props.id);
+        
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -63,8 +66,9 @@ class PerEvent extends Component {
               {
                 label: 'Yes',
                 onClick: () => {
-                    console.log('Click Yes');
-                    browserHistory.push("/event");
+                    this.props.onUpdateDeleteLoadingBar();
+                    this.props.onDeleteData("event", this.props.params.eventId);
+                    //browserHistory.push("/event");
                 }
               },
               {
@@ -211,7 +215,7 @@ class PerEvent extends Component {
                     </Breadcrumb>
                 </div>
 
-                {this.props.loading || this.props.event == null ?
+                {this.props.loading || this.props.deleteLoading || this.props.event == null ?
                     [<LoadingBar />]
                     :
                     [
@@ -331,14 +335,17 @@ const mapStateToProps = (state, props) => {
         event: state.data.event,
         userName: state.auth.userName,
         id: state.auth.id,
-        loading: state.data.loading
+        loading: state.data.loading,
+        deleteLoading: state.delete.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveDataWithUserId: retrieveDataWithUserId,
-      onUpdateLoadingBar: updateLoadingBar
+      onUpdateLoadingBar: updateLoadingBar,
+      onDeleteData: deleteData,
+      onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 

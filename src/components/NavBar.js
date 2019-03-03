@@ -41,6 +41,7 @@ class NavBar extends Component {
 
     logout() {
         this.props.onLogoutUser();
+        browserHistory.push("/");
     }
 
     toggle() {

@@ -52,7 +52,9 @@ export function deleteData(type, id) {
                             onClick: () => {
                                 if(type === "sNewsfeed" || type === "eNewsfeed") {
                                     browserHistory.push('/newsFeed');
-                                } 
+                                } else if (type === "event") {
+                                    browserHistory.push('/event');
+                                }
                             }
                         }
                     ]

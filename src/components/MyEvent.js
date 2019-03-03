@@ -222,7 +222,7 @@ class MyEvent extends Component {
                             isVege = <td>Yes</td>;
                         
 
-                        if(event["status"] != 1) {
+                        if(event["status"] != 1 && moment(event["startDate"]).format("YYYY/MM/DD") >= moment(new Date()).format("YYYY/MM/DD")) {
                             if(event["status"] != 2) {
                                 if(event["eRoleId"] === 1) 
                                     action = 
@@ -257,9 +257,10 @@ class MyEvent extends Component {
                         } else {
                             action = <td>-</td>;
                         }
-                         console.log(moment(event["startDate"]).format("DD/MM/YYYY"));
-                         console.log(moment(new Date()).format("DD/MM/YYYY"));
-                        if(event["status"] == 1 && moment(event["startDate"]).format("DD/MM/YYYY") <= moment(new Date()).format("DD/MM/YYYY")) {
+                        //  console.log(moment(event["startDate"]).format("DD/MM/YYYY"));
+                        //  console.log(moment(new Date()).format("DD/MM/YYYY"));
+                        //  console.log(moment(event["startDate"]).format("YYYY/MM/DD") <= moment(new Date()).format("YYYY/MM/DD"));
+                        if(event["status"] == 1 && moment(event["startDate"]).format("YYYY/MM/DD") <= moment(new Date()).format("YYYY/MM/DD")) {
                             if(event["ratingStatus"] == 1) 
                                 ratingStatus = <td>Done</td>;
                             else 
@@ -320,7 +321,7 @@ class MyEvent extends Component {
                                             <tr>
                                                 <th>No.</th>
                                                 <th>Logo</th>
-                                                <th>Events</th> 
+                                                <th>Upcoming Events</th> 
                                                 <th>Organisers</th> 
                                                 <th>Joined Date</th>
                                                 <th>Position</th>
