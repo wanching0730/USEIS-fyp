@@ -4,13 +4,13 @@ table {
     text-align: center;
     margin-top: 5px;
     vertical-align: middle;
-    border-color: #083477;
+    border-color: #010059;
     width: 100%;
     height: 100%;
 }
 
 table thead {
-    background-color: #083477;
+    background-color: #010059;
     color: white;
 }
 
@@ -59,7 +59,7 @@ label{
 }
 
 label:hover{
-  background: #083477;
+  background: #010059;
   color: white;
 }
 
@@ -91,7 +91,7 @@ input[type="checkbox"]:checked ~ ul{
 }
 
 input[type="checkbox"]:checked + label{
-  background: #083477;
+  background: #010059;
   color: white;
   border-bottom: 1px solid #fff;
 }

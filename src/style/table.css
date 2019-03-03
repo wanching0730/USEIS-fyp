@@ -12,14 +12,14 @@
 	}
 	
   #table1 th { 
-    background: #083477; 
+    background: #010059; 
     color: white; 
     font-weight: lighter; 
 	}
 	
   #table1 td, #table1 th { 
     padding: 6px; 
-    border: 1px solid #083477; 
+    border: 1px solid #010059; 
     text-align: left; 
   }
 
@@ -49,7 +49,7 @@
   } 
 
   #aboutMeTable td, #aboutMeTable th {
-	  border: 1px solid #083477;
+	  border: 1px solid #010059;
 	  text-align: left;
 	  padding-left: 20px;
   }
@@ -114,7 +114,7 @@ only screen and (max-width: 760px),
 	}
 	
 	#table1 tr { 
-		border: 1px solid #083477; 
+		border: 1px solid #010059; 
 		margin-bottom: 10px;
 	}
 	

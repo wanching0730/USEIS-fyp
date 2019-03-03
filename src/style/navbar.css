@@ -1,5 +1,5 @@
 Navbar {
-  background-color: #083477;
+  background-color: #010059;
 }
 
 body {
@@ -9,7 +9,7 @@ body {
 
 .topnav {
   /* overflow: hidden; */
-  background-color: #083477;
+  background-color: #010059;
   color: #FFFFFF;
   /* width: 100%;
   margin: 0 0 1em 0; */
@@ -30,6 +30,10 @@ Nav {
 
 .dropdown-menu.show {
   left: -50px !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255) !important;
 }
 
 @media screen and (max-width: 600px) {

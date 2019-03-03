@@ -4,8 +4,8 @@ import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import '../style/society.css';
 import { Link } from 'react-router';
+import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
