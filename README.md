@@ -2,7 +2,8 @@
 * React
 * Flask
 * MySQL Database
-* Cloud Services (Google Cloud SQL, Firebase Cloud Messaging)
+* Amazon Web Services (Amazon RDS, Amazon EMR, Amazon S3, Amazon Cognito, Amazon Elastic Beanstalk)
+* Firebase (Firebase Hosting, Firebase Cloud Messaging)
 * macOS Cron Job 
 
 # Scope
