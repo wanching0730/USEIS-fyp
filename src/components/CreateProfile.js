@@ -21,7 +21,7 @@ class CreateProfile extends Component {
     this.state = {
       name:'',
       desc:'',
-      category: 'dance',
+      category: 'Dance',
       vision: '',
       mission: '',
       logoUrl: '',
@@ -163,9 +163,9 @@ class CreateProfile extends Component {
       name: ["required", "min:3", "max:15"],
      }
 
-    const societyCategories = [{value:'dance', name:'Dance'}, {value:'design', name:'Design'}, {value:'education', name:'Education'},
-    {value:'entertainment', name:'Entertainment'}, {value:'music', name:'Music'}, {value:'softskill', name:'Soft Skill'}, 
-    {value:'sport', name:'Sport'}, {value:'technology', name:'Technology'}];
+    const societyCategories = [{value:'Dance', name:'Dance'}, {value:'Design', name:'Design'}, {value:'Education', name:'Education'},
+    {value:'Entertainment', name:'Entertainment'}, {value:'Music', name:'Music'}, {value:'Soft Skill', name:'Soft Skill'}, 
+    {value:'Sport', name:'Sport'}, {value:'Technology', name:'Technology'}];
 
     const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
       {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}]

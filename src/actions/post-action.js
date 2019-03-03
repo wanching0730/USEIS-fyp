@@ -124,38 +124,42 @@ export function create(type, postData) {
         }).join('&');
 
         return createData(type, data).then(result => result.json()).then(reply => {
-            if(reply != null) {
-                confirmAlert({
-                    title: 'Message',
-                    message: 'Data has been created successfully',
-                    buttons: [
-                        {
-                            label: 'Close',
-                            onClick: () => {
+            console.log(reply);
+            confirmAlert({
+                title: 'Message',
+                message: reply["responseCode"] != 500 ? 'Data has been created successfully' : 'Data cannot be created: ' + reply["message"],
+                buttons: [
+                    {
+                        label: 'Close',
+                        onClick: () => {
+                            if(reply["responseCode"] == 500) {
+                                dispatch(createSuccessfully());
+                                browserHistory.push('/home');
+                            } else {
                                 if(type === "society") {
                                     dispatch(createSuccessfully());
-                                    browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["name"]}});
+                                    browserHistory.push({pathname:`/perSociety/` + reply["message"], state: {societyName: postData["name"]}});
                                 } else if(type === "event") {
                                     dispatch(createSuccessfully());
-                                    browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["name"]}});
+                                    browserHistory.push({pathname:`/perEvent/` + reply["message"], state: {eventName: postData["name"]}});
                                 } else if(type === "newsfeeds") {
                                     dispatch(createSuccessfully());
                                     browserHistory.push('/newsfeeds');
                                 } else if(type === "registerSociety") {
                                     dispatch(registerSuccessfully());
-                                    browserHistory.push({pathname:`/perSociety/` + reply, state: {societyName: postData["societyName"]}});
+                                    browserHistory.push({pathname:`/perSociety/` + reply["message"], state: {societyName: postData["societyName"]}});
                                 } else if(type === "staffRegisterEvent" || type == "studentRegisterEvent") {
                                     dispatch(registerSuccessfully());
-                                    browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
+                                    browserHistory.push({pathname:`/perEvent/` + reply["message"], state: {eventName: postData["eventName"]}});
                                 } else if(type === "registerEventCrew") {
                                     dispatch(registerSuccessfully());
-                                    browserHistory.push({pathname:`/perEvent/` + reply, state: {eventName: postData["eventName"]}});
+                                    browserHistory.push({pathname:`/perEvent/` + reply["message"], state: {eventName: postData["eventName"]}});
                                 } 
                             }
                         }
-                    ]
-                })
-            }
+                    }
+                ]
+            }) 
         });
     };
 }
@@ -167,14 +171,17 @@ export function update(type, id, name, postData) {
         }).join('&');
 
         return updateData(type, id, data).then(result => result.json()).then(reply => {
-            if(reply != 0) {
-                confirmAlert({
-                    title: 'Message',
-                    message: 'Data has been updated successfully',
-                    buttons: [
-                        {
-                            label: 'Close',
-                            onClick: () => {
+            confirmAlert({
+                title: 'Message',
+                message: reply["responseCode"] != 500 ? 'Data has been updated successfully' : 'Data cannot be updated: ' + reply["message"],
+                buttons: [
+                    {
+                        label: 'Close',
+                        onClick: () => {
+                            if(reply["responseCode"] == 500) {
+                                dispatch(updateSuccessfully());
+                                browserHistory.push('/home');
+                            } else {
                                 if(type === "society") {
                                     dispatch(updateSuccessfully());
                                     browserHistory.push({pathname:`/perSociety/` + id, state: {societyName: name}});
@@ -190,9 +197,10 @@ export function update(type, id, name, postData) {
                                 }
                             }
                         }
-                    ]
-                  })
-            }
+                    }
+                ]
+            })
+            
         });
     };
 }
@@ -205,36 +213,38 @@ export function updateDouble(type, postData, name) {
         }).join('&');
 
         return updateDataDouble(type, data).then(result => result.json()).then(reply => {
-            if(reply != 0) {
-                confirmAlert({
-                    title: 'Message',
-                    message: 'Data has been updated successfully',
-                    buttons: [
-                        {
-                            label: 'Close',
-                            onClick: () => {
+            confirmAlert({
+                title: 'Message',
+                message: reply["responseCode"] != 500 ? 'Data has been updated successfully' : 'Data cannot be updated: ' + reply["message"],
+                buttons: [
+                    {
+                        label: 'Close',
+                        onClick: () => {
+                            if(reply["responseCode"] == 500) {
+                                dispatch(updateSuccessfully());
+                                browserHistory.push('/home');
+                            } else {
                                 if(type === "crew" || type === "rejectCrew") {
-                                    browserHistory.push({pathname:`/manageCrew/` + reply, state: {eventName: name}});
+                                    browserHistory.push({pathname:`/manageCrew/` + reply["message"], state: {eventName: name}});
                                 } else if(type === "member" || type === "rejectStudentSociety") {
-                                    browserHistory.push({pathname:`/manageMember/` + reply, state: {societyName: name}});
+                                    browserHistory.push({pathname:`/manageMember/` + reply["message"], state: {societyName: name}});
                                 } else if(type === "studentParticipant" || type === "staffParticipant" || type === "rejectStudentEvent" || type === "rejectStaffEvent") {
-
-                                    browserHistory.push({pathname:`/manageParticipant/` + reply, state: {eventName: name}});
+                                    browserHistory.push({pathname:`/manageParticipant/` + reply["message"], state: {eventName: name}});
                                 } else if(type === "booth") {
                                     dispatch(registerSuccessfully());
 
                                     if(postData["type"] === "society")
-                                        browserHistory.push({pathname:`/register_booth/society/` + reply, state: {societyName: name}});
+                                        browserHistory.push({pathname:`/register_booth/society/` + reply["message"], state: {societyName: name}});
                                     else 
-                                        browserHistory.push({pathname:`/register_booth/event/` + reply, state: {eventName: name}});
+                                        browserHistory.push({pathname:`/register_booth/event/` + reply["message"], state: {eventName: name}});
                                 } else if(type === "resubmitStaffParticipant" || type === "resubmitStudentParticipant" || type === "resubmitMemberRegistration" || type === "cancelStudentEvent") {
                                     browserHistory.push("/myEvents");
                                 }
                             }
                         }
-                    ]
-                  })
-            }
+                    }
+                ]
+            })
         });
     };
 }
