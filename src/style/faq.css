@@ -101,7 +101,7 @@
     height: 50px;
     line-height: 50px;
     padding: 0 28px 0 16px;
-    background-color: #083477;
+    background-color: #010059;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #ffffff;
@@ -149,7 +149,7 @@
       display: none;
     }
     .no-touch .cd-faq-categories a:hover {
-      background: #083477;
+      background: #010059;
     }
     .no-js .cd-faq-categories {
       width: 100%;

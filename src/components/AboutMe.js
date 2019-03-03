@@ -15,7 +15,7 @@ class AboutMe extends Component {
     }
 
     render() {
-        let user = this.props.user[0];
+        let user = this.props.user;
         const { RaisedButtonStyle } = styles;
 
         return (

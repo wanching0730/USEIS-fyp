@@ -4,6 +4,7 @@ import LoadingBar from './LoadingBar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import {browserHistory} from 'react-router';
 import moment from 'moment';
+import '../style/home.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

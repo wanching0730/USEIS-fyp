@@ -14,3 +14,17 @@ table {
     vertical-align: middle;
     border-color: #083477;
 }
+
+.rbc-event {
+    background-color: #8493E3 !important;
+}
+
+.rbc-toolbar button {
+    display: inline-block;
+}
+
+@media only screen and (max-width: 375px) {
+    .rbc-toolbar button {
+        display: flex;
+    }
+}
