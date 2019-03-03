@@ -275,22 +275,17 @@ export function updateEndLoadingBar() {
 export function exportData(type, id) {
     return function(dispatch) {
         return downloadData(type, id).then(result => result.json()).then(reply => {
-            if(reply) {
-                dispatch(retrieveAllDataSuccessful("exportData", reply));
-
-                confirmAlert({
-                    title: 'Message',
-                    message: 'Data has been exported successfully',
-                    buttons: [
-                        {
-                            label: 'Close',
-                            onClick: () => {}
-                        }
-                    ]
-                  })
-            }
-            else 
-                console.log("error");
+            dispatch(retrieveAllDataSuccessful("exportData", reply));
+            confirmAlert({
+                title: 'Message',
+                message: reply["responseCode"] != 500 ? 'Data has been exported successfully' : 'Data cannot be exported: ' + reply["message"],
+                buttons: [
+                    {
+                        label: 'Close',
+                        onClick: () => {}
+                    }
+                ]
+            })
         });
     }
 }

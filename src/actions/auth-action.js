@@ -166,8 +166,8 @@ export function loginUser(postData) {
         .catch(error => {
             console.log("login error: " + error);
             confirmAlert({
-                title: 'Invalid Login',
-                message: 'Your user name and password are not valid',
+                title: 'Login failed',
+                message: "" + error,
                 buttons: [
                     {
                         label: 'Close',

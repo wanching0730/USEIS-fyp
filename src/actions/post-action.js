@@ -134,7 +134,7 @@ export function create(type, postData) {
                         onClick: () => {
                             if(reply["responseCode"] == 500) {
                                 dispatch(createSuccessfully());
-                                browserHistory.push('/home');
+                                //browserHistory.push('/home');
                             } else {
                                 if(type === "society") {
                                     dispatch(createSuccessfully());
@@ -180,7 +180,7 @@ export function update(type, id, name, postData) {
                         onClick: () => {
                             if(reply["responseCode"] == 500) {
                                 dispatch(updateSuccessfully());
-                                browserHistory.push('/home');
+                                //browserHistory.push('/home');
                             } else {
                                 if(type === "society") {
                                     dispatch(updateSuccessfully());
@@ -221,7 +221,8 @@ export function updateDouble(type, postData, name) {
                         label: 'Close',
                         onClick: () => {
                             if(reply["responseCode"] == 500) {
-                                browserHistory.push('/home');
+                                console.log("click");
+                                //browserHistory.push('/home');
                             } else {
                                 if(type === "crew" || type === "rejectCrew") {
                                     browserHistory.push({pathname:`/manageCrew/` + reply["message"], state: {eventName: name}});
