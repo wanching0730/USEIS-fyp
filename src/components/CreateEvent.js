@@ -324,7 +324,7 @@ class CreateEvent extends Component {
                       <div class="section"><span>3</span>Fee</div>
                           <div class="inner-wrap">
                           <label>Event Fee</label>
-                          <input type="text" value={this.state.fee} name="fee" onChange={(event) => {this.setState({fee:event.target.value})}}/>
+                          <input type="number" value={this.state.fee} name="fee" onChange={(event) => {this.setState({fee:event.target.value})}}/>
                       </div>
 
                       <div class="section"><span>4</span>Organizing Chairperson Information</div>
@@ -333,7 +333,7 @@ class CreateEvent extends Component {
                         <input type="text" value={this.state.chairperson} name="chairperson" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
                         <br/>
                         <label>Contact Number</label> 
-                        <input type="text" value={this.state.contact} name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
+                        <input type="number" value={this.state.contact} name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
                         <br/>
                         <label>Vegetarian</label> 
                         <Checkbox onCheck={(e, checked) => {
@@ -349,7 +349,7 @@ class CreateEvent extends Component {
                       <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
                       <div class="inner-wrap">
                         <label>Soft Skill Points</label>
-                        <input type="text" value={this.state.ssPoint} name="ssPoint" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
+                        <input type="number" value={this.state.ssPoint} name="ssPoint" onChange={(event) => {this.setState({ssPoint:event.target.value})}}/>
                         <br/>
                         <label>Soft Skill Category</label> 
                         <select value={this.state.ssCategory} onChange={this.handleSoftskilltCategory}>
@@ -368,10 +368,10 @@ class CreateEvent extends Component {
                       <div class="section"><span>7</span>Availability</div>
                           <div class="inner-wrap">
                             <label>Total amount of Participants</label>
-                            <input type="text" value={this.state.totalParticipant} onChange={(event) => {this.setState({totalParticipant:event.target.value})}}/>
+                            <input type="number" value={this.state.totalParticipant} onChange={(event) => {this.setState({totalParticipant:event.target.value})}}/>
                             <br/>
                             <label>Total amount of Crew</label>
-                            <input type="text" value={this.state.totalCrew} onChange={(event) => {this.setState({totalCrew:event.target.value})}}/>
+                            <input type="number" value={this.state.totalCrew} onChange={(event) => {this.setState({totalCrew:event.target.value})}}/>
                             <br/>
                       </div>
 

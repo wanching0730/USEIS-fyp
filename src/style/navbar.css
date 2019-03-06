@@ -36,6 +36,10 @@ Nav {
   color: rgba(255, 255, 255) !important;
 }
 
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
 @media screen and (max-width: 600px) {
   Nav {
     height: 100%;

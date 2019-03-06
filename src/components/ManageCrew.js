@@ -3,7 +3,7 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
 import { Link } from 'react-router';
@@ -252,21 +252,21 @@ class ManageCrew extends Component {
                         if(singleCrew["status"] == 1) 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
+                                    <Tooltip title="Approved" placement="left">
                                         <li className="fa fa-check"></li>
                                     </Tooltip>
                                 </td>
                         else if(singleCrew["status"] == 0) 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve this crew</span>}>
+                                    <Tooltip title="Approve crew" placement="left">
                                         <li value={singleCrew["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li>
                                     </Tooltip>
                                 </td>
                         else 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancelled</span>}>
+                                    <Tooltip title="Cancelled" placement="left">
                                         <div>-</div>
                                     </Tooltip>
                                 </td>
@@ -274,14 +274,14 @@ class ManageCrew extends Component {
                         if(singleCrew["status"] !=3) {
                             deleteIcon = 
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject crew</span>}>
+                                    <Tooltip title="Reject Crew" placement="right">
                                         <li value={singleCrew["studentId"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         } else {
                             deleteIcon =
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove crew</span>}>
+                                    <Tooltip title="Remove Crew" placement="right">
                                         <li value={singleCrew["studentId"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>

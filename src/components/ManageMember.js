@@ -5,7 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
 import '../style/table.css';
@@ -176,21 +176,21 @@ class ManageMember extends Component {
                         if(member["memberStatus"] == 1) 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
+                                    <Tooltip title="Approved" placement="left">
                                         <li className="fa fa-check"></li>
                                     </Tooltip>
                                 </td>
                         else if(member["memberStatus"] == 0)
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve member</span>}>
+                                    <Tooltip title="Approve Member" placement="left">
                                         <li value={member["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li>
                                     </Tooltip>
                                 </td>
                         else 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancelled</span>}>
+                                    <Tooltip title="Cancelled" placement="left">
                                         <div>-</div>
                                     </Tooltip>
                                 </td>
@@ -198,14 +198,14 @@ class ManageMember extends Component {
                         if(member["memberStatus"] != 3) {
                             deleteIcon = 
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject member</span>}>
+                                    <Tooltip title="Reject Member" placement="right">
                                         <li value={member["studentId"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         } else {
                             deleteIcon = 
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove member</span>}>
+                                    <Tooltip title="Remove Member" placement="right">
                                         <li value={member["studentId"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>

@@ -108,7 +108,7 @@ class ManageBooth extends Component {
                                     <div class="section"><span>1</span>Name &amp; Category</div>
                                     <div class="inner-wrap">
                                         <label>Booth Amount</label>  
-                                        <input type="text" onChange={(event) => {
+                                        <input type="number" onChange={(event) => {
                                             this.setState({boothAmount:event.target.value});
                                         }}/>
                                         <br/>

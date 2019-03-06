@@ -3,14 +3,14 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 import { confirmAlert } from 'react-confirm-alert'; 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
 import '../style/table.css';
 import '../style/alert.css';
-import 'rc-tooltip/assets/bootstrap_white.css';
+// import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -208,21 +208,21 @@ class ManageParticipant extends Component {
                         if(studentParticipant["status"] == 1) 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
+                                    <Tooltip title="Approved" placement="left">
                                         <li className="fa fa-check"></li>
                                     </Tooltip>
                                 </td>
                         else if(studentParticipant["status"] == 0)
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve participant</span>}>
+                                    <Tooltip title="Actions" placement="Approve Participant">
                                         <li value={studentParticipant["id"]} onClick={(event) => this.handleApprove(event, studentParticipant["username"])} className="fa fa-plus"></li>
                                     </Tooltip>
                                 </td>
                         else 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancelled</span>}>
+                                    <Tooltip title="Cancelled" placement="left">
                                         <div>-</div>
                                     </Tooltip>
                                 </td>
@@ -230,14 +230,14 @@ class ManageParticipant extends Component {
                         if(studentParticipant["status"] != 3) {
                             deleteIcon = 
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
+                                    <Tooltip title="Reject Participant" placement="right">
                                         <li value={studentParticipant["id"]} onClick={(event) => this.handleReject(event, studentParticipant["username"])} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         } else {
                             deleteIcon = 
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove participant</span>}>
+                                    <Tooltip title="Remove Participant" placement="right">
                                         <li value={studentParticipant["id"]} onClick={(event) => this.handleRemove(event, studentParticipant["username"])} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
@@ -275,21 +275,21 @@ class ManageParticipant extends Component {
                         if(staffParticipant["status"] == 1) 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approved</span>}>
+                                    <Tooltip title="Approved" placement="left">
                                         <li className="fa fa-check"></li>
                                     </Tooltip>
                                 </td>;
                         else if(staffParticipant["status"] == 0) {
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Approve participant</span>}>
+                                    <Tooltip title="Approve Participant" placement="left">
                                         <li value={staffParticipant["id"]} onClick={(event) => this.handleApprove(event, staffParticipant["username"])} className="fa fa-plus"></li>
                                     </Tooltip>
                                 </td>;
                         } else 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancelled</span>}>
+                                    <Tooltip title="Cancelled" placement="left">
                                         <div>-</div>
                                     </Tooltip>
                                 </td>;
@@ -297,14 +297,14 @@ class ManageParticipant extends Component {
                         if(staffParticipant["status"] != 3) {
                             deleteIcon = 
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Reject participant</span>}>
+                                    <Tooltip title="Reject Participant" placement="left">
                                         <li value={staffParticipant["id"]} onClick={(event) => this.handleReject(event, staffParticipant["username"])} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         } else {
                             deleteIcon = 
                                 <td>
-                                    <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove participant</span>}>
+                                    <Tooltip title="Remove Participant" placement="left">
                                         <li value={staffParticipant["id"]} onClick={(event) => this.handleRemove(event, staffParticipant["username"])} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
