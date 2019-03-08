@@ -22,6 +22,7 @@ import {
     RETRIEVE_SOCIETY_MEMBERS,
     RETRIEVE_CREW_POSITION,
     RETRIEVE_ROLES,
+    RETRIEVE_REC_SOCIETIES,
     RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
@@ -257,7 +258,15 @@ export function retrieveAllDataSuccessful(type, data) {
                 loading: false
             }
         }
-    }
+    } else if(type === "recommendedSocieties") {
+        return {
+            type: RETRIEVE_REC_SOCIETIES,
+            payload: {
+                recommendedSocieties: data,
+                loading: false
+            }
+        }
+    } 
 }
 
 export function updateLoadingBar() {
@@ -569,6 +578,10 @@ export function retrieveAll(type) {
                 let roles = reply;
 
                 dispatch(retrieveAllDataSuccessful("roles", roles));
+            } else if(type === "recommendedSocieties") {
+                let recommendedSocieties = reply;
+
+                dispatch(retrieveAllDataSuccessful("recommendedSocieties", recommendedSocieties));
             } 
         });
     };
