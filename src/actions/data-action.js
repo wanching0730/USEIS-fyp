@@ -23,6 +23,7 @@ import {
     RETRIEVE_CREW_POSITION,
     RETRIEVE_ROLES,
     RETRIEVE_REC_SOCIETIES,
+    RETRIEVE_REC_EVENTS,
     RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
@@ -160,6 +161,14 @@ export function retrieveSingleDataSuccessful(type, data) {
             type: RETRIEVE_BOOTH_AMOUNT,
             payload: {
                 overallBooth: data,
+                loading: false
+            }
+        }
+    } else if(type === "recommendedEvents") {
+        return {
+            type: RETRIEVE_REC_EVENTS,
+            payload: {
+                recommendedEvents: data,
                 loading: false
             }
         }
@@ -487,6 +496,10 @@ export function retrieveData(type, id) {
                 let overallBooth = reply[0];
 
                 dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
+            } else if(type === "recommendedEvents") {
+                let recommendedEvents = reply[0];
+
+                dispatch(retrieveSingleDataSuccessful("recommendedEvents", recommendedEvents));
             } 
         });
     };

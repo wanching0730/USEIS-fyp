@@ -1,21 +1,25 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
+import LoadingBar from './LoadingBar';
 import { Doughnut, HorizontalBar } from '../../node_modules/react-chartjs-2';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { retrieveAll, retrieveData } from '../actions/data-action';
 
 class Analysis extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            labels: [],
-            data: []
+            donutLabels: [],
+            barLabels: [],
+            donutData: [],
+            barData: []
         };
 
         this.props.onRetrieveAll("recommendedSocieties");
+        this.props.onRetrieveData("recommendedEvents", this.props.id);
     }
 
     componentWillReceiveProps(nextProps){
@@ -26,9 +30,21 @@ class Analysis extends Component {
             let recommendedSocieties = nextProps.recommendedSocieties;
 
             for(var i = 0; i < recommendedSocieties.length; i++) {
-                this.state.labels.push(recommendedSocieties[i]["name"]);
-                this.state.data.push(recommendedSocieties[i]["total"]);
+                this.state.barLabels.push(recommendedSocieties[i]["name"]);
+                this.state.barData.push(recommendedSocieties[i]["total"]);
             }
+        }
+
+        if((nextProps.recommendedEvents != this.props.recommendedEvents) && (nextProps.recommendedEvents != null)) {
+            let recommendedEvents = nextProps.recommendedEvents;
+
+            let eventNames = recommendedEvents["eventId"].split(",");
+            let ratings = recommendedEvents["rating"].split(", ");
+
+            this.setState({
+                donutLabels: eventNames.slice(0,3),
+                donutData: ratings.slice(0,3) 
+            })
         }
     }
 
@@ -41,20 +57,14 @@ class Analysis extends Component {
     }
 
     render() {
-        if(this.props.recommendedSocieties != null) {
-            console.log(this.state.labels);
-            console.log(this.state.data);
+        if(this.props.recommendedSocieties != null && this.props.recommendedEvents != null) {
 
-            var doughnutData, barData, options;
+            var doughnutData, barData;
         
             doughnutData = {
-                labels: [
-                    'Cardio Night Run',
-                    'Blood Donation',
-                    'Engineering Fiesta'
-                ],
+                labels: this.state.donutLabels,
                 datasets: [{
-                    data: [200, 30, 50],
+                    data: this.state.donutData,
                     backgroundColor: [
                     '#FF6384',
                     '#36A2EB',
@@ -69,7 +79,7 @@ class Analysis extends Component {
             };
 
             barData = {
-                labels: this.state.labels,
+                labels: this.state.barLabels,
                 datasets: [
                 {
                     label: 'Total Participants',
@@ -78,7 +88,7 @@ class Analysis extends Component {
                     borderWidth: 1,
                     hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                     hoverBorderColor: 'rgba(255,99,132,1)',
-                    data: this.state.data
+                    data: this.state.barData
                 }
                 ]
             };
@@ -86,9 +96,15 @@ class Analysis extends Component {
           
 
         return (
+            
             <div>
+                {this.props.loading || this.state.donutData.length == 0 ?
+            [<LoadingBar />]
+          :
+          [
+              <div>
                 <div>
-                    <h2>Recommended Events</h2>
+                    <h2 style={{textAlign: "center"}}>Recommended Events</h2>
                     <Doughnut data={doughnutData} onElementsClick={this.clickEvent} />
                 </div>
 
@@ -98,21 +114,27 @@ class Analysis extends Component {
                     <h2>Active Societies</h2>
                     <HorizontalBar data={barData} onElementsClick={this.clickSociety} />
                 </div>
+                </div>
+                ]}
             </div>
+        
         );
     }
 }
 
 const mapStateToProps = (state, props) => {
     return {
-        recommendedSocieties: state.data.recommendedSocieties
+        recommendedSocieties: state.data.recommendedSocieties,
+        recommendedEvents: state.data.recommendedEvents,
+        id: state.auth.id,
+        loading: state.data.loading
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveAll: retrieveAll,
-      onUpdateLoadingBar: updateLoadingBar
+      onRetrieveData: retrieveData
     }, dispatch);
 };
 
