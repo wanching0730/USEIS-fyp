@@ -360,7 +360,7 @@ class CreateEvent extends Component {
 
                       <div class="section"><span>6</span>Logo</div>
                           <div class="inner-wrap">
-                          <label>Society Logo</label>
+                          <label>Event Logo URL</label>
                           <input type="text" value={this.state.logoUrl} onChange={(event) => {this.setState({logoUrl:event.target.value})}}/>
                           <br/>
                       </div>

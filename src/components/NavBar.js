@@ -53,7 +53,7 @@ class NavBar extends Component {
     }
 
     render() {
-
+        console.log(isNaN(this.props.userName));
         var dropDownItem;
         var position;
         let societies = this.props.societies;
@@ -122,21 +122,21 @@ class NavBar extends Component {
                                 <NavItem>
                                     <i class="fa fa-compass"></i><Link to="/recruitmentBooth">Booths</Link>
                                 </NavItem>
-                                &nbsp;
+                            </Nav>
+                            <Nav className="ml-auto" navbar>
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>
                                         <i class="fa fa-cog"></i>  Manage
                                     </DropdownToggle>
                                     {dropDownItem}
                                 </UncontrolledDropdown>
-                            </Nav>
-                            <Nav className="ml-auto" navbar>
+                                &nbsp;
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>
                                         <i class="fa fa-user-circle"></i> {this.props.userName}
                                     </DropdownToggle>
         
-                                    {this.props.userName != null && parseInt(this.props.userName) != 0 ? 
+                                    {this.props.userName != null && !isNaN(this.props.userName) ? 
                                     [
                                         <DropdownMenu left>
                                             <DropdownItem name="myProfile" onClick={this.onClick}>
@@ -153,6 +153,9 @@ class NavBar extends Component {
                                     : 
                                     [
                                         <DropdownMenu left>
+                                            <DropdownItem name="myProfile" onClick={this.onClick}>
+                                                My Profile
+                                            </DropdownItem>
                                             <DropdownItem name="logout" onClick={this.logout}>
                                                 Logout
                                             </DropdownItem>

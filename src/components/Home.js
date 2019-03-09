@@ -3,7 +3,6 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import Calendar from './Calendar';
 import Analysis from './Analysis';
-import SearchBar from '@opuscapita/react-searchbar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/home.css';
 
@@ -15,8 +14,6 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {searchValue: ""}
 
         if(this.props.fcmToken == null) {
             setTimeout(() => {
@@ -44,12 +41,6 @@ class Home extends Component {
         // }, 11000);
     }
 
-    handleSearch(value) {
-        if (value) {
-          console.info(`Searching "${value}"`);
-        }
-      }
-
     componentDidMount() {
         window.scrollTo(0, 0);
     }
@@ -68,13 +59,6 @@ class Home extends Component {
                     <Breadcrumb>
                         <BreadcrumbItem active>Home</BreadcrumbItem>
                     </Breadcrumb>
-                </div>
-
-                <div id="searchBarDiv" style={{ margin: 20 }}>
-                    <SearchBar
-                        onSearch={this.handleSearch}
-                        value={this.state.searchValue}
-                    />
                 </div>
 
                 {this.props.loading ?

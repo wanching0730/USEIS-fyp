@@ -46,9 +46,10 @@ class Analysis extends Component {
 
             if(recommendedEvents.length > 0) {
                 let eventNames = recommendedEvents[0]["eventId"].split(",");
-                let ratings = recommendedEvents[0]["rating"].split(", ");
-                console.log(ratings);
-
+                let ratings = recommendedEvents[0]["rating"].split(", ").map(function(each_element){
+                    return Number(parseFloat(each_element).toFixed(2));
+                });
+                
                 this.setState({
                     donutLabels: eventNames.slice(0,3),
                     donutData: ratings.slice(0,3) 
