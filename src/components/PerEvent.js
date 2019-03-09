@@ -221,7 +221,7 @@ class PerEvent extends Component {
                     :
                     [
                         <div>
-                            {(event["specificAuthorized"]) || (event["authorized"]) ?
+                            {(event["specificAuthorized"]) || (event["authorized"] || this.props.username.substring(0,2) === "01") ?
                                 [
                                     <div className="zoom">
                                         <Tooltip title="Actions" placement="left">

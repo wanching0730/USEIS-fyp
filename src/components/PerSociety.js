@@ -181,7 +181,7 @@ class PerSociety extends Component {
                     :
                     [
                         <div>
-                            {(society["specificAuthorized"]) ?
+                            {society["specificAuthorized"] || this.props.userName.substring(0,2) === "01" ?
                                 [
                                     <div className="zoom">
                                        <Tooltip title="Actions" placement="left">

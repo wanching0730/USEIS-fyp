@@ -134,7 +134,7 @@ export function loginUser(postData) {
             let userName = user["user"]["username"];
             let userId = user["user"]["userId"];
 
-            if(userName.substring(0,2) === "00") {
+            if(userName.substring(0,2) === "00" || userName.substring(0,2) === "01") {
                 let id = user["staffId"];
                 if(userSociety.length > 0) {
                     for(var i = 0; i < userSociety.length; i++) {
@@ -167,7 +167,7 @@ export function loginUser(postData) {
             console.log("login error: " + error);
             confirmAlert({
                 title: 'Login failed',
-                message: "" + error,
+                message: "Invalid username or password",
                 buttons: [
                     {
                         label: 'Close',

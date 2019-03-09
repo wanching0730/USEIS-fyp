@@ -17,7 +17,7 @@ class Analysis extends Component {
             donutData: [],
             barData: []
         };
-
+        console.log(this.props.id);
         this.props.onRetrieveAll("recommendedSocieties");
         this.props.onRetrieveData("recommendedEvents", this.props.id);
     }
@@ -29,22 +29,28 @@ class Analysis extends Component {
         if((nextProps.recommendedSocieties != this.props.recommendedSocieties) && (nextProps.recommendedSocieties != null)) {
             let recommendedSocieties = nextProps.recommendedSocieties;
 
-            for(var i = 0; i < recommendedSocieties.length; i++) {
-                this.state.barLabels.push(recommendedSocieties[i]["name"]);
-                this.state.barData.push(recommendedSocieties[i]["total"]);
+            if(recommendedSocieties.length > 0) {
+                for(var i = 0; i < recommendedSocieties.length; i++) {
+                    this.state.barLabels.push(recommendedSocieties[i]["name"]);
+                    this.state.barData.push(recommendedSocieties[i]["total"]);
+                }
             }
         }
 
         if((nextProps.recommendedEvents != this.props.recommendedEvents) && (nextProps.recommendedEvents != null)) {
+            console.log("this props: " + this.props.recommendedEvents);
+            console.log("next props: " + nextProps.recommendedEvents);
             let recommendedEvents = nextProps.recommendedEvents;
 
-            let eventNames = recommendedEvents["eventId"].split(",");
-            let ratings = recommendedEvents["rating"].split(", ");
+            if(recommendedEvents.length > 0) {
+                let eventNames = recommendedEvents["eventId"].split(",");
+                let ratings = recommendedEvents["rating"].split(", ");
 
-            this.setState({
-                donutLabels: eventNames.slice(0,3),
-                donutData: ratings.slice(0,3) 
-            })
+                this.setState({
+                    donutLabels: eventNames.slice(0,3),
+                    donutData: ratings.slice(0,3) 
+                });
+            }
         }
     }
 
@@ -62,9 +68,9 @@ class Analysis extends Component {
             var doughnutData, barData;
         
             doughnutData = {
-                labels: this.state.donutLabels,
+                labels: this.state.donutLabels.length > 0 ? this.state.donutLabels : ["none"],
                 datasets: [{
-                    data: this.state.donutData,
+                    data: this.state.donutData.length > 0 ? this.state.donutLabels : [1],
                     backgroundColor: [
                     '#FF6384',
                     '#36A2EB',
@@ -79,7 +85,7 @@ class Analysis extends Component {
             };
 
             barData = {
-                labels: this.state.barLabels,
+                labels: this.state.barLabels.length > 0 ? this.state.barLabels : ["none"],
                 datasets: [
                 {
                     label: 'Total Participants',
@@ -88,7 +94,7 @@ class Analysis extends Component {
                     borderWidth: 1,
                     hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                     hoverBorderColor: 'rgba(255,99,132,1)',
-                    data: this.state.barData
+                    data: this.state.barData.length > 0 ? this.state.barData : [1],
                 }
                 ]
             };
@@ -98,7 +104,7 @@ class Analysis extends Component {
         return (
             
             <div>
-                {this.props.loading || this.state.donutData.length == 0 ?
+                {this.props.loading ?
             [<LoadingBar />]
           :
           [

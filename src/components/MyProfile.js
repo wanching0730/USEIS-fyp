@@ -32,7 +32,7 @@ class MyProfile extends Component {
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveAll("societyEvent");
 
-        if(parseInt(this.props.userName) == 0)  
+        if(parseInt(this.props.userName) == 0)
             this.props.onRetrieveData("staffSociety", this.props.userId);
         else
             this.props.onRetrieveData("studentSociety", this.props.userId);

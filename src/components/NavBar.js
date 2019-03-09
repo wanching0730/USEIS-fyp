@@ -62,34 +62,29 @@ class NavBar extends Component {
         };
         var userPool = new CognitoUserPool(poolData);
 
-        if(societies != null) {
-            for(var i = 0; i < societies.length; i++) {
-                let p = societies[i]["roleName"];
-                if(p == "Chairperson" || p == "Secretary") {
-                    position = "committee";
-                    break;
-                }
-                else if(p == "Officer" || p == "Advisor") {
-                    position = "staff";
-                    break;
-                }
-                else 
-                    position = "student";
-            }
+        if(parseInt(this.props.userName) == 0) {
+            position = "staff";
+        } else {
+            position = "student"
         }
+
+        // if(societies != null) {
+        //     for(var i = 0; i < societies.length; i++) {
+        //         let p = societies[i]["roleName"];
+        //         if(p == "Chairperson" || p == "Secretary") {
+        //             position = "committee";
+        //             break;
+        //         }
+        //         else if(p == "Officer" || p == "Advisor") {
+        //             position = "staff";
+        //             break;
+        //         }
+        //         else 
+        //             position = "student";
+        //     }
+        // }
         
-        if(position == "committee") {
-            dropDownItem = 
-            <DropdownMenu left="true">
-                <DropdownItem name="manageBooth" onClick={this.onClick}>
-                    Manage Booth
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem name="faq" onClick={this.onClick}>
-                    FAQ
-                </DropdownItem>
-            </DropdownMenu>
-        } else if(position == "staff") {
+        if(position == "staff") {
             dropDownItem = 
             <DropdownMenu left="true">
                 <DropdownItem name="manageBooth" onClick={this.onClick}>

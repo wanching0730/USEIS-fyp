@@ -27,9 +27,10 @@ class CreateProfile extends Component {
       logoUrl: '',
       userId: this.props.userId,
       positionOptions: [],
-      position1: 0, position2: 0, position3: 0
+      position1: 2, position2: 3, position3: 0
     }
 
+    console.log(this.props.params.societyId);
     if(this.props.params.societyId) {
       this.props.onUpdateRetrieveLoadingBar();
       this.props.onRetrieveData("society", this.props.params.societyId);

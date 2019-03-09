@@ -497,7 +497,9 @@ export function retrieveData(type, id) {
 
                 dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
             } else if(type === "recommendedEvents") {
-                let recommendedEvents = reply[0];
+                var recommendedEvents = [];
+                if(reply.length > 0)
+                    recommendedEvents = reply[0];
 
                 dispatch(retrieveSingleDataSuccessful("recommendedEvents", recommendedEvents));
             } 
