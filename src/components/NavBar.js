@@ -36,6 +36,8 @@ class NavBar extends Component {
             browserHistory.push("/manageProposal");
         } else if(clickedTab == "aboutMe") {
             browserHistory.push("/aboutMe");
+        } else if(clickedTab == "myProfile") {
+            browserHistory.push("/myProfile");
         }
     }
 
@@ -67,22 +69,6 @@ class NavBar extends Component {
         } else {
             position = "student"
         }
-
-        // if(societies != null) {
-        //     for(var i = 0; i < societies.length; i++) {
-        //         let p = societies[i]["roleName"];
-        //         if(p == "Chairperson" || p == "Secretary") {
-        //             position = "committee";
-        //             break;
-        //         }
-        //         else if(p == "Officer" || p == "Advisor") {
-        //             position = "staff";
-        //             break;
-        //         }
-        //         else 
-        //             position = "student";
-        //     }
-        // }
         
         if(position == "staff") {
             dropDownItem = 
@@ -93,9 +79,6 @@ class NavBar extends Component {
                 <DropdownItem name="createProfile" onClick={this.onClick}>
                     Create Society Profile
                 </DropdownItem>
-                {/* <DropdownItem name="manageProposal" onClick={this.onClick}>
-                    Manage Proposal
-                </DropdownItem> */}
                 <DropdownItem divider />
                 <DropdownItem name="faq" onClick={this.onClick}>
                     FAQ
@@ -140,10 +123,6 @@ class NavBar extends Component {
                                     <i class="fa fa-compass"></i><Link to="/recruitmentBooth">Booths</Link>
                                 </NavItem>
                                 &nbsp;
-                                <NavItem>
-                                    <i class="fa fa-user"></i><Link to="/myProfile">My Profile</Link>
-                                </NavItem>
-                                &nbsp;
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>
                                         <i class="fa fa-cog"></i>  Manage
@@ -160,6 +139,9 @@ class NavBar extends Component {
                                     {this.props.userName != null && parseInt(this.props.userName) != 0 ? 
                                     [
                                         <DropdownMenu left>
+                                            <DropdownItem name="myProfile" onClick={this.onClick}>
+                                                My Profile
+                                            </DropdownItem>
                                             <DropdownItem name="aboutMe" onClick={this.onClick}>
                                                 About Me
                                             </DropdownItem>
@@ -186,13 +168,6 @@ class NavBar extends Component {
                         <Navbar className="topnav" dark expand="md">
                         <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
-                        {/* <Collapse isOpen={this.state.isOpen} navbar>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <Link to="/login">Login</Link>
-                                </NavItem>
-                            </Nav>
-                        </Collapse> */}
                         </Navbar>  
                     ]}     
             </div>
