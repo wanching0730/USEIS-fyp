@@ -498,8 +498,10 @@ export function retrieveData(type, id) {
                 dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
             } else if(type === "recommendedEvents") {
                 var recommendedEvents = [];
+                console.log(reply);
+                console.log(reply.length);
                 if(reply.length > 0)
-                    recommendedEvents = reply[0];
+                    recommendedEvents = reply;
 
                 dispatch(retrieveSingleDataSuccessful("recommendedEvents", recommendedEvents));
             } 

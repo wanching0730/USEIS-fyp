@@ -20,7 +20,6 @@ class RegisterEvent extends Component {
   constructor(props){
     super(props);
     this.state={
-      emailNoti: false,
       webNoti: false,
       vegetarian: 0
     }
@@ -55,7 +54,6 @@ class RegisterEvent extends Component {
       joinDate: moment(current).format("YYYY-MM-DD"),
       crewStatus: 0,
       vegetarian: this.state.vegetarian,
-      emailNoti: this.state.emailNoti ? 1 : 0,
       webNoti: this.state.webNoti ? 1 : 0
     };
 
@@ -129,15 +127,6 @@ class RegisterEvent extends Component {
 
                       <div class="section"><span>2</span>Allow Notification</div>
                       <div class="inner-wrap">
-                        <label>Allow Email Notification</label>
-                        <ToggleButton
-                          value={ this.state.emailNoti || false }
-                          onToggle={(value) => {
-                              this.setState({
-                                emailNoti: !value,
-                              })
-                          }} />
-                        <br/>
                         <label>Allow Web Notification</label>
                         <ToggleButton
                             value={ this.state.webNoti || false }

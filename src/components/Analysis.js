@@ -28,6 +28,7 @@ class Analysis extends Component {
 
         if((nextProps.recommendedSocieties != this.props.recommendedSocieties) && (nextProps.recommendedSocieties != null)) {
             let recommendedSocieties = nextProps.recommendedSocieties;
+            console.log(recommendedSocieties);
 
             if(recommendedSocieties.length > 0) {
                 for(var i = 0; i < recommendedSocieties.length; i++) {
@@ -41,10 +42,12 @@ class Analysis extends Component {
             console.log("this props: " + this.props.recommendedEvents);
             console.log("next props: " + nextProps.recommendedEvents);
             let recommendedEvents = nextProps.recommendedEvents;
+            console.log(recommendedEvents);
 
             if(recommendedEvents.length > 0) {
-                let eventNames = recommendedEvents["eventId"].split(",");
-                let ratings = recommendedEvents["rating"].split(", ");
+                let eventNames = recommendedEvents[0]["eventId"].split(",");
+                let ratings = recommendedEvents[0]["rating"].split(", ");
+                console.log(ratings);
 
                 this.setState({
                     donutLabels: eventNames.slice(0,3),
@@ -55,6 +58,7 @@ class Analysis extends Component {
     }
 
     clickEvent(event) {
+        console.log(event);
         browserHistory.push("/perEvent/1");
     }
 
@@ -70,7 +74,7 @@ class Analysis extends Component {
             doughnutData = {
                 labels: this.state.donutLabels.length > 0 ? this.state.donutLabels : ["none"],
                 datasets: [{
-                    data: this.state.donutData.length > 0 ? this.state.donutLabels : [1],
+                    data: this.state.donutData.length > 0 ? this.state.donutData : [1],
                     backgroundColor: [
                     '#FF6384',
                     '#36A2EB',
@@ -111,14 +115,14 @@ class Analysis extends Component {
               <div>
                 <div>
                     <h2 style={{textAlign: "center"}}>Recommended Events</h2>
-                    <Doughnut data={doughnutData} onElementsClick={this.clickEvent} />
+                    <Doughnut data={doughnutData} />
                 </div>
 
                 <br/>
 
                 <div>
                     <h2>Active Societies</h2>
-                    <HorizontalBar data={barData} onElementsClick={this.clickSociety} />
+                    <HorizontalBar data={barData} />
                 </div>
                 </div>
                 ]}

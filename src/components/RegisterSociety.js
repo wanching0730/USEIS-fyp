@@ -20,7 +20,6 @@ class RegisterSociety extends Component {
   constructor(props){
     super(props);
     this.state = {
-      emailNoti: false,
       webNoti: false,
       sRoleId: 1,
       positionOptions: []
@@ -65,7 +64,6 @@ class RegisterSociety extends Component {
       studentId: this.props.id,
       sRoleId: this.state.sRoleId,
       joinDate: moment(current).format("YYYY-MM-DD"),
-      emailNoti: this.state.emailNoti,
       webNoti: this.state.webNoti
     };
 
@@ -114,15 +112,6 @@ class RegisterSociety extends Component {
                   <form>
                       <div class="section"><span>1</span>Allow Notification</div>
                       <div class="inner-wrap">
-                        <label>Allow Email Notification</label>
-                        <ToggleButton
-                          value={ this.state.emailNoti || false }
-                          onToggle={(value) => {
-                              this.setState({
-                              emailNoti: !value,
-                              })
-                          }} />
-                        <br/>
                         <label>Allow Web Notification</label>
                         <ToggleButton
                             value={ this.state.webNoti || false }
