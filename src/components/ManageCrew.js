@@ -71,12 +71,12 @@ class ManageCrew extends Component {
     }
 
     updateList(data) {
-        if(this.props.params.type === "event" && data["type"] == "student") {
+        if(this.props.params.type === "event" && data["type"] == "rejectEvent") {
             if(this.state.eventCrew != null) {
                 let list = this.state.eventCrew;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["id"] == data["id"] && item["eventId"] == data["eventId"]) {
+                    if(item["username"] == data["username"] && item["eventId"] == data["eventId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
@@ -85,11 +85,11 @@ class ManageCrew extends Component {
             }
         }
         else {
-            if(this.state.societyCrew != null && data["type"] == "studentSociety") {
+            if(this.state.societyCrew != null && data["type"] == "rejectSociety") {
                 let list = this.state.societyCrew;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["id"] == data["id"] && item["societyId"] == data["societyId"]) {
+                    if(item["username"] == data["username"] && item["societyId"] == data["societyId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }

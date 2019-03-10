@@ -56,14 +56,12 @@ class ManageMember extends Component {
     }
 
     updateList(data) {
-        if(data["type"] == "studentSociety") {
+        if(data["type"] == "rejectSociety") {
             if(this.state.societyMembers != null) {
                 let list = this.state.societyMembers;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    console.log(item["studentId"]);
-                    console.log(data["id"]);
-                    if(item["studentId"] == data["id"]) {
+                    if(item["username"] == data["username"] && this.props.params.societyId == data["societyId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
@@ -100,7 +98,7 @@ class ManageMember extends Component {
           })
     }
 
-    handleReject(event) {
+    handleReject(event,name) {
         let targetMemberId = event.target.value;
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -113,7 +111,8 @@ class ManageMember extends Component {
                                 
                                 let data = {
                                     id: targetMemberId,
-                                    societyId: this.props.params.societyId
+                                    societyId: this.props.params.societyId,
+                                    username: name
                                 }
 
                                 this.props.onUpdateData("rejectStudentSociety", data, this.props.location.state["societyName"]);
@@ -199,7 +198,7 @@ class ManageMember extends Component {
                             deleteIcon = 
                                 <td>
                                     <Tooltip title="Reject Member" placement="right">
-                                        <li value={member["studentId"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
+                                        <li value={member["studentId"]} onClick={(event) => this.handleReject(event,member["username"])} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         } else {

@@ -62,12 +62,12 @@ class ManageParticipant extends Component {
     }
 
     updateList(data) {
-        if(data["type"] == "student") {
+        if(data["type"] == "rejectEvent") {
             if(this.state.studentParticipant != null) {
                 let list = this.state.studentParticipant;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["id"] == data["id"] && item["eventId"] == data["eventId"]) {
+                    if(item["username"] == data["username"] && item["eventId"] == data["eventId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
@@ -135,10 +135,11 @@ class ManageParticipant extends Component {
                                 
                                 let data = {
                                     id: targetParticipantId,
-                                    eventId: this.props.params.eventId
+                                    eventId: this.props.params.eventId,
+                                    username: username
                                 }
 
-                                if(parseInt(this.props.userName) == 0) 
+                                if(isNaN(username)) 
                                     this.props.onUpdateData("rejectStaffEvent", data, this.props.location.state["eventName"]);
                                 else 
                                     this.props.onUpdateData("rejectStudentEvent", data, this.props.location.state["eventName"]);
