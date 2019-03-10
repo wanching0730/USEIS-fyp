@@ -172,15 +172,15 @@ class ManageMember extends Component {
                     let member = societyMembers[i];
                     var approvedIcon, deleteIcon;
 
-                    if(member["memberStatus"] != 2) {
-                        if(member["memberStatus"] == 1) 
+                    if(member["status"] != 2) {
+                        if(member["status"] == 1) 
                             approvedIcon = 
                                 <td>
                                     <Tooltip title="Approved" placement="left">
                                         <li className="fa fa-check"></li>
                                     </Tooltip>
                                 </td>
-                        else if(member["memberStatus"] == 0)
+                        else if(member["status"] == 0)
                             approvedIcon = 
                                 <td>
                                     <Tooltip title="Approve Member" placement="left">
@@ -195,7 +195,7 @@ class ManageMember extends Component {
                                     </Tooltip>
                                 </td>
 
-                        if(member["memberStatus"] != 3) {
+                        if(member["status"] != 3) {
                             deleteIcon = 
                                 <td>
                                     <Tooltip title="Reject Member" placement="right">

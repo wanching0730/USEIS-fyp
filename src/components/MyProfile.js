@@ -8,7 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import {browserHistory} from 'react-router';
 import moment from "moment";
 import RaisedButton from 'material-ui/RaisedButton';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 import { groupBy } from '../common/common_function';
 import openSocket from 'socket.io-client';
 import '../style/table.css';
@@ -32,7 +32,7 @@ class MyProfile extends Component {
         this.props.onUpdateLoadingBar();
         this.props.onRetrieveAll("societyEvent");
 
-        if(parseInt(this.props.userName) == 0)
+        if(isNaN(this.props.userName))
             this.props.onRetrieveData("staffSociety", this.props.userId);
         else
             this.props.onRetrieveData("studentSociety", this.props.userId);
@@ -101,7 +101,10 @@ class MyProfile extends Component {
                                                 societyId: societyId
                                             }
 
-                                            this.props.onUpdateData("cancelStudentSociety", data, ""); 
+                                            if(isNaN(this.props.userName))
+                                                this.props.onUpdateData("cancelStaffSociety", data, ""); 
+                                            else
+                                                this.props.onUpdateData("cancelStudentSociety", data, ""); 
 
                                             onClose();
                                         }
@@ -130,7 +133,11 @@ class MyProfile extends Component {
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
 
                                             this.props.onUpdateDeleteLoadingBar();
-                                            this.props.onDeleteParticipation("studentSociety", this.props.userId, societyId);
+
+                                            if(isNaN(this.props.userName))
+                                                this.props.onDeleteParticipation("staffSociety", this.props.userId, societyId);
+                                            else
+                                                this.props.onDeleteParticipation("studentSociety", this.props.userId, societyId);
 
                                             onClose();
                                         }
@@ -149,93 +156,83 @@ class MyProfile extends Component {
         const { imageStyle, RaisedButtonStyle } = styles;
         let societies = this.state.societies;
         let societyEvents = this.props.allSocietyEvents;
+        var message = <div></div>;
 
         if(societies != null && societyEvents != null) {
-            var rows = [];
-            for(var i = 0; i < societies.length; i++) {
-                var events = [];
-                let society = societies[i];
-                var action, status;
+            if(societies.length != 0) {
+                var rows = [];
+                for(var i = 0; i < societies.length; i++) {
+                    var events = [];
+                    let society = societies[i];
+                    var action, status;
 
-                if(society["status"] != 3) {
-                    let toSociety = {
-                        pathname: "/perSociety/" + society["societyId"],
-                        state: {societyName: society["name"]}
-                    }
-                    
-                    const ids = groupBy(societyEvents, societyEvent => societyEvent["societyId"]);
-                    for (const [key, values] of ids.entries()) {
-                        if(society["societyId"] == key) {
-                            values.forEach(value => {
-                                let toEvent = {
-                                    pathname: "/perEvent/" + value["eventId"],
-                                    state: {eventName: value["eventName"]}
-                                }
-                                events.push(
-                                    <li><Link to={toEvent}>{value["eventName"]}</Link></li>
-                                );
-                            });
-                        }    
-                    }
-
-                    if(society["status"] != 1 && (parseInt(this.props.userName) == 0)) {
-                        if(society["status"] != 2) {
-                            action = 
-                                <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel society registration</span>}>
-                                        <li value={society["societyId"]} onClick={(event) => this.handleCancelSociety(event)} className="fa fa-trash"></li>
-                                    </Tooltip>
-                                </td>;
-                        } else {
-                            action = 
-                                <td>
-                                    <Tooltip placement="left" trigger={['hover']} overlay={<span>Remove society registration</span>}>
-                                        <li value={society["societyId"]} onClick={(event) => this.handleRemoveSociety(event)} className="fa fa-trash"></li>
-                                    </Tooltip>
-                                </td>;
+                    if(society["status"] != 3) {
+                        let toSociety = {
+                            pathname: "/perSociety/" + society["societyId"],
+                            state: {societyName: society["name"]}
                         }
-                    } else {
-                        action = <td>-</td>;
-                    }
+                        
+                        const ids = groupBy(societyEvents, societyEvent => societyEvent["societyId"]);
+                        for (const [key, values] of ids.entries()) {
+                            if(society["societyId"] == key) {
+                                values.forEach(value => {
+                                    let toEvent = {
+                                        pathname: "/perEvent/" + value["eventId"],
+                                        state: {eventName: value["eventName"]}
+                                    }
+                                    events.push(
+                                        <li><Link to={toEvent}>{value["eventName"]}</Link></li>
+                                    );
+                                });
+                            }    
+                        }
 
-                // if(society["position"] == 'chairperson' ||  society["position"] == 'vice_chairperson') {
-                //     editIcon = 
-                //         <td>
-                //             <Tooltip placement="right" trigger={['hover']} overlay={<span>Edit Society Profile</span>}>
-                //                 <Link to={`/createProfile/` + society["societyId"]}><FontAwesome.FaEdit /></Link>
-                //             </Tooltip>
-                //         </td>
-                // } else {
-                //     editIcon = <td></td>
-                // }
+                        if(society["status"] != 1) {
+                            if(society["status"] != 2) {
+                                action = 
+                                    <td>
+                                        <Tooltip title="Cancel registration" placement="left">
+                                            <li value={society["societyId"]} onClick={(event) => this.handleCancelSociety(event)} className="fa fa-trash"></li>
+                                        </Tooltip>
+                                    </td>;
+                            } else {
+                                action = 
+                                    <td>
+                                       <Tooltip title="Remove Registration" placement="left">
+                                            <li value={society["societyId"]} onClick={(event) => this.handleRemoveSociety(event)} className="fa fa-trash"></li>
+                                        </Tooltip>
+                                    </td>;
+                            }
+                        } else {
+                            action = <td>-</td>;
+                        }
                     
-                    if(parseInt(this.props.userName) == 0) {
-                        status = <td>-</td>;
-                    } else {
+                       
                         if(society["status"] === 0)  
                             status = <td>Pending</td>;
                         else if(society["status"] === 1)
                             status = <td>Approved</td>;
                         else if(society["status"] === 2)
                             status = <td style={{color: "red"}}>Rejected</td>; 
-                    }
+                        
 
-                    rows.push(
-                        <tr>
-                            <td>{i+1}</td>
-                            <td><img style={imageStyle} src={society["logoUrl"]} /></td>
-                            <td><Link to={toSociety}>{society["name"]}</Link></td>
-                            <td>
-                                {parseInt(this.props.userName) != 0 ? 
-                                    moment(society["joinDate"]).format("DD/MM/YYYY") : "-"}
-                            </td>
-                            <td>{society["roleName"]}</td>
-                            {status}
-                            <td>{events}</td>
-                            {action}
-                        </tr>
-                    );
-                }
+                        rows.push(
+                            <tr>
+                                <td>{i+1}</td>
+                                <td><img style={imageStyle} src={society["logoUrl"]} /></td>
+                                <td><Link to={toSociety}>{society["name"]}</Link></td>
+                                <td>{moment(society["joinDate"]).format("DD/MM/YYYY")}</td>
+                                <td>{society["roleName"]}</td>
+                                {status}
+                                <td>{events}</td>
+                                {action}
+                            </tr>
+                        );
+                        
+                    }
+                } 
+            } else {
+                message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No joined societies</div>;
             }
         }
         
@@ -281,6 +278,8 @@ class MyProfile extends Component {
                                                 {rows}
                                             </tbody>
                                         </table>  
+
+                                        {message}
 
                                         <div style= {{ margin: "0 auto" }}>
                                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>

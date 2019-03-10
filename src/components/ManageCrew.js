@@ -76,7 +76,7 @@ class ManageCrew extends Component {
                 let list = this.state.eventCrew;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["studentId"] == data["id"] && item["eventId"] == data["eventId"]) {
+                    if(item["id"] == data["id"] && item["eventId"] == data["eventId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
@@ -89,7 +89,7 @@ class ManageCrew extends Component {
                 let list = this.state.societyCrew;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["studentId"] == data["id"] && item["societyId"] == data["societyId"]) {
+                    if(item["id"] == data["id"] && item["societyId"] == data["societyId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
@@ -99,9 +99,10 @@ class ManageCrew extends Component {
         }
     }
 
-    handleApprove(event) {
-        let studentId = event.target.value;
-        this.setState({studentId: studentId})
+    handleApprove(event, name) {
+        let id = event.target.value;
+        console.log(id);
+        console.log(name);
 
         setTimeout(() => {
             confirmAlert({
@@ -114,16 +115,21 @@ class ManageCrew extends Component {
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
                                             if(this.props.params.type === "event") {
                                                 let data = {
-                                                    studentId: this.state.studentId,
+                                                    studentId: id,
                                                     eventId: this.props.params.id
                                                 }
                                                 this.props.onUpdateData("crew", data, this.props.location.state["eventName"]);
                                             } else {
                                                 let data = {
-                                                    studentId: this.state.studentId,
+                                                    id: id,
                                                     societyId: this.props.params.id
                                                 }
-                                                this.props.onUpdateData("societyCrew", data, this.props.location.state["societyName"]);
+
+                                                if(isNaN(this.props.userName))
+                                                    this.props.onUpdateData("societyAdvisor", data, this.props.location.state["societyName"]);
+                                                else 
+                                                    this.props.onUpdateData("societyCrew", data, this.props.location.state["societyName"]);
+                                                
                                             }
                                         }
                                     }/>
@@ -138,6 +144,7 @@ class ManageCrew extends Component {
 
     handleReject(event) {
         let targetCrewId = event.target.value;
+
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
@@ -157,7 +164,11 @@ class ManageCrew extends Component {
                                         id: targetCrewId,
                                         societyId: this.props.params.id
                                     }
-                                    this.props.onUpdateData("rejectSocietyCrew", data, this.props.location.state["societyName"]);
+
+                                    if(isNaN(this.props.userName))
+                                        this.props.onUpdateData("rejectSocietyAdvisor", data, this.props.location.state["societyName"]);
+                                    else 
+                                        this.props.onUpdateData("rejectSocietyCrew", data, this.props.location.state["societyName"]);
                                 }
 
                                 onClose();
@@ -182,6 +193,7 @@ class ManageCrew extends Component {
                             <p>Are you sure to remove this crew?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {   
                                 this.props.onUpdateDeleteLoadingBar(); 
+
                                 if(this.props.params.type === "event") 
                                     this.props.onDeleteParticipation("eventCrew", targetCrewId, this.props.params.id);
                                 else 
@@ -260,7 +272,7 @@ class ManageCrew extends Component {
                             approvedIcon = 
                                 <td>
                                     <Tooltip title="Approve crew" placement="left">
-                                        <li value={singleCrew["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li>
+                                        <li value={singleCrew["id"]} onClick={(event) => this.handleApprove(event, singleCrew["username"])} className="fa fa-plus"></li>
                                     </Tooltip>
                                 </td>
                         else 
@@ -275,14 +287,14 @@ class ManageCrew extends Component {
                             deleteIcon = 
                                 <td>
                                     <Tooltip title="Reject Crew" placement="right">
-                                        <li value={singleCrew["studentId"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
+                                        <li value={singleCrew["id"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         } else {
                             deleteIcon =
                                 <td>
                                     <Tooltip title="Remove Crew" placement="right">
-                                        <li value={singleCrew["studentId"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
+                                        <li value={singleCrew["id"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         }
@@ -291,7 +303,7 @@ class ManageCrew extends Component {
                         rows.push(
                             <tr> 
                                 <td>{i+1}</td>
-                                <td>{singleCrew["studentName"]}</td>
+                                <td>{singleCrew["name"]}</td>
                                 <td>{singleCrew["ic"]}</td>
                                 <td>{singleCrew["course"]}</td>
                                 <td>Y{singleCrew["year"]}S{singleCrew["semester"]}</td>

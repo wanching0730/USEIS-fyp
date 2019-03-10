@@ -31,8 +31,17 @@ export function searchAllData(type, keyword) {
 }
 
 export function createData(type, data) {
-    if(type === "registerSociety") {
-            return fetch(mainApiRoute + `/register/society`, {
+    if(type === "staffRegisterSociety") {
+            return fetch(mainApiRoute + `/register/staffSociety`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: data
+        });
+    }
+    else if(type === "studentRegisterSociety") {
+            return fetch(mainApiRoute + `/register/studentSociety`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

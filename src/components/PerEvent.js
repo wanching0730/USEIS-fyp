@@ -221,7 +221,7 @@ class PerEvent extends Component {
                     :
                     [
                         <div>
-                            {(event["specificAuthorized"]) || (event["authorized"] || this.props.username.substring(0,2) === "01") ?
+                            {(event["specificAuthorized"]) || (event["authorized"] || this.props.userName.substring(0,2) === "01") ?
                                 [
                                     <div className="zoom">
                                         <Tooltip title="Actions" placement="left">
@@ -298,7 +298,7 @@ class PerEvent extends Component {
                                         </div>
                                         <div class="column side">
                                             <h5>Chairperson:</h5>
-                                            <p><a href="https://www.facebook.com/ho.m.hm">{event["chairperson"]}</a></p>
+                                            <p>{event["chairperson"]}</p>
                                             <h5>Contact Number:</h5>
                                             <p>{event["contact"]}</p>
                                         </div>

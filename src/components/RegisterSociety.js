@@ -20,7 +20,7 @@ class RegisterSociety extends Component {
   constructor(props){
     super(props);
     this.state = {
-      webNoti: false,
+      // webNoti: false,
       sRoleId: 1,
       positionOptions: []
     }
@@ -63,14 +63,20 @@ class RegisterSociety extends Component {
       societyName: this.props.location.state["societyName"],
       studentId: this.props.id,
       sRoleId: this.state.sRoleId,
-      joinDate: moment(current).format("YYYY-MM-DD"),
-      webNoti: this.state.webNoti
+      joinDate: moment(current).format("YYYY-MM-DD")
     };
 
-    if(!this.props.isRegistered)
-      this.props.onCreate("registerSociety", data);
-    else
-      this.props.onUpdateData("resubmitMemberRegistration", data, this.props.location.state["societyName"]);
+    if(isNaN(this.props.userName)) {
+      if(!this.props.isRegistered)
+        this.props.onCreate("staffRegisterSociety", data);
+      else
+        this.props.onUpdateData("resubmitAdvisorRegistration", data, this.props.location.state["societyName"]);
+    } else {
+      if(!this.props.isRegistered)
+        this.props.onCreate("studentRegisterSociety", data);
+      else
+        this.props.onUpdateData("resubmitMemberRegistration", data, this.props.location.state["societyName"]);
+    }
     
   }
 
@@ -110,7 +116,7 @@ class RegisterSociety extends Component {
                 <div className="form-style-10">
                   <h1>Register {this.props.location.state["societyName"]}<span>Register society and looking forward for the upcoming events!</span></h1>
                   <form>
-                      <div class="section"><span>1</span>Allow Notification</div>
+                      {/* <div class="section"><span>1</span>Allow Notification</div>
                       <div class="inner-wrap">
                         <label>Allow Web Notification</label>
                         <ToggleButton
@@ -130,9 +136,9 @@ class RegisterSociety extends Component {
                           timeout="1000"
                           onClick={event => this.handleNotiClick(event)}
                         />
-                      </div>
+                      </div> */}
 
-                      <div class="section"><span>2</span>Position</div>
+                      <div class="section"><span>1</span>Position</div>
                         <div class="inner-wrap">
                           <label>Position</label>
                           <select onChange={this.handleChange}>
@@ -164,6 +170,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
   return {
     id: state.auth.id,
+    userName: state.auth.userName,
     loading: state.create.loading,
     isRegistered: state.data.isRegistered,
     roles: state.data.roles

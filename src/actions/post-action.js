@@ -145,7 +145,7 @@ export function create(type, postData) {
                                 } else if(type === "newsfeeds") {
                                     dispatch(createSuccessfully());
                                     browserHistory.push('/newsfeeds');
-                                } else if(type === "registerSociety") {
+                                } else if(type === "staffRegisterSociety" || type === "studentRegisterSociety") {
                                     dispatch(registerSuccessfully());
                                     browserHistory.push({pathname:`/perSociety/` + reply["message"], state: {societyName: postData["societyName"]}});
                                 } else if(type === "staffRegisterEvent" || type == "studentRegisterEvent") {
@@ -224,9 +224,8 @@ export function updateDouble(type, postData, name) {
                                 console.log("click");
                                 //browserHistory.push('/home');
                             } else {
-                                if(type === "crew" || type === "rejectCrew") {
-                                    browserHistory.push({pathname:`/manageCrew/` + reply["message"], state: {eventName: name}});
-                                } else if(type === "member" || type === "rejectStudentSociety") {
+                                // if(type === "crew" || type === "rejectCrew" || type === "societyCrew" || type === "societyAdvisor") {
+                                if(type === "member" || type === "rejectStudentSociety") {
                                     browserHistory.push({pathname:`/manageMember/` + reply["message"], state: {societyName: name}});
                                 } else if(type === "studentParticipant" || type === "staffParticipant" || type === "rejectStudentEvent" || type === "rejectStaffEvent") {
                                     browserHistory.push({pathname:`/manageParticipant/` + reply["message"], state: {eventName: name}});
@@ -237,8 +236,10 @@ export function updateDouble(type, postData, name) {
                                         browserHistory.push({pathname:`/register_booth/society/` + reply["message"], state: {societyName: name}});
                                     else 
                                         browserHistory.push({pathname:`/register_booth/event/` + reply["message"], state: {eventName: name}});
-                                } else if(type === "resubmitStaffParticipant" || type === "resubmitStudentParticipant" || type === "resubmitMemberRegistration" || type === "cancelStudentEvent") {
-                                    browserHistory.push("/myEvents");
+                                } else if(type === "resubmitStaffParticipant" || type === "resubmitStudentParticipant" || type === "resubmitMemberRegistration" || type === "resubmitAdvisorRegistration" || type === "cancelStudentEvent" || type === "cancelStaffEvent") {
+                                    browserHistory.push("/myProfile");
+                                } else {
+                                    browserHistory.push({pathname:`/manageCrew/` + reply["message"], state: {eventName: name}});
                                 }
                             }
                         }
