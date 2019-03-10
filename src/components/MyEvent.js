@@ -6,13 +6,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { confirmAlert } from 'react-confirm-alert';
 import RaisedButton from 'material-ui/RaisedButton';
-import Tooltip from 'rc-tooltip';
+import Tooltip from '@material-ui/core/Tooltip';
 import {browserHistory} from 'react-router';
 import openSocket from 'socket.io-client';
 import moment from "moment";
 import '../style/table.css';
 import '../style/alert.css';
-import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,7 +30,7 @@ class MyEvent extends Component {
 
         this.props.onUpdateLoadingBar();
 
-        if(parseInt(this.props.userName) == 0) 
+        if(isNaN(this.props.userName)) 
             this.props.onRetrieveData("staffEvent", this.props.userId);
         else 
             this.props.onRetrieveData("studentEvent", this.props.userId);
@@ -58,16 +57,18 @@ class MyEvent extends Component {
     }
 
     updateList(data) {
-        if(this.state.userEvents != null) {
-            let list = this.state.userEvents;
-            for(var i = 0; i < list.length; i++) {
-                let item = list[i];
-                if(item["eventId"] == data["eventId"]) {
-                    var index = list.indexOf(item);
-                    list.splice(index, 1);
+        if(data["type"] == "removeEvent") {
+            if(this.state.userEvents != null) {
+                let list = this.state.userEvents;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+                    if(this.props.userName == data["username"] && item["eventId"] == data["eventId"]) {
+                        var index = list.indexOf(item);
+                        list.splice(index, 1);
+                    }
                 }
+                this.setState({ userEvents: list });
             }
-            this.setState({ userEvents: list });
         }
     }
     
@@ -93,7 +94,8 @@ class MyEvent extends Component {
                                        
                                         let data = {
                                             id: this.props.userId,
-                                            eventId: eventId
+                                            eventId: eventId,
+                                            username: this.props.userName
                                         }
 
                                         this.props.onUpdateData("cancelStudentEvent", data, ""); 
@@ -125,10 +127,11 @@ class MyEvent extends Component {
 
                                             let data = {
                                                 id: this.props.userId,
-                                                eventId: eventId
+                                                eventId: eventId,
+                                                username: this.props.userName
                                             }
 
-                                            if(parseInt(this.props.userName) == 0) 
+                                            if(isNaN(this.props.userName)) 
                                                 this.props.onUpdateData("cancelStaffEvent", data, ""); 
                                             else 
                                                 this.props.onUpdateData("cancelStudentEvent", data, ""); 
@@ -160,7 +163,7 @@ class MyEvent extends Component {
                                 <RaisedButton label="Yes" primary={true} onClick={() => {
                                             this.props.onUpdateDeleteLoadingBar();
 
-                                            if(parseInt(this.props.userName) == 0)
+                                            if(isNaN(this.props.userName))
                                                 this.props.onDeleteParticipation("staffEvent", this.props.userId, eventId);
                                             else 
                                                 this.props.onDeleteParticipation("studentEvent", this.props.userId, eventId);
@@ -227,14 +230,14 @@ class MyEvent extends Component {
                                 if(event["eRoleId"] === 1) 
                                     action = 
                                         <td>
-                                            <Tooltip placement="left" trigger={['hover']} overlay={<span>Cancel event registration</span>}>
+                                            <Tooltip title="Cancel Event Registration" placement="left">
                                                 <li value={event["eventId"]} onClick={(event) => this.handleCancelEvent(event)} className="fa fa-trash"></li>
                                             </Tooltip>
                                         </td>;
                                 else 
                                     action = 
                                         <td>
-                                            <Tooltip placement="right" trigger={['hover']} overlay={<span>Cancel event crew</span>}>
+                                            <Tooltip title="Cancel Event Crew" placement="right">
                                                 <li value={event["eventId"]} onClick={(event) => this.handleCancelCrew(event)} className="fa fa-trash"></li>
                                             </Tooltip>
                                         </td>;
@@ -242,14 +245,14 @@ class MyEvent extends Component {
                                 if(event["eRoleId"] === 1) 
                                     action = 
                                         <td>
-                                            <Tooltip placement="left" trigger={['hover']} overlay={<span>Remove event registration</span>}>
+                                            <Tooltip title="Remove Event Registration" placement="left">
                                                 <li value={event["eventId"]} onClick={(event) => this.handleRemoveEvent(event)} className="fa fa-trash"></li>
                                             </Tooltip>
                                         </td>;
                                 else 
                                     action = 
                                         <td>
-                                            <Tooltip placement="right" trigger={['hover']} overlay={<span>Remove crew registration</span>}>
+                                            <Tooltip title="Remove Crew Registration" placement="right">
                                                 <li value={event["eventId"]} onClick={(event) => this.handleRemoveEvent(event)} className="fa fa-trash"></li>
                                             </Tooltip>
                                         </td>;

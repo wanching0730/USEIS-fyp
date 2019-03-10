@@ -27,7 +27,7 @@ class PerEvent extends Component {
         
         this.props.onUpdateLoadingBar();
 
-        if(parseInt(this.props.userName) != 0)
+        if(isNaN(this.props.userName))
             this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
         else 
             this.props.onRetrieveDataWithUserId("staffEvent", this.props.params.eventId, this.props.id);
@@ -129,7 +129,7 @@ class PerEvent extends Component {
                 state: eventState
             };
 
-            if(parseInt(this.props.userName) == 0)  {
+            if(isNaN(this.props.userName))  {
                 if(event["participated"] || event["currentParticipant"] >= event["totalParticipant"] || moment(event["startDate"]).format("YYYY/MM/DD") < moment(new Date()).format("YYYY/MM/DD")) {
                     buttons =
                         <div id="div3">
@@ -221,7 +221,7 @@ class PerEvent extends Component {
                     :
                     [
                         <div>
-                            {(event["specificAuthorized"]) || (event["authorized"] || this.props.userName.substring(0,2) === "01") ?
+                            {(event["specificAuthorized"]) || (event["authorized"] || this.props.role === "dsa") ?
                                 [
                                     <div className="zoom">
                                         <Tooltip title="Actions" placement="left">
@@ -348,6 +348,7 @@ const mapStateToProps = (state, props) => {
         event: state.data.event,
         userName: state.auth.userName,
         id: state.auth.id,
+        role: state.auth.role,
         loading: state.data.loading,
         deleteLoading: state.delete.loading
     };

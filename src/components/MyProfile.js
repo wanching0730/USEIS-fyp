@@ -65,7 +65,7 @@ class MyProfile extends Component {
                 let list = this.state.societies;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["societyId"] == data["societyId"] && this.props.userId == data["id"]) {
+                    if(item["societyId"] == data["societyId"] && this.props.userName == data["username"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
@@ -98,7 +98,8 @@ class MyProfile extends Component {
 
                                             let data = {
                                                 id: this.props.userId,
-                                                societyId: societyId
+                                                societyId: societyId,
+                                                username: this.props.userName
                                             }
 
                                             if(isNaN(this.props.userName))

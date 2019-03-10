@@ -180,7 +180,7 @@ class PerSociety extends Component {
                     :
                     [
                         <div>
-                            {society["specificAuthorized"] || this.props.userName.substring(0,2) === "01" ?
+                            {society["specificAuthorized"] || this.props.role === "dsa" ?
                                 [
                                     <div className="zoom">
                                        <Tooltip title="Actions" placement="left">
@@ -299,6 +299,7 @@ const mapStateToProps = (state, props) => {
         society: state.data.society,
         id: state.auth.id,
         userName: state.auth.userName,
+        role: state.auth.role,
         loading: state.data.loading
     };
 };

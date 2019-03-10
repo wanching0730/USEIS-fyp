@@ -10,7 +10,6 @@ import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
 import '../style/table.css';
 import '../style/alert.css';
-// import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

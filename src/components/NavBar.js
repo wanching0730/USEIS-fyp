@@ -53,7 +53,6 @@ class NavBar extends Component {
     }
 
     render() {
-        console.log(this.props.role);
         var dropDownItem;
         var position;
 
