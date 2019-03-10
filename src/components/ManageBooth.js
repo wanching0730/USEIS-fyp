@@ -4,13 +4,15 @@ import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { confirmAlert } from 'react-confirm-alert'; 
+import { confirmAlert } from 'react-confirm-alert';
+import DatePicker from "react-datepicker"; 
 import { Link } from 'react-router';
 import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { update, updatePostLoadingBar } from '../actions/post-action';
+import moment from "moment";
 
 class ManageBooth extends Component {
 
@@ -19,8 +21,12 @@ class ManageBooth extends Component {
 
         this.state = {
             boothAmount: 0,
-            floorPlanUrl: ''
+            floorPlanUrl: '',
+            selectedBiddingDate: moment(),
+            biddingDate: ''
         }
+
+        this.handleDate = this.handleDate.bind(this);
     }
 
     componentDidMount() {
@@ -34,6 +40,15 @@ class ManageBooth extends Component {
     // handleEvents(event) {
     //     browserHistory.push("/manageEventBooth");
     // }
+
+    handleDate(date) {
+        this.setState({
+          selectedBiddingDate: date,
+          biddingDate: "" + moment(date).format("YYYY-MM-DD HH:mm")
+        }), function() {
+          this.setState(this.state);
+        };
+    }
 
     handleClick(event) {
         const { boothAmount, floorPlanUrl } = this.state;
@@ -73,7 +88,8 @@ class ManageBooth extends Component {
             console.log(JSON.stringify(seatMap));
             let data = {
                 seatMap: JSON.stringify(seatMap),
-                floorPlanUrl: this.state.floorPlanUrl
+                floorPlanUrl: this.state.floorPlanUrl,
+                biddingDate: this.state.biddingDate
             }
 
             this.props.onUpdateCreateLoadingBar();
@@ -105,15 +121,32 @@ class ManageBooth extends Component {
                         <div className="container">
                             <div className="form-style-10">
                                 <form>
-                                    <div class="section"><span>1</span>Name &amp; Category</div>
+                                    <div class="section"><span>1</span>Booth</div>
                                     <div class="inner-wrap">
                                         <label>Booth Amount</label>  
                                         <input type="number" onChange={(event) => {
                                             this.setState({boothAmount:event.target.value});
                                         }}/>
-                                        <br/>
+                                    </div>
+                                    <br/>
+                                    <div class="section"><span>2</span>Floor Plan</div>
+                                        <div class="inner-wrap">
                                         <label>Floor Plan URL</label>
                                         <input type="text" onChange={(event) => {this.setState({floorPlanUrl:event.target.value})}}/>
+                                    </div>
+
+                                    <div class="section"><span>3</span>Bidding Date</div>
+                                    <div class="inner-wrap">
+                                        <label>Date &amp; Time </label>
+                                        <DatePicker
+                                        selected={this.state.selectedBiddingDate}
+                                        onChange={this.handleDate.bind(this)}
+                                        showTimeSelect
+                                        timeFormat="HH:mm"
+                                        timeIntervals={15}
+                                        dateFormat="YYYY-MM-DD HH:mm:ss"
+                                        timeCaption="time"
+                                        />
                                     </div>
 
                                     <div class="button-section">

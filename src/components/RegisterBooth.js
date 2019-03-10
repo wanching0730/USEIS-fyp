@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import Modal from 'react-responsive-modal';
 import openSocket from 'socket.io-client';
+import moment from "moment";
 import '../style/main.scss';
 import '../style/main.css';
 import '../style/form.css';
@@ -133,10 +134,17 @@ class RegisterBooth extends Component {
   }
 
   render() {
-    const { RaisedButtonStyle, imageStyle } = styles;
+    const { RaisedButtonStyle } = styles;
     const { open } = this.state;
     var breadCrumb;
+    var bidTime = false;
+    var message = <div style={{ color: "red", fontSize: 18, textAlign: "center" }}>Bidding session starts on {this.props.overallBooth == null ? "" : moment(this.props.overallBooth.biddingDate).format("YYYY/MM/DD hh:mm")}</div>
 
+    if(this.props.overallBooth != null) {
+      bidTime = moment(this.props.overallBooth.biddingDate).format("YYYY/MM/DD") >= moment(new Date()).format("YYYY/MM/DD") ? true : false;
+    }
+
+    
     if(this.props.params.type === "society") {
       breadCrumb = 
         <Breadcrumb>
@@ -174,6 +182,8 @@ class RegisterBooth extends Component {
 
           {this.props.loading || this.props.postLoading ?
             [<LoadingBar />]
+            : bidTime ?
+            [message] 
             :
             [
               <div>
