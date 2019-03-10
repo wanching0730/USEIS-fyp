@@ -53,6 +53,7 @@ class NavBar extends Component {
     }
 
     render() {
+        console.log(this.props.role);
         var dropDownItem;
         var position;
 
@@ -62,7 +63,7 @@ class NavBar extends Component {
         };
         var userPool = new CognitoUserPool(poolData);
 
-        if(isNaN(this.props.userName)) {
+        if(this.props.role == "dsa") {
             position = "staff";
         } else {
             position = "student"
@@ -180,6 +181,7 @@ const mapStateToProps = (state, props) => {
     return {
       userName: state.auth.userName,
       userId: state.auth.userId,
+      role: state.auth.role,
       id: state.auth.id,
       isAuthenticated: state.auth.isAuthenticated
     };

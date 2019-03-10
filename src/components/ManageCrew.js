@@ -101,48 +101,45 @@ class ManageCrew extends Component {
 
     handleApprove(event, name) {
         let id = event.target.value;
-        console.log(id);
-        console.log(name);
 
-        setTimeout(() => {
-            confirmAlert({
-                customUI: ({ onClose }) => {
-                    return (
-                        <MuiThemeProvider>
-                            <div className='custom-alert'>
-                                <h2>Approval Confirmation</h2>
-                                <p>Are you sure to approve this crew?</p>
-                                <RaisedButton label="Yes" primary={true} onClick={() => {
-                                            if(this.props.params.type === "event") {
-                                                let data = {
-                                                    studentId: id,
-                                                    eventId: this.props.params.id
-                                                }
-                                                this.props.onUpdateData("crew", data, this.props.location.state["eventName"]);
-                                            } else {
-                                                let data = {
-                                                    id: id,
-                                                    societyId: this.props.params.id
-                                                }
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <MuiThemeProvider>
+                        <div className='custom-alert'>
+                            <h2>Approval Confirmation</h2>
+                            <p>Are you sure to approve this crew?</p>
+                            <RaisedButton label="Yes" primary={true} onClick={() => {
+                                if(this.props.params.type === "event") {
+                                    let data = {
+                                        studentId: id,
+                                        eventId: this.props.params.id
+                                    }
+                                    this.props.onUpdateData("crew", data, this.props.location.state["eventName"]);
+                                } else {
+                                    let data = {
+                                        id: id,
+                                        societyId: this.props.params.id
+                                    }
 
-                                                if(isNaN(this.props.userName))
-                                                    this.props.onUpdateData("societyAdvisor", data, this.props.location.state["societyName"]);
-                                                else 
-                                                    this.props.onUpdateData("societyCrew", data, this.props.location.state["societyName"]);
-                                                
-                                            }
-                                        }
-                                    }/>
-                                <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
-                            </div>
-                        </MuiThemeProvider>
-                    )
-                }
-              })
-        }, 2000);
+                                    if(isNaN(name))
+                                        this.props.onUpdateData("societyAdvisor", data, this.props.location.state["societyName"]);
+                                    else 
+                                        this.props.onUpdateData("societyCrew", data, this.props.location.state["societyName"]);
+                                    
+                                }
+                                onClose();
+                            }}/>
+                            &nbsp;&nbsp;&nbsp;
+                            <RaisedButton label="No" primary={true} onClick={() => onClose()}/>
+                        </div>
+                    </MuiThemeProvider>
+                )
+            }
+        })
     }
 
-    handleReject(event) {
+    handleReject(event, name) {
         let targetCrewId = event.target.value;
 
         confirmAlert({
@@ -165,7 +162,7 @@ class ManageCrew extends Component {
                                         societyId: this.props.params.id
                                     }
 
-                                    if(isNaN(this.props.userName))
+                                    if(isNaN(name))
                                         this.props.onUpdateData("rejectSocietyAdvisor", data, this.props.location.state["societyName"]);
                                     else 
                                         this.props.onUpdateData("rejectSocietyCrew", data, this.props.location.state["societyName"]);
@@ -182,8 +179,9 @@ class ManageCrew extends Component {
         })
     }
 
-    handleRemove(event) {
+    handleRemove(event,name) {
         let targetCrewId = event.target.value;
+        
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
@@ -196,9 +194,13 @@ class ManageCrew extends Component {
 
                                 if(this.props.params.type === "event") 
                                     this.props.onDeleteParticipation("eventCrew", targetCrewId, this.props.params.id);
-                                else 
-                                    this.props.onDeleteParticipation("societyCrew", targetCrewId, this.props.params.id);
-
+                                else {
+                                    if(isNaN(name))
+                                        this.props.onDeleteParticipation("societyAdvisor", targetCrewId, this.props.params.id);
+                                    else
+                                        this.props.onDeleteParticipation("societyCrew", targetCrewId, this.props.params.id);
+                                }
+        
                                 onClose();
                             }}/>
                             &nbsp;&nbsp;&nbsp;
@@ -287,14 +289,14 @@ class ManageCrew extends Component {
                             deleteIcon = 
                                 <td>
                                     <Tooltip title="Reject Crew" placement="right">
-                                        <li value={singleCrew["id"]} onClick={(event) => this.handleReject(event)} className="fa fa-trash"></li>
+                                        <li value={singleCrew["id"]} onClick={(event) => this.handleReject(event,singleCrew["username"])} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         } else {
                             deleteIcon =
                                 <td>
                                     <Tooltip title="Remove Crew" placement="right">
-                                        <li value={singleCrew["id"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
+                                        <li value={singleCrew["id"]} onClick={(event) => this.handleRemove(event,singleCrew["username"])} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         }

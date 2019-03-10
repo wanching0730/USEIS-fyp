@@ -41,7 +41,7 @@ export function getFcmTokenSuccessful(token, messaging) {
     }
 }
 
-export function loginUserSuccessful(userName, userId, id, user, societies, token) {
+export function loginUserSuccessful(userName, userId, id, user, societies, token, role) {
     localStorage.setItem('token', token);
 
     return {
@@ -52,7 +52,8 @@ export function loginUserSuccessful(userName, userId, id, user, societies, token
             id: id,
             user: user,
             societies: societies,
-            token: token, 
+            token: token,
+            role: role, 
             loading: false
         }
     }
@@ -129,11 +130,12 @@ export function loginUser(postData) {
             let user = reply["user"];
             let userSociety = reply["userSociety"];
             let token = reply["token"];
-            var societies = [];
-            
             let userName = user["user"]["username"];
             let userId = user["user"]["userId"];
 
+            var societies = [];
+            var role = user["role"] ? user["role"] : ""
+            
             if(userName.substring(0,2) === "00" || userName.substring(0,2) === "01") {
                 let id = user["staffId"];
                 if(userSociety.length > 0) {
@@ -147,7 +149,7 @@ export function loginUser(postData) {
                     }
                 }
                 
-                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token));
+                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token, role));
             } else {
                 let id = user["studentId"];
                 if(userSociety.length > 0) {
