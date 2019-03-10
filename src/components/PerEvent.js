@@ -27,7 +27,7 @@ class PerEvent extends Component {
         
         this.props.onUpdateLoadingBar();
 
-        if(isNaN(this.props.userName))
+        if(!isNaN(this.props.userName))
             this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
         else 
             this.props.onRetrieveDataWithUserId("staffEvent", this.props.params.eventId, this.props.id);
@@ -100,7 +100,7 @@ class PerEvent extends Component {
             }));
         });
 
-        var buttons = <div></div>, message = <div></div>;
+        var buttons = <div></div>, fullMessage = <div></div>, overdueMessage = <div></div>;
         var event, toEditEvent, toManageCrew, toRegisterBooth, toManageParticipant;
         const { RaisedButtonStyle, imageStyle, div1Style } = styles;
         let eventId = this.props.params.eventId;
@@ -179,7 +179,10 @@ class PerEvent extends Component {
             }
     
             if(event["currentCrew"] >= event["totalCrew"] && event["currentParticipant"] >= event["totalParticipant"])
-                message = <div style={{ color: "red", fontSize: 20 }}>FULL</div>;
+                fullMessage = <div style={{ color: "red", fontSize: 20 }}>FULL</div>;
+
+            if(moment(event["startDate"]).format("YYYY/MM/DD") < moment(new Date()).format("YYYY/MM/DD"))
+                overdueMessage = <div style={{ color: "red", fontSize: 20 }}>Past Event</div>;
 
             // // Handle department HOD and Assistant issue
             // let splitPosition = event["position"].split(" ");
@@ -253,7 +256,8 @@ class PerEvent extends Component {
                             <div>
                                 <MuiThemeProvider>
                                 <div style={div1Style}>
-                                    {message}
+                                    {fullMessage}
+                                    {overdueMessage}
                                     <img style={imageStyle} src={event["logoUrl"]} />
                                     <h1>{event["name"]}</h1> 
                                 </div>

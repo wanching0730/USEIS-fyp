@@ -84,7 +84,6 @@ class ManageMember extends Component {
 
     handleApprove(event,name) {
         let studentId = event.target.value;
-        this.setState({studentId: studentId})
 
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -95,7 +94,7 @@ class ManageMember extends Component {
                             <p>Are you sure to approve this member?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {
                                         let data = {
-                                            studentId: this.state.studentId,
+                                            studentId: studentId,
                                             societyId: this.props.params.societyId,
                                             username: name
                                         }

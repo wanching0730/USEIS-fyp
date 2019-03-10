@@ -119,6 +119,8 @@ class NewsFeed extends Component {
                 let options = [];
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
+                    console.log(event["eRoleId"]);
+                    console.log(event);
                     if([2,3,10].includes(event["eRoleId"])) {
                         options.push({
                             value: event["eventId"],
