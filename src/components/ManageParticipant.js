@@ -62,26 +62,54 @@ class ManageParticipant extends Component {
     }
 
     updateList(data) {
+        console.log(data["type"]);
+        console.log(this.state.studentParticipant);
         if(data["type"] == "rejectEvent") {
             if(this.state.studentParticipant != null) {
                 let list = this.state.studentParticipant;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["username"] == data["username"] && item["eventId"] == data["eventId"]) {
+                    if(item["username"] == data["username"] && this.props.params.eventId == data["eventId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
                 }
                 this.setState({ studentParticipant: list });
-            }
-        } else {
+            } 
+
             if(this.state.staffParticipant != null) {
                 let list = this.state.staffParticipant;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["id"] == data["id"] && item["eventId"] == data["eventId"]) {
+                    if(item["username"] == data["username"] && this.props.params.eventId == data["eventId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
+                    }
+                }
+                this.setState({ staffParticipant: list });
+            }
+        } else if(data["type"] == "approveEvent") {
+            if(this.state.studentParticipant != null) {
+                let list = this.state.studentParticipant;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+                    console.log(item["username"]);
+                    console.log(data["username"]);
+                    console.log(data["eventId"]);
+                    console.log(this.props.params.eventId);
+                    if(item["username"] == data["username"] && this.props.params.eventId == data["eventId"]) {
+                        item["status"] = 1;
+                    }
+                }
+                this.setState({ studentParticipant: list });
+            } 
+
+            if(this.state.staffParticipant != null) {
+                let list = this.state.staffParticipant;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+                    if(item["username"] == data["username"] && this.props.params.eventId == data["eventId"]) {
+                        item["status"] = 1;
                     }
                 }
                 this.setState({ staffParticipant: list });
@@ -102,7 +130,8 @@ class ManageParticipant extends Component {
                             <RaisedButton label="Yes" primary={true} onClick={() => {
                                         let data = {
                                             id: targetParticipantId,
-                                            eventId: this.props.params.eventId
+                                            eventId: this.props.params.eventId,
+                                            username: username
                                         }
 
                                         if(parseInt(this.props.userName) == 0) 
@@ -155,7 +184,7 @@ class ManageParticipant extends Component {
         })
     }
 
-    handleRemove(event, username) {
+    handleRemove(event) {
         let targetParticipantId = event.target.value;
         let targetEventId = this.props.params.eventId;
         confirmAlert({
@@ -215,7 +244,7 @@ class ManageParticipant extends Component {
                         else if(studentParticipant["status"] == 0)
                             approvedIcon = 
                                 <td>
-                                    <Tooltip title="Actions" placement="Approve Participant">
+                                    <Tooltip title="Approve Participant" placement="left">
                                         <li value={studentParticipant["id"]} onClick={(event) => this.handleApprove(event, studentParticipant["username"])} className="fa fa-plus"></li>
                                     </Tooltip>
                                 </td>
@@ -238,7 +267,7 @@ class ManageParticipant extends Component {
                             deleteIcon = 
                                 <td>
                                     <Tooltip title="Remove Participant" placement="right">
-                                        <li value={studentParticipant["id"]} onClick={(event) => this.handleRemove(event, studentParticipant["username"])} className="fa fa-trash"></li>
+                                        <li value={studentParticipant["id"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
                                     </Tooltip>
                                 </td>
                         }

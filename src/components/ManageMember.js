@@ -68,10 +68,21 @@ class ManageMember extends Component {
                 }
                 this.setState({ societyMembers: list });
             }
+        } else if(data["type"] == "approveSociety") {
+            if(this.state.societyMembers != null) {
+                let list = this.state.societyMembers;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+                    if(item["username"] == data["username"] && this.props.params.societyId == data["societyId"]) {
+                        item["status"] = 1;
+                    }
+                }
+                this.setState({ societyMembers: list });
+            }
         }
     }
 
-    handleApprove(event) {
+    handleApprove(event,name) {
         let studentId = event.target.value;
         this.setState({studentId: studentId})
 
@@ -85,7 +96,8 @@ class ManageMember extends Component {
                             <RaisedButton label="Yes" primary={true} onClick={() => {
                                         let data = {
                                             studentId: this.state.studentId,
-                                            societyId: this.props.params.societyId
+                                            societyId: this.props.params.societyId,
+                                            username: name
                                         }
                                         this.props.onUpdateData("member", data, this.props.location.state["societyName"]);
                                     }
@@ -183,7 +195,7 @@ class ManageMember extends Component {
                             approvedIcon = 
                                 <td>
                                     <Tooltip title="Approve Member" placement="left">
-                                        <li value={member["studentId"]} onClick={(event) => this.handleApprove(event)} className="fa fa-plus"></li>
+                                        <li value={member["studentId"]} onClick={(event) => this.handleApprove(event,member["username"])} className="fa fa-plus"></li>
                                     </Tooltip>
                                 </td>
                         else 

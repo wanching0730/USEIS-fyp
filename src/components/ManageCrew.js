@@ -76,7 +76,7 @@ class ManageCrew extends Component {
                 let list = this.state.eventCrew;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["username"] == data["username"] && item["eventId"] == data["eventId"]) {
+                    if(item["username"] == data["username"] && this.props.params.id == data["eventId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
@@ -84,17 +84,41 @@ class ManageCrew extends Component {
                 this.setState({ eventCrew: list });
             }
         }
-        else {
-            if(this.state.societyCrew != null && data["type"] == "rejectSociety") {
+        else if(data["type"] == "rejectSociety") {
+            if(this.state.societyCrew != null) {
                 let list = this.state.societyCrew;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    if(item["username"] == data["username"] && item["societyId"] == data["societyId"]) {
+                    if(item["username"] == data["username"] && this.props.params.id == data["societyId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
                     }
                 }
                 this.setState({ societyCrew: list });
+            }
+        } else if (data["type"] == "approveSociety") {
+            if(this.state.societyCrew != null) {
+                let list = this.state.societyCrew;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+
+                    if(item["username"] == data["username"] && this.props.params.id == data["societyId"]) {
+                        item["status"] = 1;
+                    }
+                }
+                this.setState({ societyCrew: list });
+            }
+        } else if (data["type"] == "approveEvent") {
+            if(this.state.eventCrew != null) {
+                let list = this.state.eventCrew;
+                for(var i = 0; i < list.length; i++) {
+                    let item = list[i];
+
+                    if(item["username"] == data["username"] && this.props.params.id == data["eventId"]) {
+                        item["status"] = 1;
+                    }
+                }
+                this.setState({ eventCrew: list });
             }
         }
     }
@@ -113,13 +137,15 @@ class ManageCrew extends Component {
                                 if(this.props.params.type === "event") {
                                     let data = {
                                         studentId: id,
-                                        eventId: this.props.params.id
+                                        eventId: this.props.params.id,
+                                        username: name
                                     }
                                     this.props.onUpdateData("crew", data, this.props.location.state["eventName"]);
                                 } else {
                                     let data = {
                                         id: id,
-                                        societyId: this.props.params.id
+                                        societyId: this.props.params.id,
+                                        username: name
                                     }
 
                                     if(isNaN(name))
@@ -153,13 +179,15 @@ class ManageCrew extends Component {
                                 if(this.props.params.type === "event") {
                                     let data = {
                                         id: targetCrewId,
-                                        eventId: this.props.params.id
+                                        eventId: this.props.params.id,
+                                        username: name
                                     }
                                     this.props.onUpdateData("rejectCrew", data, this.props.location.state["eventName"]);
                                 } else {
                                     let data = {
                                         id: targetCrewId,
-                                        societyId: this.props.params.id
+                                        societyId: this.props.params.id,
+                                        username: name
                                     }
 
                                     if(isNaN(name))
