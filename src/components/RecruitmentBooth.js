@@ -33,11 +33,13 @@ class RecruitmentBooth extends Component {
     render() {
 
         const { RaisedButtonStyle } = styles;
+        var message = <div></div>;
 
         if(this.state.type === "society") {
             let societyBooths = this.props.societyBooths;
-
+            console.log(societyBooths)
             if(societyBooths != null) {
+                
                 var header = 
                     <tr>
                         <th>No.</th>
@@ -45,28 +47,33 @@ class RecruitmentBooth extends Component {
                         <th>Booth Number</th>                 
                     </tr>
 
-                var body = [];
-                for(var i = 0; i < societyBooths.length; i++) {
-                    let societyBooth = societyBooths[i];
+                if(societyBooths.length > 0) {
+                    var body = [];
+                    for(var i = 0; i < societyBooths.length; i++) {
+                        let societyBooth = societyBooths[i];
 
-                    let toSociety = {
-                        pathname: "/perSociety/" + societyBooth["societyId"],
-                        state: {societyName: societyBooth["name"]}
+                        let toSociety = {
+                            pathname: "/perSociety/" + societyBooth["societyId"],
+                            state: {societyName: societyBooth["name"]}
+                        }
+
+                        body.push(
+                            <tr>
+                                <td>{i+1}</td>
+                                <td><Link to={toSociety}>{societyBooth["name"]}</Link></td>
+                                <td>{societyBooth["location"]}</td>
+                            </tr>
+                        );
                     }
-
-                    body.push(
-                        <tr>
-                            <td>{i+1}</td>
-                            <td><Link to={toSociety}>{societyBooth["name"]}</Link></td>
-                            <td>{societyBooth["location"]}</td>
-                        </tr>
-                    );
+                } else {
+                    message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No registered booth</div>;
                 }
             } 
         } else {
             let eventBooths = this.props.eventBooths;
 
             if(eventBooths != null) {
+               
                 var header = 
                     <tr>
                         <th>No.</th>
@@ -74,24 +81,28 @@ class RecruitmentBooth extends Component {
                         <th>Booth Number</th>                 
                     </tr>
 
-                var body = [];
-                for(var i = 0; i < eventBooths.length; i++) {
-                    let eventBooth = eventBooths[i];
+                 if(eventBooths.length > 0) {
+                    var body = [];
+                    for(var i = 0; i < eventBooths.length; i++) {
+                        let eventBooth = eventBooths[i];
 
-                    let toEvent = {
-                        pathname: "/perEvent/" + eventBooth["eventId"],
-                        state: {eventName: eventBooth["name"]}
+                        let toEvent = {
+                            pathname: "/perEvent/" + eventBooth["eventId"],
+                            state: {eventName: eventBooth["name"]}
+                        }
+
+                        body.push(
+                            <tr>
+                                <td>{i+1}</td>
+                                <td><Link to={toEvent}>{eventBooth["name"]}</Link></td>
+                                <td>{eventBooth["location"]}</td>
+                            </tr>
+                        );
                     }
-
-                    body.push(
-                        <tr>
-                            <td>{i+1}</td>
-                            <td><Link to={toEvent}>{eventBooth["name"]}</Link></td>
-                            <td>{eventBooth["location"]}</td>
-                        </tr>
-                    );
+                } else {
+                    message = <div style= {{ textAlign: "center", marginBottom: "20px"}}>No registered booth</div>;
                 }
-            }
+            } 
         }
         
         
@@ -131,6 +142,8 @@ class RecruitmentBooth extends Component {
                                                 {body}
                                             </tbody>
                                         </table>
+                                        
+                                        {message}
 
                                         <div style= {{ textAlign: "center" }}>
                                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>

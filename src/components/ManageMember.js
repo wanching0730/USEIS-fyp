@@ -56,11 +56,16 @@ class ManageMember extends Component {
     }
 
     updateList(data) {
+        console.log("called");
         if(data["type"] == "rejectSociety") {
             if(this.state.societyMembers != null) {
                 let list = this.state.societyMembers;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
+                    console.log(item["username"]);
+                    console.log(data["username"]);
+                    console.log(data["societyId"]);
+                    console.log(this.props.params.societyId);
                     if(item["username"] == data["username"] && this.props.params.societyId == data["societyId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);
@@ -150,7 +155,6 @@ class ManageMember extends Component {
                             <p>Are you sure to remove this member?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {    
                                 
-                                this.props.onUpdateDeleteLoadingBar();
                                 this.props.onDeleteParticipation("studentSociety", targetMemberId, this.props.params.societyId);
 
                                 onClose();
@@ -200,7 +204,7 @@ class ManageMember extends Component {
                         else 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip title="Cancelled" placement="left">
+                                    <Tooltip title="Cancelled by member" placement="left">
                                         <div>-</div>
                                     </Tooltip>
                                 </td>

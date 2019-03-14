@@ -237,7 +237,7 @@ export function updateDouble(type, postData, name) {
                                     else 
                                         browserHistory.push({pathname:`/register_booth/event/` + reply["message"], state: {eventName: name}});
                                 } else if(type === "resubmitStaffParticipant" || type === "resubmitStudentParticipant" || type === "resubmitMemberRegistration" || type === "resubmitAdvisorRegistration" || type === "cancelStudentEvent" || type === "cancelStaffEvent") {
-                                    browserHistory.push("/myProfile");
+                                    browserHistory.push("/myEvent");
                                 } else {
                                     browserHistory.push({pathname:`/manageCrew/` + reply["message"], state: {eventName: name}});
                                 }

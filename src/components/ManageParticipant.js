@@ -195,8 +195,6 @@ class ManageParticipant extends Component {
                             <h1>Delete Confirmation</h1>
                             <p>Are you sure to remove this participant?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {    
-                                
-                                this.props.onUpdateDeleteLoadingBar();
 
                                 if(parseInt(this.props.userName) == 0) 
                                     this.props.onDeleteParticipation("staffParticipant", targetParticipantId, targetEventId);
@@ -251,7 +249,7 @@ class ManageParticipant extends Component {
                         else 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip title="Cancelled" placement="left">
+                                    <Tooltip title="Cancelled by member" placement="left">
                                         <div>-</div>
                                     </Tooltip>
                                 </td>
@@ -318,7 +316,7 @@ class ManageParticipant extends Component {
                         } else 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip title="Cancelled" placement="left">
+                                    <Tooltip title="Cancelled by member" placement="left">
                                         <div>-</div>
                                     </Tooltip>
                                 </td>;

@@ -71,7 +71,7 @@ class ManageCrew extends Component {
     }
 
     updateList(data) {
-        if(this.props.params.type === "event" && data["type"] == "rejectEvent") {
+        if(data["type"] == "rejectEvent") {
             if(this.state.eventCrew != null) {
                 let list = this.state.eventCrew;
                 for(var i = 0; i < list.length; i++) {
@@ -218,7 +218,6 @@ class ManageCrew extends Component {
                             <h2>Delete Confirmation</h2>
                             <p>Are you sure to remove this crew?</p>
                             <RaisedButton label="Yes" primary={true} onClick={() => {   
-                                this.props.onUpdateDeleteLoadingBar(); 
 
                                 if(this.props.params.type === "event") 
                                     this.props.onDeleteParticipation("eventCrew", targetCrewId, this.props.params.id);
@@ -308,7 +307,7 @@ class ManageCrew extends Component {
                         else 
                             approvedIcon = 
                                 <td>
-                                    <Tooltip title="Cancelled" placement="left">
+                                    <Tooltip title="Cancelled by member" placement="left">
                                         <div>-</div>
                                     </Tooltip>
                                 </td>
