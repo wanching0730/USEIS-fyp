@@ -1,3 +1,8 @@
+.cardlist {
+    width: 80%;
+    margin: auto;
+}
+
 .card {
     border: 1px solid gray !important;
     margin: 10px;

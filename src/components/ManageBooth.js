@@ -120,6 +120,7 @@ class ManageBooth extends Component {
                     [
                         <div className="container">
                             <div className="form-style-10">
+                                <h1>Manage Booth<span>Update booth information</span></h1>
                                 <form>
                                     <div class="section"><span>1</span>Booth</div>
                                     <div class="inner-wrap">

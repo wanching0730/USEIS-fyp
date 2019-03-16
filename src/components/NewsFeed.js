@@ -309,7 +309,7 @@ class NewsFeed extends Component {
         console.log("society: " + this.state.societyOptions);
         console.log("event: " + this.state.eventOptions);
 
-        const { RaisedButtonStyle, content } = styles;
+        const { RaisedButtonStyle, content, CreateButtonStyle } = styles;
         let newsfeeds = this.state.newsfeeds;
         let filteredNewsfeeds = [];
         var dropdown,createButton;
@@ -337,7 +337,7 @@ class NewsFeed extends Component {
         if(this.state.societyOptions != null && this.state.eventOptions != null) {
             if(this.state.societyOptions.length != 0 || this.state.eventOptions.length != 0)
                 createButton = <div style= {{ textAlign: "left" }}>
-                                    <RaisedButton label="Create New" primary={false} style={RaisedButtonStyle} onClick={(event) => this.openModal()}/>
+                                    <RaisedButton label="Create New" primary={false} style={CreateButtonStyle} onClick={(event) => this.openModal()}/>
                                 </div>;
         }
         
@@ -396,7 +396,6 @@ class NewsFeed extends Component {
         }
 
         return (
-            
             <div>
                 <MuiThemeProvider>
                 <div id="outerDiv"> 
@@ -472,7 +471,9 @@ class NewsFeed extends Component {
 
 const styles = {
     RaisedButtonStyle: {
-        margin: 15
+        marginLeft: 15,
+        marginRight: 15,
+        marginBottom: 15
     },
     content : {
         top: '50%',
@@ -481,7 +482,11 @@ const styles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)'
-      }
+    }, 
+    CreateButtonStyle: {
+        marginLeft: 125,
+        marginBottom: 15
+    }
 }
 
 const mapStateToProps = (state, props) => {

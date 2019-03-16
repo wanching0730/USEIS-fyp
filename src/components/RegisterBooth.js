@@ -111,6 +111,8 @@ class RegisterBooth extends Component {
     if(data["previousRow"] != -1 && data["previousSeat"] != -1) {
       delete newSeatMap[data["previousRow"]][data["previousSeat"]].isReserved;
       this.setState({seatMap: newSeatMap});
+    } else {
+      this.setState({seatMap: newSeatMap});
     }
   }
 

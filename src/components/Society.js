@@ -6,6 +6,7 @@ import Tooltip from 'rc-tooltip';
 import SearchBar from 'material-ui-search-bar';
 import { confirmAlert } from 'react-confirm-alert';
 import { Link } from 'react-router';
+import Analysis from './Analysis';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as FontAwesome from '../../node_modules/react-icons/lib/fa';
@@ -151,24 +152,30 @@ class Society extends Component {
                     [
                         <div>
                             <MuiThemeProvider>
-                                <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
+                                <div className="pull-left col-md-8 col-lg-8 col-sm-8" id="col-9" style={{ marginTop: 20}}>
+                                    <h1 style={{ margin: 20, color: '#083477' }}>Society List</h1>
 
-                                <SearchBar
-                                    hintText="Search name or category..."
-                                    onChange={(newValue) => this.setState({ searchWord: newValue })}
-                                    onRequestSearch={this.handleSearch.bind(this)}
-                                    style={{
-                                        marginLeft: 20,
-                                        marginBottom: 20,
-                                        maxWidth: 290,
-                                        borderRadius: 6
-                                    }}
-                                />
+                                    <SearchBar
+                                        hintText="Search name or category..."
+                                        onChange={(newValue) => this.setState({ searchWord: newValue })}
+                                        onRequestSearch={this.handleSearch.bind(this)}
+                                        style={{
+                                            marginLeft: 20,
+                                            marginBottom: 20,
+                                            maxWidth: 290,
+                                            borderRadius: 6
+                                        }}
+                                    />
 
-                                <div className="wrapper">
-                                    <ul>
-                                        {rows}
-                                    </ul>
+                                    <div className="wrapper">
+                                        <ul>
+                                            {rows}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div className="pull-right col-md-4 col-lg-4 col-sm-4" id="col-3" style={{ marginTop: 20}}>
+                                    <Analysis />
                                 </div>
                             </MuiThemeProvider>
                         </div>
