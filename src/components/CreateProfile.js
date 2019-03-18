@@ -27,7 +27,9 @@ class CreateProfile extends Component {
       logoUrl: '',
       userId: this.props.userId,
       positionOptions: [],
-      position1: 2, position2: 3, position3: 0
+      position1: 2, position2: 3, position3: 0,
+      selectedFile: null,
+      selectedFileName: ''
     }
 
     if(this.props.params.societyId) {
@@ -40,6 +42,16 @@ class CreateProfile extends Component {
     //this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
+    this.handleSelectedFile = this.handleSelectedFile.bind(this);
+
+    // s3.listObjects({Delimiter: '/'}, function(err, data) {
+    //   if (err) {
+    //     return alert('There was an error listing your albums: ' + err.message);
+    //   } else {
+    //     console.log(data);
+    //     return null;
+    //   }
+    // });
   }
 
   componentDidMount() {
@@ -98,50 +110,97 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
-    const { name, desc, vision, mission, logoUrl, position1, position2, position3 } = this.state;
-
-    if(name == '' || desc == '' || vision == '' ||  mission == '' || logoUrl == '' || (position1 == 1 && position2 == 1 && position3 == 1)) {
-      confirmAlert({
-        title: 'Warning',
-        message: 'Please fill in all empty fields before proceed',
-        buttons: [
-            {
-                label: 'Close'
-            }
-        ]
+    console.log(this.state.selectedFile);
+    console.log(this.state.selectedFileName);
+    var logoAlbumName = 'useis-logo';
+    var bucketRegion = 'ap-southeast-1';
+    var IdentityPoolId = 'ap-southeast-1:e4680cc6-76e1-4fe4-9985-e71694689442';
+    var AWS = require('aws-sdk');
+    
+    AWS.config.update({
+      region: bucketRegion,
+      credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: IdentityPoolId
       })
-      return false;
-    } else {
-      this.props.onUpdateCreateLoadingBar();
+    });
 
-      var authorizedPositions = [];
-      if(this.state.position1 != 0)
-        authorizedPositions.push(this.state.position1);
-      if(this.state.position2 != 0)
-        authorizedPositions.push(this.state.position2);
-      if(this.state.position3 != 0)
-        authorizedPositions.push(this.state.position3);
+    var s3 = new AWS.S3({
+      apiVersion: '2006-03-01',
+      params: {Bucket: logoAlbumName}
+    });
 
-      let societyId = this.props.params.societyId;
-      let data = this.state;
-      let societyName = data["name"];
-      data["authorizedPositions"] = authorizedPositions
+    console.log("s3: ");
+    console.log(s3);
 
-      // if(this.props.params.societyId)
-      //   data["authorizedPositions"]= authorizedPositions == '' ? this.props.society["authorizedPosition"] : authorizedPositions;
-      // else
-      //   data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
+    var fileKey = encodeURIComponent(this.state.selectedFileName);
+    var file = this.state.selectedFile;
+
+    
+      s3.upload({
+        Key: fileKey,
+        Body: file,
+        ACL: 'public-read'
+      }, function(err, data) {
+        if (err) {
+          return alert('There was an error uploading your photo: ', err.message);
+        }
+       // alert('Successfully uploaded photo.');
+        var s3url = s3.getSignedUrl('getObject', {Key: fileKey});
+        console.log(s3url);
+      });
+   
+    // const { name, desc, vision, mission, logoUrl, position1, position2, position3 } = this.state;
+
+    // if(name == '' || desc == '' || vision == '' ||  mission == '' || logoUrl == '' || (position1 == 1 && position2 == 1 && position3 == 1)) {
+    //   confirmAlert({
+    //     title: 'Warning',
+    //     message: 'Please fill in all empty fields before proceed',
+    //     buttons: [
+    //         {
+    //             label: 'Close'
+    //         }
+    //     ]
+    //   })
+    //   return false;
+    // } else {
+    //   this.props.onUpdateCreateLoadingBar();
+
+    //   var authorizedPositions = [];
+    //   if(this.state.position1 != 0)
+    //     authorizedPositions.push(this.state.position1);
+    //   if(this.state.position2 != 0)
+    //     authorizedPositions.push(this.state.position2);
+    //   if(this.state.position3 != 0)
+    //     authorizedPositions.push(this.state.position3);
+
+    //   let societyId = this.props.params.societyId;
+    //   let data = this.state;
+    //   let societyName = data["name"];
+    //   data["authorizedPositions"] = authorizedPositions
+
+    //   // if(this.props.params.societyId)
+    //   //   data["authorizedPositions"]= authorizedPositions == '' ? this.props.society["authorizedPosition"] : authorizedPositions;
+    //   // else
+    //   //   data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
       
-      if(societyId == null) {
-        this.props.onCreate("society", data);
-      } else {
-        this.props.onUpdate("society", societyId, societyName, data);
-      }
-    }
+    //   if(societyId == null) {
+    //     this.props.onCreate("society", data);
+    //   } else {
+    //     this.props.onUpdate("society", societyId, societyName, data);
+    //   }
+    // }
   }
 
   handleSocietyCategory(event) {
     this.setState({category: event.target.value});
+  }
+
+  handleSelectedFile (event) {
+    console.log(event.target.files[0])
+    this.setState({
+      selectedFile: event.target.files[0],
+      selectedFileName: event.target.files[0].name
+    });
   }
 
   mapItem(item) {
@@ -254,6 +313,12 @@ class CreateProfile extends Component {
                           <select value={this.state.position3}  onChange={(event) => {this.setState({position3:event.target.value})}}>
                             {this.state.positionOptions.map(this.mapItem)}
                           </select>
+                      </div>
+
+                      <div class="section"><span>5</span>Logo</div>
+                      <div class="inner-wrap">
+                      <label>Upload Logo</label>
+                      <input type="file" name="" id="" onChange={this.handleSelectedFile} />
                       </div>
 
                       <div class="button-section">
