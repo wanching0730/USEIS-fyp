@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
-import { CognitoUserPool } from "amazon-cognito-identity-js";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav,  NavItem, UncontrolledDropdown, 
     DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Link } from 'react-router';
@@ -16,7 +15,7 @@ class NavBar extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
         };
 
         this.onClick = this.onClick.bind(this);
@@ -54,16 +53,8 @@ class NavBar extends Component {
 
     render() {
         var user = localStorage.getItem('currentUser');
-        console.log(user);
-        console.log(this.props.userPool);
         var dropDownItem;
         var position;
-
-        var poolData = {
-            UserPoolId : 'ap-southeast-1_4dPeZiFVv', 
-            ClientId : '1nts071hctdk3kvt7kt6h6pjf' 
-        };
-        var userPool = new CognitoUserPool(poolData);
 
         if(this.props.role == "dsa") {
             position = "staff";
@@ -97,7 +88,7 @@ class NavBar extends Component {
         return (
             <div>
                 {
-                    localStorage.getItem('currentUser') ? [
+                    this.props.userName ? [
                 
                         <Navbar className="topnav" dark expand="md">
                         <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
@@ -181,12 +172,8 @@ class NavBar extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        userPool: state.auth.userPool,
         userName: state.auth.userName,
-        userId: state.auth.userId,
-        role: state.auth.role,
-        id: state.auth.id,
-        isAuthenticated: state.auth.isAuthenticated
+        role: state.auth.role
     };
 };
 

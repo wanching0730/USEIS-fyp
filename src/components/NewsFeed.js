@@ -53,8 +53,13 @@ class NewsFeed extends Component {
         this.clickSave = this.clickSave.bind(this);
 
         this.props.onUpdateLoadingBar();
-        this.props.onRetrieveData("studentEvent", this.props.userId);
         this.props.onRetrieveAll("newsfeeds");
+
+        if(isNaN(this.props.userName))
+            this.props.onRetrieveData("staffEvent", this.props.userId);
+        else 
+            this.props.onRetrieveData("studentEvent", this.props.userId);
+       
 
         setTimeout(() => {
             this.setState({
@@ -487,6 +492,7 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         userId: state.auth.id,
+        userName: state.auth.userName,
         newsfeeds: state.data.newsfeeds,
         societies: state.auth.societies,
         userEvents: state.data.userEvents,
