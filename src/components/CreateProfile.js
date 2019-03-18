@@ -4,8 +4,8 @@ import LoadingBar from './LoadingBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
+import { confirmAlert } from 'react-confirm-alert'; 
 import { Link } from 'react-router';
-import { confirmAlert } from 'react-confirm-alert';
 import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
@@ -43,15 +43,6 @@ class CreateProfile extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
     this.handleSelectedFile = this.handleSelectedFile.bind(this);
-
-    // s3.listObjects({Delimiter: '/'}, function(err, data) {
-    //   if (err) {
-    //     return alert('There was an error listing your albums: ' + err.message);
-    //   } else {
-    //     console.log(data);
-    //     return null;
-    //   }
-    // });
   }
 
   componentDidMount() {
@@ -66,8 +57,7 @@ class CreateProfile extends Component {
           category: society["category"],
           vision: society["vision"],
           mission: society["mission"], 
-          desc: society["desc"],
-          logoUrl: society["logoUrl"]
+          desc: society["desc"]
         });
 
         if(society["roles"].length > 0) {
@@ -110,12 +100,12 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
-    console.log(this.state.selectedFile);
-    console.log(this.state.selectedFileName);
-    var logoAlbumName = 'useis-logo';
-    var bucketRegion = 'ap-southeast-1';
-    var IdentityPoolId = 'ap-southeast-1:e4680cc6-76e1-4fe4-9985-e71694689442';
+    var bucketName = process.env.REACT_APP_S3_BUCKET_NAME;
+    var bucketRegion = process.env.REACT_APP_S3_BUCKET_REGION;
+    var IdentityPoolId = process.env.REACT_APP_AWS_IDENTITY_POOL_ID;
     var AWS = require('aws-sdk');
+    var fileKey = encodeURIComponent(this.state.selectedFileName);
+    var file = this.state.selectedFile;
     
     AWS.config.update({
       region: bucketRegion,
@@ -126,69 +116,52 @@ class CreateProfile extends Component {
 
     var s3 = new AWS.S3({
       apiVersion: '2006-03-01',
-      params: {Bucket: logoAlbumName}
+      params: {Bucket: bucketName}
     });
-
-    console.log("s3: ");
-    console.log(s3);
-
-    var fileKey = encodeURIComponent(this.state.selectedFileName);
-    var file = this.state.selectedFile;
-
     
-      s3.upload({
-        Key: fileKey,
-        Body: file,
-        ACL: 'public-read'
-      }, function(err, data) {
-        if (err) {
-          return alert('There was an error uploading your photo: ', err.message);
-        }
-       // alert('Successfully uploaded photo.');
-        var s3url = s3.getSignedUrl('getObject', {Key: fileKey});
-        console.log(s3url);
-      });
+    s3.upload({ Key: fileKey, Body: file, ACL: 'public-read'}, function(err, data) {
+      if (err) {
+        return alert('There was an error uploading your photo: ', err.message);
+      }
+    });
    
-    // const { name, desc, vision, mission, logoUrl, position1, position2, position3 } = this.state;
+    const { name, desc, vision, mission, selectedFileName, position1, position2, position3 } = this.state;
 
-    // if(name == '' || desc == '' || vision == '' ||  mission == '' || logoUrl == '' || (position1 == 1 && position2 == 1 && position3 == 1)) {
-    //   confirmAlert({
-    //     title: 'Warning',
-    //     message: 'Please fill in all empty fields before proceed',
-    //     buttons: [
-    //         {
-    //             label: 'Close'
-    //         }
-    //     ]
-    //   })
-    //   return false;
-    // } else {
-    //   this.props.onUpdateCreateLoadingBar();
+    if(name == '' || desc == '' || vision == '' ||  mission == '' || selectedFileName == '' || (position1 == 1 && position2 == 1 && position3 == 1)) {
+      confirmAlert({
+        title: 'Warning',
+        message: 'Please fill in all empty fields before proceed',
+        buttons: [
+            {
+                label: 'Close'
+            }
+        ]
+      })
+      return false;
+    } else {
+      this.props.onUpdateCreateLoadingBar();
 
-    //   var authorizedPositions = [];
-    //   if(this.state.position1 != 0)
-    //     authorizedPositions.push(this.state.position1);
-    //   if(this.state.position2 != 0)
-    //     authorizedPositions.push(this.state.position2);
-    //   if(this.state.position3 != 0)
-    //     authorizedPositions.push(this.state.position3);
+      var authorizedPositions = [];
+      if(this.state.position1 != 0)
+        authorizedPositions.push(this.state.position1);
+      if(this.state.position2 != 0)
+        authorizedPositions.push(this.state.position2);
+      if(this.state.position3 != 0)
+        authorizedPositions.push(this.state.position3);
 
-    //   let societyId = this.props.params.societyId;
-    //   let data = this.state;
-    //   let societyName = data["name"];
-    //   data["authorizedPositions"] = authorizedPositions
+      let societyId = this.props.params.societyId;
+      let data = this.state;
+      let societyName = data["name"];
 
-    //   // if(this.props.params.societyId)
-    //   //   data["authorizedPositions"]= authorizedPositions == '' ? this.props.society["authorizedPosition"] : authorizedPositions;
-    //   // else
-    //   //   data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
+      data["authorizedPositions"] = authorizedPositions
+      data["logoUrl"] = "https://" + bucketName + ".s3." + bucketRegion + ".amazonaws.com/" + selectedFileName;
       
-    //   if(societyId == null) {
-    //     this.props.onCreate("society", data);
-    //   } else {
-    //     this.props.onUpdate("society", societyId, societyName, data);
-    //   }
-    // }
+      if(societyId == null) {
+        this.props.onCreate("society", data);
+      } else {
+        this.props.onUpdate("society", societyId, societyName, data);
+      }
+    }
   }
 
   handleSocietyCategory(event) {
@@ -196,7 +169,6 @@ class CreateProfile extends Component {
   }
 
   handleSelectedFile (event) {
-    console.log(event.target.files[0])
     this.setState({
       selectedFile: event.target.files[0],
       selectedFileName: event.target.files[0].name
@@ -209,10 +181,6 @@ class CreateProfile extends Component {
 
   render() {
     const { RaisedButtonStyle } = styles;
-
-    const validations = {
-      name: ["required", "min:3", "max:15"],
-     }
 
     const societyCategories = [{value:'Dance', name:'Dance'}, {value:'Design', name:'Design'}, {value:'Education', name:'Education'},
     {value:'Entertainment', name:'Entertainment'}, {value:'Music', name:'Music'}, {value:'Soft Skill', name:'Soft Skill'}, 
@@ -293,8 +261,9 @@ class CreateProfile extends Component {
 
                       <div class="section"><span>4</span>Logo</div>
                           <div class="inner-wrap">
-                          <label>Society Logo URL</label>
-                          <input type="text" value={this.state.logoUrl} onChange={(event) => {this.setState({logoUrl:event.target.value})}}/>
+                          <label>Upload Society Logo</label>
+                          <input type="file" onChange={this.handleSelectedFile} />
+                          {/* <input type="text" value={this.state.logoUrl} onChange={(event) => {this.setState({logoUrl:event.target.value})}}/> */}
                       </div>
 
                       <div class="section"><span>5</span>Authorized Position</div>
@@ -313,12 +282,6 @@ class CreateProfile extends Component {
                           <select value={this.state.position3}  onChange={(event) => {this.setState({position3:event.target.value})}}>
                             {this.state.positionOptions.map(this.mapItem)}
                           </select>
-                      </div>
-
-                      <div class="section"><span>5</span>Logo</div>
-                      <div class="inner-wrap">
-                      <label>Upload Logo</label>
-                      <input type="file" name="" id="" onChange={this.handleSelectedFile} />
                       </div>
 
                       <div class="button-section">
