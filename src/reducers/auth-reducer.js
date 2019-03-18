@@ -21,6 +21,7 @@ const initialState = {
     statusText: null,
     fcmToken: null,
     role: null,
+    userPool: null,
     messaging: null
 };
 
@@ -39,6 +40,7 @@ export default function authReducer(state = initialState, { type, payload }) {
                 societies: payload.societies,
                 token: payload.token,
                 role: payload.role,
+                userPool: payload.userPool,
                 isAuthenticated: true,
                 loading: payload.loading
             });

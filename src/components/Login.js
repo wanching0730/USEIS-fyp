@@ -40,8 +40,8 @@ class Login extends Component {
       return false;
     } else {
       var poolData = {
-          UserPoolId : 'us-east-2_lcnWhMXnd', 
-          ClientId : '32j9lqg5k0sa3q6tts3lel12be' 
+          UserPoolId : 'ap-southeast-1_4dPeZiFVv', 
+          ClientId : '1nts071hctdk3kvt7kt6h6pjf' 
       };
       var userPool = new CognitoUserPool(poolData);
       var userData = {
@@ -63,6 +63,7 @@ class Login extends Component {
               const refreshToken = result.getRefreshToken().getToken();
               //console.log(JSON.stringify(refreshToken));
               console.log(userPool.getCurrentUser());
+              localStorage.setItem('currentUser', userPool.getCurrentUser());
           },
     
           onFailure: function(err) {
@@ -92,7 +93,7 @@ class Login extends Component {
         });
       
       this.props.onUpdateAuthLoadingBar();
-      this.props.onLoginUser({username: cognitoUser.username});
+      this.props.onLoginUser({username: cognitoUser.username, userPool: userPool});
       }
   }
 

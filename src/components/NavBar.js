@@ -53,12 +53,15 @@ class NavBar extends Component {
     }
 
     render() {
+        var user = localStorage.getItem('currentUser');
+        console.log(user);
+        console.log(this.props.userPool);
         var dropDownItem;
         var position;
 
         var poolData = {
-            UserPoolId : 'us-east-2_lcnWhMXnd', 
-            ClientId : '32j9lqg5k0sa3q6tts3lel12be' 
+            UserPoolId : 'ap-southeast-1_4dPeZiFVv', 
+            ClientId : '1nts071hctdk3kvt7kt6h6pjf' 
         };
         var userPool = new CognitoUserPool(poolData);
 
@@ -94,7 +97,7 @@ class NavBar extends Component {
         return (
             <div>
                 {
-                    userPool.getCurrentUser() != null ? [
+                    localStorage.getItem('currentUser') ? [
                 
                         <Navbar className="topnav" dark expand="md">
                         <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
@@ -178,11 +181,12 @@ class NavBar extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
-      userName: state.auth.userName,
-      userId: state.auth.userId,
-      role: state.auth.role,
-      id: state.auth.id,
-      isAuthenticated: state.auth.isAuthenticated
+        userPool: state.auth.userPool,
+        userName: state.auth.userName,
+        userId: state.auth.userId,
+        role: state.auth.role,
+        id: state.auth.id,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

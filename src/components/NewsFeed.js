@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import { Link } from 'react-router';
+import SearchBar from 'material-ui-search-bar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Breadcrumb, BreadcrumbItem, Card, CardText, CardBody,
     CardTitle, CardSubtitle } from 'reactstrap';
@@ -27,6 +28,7 @@ class NewsFeed extends Component {
         this.state = {
             modalIsOpen: false,
             inputValue: "",
+            searchWord: "",
 
             status: "all",
             owner: "s",
@@ -87,25 +89,6 @@ class NewsFeed extends Component {
                 this.setState(this.state);
             });
         } 
-        
-        // setTimeout(() => {
-        //     if(this.props.userEvents != null) {
-        //         let events = this.props.userEvents;
-        //         let options = [];
-        //         for(var i = 0; i < events.length; i++) {
-        //             let event = events[i];
-        //             if([2,3,10].includes(event["eRoleId"])) {
-        //                 options.push({
-        //                     value: event["eventId"],
-        //                     name: event["name"]
-        //                 });
-        //             }
-        //         }
-        //         this.setState({
-        //             eventOptions: options
-        //         }, () => this.setDefault());
-        //     }
-        // }, 2000);
     }
 
     componentWillReceiveProps(nextProps){
@@ -119,8 +102,6 @@ class NewsFeed extends Component {
                 let options = [];
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
-                    console.log(event["eRoleId"]);
-                    console.log(event);
                     if([2,3,10].includes(event["eRoleId"])) {
                         options.push({
                             value: event["eventId"],
@@ -306,9 +287,6 @@ class NewsFeed extends Component {
     }
 
     render() {
-        console.log("society: " + this.state.societyOptions);
-        console.log("event: " + this.state.eventOptions);
-
         const { RaisedButtonStyle, content, CreateButtonStyle } = styles;
         let newsfeeds = this.state.newsfeeds;
         let filteredNewsfeeds = [];
@@ -359,40 +337,45 @@ class NewsFeed extends Component {
             }
             
             for(var i = 0; i < filteredNewsfeeds.length; i++) {
-                let newsfeed = filteredNewsfeeds[i];
-                if(newsfeed["type"] == "s") {
-                    // url = "/perSociety/" + newsfeed["ownerId"];
-                    toView = {
-                        pathname: "/perSociety/" + newsfeed["ownerId"],
-                        state: {societyName: newsfeed["name"]}
+                if(this.state.searchWord == "" || filteredNewsfeeds[i]["name"].toLowerCase().includes(this.state.searchWord.toLowerCase())) {
+                    let newsfeed = filteredNewsfeeds[i];
+                    if(newsfeed["type"] == "s") {
+                        // url = "/perSociety/" + newsfeed["ownerId"];
+                        toView = {
+                            pathname: "/perSociety/" + newsfeed["ownerId"],
+                            state: {societyName: newsfeed["name"]}
+                        }
+                        type = " Society";
                     }
-                    type = " Society";
-                }
-                else {
-                    // url = "/perEvent/" + newsfeed["ownerId"];
-                    toView = {
-                        pathname: "/perEvent/" + newsfeed["ownerId"],
-                        state: {eventName: newsfeed["name"]}
+                    else {
+                        // url = "/perEvent/" + newsfeed["ownerId"];
+                        toView = {
+                            pathname: "/perEvent/" + newsfeed["ownerId"],
+                            state: {eventName: newsfeed["name"]}
+                        }
+                        type = " Event";
                     }
-                    type = " Event";
-                }
 
-                rows.push(
-                    <Card>
-                        <img className="image" src={ require('../assets/images/its.jpg') } />
-                        <CardBody>
-                        <CardTitle>{newsfeed["name"]}{type}</CardTitle>
-                        <CardSubtitle>| Category: {newsfeed["category"]} |</CardSubtitle>
-                        <br/>
-                        <CardText>{newsfeed["description"]}</CardText>
-                        <Link to={toView}>View</Link>&nbsp;&nbsp;&nbsp;<a href="#" onClick={() => this.handleDelete(newsfeed["newsfeedId"], newsfeed["type"])}>Delete</a>
-                        <CardText>
-                            <small className="text-muted">{moment(newsfeed["dateCreate"]).format("MMM DD YYYY hh:mm A")}</small>
-                        </CardText>
-                        </CardBody>
-                    </Card>
-                );
+                    rows.push(
+                        <Card>
+                            <img className="image" src={ require('../assets/images/its.jpg') } />
+                            <CardBody>
+                            <CardTitle>{newsfeed["name"]}{type}</CardTitle>
+                            <CardSubtitle>| Category: {newsfeed["category"]} |</CardSubtitle>
+                            <br/>
+                            <CardText>{newsfeed["description"]}</CardText>
+                            <Link to={toView}>View</Link>&nbsp;&nbsp;&nbsp;<a href="#" onClick={() => this.handleDelete(newsfeed["newsfeedId"], newsfeed["type"])}>Delete</a>
+                            <CardText>
+                                <small className="text-muted">{moment(newsfeed["dateCreate"]).format("MMM DD YYYY hh:mm A")}</small>
+                            </CardText>
+                            </CardBody>
+                        </Card>
+                    );
+                } else {
+                    continue;
+                }
             }
+                
         }
 
         return (
@@ -413,7 +396,19 @@ class NewsFeed extends Component {
                         <RaisedButton label="Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "s"})}/>
                         <RaisedButton label="Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.setState({status: "e"})}/>
                     </div>
-                    
+
+                    <SearchBar 
+                        hintText="Search society or event..."
+                        onChange={(newValue) => this.setState({ searchWord: newValue })}
+                        style={{
+                            marginLeft: 20,
+                            marginBottom: 20,
+                            maxWidth: 290,
+                            borderRadius: 6,
+                            margin: "auto"
+                        }}
+                    />
+    
                     {createButton}
 
                     <Modal
@@ -484,7 +479,7 @@ const styles = {
         transform: 'translate(-50%, -50%)'
     }, 
     CreateButtonStyle: {
-        marginLeft: 125,
+        marginLeft: 145,
         marginBottom: 15
     }
 }
