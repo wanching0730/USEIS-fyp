@@ -54,7 +54,6 @@ class RegisterBooth extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps);
     if((nextProps.overallBooth != this.props.overallBooth) && (nextProps.overallBooth != null)) {
       this.setState({seatMap: JSON.parse(nextProps.overallBooth.totalBooth)}, () => {
         if((nextProps.allBooths != null)) {
@@ -131,7 +130,6 @@ class RegisterBooth extends Component {
   }
 
   handleSelectedSeat(row, seat) {
-    console.log("row: " + row.charCodeAt(0) + " seat: " + seat);
     this.setState({selectedRow: parseInt(row.charCodeAt(0)) - 65, selectedSeat: seat - 1});
   }
 

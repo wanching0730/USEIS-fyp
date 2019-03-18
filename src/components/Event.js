@@ -40,9 +40,6 @@ class Event extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("this props: " + this.props.eventsFound);
-        console.log("next props: " + nextProps.eventsFound);
-
         if((nextProps.eventsFound != this.props.eventsFound) && (nextProps.eventsFound != null)) {
             let eventsFound = nextProps.eventsFound;
             var resultRows = [];

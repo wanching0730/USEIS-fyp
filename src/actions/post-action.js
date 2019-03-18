@@ -124,7 +124,6 @@ export function create(type, postData) {
         }).join('&');
 
         return createData(type, data).then(result => result.json()).then(reply => {
-            console.log(reply);
             confirmAlert({
                 title: 'Message',
                 message: reply["responseCode"] != 500 ? 'Data has been created successfully' : 'Data cannot be created: ' + reply["message"],

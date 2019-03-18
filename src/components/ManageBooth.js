@@ -85,7 +85,6 @@ class ManageBooth extends Component {
                 seatMap = [...seatMap, lastRow]
             }
 
-            console.log(JSON.stringify(seatMap));
             let data = {
                 seatMap: JSON.stringify(seatMap),
                 floorPlanUrl: this.state.floorPlanUrl,

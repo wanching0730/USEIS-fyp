@@ -41,7 +41,7 @@ export function getFcmTokenSuccessful(token, messaging) {
     }
 }
 
-export function loginUserSuccessful(userName, userId, id, user, societies, token, role, userPool) {
+export function loginUserSuccessful(userName, userId, id, user, societies, token, role) {
     localStorage.setItem('token', token);
 
     return {
@@ -54,7 +54,6 @@ export function loginUserSuccessful(userName, userId, id, user, societies, token
             societies: societies,
             token: token,
             role: role, 
-            userPool: userPool,
             loading: false
         }
     }
@@ -81,7 +80,6 @@ export function logoutAndRedirect() {
         var userPool = new CognitoUserPool(poolData); 
         userPool.getCurrentUser().signOut();
         localStorage.removeItem('token');
-        localStorage.removeItem('currentUser');
 
         dispatch(logout());
         browserHistory.push('/');
@@ -113,7 +111,7 @@ export function getFcmToken(postData) {
         })
         .catch(error => {
             if (error.code === "messaging/permission-blocked") {
-                console.log("Please Unblock Notification Request Manually");
+                alert("Please Unblock Notification Request Manually");
             } else {
                 console.log("Error Occurred", error);
             }
@@ -129,7 +127,6 @@ export function loginUser(postData) {
     
         return verifyUser(data).then(result => result.json()).then(reply => {
 
-            console.log(postData["userPool"]);
             let user = reply["user"];
             let userSociety = reply["userSociety"];
             let token = reply["token"];
@@ -152,7 +149,7 @@ export function loginUser(postData) {
                     }
                 }
                 
-                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token, role, postData["userPool"]));
+                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token, role));
             } else {
                 let id = user["studentId"];
                 if(userSociety.length > 0) {

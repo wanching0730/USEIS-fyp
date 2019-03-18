@@ -45,9 +45,6 @@ class ManageParticipant extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("this props: " + JSON.stringify(this.props.staffParticipant));
-        console.log("next props: " + JSON.stringify(nextProps.staffParticipant));
-
         if((nextProps.studentParticipant != this.props.studentParticipant) && (nextProps.studentParticipant != null)) {
             this.setState({
                 studentParticipant: nextProps.studentParticipant
@@ -62,8 +59,6 @@ class ManageParticipant extends Component {
     }
 
     updateList(data) {
-        console.log(data["type"]);
-        console.log(this.state.studentParticipant);
         if(data["type"] == "rejectEvent") {
             if(this.state.studentParticipant != null) {
                 let list = this.state.studentParticipant;
@@ -93,10 +88,6 @@ class ManageParticipant extends Component {
                 let list = this.state.studentParticipant;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    console.log(item["username"]);
-                    console.log(data["username"]);
-                    console.log(data["eventId"]);
-                    console.log(this.props.params.eventId);
                     if(item["username"] == data["username"] && this.props.params.eventId == data["eventId"]) {
                         item["status"] = 1;
                     }

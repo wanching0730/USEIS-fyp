@@ -120,7 +120,6 @@ class RegisterEvent extends Component {
                             this.setState({vegetarian: 1});
                           else 
                             this.setState({vegetarian: 0});
-                          console.log("vegetarian checked: " + this.state.vegetarian);
                         }}
                       /> 
                       </div>

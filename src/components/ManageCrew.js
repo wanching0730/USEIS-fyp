@@ -52,9 +52,6 @@ class ManageCrew extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("this props: " + JSON.stringify(this.props.societyCrew));
-        console.log("next props: " + JSON.stringify(nextProps.societyCrew));
-
         if(this.props.params.type === "event") {
             if((nextProps.eventCrew != this.props.eventCrew) && (nextProps.eventCrew != null)) {
                 this.setState({

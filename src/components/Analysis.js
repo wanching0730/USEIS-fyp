@@ -17,18 +17,14 @@ class Analysis extends Component {
             donutData: [],
             barData: []
         };
-        console.log(this.props.id);
+
         this.props.onRetrieveAll("recommendedSocieties");
         this.props.onRetrieveData("recommendedEvents", this.props.id);
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("this props: " + this.props.recommendedSocieties);
-        console.log("next props: " + nextProps.recommendedSocieties);
-
         if((nextProps.recommendedSocieties != this.props.recommendedSocieties) && (nextProps.recommendedSocieties != null)) {
             let recommendedSocieties = nextProps.recommendedSocieties;
-            console.log(recommendedSocieties);
 
             if(recommendedSocieties.length > 0) {
                 for(var i = 0; i < recommendedSocieties.length; i++) {
@@ -39,10 +35,7 @@ class Analysis extends Component {
         }
 
         if((nextProps.recommendedEvents != this.props.recommendedEvents) && (nextProps.recommendedEvents != null)) {
-            console.log("this props: " + this.props.recommendedEvents);
-            console.log("next props: " + nextProps.recommendedEvents);
             let recommendedEvents = nextProps.recommendedEvents;
-            console.log(recommendedEvents);
 
             if(recommendedEvents.length > 0) {
                 let eventNames = recommendedEvents[0]["eventId"].split(",");
@@ -59,7 +52,6 @@ class Analysis extends Component {
     }
 
     clickEvent(event) {
-        console.log(event);
         browserHistory.push("/perEvent/1");
     }
 

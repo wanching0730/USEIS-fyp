@@ -435,9 +435,6 @@ export function retrieveData(type, id) {
                 for(var i = 0; i < reply.length; i++) {
                     userEvents.push(reply[i]);
                 }
-
-                console.log(userEvents);
-
                 dispatch(retrieveSingleDataSuccessful("userEvent", userEvents));
             } else if(type === "studentSociety" || type === "staffSociety") {
                 let userSocieties = [];
@@ -498,8 +495,6 @@ export function retrieveData(type, id) {
                 dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
             } else if(type === "recommendedEvents") {
                 var recommendedEvents = [];
-                console.log(reply);
-                console.log(reply.length);
                 if(reply.length > 0)
                     recommendedEvents = reply;
 
@@ -542,11 +537,7 @@ export function retrieveAll(type) {
                 }
                 dispatch(retrieveAllDataSuccessful(type, events));
             } else if(type === "calendarEvent") {
-                console.log(reply);
                 calendarEvents = reply;
-                // for(var i = 0; i < reply.length; i++) {
-                //     calendarEvents.push(reply[i]);
-                // }
 
                 dispatch(retrieveAllDataSuccessful(type, calendarEvents));
             } else if(type === "newsfeeds") {

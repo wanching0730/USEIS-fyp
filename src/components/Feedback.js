@@ -36,10 +36,6 @@ class Feedback extends Component {
         score: this.state.score
       };
 
-      console.log(typeof Number(this.props.userName) === 'string');
-      console.log(isNaN(this.props.userName));
-      console.log(parseInt(this.props.userName));
-
       if(parseInt(this.props.userName) == 0) 
         this.props.onUpdate("staffRating", data.id, "", data);
       else

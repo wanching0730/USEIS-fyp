@@ -36,9 +36,6 @@ class Society extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("this props: " + this.props.societiesFound);
-        console.log("next props: " + nextProps.societiesFound);
-
         if((nextProps.societiesFound != this.props.societiesFound) && (nextProps.societiesFound != null)) {
             let societiesFound = nextProps.societiesFound;
             var resultRows = [];

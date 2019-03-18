@@ -24,12 +24,9 @@ class Home extends Component {
             }, 3000);
     
             setTimeout(() => {
-                console.log("onmessage:");
-                console.log(this.props.messaging);
                 // onMessage is an observable, it only need to be called once to use
                 if(this.props.messaging != null) {
                     this.props.messaging.onMessage(function(payload) {
-                        console.log('Message received. ', payload);
                         alert(payload["notification"]["title"] + ": \n" + payload["notification"]["body"]);
                     });
                 }
@@ -46,11 +43,6 @@ class Home extends Component {
     }
 
     render() {
-        // console.log(localStorage.getItem("token"));
-        // var jwtDecode = require('jwt-decode');
-        // console.log(jwtDecode(localStorage.getItem("token")).exp);
-        // console.log(Date.now() / 1000);
-        // console.log(jwtDecode(localStorage.getItem("token")).exp < Date.now() / 1000);
         return (
             <div id="outerDiv"> 
                 <NavBar />

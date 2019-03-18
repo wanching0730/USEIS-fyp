@@ -45,9 +45,6 @@ class ManageMember extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("this props: " + JSON.stringify(this.props.societyMembers));
-        console.log("next props: " + JSON.stringify(nextProps.societyMembers));
-
         if((nextProps.societyMembers != this.props.societyMembers) && (nextProps.societyMembers != null)) {
             this.setState({
                 societyMembers: nextProps.societyMembers
@@ -56,16 +53,11 @@ class ManageMember extends Component {
     }
 
     updateList(data) {
-        console.log("called");
         if(data["type"] == "rejectSociety") {
             if(this.state.societyMembers != null) {
                 let list = this.state.societyMembers;
                 for(var i = 0; i < list.length; i++) {
                     let item = list[i];
-                    console.log(item["username"]);
-                    console.log(data["username"]);
-                    console.log(data["societyId"]);
-                    console.log(this.props.params.societyId);
                     if(item["username"] == data["username"] && this.props.params.societyId == data["societyId"]) {
                         var index = list.indexOf(item);
                         list.splice(index, 1);

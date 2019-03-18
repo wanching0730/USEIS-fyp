@@ -131,10 +131,6 @@ class CreateEvent extends Component {
     }
   }
 
-  // handleChange(event) {
-  //   this.setState({authorizedPositions: this.state.authorizedPositions + event.target.value + ','}); 
-  // }
-
   handleClick(event) {
     // console.log(typeof this.state.selectedStartDate == "string");
     // console.log(this.state.selectedStartDate);
@@ -341,7 +337,6 @@ class CreateEvent extends Component {
                               this.setState({vegetarian: 1});
                             else 
                               this.setState({vegetarian: 0});
-                            console.log("vegetarian checked: " + this.state.vegetarian);
                           }}
                         /> 
                       </div>

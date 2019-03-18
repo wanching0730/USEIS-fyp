@@ -50,8 +50,6 @@ class MyProfile extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(this.props.userSocieties);
-        console.log(nextProps.userSocieties);
         if((nextProps.userSocieties != this.props.userSocieties) || (nextProps.userSocieties != null)) {
             this.setState({
                 societies: nextProps.userSocieties

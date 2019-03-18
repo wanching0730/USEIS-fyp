@@ -30,7 +30,6 @@ class CreateProfile extends Component {
       position1: 2, position2: 3, position3: 0
     }
 
-    console.log(this.props.params.societyId);
     if(this.props.params.societyId) {
       this.props.onUpdateRetrieveLoadingBar();
       this.props.onRetrieveData("society", this.props.params.societyId);
@@ -97,14 +96,6 @@ class CreateProfile extends Component {
       this.setState({positionOptions: positionOptions});
     }
   }
-
-  // handleChange(event) {
-  //   console.log(event.target.value);
-  //   // this.setState(prevState => (
-  //   //   { 
-  //   //     authorizedPositions: [...prevState.authorizedPositions, event.target.value]
-  //   //   }));
-  // }
 
   handleClick(event) {
     const { name, desc, vision, mission, logoUrl, position1, position2, position3 } = this.state;
