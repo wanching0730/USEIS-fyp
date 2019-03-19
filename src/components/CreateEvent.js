@@ -44,7 +44,9 @@ class CreateEvent extends Component {
       userId: this.props.userId,
       vegetarian: 0,
       positionOptions: [],
-      position1: 0, position2: 0, position3: 0
+      position1: 2, position2: 3, position3: 0,
+      selectedFile: null,
+      selectedFileName: ''
     }
 
     this.props.onRetrieveAll("eventRole");
@@ -53,6 +55,7 @@ class CreateEvent extends Component {
     //this.handleChange = this.handleChange.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
+    this.handleSelectedFile = this.handleSelectedFile.bind(this);
     this.handleEventCategory = this.handleEventCategory.bind(this);
     this.handleSoftskilltCategory = this.handleSoftskilltCategory.bind(this);
   }
@@ -131,6 +134,13 @@ class CreateEvent extends Component {
     }
   }
 
+  handleSelectedFile (event) {
+    this.setState({
+      selectedFile: event.target.files[0],
+      selectedFileName: event.target.files[0].name
+    });
+  }
+
   handleClick(event) {
     // console.log(typeof this.state.selectedStartDate == "string");
     // console.log(this.state.selectedStartDate);
@@ -138,9 +148,9 @@ class CreateEvent extends Component {
     // console.log(this.state.selectedStartDate._d);
     // console.log(moment().format("YYYY-MM-DD HH:mm"));
     // console.log(moment(moment()._d).format("YYYY-MM-DD HH:mm"))
-    const { name, desc, venue, chairperson, contact, logoUrl, position1, position2, position3 } = this.state;
+    const { name, desc, venue, chairperson, contact, logoUrl, selectedFileName, position1, position2, position3 } = this.state;
     
-    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' || logoUrl == '' || (position1 == 0 && position2 == 0 && position3 == 0)) {
+    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' || selectedFileName == '' || (position1 == 0 && position2 == 0 && position3 == 0)) {
       confirmAlert({
         title: 'Warning',
         message: 'Please fill in all empty fields before proceed',
@@ -153,6 +163,31 @@ class CreateEvent extends Component {
       return false;
     } else {
       this.props.onUpdateLoadingBar();
+
+      var bucketName = process.env.REACT_APP_S3_BUCKET_NAME;
+      var bucketRegion = process.env.REACT_APP_S3_BUCKET_REGION;
+      var IdentityPoolId = process.env.REACT_APP_AWS_IDENTITY_POOL_ID;
+      var AWS = require('aws-sdk');
+      var fileKey = encodeURIComponent(this.state.selectedFileName);
+      var file = this.state.selectedFile;
+      
+      AWS.config.update({
+        region: bucketRegion,
+        credentials: new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: IdentityPoolId
+        })
+      });
+
+      var s3 = new AWS.S3({
+        apiVersion: '2006-03-01',
+        params: {Bucket: bucketName}
+      });
+      
+      s3.upload({ Key: fileKey, Body: file, ACL: 'public-read'}, function(err, data) {
+        if (err) {
+          return alert('There was an error uploading your photo: ', err.message);
+        }
+      });
 
       var authorizedPositions = [];
       if(this.state.position1 != 0)
@@ -167,6 +202,7 @@ class CreateEvent extends Component {
       let data = this.state
       let eventName = data["name"];
       data["authorizedPositions"] = authorizedPositions
+      data["logoUrl"] = "https://" + bucketName + ".s3." + bucketRegion + ".amazonaws.com/" + selectedFileName;
       //data["selectedStartDate"] = typeof this.state.selectedStartDate != "string" ? "" + moment().format("YYYY-MM-DD HH:mm") : data["selectedStartDate"];
 
       // if(this.props.params.eventId)
@@ -355,8 +391,8 @@ class CreateEvent extends Component {
 
                       <div class="section"><span>6</span>Logo</div>
                           <div class="inner-wrap">
-                          <label>Event Logo URL</label>
-                          <input type="text" value={this.state.logoUrl} onChange={(event) => {this.setState({logoUrl:event.target.value})}}/>
+                          <label>Upload Event Logo</label>
+                          <input type="file" onChange={this.handleSelectedFile} />
                           <br/>
                       </div>
 

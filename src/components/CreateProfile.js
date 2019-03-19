@@ -100,31 +100,6 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
-    var bucketName = process.env.REACT_APP_S3_BUCKET_NAME;
-    var bucketRegion = process.env.REACT_APP_S3_BUCKET_REGION;
-    var IdentityPoolId = process.env.REACT_APP_AWS_IDENTITY_POOL_ID;
-    var AWS = require('aws-sdk');
-    var fileKey = encodeURIComponent(this.state.selectedFileName);
-    var file = this.state.selectedFile;
-    
-    AWS.config.update({
-      region: bucketRegion,
-      credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: IdentityPoolId
-      })
-    });
-
-    var s3 = new AWS.S3({
-      apiVersion: '2006-03-01',
-      params: {Bucket: bucketName}
-    });
-    
-    s3.upload({ Key: fileKey, Body: file, ACL: 'public-read'}, function(err, data) {
-      if (err) {
-        return alert('There was an error uploading your photo: ', err.message);
-      }
-    });
-   
     const { name, desc, vision, mission, selectedFileName, position1, position2, position3 } = this.state;
 
     if(name == '' || desc == '' || vision == '' ||  mission == '' || selectedFileName == '' || (position1 == 1 && position2 == 1 && position3 == 1)) {
@@ -140,6 +115,31 @@ class CreateProfile extends Component {
       return false;
     } else {
       this.props.onUpdateCreateLoadingBar();
+
+      var bucketName = process.env.REACT_APP_S3_BUCKET_NAME;
+      var bucketRegion = process.env.REACT_APP_S3_BUCKET_REGION;
+      var IdentityPoolId = process.env.REACT_APP_AWS_IDENTITY_POOL_ID;
+      var AWS = require('aws-sdk');
+      var fileKey = encodeURIComponent(this.state.selectedFileName);
+      var file = this.state.selectedFile;
+      
+      AWS.config.update({
+        region: bucketRegion,
+        credentials: new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: IdentityPoolId
+        })
+      });
+
+      var s3 = new AWS.S3({
+        apiVersion: '2006-03-01',
+        params: {Bucket: bucketName}
+      });
+      
+      s3.upload({ Key: fileKey, Body: file, ACL: 'public-read'}, function(err, data) {
+        if (err) {
+          return alert('There was an error uploading your photo: ', err.message);
+        }
+      });
 
       var authorizedPositions = [];
       if(this.state.position1 != 0)
@@ -186,8 +186,8 @@ class CreateProfile extends Component {
     {value:'Entertainment', name:'Entertainment'}, {value:'Music', name:'Music'}, {value:'Soft Skill', name:'Soft Skill'}, 
     {value:'Sport', name:'Sport'}, {value:'Technology', name:'Technology'}];
 
-    const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
-      {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}]
+    // const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
+    //   {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}]
 
     var header, breadCrumb;
 
