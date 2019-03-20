@@ -15,6 +15,10 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         if(this.props.fcmToken == null) {
             setTimeout(() => {
                 this.props.onGetFcmToken({
@@ -130,7 +134,8 @@ const mapStateToProps = (state, props) => {
         userId: state.auth.userId,
         messaging: state.auth.messaging,
         fcmToken: state.auth.fcmToken,
-        loading: state.auth.loading
+        loading: state.auth.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

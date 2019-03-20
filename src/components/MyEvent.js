@@ -24,6 +24,10 @@ class MyEvent extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.state = {
             userEvents: null
         };
@@ -373,7 +377,8 @@ const mapStateToProps = (state, props) => {
         userId: state.auth.id,
         userName: state.auth.userName,
         loading: state.data.loading,
-        deleteLoading: state.delete.loading
+        deleteLoading: state.delete.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

@@ -21,6 +21,10 @@ class PerSociety extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.props.onUpdateLoadingBar();
 
         if(parseInt(this.props.userName) != 0) {
@@ -300,6 +304,7 @@ const mapStateToProps = (state, props) => {
         id: state.auth.id,
         userName: state.auth.userName,
         role: state.auth.role,
+        isAuthenticated: state.auth.isAuthenticated,
         loading: state.data.loading
     };
 };

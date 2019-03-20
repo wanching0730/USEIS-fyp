@@ -24,6 +24,10 @@ class ManageCrew extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.state = {
             studentId: -1,
             eventCrew: null,
@@ -414,7 +418,8 @@ const mapStateToProps = (state, props) => {
         societyCrew: state.data.societyCrew,
         userName: state.auth.userName,
         loading: state.data.loading,
-        deleteLoading: state.delete.loading
+        deleteLoading: state.delete.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

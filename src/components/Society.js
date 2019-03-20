@@ -23,6 +23,10 @@ class Society extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.state = {
             searchWord: ""
         };
@@ -188,6 +192,7 @@ const mapStateToProps = (state, props) => {
     return {
       societies: state.data.societies,
       societiesFound: state.data.societiesFound,
+      isAuthenticated: state.auth.isAuthenticated,
       loading: state.data.loading
     };
 };

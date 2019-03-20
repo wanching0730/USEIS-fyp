@@ -5,7 +5,17 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/faq.css';
 import $ from 'jquery';
 
+import { connect } from 'react-redux';
+
 class Faq extends Component {
+
+    constructor(props) {
+        super(props);
+
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+    }
 
     componentDidMount() {
 
@@ -286,4 +296,10 @@ class Faq extends Component {
     }
 }
 
-export default Faq;
+const mapStateToProps = (state, props) => {
+    return {
+      isAuthenticated: state.auth.isAuthenticated
+    };
+  };
+
+  export default connect(mapStateToProps)(Faq);

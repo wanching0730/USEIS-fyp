@@ -24,6 +24,10 @@ class PerEvent extends Component {
 
     constructor(props) {
         super(props);
+
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
         
         this.props.onUpdateLoadingBar();
 
@@ -354,7 +358,8 @@ const mapStateToProps = (state, props) => {
         id: state.auth.id,
         role: state.auth.role,
         loading: state.data.loading,
-        deleteLoading: state.delete.loading
+        deleteLoading: state.delete.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

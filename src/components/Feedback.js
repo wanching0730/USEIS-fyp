@@ -16,9 +16,14 @@ class Feedback extends Component {
 
     constructor(props){
       super(props);
+
       this.state={
         score: 1
       };
+
+      if(!this.props.isAuthenticated) {
+        window.location.assign('/');
+      }
 
       this.handleClick = this.handleClick.bind(this);
     };
@@ -110,6 +115,7 @@ class Feedback extends Component {
     return {
       id: state.auth.id,
       userName: state.auth.userName,
+      isAuthenticated: state.auth.isAuthenticated,
       createLoading: state.create.loading
     };
   };

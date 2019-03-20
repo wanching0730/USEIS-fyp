@@ -16,6 +16,10 @@ class RecruitmentBooth extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.state = {
             type: "society"
         }
@@ -172,7 +176,8 @@ const mapStateToProps = (state, props) => {
     return {
         societyBooths: state.data.societyBooths,
         eventBooths: state.data.eventBooths,
-        loading: state.data.loading
+        loading: state.data.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

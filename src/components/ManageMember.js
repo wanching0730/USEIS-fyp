@@ -22,6 +22,10 @@ class ManageMember extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.state = {
             studentId: -1,
             societyMembers: null
@@ -301,7 +305,8 @@ const mapStateToProps = (state, props) => {
     return {
         societyMembers: state.data.societyMembers,
         loading: state.data.loading,
-        deleteLoading: state.delete.loading
+        deleteLoading: state.delete.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

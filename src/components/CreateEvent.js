@@ -521,7 +521,8 @@ const mapStateToProps = (state, props) => {
     event: state.data.event,
     loading: state.create.loading,
     retrieveLoading: state.data.loading,
-    roles: state.data.roles
+    roles: state.data.roles,
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 

@@ -18,6 +18,11 @@ class RegisterCrew extends Component {
 
   constructor(props){
     super(props);
+
+    if(!this.props.isAuthenticated) {
+      window.location.assign('/');
+    }
+
     this.state={
       emailNoti: false,
       webNoti: false,
@@ -205,6 +210,7 @@ const mapStateToProps = (state, props) => {
     loading: state.create.loading,
     isRegistered: state.data.isRegistered,
     crewPositions: state.data.crewPositions,
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 

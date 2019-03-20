@@ -19,8 +19,12 @@ class RegisterSociety extends Component {
 
   constructor(props){
     super(props);
+
+    if(!this.props.isAuthenticated) {
+      window.location.assign('/');
+    }
+
     this.state = {
-      // webNoti: false,
       sRoleId: 1,
       positionOptions: []
     }
@@ -173,7 +177,8 @@ const mapStateToProps = (state, props) => {
     userName: state.auth.userName,
     loading: state.create.loading,
     isRegistered: state.data.isRegistered,
-    roles: state.data.roles
+    roles: state.data.roles,
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 

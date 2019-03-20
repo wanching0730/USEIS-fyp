@@ -19,6 +19,10 @@ class ManageBooth extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.state = {
             boothAmount: 0,
             floorPlanUrl: '',
@@ -215,7 +219,8 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-      createLoading: state.create.loading
+      createLoading: state.create.loading,
+      isAuthenticated: state.auth.isAuthenticated
     };
   };
   

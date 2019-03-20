@@ -22,6 +22,10 @@ class ManageParticipant extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+        
         this.state = {
             studentParticipant: null,
             staffParticipant: null
@@ -456,7 +460,8 @@ const mapStateToProps = (state, props) => {
         studentParticipant: state.data.studentParticipant,
         staffParticipant: state.data.staffParticipant,
         loading: state.data.loading,
-        deleteLoading: state.delete.loading
+        deleteLoading: state.delete.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

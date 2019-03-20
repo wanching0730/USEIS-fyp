@@ -24,6 +24,10 @@ class Event extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+          }
+
         this.state = {
             sortType: "name",
             searchWord: ""
@@ -228,7 +232,8 @@ const mapStateToProps = (state, props) => {
     return {
       events: state.data.events,
       eventsFound: state.data.eventsFound,
-      loading: state.data.loading
+      loading: state.data.loading,
+      isAuthenticated: state.auth.isAuthenticated
     };
 };
 

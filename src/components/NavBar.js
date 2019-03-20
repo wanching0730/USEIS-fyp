@@ -52,7 +52,6 @@ class NavBar extends Component {
     }
 
     render() {
-        var user = localStorage.getItem('currentUser');
         var dropDownItem;
         var position;
 

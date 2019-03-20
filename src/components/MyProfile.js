@@ -25,6 +25,10 @@ class MyProfile extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.state = {
             societies: null
         };
@@ -310,9 +314,9 @@ const mapStateToProps = (state, props) => {
         userId: state.auth.id,
         userName: state.auth.userName,
         userSocieties: state.data.userSocieties,
-        //societies: state.auth.societies,
         allSocietyEvents: state.data.allSocietyEvents,
-        loading: state.data.loading
+        loading: state.data.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

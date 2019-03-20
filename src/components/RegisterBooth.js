@@ -23,6 +23,10 @@ class RegisterBooth extends Component {
   constructor(props) {
     super(props);
 
+    if(!this.props.isAuthenticated) {
+      window.location.assign('/');
+    }
+
     // this.state = {
     //   seatMap: [
     //     [{ number: 1 }, {number: 2}, {number: 3}, {number: 4}, {number: 5}, {number: 6}],
@@ -235,6 +239,7 @@ const mapStateToProps = (state, props) => {
   return {
     allBooths: state.data.allBooths,
     overallBooth: state.data.overallBooth,
+    isAuthenticated: state.auth.isAuthenticated,
     loading: state.data.loading,
     postLoading: state.create.loading
   };

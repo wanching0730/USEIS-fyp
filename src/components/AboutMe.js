@@ -12,6 +12,10 @@ class AboutMe extends Component {
 
     constructor(props){
         super(props);
+
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
     }
 
     render() {
@@ -88,7 +92,8 @@ const styles = {
 
 const mapStateToProps = (state, props) => {
     return {
-        user: state.auth.user
+        user: state.auth.user,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 

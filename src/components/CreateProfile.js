@@ -18,6 +18,10 @@ class CreateProfile extends Component {
   constructor(props){
     super(props);
 
+    if(!this.props.isAuthenticated) {
+      window.location.assign('/');
+    }
+
     this.state = {
       name:'',
       desc:'',
@@ -311,7 +315,8 @@ const mapStateToProps = (state, props) => {
     society: state.data.society,
     createLoading: state.create.loading,
     retrieveLoading: state.data.loading,
-    roles: state.data.roles
+    roles: state.data.roles,
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 

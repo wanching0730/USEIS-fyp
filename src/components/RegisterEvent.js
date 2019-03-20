@@ -19,6 +19,11 @@ class RegisterEvent extends Component {
 
   constructor(props){
     super(props);
+
+    if(!this.props.isAuthenticated) {
+      window.location.assign('/');
+    }
+
     this.state={
       webNoti: false,
       vegetarian: 0
@@ -174,7 +179,8 @@ const mapStateToProps = (state, props) => {
     id: state.auth.id,
     userName: state.auth.userName,
     loading: state.create.loading,
-    isRegistered: state.data.isRegistered
+    isRegistered: state.data.isRegistered,
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 

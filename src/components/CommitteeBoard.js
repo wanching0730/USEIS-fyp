@@ -17,6 +17,10 @@ class CommitteeBoard extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.props.onUpdateLoadingBar();
 
         let parameter = this.props.params;
@@ -146,7 +150,8 @@ const styles = {
 const mapStateToProps = (state, props) => {
     return {
         comm: state.data.comm,
-        loading: state.data.loading
+        loading: state.data.loading,
+        isAuthenticated: state.auth.isAuthenticated
     };
 };
 
