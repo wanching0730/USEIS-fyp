@@ -1,0 +1,7 @@
+firebase login
+firebase init
+firebase deploy
+
+npm build
+use /build folder
+do not overwrite
