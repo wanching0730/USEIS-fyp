@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { groupBy } from '../common/common_function';
 import openSocket from 'socket.io-client';
+import { API_BASE_URL } from '../constant';
 import '../style/table.css';
 import 'rc-tooltip/assets/bootstrap_white.css';
 
@@ -49,7 +50,7 @@ class MyProfile extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
 
-        const socket = openSocket('http://localhost:5000');
+        const socket = openSocket(API_BASE_URL);
         socket.on('updateParticipation', this.updateList);
     }
 

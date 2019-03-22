@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { confirmAlert } from 'react-confirm-alert';
 import moment from "moment";
 import openSocket from 'socket.io-client';
+import { API_BASE_URL } from '../constant';
 import '../style/newsfeed.css';
 import '../style/alert.css';
 
@@ -71,7 +72,7 @@ class NewsFeed extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
 
-        const socket = openSocket('http://localhost:5000');
+        const socket = openSocket(API_BASE_URL);
         socket.on('updateAddedNewsfeed', this.updateAddedNewsfeeds);
         socket.on('updateDeletedNewsfeed', this.updateDeletedNewsfeeds);
 

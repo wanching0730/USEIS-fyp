@@ -9,6 +9,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
 import moment from "moment";
+import { API_BASE_URL } from '../constant';
 import '../style/table.css';
 import '../style/alert.css';
 import 'rc-tooltip/assets/bootstrap_white.css';
@@ -51,7 +52,7 @@ class ManageCrew extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
 
-        const socket = openSocket('http://localhost:5000');
+        const socket = openSocket(API_BASE_URL);
         socket.on('updateManage', this.updateList);
     }
 

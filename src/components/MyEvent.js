@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import {browserHistory} from 'react-router';
 import openSocket from 'socket.io-client';
+import { API_BASE_URL } from '../constant';
 import moment from "moment";
 import '../style/table.css';
 import '../style/alert.css';
@@ -48,7 +49,7 @@ class MyEvent extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
 
-        const socket = openSocket('http://localhost:5000');
+        const socket = openSocket(API_BASE_URL);
         socket.on('updateParticipation', this.updateList);
     }
 

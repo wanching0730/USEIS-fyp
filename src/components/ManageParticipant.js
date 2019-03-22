@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
+import { API_BASE_URL } from '../constant';
 import '../style/table.css';
 import '../style/alert.css';
 
@@ -44,7 +45,7 @@ class ManageParticipant extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
 
-        const socket = openSocket('http://localhost:5000');
+        const socket = openSocket(API_BASE_URL);
         socket.on('updateManage', this.updateList);
     }
 

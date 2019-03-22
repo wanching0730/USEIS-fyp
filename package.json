@@ -15,7 +15,7 @@
     "circular-json": "^0.5.7",
     "dotenv": "^7.0.0",
     "downloadbutton": "^1.0.0",
-    "firebase": "^5.5.3",
+    "firebase": "^5.9.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "jwt-decode": "^2.2.0",
