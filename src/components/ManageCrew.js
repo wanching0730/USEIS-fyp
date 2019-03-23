@@ -7,6 +7,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
 import { Link } from 'react-router';
+import { CSVLink } from "react-csv";
 import openSocket from 'socket.io-client';
 import moment from "moment";
 import { API_BASE_URL } from '../constant';
@@ -32,7 +33,17 @@ class ManageCrew extends Component {
         this.state = {
             studentId: -1,
             eventCrew: null,
-            societyCrew: null
+            societyCrew: null,
+            headers: [
+                { label: "No.", key: "number" },
+                { label: "Name", key: "name" },
+                { label: "IC", key: "ic" },
+                { label: "Course", key: "course" },
+                { label: "Year and Sem", key: "year" },
+                { label: "Phone Number", key: "phone" },
+                { label: "Email Address", key: "email" },
+                { label: "Position", key: "position" }
+            ], data: []
         };
 
         this.props.onUpdateLoadingBar();
@@ -62,12 +73,44 @@ class ManageCrew extends Component {
                 this.setState({
                     eventCrew: nextProps.eventCrew
                 });
+
+                this.setState({ data: [] })
+
+                let ec = nextProps.eventCrew;
+                let data = []
+    
+                for(var i = 0; i < ec.length; i++) {
+                    if(ec[i]["status"] == 1) {
+                        data.push({
+                            number: i+1, name: ec[i]["name"], ic: ec[i]["ic"], course: ec[i]["course"],
+                            year: "Y"+ec[i]["year"]+"S"+ec[i]["semester"], phone: ec[i]["contact"],
+                            email: ec[i]["email"], position: ec[i]["roleName"]
+                        })
+                    }
+                }
+                this.setState({ data: data });
             }
         } else {
             if((nextProps.societyCrew != this.props.societyCrew) && (nextProps.societyCrew != null)) {
                 this.setState({
                     societyCrew: nextProps.societyCrew
                 });
+
+                this.setState({ data: [] })
+                
+                let sc = nextProps.societyCrew;
+                let data = []
+    
+                for(var i = 0; i < sc.length; i++) {
+                    if(sc[i]["status"] == 1) {
+                        data.push({
+                            number: i+1, name: sc[i]["name"], ic: sc[i]["ic"], course: sc[i]["course"],
+                            year: "Y"+sc[i]["year"]+"S"+sc[i]["semester"], phone: sc[i]["contact"],
+                            email: sc[i]["email"], position: sc[i]["roleName"]
+                        })
+                    }
+                }
+                this.setState({ data: data });
             }
         }
     }
@@ -392,7 +435,7 @@ class ManageCrew extends Component {
                                         {message}
 
                                         <div style= {{ margin: "0 auto" }}>
-                                            <RaisedButton label="Download" primary={true} style={RaisedButtonStyle} onClick={(event) => this.exportData()}/>
+                                            <CSVLink data={this.state.data} headers={this.state.headers}>Download</CSVLink>
                                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                         </div> 
                                     </div>

@@ -4,6 +4,7 @@ import LoadingBar from './LoadingBar';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import { CSVLink } from "react-csv";
 import { confirmAlert } from 'react-confirm-alert'; 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
@@ -29,7 +30,17 @@ export class ManageParticipant extends Component {
         
         this.state = {
             studentParticipant: null,
-            staffParticipant: null
+            staffParticipant: null,
+            headers: [
+                { label: "No.", key: "number" },
+                { label: "Name", key: "name" },
+                { label: "IC", key: "ic" },
+                { label: "Course", key: "course" },
+                { label: "Year and Sem", key: "year" },
+                { label: "Phone Number", key: "phone" },
+                { label: "Email Address", key: "email" },
+                { label: "Vegetarian", key: "vegetarian" }
+            ], data: []
         };
 
         this.props.onUpdateLoadingBar();
@@ -39,7 +50,6 @@ export class ManageParticipant extends Component {
         this.handleReject = this.handleReject.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.updateList = this.updateList.bind(this);
-        this.exportData = this.exportData.bind(this);
     }
 
     componentDidMount() {
@@ -60,6 +70,23 @@ export class ManageParticipant extends Component {
             this.setState({
                 staffParticipant: nextProps.staffParticipant
             });
+        }
+
+        if(nextProps.studentParticipant != null || nextProps.staffParticipant != null) {
+            this.setState({ data: [] })
+            let sp = [...nextProps.studentParticipant, ...nextProps.staffParticipant];
+            let data = []
+
+            for(var i = 0; i < sp.length; i++) {
+                if(sp[i]["status"] == 1) {
+                    data.push({
+                        number: i+1, name: sp[i]["name"], ic: sp[i]["ic"], course: sp[i]["course"],
+                        year: "Y"+sp[i]["year"]+"S"+sp[i]["semester"], phone: sp[i]["contact"],
+                        email: sp[i]["email"], vegetarian: sp[i]["vegetarian"] ? "Yes" : "No"
+                    })
+                }
+            }
+            this.setState({ data: data });
         }
     }
 
@@ -164,6 +191,8 @@ export class ManageParticipant extends Component {
                                     username: username
                                 }
 
+                                console.log(data);
+
                                 if(isNaN(username)) 
                                     this.props.onUpdateData("rejectStaffEvent", data, this.props.location.state["eventName"]);
                                 else 
@@ -206,10 +235,6 @@ export class ManageParticipant extends Component {
                 )
             }
         })
-    }
-
-    exportData() {
-        this.props.onExportData("eventParticipant", this.props.params.eventId);
     }
     
     render() {
@@ -437,7 +462,7 @@ export class ManageParticipant extends Component {
                                 ]}
 
                                 <div style= {{ textAlign: "center", marginTop: "40px" }}>
-                                    <RaisedButton label="Download" primary={true} style={RaisedButtonStyle} onClick={(event) => this.exportData()}/>
+                                    <CSVLink data={this.state.data} headers={this.state.headers}>Download</CSVLink>
                                     <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                 </div>    
                             </MuiThemeProvider>

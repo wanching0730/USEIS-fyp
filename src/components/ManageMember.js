@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert'; 
 import Tooltip from '@material-ui/core/Tooltip';
+import { CSVLink } from "react-csv";
 import { Link } from 'react-router';
 import openSocket from 'socket.io-client';
 import { API_BASE_URL } from '../constant';
@@ -29,7 +30,17 @@ class ManageMember extends Component {
 
         this.state = {
             studentId: -1,
-            societyMembers: null
+            societyMembers: null,
+            headers: [
+                { label: "No.", key: "number" },
+                { label: "Name", key: "name" },
+                { label: "IC", key: "ic" },
+                { label: "Course", key: "course" },
+                { label: "Year and Sem", key: "year" },
+                { label: "Phone Number", key: "phone" },
+                { label: "Email Address", key: "email" },
+                { label: "Vegetarian", key: "vegetarian" }
+            ], data: []
         };
 
         this.props.onUpdateLoadingBar();
@@ -49,11 +60,27 @@ class ManageMember extends Component {
         socket.on('updateManage', this.updateList);
     }
 
+
     componentWillReceiveProps(nextProps){
         if((nextProps.societyMembers != this.props.societyMembers) && (nextProps.societyMembers != null)) {
             this.setState({
                 societyMembers: nextProps.societyMembers
             });
+
+            this.setState({ data: [] });
+            let sm = nextProps.societyMembers;
+            let data = []
+
+            for(var i = 0; i < sm.length; i++) {
+                if(sm[i]["status"] == 1) {
+                    data.push({
+                        number: i+1, name: sm[i]["name"], ic: sm[i]["ic"], course: sm[i]["course"],
+                        year: "Y"+sm[i]["year"]+"S"+sm[i]["semester"], phone: sm[i]["contact"],
+                        email: sm[i]["email"], vegetarian: sm[i]["vegetarian"] ? "Yes" : "No"
+                    })
+                }
+            }
+            this.setState({ data: data });
         }
     }
 
@@ -282,7 +309,7 @@ class ManageMember extends Component {
                                         </table>
 
                                         <div style= {{ margin: "0 auto" }}>
-                                            <RaisedButton label="Download" primary={true} style={RaisedButtonStyle} onClick={(event) => this.exportData()}/>
+                                            <CSVLink data={this.state.data} headers={this.state.headers}>Download</CSVLink>
                                             <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
                                         </div>
                                     </div>
