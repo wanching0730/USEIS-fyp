@@ -49,7 +49,7 @@ class SocietyEvents extends Component {
                     rows.push(
                         <tr> 
                             <td>{i+1}</td>
-                            <td><img style={imageStyle} src={ require('../assets/images/image1.jpg') } /></td>
+                            <td><img style={imageStyle} src={societyEvent["logoUrl"]} /></td>
                             <td><Link to={toEvent}>{societyEvent["name"]}</Link></td>
                             <td>{moment(societyEvent["startDate"]).format("YYYY-MM-DD HH:mm")}</td>
                             <td>{moment(societyEvent["endDate"]).format("YYYY-MM-DD HH:mm")}</td>

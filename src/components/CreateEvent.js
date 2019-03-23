@@ -40,7 +40,7 @@ class CreateEvent extends Component {
       totalCrew: 0,
       selectedStartDate: moment(),
       selectedEndDate: moment(),
-      position: 'Chairperson,Vice Chairperson',
+      position: 'Chairperson,Vice Chairperson,',
       userId: this.props.userId,
       vegetarian: 0,
       positionOptions: [],
@@ -429,49 +429,49 @@ class CreateEvent extends Component {
                           <label>Vice Treasurer</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Treasurer,'}); 
+                                this.setState({position: this.state.position + 'Vice Treasurer,'}); 
                             }}
                           /> 
                           <label>Programme</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Programme,'}); 
+                                this.setState({position: this.state.position + 'Programme HOD,Programme Assistant,'}); 
                             }}
                           /> 
                            <label>Publicity</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Publicity,'}); 
+                                this.setState({position: this.state.position + 'Publicity HOD,Publicity Assistant,'}); 
                             }}
                           /> 
                            <label>Logistics</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Logistics,'}); 
+                                this.setState({position: this.state.position + 'Logistics HOD,Logistics Assistant',}); 
                             }}
                           /> 
                            <label>Decoration</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Decoration,'}); 
+                                this.setState({position: this.state.position + 'Decoration HOD,Decoration Assistant,'}); 
                             }}
                           /> 
                            <label>Editorial</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Editorial,'}); 
+                                this.setState({position: this.state.position + 'Editorial HOD,Editorial Assistant,'}); 
                             }}
                           /> 
                           <label>Technical</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Technical,'}); 
+                                this.setState({position: this.state.position + 'Technical HOD,Techinical Assistant,'}); 
                             }}
                           /> 
-                          <label>Editor</label>
+                          <label>Auditor</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Editor,'}); 
+                                this.setState({position: this.state.position + 'Auditor,'}); 
                             }}
                           />
                       </div>

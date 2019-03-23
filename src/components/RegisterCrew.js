@@ -24,7 +24,6 @@ class RegisterCrew extends Component {
     }
 
     this.state={
-      emailNoti: false,
       webNoti: false,
       position: 'Chairperson',
       vegetarian: 0,
@@ -51,32 +50,14 @@ class RegisterCrew extends Component {
       for(var i = 0; i < positions.length; i++) {
         if(positions[i] != "") {
           let position = positions[i];
-          if(position === "Chairperson" || position === "Vice Chairperson" || position === "Secretary" || position === "Vice Secretary" || position === "Treasurer" || position === "Vice Treasurer" || position === "Editor") {
-            positionOptions.push({
-              value: position,
-              name: position
-            });
-          } else {
-            positionOptions.push({
-              value: position + " HOD",
-              name: position + " HOD"
-            });
-            positionOptions.push({
-              value: position + " Assistant",
-              name: position + " Assistant"
-            });
-          }
+          positionOptions.push({
+            value: position,
+            name: position
+          });
         }
       }
       this.setState({positionOptions: positionOptions});
     }
-  }
-
-  displayText() {
-      if(this.state.webNoti) {
-        if(this.n.supported()) 
-          this.n.show();
-      }
   }
 
   handleNotiClick(event) {
@@ -85,8 +66,6 @@ class RegisterCrew extends Component {
   }
 
   handleSubmit(event) {
-      this.displayText();
-      
       this.props.onUpdateLoadingBar();
       let current = moment();
       let data = {
@@ -97,7 +76,6 @@ class RegisterCrew extends Component {
         joinDate: moment(current).format("YYYY-MM-DD"),
         crewStatus: 0,
         vegetarian: this.state.vegetarian,
-        emailNoti: this.state.emailNoti ? 1 : 0,
         webNoti: this.state.webNoti ? 1 : 0
       };
 
@@ -164,15 +142,6 @@ class RegisterCrew extends Component {
 
                       <div class="section"><span>3</span>Allow Notification</div>
                       <div class="inner-wrap">
-                        <label>Allow Email Notification</label>
-                        <ToggleButton
-                          value={ this.state.emailNoti || false }
-                          onToggle={(value) => {
-                              this.setState({
-                              emailNoti: !value,
-                              })
-                          }} />
-                        <br/>
                         <label>Allow Web Notification</label>
                         <ToggleButton
                             value={ this.state.webNoti || false }

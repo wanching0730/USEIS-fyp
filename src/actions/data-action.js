@@ -399,6 +399,7 @@ export function retrieveData(type, id) {
                         fee: reply[i]["fee"],
                         chairperson: reply[i]["chairperson"],
                         contact: reply[i]["contact"],
+                        logoUrl: reply[i]["logoUrl"]
                     });
                 }
 

@@ -17,28 +17,28 @@ describe('ACTION', () => {
         store = mockStore(initialState);
     });
 
-    it('should dispatch "loginSuccessful" action', () => {
-        // Dispatch the action
-        store.dispatch(loginUserSuccessful())
+    // it('should dispatch "loginSuccessful" action', () => {
+    //     // Dispatch the action
+    //     store.dispatch(loginUserSuccessful())
 
-        // Test if the store dispatched the expected actions
-        expect(store.getActions()[0].type).toEqual("LOGIN_USER_SUCCESS")
-    })
+    //     // Test if the store dispatched the expected actions
+    //     expect(store.getActions()[0].type).toEqual("LOGIN_USER_SUCCESS")
+    // })
 
-    it('should dispatch "searchDataSuccessful" action', () => {
-        store.dispatch(searchDataSuccessful("society"))
-        expect(store.getActions()[0].type).toEqual("SEARCH_SOCIETY")
-    })
+    // it('should dispatch "searchDataSuccessful" action', () => {
+    //     store.dispatch(searchDataSuccessful("society"))
+    //     expect(store.getActions()[0].type).toEqual("SEARCH_SOCIETY")
+    // })
 
-    it('should dispatch "deleteDataSuccessful" action', () => {
-        store.dispatch(deleteDataSuccessful())
-        expect(store.getActions()[0].type).toEqual("DELETE_DATA")
-    })
+    // it('should dispatch "deleteDataSuccessful" action', () => {
+    //     store.dispatch(deleteDataSuccessful())
+    //     expect(store.getActions()[0].type).toEqual("DELETE_DATA")
+    // })
 
-    it('should dispatch "createSuccessfully" action', () => {
-        store.dispatch(createSuccessfully())
-        expect(store.getActions()[0].type).toEqual("CREATE")
-    })
+    // it('should dispatch "createSuccessfully" action', () => {
+    //     store.dispatch(createSuccessfully())
+    //     expect(store.getActions()[0].type).toEqual("CREATE")
+    // })
 
     // to test whether the correct action is dispatched after respective API call
     it('calls request and success actions if the fetch response was successful - 1', () => {
