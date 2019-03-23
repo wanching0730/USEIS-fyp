@@ -13,11 +13,11 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
 
-        this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
         };
 
+        this.toggle = this.toggle.bind(this);
         this.onClick = this.onClick.bind(this);
         this.logout = this.logout.bind(this);
     }

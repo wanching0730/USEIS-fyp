@@ -18,7 +18,7 @@ import { retrieveData, updateLoadingBar, exportData } from '../actions/data-acti
 import { updateDouble } from '../actions/post-action';
 import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
-class ManageParticipant extends Component {
+export class ManageParticipant extends Component {
 
     constructor(props) {
         super(props);

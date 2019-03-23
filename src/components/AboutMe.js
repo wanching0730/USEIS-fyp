@@ -8,7 +8,7 @@ import '../style/table.css';
 
 import { connect } from 'react-redux';
 
-class AboutMe extends Component {
+export class AboutMe extends Component {
 
     constructor(props){
         super(props);
@@ -16,6 +16,10 @@ class AboutMe extends Component {
         if(!this.props.isAuthenticated) {
             window.location.assign('/');
         }
+    }
+
+    componentDidMount() {
+        fetch(`https://b2auwy2dql.execute-api.ap-southeast-1.amazonaws.com/v1/society`);
     }
 
     render() {

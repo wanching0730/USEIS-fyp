@@ -11,6 +11,7 @@
     "aws-amplify": "^1.1.19",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
+    "chai": "^4.2.0",
     "chart.js": "^2.7.2",
     "circular-json": "^0.5.7",
     "downloadbutton": "^1.0.0",
@@ -59,10 +60,13 @@
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
+    "sinon-chai": "^3.3.0",
     "socket.io-client": "^2.1.1"
   },
   "devDependencies": {
-    "dotenv": "^7.0.0"
+    "dotenv": "^7.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2"
   },
   "scripts": {
     "start": "set HTTPS=true&&react-scripts start",

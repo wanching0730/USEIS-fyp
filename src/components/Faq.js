@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 import { connect } from 'react-redux';
 
-class Faq extends Component {
+export class Faq extends Component {
 
     constructor(props) {
         super(props);
@@ -302,4 +302,4 @@ const mapStateToProps = (state, props) => {
     };
   };
 
-  export default connect(mapStateToProps)(Faq);
+export default connect(mapStateToProps)(Faq);
