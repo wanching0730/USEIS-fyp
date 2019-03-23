@@ -15,7 +15,7 @@ import '../style/alert.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData, updateLoadingBar, exportData } from '../actions/data-action';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
 import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
@@ -50,7 +50,6 @@ class ManageMember extends Component {
         this.handleApprove = this.handleApprove.bind(this);
         this.handleReject = this.handleReject.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
-        this.exportData = this.exportData.bind(this);
     }
 
     componentDidMount() {
@@ -190,11 +189,6 @@ class ManageMember extends Component {
                 )
             }
         })
-    }
-
-    exportData() {
-        this.props.onUpdateLoadingBar();
-        this.props.onExportData("societyMember", this.props.params.societyId);
     }
 
     render() {
@@ -344,8 +338,7 @@ const mapActionsToProps = (dispatch, props) => {
       onUpdateData: updateDouble,
       onUpdateLoadingBar: updateLoadingBar,
       onDeleteParticipation: deleteParticipation,
-      onUpdateDeleteLoadingBar: updateDeleteLoadingBar,
-      onExportData: exportData
+      onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 

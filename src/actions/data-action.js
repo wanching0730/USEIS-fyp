@@ -27,8 +27,7 @@ import {
     RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
-    CHECK_IS_REGISTERED,
-    EXPORT_DATA
+    CHECK_IS_REGISTERED
 } from '../constant';
 
 export function updateLoadingBarSuccessful() {
@@ -252,13 +251,6 @@ export function retrieveAllDataSuccessful(type, data) {
                 allBooths: data
             }
         }
-    } else if(type === "exportData") {
-        return {
-            type: EXPORT_DATA,
-            payload: {
-                loading: false
-            }
-        }
     } else if(type === "roles") {
         return {
             type: RETRIEVE_ROLES,
@@ -287,24 +279,6 @@ export function updateLoadingBar() {
 export function updateEndLoadingBar() {
     return function (dispatch) {
         dispatch(updateEndLoadingBarSuccessful());
-    }
-}
-
-export function exportData(type, id) {
-    return function(dispatch) {
-        return downloadData(type, id).then(result => result.json()).then(reply => {
-            dispatch(retrieveAllDataSuccessful("exportData", reply));
-            confirmAlert({
-                title: 'Message',
-                message: reply["responseCode"] != 500 ? 'Data has been exported successfully' : 'Data cannot be exported: ' + reply["message"],
-                buttons: [
-                    {
-                        label: 'Close',
-                        onClick: () => {}
-                    }
-                ]
-            })
-        });
     }
 }
 

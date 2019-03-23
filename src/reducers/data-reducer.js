@@ -25,8 +25,7 @@ import {
     RETRIEVE_REC_EVENTS,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
-    CHECK_IS_REGISTERED,
-    EXPORT_DATA
+    CHECK_IS_REGISTERED
 } from '../constant';
 
 const initialState = {
@@ -197,10 +196,6 @@ export default function dataReducer(state = initialState, { type, payload }) {
         case CHECK_IS_REGISTERED:
             return Object.assign({}, state, {
                 isRegistered: payload.isRegistered
-            });
-        case EXPORT_DATA:
-            return Object.assign({}, state, {
-                loading: payload.loading
             });
         default: 
             return state;

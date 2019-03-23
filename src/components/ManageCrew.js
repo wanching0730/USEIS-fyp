@@ -17,7 +17,7 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData, updateLoadingBar, exportData } from '../actions/data-action';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
 import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
@@ -57,7 +57,6 @@ class ManageCrew extends Component {
         this.handleReject = this.handleReject.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
         this.updateList = this.updateList.bind(this);
-        this.exportData = this.exportData.bind(this);
     }
 
     componentDidMount() {
@@ -284,15 +283,6 @@ class ManageCrew extends Component {
         })
     }
 
-    exportData() {
-        this.props.onUpdateLoadingBar();
-
-        if(this.props.params.type === "event") 
-            this.props.onExportData("eventCrew", this.props.params.id);
-        else
-            this.props.onExportData("societyCrew", this.props.params.id);
-    }
-
     render() {
         const { RaisedButtonStyle } = styles;
         var message = <div></div>;
@@ -473,8 +463,7 @@ const mapActionsToProps = (dispatch, props) => {
       onUpdateData: updateDouble,
       onDeleteParticipation: deleteParticipation,
       onUpdateLoadingBar: updateLoadingBar,
-      onUpdateDeleteLoadingBar: updateDeleteLoadingBar,
-      onExportData: exportData
+      onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 

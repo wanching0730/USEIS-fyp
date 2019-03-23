@@ -15,7 +15,7 @@ import '../style/alert.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { retrieveData, updateLoadingBar, exportData } from '../actions/data-action';
+import { retrieveData, updateLoadingBar } from '../actions/data-action';
 import { updateDouble } from '../actions/post-action';
 import { deleteParticipation, updateDeleteLoadingBar } from '../actions/delete-action';
 
@@ -497,8 +497,7 @@ const mapActionsToProps = (dispatch, props) => {
         onUpdateData: updateDouble,
         onDeleteParticipation: deleteParticipation,
         onUpdateLoadingBar: updateLoadingBar,
-        onUpdateDeleteLoadingBar: updateDeleteLoadingBar,
-        onExportData: exportData
+        onUpdateDeleteLoadingBar: updateDeleteLoadingBar
     }, dispatch);
 };
 
