@@ -108,7 +108,7 @@ export function updateDataDouble(type, data) {
         return fetch(mainApiRoute + `/` + type, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json',
             },
             body: data
         });
