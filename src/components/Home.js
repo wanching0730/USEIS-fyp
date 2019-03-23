@@ -37,9 +37,9 @@ class Home extends Component {
             }, 9000);
         }
 
-        setTimeout(() => {
-            fetch(`http://useis-env-2.mtaihhapn5.ap-southeast-1.elasticbeanstalk.com/api/v1/notification`);
-        }, 11000);
+        // setTimeout(() => {
+        //     fetch(`https://b2auwy2dql.execute-api.ap-southeast-1.amazonaws.com/v1/notification`);
+        // }, 11000);
     }
 
     componentDidMount() {

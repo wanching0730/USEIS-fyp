@@ -10,7 +10,7 @@ import '../style/spinner.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { loginUser, getFcmToken, updateAuthLoadingBar } from '../actions/auth-action';
+import { loginUser, updateAuthLoadingBar } from '../actions/auth-action';
 
 class Login extends Component {
 
@@ -155,12 +155,12 @@ class Login extends Component {
 }
 
 const styles = {
-    RaisedButtonStyle: {
-        margin: 15,
-    }
+  RaisedButtonStyle: {
+      margin: 15,
+  }
 };
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
     userName: state.auth.userName,
     userPosition: state.auth.userPosition,
@@ -169,7 +169,7 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapActionsToProps = (dispatch, props) => {
+const mapActionsToProps = (dispatch) => {
   return bindActionCreators({
     onLoginUser: loginUser,
     onUpdateAuthLoadingBar: updateAuthLoadingBar

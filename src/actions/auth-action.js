@@ -42,8 +42,6 @@ export function getFcmTokenSuccessful(token, messaging) {
 }
 
 export function loginUserSuccessful(userName, userId, id, user, societies, token, role) {
-    localStorage.setItem('token', token);
-
     return {
         type: LOGIN_USER_SUCCESS,
         payload: {
@@ -149,6 +147,7 @@ export function loginUser(postData) {
                     }
                 }
                 
+                localStorage.setItem('token', token);
                 dispatch(loginUserSuccessful(userName, userId, id, user, societies, token, role));
             } else {
                 let id = user["studentId"];

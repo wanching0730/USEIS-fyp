@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Router, browserHistory, Route } from 'react-router';
-import { Redirect, Switch } from 'react-router-dom';
-import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
-// import { SecureRoute } from 'react-route-guard';
 import Login from '../src/components/Login';
 import Home from '../src/components/Home';
 import NewsFeed from './components/NewsFeed';
@@ -34,60 +31,16 @@ import Faq from './components/Faq';
 import AboutMe from './components/AboutMe';
 import './App.css';
 
-const poolData = {
-  UserPoolId : 'us-east-2_lcnWhMXnd', 
-  ClientId : '32j9lqg5k0sa3q6tts3lel12be' 
-};
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-
 class App extends Component {
   render() {
-    const PrivateRoute = ({ component: Component, authed, path, ...rest }) => {
-      return (
-        <Route
-          path={path}
-          {...rest}
-          render={props => {
-            return authed ? (
-              <Component {...props} />
-            ) : (
-              <Redirect
-                to={{
-                  pathname: "/",
-                  state: {
-                    prevLocation: path,
-                    error: "You need to login first!",
-                  },
-                }}
-              />
-            );
-          }}
-        />
-      );
-    };
-
-    function isAuthenticated() {
-      if(userPool.getCurrentUser())
-        return true;
-      else 
-        return false;
-    }
-
-    //var jwtDecode = require('jwt-decode');
-    //console.log(jwtDecode(localStorage.getItem("token")));
     
     return (
         <Router history={browserHistory}>
-        <Switch>
           <Route path="/" component={Login}/>
-          <PrivateRoute authed={isAuthenticated} path='/home' component={Home} />
-          </Switch>
-          {/* <SecureRoute path="/home" component={Home} routeGuard={new UserRouteGuard()} redirectToPathWhenFail="/"/> */}
-          {/* <Route path="/home" component={Home}/> */}
+          <Route path="/home" component={Home}/>
           <Route path="/newsFeed" component={NewsFeed}/>
           <Route path="/society" component={Society}/>
           <Route path="/event" component={Event}/>
-          {/* <Route path="/register" component={Register}/> */}
           <Route path="/perSociety/:societyId" component={PerSociety}/>
           <Route path="/perEvent/:eventId" component={PerEvent}/>
           <Route path="/student" component={Student}/>
@@ -95,7 +48,6 @@ class App extends Component {
           <Route path="/register_event/:eventId" component={RegisterEvent}/>
           <Route path="/register_society/:societyId" component={RegisterSociety}/>
           <Route path="/register_crew/:eventId" component={RegisterCrew}/>
-          {/* optional society id for createProfile */}
           <Route path="/createProfile(/:societyId)" component={CreateProfile}/>
           <Route path="/createEvent/:type(society|event)/:id" component={CreateEvent}/>
           <Route path="/myProfile" component={MyProfile}/>

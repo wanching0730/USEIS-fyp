@@ -57,6 +57,7 @@
     "reactjs-popup": "^1.2.0",
     "reactstrap": "^5.0.0-alpha.4",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
     "socket.io-client": "^2.1.1"
   },
@@ -66,6 +67,7 @@
   "scripts": {
     "start": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run build && firebase deploy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

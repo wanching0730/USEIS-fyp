@@ -58,7 +58,7 @@ export function searchDataSuccessful(type, data) {
                 loading: false
             }
         };
-    } else {
+    } else if(type === "event") {
         return {
             type: SEARCH_EVENT,
             payload: {

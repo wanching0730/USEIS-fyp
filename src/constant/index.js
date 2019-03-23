@@ -62,5 +62,5 @@ export const SEARCH_EVENT = 'SEARCH_EVENT';
 export const DELETE_PARTICIPATION = 'DELETE_PARTICIPATION';
 export const DELETE_DATA = 'DELETE_DATA';
 
-export const API_BASE_URL = 'http://useis-env-2.mtaihhapn5.ap-southeast-1.elasticbeanstalk.com';
-export const API_URL = API_BASE_URL + `/api/v1`;
+export const API_BASE_URL = 'ws://useis-env-2.mtaihhapn5.ap-southeast-1.elasticbeanstalk.com';
+export const API_URL = 'http://useis-env-2.mtaihhapn5.ap-southeast-1.elasticbeanstalk.com' + `/api/v1`;
