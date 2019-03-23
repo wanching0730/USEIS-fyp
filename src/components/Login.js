@@ -93,6 +93,8 @@ class Login extends Component {
         });
       
       this.props.onUpdateAuthLoadingBar();
+      console.log(cognitoUser.username);
+      console.log(userPool);
       this.props.onLoginUser({username: cognitoUser.username, userPool: userPool});
       }
   }
