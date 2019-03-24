@@ -120,7 +120,7 @@ class RecruitmentBooth extends Component {
                     <div style={{ margin: 20 }}>
                         <Breadcrumb>
                             <BreadcrumbItem><Link to={`/home`}>Home</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>Booths</BreadcrumbItem>
+                            <BreadcrumbItem active>Registered Booths</BreadcrumbItem>
                         </Breadcrumb>
                     </div>
 

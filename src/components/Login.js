@@ -94,7 +94,7 @@ class Login extends Component {
       
       this.props.onUpdateAuthLoadingBar();
       console.log(cognitoUser.username);
-      console.log(userPool);
+      console.log(userPool.getCurrentUser);
       this.props.onLoginUser({username: cognitoUser.username, userPool: userPool});
       }
   }
@@ -122,6 +122,8 @@ class Login extends Component {
                 ]
                 :
                 [
+                  <div>
+                  <h2>UTAR Societies and Event's Information System</h2>
                   <div className="container">
                     <div className="row">
                       <div className="col-md-6 col-md-offset-3">
@@ -146,6 +148,7 @@ class Login extends Component {
                         </div>
                       </div>
                     </div>
+                  </div>
                   </div>
                 ]}
           </div>

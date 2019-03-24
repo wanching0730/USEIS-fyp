@@ -524,7 +524,8 @@ export function retrieveAll(type) {
                         category: reply[i]["category"],
                         description: reply[i]["description"],
                         dateCreate: reply[i]["dateCreate"],
-                        type: reply[i]["type"]
+                        type: reply[i]["type"],
+                        logoUrl: reply[i]["logoUrl"]
                     })
                 }
 

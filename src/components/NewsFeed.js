@@ -364,7 +364,7 @@ class NewsFeed extends Component {
 
                     rows.push(
                         <Card>
-                            <img className="image" src={ require('../assets/images/its.jpg') } />
+                            <img className="image" src={newsfeed["logoUrl"]} />
                             <CardBody>
                             <CardTitle>{newsfeed["name"]}{type}</CardTitle>
                             <CardSubtitle>| Category: {newsfeed["category"]} |</CardSubtitle>
