@@ -44,8 +44,8 @@ class Analysis extends Component {
                 });
                 
                 this.setState({
-                    donutLabels: eventNames.slice(0,3),
-                    donutData: ratings.slice(0,3) 
+                    donutLabels: eventNames.slice(0,4),
+                    donutData: ratings.slice(0,4    ) 
                 });
             }
         }
@@ -69,14 +69,16 @@ class Analysis extends Component {
                 datasets: [{
                     data: this.state.donutData.length > 0 ? this.state.donutData : [1],
                     backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56'
+                        '#fd93ff',
+                        '#b29bff',
+                        '#87d7ff',
+                        '#1ff48d',
                     ],
                     hoverBackgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                    '#FFCE56'
+                        '#e420e8',
+                        '#8367e0',
+                        '#2eacea',
+                        '#13c670',
                     ]
                 }]
             };
@@ -112,9 +114,10 @@ class Analysis extends Component {
                 </div>
 
                 <br/>
+                <br/>
 
                 <div>
-                    <h2>Active Societies</h2>
+                    <h2>Recommended Societies</h2>
                     <HorizontalBar data={barData} />
                 </div>
                 </div>

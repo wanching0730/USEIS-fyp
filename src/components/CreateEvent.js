@@ -435,7 +435,7 @@ class CreateEvent extends Component {
                           <label>Programme</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Programme HOD,Programme Assistant,'}); 
+                                this.setState({position: this.state.position + 'Program HOD,Program Assistant,'}); 
                             }}
                           /> 
                            <label>Publicity</label>
@@ -447,7 +447,7 @@ class CreateEvent extends Component {
                            <label>Logistics</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Logistics HOD,Logistics Assistant',}); 
+                                this.setState({position: this.state.position + 'Logistics HOD,Logistics Assistant,'}); 
                             }}
                           /> 
                            <label>Decoration</label>
@@ -465,7 +465,7 @@ class CreateEvent extends Component {
                           <label>Technical</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Technical HOD,Techinical Assistant,'}); 
+                                this.setState({position: this.state.position + 'Technical HOD,Technical Assistant,'}); 
                             }}
                           /> 
                           <label>Auditor</label>
