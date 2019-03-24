@@ -37,6 +37,8 @@ class NavBar extends Component {
             browserHistory.push("/aboutMe");
         } else if(clickedTab == "myProfile") {
             browserHistory.push("/myProfile");
+        } else if(clickedTab == "myRecommendation") {
+            browserHistory.push("/myRecommendation");
         }
     }
 
@@ -133,6 +135,9 @@ class NavBar extends Component {
                                             <DropdownItem name="myProfile" onClick={this.onClick}>
                                                 My Profile
                                             </DropdownItem>
+                                            <DropdownItem name="myRecommendation" onClick={this.onClick}>
+                                                My Recommendation
+                                            </DropdownItem>
                                             <DropdownItem name="aboutMe" onClick={this.onClick}>
                                                 About Me
                                             </DropdownItem>
@@ -146,6 +151,9 @@ class NavBar extends Component {
                                         <DropdownMenu left>
                                             <DropdownItem name="myProfile" onClick={this.onClick}>
                                                 My Profile
+                                            </DropdownItem>
+                                            <DropdownItem name="myRecommendation" onClick={this.onClick}>
+                                                My Recommendation
                                             </DropdownItem>
                                             <DropdownItem name="logout" onClick={this.logout}>
                                                 Logout

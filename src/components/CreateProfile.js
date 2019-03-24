@@ -326,8 +326,7 @@ const mapActionsToProps = (dispatch, props) => {
     onUpdate: update,
     onRetrieveData: retrieveData,
     onRetrieveAll: retrieveAll,
-    onUpdateRetrieveLoadingBar: updateLoadingBar,
-    onUpdateCreateLoadingBar: updatePostLoadingBar
+    onUpdateRetrieveLoadingBar: updateLoadingBar
   }, dispatch);
 };
 

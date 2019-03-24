@@ -109,7 +109,7 @@ class Analysis extends Component {
           [
               <div>
                 <div>
-                    <h2 style={{textAlign: "center"}}>Recommended Events</h2>
+                    <h2 style={{textAlign: "center"}}>Past Events Anaylysis</h2>
                     <Doughnut data={doughnutData} />
                 </div>
 

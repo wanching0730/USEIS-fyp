@@ -24,6 +24,7 @@ import {
     RETRIEVE_ROLES,
     RETRIEVE_REC_SOCIETIES,
     RETRIEVE_REC_EVENTS,
+    RETRIEVE_EVENTS_IN_MONTHS,
     RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
@@ -264,6 +265,14 @@ export function retrieveAllDataSuccessful(type, data) {
             type: RETRIEVE_REC_SOCIETIES,
             payload: {
                 recommendedSocieties: data,
+                loading: false
+            }
+        }
+    } else if(type === "eventInMonth") {
+        return {
+            type: RETRIEVE_EVENTS_IN_MONTHS,
+            payload: {
+                eventInMonth: data,
                 loading: false
             }
         }
@@ -565,7 +574,11 @@ export function retrieveAll(type) {
             } else if(type === "recommendedSocieties") {
                 let recommendedSocieties = reply;
 
-                dispatch(retrieveAllDataSuccessful("recommendedSocieties", recommendedSocieties));
+                dispatch(retrieveAllDataSuccessful(type, recommendedSocieties));
+            } else if(type === "eventInMonth") {
+                let eventInMonth = reply;
+
+                dispatch(retrieveAllDataSuccessful(type, eventInMonth));
             } 
         });
     };

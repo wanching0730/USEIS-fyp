@@ -23,6 +23,7 @@ import {
     RETRIEVE_ROLES,
     RETRIEVE_REC_SOCIETIES,
     RETRIEVE_REC_EVENTS,
+    RETRIEVE_EVENTS_IN_MONTHS,
     SEARCH_SOCIETY,
     SEARCH_EVENT,
     CHECK_IS_REGISTERED
@@ -46,6 +47,7 @@ const initialState = {
     overallBooth: null,
     recommendedSocieties: null,
     recommendedEvents: null,
+    eventInMonth: null,
 
     societies: null,
     events: null,
@@ -181,6 +183,11 @@ export default function dataReducer(state = initialState, { type, payload }) {
         case RETRIEVE_REC_EVENTS:
             return Object.assign({}, state, {
                 recommendedEvents: payload.recommendedEvents,
+                loading: payload.loading
+            });
+        case RETRIEVE_EVENTS_IN_MONTHS:
+            return Object.assign({}, state, {
+                eventInMonth: payload.eventInMonth,
                 loading: payload.loading
             });
         case SEARCH_SOCIETY:

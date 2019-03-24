@@ -268,7 +268,7 @@ class MyEvent extends Component {
                         //  console.log(moment(event["startDate"]).format("DD/MM/YYYY"));
                         //  console.log(moment(new Date()).format("DD/MM/YYYY"));
                         //  console.log(moment(event["startDate"]).format("YYYY/MM/DD") <= moment(new Date()).format("YYYY/MM/DD"));
-                        if(event["status"] == 1 && moment(event["startDate"]).format("YYYY/MM/DD") <= moment(new Date()).format("YYYY/MM/DD")) {
+                        if(event["status"] == 1 && moment(event["startDate"]).format("YYYY/MM/DD") <= moment(new Date()).format("YYYY/MM/DD") && moment(event["endDate"]).format("YYYY/MM/DD") <= moment(new Date()).format("YYYY/MM/DD")) {
                             if(event["ratingStatus"] == 1) 
                                 ratingStatus = <td>Done</td>;
                             else 

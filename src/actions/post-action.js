@@ -118,6 +118,7 @@ export function updatePostLoadingBar() {
 }
 
 export function create(type, postData) {
+    console.log(postData)
     return function (dispatch) {
         const data = Object.keys(postData).map((key) => {
             return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);

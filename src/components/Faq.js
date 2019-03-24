@@ -229,9 +229,16 @@ export class Faq extends Component {
                     <ul id="account" className="cd-faq-group">
                         <li className="cd-faq-title"><h2>Event</h2></li>
                         <li>
+                            <a className="cd-faq-trigger" href="#0">What is Past Event Analysis?</a>
+                            <div className="cd-faq-content">
+                                <p>The analysis tells you about which events are favoured by yourself and others based on the joined events.</p>
+                            </div> 
+                        </li>
+
+                        <li>
                             <a className="cd-faq-trigger" href="#0">Can I receive notification from registered event?</a>
                             <div className="cd-faq-content">
-                                <p>Yes, you can allow the notification during event registration. The notification will be sent to you as a reminder before the actual day of the event.</p>
+                                <p>Yes, you can allow the notification during event registration. The notification will be sent to you as a reminder on the actual day of the event.</p>
                             </div> 
                         </li>
             
