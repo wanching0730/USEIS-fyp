@@ -91,6 +91,7 @@ export class ManageParticipant extends Component {
     }
 
     updateList(data) {
+        console.log(data["type"])
         if(data["type"] == "rejectEvent") {
             if(this.state.studentParticipant != null) {
                 let list = this.state.studentParticipant;
@@ -116,6 +117,7 @@ export class ManageParticipant extends Component {
                 this.setState({ staffParticipant: list });
             }
         } else if(data["type"] == "approveEvent") {
+            console.log("called")
             if(this.state.studentParticipant != null) {
                 let list = this.state.studentParticipant;
                 for(var i = 0; i < list.length; i++) {

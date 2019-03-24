@@ -69,16 +69,16 @@ class Analysis extends Component {
                 datasets: [{
                     data: this.state.donutData.length > 0 ? this.state.donutData : [1],
                     backgroundColor: [
-                        '#fd93ff',
-                        '#b29bff',
-                        '#87d7ff',
-                        '#1ff48d',
+                        '#FF6384',
+	                    '#36A2EB',
+                        '#FFCE56',
+                        '#27b562',
                     ],
                     hoverBackgroundColor: [
-                        '#e420e8',
-                        '#8367e0',
-                        '#2eacea',
-                        '#13c670',
+                        '#e01f48',
+                        '#1873af',
+                        '#e2ac24',
+                        '#16994c',
                     ]
                 }]
             };

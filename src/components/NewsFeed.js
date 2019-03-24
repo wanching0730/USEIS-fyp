@@ -26,6 +26,10 @@ class NewsFeed extends Component {
     constructor(props) {
         super(props);
 
+        if(!this.props.isAuthenticated) {
+            window.location.assign('/');
+        }
+
         this.state = {
             modalIsOpen: false,
             inputValue: "",
@@ -210,7 +214,7 @@ class NewsFeed extends Component {
             name: this.state.ownerName,
             category: this.state.ownerCategory,
             desc: this.state.inputValue,
-            dateCreate: moment(current).format("YYYY-MM-DD hh:mm:ss"),
+            dateCreate: moment(current).format("YYYY-MM-DD hh:mm:ss A"),
             type: this.state.owner
         };
 
@@ -494,6 +498,7 @@ const mapStateToProps = (state, props) => {
     return {
         userId: state.auth.id,
         userName: state.auth.userName,
+        isAuthenticated: state.auth.isAuthenticated,
         newsfeeds: state.data.newsfeeds,
         societies: state.auth.societies,
         userEvents: state.data.userEvents,

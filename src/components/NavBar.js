@@ -160,9 +160,11 @@ class NavBar extends Component {
                         </Navbar>
                     ]:[ 
                         <Navbar className="topnav" dark expand="md">
-                        <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
-                        <NavbarToggler onClick={this.toggle} />
+                            <NavbarBrand><img src={ require('../assets/images/utar.jpg') } /></NavbarBrand>
+                            <NavbarToggler onClick={this.toggle} />
+                            <h4 style={{ marginLeft: "230px" }}>UTAR Societies and Event's Information System</h4>
                         </Navbar>  
+                         
                     ]}     
             </div>
         );

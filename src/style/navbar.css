@@ -28,6 +28,10 @@ Nav {
   width: 100px;
 }
 
+a:focus {
+  color: black !important
+}
+
 .dropdown-menu.show {
   left: -50px !important;
 }
@@ -43,6 +47,12 @@ Nav {
 @media screen and (max-width: 600px) {
   Nav {
     height: 100%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .topnav h4 {
+    margin: auto !important
   }
 }
 

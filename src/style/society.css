@@ -36,11 +36,19 @@ table tbody tr td :nth-child(5) {
     }
 }
 
+@media screen and (max-width: 540px) {
+  .wrapper{
+    margin: 20px;
+    width: 200px;
+    font-size: 20px;
+  }
+}
+
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
 .wrapper{
   margin: 20px;
-  width: 200px;
+  width: 250px;
   font-size: 20px;
 }
 

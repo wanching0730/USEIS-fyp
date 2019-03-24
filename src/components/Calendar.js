@@ -57,7 +57,7 @@ class Calendar extends Component {
               popup
               selectable
               events={this.state.calendarEvents}
-              views={{ month: true, week: true }}
+              views={{ month: true }}
               step={60}
               showMultiDayTimes
               defaultDate={new Date()}
