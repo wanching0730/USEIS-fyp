@@ -3,6 +3,9 @@ import NavBar from './NavBar';
 import LoadingBar from './LoadingBar';
 import Calendar from './Calendar';
 import Analysis from './Analysis';
+import {browserHistory} from 'react-router';
+import { Snackbar, IconButton, Button } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import '../style/home.css';
 
@@ -14,6 +17,10 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = { open: false };
+
+        this.handleClick = this.handleClick.bind(this);
 
         if(!this.props.isAuthenticated) {
             window.location.assign('/');
@@ -42,8 +49,23 @@ class Home extends Component {
         // }, 11000);
     }
 
+    componentWillReceiveProps(nextProps){
+        if((nextProps.snackBarShow != this.props.snackBarShow) || (this.props.snackBarShow != null)) {
+            if(nextProps.snackBarShow)
+                this.setState({ open: true });
+        }
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0);
+    }
+
+    handleClose = (event, reason) => {
+        this.setState({ open: false });
+    };
+
+    handleClick() {
+        browserHistory.push("/myRecommendation");
     }
 
     render() {
@@ -67,60 +89,33 @@ class Home extends Component {
                         </div>
 
                         <div className="pull-right col-md-4 col-lg-4 col-sm-4" id="col-3" style={{ marginTop: 20}}>
-                            {/* <h4>Event Recommendations</h4> */}
-                            {/* <table className="table table-hover table-light" border="1">
-                                <thead>
-                                    <tr>
-                                        <th>Events</th>
-                                        <th>Organiser</th>
-                                        <th>Attendance</th>                  
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>Work Shop</td>
-                                        <td>IT Society</td>
-                                        <td>45</td>
-                                    </tr>
-                                    <tr>
-                                        <td>USTAR 8</td>
-                                        <td>Music Society</td>
-                                        <td>40</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Performance</td>
-                                        <td>Wushu Society</td>
-                                        <td>38</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <br/>
-                            <br/>
-
-                            <h4>Society Recommendations</h4>
-                            <table className="table table-hover table-light" border="1">
-                                <thead>
-                                    <tr>
-                                        <th>Societies</th>             
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>IT Society</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Music Society</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Wushu Society</td>
-                                    </tr>
-                                </tbody>
-                            </table> */}
-                            <br/>
                             <Analysis />
+                            <Snackbar
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                open={this.state.open}
+                                autoHideDuration={6000}
+                                onClose={this.handleClose}
+                                ContentProps={{
+                                    'aria-describedby': 'message-id',
+                                }}
+                                message={<span id="message-id">Note archived</span>}
+                                action={[
+                                    <Button key="undo" color="default" size="small" onClick={this.handleClick}>
+                                        Proceed
+                                    </Button>,
+                                    <IconButton
+                                    key="close"
+                                    aria-label="Close"
+                                    color="inherit"
+                                    onClick={this.handleClose}
+                                    >
+                                    <CloseIcon />
+                                    </IconButton>,
+                                ]}
+                            />
                         </div>
                     </div>
                 ]}
@@ -135,7 +130,8 @@ const mapStateToProps = (state, props) => {
         messaging: state.auth.messaging,
         fcmToken: state.auth.fcmToken,
         loading: state.auth.loading,
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
+        snackBarShow: state.auth.snackBarShow
     };
 };
 

@@ -1,6 +1,6 @@
 // const mainApiRoute = `http://useis-env-2.mtaihhapn5.ap-southeast-1.elasticbeanstalk.com/api/v1`;
-const mainApiRoute = `http://localhost:5000/api/v1`;
-//const mainApiRoute =   `https://b2auwy2dql.execute-api.ap-southeast-1.amazonaws.com/v1`;
+//const mainApiRoute = `http://localhost:5000/api/v1`;
+const mainApiRoute =   `https://b2auwy2dql.execute-api.ap-southeast-1.amazonaws.com/v1`;
 
 export function verifyUser(data) {
     return fetch(mainApiRoute + `/login`, {

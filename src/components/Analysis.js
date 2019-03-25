@@ -79,7 +79,6 @@ class Analysis extends Component {
     }
 
     render() {
-        console.log(this.props.recommendedEvents)
         if(this.props.recommendedSocieties != null && this.props.analyzedEvents != null) {
 
             var doughnutData, barData, bar1Data;
@@ -107,7 +106,7 @@ class Analysis extends Component {
                 labels: this.state.bar1Labels.length > 0 ? this.state.bar1Labels : ["none"],
                 datasets: [
                 {
-                    label: 'Total Participants',
+                    label: 'Total Ratings',
                     backgroundColor: 'rgba(255,99,132,0.2)',
                     borderColor: 'rgba(255,99,132,1)',
                     borderWidth: 1,

@@ -41,7 +41,7 @@ export function getFcmTokenSuccessful(token, messaging) {
     }
 }
 
-export function loginUserSuccessful(userName, userId, id, user, societies, token, role) {
+export function loginUserSuccessful(userName, userId, id, user, societies, token, role, snackBarShow) {
     return {
         type: LOGIN_USER_SUCCESS,
         payload: {
@@ -52,7 +52,8 @@ export function loginUserSuccessful(userName, userId, id, user, societies, token
             societies: societies,
             token: token,
             role: role, 
-            loading: false
+            loading: false,
+            snackBarShow: snackBarShow
         }
     }
 }
@@ -148,7 +149,7 @@ export function loginUser(postData) {
                 }
                 
                 localStorage.setItem('token', token);
-                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token, role));
+                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token, role, false));
             } else {
                 let id = user["studentId"];
                 if(userSociety.length > 0) {
@@ -157,7 +158,7 @@ export function loginUser(postData) {
                     }
                 }
 
-                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token));
+                dispatch(loginUserSuccessful(userName, userId, id, user, societies, token, role, true));
             }
 
             browserHistory.push("/home");
