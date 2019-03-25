@@ -42,7 +42,6 @@ class CreateEvent extends Component {
       selectedEndDate: moment(),
       position: 'Chairperson,Vice Chairperson,',
       userId: this.props.userId,
-      vegetarian: 0,
       positionOptions: [],
       position1: 2, position2: 3, position3: 0,
       selectedFile: null,
@@ -366,15 +365,6 @@ class CreateEvent extends Component {
                         <br/>
                         <label>Contact Number</label> 
                         <input type="number" value={this.state.contact} name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
-                        <br/>
-                        <label>Vegetarian</label> 
-                        <Checkbox onCheck={(e, checked) => {
-                            if(checked)
-                              this.setState({vegetarian: 1});
-                            else 
-                              this.setState({vegetarian: 0});
-                          }}
-                        /> 
                       </div>
 
                       <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>

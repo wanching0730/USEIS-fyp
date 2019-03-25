@@ -223,6 +223,13 @@ export class Faq extends Component {
                                 <p>Yes, you can register as society member in this system and wait for the people in-charged to approve your registration. But payment is excluded in this sytem.</p>
                             </div> 
                         </li>
+
+                        <li>
+                            <a className="cd-faq-trigger" href="#0">What is the purpose of completing the survey for upcoming events?</a>
+                            <div className="cd-faq-content">
+                                <p>There is a recommender system which will recommend user for interested events based on all preference in rating those upcoming events. The recommended events will be updated on every Sunday 8am.</p>
+                            </div> 
+                        </li>
             
                     </ul> 
             
