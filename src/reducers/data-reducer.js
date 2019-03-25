@@ -182,6 +182,11 @@ export default function dataReducer(state = initialState, { type, payload }) {
                 recommendedSocieties: payload.recommendedSocieties,
                 loading: payload.loading
             });
+        case RETRIEVE_REC_EVENTS:
+            return Object.assign({}, state, {
+                recommendedEvents: payload.recommendedEvents,
+                loading: payload.loading
+            });
         case RETRIEVE_EVENT_ANALYSIS:
             return Object.assign({}, state, {
                 analyzedEvents: payload.analyzedEvents,

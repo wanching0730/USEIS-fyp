@@ -14,15 +14,34 @@ class Analysis extends Component {
         this.state = {
             donutLabels: [],
             barLabels: [],
+            bar1Labels: [],
             donutData: [],
-            barData: []
+            barData: [],
+            bar1Data: []
         };
 
+        this.props.onRetrieveData("recommendedEvents", this.props.id);
         this.props.onRetrieveAll("recommendedSocieties");
         this.props.onRetrieveData("eventAnalysis", this.props.id);
     }
 
     componentWillReceiveProps(nextProps){
+        if((nextProps.recommendedEvents != this.props.recommendedEvents) && (nextProps.recommendedEvents != null)) {
+            let recommendedEvents = nextProps.recommendedEvents;
+
+            if(recommendedEvents.length > 0) {
+                let eventNames = recommendedEvents[0]["eventId"].split(",");
+                let ratings = recommendedEvents[0]["rating"].split(", ").map(function(each_element){
+                    return Number(parseFloat(each_element).toFixed(2));
+                });
+                
+                this.setState({
+                    bar1Labels: eventNames.slice(0,4),
+                    bar1Data: ratings.slice(0,4    ) 
+                });
+            }
+        }
+
         if((nextProps.recommendedSocieties != this.props.recommendedSocieties) && (nextProps.recommendedSocieties != null)) {
             let recommendedSocieties = nextProps.recommendedSocieties;
 
@@ -60,9 +79,10 @@ class Analysis extends Component {
     }
 
     render() {
+        console.log(this.props.recommendedEvents)
         if(this.props.recommendedSocieties != null && this.props.analyzedEvents != null) {
 
-            var doughnutData, barData;
+            var doughnutData, barData, bar1Data;
         
             doughnutData = {
                 labels: this.state.donutLabels.length > 0 ? this.state.donutLabels : ["none"],
@@ -81,6 +101,21 @@ class Analysis extends Component {
                         '#16994c',
                     ]
                 }]
+            };
+
+            bar1Data = {
+                labels: this.state.bar1Labels.length > 0 ? this.state.bar1Labels : ["none"],
+                datasets: [
+                {
+                    label: 'Total Participants',
+                    backgroundColor: 'rgba(255,99,132,0.2)',
+                    borderColor: 'rgba(255,99,132,1)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                    hoverBorderColor: 'rgba(255,99,132,1)',
+                    data: this.state.bar1Data.length > 0 ? this.state.bar1Data : [1],
+                }
+                ]
             };
 
             barData = {
@@ -108,18 +143,28 @@ class Analysis extends Component {
           :
           [
               <div>
+
+                <div>
+                    <h2 style={{textAlign: "center"}}>Recommended Events</h2>
+                    <HorizontalBar data={bar1Data} />
+                </div>
+
+                <br/>
+                <br/>
+
+                 <div>
+                    <h2>Recommended Societies</h2>
+                    <HorizontalBar data={barData} />
+                </div>
+
+                <br/>
+                <br/>
+
                 <div>
                     <h2 style={{textAlign: "center"}}>Past Events Anaylysis</h2>
                     <Doughnut data={doughnutData} />
                 </div>
-
-                <br/>
-                <br/>
-
-                <div>
-                    <h2>Recommended Societies</h2>
-                    <HorizontalBar data={barData} />
-                </div>
+               
                 </div>
                 ]}
             </div>
@@ -130,6 +175,7 @@ class Analysis extends Component {
 
 const mapStateToProps = (state, props) => {
     return {
+        recommendedEvents: state.data.recommendedEvents,
         recommendedSocieties: state.data.recommendedSocieties,
         analyzedEvents: state.data.analyzedEvents,
         id: state.auth.id,

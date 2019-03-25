@@ -173,6 +173,14 @@ export function retrieveSingleDataSuccessful(type, data) {
                 loading: false
             }
         }
+    } else if(type === "recommendedEvents") {
+        return {
+            type: RETRIEVE_REC_EVENTS,
+            payload: {
+                recommendedEvents: data,
+                loading: false
+            }
+        }
     } 
 }
 
@@ -484,6 +492,12 @@ export function retrieveData(type, id) {
                     analyzedEvents = reply;
 
                 dispatch(retrieveSingleDataSuccessful("eventAnalysis", analyzedEvents));
+            } else if(type === "recommendedEvents") {
+                var recommendedEvents = [];
+                if(reply.length > 0)
+                    recommendedEvents = reply;
+
+                dispatch(retrieveSingleDataSuccessful("recommendedEvents", recommendedEvents));
             } 
         });
     };
