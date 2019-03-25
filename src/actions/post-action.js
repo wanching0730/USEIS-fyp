@@ -154,6 +154,9 @@ export function create(type, postData) {
                                 } else if(type === "registerEventCrew") {
                                     dispatch(registerSuccessfully());
                                     browserHistory.push({pathname:`/perEvent/` + reply["message"], state: {eventName: postData["eventName"]}});
+                                } else if(type === "studentEventRating") {
+                                    dispatch(createSuccessfully());
+                                    browserHistory.push("/home");
                                 } 
                             }
                         }

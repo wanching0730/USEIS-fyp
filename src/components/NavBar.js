@@ -37,8 +37,8 @@ class NavBar extends Component {
             browserHistory.push("/aboutMe");
         } else if(clickedTab == "myProfile") {
             browserHistory.push("/myProfile");
-        } else if(clickedTab == "myRecommendation") {
-            browserHistory.push("/myRecommendation");
+        } else if(clickedTab == "mySurvey") {
+            browserHistory.push("/mySurvey");
         }
     }
 
@@ -135,8 +135,8 @@ class NavBar extends Component {
                                             <DropdownItem name="myProfile" onClick={this.onClick}>
                                                 My Profile
                                             </DropdownItem>
-                                            <DropdownItem name="myRecommendation" onClick={this.onClick}>
-                                                My Recommendation
+                                            <DropdownItem name="mySurvey" onClick={this.onClick}>
+                                                My Survey
                                             </DropdownItem>
                                             <DropdownItem name="aboutMe" onClick={this.onClick}>
                                                 About Me
@@ -152,8 +152,8 @@ class NavBar extends Component {
                                             <DropdownItem name="myProfile" onClick={this.onClick}>
                                                 My Profile
                                             </DropdownItem>
-                                            <DropdownItem name="myRecommendation" onClick={this.onClick}>
-                                                My Recommendation
+                                            <DropdownItem name="mySurvey" onClick={this.onClick}>
+                                                My Survey
                                             </DropdownItem>
                                             <DropdownItem name="logout" onClick={this.logout}>
                                                 Logout

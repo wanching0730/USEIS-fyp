@@ -65,7 +65,7 @@ class Home extends Component {
     };
 
     handleClick() {
-        browserHistory.push("/myRecommendation");
+        browserHistory.push("/mySurvey");
     }
 
     render() {
@@ -101,9 +101,9 @@ class Home extends Component {
                                 ContentProps={{
                                     'aria-describedby': 'message-id',
                                 }}
-                                message={<span id="message-id">Note archived</span>}
+                                message={<span id="message-id">Complete survey for event preference.</span>}
                                 action={[
-                                    <Button key="undo" color="default" size="small" onClick={this.handleClick}>
+                                    <Button key="undo" color="secondary" size="small" onClick={this.handleClick}>
                                         Proceed
                                     </Button>,
                                     <IconButton
