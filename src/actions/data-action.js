@@ -24,6 +24,7 @@ import {
     RETRIEVE_ROLES,
     RETRIEVE_REC_SOCIETIES,
     RETRIEVE_REC_EVENTS,
+    RETRIEVE_EVENT_ANALYSIS,
     RETRIEVE_EVENTS_IN_MONTHS,
     RETRIEVE_BOOTH_AMOUNT,
     SEARCH_SOCIETY,
@@ -164,11 +165,11 @@ export function retrieveSingleDataSuccessful(type, data) {
                 loading: false
             }
         }
-    } else if(type === "recommendedEvents") {
+    } else if(type === "eventAnalysis") {
         return {
-            type: RETRIEVE_REC_EVENTS,
+            type: RETRIEVE_EVENT_ANALYSIS,
             payload: {
-                recommendedEvents: data,
+                analyzedEvents: data,
                 loading: false
             }
         }
@@ -477,12 +478,12 @@ export function retrieveData(type, id) {
                 let overallBooth = reply[0];
 
                 dispatch(retrieveSingleDataSuccessful("totalBooth", overallBooth));
-            } else if(type === "recommendedEvents") {
-                var recommendedEvents = [];
+            } else if(type === "eventAnalysis") {
+                var analyzedEvents = [];
                 if(reply.length > 0)
-                    recommendedEvents = reply;
+                    analyzedEvents = reply;
 
-                dispatch(retrieveSingleDataSuccessful("recommendedEvents", recommendedEvents));
+                dispatch(retrieveSingleDataSuccessful("eventAnalysis", analyzedEvents));
             } 
         });
     };

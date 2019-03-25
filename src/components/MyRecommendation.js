@@ -54,13 +54,15 @@ class CommitteeBoard extends Component {
 
     handleClick() {
         let eventInMonth = this.state.eventInMonth;
-        console.log(eventInMonth);
-        console.log(this.state.eventInMonth);
-        this.props.onCreate("studentEventRating", eventInMonth);
+        let ids = [], ratings = [];
+        for(var i = 0; i < eventInMonth.length; i++) {
+            ids.push(eventInMonth[i].eventId);
+            ratings.push(eventInMonth[i].rating);
+        }
+        this.props.onCreate("studentEventRating", {ids: ids, ratings: ratings, studentId: this.props.id});
     }
 
     render() {
-        console.log(this.props.eventInMonth);
         const { RaisedButtonStyle } = styles;
         let eventInMonth = this.props.eventInMonth;
         var rows = [];
@@ -139,15 +141,16 @@ const styles = {
     }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
         eventInMonth: state.data.eventInMonth,
         loading: state.data.loading,
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
+        id: state.auth.id
     };
 };
 
-const mapActionsToProps = (dispatch, props) => {
+const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
         onRetrieveAll: retrieveAll,
         onCreate: create,

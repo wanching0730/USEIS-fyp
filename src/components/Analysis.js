@@ -19,7 +19,7 @@ class Analysis extends Component {
         };
 
         this.props.onRetrieveAll("recommendedSocieties");
-        this.props.onRetrieveData("recommendedEvents", this.props.id);
+        this.props.onRetrieveData("eventAnalysis", this.props.id);
     }
 
     componentWillReceiveProps(nextProps){
@@ -34,12 +34,12 @@ class Analysis extends Component {
             }
         }
 
-        if((nextProps.recommendedEvents != this.props.recommendedEvents) && (nextProps.recommendedEvents != null)) {
-            let recommendedEvents = nextProps.recommendedEvents;
+        if((nextProps.analyzedEvents != this.props.analyzedEvents) && (nextProps.analyzedEvents != null)) {
+            let analyzedEvents = nextProps.analyzedEvents;
 
-            if(recommendedEvents.length > 0) {
-                let eventNames = recommendedEvents[0]["eventId"].split(",");
-                let ratings = recommendedEvents[0]["rating"].split(", ").map(function(each_element){
+            if(analyzedEvents.length > 0) {
+                let eventNames = analyzedEvents[0]["eventId"].split(",");
+                let ratings = analyzedEvents[0]["rating"].split(", ").map(function(each_element){
                     return Number(parseFloat(each_element).toFixed(2));
                 });
                 
@@ -60,7 +60,7 @@ class Analysis extends Component {
     }
 
     render() {
-        if(this.props.recommendedSocieties != null && this.props.recommendedEvents != null) {
+        if(this.props.recommendedSocieties != null && this.props.analyzedEvents != null) {
 
             var doughnutData, barData;
         
@@ -131,7 +131,7 @@ class Analysis extends Component {
 const mapStateToProps = (state, props) => {
     return {
         recommendedSocieties: state.data.recommendedSocieties,
-        recommendedEvents: state.data.recommendedEvents,
+        analyzedEvents: state.data.analyzedEvents,
         id: state.auth.id,
         loading: state.data.loading
     };
