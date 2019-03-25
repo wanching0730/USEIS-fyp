@@ -146,6 +146,7 @@ class ManageBooth extends Component {
                                         selected={this.state.selectedBiddingDate}
                                         onChange={this.handleDate.bind(this)}
                                         showTimeSelect
+                                        minDate={moment()}
                                         timeFormat="HH:mm"
                                         timeIntervals={15}
                                         dateFormat="YYYY-MM-DD HH:mm:ss"

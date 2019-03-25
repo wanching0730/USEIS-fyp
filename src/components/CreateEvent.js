@@ -35,7 +35,6 @@ class CreateEvent extends Component {
       fee: 0,
       chairperson: '',
       contact: '',
-      logoUrl: '',
       totalParticipant: 0,
       totalCrew: 0,
       selectedStartDate: moment(),
@@ -45,7 +44,8 @@ class CreateEvent extends Component {
       positionOptions: [],
       position1: 2, position2: 3, position3: 0,
       selectedFile: null,
-      selectedFileName: ''
+      selectedFileName: '',
+      counter: 0
     }
 
     this.props.onRetrieveAll("eventRole");
@@ -78,7 +78,6 @@ class CreateEvent extends Component {
         ssPoint: event["ssPoint"],
         chairperson: event["chairperson"], 
         contact: event["contact"],
-        logoUrl: event["logoUrl"],
         totalParticipant: event["totalParticipant"],
         totalCrew: event["totalCrew"],
         boothId: event["boothId"],
@@ -147,9 +146,9 @@ class CreateEvent extends Component {
     // console.log(this.state.selectedStartDate._d);
     // console.log(moment().format("YYYY-MM-DD HH:mm"));
     // console.log(moment(moment()._d).format("YYYY-MM-DD HH:mm"))
-    const { name, desc, venue, chairperson, contact, logoUrl, selectedFileName, position1, position2, position3 } = this.state;
+    const { name, desc, venue, chairperson, contact, position1, position2, position3, selectedFile, selectedFileName } = this.state;
     
-    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' || selectedFileName == '' || (position1 == 0 && position2 == 0 && position3 == 0)) {
+    if(name == '' || desc == '' || venue == '' ||  chairperson == '' || contact == '' || (position1 == 0 && position2 == 0 && position3 == 0)) {
       confirmAlert({
         title: 'Warning',
         message: 'Please fill in all empty fields before proceed',
@@ -160,6 +159,36 @@ class CreateEvent extends Component {
         ]
       })
       return false;
+    } else if (position1 == 1 && position2 == 1 && position3 == 1) {
+      confirmAlert({
+        title: 'Warning',
+        message: 'Please select authorized positions for this event to proceed',
+        buttons: [
+            {
+                label: 'Close'
+            }
+        ]
+      })
+    } else if(!selectedFile) {
+      confirmAlert({
+        title: 'Warning',
+        message: 'Please upload poster for this event to proceed',
+        buttons: [
+            {
+                label: 'Close'
+            }
+        ]
+      })
+    } else if(this.state.counter == 0) {
+      confirmAlert({
+        title: 'Warning',
+        message: 'Please select crew registration positions for this event to proceed',
+        buttons: [
+            {
+                label: 'Close'
+            }
+        ]
+      })
     } else {
       this.props.onUpdateLoadingBar();
 
@@ -331,6 +360,7 @@ class CreateEvent extends Component {
                           selected={this.state.selectedStartDate}
                           onChange={this.handleStart.bind(this)}
                           showTimeSelect
+                          minDate={moment()}
                           timeFormat="HH:mm"
                           timeIntervals={15}
                           dateFormat="YYYY-MM-DD HH:mm:ss"
@@ -342,6 +372,7 @@ class CreateEvent extends Component {
                           selected={this.state.selectedEndDate}
                           onChange={this.handleEnd.bind(this)}
                           showTimeSelect
+                          minDate={moment()}
                           timeFormat="HH:mm"
                           timeIntervals={15}
                           dateFormat="YYYY-MM-DD HH:mm:ss"
@@ -401,67 +432,67 @@ class CreateEvent extends Component {
                           <label>Secretary</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Secretary,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Secretary,'}); 
                             }}
                           /> 
                           <label>Vice Secretary</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Vice Secretary,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Vice Secretary,'}); 
                             }}
                           /> 
                           <label>Treasurer</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Treasurer,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Treasurer,'}); 
                             }}
                           /> 
                           <label>Vice Treasurer</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Vice Treasurer,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Vice Treasurer,'}); 
                             }}
                           /> 
                           <label>Programme</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Program HOD,Program Assistant,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Program HOD,Program Assistant,'}); 
                             }}
                           /> 
                            <label>Publicity</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Publicity HOD,Publicity Assistant,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Publicity HOD,Publicity Assistant,'}); 
                             }}
                           /> 
                            <label>Logistics</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Logistics HOD,Logistics Assistant,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Logistics HOD,Logistics Assistant,'}); 
                             }}
                           /> 
                            <label>Decoration</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Decoration HOD,Decoration Assistant,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Decoration HOD,Decoration Assistant,'}); 
                             }}
                           /> 
                            <label>Editorial</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Editorial HOD,Editorial Assistant,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Editorial HOD,Editorial Assistant,'}); 
                             }}
                           /> 
                           <label>Technical</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Technical HOD,Technical Assistant,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Technical HOD,Technical Assistant,'}); 
                             }}
                           /> 
                           <label>Auditor</label>
                           <Checkbox onCheck={(e, checked) => {
                               if(checked)
-                                this.setState({position: this.state.position + 'Auditor,'}); 
+                                this.setState({counter: this.state.counter+1, position: this.state.position + 'Auditor,'}); 
                             }}
                           />
                       </div>

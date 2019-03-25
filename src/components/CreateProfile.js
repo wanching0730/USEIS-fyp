@@ -104,12 +104,12 @@ class CreateProfile extends Component {
   }
 
   handleClick(event) {
-    const { name, desc, vision, mission, selectedFileName, position1, position2, position3 } = this.state;
+    const { name, desc, vision, mission, selectedFileName, position1, position2, position3, selectedFile } = this.state;
 
-    if(name == '' || desc == '' || vision == '' ||  mission == '' || selectedFileName == '' || (position1 == 1 && position2 == 1 && position3 == 1)) {
+    if(name == '' || desc == '' || vision == '' ||  mission == '') {
       confirmAlert({
         title: 'Warning',
-        message: 'Please fill in all empty fields before proceed',
+        message: 'Please fill in all empty fields to proceed',
         buttons: [
             {
                 label: 'Close'
@@ -117,7 +117,30 @@ class CreateProfile extends Component {
         ]
       })
       return false;
-    } else {
+    } else if (position1 == 1 && position2 == 1 && position3 == 1) {
+      console.log(position1);
+      console.log(position2);
+      confirmAlert({
+        title: 'Warning',
+        message: 'Please select authorized positions for this society to proceed',
+        buttons: [
+            {
+                label: 'Close'
+            }
+        ]
+      })
+    } else if(!selectedFile) {
+      confirmAlert({
+        title: 'Warning',
+        message: 'Please upload poster for this society to proceed',
+        buttons: [
+            {
+                label: 'Close'
+            }
+        ]
+      })
+    }
+    else  {
       this.props.onUpdateCreateLoadingBar();
 
       var bucketName = process.env.REACT_APP_S3_BUCKET_NAME;
@@ -326,7 +349,8 @@ const mapActionsToProps = (dispatch, props) => {
     onUpdate: update,
     onRetrieveData: retrieveData,
     onRetrieveAll: retrieveAll,
-    onUpdateRetrieveLoadingBar: updateLoadingBar
+    onUpdateRetrieveLoadingBar: updateLoadingBar,
+    onUpdateCreateLoadingBar: updatePostLoadingBar
   }, dispatch);
 };
 
