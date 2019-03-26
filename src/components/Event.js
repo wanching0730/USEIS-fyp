@@ -34,13 +34,13 @@ class Event extends Component {
         };
 
         this.handleSearch = this.handleSearch.bind(this);
-
-        this.props.onUpdateLoadingBar();
-        this.props.onRetrieveAll("event");
     }
 
     async componentDidMount() {
         window.scrollTo(0, 0);
+
+        this.props.onUpdateLoadingBar();
+        this.props.onRetrieveAll("event");
     }
 
     componentWillReceiveProps(nextProps){

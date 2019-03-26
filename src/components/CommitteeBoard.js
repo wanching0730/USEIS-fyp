@@ -20,6 +20,10 @@ class CommitteeBoard extends Component {
         if(!this.props.isAuthenticated) {
             window.location.assign('/');
         }
+    }
+
+    componentDidMount() {
+        window.scrollTo(0, 0);
 
         this.props.onUpdateLoadingBar();
 
@@ -28,10 +32,6 @@ class CommitteeBoard extends Component {
             this.props.onRetrieveData("societyComm", parameter.id);
         else 
             this.props.onRetrieveData("eventComm", parameter.id);
-    }
-
-    componentDidMount() {
-        window.scrollTo(0, 0)
     }
 
     render() {

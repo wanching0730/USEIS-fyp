@@ -18,9 +18,9 @@ export class AboutMe extends Component {
         }
     }
 
-    componentDidMount() {
-        fetch(`https://b2auwy2dql.execute-api.ap-southeast-1.amazonaws.com/v1/society`);
-    }
+    // componentDidMount() {
+    //     fetch(`https://b2auwy2dql.execute-api.ap-southeast-1.amazonaws.com/v1/society`);
+    // }
 
     render() {
         let user = this.props.user;

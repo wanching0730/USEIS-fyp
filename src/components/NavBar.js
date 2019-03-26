@@ -141,6 +141,7 @@ class NavBar extends Component {
                                             <DropdownItem name="aboutMe" onClick={this.onClick}>
                                                 About Me
                                             </DropdownItem>
+                                            <DropdownItem divider />
                                             <DropdownItem name="logout" onClick={this.logout}>
                                                 Logout
                                             </DropdownItem>             
@@ -155,6 +156,7 @@ class NavBar extends Component {
                                             <DropdownItem name="mySurvey" onClick={this.onClick}>
                                                 My Survey
                                             </DropdownItem>
+                                            <DropdownItem divider />
                                             <DropdownItem name="logout" onClick={this.logout}>
                                                 Logout
                                             </DropdownItem>

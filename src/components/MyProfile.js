@@ -34,14 +34,6 @@ class MyProfile extends Component {
             societies: null
         };
 
-        this.props.onUpdateLoadingBar();
-        this.props.onRetrieveAll("societyEvent");
-
-        if(isNaN(this.props.userName))
-            this.props.onRetrieveData("staffSociety", this.props.userId);
-        else
-            this.props.onRetrieveData("studentSociety", this.props.userId);
-
         this.updateList = this.updateList.bind(this);
         this.handleCancelSociety = this.handleCancelSociety.bind(this);
         this.handleRemoveSociety = this.handleRemoveSociety.bind(this);
@@ -50,6 +42,15 @@ class MyProfile extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
 
+        this.props.onUpdateLoadingBar();
+        this.props.onRetrieveAll("societyEvent");
+
+        if(isNaN(this.props.userName))
+            this.props.onRetrieveData("staffSociety", this.props.userId);
+        else
+            this.props.onRetrieveData("studentSociety", this.props.userId);
+
+            
         const socket = openSocket(API_BASE_URL);
         socket.on('updateParticipation', this.updateList);
     }

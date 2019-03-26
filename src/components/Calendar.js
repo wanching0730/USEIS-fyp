@@ -20,10 +20,12 @@ class Calendar extends Component {
       this.state = {
         calendarEvents: []
       };
+  }
 
-      this.props.onRetrieveAll("calendarEvent");
-
-      BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
+  componentDidMount() {
+    this.props.onRetrieveAll("calendarEvent");
+    
+    BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment))
   }
 
   componentWillReceiveProps(nextProps){

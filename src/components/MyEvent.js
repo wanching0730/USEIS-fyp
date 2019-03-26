@@ -33,13 +33,6 @@ class MyEvent extends Component {
             userEvents: null
         };
 
-        this.props.onUpdateLoadingBar();
-
-        if(isNaN(this.props.userName)) 
-            this.props.onRetrieveData("staffEvent", this.props.userId);
-        else 
-            this.props.onRetrieveData("studentEvent", this.props.userId);
-
         this.handleCancelEvent = this.handleCancelEvent.bind(this);
         this.handleCancelCrew = this.handleCancelCrew.bind(this);
         this.handleRemoveEvent = this.handleRemoveEvent.bind(this);
@@ -48,6 +41,13 @@ class MyEvent extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
+
+        this.props.onUpdateLoadingBar();
+
+        if(isNaN(this.props.userName)) 
+            this.props.onRetrieveData("staffEvent", this.props.userId);
+        else 
+            this.props.onRetrieveData("studentEvent", this.props.userId);
 
         const socket = openSocket(API_BASE_URL);
         socket.on('updateParticipation', this.updateList);

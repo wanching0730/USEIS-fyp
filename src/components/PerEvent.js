@@ -29,18 +29,18 @@ class PerEvent extends Component {
             window.location.assign('/');
         }
         
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    componentDidMount() {
+        window.scrollTo(0, 0);
+
         this.props.onUpdateLoadingBar();
 
         if(!isNaN(this.props.userName))
             this.props.onRetrieveDataWithUserId("studentEvent", this.props.params.eventId, this.props.id);
         else 
             this.props.onRetrieveDataWithUserId("staffEvent", this.props.params.eventId, this.props.id);
-        
-        this.handleDelete = this.handleDelete.bind(this);
-    }
-
-    componentDidMount() {
-        window.scrollTo(0, 0);
     }
 
     handleEvent(event) {

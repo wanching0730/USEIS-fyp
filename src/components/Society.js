@@ -30,13 +30,13 @@ class Society extends Component {
         this.state = {
             searchWord: ""
         };
-
-        this.props.onUpdateLoadingBar();
-        this.props.onRetrieveAll("society");
     }
 
     async componentDidMount() {
         window.scrollTo(0,0);
+
+        this.props.onUpdateLoadingBar();
+        this.props.onRetrieveAll("society");
     }
 
     componentWillReceiveProps(nextProps){

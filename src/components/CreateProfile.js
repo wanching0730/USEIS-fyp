@@ -118,8 +118,6 @@ class CreateProfile extends Component {
       })
       return false;
     } else if (position1 == 1 && position2 == 1 && position3 == 1) {
-      console.log(position1);
-      console.log(position2);
       confirmAlert({
         title: 'Warning',
         message: 'Please select authorized positions for this society to proceed',
