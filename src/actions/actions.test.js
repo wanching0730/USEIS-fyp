@@ -1,10 +1,9 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk';
 
-import { loginUserSuccessful, loginUser } from './auth-action';
-import { searchDataSuccessful, exportData } from './data-action';
-import { deleteDataSuccessful, deleteData } from './delete-action';
-import { createSuccessfully } from './post-action';
+import { loginUser } from './auth-action';
+import { retrieveAll } from './data-action';
+import { deleteData } from './delete-action';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -40,9 +39,9 @@ describe('ACTION', () => {
     //     expect(store.getActions()[0].type).toEqual("CREATE")
     // })
 
-    // to test whether the correct action is dispatched after respective API call
+    // to test whether the correct action is dispatched after respective API is called
     it('calls request and success actions if the fetch response was successful - 1', () => {
-        return store.dispatch(loginUser({username: "123", userPool: {}}))
+        return store.dispatch(loginUser({username: "150123", userPool: {}}))
           .then(() => {
             const expectedActions = store.getActions();
             expect(expectedActions.length).toBe(1);
@@ -51,11 +50,11 @@ describe('ACTION', () => {
     });
 
     it('calls request and success actions if the fetch response was successful - 2', () => {
-        return store.dispatch(exportData("eventCrew", 4))
+        return store.dispatch(retrieveAll("society", 37))
           .then(() => {
             const expectedActions = store.getActions();
             expect(expectedActions.length).toBe(1);
-            expect(expectedActions[0].type).toEqual("EXPORT_DATA");
+            expect(expectedActions[0].type).toEqual("RETRIEVE_SOCIETIES");
           })
     });
 

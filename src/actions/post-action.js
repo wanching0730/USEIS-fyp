@@ -125,9 +125,20 @@ export function create(type, postData) {
         }).join('&');
 
         return createData(type, data).then(result => result.json()).then(reply => {
+            var message;
+            if(reply["responseCode"] != 500) {
+                if(type == "society" || type == "event" || type == "newsfeeds" || type == "studentEventRating")
+                    message = "Data has been created successfully";
+                else 
+                    message = "Your registration is completed. Approval is pending."
+            } else {
+                message = 'Data cannot be created: ' + reply["message"]
+            }
+                
+            
             confirmAlert({
                 title: 'Message',
-                message: reply["responseCode"] != 500 ? 'Data has been created successfully' : 'Data cannot be created: ' + reply["message"],
+                message: message,
                 buttons: [
                     {
                         label: 'Close',

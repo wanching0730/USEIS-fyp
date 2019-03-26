@@ -347,7 +347,7 @@ class NewsFeed extends Component {
             }
             
             for(var i = 0; i < filteredNewsfeeds.length; i++) {
-                if(this.state.searchWord == "" || filteredNewsfeeds[i]["name"].toLowerCase().includes(this.state.searchWord.toLowerCase())) {
+                if(this.state.searchWord == "" || filteredNewsfeeds[i]["name"].toLowerCase().includes(this.state.searchWord.toLowerCase()) || filteredNewsfeeds[i]["description"].toLowerCase().includes(this.state.searchWord.toLowerCase())) {
                     let newsfeed = filteredNewsfeeds[i];
                     if(newsfeed["type"] == "s") {
                         // url = "/perSociety/" + newsfeed["ownerId"];
@@ -408,7 +408,7 @@ class NewsFeed extends Component {
                     </div>
 
                     <SearchBar 
-                        hintText="Search society or event..."
+                        hintText="Search by society or event..."
                         onChange={(newValue) => this.setState({ searchWord: newValue })}
                         style={{
                             marginLeft: 20,

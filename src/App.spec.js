@@ -7,7 +7,7 @@ describe('Faq Component', () => {
     it('renders the Faq wrapper', () => {
       const wrapper = shallow(
         <Faq />);
-      expect(wrapper.find('li')).to.have.length(22);
+      expect(wrapper.find('li')).to.have.length(24);
   });
 });
 
