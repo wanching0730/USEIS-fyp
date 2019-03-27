@@ -317,6 +317,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
                     specificAuthorized: reply[0]["specificAuthorized"],
+                    authorized: reply[0]["authorized"],
                     status: reply[0]["status"]  
                 }
 
@@ -347,6 +348,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     participated: reply[0]["participated"],
                     authorized: reply[0]["authorized"],
                     specificAuthorized: reply[0]["specificAuthorized"],
+                    authorized: reply[0]["authorized"],
                     roles: reply[0]["roles"],
                     status: reply[0]["status"]
                 }

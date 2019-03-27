@@ -184,7 +184,7 @@ class PerSociety extends Component {
                     :
                     [
                         <div>
-                            {society["specificAuthorized"] || this.props.role === "dsa" ?
+                            {society["specificAuthorized"] || this.props.role === "dsa" || society["authorized"] ?
                                 [
                                     <div className="zoom">
                                        <Tooltip title="Actions" placement="left">
