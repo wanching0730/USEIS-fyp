@@ -252,7 +252,10 @@ export function updateDouble(type, postData, name) {
                                         browserHistory.push({pathname:`/register_booth/event/` + reply["message"], state: {eventName: name}});
                                 } else if(type === "resubmitStaffParticipant" || type === "resubmitStudentParticipant" || type === "resubmitMemberRegistration" || type === "resubmitAdvisorRegistration" || type === "cancelStudentEvent" || type === "cancelStaffEvent") {
                                     browserHistory.push("/myEvent");
-                                } else {
+                                } else if(type === "removeBooth") {
+                                    browserHistory.push("/recruitmentBooth");
+                                }
+                                 else {
                                     browserHistory.push({pathname:`/manageCrew/` + reply["message"], state: {eventName: name}});
                                 }
                             }

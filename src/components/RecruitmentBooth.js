@@ -5,11 +5,13 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Link } from 'react-router';
+import Tooltip from '@material-ui/core/Tooltip';
 import '../style/society.css';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveAll, updateLoadingBar } from '../actions/data-action';
+import { updateDouble, updatePostLoadingBar, update} from '../actions/post-action';
 
 class RecruitmentBooth extends Component {
 
@@ -26,16 +28,28 @@ class RecruitmentBooth extends Component {
 
         this.props.onUpdateLoadingBar();
 
+        this.handleRemove = this.handleRemove.bind(this);
+    }
+
+    componentDidMount() {
+        window.scrollTo(0, 0);
+
         this.props.onRetrieveAll("societyBooth");
         this.props.onRetrieveAll("eventBooth");
     }
 
-    componentDidMount() {
-        window.scrollTo(0, 0)
+    handleRemove(event) {
+        this.props.onUpdatePostLoadingBar();
+
+        let data = {
+          type: this.state.type,
+          id: event.target.value
+        }
+    
+        this.props.onUpdateDouble("removeBooth", data, "");
     }
 
     render() {
-
         const { RaisedButtonStyle } = styles;
         var message = <div></div>;
 
@@ -48,7 +62,8 @@ class RecruitmentBooth extends Component {
                     <tr>
                         <th>No.</th>
                         <th>Society</th>
-                        <th>Booth Number</th>                 
+                        <th>Booth Number</th>   
+                        {this.props.role == "dsa" ? <th>Action</th> : null}      
                     </tr>
 
                 if(societyBooths.length > 0) {
@@ -66,6 +81,13 @@ class RecruitmentBooth extends Component {
                                 <td>{i+1}</td>
                                 <td><Link to={toSociety}>{societyBooth["name"]}</Link></td>
                                 <td>{societyBooth["location"]}</td>
+                                {this.props.role == "dsa" ? 
+                                    <td>
+                                        <Tooltip title="Remove" placement="right">
+                                            <li value={societyBooth["societyId"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
+                                        </Tooltip>
+                                    </td> 
+                                : null}   
                             </tr>
                         );
                     }
@@ -82,7 +104,8 @@ class RecruitmentBooth extends Component {
                     <tr>
                         <th>No.</th>
                         <th>Event</th>
-                        <th>Booth Number</th>                 
+                        <th>Booth Number</th>     
+                        {this.props.role == "dsa" ? <th>Action</th> : null}
                     </tr>
 
                  if(eventBooths.length > 0) {
@@ -100,6 +123,13 @@ class RecruitmentBooth extends Component {
                                 <td>{i+1}</td>
                                 <td><Link to={toEvent}>{eventBooth["name"]}</Link></td>
                                 <td>{eventBooth["location"]}</td>
+                                {this.props.role == "dsa" ? 
+                                    <td>
+                                        <Tooltip title="Remove" placement="right">
+                                            <li value={eventBooth["eventId"]} onClick={(event) => this.handleRemove(event)} className="fa fa-trash"></li>
+                                        </Tooltip>
+                                    </td> 
+                                : null}   
                             </tr>
                         );
                     }
@@ -108,7 +138,6 @@ class RecruitmentBooth extends Component {
                 }
             } 
         }
-        
         
         return (
 
@@ -177,14 +206,17 @@ const mapStateToProps = (state, props) => {
         societyBooths: state.data.societyBooths,
         eventBooths: state.data.eventBooths,
         loading: state.data.loading,
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
+        role: state.auth.role
     };
 };
 
 const mapActionsToProps = (dispatch, props) => {
     return bindActionCreators({
       onRetrieveAll: retrieveAll,
+      onUpdateDouble: updateDouble,
       onUpdateLoadingBar: updateLoadingBar,
+      onUpdatePostLoadingBar: updatePostLoadingBar
     }, dispatch);
 };
 

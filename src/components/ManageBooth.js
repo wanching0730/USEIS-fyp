@@ -7,12 +7,13 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { confirmAlert } from 'react-confirm-alert';
 import DatePicker from "react-datepicker"; 
 import { Link } from 'react-router';
+import moment from "moment";
 import '../style/form.css';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { update, updatePostLoadingBar } from '../actions/post-action';
-import moment from "moment";
+
 
 class ManageBooth extends Component {
 
@@ -135,14 +136,14 @@ class ManageBooth extends Component {
                                     <div class="inner-wrap">
                                         <label>Date &amp; Time </label>
                                         <DatePicker
-                                        selected={this.state.selectedBiddingDate}
-                                        onChange={this.handleDate.bind(this)}
-                                        showTimeSelect
-                                        minDate={moment()}
-                                        timeFormat="HH:mm"
-                                        timeIntervals={15}
-                                        dateFormat="YYYY-MM-DD HH:mm:ss"
-                                        timeCaption="time"
+                                            selected={this.state.selectedBiddingDate}
+                                            onChange={this.handleDate.bind(this)}
+                                            showTimeSelect
+                                            minDate={moment()}
+                                            timeFormat="HH:mm"
+                                            timeIntervals={15}
+                                            dateFormat="YYYY-MM-DD HH:mm:ss"
+                                            timeCaption="time"
                                         />
                                     </div>
 
@@ -159,7 +160,6 @@ class ManageBooth extends Component {
         </div>
         );
     };
-    
 };
 
 const styles = {
