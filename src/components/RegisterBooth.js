@@ -17,7 +17,7 @@ import '../style/form.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { retrieveAll, retrieveData, updateLoadingBar, updateEndLoadingBar } from '../actions/data-action';
-import { updateDouble, updatePostLoadingBar, update} from '../actions/post-action';
+import { updateDouble, updatePostLoadingBar } from '../actions/post-action';
 
 class RegisterBooth extends Component {
 
@@ -111,7 +111,6 @@ class RegisterBooth extends Component {
     var newSeatMap = this.state.seatMap;
     newSeatMap[data["selectedRow"]][data["selectedSeat"]]["isReserved"] = true;
 
-    console.log(data["previousRow"]);
     if(data["previousRow"] != -1 && data["previousSeat"] != -1) {
       delete newSeatMap[data["previousRow"]][data["previousSeat"]].isReserved;
       this.setState({seatMap: newSeatMap});

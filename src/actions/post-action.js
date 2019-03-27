@@ -244,7 +244,7 @@ export function updateDouble(type, postData, name) {
                                 } else if(type === "studentParticipant" || type === "staffParticipant" || type === "rejectStudentEvent" || type === "rejectStaffEvent") {
                                     browserHistory.push({pathname:`/manageParticipant/` + reply["message"], state: {eventName: name}});
                                 } else if(type === "booth") {
-                                    dispatch(registerSuccessfully());
+                                    dispatch(updateSuccessfully());
 
                                     if(postData["type"] === "society")
                                         browserHistory.push({pathname:`/register_booth/society/` + reply["message"], state: {societyName: name}});
@@ -253,6 +253,7 @@ export function updateDouble(type, postData, name) {
                                 } else if(type === "resubmitStaffParticipant" || type === "resubmitStudentParticipant" || type === "resubmitMemberRegistration" || type === "resubmitAdvisorRegistration" || type === "cancelStudentEvent" || type === "cancelStaffEvent") {
                                     browserHistory.push("/myEvent");
                                 } else if(type === "removeBooth") {
+                                    dispatch(updateSuccessfully());
                                     browserHistory.push("/recruitmentBooth");
                                 }
                                  else {
