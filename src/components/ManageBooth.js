@@ -37,14 +37,6 @@ class ManageBooth extends Component {
         window.scrollTo(0, 0)
     }
 
-    // handleSocieties(event) {
-    //     browserHistory.push("/manageBooth");
-    // }
-
-    // handleEvents(event) {
-    //     browserHistory.push("/manageEventBooth");
-    // }
-
     handleDate(date) {
         this.setState({
           selectedBiddingDate: date,
@@ -162,48 +154,6 @@ class ManageBooth extends Component {
                             </div>
                         </div>
                     ]}
-
-                    {/* <div style= {{ textAlign: "center" }}>
-                        <RaisedButton label="My Societies" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleSocieties(event)}/>
-                        <RaisedButton label="My Events" primary={true} style={RaisedButtonStyle} onClick={(event) => this.handleEvents(event)}/>
-                    </div>
-
-                    <div className="container" id="tableContainer">
-                        <div className="row">
-                            <div className="panel-body">
-                                <table className="table table-hover table-light" border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>No.</th>
-                                            <th>Societies</th>
-                                            <th>Booth Number</th>     
-                                            <th>Action</th>                 
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr> 
-                                            <td>1</td>
-                                            <td>IT Society</td>
-                                            <td>21</td>
-                                            <td><Link onClick={this.handleApprove}><FontAwesome.FaPlus /></Link></td>
-                                        </tr>
-                                        <tr> 
-                                            <td>4</td>
-                                            <td>Music Club</td>
-                                            <td>5</td>
-                                            <td><FontAwesome.FaCheck /></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <div style= {{ textAlign: "center" }}>
-                                    <RaisedButton label="Back" primary={true} style={RaisedButtonStyle} onClick={(event) => window.history.back()}/>
-                                </div>
-
-                            </div>
-                        </div> */}
-                    {/* </div> */}
                 </MuiThemeProvider>
             </div>
         </div>
