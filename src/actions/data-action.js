@@ -317,7 +317,7 @@ export function retrieveDataWithUserId(type, id, userId) {
                     boothId: reply[0]["boothId"],
                     participated: reply[0]["participated"],
                     specificAuthorized: reply[0]["specificAuthorized"],
-                    status: reply[0]["status"]      
+                    status: reply[0]["status"]  
                 }
 
                 dispatch(retrieveSingleDataSuccessful("society", society));

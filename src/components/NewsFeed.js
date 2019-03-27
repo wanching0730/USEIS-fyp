@@ -112,7 +112,7 @@ class NewsFeed extends Component {
                 let options = [];
                 for(var i = 0; i < events.length; i++) {
                     let event = events[i];
-                    if([2,3,10].includes(event["eRoleId"])) {
+                    if([2,3,12].includes(event["eRoleId"])) {
                         options.push({
                             value: event["eventId"],
                             name: event["name"]
@@ -431,6 +431,7 @@ class NewsFeed extends Component {
                         >
 
                         <h2 ref={subtitle => this.subtitle = subtitle}>What's new?</h2>
+                        <h6 style={{ textAlign: "center" }}>*Only Chairperson, Vice Chairperson and Publicity HOD of event is authorized to create news feed.</h6>
                         <br/>
                         <form style={{textAlign:"center"}}>
                             <label><strong>Choose: </strong></label>

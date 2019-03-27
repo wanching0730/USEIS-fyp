@@ -285,14 +285,7 @@ class PerEvent extends Component {
                                         </div>
                                         <div class="column middle">
                                             <h5>Description:</h5>
-                                            <p>
-                                                {/* {event["desc"]} */}
-                                                The biggest challenge to IT in the future is security. 
-                                                Security could negatively impact connectivity to public networks. 
-                                                If these problems cannot be successfully addressed, I envision a time of closed, private networks and less information sharing. 
-                                                The risks now are so great and getting worse every day that we even see foreign governments 
-                                                toppling superpowers the way Russia toppled the US and put its puppet in charge because of weak controls and poor security.
-                                            </p>
+                                            <p>{event["desc"]}</p>
                                             <br/><br/>
                                             <h5>Start Date:</h5>
                                             <p>{moment(event["startDate"]).format("YYYY-MM-DD HH:mm")}</p>

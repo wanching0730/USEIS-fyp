@@ -395,7 +395,7 @@ class CreateEvent extends Component {
                         <input type="text" value={this.state.chairperson} name="chairperson" onChange={(event) => {this.setState({chairperson:event.target.value})}}/>
                         <br/>
                         <label>Contact Number</label> 
-                        <input type="number" min="0" value={this.state.contact} name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
+                        <input type="number" min="0" placeholder="0163344556" value={this.state.contact} name="contact" onChange={(event) => {this.setState({contact:event.target.value})}}/>
                       </div>
 
                       <div class="section"><span>5</span>Soft Skill Points &amp; Category</div>
