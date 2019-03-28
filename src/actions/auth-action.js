@@ -163,7 +163,7 @@ export function loginUser(postData) {
 
             browserHistory.push("/home");
 
-            console.log("token: " + reply["token"]);
+            // console.log("token: " + reply["token"]);
         })
         .catch(error => {
             console.log("login error: " + error);

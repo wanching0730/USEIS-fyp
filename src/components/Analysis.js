@@ -79,7 +79,12 @@ class Analysis extends Component {
     }
 
     render() {
-        if(this.props.recommendedSocieties != null && this.props.analyzedEvents != null) {
+        console.log(this.state.bar1Labels);
+        console.log(this.state.bar1Data);
+        console.log(this.props.recommendedEvents);
+        console.log(this.props.recommendedSocieties);
+        console.log(this.props.analyzedEvents);
+        if(this.props.recommendedSocieties != null || this.props.analyzedEvents != null || this.props.recommendedEvents != null) {
 
             var doughnutData, barData, bar1Data;
         

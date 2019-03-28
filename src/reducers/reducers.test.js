@@ -14,6 +14,7 @@ const loggedInState = {
     deleteLoading: true
 };
 
+// to test whether the values inserted into the store can be retrieved using reducer or not
 describe('REDUCER', () => {
     it('handles successful login', () => {
         expect(authReducer(initialState, {
