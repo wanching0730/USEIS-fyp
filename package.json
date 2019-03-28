@@ -69,14 +69,14 @@
     "cypress": "^3.2.0",
     "dotenv": "^7.0.0",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.11.2"
+    "enzyme-adapter-react-16": "^1.11.2",
+    "start-server-and-test": "^1.7.12"
   },
   "scripts": {
     "start": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
     "deploy": "npm run build && firebase deploy",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "test:cypress": "cypress open"
+    "eject": "react-scripts eject"
   }
 }
