@@ -74,14 +74,14 @@ class Calendar extends Component {
 
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
     calendarEvents: state.data.calendarEvents,
     loading: state.data.loading
   };
 };
 
-const mapActionsToProps = (dispatch, props) => {
+const mapActionsToProps = (dispatch) => {
   return bindActionCreators({
     onRetrieveAll: retrieveAll,
     onUpdateLoadingBar: updateLoadingBar

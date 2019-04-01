@@ -51,7 +51,6 @@ class CreateEvent extends Component {
     this.props.onRetrieveAll("eventRole");
 
     this.handleClick = this.handleClick.bind(this);
-    //this.handleChange = this.handleChange.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.handleSelectedFile = this.handleSelectedFile.bind(this);
@@ -225,18 +224,10 @@ class CreateEvent extends Component {
       if(this.state.position3 != 0)
         authorizedPositions.push(this.state.position3);
       
-      //let authorizedPositions = this.state.position1 + ',' + this.state.position2 + ',' + this.state.position3;
-      //let eventId = this.props.params.id;
       let data = this.state
       let eventName = data["name"];
       data["authorizedPositions"] = authorizedPositions
       data["logoUrl"] = "https://" + bucketName + ".s3." + bucketRegion + ".amazonaws.com/" + selectedFileName;
-      //data["selectedStartDate"] = typeof this.state.selectedStartDate != "string" ? "" + moment().format("YYYY-MM-DD HH:mm") : data["selectedStartDate"];
-
-      // if(this.props.params.eventId)
-      //   data["authorizedPositions"]= authorizedPositions == '' ? this.props.event["authorizedPosition"] : authorizedPositions;
-      // else
-      //   data["authorizedPositions"]= authorizedPositions == '' ? "Chairperson,Vice Chairperson" : authorizedPositions;
 
       if(this.props.params.type == "society")
         this.props.onCreate("event", data);
@@ -290,9 +281,6 @@ class CreateEvent extends Component {
     const softSkillCategories = [{value:'Communication & Language Skills', name:'Communication & Language Skills'}, {value:'Critical Thinking & Problem Solving', name:'Critical Thinking & Problem Solving'}, {value:'digitalLiteracy', name:'Digital Literacy'},
     {value:'Emotional Intelligence & Teamwork Skills', name:'Emotional Intelligence & Teamwork Skills'}, {value:'Entrepreneur Skills', name:'Entrepreneurship Skills'}, {value:'Leadership Skills', name:'Leadership Skills'},
     {value:'Lifelong Learning & Information Management', name:'Lifelong Learning & Information Management'}, {value:'Moral & Professional Ethics', name:'Moral & Professional Ethics'}];
-
-    // const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
-    //   {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Editorial', name:'Editorial'}]
 
     var header;
     var breadCrumb;

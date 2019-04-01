@@ -40,7 +40,6 @@ export function updateDeleteLoadingBar() {
 export function deleteData(type, id) {
     return function (dispatch) {
         return removeData(type, id).then(result => result.json()).then(reply => {
-            // if(reply != "true") {
             dispatch(deleteDataSuccessful());
             confirmAlert({
                 title: 'Message',
@@ -60,8 +59,8 @@ export function deleteData(type, id) {
                             }
                         }
                     }
-                ]})
-            //}
+                ]
+            })
         });
     };
 }

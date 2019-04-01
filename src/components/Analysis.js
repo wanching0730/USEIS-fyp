@@ -79,11 +79,6 @@ class Analysis extends Component {
     }
 
     render() {
-        console.log(this.state.bar1Labels);
-        console.log(this.state.bar1Data);
-        console.log(this.props.recommendedEvents);
-        console.log(this.props.recommendedSocieties);
-        console.log(this.props.analyzedEvents);
         if(this.props.recommendedSocieties != null || this.props.analyzedEvents != null || this.props.recommendedEvents != null) {
 
             var doughnutData, barData, bar1Data;
@@ -177,7 +172,7 @@ class Analysis extends Component {
     }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
         recommendedEvents: state.data.recommendedEvents,
         recommendedSocieties: state.data.recommendedSocieties,
@@ -187,7 +182,7 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-const mapActionsToProps = (dispatch, props) => {
+const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
       onRetrieveAll: retrieveAll,
       onRetrieveData: retrieveData

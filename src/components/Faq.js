@@ -238,7 +238,7 @@ export class Faq extends Component {
                         <li>
                             <a className="cd-faq-trigger" href="#0">What is Past Event Analysis?</a>
                             <div className="cd-faq-content">
-                                <p>The analysis tells you about which events are favoured by yourself and others based on the joined events.</p>
+                                <p>The analysis tells you about which events are favoured by yourself and other students based on the past event ratings provided by everyone.</p>
                             </div> 
                         </li>
 

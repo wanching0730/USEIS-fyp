@@ -4,15 +4,9 @@ import { confirmAlert } from 'react-confirm-alert';
 import '../style/alert.css';
 import {
     UPDATE_POST_LOADINGBAR,
-    // CREATE_SOCIETY,
-    // CREATE_EVENT,
-    // CREATE_NEWSFEED,
-    // CREATE_RATING,
     CREATE,
     REGISTER,
     UPDATE
-    // UPDATE_SOCIETY,
-    // UPDATE_EVENT
 } from '../constant';
 
 export function updatePostLoadingBarSuccessful() {
@@ -33,46 +27,6 @@ export function createSuccessfully() {
     }
 }
 
-// export function createSocietySuccessful(societyId) {
-//     return {
-//         type: CREATE_SOCIETY,
-//         payload: {
-//             createdSocietyId: societyId,
-//             loading: false
-//         }
-//     }
-// }
-
-// export function createEventSuccessful(eventId) {
-//     return {
-//         type: CREATE_EVENT,
-//         payload: {
-//             createdEventId: eventId,
-//             loading: false
-//         }
-//     }
-// }
-
-// export function createNewsfeedSuccessful(newsfeedId) {
-//     return {
-//         type: CREATE_NEWSFEED,
-//         payload: {
-//             createdNewsfeedId: newsfeedId,
-//             loading: false
-//         }
-//     }
-// }
-
-// export function createRatingSuccessful(ratingId) {
-//     return {
-//         type: CREATE_RATING,
-//         payload: {
-//             createdRatingId: ratingId,
-//             loading: false
-//         }
-//     }
-// }
-
 export function registerSuccessfully() {
     return {
         type: REGISTER,
@@ -90,26 +44,6 @@ export function updateSuccessfully() {
         }
     }
 }
-
-// export function updateSocietySuccessfully(updatedSocietyId) {
-//     return {
-//         type: UPDATE_SOCIETY,
-//         payload: {
-//             updatedSocietyId: updatedSocietyId,
-//             loading: false
-//         }
-//     }
-// }
-
-// export function updateEventSuccessfully(updatedEventId) {
-//     return {
-//         type: UPDATE_EVENT,
-//         payload: {
-//             updatedEventId: updatedEventId,
-//             loading: false
-//         }
-//     }
-// }
 
 export function updatePostLoadingBar() {
     return function (dispatch) {
@@ -145,7 +79,6 @@ export function create(type, postData) {
                         onClick: () => {
                             if(reply["responseCode"] == 500) {
                                 dispatch(createSuccessfully());
-                                //browserHistory.push('/home');
                             } else {
                                 if(type === "society") {
                                     dispatch(createSuccessfully());
@@ -194,7 +127,6 @@ export function update(type, id, name, postData) {
                         onClick: () => {
                             if(reply["responseCode"] == 500) {
                                 dispatch(updateSuccessfully());
-                                //browserHistory.push('/home');
                             } else {
                                 if(type === "society") {
                                     dispatch(updateSuccessfully());
@@ -236,9 +168,7 @@ export function updateDouble(type, postData, name) {
                         onClick: () => {
                             if(reply["responseCode"] == 500) {
                                 console.log("click");
-                                //browserHistory.push('/home');
                             } else {
-                                // if(type === "crew" || type === "rejectCrew" || type === "societyCrew" || type === "societyAdvisor") {
                                 if(type === "member" || type === "rejectStudentSociety") {
                                     browserHistory.push({pathname:`/manageMember/` + reply["message"], state: {societyName: name}});
                                 } else if(type === "studentParticipant" || type === "staffParticipant" || type === "rejectStudentEvent" || type === "rejectStaffEvent") {

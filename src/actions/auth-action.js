@@ -7,8 +7,6 @@ import firebase from 'firebase';
 import {
     UPDATE_AUTH_LOADINGBAR,
     LOGIN_USER_SUCCESS,
-    // LOGIN_USER_FAILURE,
-    // LOGIN_USER_REQUEST,
     LOGOUT_USER,
     GET_FCM_TOKEN
 } from '../constant';
@@ -162,8 +160,6 @@ export function loginUser(postData) {
             }
 
             browserHistory.push("/home");
-
-            // console.log("token: " + reply["token"]);
         })
         .catch(error => {
             console.log("login error: " + error);

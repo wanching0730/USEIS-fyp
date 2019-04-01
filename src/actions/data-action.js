@@ -1,5 +1,4 @@
-import { getData, getAllData, getDataWithUserId, searchAllData, downloadData } from '../utils/http_function';
-import { confirmAlert } from 'react-confirm-alert';
+import { getData, getAllData, getDataWithUserId, searchAllData } from '../utils/http_function';
 import {
     UPDATE_RETRIEVE_LOADINGBAR,
     RETRIEVE_SOCIETIES,

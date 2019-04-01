@@ -43,7 +43,6 @@ class CreateProfile extends Component {
 
     this.props.onRetrieveAll("societyRole");
 
-    //this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleSocietyCategory = this.handleSocietyCategory.bind(this);
     this.handleSelectedFile = this.handleSelectedFile.bind(this);
@@ -210,9 +209,6 @@ class CreateProfile extends Component {
     const societyCategories = [{value:'Dance', name:'Dance'}, {value:'Design', name:'Design'}, {value:'Education', name:'Education'},
     {value:'Entertainment', name:'Entertainment'}, {value:'Music', name:'Music'}, {value:'Soft Skill', name:'Soft Skill'}, 
     {value:'Sport', name:'Sport'}, {value:'Technology', name:'Technology'}];
-
-    // const positionOptions = [{value:'Chairperson', name:'Chairperson'}, {value:'Vice Chairperson', name:'Vice Chairperson'}, {value:'Secretary', name:'Secretary'}, {value:'Vice Secretary', name:'Vice Secretary'},
-    //   {value:'Treasurer', name:'Treasurer'}, {value:'Publicity', name:'Publicity'}, {value:'Logistics', name:'Logistics'}, {value:'Auditor', name:'Auditor'}]
 
     var header, breadCrumb;
 

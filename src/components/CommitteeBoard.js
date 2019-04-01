@@ -147,7 +147,7 @@ const styles = {
     }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
         comm: state.data.comm,
         loading: state.data.loading,
@@ -155,7 +155,7 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-const mapActionsToProps = (dispatch, props) => {
+const mapActionsToProps = (dispatch) => {
     return bindActionCreators({
         onRetrieveData: retrieveData,
         onUpdateLoadingBar: updateLoadingBar

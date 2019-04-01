@@ -18,10 +18,6 @@ export class AboutMe extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     fetch(`https://b2auwy2dql.execute-api.ap-southeast-1.amazonaws.com/v1/society`);
-    // }
-
     render() {
         let user = this.props.user;
         const { RaisedButtonStyle } = styles;
@@ -94,7 +90,7 @@ const styles = {
     }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
         user: state.auth.user,
         isAuthenticated: state.auth.isAuthenticated
